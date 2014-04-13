@@ -3,7 +3,7 @@
 #----------------------------------------------------------
 PROJECT= master
 FIGURES_DIR= ./Figures
-SRC= $(wildcard *.tex) manuscrit.cls Preamble/$(wildcard *.tex) Front/$(wildcard *.tex) Main/$(wildcard *.tex) Back/$(wildcard *.tex)
+SRC= $(wildcard *.tex) manuscrit.cls $(wildcard Preamble/*.tex) $(wildcard Front/*.tex) $(wildcard Main/*.tex) $(wildcard Back/*.tex)
 #
 # Set this option to 'yes' to compile to dvi -> ps -> pdf
 # instead of creating directly the pdf with pdflatex
@@ -68,7 +68,7 @@ else
 
 %.pdf: %.tex $(SRC)
 	@$(LATEX) $(LFLAGS) $<
-	@if egrep -q $(BIBLIO) $< ; then $(BIBTEX) $* ; fi
+	#@if egrep -q $(BIBLIO) $< ; then $(BIBTEX) $* ; fi
 	@if egrep -q $(RERUN) $*.log ; then $(LATEX) $(LFLAGS) $< ; fi
 	@if egrep -q $(RERUN) $*.log ; then $(LATEX) $(LFLAGS) $< ; fi
 	@if egrep -q $(RERUN) $*.log ; then $(LATEX) $(LFLAGS) $< ; fi
