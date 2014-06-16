@@ -52,7 +52,7 @@
 %%   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %%   Right brace   \}     Tilde         \~}
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{manuscrit}
+\ProvidesClass{thesismanuscrit}
               [2014/04/11 v1.0
  Yet another PhD thesis class]
 \newcommand\@ptsize{}
@@ -258,18 +258,18 @@
         %\raggedleft\fontsize{20}{25}\selectfont\@title\vfill%
       %}%
       \setsansfont[%
-            Color=white,%
+            Color=FFFFFE,%
             Numbers=OldStyle,%
             UprightFeatures={Ligatures={TeX,Rare,Historic},StylisticSet=2},%
             BoldFeatures={Ligatures={TeX,Historic},StylisticSet=1},%
             BoldItalicFeatures={Ligatures={TeX,Historic},StylisticSet=1}%
         ]{Linux Biolinum O}
       \setmainfont[%
-            Color=white,%
+            Color=FFFFFE,%
             Numbers=OldStyle,%
             UprightFeatures={Ligatures={TeX,Rare,Historic},StylisticSet=2},%
             BoldFeatures={Ligatures={TeX,Historic},StylisticSet=1},%
-            BoldItalicFeatures={Ligatures={TeX,Historic},StylisticSet=1}%
+            %BoldItalicFeatures={Ligatures={TeX,Historic},StylisticSet=1}%
         ]{Linux Libertine O}
       {\color{white}\vrule height 1pt width \titlep@getextwidth}\\%
       \vskip1.5em%

@@ -3,34 +3,23 @@
 #----------------------------------------------------------
 PROJECT= master
 FIGURES_DIR= ./Figures
-SRC= $(wildcard *.tex) manuscrit.cls $(wildcard Preamble/*.tex) $(wildcard Front/*.tex) $(wildcard Main/*.tex) $(wildcard Back/*.tex)
-#
-# Set this option to 'yes' to compile to dvi -> ps -> pdf
-# instead of creating directly the pdf with pdflatex
-DVI_AND_PS= no
+SRC= $(wildcard *.tex) thesismanuscrit.cls \
+	$(wildcard Preamble/*.tex) \
+	$(wildcard Front/*.tex) \
+	$(wildcard Main/*.tex) \
+	    $(wildcard Main/SelecAleatoire/*.tex) \
+	        $(wildcard Main/Figures/*) \
+	$(wildcard Back/*.tex)
 #----------------------------------------------------------
 
 PDF= $(PROJECT).pdf
-BIBTEX= bibtex
+BIBTOOL= biber
 VIEWER= okular
-
-ifeq ($(DVI_AND_PS), yes)
-
-# Tools for compiling to dvi, ps, then pdf
-LATEX= latex
-LFLAGS=
-DVIPS= dvips
-PS2PDF= ps2pdf
-
-else
 
 # Tool for compiling directly to pdf
 LATEX= lualatex
 LFLAGS= -interaction nonstopmode
 
-endif
-
-BIBLIO= '^[^%%]*[\]bibliography\{.*\}'
 RERUN= '(There were undefined references|Rerun to get (cross-references|the bars) right)'
 UNDEFINED= '((Reference|Citation).*undefined)|(Label.*multiply defined)'
 
@@ -40,50 +29,43 @@ UNDEFINED= '((Reference|Citation).*undefined)|(Label.*multiply defined)'
 
 .PHONY: pdf clean clean-all display
 
-.SUFFIXES: .tex .pdf
+.SUFFIXES: .tex .pdf .bb; .bcf
 
 # For compatibility with vim latex-suite search and
 # compilation
 pdf: $(PDF)
-
-$(PDF):
-
-ifeq ($(DVI_AND_PS), yes)
-
-%.pdf: %.ps $(SRC)
-	@$(PS2PDF) $<
-
-%.ps: %.dvi
-	@$(DVIPS) $<
-
-%.dvi: %.tex
-	@$(LATEX) $<
-	@if egrep -q $(BIBLIO) $< ; then $(BIBTEX) $* ; fi
-	@if egrep -q $(RERUN) $*.log ; then $(LATEX) $(LFLAGS) $<; fi
-	@if egrep -q $(RERUN) $*.log ; then $(LATEX) $(LFLAGS) $<; fi
-	@echo "Undefined citations or references:"
-	@egrep -i $(UNDEFINED) $*.log || echo "none"
-
-else
-
-%.pdf: %.tex $(SRC)
-	@$(LATEX) $(LFLAGS) $<
-	#@if egrep -q $(BIBLIO) $< ; then $(BIBTEX) $* ; fi
-	@if egrep -q $(RERUN) $*.log ; then $(LATEX) $(LFLAGS) $< ; fi
-	@if egrep -q $(RERUN) $*.log ; then $(LATEX) $(LFLAGS) $< ; fi
-	@if egrep -q $(RERUN) $*.log ; then $(LATEX) $(LFLAGS) $< ; fi
 	@echo "Citations ou références indéfinies:"
 	@egrep -i $(UNDEFINED) $*.log || echo "Aucune"
 
-endif
+$(PDF):
+
+%.pdf: %.tex $(SRC) %.bbl %.bcf.md5
+	@$(LATEX) $(LFLAGS) $<
+	#@if egrep -q $(RERUN) $*.log ; then $(LATEX) $(LFLAGS) $< ; fi
+	#@if egrep -q $(RERUN) $*.log ; then $(LATEX) $(LFLAGS) $< ; fi
+	#@if egrep -q $(RERUN) $*.log ; then $(LATEX) $(LFLAGS) $< ; fi
+	@MD5=$$(md5sum $*.bcf) ; echo $$MD5 | cmp -s $*.bcf.md5 - ; if $$? -ne 0 ; \
+	    then echo $$MD5 > $*.bcf.md5 ; \
+		make pdf ; fi
+
+%.bbl: %.bcf.md5
+	@$(BIBTOOL) $*
+
+%.bcf.md5: %.bcf
+	@MD5=$$(md5sum $<) ; echo $$MD5 | cmp -s $@ - ; if $$? -ne 0 ; \
+	    then echo $$MD5 > $@ ; fi
+
+%.bcf:
+	@$(LATEX) $(LFLAGS) $*.tex
 
 clean:
 	@rm -f *.log *.aux *.dvi *.toc *.lot *.lof *.snm *.nav *.out
 	@rm -f *.bbl *.blg *.run.xml *.bcf
+	@rm -f *.bcf.md5 # From Makefile
 	@rm -f *.upa *.upb # For PDF comments?
 	@rm -f comment.cut # Created by comment package
 	@rm -f $(FIGURES_DIR)/*-converted-to.pdf
-	@rm -f Preamble/*.aux Front/*.aux Main/*.aux Back/*.aux
+	@find . -name "*.aux" -print0 | xargs -0 rm -f
 
 clean-all: clean
 	@rm -f $(PDF)

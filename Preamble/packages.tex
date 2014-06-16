@@ -1,10 +1,12 @@
+% Vim: set spelllang=fr
+% PAQUETS
 %\usepackage{amsfonts}
-%\usepackage{amsmath}
+\usepackage{amsmath}
 %\usepackage{amssymb}
 %\usepackage{amsthm}
 \usepackage{array}
-\usepackage{biblatex}
-%\usepackage{booktabs}
+\usepackage[backend=biber,language=french]{biblatex}
+\usepackage{booktabs}
 \usepackage{color}
 %\usepackage{comment}
 \usepackage{csquotes}
@@ -15,15 +17,56 @@
 %\usepackage[left=2cm, top=2cm, right=2cm, bottom=2cm]{geometry}
 \usepackage{graphicx}
 \usepackage[unicode]{hyperref}
+\usepackage{iftex}
 %\usepackage{listings}
-\usepackage{microtype}
 %\usepackage{multicol}
 %\usepackage{multirow}
-\usepackage{polyglossia}
 %\usepackage{setspace}
 \usepackage{xcolor}
 \usepackage{xspace}
+\usepackage{xpatch}
+\usepackage{wrapfig}
 
+% FONTES & LANGAGES
+\ifXeTeX\else
+\ifLuaTeX\else
+\begingroup
+  \errorcontextlines=-1\relax
+  \newlinechar=10\relax
+  \errmessage{^^J
+  *************************************************^^J
+  * (Lua|Xe)TeX is required to compile this document.^^J
+  * Sorry!^^J
+  *************************************************}%
+\endgroup
+\fi\fi
+
+\ifLuaTeX
+    \usepackage{luatextra}
+    \usepackage{microtype}
+\else
+    \usepackage{fontspec}
+\fi
+\usepackage{polyglossia}
+
+\setdefaultlanguage{french}
+\setotherlanguage{english}
+\defaultfontfeatures{Ligatures=TeX}
+\setmainfont[%
+        UprightFeatures={StylisticSet=2},%
+        BoldFeatures={StylisticSet=1},%
+        ItalicFeatures={StylisticSet=1},%
+        %BoldItalicFeatures={StylisticSet=1},%
+    ]{Linux Libertine O}
+    \setsansfont[%
+        UprightFeatures={StylisticSet=2},%
+        BoldFeatures={StylisticSet=1},%
+        ItalicFeatures={StylisticSet=1},%
+        BoldItalicFeatures={StylisticSet=1},%
+    ]{Linux Biolinum O}
+\setmonofont{Inconsolata}
+
+% HYPERSETUP
 \hypersetup{
     linktoc=all,
     %backref=true,
@@ -45,19 +88,8 @@
     pdfkeywords   = {Thèse~; Manuscrit}
 }
 
-\setdefaultlanguage{french}
-\setotherlanguage{english}
-\defaultfontfeatures{Ligatures=TeX}
-\setmainfont[%
-        UprightFeatures={StylisticSet=2},%
-        BoldFeatures={StylisticSet=1},%
-        ItalicFeatures={StylisticSet=1},%
-        BoldItalicFeatures={StylisticSet=1},%
-    ]{Linux Libertine O}
-    \setsansfont[%
-        UprightFeatures={StylisticSet=2},%
-        BoldFeatures={StylisticSet=1},%
-        ItalicFeatures={StylisticSet=1},%
-        BoldItalicFeatures={StylisticSet=1},%
-    ]{Linux Biolinum O}
-\setmonofont{Inconsolata}
+% BIBLIO
+\addbibresource{Back/biblio.bib}
+
+% OPTIONS
+\renewcommand{\labelitemi}{\textbullet}
