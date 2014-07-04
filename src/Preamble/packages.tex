@@ -19,9 +19,10 @@
 \usepackage[unicode]{hyperref}
 \usepackage{iftex}
 %\usepackage{listings}
+\usepackage{minitoc}
 %\usepackage{multicol}
 %\usepackage{multirow}
-%\usepackage{setspace}
+\usepackage{setspace}
 \usepackage{xcolor}
 \usepackage{xspace}
 \usepackage{xpatch}
@@ -66,14 +67,18 @@
     ]{Linux Biolinum O}
 \setmonofont{Inconsolata}
 
+\makeatletter
+    \definecolor{blueLACL}{RGB}{\@blueLACL}
+\makeatother
+
 % HYPERSETUP
-\hypersetup{
+\hypersetup{%
     linktoc=all,
     %backref=true,
     breaklinks,
     colorlinks,
-    linkcolor=black,
-    citecolor=black,
+    linkcolor=blueLACL,
+    citecolor=blueLACL,
     urlcolor=blue,
     baseurl       = http://,
     pdfpagelayout = OneColumn, % pdfpagelayout=SinglePage
@@ -87,6 +92,11 @@
     pdfsubject    = {Réseaux de capteurs et dénis de service},
     pdfkeywords   = {Thèse~; Manuscrit}
 }
+
+% MINITOC
+\mtcsetdepth{minitoc}{1}
+\mtcsettitle{minitoc}{}
+%\mtcselectlanguage{french}
 
 % BIBLIO
 \addbibresource{Back/biblio.bib}

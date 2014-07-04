@@ -6,11 +6,19 @@
 \input{Preamble/meta}
 %===============================================================================
 \begin{document}
+\dominitoc
 
 \frontmatter
 \maketitle
+\pagestyle{empty}
+\include{Front/garde}
+\include{Front/remerciements}
+\include{Front/resume}
 \include{Front/abstract}
+\doublespacing
 \clearpage\tableofcontents
+\singlespacing
+\pagestyle{headings}
 
 \mainmatter
 \include{Main/01-chapitre1}
