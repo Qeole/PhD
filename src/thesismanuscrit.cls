@@ -496,6 +496,7 @@
     \Huge %\bfseries
       #1\par\nobreak
     \vskip 40\p@
+    \minitoc
   }}
 \def\@schapter#1{\if@twocolumn
                    \@topnewpage[\@makeschapterhead{#1}]%
@@ -688,7 +689,8 @@
     \else
       \@restonecolfalse
     \fi
-    \chapter*{\contentsname
+    %\chapter*{\contentsname
+    \chapter{\contentsname
         \@mkboth{%
            \MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
     }%
