@@ -1,0 +1,9 @@
+###
+gnuplot
+###
+
+set term postscript eps size 3.49,2.44 font "Helvetica" 14
+set out "./graphe1.eps"
+load "./plot_graphe1.gpl"
+
+

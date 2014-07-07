@@ -1,0 +1,15 @@
+#set term postscript eps size 3.49,2.44 enhanced font "Times-Roman" 16
+#set out "./overhead.eps"
+#set title 'Estimated number of packets during the simulation'
+set nogrid
+#set sample 500
+#set dummy x
+set xrange [0:30]
+set yrange [0:36000]
+set key inside top right
+set xlabel 'Time (minutes)'
+set ylabel 'Estimated quantity of generetad packets'
+
+
+plot 61*int(x)+840*x	title 'with proposed solution'	with lines lt 1,\
+     4*int(x)+600*x		title 'without proposed solution'	with lines lt 2

@@ -1,6 +1,26 @@
 % vim: set spelllang=fr foldmethod=marker:
-\chapter{Sélection des \cns selon l'énergie résiduelle}
+\chapter{Sélection des \cns selon l'énergie résiduelle}\label{chap:se}
 
 % préfixe: se
 \renewcommand\chapterpath{Main/SelecEnergie}
 \renewcommand\chapterfig{Main/SelecEnergie/Figures}
+
+\paragraph{abstract}
+The use of sensor networks has increased rapidly over the last years.
+Due to their low resources, sensors come along with new issues regarding network security and energy consumption.
+
+Focusing on the network availability, previous studies proposed to protect the network against \dos attacks with the use of traffic monitoring agents on some nodes.
+But if the control nodes go down or get compromised, they leave the network unprotected.
+To better fight against attacks, we try to enhance this solution by introducing an energy-aware and secure method to select these monitoring nodes (called \cns) in a clustered \wsn.
+Our election process is done in accordance to their remaining reserves: nodes with the higher residual energy are selected.
+We discuss limitations of this deterministic process concerning security and cluster coverage, and suggest as a workaround to designate new control nodes (called \vns).
+Those \vns are responsible for monitoring the \cns by periodically enquiring about their remaining energy and ensuring that they do not lie during the election process (in attempt to keep their \cn role).
+Finally, we present some experimental results obtained with the \ns simulator in order to analyze the impact of our proposal on the energy repartition in the network.
+
+\input{\chapterpath/intro.tex}
+
+\input{\chapterpath/proposal.tex}
+
+\input{\chapterpath/simulation.tex}
+
+\input{\chapterpath/conclusion.tex}

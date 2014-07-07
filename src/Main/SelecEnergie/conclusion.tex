@@ -1,0 +1,18 @@
+\section{Conclusion}
+
+\cns are used in clustered \wsns to monitor traffic of the nodes and to detect \dos attacks (\eg flooding, black hole attacks).
+In this paper, we have proposed a new method to dynamically elect those \cns, based on their residual energy.
+The aim of the proposed selection algorithm is to provide a better load balancing in the cluster.
+
+We have addressed several issues related with the use of a deterministic selection.
+Compromised nodes trying to systematically take over the \cn role are forced to abandon it for later cycle, or get detected, by \vns.
+The \vn role is a new role we introduced to survey the \cns by matching their announced energy consumption with a theoretical model.
+The issue of areas of the cluster uncovered by \cns, depending of the activity in the cluster, is addressed by enforcing covering of the whole cluster: the \ch is to designate additional \cns if needed.
+Working with clusters ensures a good scalability of the solution.
+It is also flexible, as \cns can endorse various trust-based model, and monitoring rules can be set to fight against several types of \dos attacks.
+And the use of \vns is resilient to a small percentage of compromised \vns (depending on parameters set by user).
+
+The results we have obtained through simulations show that even though using our simulation causes a higher global consumption of energy in the cluster, it provides a better load repartition between sensors.
+
+Future works include improvements of our solution by adding monitoring of the \ch, as well as modeling a cluster with areas of different activity levels.
+Also we would especially like to study the impact of the percentage of designated \vns on global energy consumption.

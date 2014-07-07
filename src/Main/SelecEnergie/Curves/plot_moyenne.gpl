@@ -1,0 +1,15 @@
+#set term postscript eps size 3.49,2.44 enhanced font "Times-Roman" 16
+#set out "./mean.eps"
+#set title 'Average residual energy of the nodes (excluding cluster head)'
+set nogrid
+#set sample 500
+#set dummy x
+set xrange [0:30]
+set yrange [124900:125100]
+set key inside top right
+set xlabel 'Time (minutes)'
+set ylabel 'Average residual energy of the nodes (J)'
+
+
+plot 'mean-n30-t31-e_1_0-r1.dat'	using 1:2 title 'with proposed solution'	with linespoints lt 1,\
+     'mean-n30-t31-e_1_0-r1.dat'	using 1:3 title 'without proposed solution'	with linespoints lt 4

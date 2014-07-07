@@ -1,0 +1,17 @@
+#set term postscript size 3.49,2.44 font "Helvetica" 14
+#set title 'Detection percentage versus transmission rate'
+set nogrid
+#set sample 500
+#set dummy x
+set xrange [1.5:5.5]
+set yrange [0:100]
+set key inside top left
+#set xrange [0:3600]
+#set yrange [-10:10]
+set xlabel 'Lambda (average transmission rate of compromised node)'
+set ylabel 'Detection percentage in the network'
+#set key outside
+
+
+plot 'graphe4.dat'	using 3:1 title 'static method'		with linespoints lt 2,\
+	 'graphe4.dat'	using 3:2 title 'dynamic method'	with linespoints lt 1
