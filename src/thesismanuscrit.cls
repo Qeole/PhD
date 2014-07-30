@@ -738,7 +738,8 @@
     \else
       \@restonecolfalse
     \fi
-    \chapter*{\listfigurename}%
+    %\chapter*{\listfigurename}%
+    \chapter{\listfigurename}%
       \@mkboth{\MakeUppercase\listfigurename}%
               {\MakeUppercase\listfigurename}%
     \@starttoc{lof}%
@@ -751,7 +752,8 @@
     \else
       \@restonecolfalse
     \fi
-    \chapter*{\listtablename}%
+    %\chapter*{\listtablename}%
+    \chapter{\listtablename}%
       \@mkboth{%
           \MakeUppercase\listtablename}%
          {\MakeUppercase\listtablename}%

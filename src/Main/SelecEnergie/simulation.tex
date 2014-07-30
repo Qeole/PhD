@@ -2,15 +2,15 @@
 \label{se:sec:simul}
 
 We have undertaken simulation of our proposal regarding the energy consumption in order to compare it with the previous model (using pseudo-random election for \cns).
-We used \ns software to proceed.
+We used \nsiii software to proceed.
 
 In the new proposal, the \vns are to model the theoretical consumption of the \cns they watch over.
 We have chosen to use Rakhmatov and Vrudhula's diffusion model\cite{RV01} to compute the consumption.
 This choice was driven by several reasons:
 \begin{itemize}
     \item it provides a pretty accurate approximation of real consumption, taking into account chemical processes internal to the battery such as rate capacity effect and recovery effect;
-    \item it is one of the models already implemented in \ns. So in our case it is an absolutely perfect theoretical model.
-        It remains ``theoretical'' as \vns use this model to compute the expected behaviour of \cns according to the few packets they sometimes hear. Meanwhile, real \cns consumption computed by \ns core takes into account every packet actually sent or received by \cns, also including packets that \vns can not hear (because of distance or sleep schedule). So the values computed by \vns and \ns core will not always be the same, which allows us to use the model.
+    \item it is one of the models already implemented in \nsiii. So in our case it is an absolutely perfect theoretical model.
+        It remains ``theoretical'' as \vns use this model to compute the expected behaviour of \cns according to the few packets they sometimes hear. Meanwhile, real \cns consumption computed by \nsiii core takes into account every packet actually sent or received by \cns, also including packets that \vns can not hear (because of distance or sleep schedule). So the values computed by \vns and \nsiii core will not always be the same, which allows us to use the model.
 \end{itemize}
 Rakhmatov and Vrudhula's diffusion model refers to the chemical reaction happening inside the battery electrolyte, and is summarized by equation~(\ref{se:eqn:rvdm}).
 \begin{equation}
@@ -25,7 +25,7 @@ where:
     \item $i(t)$ is the current at $t$;
     \item $\beta = \dfrac{\pi\sqrt{D}}{w}$, where $D$ is the diffusion constant and $w$ the full width of the electrolyte.
 \end{itemize}
-In practice, computing the first ten terms of the sum provides a good approximation (this is also the default behavior of \ns, by the way).
+In practice, computing the first ten terms of the sum provides a good approximation (this is also the default behavior of \nsiii, by the way).
 
 We launched several simulation instances and chose to focus on the energy consumption and load balancing in the cluster.
 To obtain data about detection rate or false positive values of the \cns scheme, the reader is redirected to our previous work\cite{GMT12, BMM13}.
