@@ -17,7 +17,7 @@ in a single-use battery.
 For instance there is a lot at stakes when sensor networks are used for watching forests for fires, for measuring the nuclear activity degree in sensitive areas, or for military operations over battlefields.
 In this context, bringing security guaranties ---~including availability~--- to the network becomes essential.
 
-Based on former studies (see Section~\ref{se:sec:related}), the present one relies on the use of monitoring nodes (or ``\cns'') to protect a \wsn again various \dos attacks.
+Based on former studies (see Section~\ref{ea:sec:related}), the present one relies on the use of monitoring nodes (or ``\cns'') to protect a \wsn again various \dos attacks.
 Actually, it focuses on the election process of those control nodes.
 Our approach consists in taking energy into account at this step, in order to obtain an even better load balancing.
 We propose to designate the sensors for the \cn position according to their residual energy, but we show that several problems occur with deterministic election.
@@ -25,11 +25,11 @@ Indeed compromised nodes could see a flaw to exploit in order to take over the \
 We address this issue by introducing a second role of surveillance: we choose ``\vns'' responsible for watching over the \cns and for matching their announced consumption against mathematical model.
 We also recommend that every node in the cluster be monitored by at least one \cn to prevent all the \cns to be elected inside the same spatial area of the cluster at each election iteration.
 
-The rest of the paper is organized as follows: first we present a quick overview of related work in Section~\ref{se:sec:related}. After we introduce a new \cn selection method in Section~\ref{se:sec:proposal}, we describe and discuss the simulation of the algorithm that we have done using \nsiii in Section~\ref{se:sec:simul}.
+The rest of the paper is organized as follows: first we present a quick overview of related work in Section~\ref{ea:sec:related}. After we introduce a new \cn selection method in Section~\ref{ea:sec:proposal}, we describe and discuss the simulation of the algorithm that we have done using \nsiii in Section~\ref{ea:sec:simul}.
 Last Section summarizes the main contributions of the paper and gives some directions of future work.
 
 \section{Related work}
-\label{se:sec:related}
+\label{ea:sec:related}
 
 For sensitive operations involving the deployment of a \wsn, all security aspects of the network must be reviewed.
 WSN-addressed protocols to provide data privacy\cite{OX09} and authentication\cite{SOBMCN11} have been subject to deep research investigation, and led for example to the proposal of mechanisms for secure data aggregation without persistent cryptographic operations\cite{WDSX07} or for authenticated broadcast such as $\mu$TESLA\cite{PSWCT02}.
@@ -43,11 +43,11 @@ Clustered networks are partitioned into clusters \via algorithms such as \leach\
 One \ch (\CH) per cluster is responsible for gathering data from its peers, for aggregating and sending it to the \bs.
 The \CHs are the only nodes to use long range (and expensive) transmissions to reach the \bs.
 Clustering enables to preserve energy for the sensing nodes and offers an easier management of the nodes.
-In our case, all nodes of a cluster can reach their \ch directly (\emph{1-hop transmission}), as on \figurename~\ref{se:fig:wsn}.
+In our case, all nodes of a cluster can reach their \ch directly (\emph{1-hop transmission}), as on \figurename~\ref{ea:fig:wsn}.
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\linewidth]{\chapterfig/WSN.eps}
-    \caption{Clustered wireless sensor networks scheme}\label{se:fig:wsn}
+    \caption{Clustered wireless sensor networks scheme}\label{ea:fig:wsn}
 \end{figure}
 
 Control nodes are elected among the non-\ch nodes of a cluster.
