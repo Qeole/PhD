@@ -84,7 +84,7 @@ S'il advient qu'une certaine zone géographique du cluster produit un trafic plu
 Il s'ensuit mécaniquement que les \cns ne seront pas ou peu sélectionnés parmi les capteurs de cette zone.
 Il y a même de forte chances que les $n$ \cns désirés soient sélectionnés en dehors de la zone en question, et que certains capteurs ne soient pas surveillés du tout tant que le trafic de la zone d'activité ne diminue pas ---~potentiellement pour tous les cycles.
 La figure \figref{se:fig:cover} illustre ce problème.
-\begin{figure}[h]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=.8\linewidth]{\chapterfig/cover.eps}
     \caption{Schéma d'explication: les \cns sont sélectionnés au sein de la zone où l'activité est la plus faible (donc ou les nœuds ont conservé le plus d'énergie), et leur surveillance ne couvre pas les capteurs situés dans la partie opposée du cluster.}\label{se:fig:cover}
