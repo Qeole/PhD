@@ -66,6 +66,28 @@ Le recours au rôle de \vn assure ainsi que seuls les nœuds annonçant un nivea
 Comme ce dernier rôle consomme plus d'énergie que le relevé et la transmission des mesures sur l'environnement des capteurs, les nœuds sélectionnés pour être \cns verront tôt ou tard leur énergie résiduelle descendre sous le niveau des nœuds assurant leurs fonctions de base; une fois ce stade atteint, ils sont assurés de perdre leur rôle pour le cycle suivant.
 On remarquera que les points~2 et~3 énoncés ci-dessus correspondent à un nœud compromis qui décrémente volontairement son énergie annoncée au cours du temps; même si des irrégularités peuvent être détectées et le nœud compromis être ainsi démasqué, le seul fait qu'il applique ce comportement assure tout de même que le capteur compromis cessera d'être désigné \cn pour un cycle ou pour un autre dans le futur.
 
+Le modèle énergétique implémenté par les \vns pour vérifier les affirmations des \cns ne doit pas être trop lourd, mais il doit demeurer suffisamment précis pour pouvoir déterminer si un \cn s'en éloigne véritablement, tout en limitant les faux positifs.
+Nous proposons ici d'utiliser le modèle de diffusion de Rakhmatov et Vrudhula~\cite{RV01}.
+Ce choix repose sur plusieurs observations:
+\begin{itemize}
+    \item ce modèle fournit une approximation assez précise de la consommation réelle d'une batterie, et tient compte des processus chimiques internes à la batterie tels que les effets de récupération (\textit{recovery effect}) ou de perte de capacité selon la tension de décharge (\textit{rate capacity effect});
+    \item il s'agit de l'un des modèles implémentés dans \nsiii, ce qui permet, pour les simulations basées sur ce logiciel, de bénéficier d'une implémentation déjà existante, et surtout d'un modèle théorique parfait. Il ne faut pas craindre cependant que ce modèle ne soit « trop parfait » pour être utilisé par les \vns, étant donné que ces derniers estimeront l'énergie consommée par les \cns à partir de messages émis par ces derniers, sans connaissance des mécanismes internes au nœud (calcul, écoute) comme le fait le cœur du simulateur. Les valeurs calculées par les \vns demeurent donc approximatives par rapport à la consommation des \cns réellement calculée par \nsiii.
+\end{itemize}
+Le modèle de diffusion de Rakhmatov et Vrudhula se réfère aux réactions chimiques qui se produisent à l'intérieur de l'électrolyte de la batterie, et elle est résumée par l'équation~\ref{se:eqn:rvdm}
+\begin{equation}
+    \label{se:eqn:rvdm}
+    \sigma(t) = \underbrace{\int_{0}^{t} i(\tau) \, \mathrm d\tau}_{l(t)} \;+\; \overbrace{\int_{0}^{t} i(\tau) \left(2 \sum_{m=1}^{\infty} \exp^{-\beta^2 m^2 (t-r)} \right) \mathrm d\tau}^{u(t)}
+\end{equation}
+où:
+\begin{itemize}
+    \item $\sigma(t)$ est la charge apparente perdue par la batterie à l'instant $t$;
+    \item $l(t)$ est la charge « utile »;
+    \item $u(t)$ est la charge inutilisable (« perdue dans la batterie »);
+    \item $i(t)$ est l'intensité du courant électrique à l'instant $t$;
+    \item $\beta = \dfrac{\pi\sqrt{D}}{w}$, où $D$ est une constante de diffusion et $w$ la largeur de l'électrolyte.
+\end{itemize}
+En pratique, le calcul des dix premiers termes de la somme fournit une bonne approximation ---~il s'agit par ailleurs du comportement par défaut de \nsiii pour l'utilisation de ce modèle énergétique.
+
 L'intérêt des \vns peut être résumé ainsi: un nœud compromis ne peut pas accaparer indéfiniment le rôle de \cn sans tricher lors des annonces, auquel cas ils sont détectés par les \vns.
 La détection des \cns corrompus, ou bien le fait de les forcer à abandonner leur rôle pour un cycle futur, sont donc les deux objectifs des \vns.
 Ce rôle n'empêche pas, par ailleurs, le nœud qui l'endosse de poursuivre ses activités de mesure: les requêtes auprès des \cns ne doivent pas survenir trop souvent, sous peine de décharger trop rapidement la batterie des \vns.

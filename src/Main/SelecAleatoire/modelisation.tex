@@ -221,7 +221,7 @@ Dans notre cas, pour élire deux \cns au sein du cluster, et en supposant que le
 À la fin d'une période d'activité des \cns, une nouvelle élection est déclenchée.
 La transition minutée correspondant aux \cns élus pour la période qui s'achève est déclenchée; les jetons présents dans les places \textsf{cNode} de ces \cns sont consommés, et produisent ainsi un jeton dans l'unique place centrale du module.
 Chaque transition immédiate tente alors de produire un jeton.
-Comme elles sont mutuellement exclusives, mais ont la même priorité et le même poids (voir sous-sous-section~\ref{sa:subsubsec:presRPSGE}), un tirage aléatoire a lieu pour déterminer l'unique transition qui est franchie et produit ses jetons.
+Comme elles sont mutuellement exclusives, mais ont la même priorité et le même poids (voir \sssref{sa:subsubsec:presRPSGE}), un tirage aléatoire a lieu pour déterminer l'unique transition qui est franchie et produit ses jetons.
 Ceux-ci sont envoyés dans les places \textsf{cNode} des nœuds élus pour la période qui débute, activant au passage leurs fonctionnalités de \cns.
 %===============================================================================
     \subsection{Logique stochastique avec automates hybrides}

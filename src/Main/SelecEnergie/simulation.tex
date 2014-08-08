@@ -1,31 +1,13 @@
-\section{Selection in practice: results from simulation}
-\label{se:sec:simul}
+% vim: set spelllang=fr foldmethod=marker:
+\section{Simulation du processus}\label{se:sec:simul}
 
-We have undertaken simulation of our proposal regarding the energy consumption in order to compare it with the previous model (using pseudo-random election for \cns).
-We used \nsiii software to proceed.
+Le processus de sélection des \cns selon leur énergie résiduelle a lui aussi conduit à la réalisation de plusieurs simulations, afin de le comparer au modèle de sélection pseudo-aléatoire.
+Le logiciel \nsiii a été utilisé pour l'occasion.
 
-In the new proposal, the \vns are to model the theoretical consumption of the \cns they watch over.
-We have chosen to use Rakhmatov and Vrudhula's diffusion model\cite{RV01} to compute the consumption.
-This choice was driven by several reasons:
-\begin{itemize}
-    \item it provides a pretty accurate approximation of real consumption, taking into account chemical processes internal to the battery such as rate capacity effect and recovery effect;
-    \item it is one of the models already implemented in \nsiii. So in our case it is an absolutely perfect theoretical model.
-        It remains ``theoretical'' as \vns use this model to compute the expected behaviour of \cns according to the few packets they sometimes hear. Meanwhile, real \cns consumption computed by \nsiii core takes into account every packet actually sent or received by \cns, also including packets that \vns can not hear (because of distance or sleep schedule). So the values computed by \vns and \nsiii core will not always be the same, which allows us to use the model.
-\end{itemize}
-Rakhmatov and Vrudhula's diffusion model refers to the chemical reaction happening inside the battery electrolyte, and is summarized by equation~(\ref{se:eqn:rvdm}).
-\begin{equation}
-    \label{se:eqn:rvdm}
-    \sigma(t) = \underbrace{\int_{0}^{t} i(\tau) \, \mathrm d\tau}_{l(t)} \;+\; \overbrace{\int_{0}^{t} i(\tau) \left(2 \sum_{m=1}^{\infty} \exp^{-\beta^2 m^2 (t-r)} \right) \mathrm d\tau}^{u(t)}
-\end{equation}
-where:
-\begin{itemize}
-    \item $\sigma(t)$ is the apparent charge lost from the battery at $t$;
-    \item $l(t)$ is the charge lost to the load (``useful'' charge);
-    \item $u(t)$ is the unavailable charge (``lost in battery'' charge);
-    \item $i(t)$ is the current at $t$;
-    \item $\beta = \dfrac{\pi\sqrt{D}}{w}$, where $D$ is the diffusion constant and $w$ the full width of the electrolyte.
-\end{itemize}
-In practice, computing the first ten terms of the sum provides a good approximation (this is also the default behavior of \nsiii, by the way).
+Nous avons exécuté plusieurs instances de simulation en nous concentrant sur la consommation en énergie ainsi que sur la répartition de la charge dans le cluster.
+\todo{link to detection results~\cite{GMT12, BMM13}}
+Les paramètres utilisés lors des simulations sont présentés en \tabref{se:table:parameters}.
+
 
 We launched several simulation instances and chose to focus on the energy consumption and load balancing in the cluster.
 To obtain data about detection rate or false positive values of the \cns scheme, the reader is redirected to our previous work\cite{GMT12, BMM13}.
@@ -33,62 +15,60 @@ When we implemented our solution, we set the parameters of the simulation as det
 
 \begin{table}[ht]
     \centering
-    \caption{Parameters used for simulations}
-    \begin{tabular}{c c}
+    \caption{Paramètres utilisés pour les simulations}
+    \medskip
+    \begin{tabular}{l l}
         \toprule
-        Parameter & Value\\
+        Paramètre                          & Valeur\\
         \midrule
-        Number of nodes & 30 (plus 1~\CH)\\
-        Number of \cns & 4\\
-        Probability for \vns selection & 33~\%\\
-        Delay between consecutive elections & 1~minute\\
-        Simulation length & 30~minutes\\
-        Cluster shape & Squared box\\
-        Cluster length & Diagonal is 2$\times$50~meters\\
-        Transmission range & 50~meters\\
-        Location of the nodes & \CH: center; others: random\\
-        Mobility of the nodes & Null\\
-        Average data sent by normal nodes & 1024~bytes every 3~seconds\\
-        Data sent by \vns (per target \cn) & 1024~bytes every 5~seconds\\
+        Nombre de nœuds                    & 30 (plus 1~\CH)\\
+        Nombre de \cns                     & 4\\
+        Probabilité de sélection d'un \vns & 33~\%\\
+        Période de renouvellement des \cns & 1~minute\\
+        Durée totale de simulation         & 30~minutes\\
+        Forme du cluster                   & carré\\
+        Taille du cluster                  & 2$\times$50~mètres de diagonale\\
+        Portée de transmission             & 50~mètres\\
+        Position des nœuds                 & \CH: au centre; autres: aléatoire\\
+        Mobilité des nœuds                 & nulle\\
+        Débit d'émission des nœuds normaux & 1024~octets toutes les 3~secondes\\
+        Requêtes des \vns (par \cn cible)  & 1024~octets toutes les 5~secondes\\
         \bottomrule
-    \end{tabular}
-    \label{se:table:parameters}
+    \end{tabular}\label{se:table:parameters}
 \end{table}
 
-We obtained the residual energy values for each node at each minute of the simulation.
-From this data we draw the average residual energy of the nodes (excluding \ch) as well as the standard deviation.
+Ces simulations ont permis d'obtenir l'énergie résiduelle de chaque capteur à intervalles réguliers (une minute).
+À partir de ces données, nous avons pu retracer les courbes d'évolution de la moyenne et de l'écart-type de la distribution de l'énergie résiduelle entre les nœuds.
+L'énergie résiduelle du \ch a été volontairement ignorée.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.96\linewidth]{\chapterfig/mean.eps}
-    \caption{Average residual energy of the nodes (excluding \ch)}\label{se:fig:mean}
+    \caption{Valeur moyenne de l'énergie des nœuds (à l'exception du \ch) en fonction du temps}\label{se:fig:mean}
 \end{figure}
-Average residual energy per minute in the batteries of the nodes is displayed on \figurename~\ref{se:fig:mean}.
-Increasing values at $t=11$~minutes and $t=15$~minutes with the use of the proposed solution traduce the recovery effect of the batteries.
-As expected, our proposal causes an increased global energy consumption.
-This is due, of course, to the new \vn role.
-\vns have to wake up periodically to send requests to neighbor \cns and to wait for an answer: this is energy-consuming.
-The estimated overhead for our solution appears on \figurename~\ref{se:fig:overhead}.
+La valeur moyenne est présentée sur la \figref{se:fig:mean}.
+L'augmentation des valeurs à $t=11$~minutes ainsi qu'à $t=15$~minutes sur la courbe de la sélection par l'énergie provient de l'effet de récupération des batteries.
+Ces résultats sont conformes aux attentes: le processus de sélection par l'énergie consomme davantage d'énergie dans le réseau, ce que l'on peut imputer au rôle supplémentaire de \vn mis en place.
+Étant donné que les \vns vont avoir à sortir périodiquement de leur état de veille pour envoyer une requête au \cn surveillé, écouter la réponse, et calculer une consommation théorique, le besoin en ressources énergétiques se retrouve logiquement affecté par rapport au processus de sélection pseudo-aléatoire.
+
+Les données de contrôle des deux méthodes proposées apparaissent sur la \figref{se:fig:overhead}.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.96\linewidth]{\chapterfig/overhead.eps}
-    \caption{Estimated number of generated packets during the simulation}\label{se:fig:overhead}
+    \caption{Estimation du nombre total de paquets générés au cours de la simulation au cours du temps}\label{se:fig:overhead}
 \end{figure}
+Ici encore, l'usage des \vns entraîne une augmentation des ressources consommées; il faut également tenir compte des messages (moins nombreux) envoyés par chaque capteur au moment du renouvellement de la sélection.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Along with overall complexity, overhead is also increased.
-%Both those factors impact the nodes consumption.
-%Note that we do not seek to decrease the comprehensive consumption of energy in the network; instead, we try to improve load balancing in order to keep alive as many nodes in the cluster as we can as time goes by.
-Standard deviation of residual energy value in the nodes at each minute of the simulation is presented on \figurename~\ref{se:fig:stddev}.
+L'écart-type de la distribution en énergie résiduelle des nœuds est présenté sur la \figref{se:fig:stddev}.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.96\linewidth]{\chapterfig/stddev.eps}
-    \caption{Standard deviation for residual energy of the nodes}\label{se:fig:stddev}
+    \caption{Écart-type pour l'énergie résiduelle des nœuds (à l'exception du \ch) au cours du temps}\label{se:fig:stddev}
 \end{figure}
-During the first minutes of simulation, our solution creates a higher disproportion in load balancing due to the introduction of \vns (there are more nodes assuming demanding functions).
-But after the seven first minutes or so, the standard deviation with our method falls below the standard deviation of previous method.
-This is the consequence of a better load repartition over the nodes with our solution.
-The difference between standard deviation with and without our simulation may look small: this is due to the model of the simulation we implemented.
-Given that we have a good pseudo-random numbers generator, when the number of elections get high, all nodes will roughly assume \cn role the same number of times in simulation \emph{not} using our solution.
-As sensing nodes all have the same activity, a correct repartition of the \cn roles over the time leads to a good energy balance.
-But in a situation where sensing nodes have different activity levels ---~for instance, if there is an area in the cluster when measured events occur much more often than in the other parts of the cluster~--- the consumption would not be equilibrated between all the nodes with the previous method; whereas our solution would deal well with this case, since \cns are elected according to residual energy.
-Thus simulations show that the use of \vns leads to a higher energy consumption, but electing \cns on residual energy provides a better load repartition in the cluster.
+Durant les premières minutes de la simulation, la sélection par l'énergie crée une dispersion plus affirmée de la charge en énergie du réseau, à cause des \vns (il y a davantage de capteurs qui endossent des rôles consommant plus d'énergie).
+Mais après les sept premières minutes environ, l'écart-type pour le processus de sélection par l'énergie devient et demeure inférieur à celui associé à la méthode pseudo-aléatoire.
+Cela traduit la meilleure répartition de la charge énergétique dans le cluster, ce qui était l'objectif de cette solution.
+La différence entre les écart-types des deux méthodes est malgré tout peu élevé: cela tient entre autres aux modèles implémentés pour les simulations.
+Comme nous disposons d'un générateur de nombres pseudo-aléatoires efficace, à partir d'un certain nombre de renouvellements de la sélection, tous les capteurs vont endosser le rôle de \cn à peu près le même nombre de fois si la sélection se fait de façon pseudo-aléatoire.
+Et comme les capteurs ont également des activités de mesure identique, cette méthode (pseudo-aléatoire) fournit, dans notre cas, une excellente répartition de la charge dans le cluster.
+Dans une situation où les capteurs auraient des niveaux d'activité différents ---~si par exemple un évènement à détecter se produit beaucoup plus souvent dans une certaine région géographique du cluster~--- alors la consommation, avec cette méthode, ne serait plus nécessairement équilibrée entre tous les nœuds du cluster.
+Tandis que la sélection des \cns par l'énergie permettrait de rétablir cet équilibre.

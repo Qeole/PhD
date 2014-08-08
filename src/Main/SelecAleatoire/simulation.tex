@@ -25,10 +25,11 @@ Ses caractéristiques sont les suivantes:
     \subsection{Taux de détection des nœuds compromis}
 
 Pour mesurer l'efficacité des \cns, nous avons effectué plusieurs tests avec \nsii.
-Le tableau~\ref{sa:table:parametres1} indique les valeurs (ou les fourchettes de valeurs) utilisées comme paramètres au cours des différentes simulations.
+La \tabref{sa:table:parametres1} indique les valeurs (ou les fourchettes de valeurs) utilisées comme paramètres au cours des différentes simulations.
 \begin{table}[ht]
     \centering
     \caption{Paramètres de simulation}\label{sa:table:parametres1}
+    \medskip
     \begin{tabular}{ll}
         \toprule
         Durée de la simulation    & 100--3600~s\\
@@ -70,10 +71,11 @@ La courbe présentée en figure~\ref{sa:fig:graphe4} illustre cet état de fait.
 %===============================================================================
     \subsection{Consommation énergétique}
 
-Les paramètres utilisés pour les simulations présentées dans cette sous-section sont synthétisés dans le tableau~\ref{sa:table:parametres2}.
+Les paramètres utilisés pour les simulations présentées dans cette sous-section sont synthétisés en \tabref{sa:table:parametres2}.
 \begin{table}[ht]
     \centering
     \caption{Paramètres de simulation}\label{sa:table:parametres2}
+    \medskip
     \begin{tabular}{ll}
         \toprule
         Durée de la simulation                & 500~secondes\\
@@ -85,7 +87,7 @@ Les paramètres utilisés pour les simulations présentées dans cette sous-sect
 \end{table}
 L'histogramme exposé en figure~\ref{sa:fig:conso-moyenne} expose la consommation en énergie des nœuds, pour la méthode d'élection statique et pour la méthode dynamique, en fonction du pourcentage de \cns.
 Par «~consommation en énergie~», on entend ici la consommation moyenne en fin de simulation ramenée sur la totalité des nœuds, à l'exception du \ch ainsi que du nœud compromis, qui consomment évidemment plus que les autres, et dont le comportement est invariant entre les méthodes statiques et dynamiques.
-Pour rappel, les nœuds normaux (non \cns) ne reçoivent pas les messages de leurs voisins et donc ne consomment pas d'énergie en dehors de leur période d'émission (voir le fonctionnement détaillé de \leach en sous-sous-section~\ref{sa:subsubsec:leach}).
+Pour rappel, les nœuds normaux (non \cns) ne reçoivent pas les messages de leurs voisins et donc ne consomment pas d'énergie en dehors de leur période d'émission (voir le fonctionnement détaillé de \leach en \sssref{st:subsubsec:leach}).
 \begin{figure}[ht]
     \centering
     \includegraphics[width=7cm]{\chapterfig/mean.pdf}
@@ -140,10 +142,11 @@ Le premier nœud à épuiser sa batterie a donc une espérance de vie bien plus 
 Au cours de cette dernière simulation, nous avons observé le nombre de nœuds toujours «~en vie~», ainsi que le nombre de nœuds détectant le nœud compromis au cours du temps.
 La durée de la simulation a été étendue à une heure, et les nœuds se sont vus allouer une réserve initiale d'énergie égale à 10~J.
 Dix pour cent d'entre eux, soit dix à la fois, ont été désignés en tant que \cns.
-Ces données, et les autres paramètres utilisés, sont présentés dans le tableau~\ref{sa:table:parametres3}.
+Ces données, et les autres paramètres utilisés, sont présentés en \tabref{sa:table:parametres3}.
 \begin{table}[ht]
     \centering
     \caption{Paramètres de simulation}\label{sa:table:parametres3}
+    \medskip
     \begin{tabular}{l l}
         \toprule
         Durée de la simulation                & 3600~secondes\\
