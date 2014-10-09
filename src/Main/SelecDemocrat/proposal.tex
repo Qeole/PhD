@@ -1,0 +1,114 @@
+% vim: set spelllang=fr foldmethod=marker:
+\section{Processus d'élection démocratique des \cns}\label{sd:sec:proposal}
+
+Ce troisième processus de sélection se base lui aussi sur un renouvellement dynamique.
+Chaque renouvellement sera appelé une \emph{itération} du processus.
+
+Pour efficacement celui-ci, nous allons adopter les notations suivantes:
+\begin{itemize}
+    \item $\mathcal{N}$ désigne l'ensemble des capteurs du cluster (à l'exception du \ch);
+    \item $\mathcal{CN}$ désigne l'ensemble des \cns du cluster à l'instant considéré;
+    \item $i$ est un index utilisé pour parcourir $\mathcal{N}$;
+    \item soit $RE_k$ un tableau contenant l'énergie résiduelle des nœuds annoncée par les \cns au \ch à la $k$\textsuperscript{e} itération.
+    \item soit $Obs_k$ un tableau contenant les observations réalisées par le \cn~$j$ sur les communications de ses voisins.
+\end{itemize}
+
+Le processus d'élection débute, avant sa première itération, par une phase d'initialisation.
+Viennent ensuite les itérations elle-même qui marquent le renouvellement de l'attribution du rôle de \cn, tant que le réseau est en fonctionnement.
+
+\subsection{Phase d'initialisation}
+
+Les étapes suivantes sont réalisées une fois le cluster formé:
+\begin{itemize}
+    \item chaque nœud~$i$ du cluster envoie au \ch la valeur de son énergie résiduelle; le \CH l'enregistre dans un tableau spécifique, dénoté~$RE_0[i]$;
+    \item chaque nœud agit temporairement comme un \cn, et commence à surveiller le trafic de ses voisins. Il conserve en parallèle le fonctionnement d'un nœud normal (en termes de mesure physiques et de collecte de données), sans quoi il n'y aurait aucun trafic à observer. Cette étape a pour but d'essayer de repérer, dès le départ, d'éventuels nœuds compromis, pour les écarter de la liste des candidats au rôle de \cn;
+    \item une fois la durée de cette première étape d'observation écoulée, le processus d'élection démocratique peut commencer. La valeur du compteur d'itérations~$k$ est passée à $1$.
+\end{itemize}
+
+\subsection{Sélection des \cns}
+
+Chaque itération~$k$ se décompose en étapes, qui sont détaillées ici:
+\begin{enumerate}
+
+    \item The duration of this surveillance step at any iteration~$k$ is random to prevent compromised nodes to simulate the behavior of sane nodes as long as possible.
+        During step~1, each \cn controls the neighboring nodes (including other \cns) by recording and adding up sizes of all packets sent or received by these nodes.
+        Recall that all nodes in the first iteration ($k=1$) are \cns.
+    \item At the end of iteration~$k$, the \ch (\CH) asks each node~$i$ to send its residual energy value~$RE_k[i]$ and asks each \cn~$j$ to send the array~$Obs_k[j]$ containing its observations over transmission rates of its neighbors.
+    \item For each node~$i$, the \ch performs an analysis work as follows:
+        \begin{itemize}
+            \item According to an adequate mathematical model, the \CH assesses the energy consumption $ECa$ related to the maximum of rates $\{Obs_k[j][i]\}|_{j\in \mathcal{CN}}$ observed by neighboring \cns $j$ during the current iteration $k$.
+            \item The \CH also computes the value of the energy consumption~$ECd$ as the difference between residual energies declared in the two last steps (\ie~$RE_k[i]$ and~$RE_{k-1}[i]$).
+            \item If $|ECd-ECa|\leq\epsilon$ (where $\epsilon$ represents a tolerated error) then the node~$i$ is declared as sane and put into the set~$SEN$ of nodes eligible to take on a \cn functioning mode.
+                Otherwise, it is removed from the set~$SEN$ of sane nodes (if it was there) and put into the pool~$SSN$ of suspicious nodes.
+            \item Let $SSN[i]$ stand for the number of times it has declared as suspicious from the start of the process.
+                If $SSN[i]\ge threshold$ then the node is declared as compromised and put into a quarantine list.
+                On the other hand, if a suspicious node has continually been declared as sane (more than some number of times) then it could be removed from $SSN$ and put again into $SEN$.
+        \end{itemize}
+    \item Once step~3 is finished, the \CH selects \cns from the set~$SEN$ of eligible nodes in such a way that every node is controlled by at least two \cns.
+        Hence, as a \cn will be controlled by other \cns, its misbehavior would be reported to the \CH.
+        For further iterations, such a rule helps detect and discard compromised nodes which have been chosen as \cn because they normally behaved in the past iterations and made false statement about their residual energies, unless they continue to undertake normal communications.
+    \item The process increments the number~$k$ of iterations and continues its iterative execution by going back to step~1.
+\end{enumerate}
+
+\subsection{Mathematical model for energy consumption}
+
+A possible mathematical model that the \chs may use for computing the energy consumed by the nodes based on received observations is Rakhmatov and Vrudhula's diffusion model~\cite{RV01}.
+It provides a pretty accurate approximation of real consumption, taking into account chemical processes internal to the battery such as rate capacity effect and recovery effect.
+Rakhmatov and Vrudhula's diffusion model refers to the chemical reaction happening inside the battery electrolyte, and is summarized by equation~(\ref{eqn:rvdm}):
+\begin{equation}
+    \label{eqn:rvdm}
+    \sigma(t) = \underbrace{\int_{0}^{t} i(\tau) \, \mathrm d\tau}_{l(t)} \;+\; \overbrace{\int_{0}^{t} i(\tau) \left(2 \sum_{m=1}^{\infty} \exp^{-\beta^2 m^2 (t-r)} \right) \mathrm d\tau}^{u(t)}
+\end{equation}
+where:
+\begin{itemize}
+    \item $\sigma(t)$ is the apparent charge lost from the battery at $t$.
+    \item $l(t)$ is the charge lost to the load (``useful'' charge).
+    \item $u(t)$ is the unavailable charge (``lost in battery'' charge).
+    \item $i(t)$ is the current at $t$.
+    \item $\beta = \dfrac{\pi\sqrt{D}}{w}$, where $D$ is the diffusion constant and $w$ the full width of the electrolyte of the battery.
+\end{itemize}
+In practice, computing the first ten terms of the sum provides a good approximation.
+
+\subsection{Selecting \cns among set $SEN$}
+
+At step~3 of the fair election process, \chs select the \cns for the running iteration among the nodes inside $SEN$ sets.
+Note that any selection criterion could be used at this point.
+For instance, \cns could be randomly picked among elements of $SEN$ until we have:
+\begin{itemize}
+    \item enough \cns (according to user's choice)
+    \item and all nodes covered by at least two \cns, as mentioned above.
+\end{itemize}
+Some other selection criteria could include:
+\begin{itemize}
+    \item residual energy of the nodes
+    \item connectivity index (number of direct neighbors)
+    \item signal power
+    \item \etc
+\end{itemize}
+Several criteria can even be combined to obtain a weighted score, such as for instance in equation~\ref{eqn:score}:
+\begin{equation}
+    \label{eqn:score}
+    s_k[i] = (\alpha \times RE_k[i]) + (\gamma \times ci_k[i]) + (\delta \times sp_k[i]) + (\zeta \times nsl_k[i])
+\end{equation}
+where:
+\begin{itemize}
+    \item $s_k[i]$ denotes the score for node~$i$ at iteration~$k$.
+    \item $RE_k[i]$ remains the residual energy for said node and iteration.
+    \item $ci_k[i]$ would be the connectivity index of~$i$.
+    \item $sp_k[i]$ is the average signal power as perceived by the neighbors of node~$i$.
+    \item $nsl_k[i]$ is the maximum value between a predetermined integer value and the number of iterations before~$k$ since node~$i$ was last selected as a \cn.
+    \item $\alpha$, $\gamma$, $\delta$ and $\zeta$ would be constants fixed by the user.
+\end{itemize}
+This formula could be used to sort nodes in set $SEN$ so that the \ch can select the best possible \cns in regard with retained criteria.
+
+Setting the criteria and the weights for the formula is up to the user of the network.
+It should be adapted to the exact application and environment of the WSN.
+For instance it may be worth noting that for networks made of static nodes, the connectivity index and the signal power of the nodes are not expected to change much between two consecutive iterations.
+Therefore their weights should not be too high (in regard with the other weights in the formula) so as to avoid selecting the same \cns at each iteration.
+In clustered networks, where all the nodes can reach their \CH in a one-hop fashion, index connectivity or signal power might not even be relevant (once again, depending also on the deployed application).
+But even if we only work in clustered networks in this study ---~because they allow energy savings and a much better scaling~--- we should nevertheless consider other architectures in that respect, for not all WSNs are clustered.
+And many ones also work with mobile nodes.
+In such cases, evaluating the density of nodes or the quality of the links in the area where the candidate \cns are located becomes more interesting because it generally has a higher impact on performances.
+Such observations remain valid for the chosen constraint stating that each node must be watched over by at least two \cns.
+While it is a good thing in clusters where nodes are all gathered around their \ch, it could be much harder to obtain in some other topologies.
+In a star-like network for instance, where most sensors would be on branches and only have two neighbors (one closer, one farther from the base station), it could result in all nodes being selected as \cns.
