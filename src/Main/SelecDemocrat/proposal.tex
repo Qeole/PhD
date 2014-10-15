@@ -29,86 +29,64 @@ Les étapes suivantes sont réalisées une fois le cluster formé:
 
 Chaque itération~$k$ se décompose en étapes, qui sont détaillées ici:
 \begin{enumerate}
-
-    \item The duration of this surveillance step at any iteration~$k$ is random to prevent compromised nodes to simulate the behavior of sane nodes as long as possible.
-        During step~1, each \cn controls the neighboring nodes (including other \cns) by recording and adding up sizes of all packets sent or received by these nodes.
-        Recall that all nodes in the first iteration ($k=1$) are \cns.
-    \item At the end of iteration~$k$, the \ch (\CH) asks each node~$i$ to send its residual energy value~$RE_k[i]$ and asks each \cn~$j$ to send the array~$Obs_k[j]$ containing its observations over transmission rates of its neighbors.
-    \item For each node~$i$, the \ch performs an analysis work as follows:
+    \item la phase « active » de collecte de données a lieu. Les capteurs non sélectionnés amassent puis communiquent leurs données, sous la surveillance des \cns. Ces derniers journalisent le nombre, la taille et la date des paquets envoyés par chacun de leur voisins, et signalent les éventuels comportements suspects au \ch;
+    \item à la fin de l'itération~$k$, chaque nœud~$i$ envoie son énergie résiduelle (dénotée~$RE_k[i]$); chaque \cn~$j$ envoie en plus un tableau~$Obs_k[j]$ contenant les observations effectuées sur le débit d'émission de ses voisins au cours de l'itération;
+    \item pour chaque nœud~$i$, le \ch réalise l'analyse suivante:
         \begin{itemize}
-            \item According to an adequate mathematical model, the \CH assesses the energy consumption $ECa$ related to the maximum of rates $\{Obs_k[j][i]\}|_{j\in \mathcal{CN}}$ observed by neighboring \cns $j$ during the current iteration $k$.
-            \item The \CH also computes the value of the energy consumption~$ECd$ as the difference between residual energies declared in the two last steps (\ie~$RE_k[i]$ and~$RE_{k-1}[i]$).
-            \item If $|ECd-ECa|\leq\epsilon$ (where $\epsilon$ represents a tolerated error) then the node~$i$ is declared as sane and put into the set~$SEN$ of nodes eligible to take on a \cn functioning mode.
-                Otherwise, it is removed from the set~$SEN$ of sane nodes (if it was there) and put into the pool~$SSN$ of suspicious nodes.
-            \item Let $SSN[i]$ stand for the number of times it has declared as suspicious from the start of the process.
-                If $SSN[i]\ge threshold$ then the node is declared as compromised and put into a quarantine list.
-                On the other hand, if a suspicious node has continually been declared as sane (more than some number of times) then it could be removed from $SSN$ and put again into $SEN$.
+            \item en se basant sur un modèle mathématique adapté, le \CH calcule la consommation énergétique « effective » $ECe$ relative au débit moyen\footnote{ou maximum? Mais attaques possibles. Ou maximum pondéré?} $\{Obs_k[j][i]\}|_{j\in \mathcal{CN}}$ observé par les \cns~$j$ voisins de~$i$ au cours de l'itération,
+            \item le \CH calcule alors la consommation « annoncée » pour la période~$k$, en prenant la différence des dernières valeurs annoncées par~$i$: $ECd=RE_{k-1}[i] - RE_k[i]$,
+            \item si $|ECa-ECe|\leq\epsilon$ (où $\epsilon$ est la marge d'erreur tolérée), alors le nœud~$i$ est déclaré « sain », et il est ajouté à l'ensemble~$SEN$ des nœuds éligibles pour la prochaine sélection des \cns,
+            \item sinon, le nœud est placé dans la liste~$SSN$ des nœuds suspects,
+            \item soit $SSN[i]$ le nombre de fois où le nœud~$i$ a été déclaré suspect depuis le déploiement du réseau. Si $SSN[i] \ge \mathrm{seuil}$, alors le capteur est déclaré compromis et devient virtuellement exclu du cluster; si à l'inverse le capteur avait systématiquement adopté un comportement honnête, il peut s'agir d'un faux positif, et le nœud n'est pas définitivement exclu. Il conserve la possibilité de rejoindre l'ensemble~$SEN$ au terme de prochaines itérations;
         \end{itemize}
-    \item Once step~3 is finished, the \CH selects \cns from the set~$SEN$ of eligible nodes in such a way that every node is controlled by at least two \cns.
-        Hence, as a \cn will be controlled by other \cns, its misbehavior would be reported to the \CH.
-        For further iterations, such a rule helps detect and discard compromised nodes which have been chosen as \cn because they normally behaved in the past iterations and made false statement about their residual energies, unless they continue to undertake normal communications.
-    \item The process increments the number~$k$ of iterations and continues its iterative execution by going back to step~1.
+    \item une fois l'étape~3 terminée, le \CH sélectionne les \cns parmi l'ensemble~$SEN$ des nœuds éligibles. Le choix est réalisé de telle manière que chaque capteur, \cns compris, soit contrôlé par au moins deux \cns distincts. Ainsi, un nœud compromis qui aurait néanmoins réussi à se faire élire en tant que \cn (avant de démarrer son attaque, par exemple), mais se comportant de façon malicieuse sur l'envoi de données, sera détecté;
+    \item enfin l'itération suivante démarre: le compteur~$k$ est incrémenté, et l'on retourne à l'étape~1.
 \end{enumerate}
 
-\subsection{Mathematical model for energy consumption}
+\subsection{Modèle mathématique pour la consommation en énergie}
 
-A possible mathematical model that the \chs may use for computing the energy consumed by the nodes based on received observations is Rakhmatov and Vrudhula's diffusion model~\cite{RV01}.
-It provides a pretty accurate approximation of real consumption, taking into account chemical processes internal to the battery such as rate capacity effect and recovery effect.
-Rakhmatov and Vrudhula's diffusion model refers to the chemical reaction happening inside the battery electrolyte, and is summarized by equation~(\ref{eqn:rvdm}):
-\begin{equation}
-    \label{eqn:rvdm}
-    \sigma(t) = \underbrace{\int_{0}^{t} i(\tau) \, \mathrm d\tau}_{l(t)} \;+\; \overbrace{\int_{0}^{t} i(\tau) \left(2 \sum_{m=1}^{\infty} \exp^{-\beta^2 m^2 (t-r)} \right) \mathrm d\tau}^{u(t)}
-\end{equation}
-where:
+Tout comme dans le chapitre précédent, la solution présentée ici implique des estimations sur la consommation en énergie des capteurs du cluster.
+Nous proposons à nouveau pour ces calculs d'utiliser le modèle de diffusion de Rakhmatov et Vrudhula, détaillé au \chapref{se}, \ssref{se:rakvru-formula}.
+
+\subsection{Sélection des \cns parmi l'ensemble $SEN$}
+
+À l'étape~3 du processus d'élection, les \chs choisissent les \cns pour l'itération à venir parmi tous les nœuds placés dans la liste~$SEN$.
+Les critères retenus pour effectuer ce choix peuvent être très variés.
+Par exemple, il est possible de tirer aléatoirement des \cns parmi les nœuds de~$SEN$, jusqu'à ce que:
 \begin{itemize}
-    \item $\sigma(t)$ is the apparent charge lost from the battery at $t$.
-    \item $l(t)$ is the charge lost to the load (``useful'' charge).
-    \item $u(t)$ is the unavailable charge (``lost in battery'' charge).
-    \item $i(t)$ is the current at $t$.
-    \item $\beta = \dfrac{\pi\sqrt{D}}{w}$, where $D$ is the diffusion constant and $w$ the full width of the electrolyte of the battery.
+    \item l'on ait assez de \cns (selon le seuil déterminé par l'utilisateur du réseau);
+    \item et que tous les nœuds du cluster soient couverts par au moins deux \cns, comme expliqué plus haut.
 \end{itemize}
-In practice, computing the first ten terms of the sum provides a good approximation.
-
-\subsection{Selecting \cns among set $SEN$}
-
-At step~3 of the fair election process, \chs select the \cns for the running iteration among the nodes inside $SEN$ sets.
-Note that any selection criterion could be used at this point.
-For instance, \cns could be randomly picked among elements of $SEN$ until we have:
+D'autres façons d'effectuer ce choix reviendraient par exemple à prendre en compte un ou plusieurs critères parmi la liste suivante:
 \begin{itemize}
-    \item enough \cns (according to user's choice)
-    \item and all nodes covered by at least two \cns, as mentioned above.
-\end{itemize}
-Some other selection criteria could include:
-\begin{itemize}
-    \item residual energy of the nodes
-    \item connectivity index (number of direct neighbors)
-    \item signal power
+    \item l'énergie résiduelle des nœuds;
+    \item l'index de connectivité (le nombre de voisins directs des nœuds);
+    \item la puissance du signal;
     \item \etc
 \end{itemize}
-Several criteria can even be combined to obtain a weighted score, such as for instance in equation~\ref{eqn:score}:
+Plusieurs de ces critères peuvent être pondérés et combinés de façon à obtenir une note pour chaque nœud, comme par exemple dans l'\equaref{se:eqn:score}.
 \begin{equation}
     \label{eqn:score}
     s_k[i] = (\alpha \times RE_k[i]) + (\gamma \times ci_k[i]) + (\delta \times sp_k[i]) + (\zeta \times nsl_k[i])
 \end{equation}
-where:
+où:
 \begin{itemize}
-    \item $s_k[i]$ denotes the score for node~$i$ at iteration~$k$.
-    \item $RE_k[i]$ remains the residual energy for said node and iteration.
-    \item $ci_k[i]$ would be the connectivity index of~$i$.
-    \item $sp_k[i]$ is the average signal power as perceived by the neighbors of node~$i$.
-    \item $nsl_k[i]$ is the maximum value between a predetermined integer value and the number of iterations before~$k$ since node~$i$ was last selected as a \cn.
-    \item $\alpha$, $\gamma$, $\delta$ and $\zeta$ would be constants fixed by the user.
+    \item $s_k[i]$ représente la note du nœud~$i$ pour l'itération~$k$;
+    \item $RE_k[i]$ reste l'énergie résiduelle pour le même nœud et la même itération;
+    \item $ci_k[i]$ est l'index de connectivité de~$i$;
+    \item $sp_k[i]$ est la puissance moyenne du signal enregistrée par les voisins du nœud~$i$;
+    \item $nsl_k[i]$ est la valeur maximale entre un seuil prédéterminé et le nombre d'itérations antérieures à~$k$ depuis que le nœud a été désigné \cn pour la dernière fois;
+    \item $\alpha$, $\gamma$, $\delta$ et $\zeta$ sont des constantes définies par l'utilisateur.
 \end{itemize}
-This formula could be used to sort nodes in set $SEN$ so that the \ch can select the best possible \cns in regard with retained criteria.
+Cette formule pourrait être utilisée pour classer les nœuds de la liste~$SEN$ de telle manière que le \ch puisse choisir les meilleurs \cns possibles par rapport aux critères pris en compte.
 
-Setting the criteria and the weights for the formula is up to the user of the network.
-It should be adapted to the exact application and environment of the WSN.
-For instance it may be worth noting that for networks made of static nodes, the connectivity index and the signal power of the nodes are not expected to change much between two consecutive iterations.
-Therefore their weights should not be too high (in regard with the other weights in the formula) so as to avoid selecting the same \cns at each iteration.
-In clustered networks, where all the nodes can reach their \CH in a one-hop fashion, index connectivity or signal power might not even be relevant (once again, depending also on the deployed application).
-But even if we only work in clustered networks in this study ---~because they allow energy savings and a much better scaling~--- we should nevertheless consider other architectures in that respect, for not all WSNs are clustered.
-And many ones also work with mobile nodes.
-In such cases, evaluating the density of nodes or the quality of the links in the area where the candidate \cns are located becomes more interesting because it generally has a higher impact on performances.
-Such observations remain valid for the chosen constraint stating that each node must be watched over by at least two \cns.
-While it is a good thing in clusters where nodes are all gathered around their \ch, it could be much harder to obtain in some other topologies.
-In a star-like network for instance, where most sensors would be on branches and only have two neighbors (one closer, one farther from the base station), it could result in all nodes being selected as \cns.
+La détermination des critères à retenir et des poids à appliquer revient à l'utilisateur du réseau; en pratique, il faudrait les adapter par rapport à l'application qui sera faite du réseau de capteurs, tout en tenant compte des conditions particulières de l'environnement dans lequel celui-ci sera déployé.
+Dans un réseau constitué de nœuds statiques, par exemple, l'index de connectivité des capteurs, de même que la puissance de leur signal, ne sont pas censés subir de modifications sensibles entre deux itérations consécutives.
+En conséquence, les poids de ces deux critères devraient être modérés (par rapport aux autres poids utilisés dans la formule) afin d'éviter de désigner les mêmes capteurs à chaque itération.
+Dans un réseau clusterisé, où tous les nœuds peuvent atteindre leur \CH en un seul saut, l'index de connectivité ou la puissance du signal ne constituent peut-être pas des critères pertinents pour la formule de sélection (bien que, là encore, cela puisse dépendre de l'application déployée).
+Mais même si nous travaillons principalement dans des réseaux clusterisés dans cet ouvrage, il est bon de se rappeler que tous les réseaux de capteurs ne font pas nécessairement appel à de tels mécanismes.
+Et que nombre d'entre eux comportent également des nœuds mobiles.
+Dans de tels environnements, l'évaluation de la densité des nœuds ou de la qualité des liens dans les zones où sont situés les \cns candidats devient plus intéressante, car il s'agit souvent d'indicateurs précieux sur les performances du réseau.
+Toujours sur le même propos, la contrainte fixée consistant à faire en sorte que chaque nœud soit surveillé par au moins deux \cns peut éventuellement être aménagée.
+S'il s'agit en principe d'une bonne assurance pour détecter les nœuds compromis dans des clusters où tous les nœuds sont réunis à portée d'émission de leur \ch, cette contrainte pourrait s'avérer beaucoup plus lourde pour d'autres topologies.
+Ainsi dans un réseau en étoile, par exemple, où tous les capteurs se retrouveraient sur des branches et n'auraient que deux voisins (l'un plus près, l'autre plus loin de la station de base), la mise en application de la contrainte pourrait avoir pour effet de désigner tous les nœuds du réseau comme \cns.
