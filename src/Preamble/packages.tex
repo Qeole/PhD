@@ -1,9 +1,9 @@
-% Vim: set spelllang=fr
+% Vim: set spelllang=fr:
 % PAQUETS
 %\usepackage{amsfonts}
 \usepackage{amsmath}
-%\usepackage{amssymb}
-%\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsthm}
 \usepackage{array}
 \usepackage[backend=biber,language=french]{biblatex}
 \usepackage{booktabs}
@@ -23,10 +23,19 @@
 %\usepackage{multicol}
 %\usepackage{multirow}
 \usepackage{setspace}
+\usepackage{tikz}
 \usepackage{xcolor}
 \usepackage{xspace}
 \usepackage{xpatch}
 \usepackage{wrapfig}
+
+% Chap. théorie des jeux
+\usetikzlibrary{automata,calc,shapes}
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}                                                    %
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{remark}{Remark}
 
 % FONTES & LANGAGES
 \ifXeTeX\else
