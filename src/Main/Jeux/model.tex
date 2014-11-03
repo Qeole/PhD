@@ -1,4 +1,4 @@
-% vim: set spelllang=fr,en foldmethod=marker:
+% vim: set spelllang=fr foldmethod=marker:
 \section{Jeux quantitatifs infinis sur graphes finis}
 \label{tj:sec:model}
 
@@ -41,7 +41,7 @@ Elles peuvent donc être dissociées en deux ensembles: $k_e$ dimensions relativ
 Une configuration du jeu devient alors $(q,\val,\energ)$.
 Les niveaux d'énergie doivent rester supérieur à zéro, quelles que soient leurs valeurs par ailleurs.
 Les gains peuvent être négatifs, bien que le but des joueurs soit de le maximiser.
-Comme l'on considère des exécutions infinies, il est plus pertinent de considérer la moyenne du gain sur la durée des exécutions, c'est-à-dire de prendre le \emph{gain moyen} pour objectif.
+Comme l'on considère des exécutions infinies, il est plus pertinent de considérer la moyenne du gain sur la durée des exécutions, \cad de prendre le \emph{gain moyen} pour objectif.
 
 L'ensemble des exécutions victorieuses pour un joueur est constituée des exécutions qui vérifient une \emph{formule de gain} donnée, elle-même définie par la grammaire suivante:
 \[ \varphi ::= \varphi \vee \varphi \mid \varphi \wedge \varphi \mid \neg\mathit{at}
@@ -69,7 +69,7 @@ L'utilisation de la limite inférieure ne serait pas faux par rapport au modèle
 La satisfaction d'une combinaison booléenne d'atomes est définie de la manière classique.
 La négation ne peut être appliquée que sur des atomes.
 On appelle \emph{littéral} un atome ou sa négation.
-Lors de la résolution des jeux, on considérera le \emph{fragment positif} de cette logique, c'est-à-dire des conjonctions de littéraux.
+Lors de la résolution des jeux, on considérera le \emph{fragment positif} de cette logique, \cad des conjonctions de littéraux.
 Une exécution devient ainsi gagnante si la formule est satisfaite, ce que l'on note $\rho\vDash\varphi$.
 
 Les gains des joueurs débuteront avec la valeur $0$, tandis que les niveaux en énergie seront crédités dès le début du jeu d'une valeur strictement positive, appelée \emph{crédit initial}.
@@ -79,6 +79,6 @@ Les gains des joueurs débuteront avec la valeur $0$, tandis que les niveaux en 
 Les problèmes de décisions qui sont soulevés dans ce contexte sont les suivants:
 
 \begin{itemize}
-\item \textbf{Problème de victoire:} étant données une configuration initiale ainsi qu'une formule de gain $\varphi$, existe-t-il une stratégie $\sigma_c$ pour le capteur compromis telle que pour toute stratégie $\sigma_g$ des capteurs « sains », $\outcome(\sigma_c,\sigma_g) \vDash \varphi$?
-\item \textbf{Problème du crédit initial:} étant donnés un état initial $q$ ainsi qu'une formule de gain, existe-t-il une valeur $\chi \in \N$ telle que le problème de victoire basé sur la configuration $(q,0^{k_p},\chi^{k_e})$ ait une réponse positive?
+    \item \textbf{Problème de victoire:} étant données une configuration initiale ainsi qu'une formule de gain $\varphi$, existe-t-il une stratégie $\sigma_c$ pour le capteur compromis telle que pour toute stratégie $\sigma_g$ des capteurs « sains », $\outcome(\sigma_c,\sigma_g) \vDash \varphi$?
+    \item \textbf{Problème du crédit initial:} étant donnés un état initial $q$ ainsi qu'une formule de gain, existe-t-il une valeur $\chi \in \N$ telle que le problème de victoire basé sur la configuration $(q,0^{k_p},\chi^{k_e})$ ait une réponse positive?
 \end{itemize}

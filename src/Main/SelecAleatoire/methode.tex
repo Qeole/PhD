@@ -8,7 +8,7 @@
 Certains capteurs se voient ainsi confier le rôle de «~nœuds de contrôle~», ou \cns (introduits dans~\cite{LC08}), et sont chargés de surveiller le trafic entrant et sortant des \chs.
 
 Si un \cn constate qu'un capteur envoie, au cours d'une unité de temps, plus de données à leur \CH qu'une valeur de seuil déterminée $S_{debit}$, il retient que le nœud a eu un comportement anormal (il y a eu un écart important à la moyenne de la quantité de données envoyées par unité de temps).
-Lorsque ce nœud réalise un certains nombres d'écarts, c'est à dire lorsque le nombre de comportement anormaux détectés par un \cn dépasse une valeur de seuil $S_{ecarts}$, le ou les nœuds de contrôle qui ont repéré ces écarts considèrent alors le capteur comme compromis.
+Lorsque ce nœud réalise un certains nombres d'écarts, \cad lorsque le nombre de comportement anormaux détectés par un \cn dépasse une valeur de seuil $S_{ecarts}$, le ou les nœuds de contrôle qui ont repéré ces écarts considèrent alors le capteur comme compromis.
 Chaque \cn ayant détecté un nœud compromis envoie un message d'avertissement à son \ch.
 Ici encore, un seuil $S_{alertes}$ est fixé pour le nombre minimum d'alertes qu'un \CH doit recevoir avant de considérer un nœud comme malveillant, et ce afin d'éviter qu'un nœud compromis se faisant passer pour un \cn ne déclare tous ses voisins comme compromis.
 Plusieurs \cns distincts doivent donc détecter les écarts d'un nœud pour que celui-ci soit effectivement considéré comme compromis par le \ch.

@@ -120,7 +120,7 @@ Chaque ronde $r$  est organisée de la façon suivante:
     \item Les \chs auto-désignés informent leurs nœuds voisins de leur changement de statut à l'aide de messages en \textit{broadcast}.
         Tous ces messages sont envoyés en utilisant la même puissance de transmission (valeur fixe et prédéterminée lors de l'implémentation).
         Pour limiter les collisions, il est fait usage de la méthode \textit{Carrier Sense Multiple Access} (\textit{CSMA}) au niveau de la couche \textit{MAC}.
-    \item Les autres nœuds, qui ne se sont pas désignés en tant que \chs pour la ronde en cours, choisissent de se joindre au cluster du \CH dont ils perçoivent le signal avec l'intensité la plus élevée, c'est à dire le \CH le plus proche en termes d'émissions électromagnétiques.
+    \item Les autres nœuds, qui ne se sont pas désignés en tant que \chs pour la ronde en cours, choisissent de se joindre au cluster du \CH dont ils perçoivent le signal avec l'intensité la plus élevée, \cad le \CH le plus proche en termes d'émissions électromagnétiques.
         Chaque nœud prévient le \ch qu'il décide de rejoindre en lui envoyant un message.
         La méthode \textit{CSMA} est là encore appliquée.
     \item Au vu des réponses reçues, chaque \ch calcule un «~ordre de transmission~» pour les nœuds qui l'ont rejoint.

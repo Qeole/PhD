@@ -68,7 +68,7 @@ Chaque message reçu laisse le \cn $k$ dans un état presque identique, à la se
 La même chose se produit avec une fréquence $\lambda_c$ pour les messages envoyés par le nœud compromis, qui provoque à chaque fois l'incrémentation du compteur $x_{k_c}$.
 Enfin, la vérification du trafic enregistré par le \cn $k$ survient avec une fréquence $\mu$.
 La fonction $f$ est appliquée sur l'ensemble des $x_{k_i}$, $i$ allant de $1$ à $s$.
-Si l'un des capteurs a envoyé un nombre de paquets supérieur à la valeur de seuil (c'est à dire si l'on a $f(x_k)\geq \mathit{seuil}$), le drapeau $x_{k_d}$ est levé.
+Si l'un des capteurs a envoyé un nombre de paquets supérieur à la valeur de seuil (\cad si l'on a $f(x_k)\geq \mathit{seuil}$), le drapeau $x_{k_d}$ est levé.
 Un message d'alerte est alors envoyé du \cn $k$ au \ch.
 Si, en revanche, aucune anomalie n'est à rapporter, le drapeau $x_{k_i}$ est laissé à $0$, et rien n'est envoyé.
 Dans les deux cas, tous les compteurs $x_{k_i}$ sont réinitialisés à $0$, afin que la prochaine vérification soit effectuée sur des données «~fraîches~» (et pour ne pas déclencher par erreur une fausse détection par cumul des nombres de paquets envoyés d'une période sur l'autre).
@@ -258,7 +258,7 @@ Basée sur ce modèle une formule LSAH comprend ainsi deux sous-éléments:
     \begin{itemize}
         \item $x$ est une variable de données de l'automate:
         \item $y$ est une expression arithmétique à partir de ces variables de données;
-        \item $Y$ est une variable de chemin aléatoire, c'est à dire une variable évaluée à l'aide d'un chemin de syncronisation, lui-même créé par la syncronisation entre une trajectoire du modèle RPSG et l'ALH;
+        \item $Y$ est une variable de chemin aléatoire, \cad une variable évaluée à l'aide d'un chemin de syncronisation, lui-même créé par la syncronisation entre une trajectoire du modèle RPSG et l'ALH;
         \item $\mbox{last}(y)$ est la dernière des valeurs endossées par l'expression $y$ le long d'un chemin syncronisé; $\mbox{min}(y)$ et $\mbox{max}(y)$ sont les valeurs optimales obtenues le long de ce chemin. $\mbox{int}(y)$ est l'intégrale d'$y$, et $\mbox{avg}(y)$ la moyenne des valeurs obtenues le long du chemin.
     \end{itemize}
 \end{itemize}
