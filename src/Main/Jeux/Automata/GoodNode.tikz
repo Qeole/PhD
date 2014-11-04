@@ -1,0 +1,33 @@
+\begin{scriptsize}
+\begin{tikzpicture}[scale=.6]
+\tikzset{state/.style={draw,circle,thick,minimum width=1cm,align=center}};
+\tikzset{edge/.style={thick,->,>=stealth}};
+
+\node[state] (ni) at (-3,+3) {idle};
+\node[state] (nl) at (+3,+3) {listen};
+\node[state] (nt) at (+3,-3) {treat\\msg};
+\node[state] (ns) at (-3,-3) {send};
+
+% IDLE <-> LISTEN
+\draw[edge] (ni) to[bend left=20] node[above]{start\_listen: (-1,0)} (nl);
+\draw[edge] (nl) to[bend left=20] node[below]{stop\_listen: (0,0)} (ni);
+
+% IDLE <-> SEND
+\draw[edge] (ni) to[bend left=20] node[midway,below=1.1cm,right=.2cm,rotate=90]{start\_send: (-2,+1)} (ns);
+\draw[edge] (ns) to[bend left=20] node[midway,above,rotate=90]{stop\_send: (0,0)} (ni);
+
+% TREAT->SEND
+\draw[edge] (nt) to[bend left=20] node[below]{start\_transmit: (-2,0)} (ns);
+
+% LISTEN->TREAT
+\draw[edge] (nl) to[bend left=20] node[midway,below,rotate=90]{start\_receive: (0,0)} (nt);
+
+% Loop edges
+\draw[edge] (ni) edge[loop,in=110,out=160,looseness=5] node[above=.3cm,right=-1cm]{remain\_idle: (+1,0)} (ni);
+\draw[edge] (ns) edge[loop,in=200,out=250,looseness=5] node[below=.3cm,right=-.5cm]{resend: (-2,0)} (ns);
+\draw[edge] (nt) edge[loop,in=290,out=340,looseness=5] node[below=.3cm,left=-.3cm]{hold: (0,0)} (nt);
+
+% Init edge
+\draw[edge] (-5.5,+3) to (ni);
+\end{tikzpicture}
+\end{scriptsize}

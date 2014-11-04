@@ -1,0 +1,347 @@
+% vim: set spelllang=fr,en foldmethod=marker:
+\section{Résolution des jeux}
+\label{tj:sec:algo}
+
+Cette section s'intéresse au problème posé par la résolution de ces jeux.
+Nous montrerons tout d'abord que la résolution est un problème indécidable lorsque la condition de victoire est une formule de gain arbitraire.
+Nous nous concentrerons ensuite sur le segment positif de ces formules, et donnerons des conditions suffisantes pour pouvoir résoudre le problème.
+
+\newcommand\jo{joueur~0\xspace}
+\newcommand\ji{joueur~1\xspace}
+Afin de clarifier la présentation, nous considérons dans cette section deux joueurs, simplement désignés par les termes \jo et \ji.
+Le \jo est celui qui cherche à atteindre l'objectif décrit par la formule de gain, et représente donc le nœud compromis.
+Conformément à la convention adoptée dans la section précédente, ses états seront représentés sous forme de rectangles.
+Le \ji quant à lui représente l'« équipe » (l'ensemble) des autres nœuds, et ses états seront de forme circulaire.
+
+\subsection{Undecidability of the general case}
+
+In this section we show that there is no algorithmic solution to solve the winning problem on these games if the winning condition can be specified by any payoff formula.
+Namely, we show the following:
+\begin{theorem}
+The winning problem and the initial credit problem are undecidable for objective defined by a given payoff formula with four energy components and one payoff component.
+\end{theorem}
+
+The proof consists in encoding the halting problem on two-counter machines --~which is known to be undecidable~\cite{minsky67}~-- with such a game.
+Each counter is represented by two energy components (one for each player) carrying a copy of the value of said counter.
+In the case of the $0$-test, player~0 can claim that the counter was or was not null and the second one can check the validity of the claim.
+If the machine reaches its halting state, a reward component is incremented, and all other components are reset to $0$.
+Hence if the machine halts, player~0 has a winning strategy (encoding faithfully the machine's behavior) to get a strictly positive reward.
+Otherwise the reward remains null. 
+
+More precisely, a two-counter machine is a list of labeled instructions of that can be:
+\begin{itemize}
+    \item \textbf{increment:} increment counter $c$ (resp. $d$) and goto label $\ell$
+    \item \textbf{0-test:} if $c=0$ (resp. $d=0$) then goto $\ell_1$ else decrement $c$ (resp. $d$) and goto $\ell_2$
+    \item \textbf{halting:} \emph{halt}
+\end{itemize}
+The first label is the initial one.
+Initially, both counters are set to $0$.
+
+Now given a machine $\machine$, we build an arena $\G_\machine$ based on small modules for each kind of instructions (for counter $c$, it is symmetrical for $d$).
+The arena has $5$ components $c,c',d,d',p$, where only $p$ is a payoff one.
+Components $c$ and $c'$ (resp. $d$ and $d'$) are supposed to always retain the same value, except in the $0$-test.
+Initially, all components have value\footnote{In this simulation, one could increase all energy component's value by $1$ in order to retain $0$ as a losing value; however, in order to clarify the link between counter values and energy levels, we chose to allow energy level to be $0$, and consider the game ``lost'' only for strictly negative values.} $0$.
+
+The goal of player~0 is to obtain a strictly positive payoff while faithfully simulating the machine.
+The faithful simulation depends on the component's values: $c$ and $d$ must remain positive.
+Components $c'$ and $d'$ ensure that player~1 cannot wrongfully claim that player~0 cheated.
+If so, their value will be strictly negative.
+As a result, the winning condition is the satisfaction of the following payoff formula:
+\[(c\geq0 \wedge d\geq0 \wedge p>0) \vee (c'<0 \wedge c\geq0) \vee (d'<0 \wedge d\geq0)\]
+
+Each labeled instruction has a state in the arena belonging to player~0, with the same label (some other states will be added).
+The case of incrementation is trivial if instruction $\ell$ is ``increment $c$ then goto $\ell'$'', then there is an edge from $\ell$ to $\ell'$ with weights $(1,1,0,0,0)$.
+There is no other edge from $\ell$, so the player has no choice.
+
+The $0$-test is trickier, since player~0 could ``cheat'' by choosing the wrong branch of the conditional.
+Formally, assume $\ell$ is ``if $c=0$ then goto $\ell_1$ else decrement $c$ and goto $\ell_2$''.
+Then there are two edges stemming from state $\ell$: one claiming that $c=0$, the other claiming that $c>0$, as depicted in \figref{tj:fig:zerotest}.
+The edge claiming that $c=0$ goes to a state owned by player~1, which can either accept the claim (hence going into $\ell_1$) or reject it.
+Rejecting the claim means decrementing $c'$ (but not $c$) and going to a \emph{stop} state: this state has one edge to itself labeled $(0,0,0,0,0)$, meaning the simulation has stopped.
+Note that wrongfully rejecting the claim means that $c'<0$ while $c=0$, since $c$ and $c'$ were equal.
+Rightfully rejecting it means that the payoff is null.
+
+\begin{figure}
+\centering
+\begin{tikzpicture}[auto,thick,>=stealth,xscale=1.05]
+\tikzstyle{stateComp}=[state, shape=rectangle]
+\tikzstyle{stateNorm}=[state,inner sep=0pt]
+\tikzstyle{mini}=[font=\small]
+
+\node[stateComp] (l0) at (0,0) {$\ell$};
+\node[stateNorm] (c0) at (3,0) {`$c=0$'};
+\node[stateComp] (l1) at (6,0) {$\ell_1$};
+\node[stateComp] (stop1) at (6,-2) {\emph{stop}};
+\node[stateNorm] (cpos) at (0,-2) {`$c>0$'};
+\node[stateComp] (l2) at (0,-4) {$\ell_2$};
+\node[stateComp] (stop2) at (3,-4) {\emph{stop$'$}};
+
+\draw[->] (l0) edge (c0);
+\draw[->] (c0) edge (l1);
+\draw[->] (c0) edge[bend right] node[mini] {$(0,-1,0,0,0)$} (stop1);
+
+\draw[->] (l0) edge node[mini] {$(-1,-1,0,0,0)$} (cpos);
+\draw[->] (cpos) edge (l2);
+\draw[->] (cpos) edge (stop2);
+
+\draw[->] (stop1) edge [loop below] (stop1);
+\draw[->] (stop2) edge [loop right] node [mini] {$(0,0,0,0,1)$} (stop2);
+
+\end{tikzpicture}
+\caption[Module for encoding a $0$-test instruction into a game.]{Module for encoding a $0$-test instruction into a game:``if $c=0$ then goto $\ell_1$ else decrement $c$ and goto $\ell_2$''. Square states belong to player~0, round states to the second one. Unmarked edges are assumed to have $(0,0,0,0,0)$ weights.}
+\label{tj:fig:zerotest}
+\end{figure}
+
+Similarly, the claim that $c>0$ is made by an edge decrementing both $c$ and $c'$ (hence $(-1,-1,0,0,0)$), and going to state of player~1.
+He can either follow with the simulation or go to a \emph{stop$'$} state.
+This state has a single edge to itself labeled $(0,0,0,0,1)$, meaning the simulation has stopped but the payoff is $1$.
+If player~0 cheated, then $c<0$ and the simulation need not go further.
+If he didn't, then both $c>0$ and $c'>0$, and $p>1$.
+
+Finally, upon reaching the \emph{halt} state, player~0 decreases both $c$ and $c'$ at will, then go to a \emph{check} state.
+State \emph{check} belongs to player~1, and behaves as in the case of $0$-test where player~0 claimed that $c=0$.
+The same is also done for $d$, and finally an edge goes back from \emph{check} to the initial state giving a reward to the $p$ component: $(0,0,0,0,1)$.
+This module is depicted in \figref{tj:fig:halt}.
+
+\begin{figure}
+\centering
+\begin{tikzpicture}[auto, thick,>=stealth]
+\tikzstyle{stateComp}=[state, shape=rectangle]
+\tikzstyle{stateNorm}=[state,inner sep=0pt]
+\tikzstyle{mini}=[font=\small]
+
+\node[stateComp] (h) at (0,0) {\emph{halt}};
+\node[stateNorm] (z) at (3,0) {\emph{check}};
+\node[stateComp] (stop) at (3,-1.5) {\emph{stop}};
+\node[stateComp] (l0) at (6,0) {$\ell_0$};
+
+\draw[->] (h) edge[loop above] node[mini] {$(-1,-1,0,0,0)$} (h);
+\draw[->] (h) edge[loop below] node[mini] {$(0,0,-1,-1,0)$} (h);
+\draw[->] (h) edge (z);
+
+\draw[->] (z) edge[bend right] node[mini,swap,pos=0.55] {$(0,-1,0,0,0)$} (stop);
+\draw[->] (z) edge[bend left] node[mini,pos=0.55] {$(0,0,0,-1,0)$} (stop);
+\draw[->] (z) edge node[mini] {$(0,0,0,0,1)$} (l0);
+
+\draw[->] (stop) edge [loop right] (stop);
+
+\end{tikzpicture}
+\caption[Module for encoding the halting instruction into a game.]{Module for encoding the halting instruction into a game. Square states belong to player~0, round states to the second one. Unmarked edges are assumed to have $(0,0,0,0,0)$ weights.}
+\label{tj:fig:halt}
+\end{figure}
+
+Now assume that $\machine$ halts.
+Consider the strategy of player~0 that plays faithfully \emph{i.e.} claims exactly what the counter value tells (and in the end decrements components so that they exactly reach $0$).
+Then if player~1 never claims wrongdoing, counters $c$ and $d$ remain positive as in $\machine$.
+In addition, assume $\machine$ finished in $k$ steps and let $c_k$ and $d_k$ be the values of $c$ and $d$, respectively, upon reaching the halting instruction.
+Then the run of the machine is then at most $2k$ steps in the game (because of the claims that must be accepted), then from the \emph{halt} state the game needs $c_k+d_k+2$ steps to reach the initial state again: it is the number of steps required in order to decrement both counters and traverse the module of \figref{tj:fig:halt}.
+Hence the mean payoff is at least $\frac1{2k+c_k+d_k+2}>0$.
+
+If player~1 rejected a claim:
+\begin{itemize}
+\item if $c=c'=0$ but player~1 decremented $c'$ to contest the claim, then the game ``stops'' but condition $c'<0 \wedge c\geq0$ is satisfied;
+\item if $c=c'\geq0$ after decrementation but the game was ``stopped'', payoff is $1$ while both $c$ and $d$ are above $0$, hence condition $c\geq0 \wedge d\geq0 \wedge p>0$ is satisfied.
+\end{itemize}
+
+As a result, this faithful simulation strategy is winning.
+
+\bigskip
+
+On the other hand if $\machine$ does not halt, faithful simulation yields a payoff of $0$ provided player~1 never wrongfully attacks a claim (the halt state is never reached, and if player~1 does not claim cheating, stop$'$ is not reached either).
+Note that in case of unfaithful simulation from player~0, player~1 only needs to detect this fault: either $c<0$ or the payoff is irremediably null.
+
+\bigskip
+
+This construction can be adapted to the initial credit problem: one needs to add a module before the initial state that resembles the \emph{halt} module, in the sense that it ensures bringing all energy levels to $0$.
+Hence any initial credit is irrelevant and player~0 wins if and only if $\machine$ halts.
+
+\subsection{The positive fragment}
+
+We now consider the initial credit problem.
+It is ``easier'' for the compromised node to win for this game rather than for the corresponding winning game.
+Additionally, it is common when combining strategies that an initial credit required to win is increased; in other words, strategies for the winning problem are usually not robust enough.
+From the model point of view, solving this problem yields more information: if a strategy and a credit are found, they give an actual value to which the initial energy level must be set.
+
+\bigskip
+
+We show in this section that winning strategies for objectives defined by literals may be combined into a winning strategy for the whole objective.
+
+First, the case of a literal is the well-studied case of either energy games or mean-payoff games.
+These games have simple solutions, in the sense that (1) these games are determined, \ie one of the player has a winning strategy; (2) if a winning strategy exists, there exists one with finite memory; (3) which player wins the game can be decided in $\NP\cap \coNP$~\cite{zwick96}.
+Moreover, it was proved in~\cite{velner12a} that finite memory suffice to win a conjunction of energy requirements.
+The case of conjunction of payoff requirement has also been studied in~\cite{velner12a}, where the memoryless strategies for each payoff condition is combined into infinite memory strategies for the whole objective.
+For example, when mean-payoff is defined with the superior limit: each strategy is played in increasingly longer phases until reaching the desired value (as close as needed).
+
+As a result we here focus on mixing energy and payoff objectives.
+Remark that since the objective of the compromised node is a conjunction of literals, it is clear that if the objective specified by one of the literals cannot be achieved, then the conjunction cannot, hence the game cannot be won.
+
+If there are strategies for each of the objectives, it may be possible to combine finite-memory winning strategies for each of the literals into a single winning strategy, possibly needing infinite memory.
+We provide sufficient conditions to do so; finding an algorithm for this problem is still open.
+
+\subsubsection{Attractors}
+
+In two-player games, it is common to use the notion of \emph{attractor} of a set $Q$ to denote states where a player can force the play to reach $Q$.
+
+\begin{definition}
+The 1-step \emph{attractors} for players~$0$ and~$1$ of a set $Q$ of states are defined as follows:
+\begin{eqnarray*}
+1\!\attractor{0}(Q) &=& \left\{q \in V_0 \mmid \exists (q,q') \in E \textrm{ s.t. } q' \in Q \right\}
+\\&&\quad
+\cup \;\left\{q \in V_1 \mmid \forall (q,q') \in E, q' \in Q \right\}
+\end{eqnarray*}
+\begin{eqnarray*}
+1\!\attractor{1}(Q) &=& \left\{q \in V_0 \mmid \forall (q,q') \in E, q' \in Q \right\}
+\\&&\quad
+\cup \;\left\{q \in V_1 \mmid \exists (q,q') \in E \textrm{ s.t. } q' \in Q \right\}
+\end{eqnarray*}
+The \emph{attractors} for player~$0$ (resp. player~$1$) of a set $Q$ of states are the fix-point of the 1-step attractor, starting from $Q$: for $i \in \{0,1\}$,
+\[\attractor{i}(Q) = \bigcup_{j \in \N} \left(1\!\attractor{i}\right)^j(Q)\]
+%One can also define a strict version of this attractor, which excludes the set $Q$ itself (except if $q \in Q$ can reach $Q$):
+%\[\attractor{i}^+(Q) = \bigcup_{j \in \N\setminus\{0\}} \left(1\!\attractor{i}\right)^j(Q)\]
+\end{definition}
+The attractor of player~$i$ is therefore the set of states from which he can ensure that the play reaches $Q$.
+Note that from any state in $(1\!\attractor{i})^j(Q)$, player $i$ has a memoryless strategy to reach $Q$ in at most $j$ steps.
+Since the fix-point is reached in at most $|V|$ iterations, $Q$ can be reached in at most $|V|$ steps from any state of $\attractor{i}(Q)$.
+Note that this bound also shows that attractors can be computed in polynomial time.
+
+\begin{lemma}
+From any state of $\attractor{i}(Q)$, player $i$ has a memoryless strategy that ensures reaching $Q$ in at most $|V|$ steps.
+\end{lemma}
+
+A property of attractors in games is that they can be ``safely'' removed from a game while leaving the graph structure still a game (\emph{i.e.} without end-states):
+\begin{lemma}\label{tj:lem:removeattr}
+Let $\G = \langle V_0, V_1, E\rangle$ be a game graph (\emph{i.e.} such that every state of $V$ has an outgoing edge in $E$).
+Let $j \in \{0,1\}$ be a player.
+Let $Q \subseteq V$ and consider the graph $\G' = (V_0', V_1', E \cap (V' \times V'))$ with $V_i' = V_i \setminus \attractor{j}(Q)$ for $i \in \{0,1\}$.
+Then every state of $V'$ has an outgoing edge in $E \cap (V' \times V')$, \emph{i.e.} $\G'$ is also a game graph.
+\end{lemma}
+
+\begin{proof}
+Assume by contradiction that $q \in V'$ has no outgoing edge.
+Since $q$ had an outgoing edge in $E$, it means that all successor states of $q$ belong to $\attractor{j}(Q)$.
+Then by definition of an attractor, so does $q$, and $q \notin V'$.
+\end{proof}
+
+\subsubsection{Conjunction of an energy and payoff objective}
+
+In this first simpler case, we study objectives for player~0 of the form $p_e \geq c_e \wedge p_v \geq c_v$, with $c_e,c_v \in \N$.
+These objectives state that a certain reward must be achieved while maintaining the energy level above a given limit.
+A simple example of this kind of objective for a compromised node is the \emph{greedy} objective: to remain alive ($p_e \geq 1$) while sending at least a message every $6$ steps ($p_v \geq \frac1{6}$, as noted before, this can be transformed into an integral threshold by multiplying each weight of this component by $6$).
+
+First, it is clear that from states where one of the objective cannot be fulfilled, player~0 cannot win.
+In addition, if player~1 can force to reach such states, then the objective of player~0 cannot be fulfilled.
+Namely, we use the classical notion of \emph{attractors} defined above.
+We write $L_e$ the states where player~0 loses for $p_e \geq c_e$ (\emph{i.e.} player~1 has a strategy to prevent that), and $L_v$ the states where player~0 loses for $p_v \geq c_v$.
+It is clear that player~1 can prevent player~0 from winning for objective $p_e \geq c_e \wedge p_v \geq c_v$ from any state in $\attractor{g}(L_e \cup L_v)$.
+Hence any winning strategy for player~0 must remain in $\G \setminus\attractor{1}(L_e \cup L_v)$.
+Conversely, a winning strategy that remains in $\G \setminus\attractor{1}(L_e \cup L_v)$ is also a winning strategy in $\G$ since player~1 cannot force the play into $\attractor{1}(L_e \cup L_v)$, by the definition of attractors.
+
+As a result, one can recursively remove states in $\G$ until player~0 wins for both objectives in every state.
+Note that if the game is empty at that point, then player~0 cannot win from any state.
+
+Now assume player~0 has winning strategies $\lambda_e$, $\lambda_v$ for objectives $p_e \geq 1$, $p_v \geq \frac1{15}$, respectively, that win from every state.
+Remark that these strategies can be assumed to be memoryless, hence functions from $V_c$ to $V$.
+
+Consider $\G_e$ the single player game obtained when player~0 plays $\lambda_e$: each transition entering a state $v \in V_c$ goes instead to $\lambda_e(v)$, and weights are added: $v_0 \xrightarrow{w_1} v \xrightarrow{w_2} \lambda_e(v)$ is replaced by $v_0 \xrightarrow{w_1+w_2} \lambda_e(v)$.
+Similarly, let $\G_v$ the single player game obtained when playing $\lambda_v$.
+
+Let $\alpha$ be the lowest value that can be obtained for component $k_v$ in a simple cycle in $\G_e$, and dually $\beta$ the lowest value that can be obtained for $k_e$ in $\G_v$.
+In other words, $\alpha$ is the worst that can happen to reward when playing the strategy ensuring adequate level of energy, while $\beta$ is the worst that can happen to energy level when ensuring adequate reward.
+Note that if $\alpha \geq c_v$, then $\lambda_e$ is also a winning strategy for objective $p_v \geq c_v$, hence is a winning strategy for the whole objective.
+Similarly, if $\beta > 0$, then $\lambda_v$ ensures objective $p_e \geq c_e$ provided the initial credit is adapted to the minimal sum of weights reached along a cycle:
+\[\textit{initial\_credit} = 1+c+\min_{\substack{\rho \textrm{ prefix of } \mathcal{C}\\  \mathcal{C}\textrm{ cycle in } \G_v}} w_e(\rho)\]
+
+\medskip
+
+If the above sufficient condition is not fulfilled, we do not so far have a solution for solving these games in the general setting.
+Indeed, strategies for each component or the other can be incompatible.
+For example, consider the (single-player) game of \figref{tj:fig:infmemoryneeded}.
+In this example, $q_0$ acts as a recharging state while $q_1$ is an active state, producing a useful effect rewarded by a payoff.
+One can see that recharging the battery is much slower than using it, since it takes 42 ``energy units'' per active step\footnote{For example this can be a joule, meaning that the active state consumes 42W of power while the charging is done with 1W of power. The value 42 was arbitrarily chosen.}
+
+One can achieve a positive energy (first component) at all times by remaining in $q_0$ (or going there if starting from $q_1$).
+It is also possible to achieve a payoff (second component) of $1$ by remaining in $q_1$ (or going there if starting from $q_0$, the transitive effect is negligible in the long run).
+However, one cannot achieve a payoff of $1$ while maintaining the energy positive, since it takes 42 turns of ``recharging'' before being allowed to do something rewarding.
+
+\begin{figure}
+\centering
+\begin{tikzpicture}[auto, thick,>=stealth]
+\tikzstyle{stateComp}=[state, shape=rectangle]
+
+\node[stateComp] (q0) at (0,0) {$q_0$};
+\node[stateComp] (q1) at (3,0) {$q_1$};
+
+\path[->] (q0) edge[loop left] node {$+1,0$} (q0);
+\path[->] (q0) edge[bend left=15] node {$0,0$} (q1);
+\path[->] (q1) edge[loop right] node {$-42,+1$} (q1);
+\path[->] (q1) edge[bend left=15] node {$0,0$} (q0);
+\end{tikzpicture}
+\caption{A simple game that requires infinite memory. The first component is an energy level while the second is a payoff.}
+\label{tj:fig:infmemoryneeded}
+\end{figure}
+
+\subsubsection{Using bounded memory}
+
+However, one can consider that nodes of a \wsn are very limited in their resources, hence can only implement finite memory strategies.
+In this case, bounding \emph{a priori} the amount of memory that can be used by player provides a solution for solving the initial credit problem for games with winning condition in the positive fragment.
+
+A finite memory strategy is a strategy that can be implemented by a finite deterministic Mealy machine: given the current state of the machine and of the game, the machine produces an edge to be played and the next state of the machine.
+The size of the memory is the size of the Mealy machine.
+
+For example, a finite memory strategy for the game of \figref{tj:fig:infmemoryneeded} that loops 42 times in $q_0$ then goes to $q_1$, loops once there, and goes back to $q_0$ to start again can be represented by the machine of \figref{tj:fig:memory42}.
+This machine has 46 states, since it needs to count how many times it has accumulated energy in $q_0$.
+Note that if starting in $q_1$, the machine first goes back to $q_0$ then applies the aforementioned strategy.
+Also, a strategy must be complete on its input, hence it must allow $q_1$ to occur in any memory state (in this case it goes back to the initial memory state and to $q_0$ in the game).
+
+\begin{figure}
+\centering
+\begin{tikzpicture}[auto, thick,>=stealth]
+\useasboundingbox (-1.25,1.45) rectangle (7.8,-3.15);
+\node[state, initial,initial text=] (m0) at (0,0) {$m_0$};
+\node[state] (m1) at (2,0) {$m_1$};
+\node (dots) at (3.5,0) {\dots};
+\node[state] (m42) at (5,0) {$m_{42}$};
+\node[state] (m43) at (7,0) {$m_{43}$};
+\node[state] (m44) at (7,-2) {$m_{44}$};
+\node[state] (m45) at (5,-2) {$m_{45}$};
+
+\draw[->] (m0) edge[loop above] node {$q_1 | q_0$} (m0);
+\draw[->] (m0) edge node {$q_0 | q_0$} (m1);
+\draw[->] (m1) edge node {$q_0 | q_0$} (dots);
+\draw[->] (m42) edge node {$q_0 | q_0$} (m43);
+\draw[->] (m43) edge node {$q_0 | q_1$} (m44);
+\draw[->] (m44) edge node {$q_1 | q_1$} (m45);
+\draw[->] (m45) edge[bend left] node[swap,pos=0.15] {$q_1 | q_0$} (m0);
+
+\draw[->] (m1) edge[bend left=15] node[pos=0.15] {$q_1 | q_0$} (m0);
+\draw[->] (m42) edge[bend left=25] node[,pos=0.15] {$q_1 | q_0$} (m0);
+\draw[->] (m43) edge[bend left=45] node[swap,pos=0.33] {$q_1 | q_0$} (m0);
+\draw[->] (m44) edge[bend left=60, in =60] node[pos=0.75] {$q_0 | q_0$} (m0);
+\draw[->] (m45) edge[bend left=60] node[pos=0.1] {$q_0 | q_0$} (m0);
+\end{tikzpicture}
+\caption[A Mealy machine representing a finite memory strategy.]{A Mealy machine representing a finite memory strategy (46 states). The input of edges is the current state of the game, the output is the chosen next state.}
+\label{tj:fig:memory42}
+\end{figure}
+
+\begin{remark}
+Note that the strategies with given memory may not be optimal.
+Consider for example the game of \figref{tj:fig:infmemoryneeded} with objective being to maintain the energy level above $0$ and ensure a mean-payoff greater than or equal to $\frac1{43}$.
+
+An infinite memory strategy can win this game.
+It is defined by phases, as follows.
+At the $k$-th phase, loop $42k$ times in $q_0$, then go to $q_1$, loop $k$ times, go back to $q_0$.
+This ensures that the transitions between $q_0$ and $q_1$ are negligible, hence the limit of the payoff is $\frac1{43}$, since 43 steps are needed to increment the payoff counter once.
+In addition, at each phase the energy goes back to its initial value (which can be $1$), while only encountering positive values.
+
+On the other hand, if only $k$ states of memory are allowed, the best payoff achievable is $\frac{k}{43k+2}$ (the corresponding strategy consists in repeating phase $k$).
+Hence not only the optimal payoff cannot be achieved, but allowing more memory allows to achieve better payoff.
+\end{remark}
+
+Solving the game assuming player~0 has bounded memory $k$ given as input consists in guessing this strategy as a machine, which is an exponential object if $k$ is given in binary.
+Then the machine is synchronized with the game, yielding a single-player game, to be played by player~1.
+In this game, only memoryless strategies need to be considered.
+
+Indeed, any infinite path not satisfying $p_e \geq c_e \wedge p_v \geq c_v$ either is such that $p_e$ falls below $c_e$ or the limit average of $p_v$ is below $c_v$.
+In both cases this amounts to finding a lasso path in the graph, which can be guessed.
+
+Regarding complexity, the above procedure is in $\NEXPSPACE$ (which is equivalent to $\EXPSPACE$~\cite[Chap.~20]{papadimitriou94}), although the bound is not tight.
