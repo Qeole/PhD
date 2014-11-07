@@ -91,17 +91,18 @@ Si l'affirmation a été rejetée à raison, alors le gain est nul.
 \label{tj:fig:zerotest}
 \end{figure}
 
+De même, l'affirmation $c>0$ est représentée par une arête qui décrémente à la fois $c$ et $c'$ (donc de poids $(-1,-1,0,0,0)$), et atteint l'état du \ji.
+Ce dernier peut soit poursuivre la simulation, soit se rendre sur un état \emph{arrêt$'$}.
+Cet état possède une unique arête qui boucle sur lui-même avec les poids $(0,0,0,0,1)$, ce qui signifie que la simulations est arrêtée mais que le gain vaut $1$.
+Si le \jo a triché, alors $c<0$ et la simulation n'a pas besoin d'être menée plus avant.
+S'il s'est comporté de façon loyale, alors $c>0$ et $c'>0$, et $p>1$.
 
-Similarly, the claim that $c>0$ is made by an edge decrementing both $c$ and $c'$ (hence $(-1,-1,0,0,0)$), and going to state of player~1.
-He can either follow with the simulation or go to a \emph{stop$'$} state.
-This state has a single edge to itself labeled $(0,0,0,0,1)$, meaning the simulation has stopped but the payoff is $1$.
-If player~0 cheated, then $c<0$ and the simulation need not go further.
-If he didn't, then both $c>0$ and $c'>0$, and $p>1$.
-
-Finally, upon reaching the \emph{halt} state, player~0 decreases both $c$ and $c'$ at will, then go to a \emph{check} state.
-State \emph{check} belongs to player~1, and behaves as in the case of $0$-test where player~0 claimed that $c=0$.
-The same is also done for $d$, and finally an edge goes back from \emph{check} to the initial state giving a reward to the $p$ component: $(0,0,0,0,1)$.
-This module is depicted in \figref{tj:fig:halt}.
+Enfin, lorsqu'il atteint l'état d'\emph{arrêt}, le \jo décrémente à la fois $c$ et $c'$ autant de fois qu'il le souhaite, puis se rend sur un état de vérification (\emph{check}).
+L'état \emph{check} appartient au \ji, et agit de la même façon que pour le $0$-test dans le cas où le \jo affirme que $c=0$.
+On procède de façon identique pour $d$.
+Enfin, une arête retourne depuis l'état \emph{check} jusqu'à l'état initial et rapporte une récompense à la composante de gain~$p$: son poids est $(0,0,0,0,1)$.
+Ce module est représenté sur la \figref{tj:fig:halt}.
+\todo{Remettre états \emph{halt} / \emph{stop}}
 
 \begin{figure}
 \centering
@@ -126,64 +127,68 @@ This module is depicted in \figref{tj:fig:halt}.
 \draw[->] (stop) edge [loop right] (stop);
 
 \end{tikzpicture}
-\caption[Module for encoding the halting instruction into a game.]{Module for encoding the halting instruction into a game. Square states belong to player~0, round states to the second one. Unmarked edges are assumed to have $(0,0,0,0,0)$ weights.}
+\caption[Module d'encodage des instructions d'arrêt sous forme de jeu.]{Module d'encodage des instructions d'arrêt sous forme de jeu. Les états sous forme de carrés appartiennent au \jo, les cercles représentent les états du \ji. Il est convenu qu'en l'absence d'indication de poids, les arêtes comportent les poids~$(0,0,0,0,0)$.}
 \label{tj:fig:halt}
 \end{figure}
 
-Now assume that $\machine$ halts.
-Consider the strategy of player~0 that plays faithfully \emph{i.e.} claims exactly what the counter value tells (and in the end decrements components so that they exactly reach $0$).
-Then if player~1 never claims wrongdoing, counters $c$ and $d$ remain positive as in $\machine$.
-In addition, assume $\machine$ finished in $k$ steps and let $c_k$ and $d_k$ be the values of $c$ and $d$, respectively, upon reaching the halting instruction.
-Then the run of the machine is then at most $2k$ steps in the game (because of the claims that must be accepted), then from the \emph{halt} state the game needs $c_k+d_k+2$ steps to reach the initial state again: it is the number of steps required in order to decrement both counters and traverse the module of \figref{tj:fig:halt}.
-Hence the mean payoff is at least $\frac1{2k+c_k+d_k+2}>0$.
+Supposons à présent que la \machine s'arrête.
+Considérons la stratégie du \jo qui consiste à jouer honnêtement, \cad à annoncer les valeurs correctes du compteur (et à décrémenter les composantes d'énergie, de sorte qu'elles atteignent exactement $0$).
+Alors si le \ji ne lance aucune accusation de tricherie, les compteurs $c$ et $d$ restent tous deux positifs, comme pour la \machine\todo{Read again}.
+Supposons de plus que la \machine a terminé son exécution en $k$ étape, et dénotons par $c_k$ et $d_k$ les valeurs respectives de $c$ et $d$ lorsque l'on atteint les instructions d"arrêt.
+Dans ce cas l'exécution de la simulation sur la machine correspond au plus à $2k$ étapes du jeu (à cause des affirmations qui doivent être acceptées), et le jeu nécessite $c_k+d_k+2$ étapes depuis l'état \emph{halt} pour atteindre à nouveau l'état initial: il s'agit du nombre d'étapes requises pour décrémenter chaque compteur et pour traverser le module de la \figref{tj:fig:halt}.
+En conséquence la valeur minimale du gain moyen est de $\frac1{2k+c_k+d_k+2}>0$.
 
-If player~1 rejected a claim:
+Si le \ji a rejeté l'une des affirmations du \jo:
 \begin{itemize}
-\item if $c=c'=0$ but player~1 decremented $c'$ to contest the claim, then the game ``stops'' but condition $c'<0 \wedge c\geq0$ is satisfied;
-\item if $c=c'\geq0$ after decrementation but the game was ``stopped'', payoff is $1$ while both $c$ and $d$ are above $0$, hence condition $c\geq0 \wedge d\geq0 \wedge p>0$ is satisfied.
+\item si $c=c'=0$, mais que le \ji a décrémenté $c'$ pour contester l'annonce, alors le jeu « s'arrête », mais la condition~$c'<0 \wedge c\geq0$ est satisfaite
+\item si $c=c'\geq0$ après le décrément mais que le jeu a été « arrêté », le gain vaut $1$ tandis que les deux composantes $c$ et $d$ sont supérieures à $0$. Dans ce cas la condition~$c\geq0 \wedge d\geq0 \wedge p>0$ est satisfaite.
 \end{itemize}
 
-As a result, this faithful simulation strategy is winning.
+Au final, on retient que la stratégie de simulation « loyale » est gagnante.
 
 \bigskip
 
-On the other hand if $\machine$ does not halt, faithful simulation yields a payoff of $0$ provided player~1 never wrongfully attacks a claim (the halt state is never reached, and if player~1 does not claim cheating, stop$'$ is not reached either).
-Note that in case of unfaithful simulation from player~0, player~1 only needs to detect this fault: either $c<0$ or the payoff is irremediably null.
+Supposons maintenant que la \machine ne s'arrête pas: la simulation « loyale » retourne une valeur de gain de $0$ si le \ji ne porte aucune accusation à tord (l'état d'arrêt \emph{halt} n'est jamais atteint, et si le \ji ne réfute aucune annonce, l'état \emph{stop$'$} n'est pas non plus atteint.)
+Dans le cas où le \jo « ment » lors de ses annonces, il suffit au \ji de détecter cette erreur pour que l'on obtienne soit $c<0$, soit une valeur de gain définitivement nulle.
 
 \bigskip
 
-This construction can be adapted to the initial credit problem: one needs to add a module before the initial state that resembles the \emph{halt} module, in the sense that it ensures bringing all energy levels to $0$.
-Hence any initial credit is irrelevant and player~0 wins if and only if $\machine$ halts.
+Cette construction peut être adaptée au problème du crédit initial: il suffit seulement de rajouter, en amont de l'état initial, un module similaire au module \emph{halt} dans le sens où il doit permettre à tous les niveaux d'énergie d'atteindre $0$.
+Une fois l'état « initial » (à l'origine) atteint, le crédit initial devient caduque, et le \jo gagne si et seulement si la \machine s'arrête.
 
-\subsection{The positive fragment}
+\subsection{Le fragment positif}
 
-We now consider the initial credit problem.
-It is ``easier'' for the compromised node to win for this game rather than for the corresponding winning game.
-Additionally, it is common when combining strategies that an initial credit required to win is increased; in other words, strategies for the winning problem are usually not robust enough.
-From the model point of view, solving this problem yields more information: if a strategy and a credit are found, they give an actual value to which the initial energy level must be set.
+Revenons à présent sur le problème du crédit initial, dont le jeu est plus « simple » à remporter pour le nœud compromis que le jeu du problème de victoire correspondant.
+De plus il est courant, lorsque l'on combine des stratégies, qu'un crédit initial nécessaire à la victoire soit augmenté; en d'autres termes, les stratégies concernant le problème de victoire ne sont souvent pas assez robustes.
+Du point de vue du modèle employé, résoudre le problème du crédit initial permet d'obtenir plus d'informations: si une stratégie et un crédit sont découverts, ils fournissent une valeur concrète à laquelle l'énergie doit être initialisée.
 
 \bigskip
 
-We show in this section that winning strategies for objectives defined by literals may be combined into a winning strategy for the whole objective.
+Nous démontrons dans cette section que les stratégies gagnantes pour les objectifs définis par des littéraux peuvent être combinés en une stratégie gagnante pour l'objectif global.
 
-First, the case of a literal is the well-studied case of either energy games or mean-payoff games.
-These games have simple solutions, in the sense that (1) these games are determined, \ie one of the player has a winning strategy; (2) if a winning strategy exists, there exists one with finite memory; (3) which player wins the game can be decided in $\NP\cap \coNP$~\cite{zwick96}.
-Moreover, it was proved in~\cite{velner12a} that finite memory suffice to win a conjunction of energy requirements.
-The case of conjunction of payoff requirement has also been studied in~\cite{velner12a}, where the memoryless strategies for each payoff condition is combined into infinite memory strategies for the whole objective.
-For example, when mean-payoff is defined with the superior limit: each strategy is played in increasingly longer phases until reaching the desired value (as close as needed).
+Rappelons avant tout que le cas d'un littéral a été étudié en détail, pour des jeux relatifs soit à de l'énergie, soit à des gains moyen.
+Ces jeux ont une solution simple, dans le sens où:
+\begin{itemize}
+    \item ces jeux sont déterministes\todo{determined}, autrement dit l'un des joueurs a une stratégie gagnante;
+    \item si une stratégie gagnante existe, alors il en existe une qui repose sur une mémoire finie;
+    \item déterminer quel sera le joueur vainqueur peur être réalisé en $\NP\cap \coNP$~\cite{zwick96}.
+\end{itemize}
+De plus, il a été prouvé~\cite{velner12a} qu'une mémoire finie est suffisante pour gagner sur une conjonction de contraintes sur l'énergie.
+Le cas des conjonctions de contraintes sur le gain a lui aussi fait l'objet d'études dans~\cite{velner12a}, où les stratégies sans mémoire pour chaque condition sur le gain sont combinées en stratégies à mémoire infinie pour l'objectif global.
+Par exemple, lorsque le gain moyen des défini par la limite supérieur du gain, chaque stratégie peut être jouée au cours de phases de durée croissante jusqu'à atteindre (ou à s'approcher aussi près que nécessaire de) la valeur désirée.
 
-As a result we here focus on mixing energy and payoff objectives.
-Remark that since the objective of the compromised node is a conjunction of literals, it is clear that if the objective specified by one of the literals cannot be achieved, then the conjunction cannot, hence the game cannot be won.
+Par conséquent nous allons nous concentrer ici sur l'association d'objectifs portant à la fois sur l'énergie et sur le gain moyen.
+Il est bon de noter avant tout que si l'objectif du nœud compromis est une conjonction de littéraux, et que l'un deux ne peut être réalisé, il est évident que le jeu ne peut être remporté.
 
-If there are strategies for each of the objectives, it may be possible to combine finite-memory winning strategies for each of the literals into a single winning strategy, possibly needing infinite memory.
-We provide sufficient conditions to do so; finding an algorithm for this problem is still open.
+S'il existe des stratégies pour chacun des sous-objectifs, il peut être possible de combiner des stratégies gagnantes à mémoire finie pour chacun des littéraux en une unique stratégie gagnante, nécessitant potentiellement une mémoire infinie.
+Nous allons fournir des conditions suffisantes pour obtenir une telle stratégie globale; la recherche algorithmique de la stratégie en question est un problème non résolu.
 
-\subsubsection{Attractors}
+\subsubsection{Attracteurs}
 
-In two-player games, it is common to use the notion of \emph{attractor} of a set $Q$ to denote states where a player can force the play to reach $Q$.
+Dans les jeux à deux joueurs, il est courant de faire appel à la notion d'\emph{attracteurs} d'un ensemble $Q$ pour désigner les états depuis lesquels un joueur peut forcer le jeu à se déplacer dans $Q$.
 
 \begin{definition}
-The 1-step \emph{attractors} for players~$0$ and~$1$ of a set $Q$ of states are defined as follows:
+Les \emph{attracteurs une-étape} d'un ensemble d'états $Q$ pour les joueurs~0 et~1 sont définis ainsi:
 \begin{eqnarray*}
 1\!\attractor{0}(Q) &=& \left\{q \in V_0 \mmid \exists (q,q') \in E \textrm{ s.t. } q' \in Q \right\}
 \\&&\quad
@@ -194,26 +199,24 @@ The 1-step \emph{attractors} for players~$0$ and~$1$ of a set $Q$ of states are 
 \\&&\quad
 \cup \;\left\{q \in V_1 \mmid \exists (q,q') \in E \textrm{ s.t. } q' \in Q \right\}
 \end{eqnarray*}
-The \emph{attractors} for player~$0$ (resp. player~$1$) of a set $Q$ of states are the fix-point of the 1-step attractor, starting from $Q$: for $i \in \{0,1\}$,
-\[\attractor{i}(Q) = \bigcup_{j \in \N} \left(1\!\attractor{i}\right)^j(Q)\]
-%One can also define a strict version of this attractor, which excludes the set $Q$ itself (except if $q \in Q$ can reach $Q$):
-%\[\attractor{i}^+(Q) = \bigcup_{j \in \N\setminus\{0\}} \left(1\!\attractor{i}\right)^j(Q)\]
+Les \emph{attracteurs} pour le \jo (respectivement pour le \ji) d'un ensemble $Q$ d'étatssont les points fixes des attracteurs une-étape, en partant de $Q$: pour $i \in \{0,1\}$, \[\attractor{i}(Q) = \bigcup_{j \in \N} \left(1\!\attractor{i}\right)^j(Q)\]
 \end{definition}
-The attractor of player~$i$ is therefore the set of states from which he can ensure that the play reaches $Q$.
-Note that from any state in $(1\!\attractor{i})^j(Q)$, player $i$ has a memoryless strategy to reach $Q$ in at most $j$ steps.
-Since the fix-point is reached in at most $|V|$ iterations, $Q$ can be reached in at most $|V|$ steps from any state of $\attractor{i}(Q)$.
-Note that this bound also shows that attractors can be computed in polynomial time.
+L'attracteur pour le joueur~$i$ est donc l'ensemble des états depuis lesquels ce joueur est en mesure de s'assurer que le jeu atteigne $Q$.
+On notera que pour tout état de $(1\!\attractor{i})^j(Q)$, le joueur~$i$ a une stratégie sans mémoire lui permettant d'atteindre $Q$ en $j$ étapes au plus.player $i$ has a memoryless strategy to reach $Q$ in at most $j$ steps.
+Puisque le point fixe est atteint en $|V|$ itérations au plus, $Q$ peut être atteint avec un maximum de $|V|$ étapes depuis n'importe quel état de $\attractor{i}(Q)$.
+On notera aussi que cette borne entraîne la possibilité de calculer les attracteurs en un temps polynomial.
 
 \begin{lemma}
-From any state of $\attractor{i}(Q)$, player $i$ has a memoryless strategy that ensures reaching $Q$ in at most $|V|$ steps.
+Depuis n'importe quel état de $\attractor{i}(Q)$, le joueur~$i$ possède une stratégie sans mémoire qui l'assure d'atteindre $Q$ en un maximum de $|V|$ étapes.
 \end{lemma}
 
-A property of attractors in games is that they can be ``safely'' removed from a game while leaving the graph structure still a game (\emph{i.e.} without end-states):
+Une propriété des attracteurs dans les jeux est qu'ils peuvent être retirés sans danger du jeu, tout en laissant la structure du graphe restant toujours associée à un jeu (\cad sans état final):
 \begin{lemma}\label{tj:lem:removeattr}
-Let $\G = \langle V_0, V_1, E\rangle$ be a game graph (\emph{i.e.} such that every state of $V$ has an outgoing edge in $E$).
-Let $j \in \{0,1\}$ be a player.
-Let $Q \subseteq V$ and consider the graph $\G' = (V_0', V_1', E \cap (V' \times V'))$ with $V_i' = V_i \setminus \attractor{j}(Q)$ for $i \in \{0,1\}$.
-Then every state of $V'$ has an outgoing edge in $E \cap (V' \times V')$, \emph{i.e.} $\G'$ is also a game graph.
+Soit $\G = \langle V_0, V_1, E\rangle$ le graphe d'un jeu (\cad tel que tout état de $V$ a une arête sortante allant dans $E$).
+Soit un joueur $j \in \{0,1\}$.
+Soit $Q \subseteq V$.
+Considérons le graphe $\G' = (V_0', V_1', E \cap (V' \times V'))$ with $V_i' = V_i \setminus \attractor{j}(Q)$ pour $i \in \{0,1\}$.
+Alors tout état de $V'$ a une arête sortante allant dans $E \cap (V' \times V')$, autrement dit$\G'$ est aussi un graphe de jeu.
 \end{lemma}
 
 \begin{proof}
