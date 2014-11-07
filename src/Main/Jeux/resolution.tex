@@ -15,52 +15,50 @@ Le \ji quant à lui représente l'« équipe » (l'ensemble) des autres nœuds
 
 \subsection{Indécidabilité du cas général}
 
-
-In this section we show that there is no algorithmic solution to solve the winning problem on these games if the winning condition can be specified by any payoff formula.
-Namely, we show the following:
+Nous allons démontrer ici que le problème de victoire pour les jeux étudiés ne présente pas de solution algorithmique si la condition de victoire ne peut pas être spécifiée par une formule de gain.
+Le théorème établi est le suivant:
 \begin{theorem}
-The winning problem and the initial credit problem are undecidable for objective defined by a given payoff formula with four energy components and one payoff component.
+Le problème de victoire, ainsi que le problème de crédit initial, sont indécidables pour des objectifs définis par une formule de gain comportant quatre composantes relatives à l'énergie et une composante relative au gain.
 \end{theorem}
 
-The proof consists in encoding the halting problem on two-counter machines --~which is known to be undecidable~\cite{minsky67}~-- with such a game.
-Each counter is represented by two energy components (one for each player) carrying a copy of the value of said counter.
-In the case of the $0$-test, player~0 can claim that the counter was or was not null and the second one can check the validity of the claim.
-If the machine reaches its halting state, a reward component is incremented, and all other components are reset to $0$.
-Hence if the machine halts, player~0 has a winning strategy (encoding faithfully the machine's behavior) to get a strictly positive reward.
-Otherwise the reward remains null. 
+La preuve de ce théorème consiste à encoder, à l'aide d'un jeu du type étudié, le problème de terminaison à l'aide d'une machine à deux compteurs: le problème équivalent ainsi obtenu est connu comme étant indécidable\cite{minsky67}.
+Chaque compteur est représenté par deux composantes d'énergie (une pour chacun des deux joueurs), qui contiennent chacune une copie de la valeur du compteur en question.
+Pour l'instruction $0$-test (présentée ci-dessous), le \jo peut prétendre que son compteur est nul, ou bien qu'il ne l'est pas; le second joueur peut vérifier si cette affirmation est valide ou non.
+Si la machine atteint son état d'arrêt, une composante de gain est incrémentée, et tous les autres composantes sont réinitialisées à $0$.
+De cette manière, si la machine s'arrête, le \jo a une stratégie gagnante lui permettant d'obtenir un gain strictement positif.
+Autrement, le gain demeure nul.
 
-More precisely, a two-counter machine is a list of labeled instructions of that can be:
+On définit plus précisément une machine à deux compteurs comme une liste d'instructions étiquetées, qui peuvent être:
 \begin{itemize}
-    \item \textbf{increment:} increment counter $c$ (resp. $d$) and goto label $\ell$
-    \item \textbf{0-test:} if $c=0$ (resp. $d=0$) then goto $\ell_1$ else decrement $c$ (resp. $d$) and goto $\ell_2$
-    \item \textbf{halting:} \emph{halt}
+    \item \textbf{increment:} incrémenter le compteur $c$ (respectivement $d$) et aller à l'étiquette~$\ell$
+    \item \textbf{0-test:} si $c=0$ (respectivement $d=0$) alors aller à l'étiquette~$\ell_1$, sinon décrémenter $c$ (respectivement $d$) et aller à l'étiquette~$\ell_2$
+    \item \textbf{halting:} \emph{arrêt}
 \end{itemize}
-The first label is the initial one.
-Initially, both counters are set to $0$.
+Au départ, les deux compteurs sont initialisés à $0$.
 
-Now given a machine $\machine$, we build an arena $\G_\machine$ based on small modules for each kind of instructions (for counter $c$, it is symmetrical for $d$).
-The arena has $5$ components $c,c',d,d',p$, where only $p$ is a payoff one.
-Components $c$ and $c'$ (resp. $d$ and $d'$) are supposed to always retain the same value, except in the $0$-test.
-Initially, all components have value\footnote{In this simulation, one could increase all energy component's value by $1$ in order to retain $0$ as a losing value; however, in order to clarify the link between counter values and energy levels, we chose to allow energy level to be $0$, and consider the game ``lost'' only for strictly negative values.} $0$.
+À présent, étant donné une machine $\machine$, nous construisons une arène $\G_\machine$ basée sur des modules « élémentaires » pour chaque type d'instructions (celui du compteur $c$ sera symétrique à celui du compteur $d$).
+L'arène comporte donc 5 composantes $c$,$c'$,$d$,$d'$,$p$, où seule $p$ concerne le gain, les autres étant attachées à des valeurs énergétiques.
+Les composantes $c$ et $c'$ (respectivement $d$ et $d'$) sont supposées toujours conserver la même valeur, excepté pour l'instruction $0$-test.
+Au lancement du jeu toutes les composantes ont pour valeur\footnote{Pour obtenir une simulation plus réaliste, il est possible d'assigner aux composantes la valeur initiale $1$, et de considérer $0$ comme valeur de défaite. Nous choisissons ici d'autoriser un niveau d'énergie nul et considérons le jeu comme « perdu » pour des valeurs strictement négative, et ce afin de rendre plus clair le lien entre les valeurs des compteurs et les niveaux d'énergie.} $0$.
 
-The goal of player~0 is to obtain a strictly positive payoff while faithfully simulating the machine.
-The faithful simulation depends on the component's values: $c$ and $d$ must remain positive.
-Components $c'$ and $d'$ ensure that player~1 cannot wrongfully claim that player~0 cheated.
-If so, their value will be strictly negative.
-As a result, the winning condition is the satisfaction of the following payoff formula:
+Le but du \jo est d'obtenir un gain strictement positif, tout en simulant fidèlement la machine.
+Il faut entendre par cette expression que les valeurs des composantes $c$ et $d$ doivent demeurer positives.
+Les composantes $c'$ et $d'$ permettent de s'assurer que le \ji ne pourra prétendre à tord que le \jo a triché.
+Si le cas devait se produire, les valeurs de ces composantes seraient strictement négatives.
+À présent la condition de victoire s'exprime comme la satisfaction de la formule de gain suivante:
 \[(c\geq0 \wedge d\geq0 \wedge p>0) \vee (c'<0 \wedge c\geq0) \vee (d'<0 \wedge d\geq0)\]
 
-Each labeled instruction has a state in the arena belonging to player~0, with the same label (some other states will be added).
-The case of incrementation is trivial if instruction $\ell$ is ``increment $c$ then goto $\ell'$'', then there is an edge from $\ell$ to $\ell'$ with weights $(1,1,0,0,0)$.
-There is no other edge from $\ell$, so the player has no choice.
+Chaque instruction étiquetée a un état dans l'arène appartenant au \jo, avec la même étiquette (d'autres états seront rajoutés par la suite).
+Le cas de l'incrément est trivial: si l'instruction $\ell$ est « incrémenter $c$ puis aller à l'étiquette~$\ell'$ », alors il y a une arête partant de $\ell$ et joignant $\ell'$ avec les poids $(1,1,0,0,0)$.
+Il n'y a pas d'autre arête partant de $\ell$, le joueur n'a donc pas d'autre choix.
 
-The $0$-test is trickier, since player~0 could ``cheat'' by choosing the wrong branch of the conditional.
-Formally, assume $\ell$ is ``if $c=0$ then goto $\ell_1$ else decrement $c$ and goto $\ell_2$''.
-Then there are two edges stemming from state $\ell$: one claiming that $c=0$, the other claiming that $c>0$, as depicted in \figref{tj:fig:zerotest}.
-The edge claiming that $c=0$ goes to a state owned by player~1, which can either accept the claim (hence going into $\ell_1$) or reject it.
-Rejecting the claim means decrementing $c'$ (but not $c$) and going to a \emph{stop} state: this state has one edge to itself labeled $(0,0,0,0,0)$, meaning the simulation has stopped.
-Note that wrongfully rejecting the claim means that $c'<0$ while $c=0$, since $c$ and $c'$ were equal.
-Rightfully rejecting it means that the payoff is null.
+L'instruction $0$-test est plus délicate, car le \jo est susceptible de tricher en empruntant la mauvaise branche de l'instruction conditionnelle.
+De manière formelle, on suppose que $\ell$ est « si $c=0$ alors aller à l'étiquette~ $\ell_1$, sinon décrémenter $c$ et aller à l'étiquette~$\ell_2$ ».
+Il y a alors deux arêtes sortant de l'état $\ell$: l'une correspondant à l'annonce $c=0$, l'autre à l'annonce $c>0$, comme indiqué sur la \figref{tj:fig:zerotest}.
+L'arête portant l'affirmation $c=0$ atteint un état possédé par le \ji, qui peut soit accepter l'affirmation (et aller dans ce cas à $\ell_1$), soit la rejeter.
+Le rejet de cette affirmation implique de décrémenter $c'$ (mais non $c$) et de se rendre sur un état d'\emph{arrêt}: cet état possède une unique arête sortante, qui boucle sur lui-même avec les poids $(0,0,0,0,0)$, signifiant que la simulation s'est arrêtée.
+Si l'affirmation est rejetée à tord, on obtient $c'<0$ tandis que $c=0$, puisque les valeurs de $c$ et $c'$ étaient égales.
+Si l'affirmation a été rejetée à raison, alors le gain est nul.
 
 \begin{figure}
 \centering
@@ -89,7 +87,7 @@ Rightfully rejecting it means that the payoff is null.
 \draw[->] (stop2) edge [loop right] node [mini] {$(0,0,0,0,1)$} (stop2);
 
 \end{tikzpicture}
-\caption[Module for encoding a $0$-test instruction into a game.]{Module for encoding a $0$-test instruction into a game:``if $c=0$ then goto $\ell_1$ else decrement $c$ and goto $\ell_2$''. Square states belong to player~0, round states to the second one. Unmarked edges are assumed to have $(0,0,0,0,0)$ weights.}
+\caption[Module d'encodage de l'instruction $0$-test sous forme de jeu.]{Module d'encodage de l'instruction $0$-test sous forme de jeu: « si $c=0$ alors aller à l'étiquette~$\ell_1$, sinon décrémenter $c$ et aller à l'étiquette~$\ell_2$ ». Les états sous forme de carrés appartiennent au \jo, les cercles représentent les états du \ji. Il est convenu qu'en l'absence d'indication de poids, les arêtes comportent les poids~$(0,0,0,0,0)$.}
 \label{tj:fig:zerotest}
 \end{figure}
 
