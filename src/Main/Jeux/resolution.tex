@@ -53,7 +53,7 @@ Le cas de l'incrément est trivial: si l'instruction $\ell$ est « incrémenter
 Il n'y a pas d'autre arête partant de $\ell$, le joueur n'a donc pas d'autre choix.
 
 L'instruction $0$-test est plus délicate, car le \jo est susceptible de tricher en empruntant la mauvaise branche de l'instruction conditionnelle.
-De manière formelle, on suppose que $\ell$ est « si $c=0$ alors aller à l'étiquette~ $\ell_1$, sinon décrémenter $c$ et aller à l'étiquette~$\ell_2$ ».
+De manière formelle, on suppose que $\ell$ est « si $c=0$ alors aller à l'étiquette~$\ell_1$, sinon décrémenter $c$ et aller à l'étiquette~$\ell_2$ ».
 Il y a alors deux arêtes sortant de l'état $\ell$: l'une correspondant à l'annonce $c=0$, l'autre à l'annonce $c>0$, comme indiqué sur la \figref{tj:fig:zerotest}.
 L'arête portant l'affirmation $c=0$ atteint un état possédé par le \ji, qui peut soit accepter l'affirmation (et aller dans ce cas à $\ell_1$), soit la rejeter.
 Le rejet de cette affirmation implique de décrémenter $c'$ (mais non $c$) et de se rendre sur un état d'\emph{arrêt}: cet état possède une unique arête sortante, qui boucle sur lui-même avec les poids $(0,0,0,0,0)$, signifiant que la simulation s'est arrêtée.
@@ -87,7 +87,7 @@ Si l'affirmation a été rejetée à raison, alors le gain est nul.
 \draw[->] (stop2) edge [loop right] node [mini] {$(0,0,0,0,1)$} (stop2);
 
 \end{tikzpicture}
-\caption[Module d'encodage de l'instruction $0$-test sous forme de jeu.]{Module d'encodage de l'instruction $0$-test sous forme de jeu: « si $c=0$ alors aller à l'étiquette~$\ell_1$, sinon décrémenter $c$ et aller à l'étiquette~$\ell_2$ ». Les états sous forme de carrés appartiennent au \jo, les cercles représentent les états du \ji. Il est convenu qu'en l'absence d'indication de poids, les arêtes comportent les poids~$(0,0,0,0,0)$.}
+\caption[Module d'encodage de l'instruction $0$-test sous forme de jeu.]{Module d'encodage de l'instruction $0$-test sous forme de jeu: « si $c=0$ alors aller à l'étiquette~$\ell_1$, sinon décrémenter $c$ et aller à l'étiquette~$\ell_2$ ». Les états sous forme de carrés appartiennent au \jo, les cercles représentent les états du \ji. Il est convenu qu'en l'absence d'indication de poids, les arêtes comportent les poids~$(0,0,0,0,0)$.}%
 \label{tj:fig:zerotest}
 \end{figure}
 
@@ -127,7 +127,7 @@ Ce module est représenté sur la \figref{tj:fig:halt}.
 \draw[->] (stop) edge [loop right] (stop);
 
 \end{tikzpicture}
-\caption[Module d'encodage des instructions d'arrêt sous forme de jeu.]{Module d'encodage des instructions d'arrêt sous forme de jeu. Les états sous forme de carrés appartiennent au \jo, les cercles représentent les états du \ji. Il est convenu qu'en l'absence d'indication de poids, les arêtes comportent les poids~$(0,0,0,0,0)$.}
+\caption[Module d'encodage des instructions d'arrêt sous forme de jeu.]{Module d'encodage des instructions d'arrêt sous forme de jeu. Les états sous forme de carrés appartiennent au \jo, les cercles représentent les états du \ji. Il est convenu qu'en l'absence d'indication de poids, les arêtes comportent les poids~$(0,0,0,0,0)$.}%
 \label{tj:fig:halt}
 \end{figure}
 
@@ -220,51 +220,53 @@ Alors tout état de $V'$ a une arête sortante allant dans $E \cap (V' \times V'
 \end{lemma}
 
 \begin{proof}
-Assume by contradiction that $q \in V'$ has no outgoing edge.
-Since $q$ had an outgoing edge in $E$, it means that all successor states of $q$ belong to $\attractor{j}(Q)$.
-Then by definition of an attractor, so does $q$, and $q \notin V'$.
+Supposons que la contradiction soit vraie, \cad qu'il existe $q \in V'$ tel que $q$ n'a aucune arête sortante.
+Comme $q$ avait une arête sortante dans le graphe de jeu $E$, cela signifie que tous les états successeurs de $q$ appartiennent à $\attractor{j}(Q)$.
+Par définition d'un attracteur, on a alors $q \in \attractor{j}(Q)$, et $q \notin V'$.
 \end{proof}
 
-\subsubsection{Conjunction of an energy and payoff objective}
+\subsubsection{Conjonction d'un objectif de gain et d'un objectif d'énergie}
 
-In this first simpler case, we study objectives for player~0 of the form $p_e \geq c_e \wedge p_v \geq c_v$, with $c_e,c_v \in \N$.
-These objectives state that a certain reward must be achieved while maintaining the energy level above a given limit.
-A simple example of this kind of objective for a compromised node is the \emph{greedy} objective: to remain alive ($p_e \geq 1$) while sending at least a message every $6$ steps ($p_v \geq \frac1{6}$, as noted before, this can be transformed into an integral threshold by multiplying each weight of this component by $6$).
+\todo{chech $p_e$and $p_v$}
+Dans ce premier exemple simple, nous étudions les objectifs, pour le \jo, de la forme $p_e \geq c_e \wedge p_v \geq c_v$, avec $c_e,c_v \in \N$.
+De tels objectifs se traduisent par le besoin d'atteindre une certaine valeur de gain tandis que le niveau d'énergie demeure supérieur à une limite donnée.
+Un comportement cupide est une illustration simple d'un objectif de ce type: le nœud compromis cherche à rester « en vie » ($p_e \geq 1$) tout en émettant au moins un message toutes les $6$ étapes ($p_v \geq \frac1{6}$, mais comme nous l'avons remarqué plus haut, il est possible d'obtenir un seuil à valeur entière en multipliant tous les poids de la composante par $6$).
 
-First, it is clear that from states where one of the objective cannot be fulfilled, player~0 cannot win.
-In addition, if player~1 can force to reach such states, then the objective of player~0 cannot be fulfilled.
-Namely, we use the classical notion of \emph{attractors} defined above.
-We write $L_e$ the states where player~0 loses for $p_e \geq c_e$ (\emph{i.e.} player~1 has a strategy to prevent that), and $L_v$ the states where player~0 loses for $p_v \geq c_v$.
-It is clear that player~1 can prevent player~0 from winning for objective $p_e \geq c_e \wedge p_v \geq c_v$ from any state in $\attractor{g}(L_e \cup L_v)$.
-Hence any winning strategy for player~0 must remain in $\G \setminus\attractor{1}(L_e \cup L_v)$.
-Conversely, a winning strategy that remains in $\G \setminus\attractor{1}(L_e \cup L_v)$ is also a winning strategy in $\G$ since player~1 cannot force the play into $\attractor{1}(L_e \cup L_v)$, by the definition of attractors.
+Tout d'abord, nous pouvons clairement établie que depuis un état à partir duquel au moins un des objectifs ne peut être rempli, le \jo ne peut pas gagner.
+De plus, si le \ji peut forcer le \jo à atteindre l'un de ces états, alors l'objectif du \jo ne sera pas rempli.
+De là nous pouvons utiliser la notion classique d'\emph{attractors} dont nous avons rappelé la définition.
+Nous notons $L_e$ les états où le \jo perd pour $p_e \geq c_e$ (\cad où le \ji possède une stratégie pour l'empêcher de gagner), et $L_v$ les états pour lesquels le \jo perd pour $p_v \geq c_v$.
+Le \ji peut évidemment empêcher le \jo d'atteindre son objectif $p_e \geq c_e \wedge p_v \geq c_v$ depuis tout état de $\attractor{g}(L_e \cup L_v)$.
+Par conséquent toute stratégie gagnante pour le \jo doit rester dans l'ensemble $\G \setminus\attractor{1}(L_e \cup L_v)$.
+Par ailleurs, une stratégie gagnante qui reste dans $\G \setminus\attractor{1}(L_e \cup L_v)$ est aussi une stratégie gagnante dans $\G$ puisque le \ji ne peut pas forcer le jeu à se déplacer dans $\attractor{1}(L_e \cup L_v)$ (par définition des attracteurs).
 
-As a result, one can recursively remove states in $\G$ until player~0 wins for both objectives in every state.
-Note that if the game is empty at that point, then player~0 cannot win from any state.
+Ainsi il devient possible de retirer, de manière récursive, des états de $\G$ jusqu'à ce que le \jo gagne pour chacun de ses objectifs depuis tous les états restants.
+Si, en revanche, le graphe de jeu devient vide à un moment donné, cela signifie que le \jo ne peut pas gagner pour les deux objectifs depuis quelque état que ce soit du graphe d'origine.
 
-Now assume player~0 has winning strategies $\lambda_e$, $\lambda_v$ for objectives $p_e \geq 1$, $p_v \geq \frac1{15}$, respectively, that win from every state.
-Remark that these strategies can be assumed to be memoryless, hence functions from $V_c$ to $V$.
+Supposons à présent que le \jo dispose des stratégies gagnantes $\lambda_e$, $\lambda_v$ pour les objectifs respectifs $p_e \geq 1$ et $p_v \geq \frac1{15}$, et que ces stratégies sont gagnantes depuis tous les états.
+Ces stratégies sont supposées être sans mémoire, ce sont donc des fonctions de $V_c$ dans $V$.
 
-Consider $\G_e$ the single player game obtained when player~0 plays $\lambda_e$: each transition entering a state $v \in V_c$ goes instead to $\lambda_e(v)$, and weights are added: $v_0 \xrightarrow{w_1} v \xrightarrow{w_2} \lambda_e(v)$ is replaced by $v_0 \xrightarrow{w_1+w_2} \lambda_e(v)$.
-Similarly, let $\G_v$ the single player game obtained when playing $\lambda_v$.
+Considérons le jeu à un joueur $\G_e$, obtenu quand le \jo joue $\lambda_e$: chaque arête entrante dans un état $v \in V_c$ va à la place à $\lambda_e(v)$, et les poids sont cumulés: $v_0 \xrightarrow{w_1} v \xrightarrow{w_2} \lambda_e(v)$ est remplacé par $v_0 \xrightarrow{w_1+w_2} \lambda_e(v)$.
+De façon similaire, soit $\G_v$ le jeu à un joueur obtenu en jouant $\lambda_v$.
 
-Let $\alpha$ be the lowest value that can be obtained for component $k_v$ in a simple cycle in $\G_e$, and dually $\beta$ the lowest value that can be obtained for $k_e$ in $\G_v$.
-In other words, $\alpha$ is the worst that can happen to reward when playing the strategy ensuring adequate level of energy, while $\beta$ is the worst that can happen to energy level when ensuring adequate reward.
-Note that if $\alpha \geq c_v$, then $\lambda_e$ is also a winning strategy for objective $p_v \geq c_v$, hence is a winning strategy for the whole objective.
-Similarly, if $\beta > 0$, then $\lambda_v$ ensures objective $p_e \geq c_e$ provided the initial credit is adapted to the minimal sum of weights reached along a cycle:
-\[\textit{initial\_credit} = 1+c+\min_{\substack{\rho \textrm{ prefix of } \mathcal{C}\\  \mathcal{C}\textrm{ cycle in } \G_v}} w_e(\rho)\]
+Soit $\alpha$ la valeur la plus basse pouvant être obtenue pour la composante $k_v$ sur un cycle simple sur $\G_e$, et soit de même $\beta$ la valeur la plus basse pouvant être obtenue pour $k_e$ lors d'un cycle sur $\G_v$.
+Plus concrètement, $\alpha$ représente la pire valeur de gain que le joueur peut obtenir lorsqu'il joue selon la stratégie qui l'assure de conserver le niveau d'énergie requis, tandis que $\beta$ est la pire valeur en énergie qui puisse être atteinte en jouant la stratégie qui assure le gain requis.
+Il est à noter que si $\alpha \geq c_v$, alors $\lambda_e$ est aussi une stratégie gagnante pour l'objectif $p_v \geq c_v$, et constitue donc une stratégie gagnante pour l'objectif global.
+De même si $\beta > 0$, alors $\lambda_v$ vérifie l'objectif $p_e \geq c_e$ pourvu que le crédit initial soit adapté à la somme minimale des poids des arêtes empruntées au cours d'un cycle:
+\todo{in French, math below}
+\[\textit{crédit\_initial} = 1+c+\min_{\substack{\rho \textrm{ prefix of } \mathcal{C}\\  \mathcal{C}\textrm{ cycle in } \G_v}} w_e(\rho)\]
 
 \medskip
 
-If the above sufficient condition is not fulfilled, we do not so far have a solution for solving these games in the general setting.
-Indeed, strategies for each component or the other can be incompatible.
-For example, consider the (single-player) game of \figref{tj:fig:infmemoryneeded}.
-In this example, $q_0$ acts as a recharging state while $q_1$ is an active state, producing a useful effect rewarded by a payoff.
-One can see that recharging the battery is much slower than using it, since it takes 42 ``energy units'' per active step\footnote{For example this can be a joule, meaning that the active state consumes 42W of power while the charging is done with 1W of power. The value 42 was arbitrarily chosen.}
+Si la condition suffisante que nous venons de présenter n'est pas remplie, nous n'avons pas, à ce jour, de solution pour résoudre ces jeux dans un contexte général.
+Des stratégies gagnantes pour chaque composante pourraient en effet se révéler incompatibles entre elles.
+Prenons, pour illustrer, l'exemple du jeu à un joueur présenté en \figref{tj:fig:infmemoryneeded}.
+Dans cet exemple, $q_0$ agit comme un état de recharge (en énergie) tandis que $q_1$ est un état actif qui produit un effet utile récompensé par une valeur de gain.
+On constate que recharger la batterie est bien plus lent que de consommer l'énergie, puisqu'il faut 42 « unités d'énergie\footnote{Ce peut être, par exemple, une joule, ce qui signifierait que l'étape active consommerait avec une puissance de 42~W, tandis que la puissance de la recharge serait de 1~W. La valeur 42 a été choisie arbitrairement pour cet exemple.} » par étape active.
 
-One can achieve a positive energy (first component) at all times by remaining in $q_0$ (or going there if starting from $q_1$).
-It is also possible to achieve a payoff (second component) of $1$ by remaining in $q_1$ (or going there if starting from $q_0$, the transitive effect is negligible in the long run).
-However, one cannot achieve a payoff of $1$ while maintaining the energy positive, since it takes 42 turns of ``recharging'' before being allowed to do something rewarding.
+Il est possible de maintenir un niveau d'énergie constamment positif (pour la première composante) en restant dans $q_0$ (où en y allant si l'on commence en $q_1$).
+Il est aussi possible d'atteindre un gain moyen de $1$ en demeurant sur $q_1$ (ou en s'y rendant si l'on démarre sur $q_0$, car le poids de l'unique arête empruntée est négligeable sur une longue exécution).
+Cependant, il n'est pas possible de conserver un gain moyen de $1$ tout en maintenant un niveau d'énergie positif, puisqu'une fois le crédit initial écoulé, 42~étapes de recharge doivent impérativement être effectuées avant de réaliser toute action susceptible de rapporter un gain.
 
 \begin{figure}
 \centering
@@ -279,22 +281,22 @@ However, one cannot achieve a payoff of $1$ while maintaining the energy positiv
 \path[->] (q1) edge[loop right] node {$-42,+1$} (q1);
 \path[->] (q1) edge[bend left=15] node {$0,0$} (q0);
 \end{tikzpicture}
-\caption{A simple game that requires infinite memory. The first component is an energy level while the second is a payoff.}
+\caption[Un exemple de jeu simple nécessitant une mémoire infinie.]{Un exemple de jeu simple nécessitant une mémoire infinie. La première composante est un niveau d'énergie, la seconde est une valeur de gain.}%
 \label{tj:fig:infmemoryneeded}
 \end{figure}
 
-\subsubsection{Using bounded memory}
+\subsubsection{Avec mémoire limitée}
 
-However, one can consider that nodes of a \wsn are very limited in their resources, hence can only implement finite memory strategies.
-In this case, bounding \emph{a priori} the amount of memory that can be used by player provides a solution for solving the initial credit problem for games with winning condition in the positive fragment.
+Nous considérons que les \wsns sont fortement limités en ressources disponibles, et ne peuvent donc implémenter que des stratégies à mémoire finie.
+Dans ce cas, limiter \apriori la quantité de mémoire qui peut être utilisée par le joueur fournit une solution pour résoudre le problème du crédit initial pour des jeux ayant une condition de victoire sur le fragment positif.
 
-A finite memory strategy is a strategy that can be implemented by a finite deterministic Mealy machine: given the current state of the machine and of the game, the machine produces an edge to be played and the next state of the machine.
-The size of the memory is the size of the Mealy machine.
+Une stratégie à mémoire finie est une stratégie qui peut être implémentée par une machine de Mealy finie et déterministe: état donné l'état actuel de la machine et du jeu, la machine fournit l'arête à emprunter et de là l'état suivant de la machine.
+La taille de machine de Mealy est la taille de la mémoire disponible.
 
-For example, a finite memory strategy for the game of \figref{tj:fig:infmemoryneeded} that loops 42 times in $q_0$ then goes to $q_1$, loops once there, and goes back to $q_0$ to start again can be represented by the machine of \figref{tj:fig:memory42}.
-This machine has 46 states, since it needs to count how many times it has accumulated energy in $q_0$.
-Note that if starting in $q_1$, the machine first goes back to $q_0$ then applies the aforementioned strategy.
-Also, a strategy must be complete on its input, hence it must allow $q_1$ to occur in any memory state (in this case it goes back to the initial memory state and to $q_0$ in the game).
+Par exemple, une stratégie à mémoire finie pour le jeu de la \figref{tj:fig:infmemoryneeded}, qui boucle 42~fois sur $q_0$ puis se rend sur $q_1$, boucle une fois et enfin retourne sur $q_0$ pour recommencer le cycle, est représentée sur la machine de la \figref{tj:fig:memory42}.
+Cette machine possède 46~états, puisqu'elle nécessite de compter (et donc garder en mémoire) le nombre de fois où l'on a bouclé sur $q_0$ pour accumuler de l'énergie.
+Si l'on devait démarrer en $q_1$, la machine se rendrait tout d'abord en $q_0$ avant d'appliquer la stratégie que nous venons de décrire.
+La machine doit être complète au niveau des entrées possibles, aussi faut-il autoriser $q_1$ à survenir depuis n'importe quel état mémoire (dans notre cas elle retourne à l'état mémoire initial, tandis que le jeu retourne en $q_0$).\todo{re-read this}
 
 \begin{figure}
 \centering
@@ -322,29 +324,28 @@ Also, a strategy must be complete on its input, hence it must allow $q_1$ to occ
 \draw[->] (m44) edge[bend left=60, in =60] node[pos=0.75] {$q_0 | q_0$} (m0);
 \draw[->] (m45) edge[bend left=60] node[pos=0.1] {$q_0 | q_0$} (m0);
 \end{tikzpicture}
-\caption[A Mealy machine representing a finite memory strategy.]{A Mealy machine representing a finite memory strategy (46 states). The input of edges is the current state of the game, the output is the chosen next state.}
+\caption[Une machine de Mealy représentant une stratégie à mémoire finie.]{Une machine de Mealy représentant une stratégie à mémoire finie (46~états). L'extrémité sortante d'une arête représente l'état actuel du jeu, l'extrémité sortante est l'état suivant retenu.}%
 \label{tj:fig:memory42}
 \end{figure}
 
 \begin{remark}
-Note that the strategies with given memory may not be optimal.
-Consider for example the game of \figref{tj:fig:infmemoryneeded} with objective being to maintain the energy level above $0$ and ensure a mean-payoff greater than or equal to $\frac1{43}$.
+Les stratégies pour une quantité finie donnée de mémoire peuvent ne pas être optimales.
+Considérons par exemple le jeu de la \figref{tj:fig:infmemoryneeded} avec pour objectif le maintien du niveau d'énergie au-dessus de $0$ et d'obtenir un gain moyen supérieur ou égal à $\frac1{43}$.
 
-An infinite memory strategy can win this game.
-It is defined by phases, as follows.
-At the $k$-th phase, loop $42k$ times in $q_0$, then go to $q_1$, loop $k$ times, go back to $q_0$.
-This ensures that the transitions between $q_0$ and $q_1$ are negligible, hence the limit of the payoff is $\frac1{43}$, since 43 steps are needed to increment the payoff counter once.
-In addition, at each phase the energy goes back to its initial value (which can be $1$), while only encountering positive values.
+Une stratégie à mémoire infinie pourrait remporter la victoire sur ce jeu.
+Elle serait découpée en phases qui se dérouleraient de la manière suivante: à la $k$e \todo{kième} phase, il faudrait boucler $42k$~fois sur $q_0$, puis se rendre en $q_1$; il faudrait alors boucler $k$~fois avant de retourner sur $q_0$.
+Cela permettrait de faire en sorte que les poids des transitions entre $q_0$ et $q_1$ soient négligeables, et d'obtenir une limite, pour le gain moyen, de $\frac1{43}$, puisque 43~étapes seraient nécessaires pour incrémenter le compteur de gain d'une unité.
+De plus, à chaque phase, le niveau d'énergie retombe à sa valeur initiale, puis ne prend que des valeurs positives.
 
-On the other hand, if only $k$ states of memory are allowed, the best payoff achievable is $\frac{k}{43k+2}$ (the corresponding strategy consists in repeating phase $k$).
-Hence not only the optimal payoff cannot be achieved, but allowing more memory allows to achieve better payoff.
+En revanche, si seulement $m$ états de mémoire sont autorisés, la meilleure valeur de gain moyen que l'on peut espérer obtenir est de $\frac{m}{43m+2}$ (la stratégie correspondante consiste à répéter la phase $m$).
+Ainsi, avec une mémoire finie, non seulement le gain moyen optimal ne peut pas être atteint, mais on constate de plus que l'allocation de davantage de mémoire permet d'atteindre une meilleure valeur de gain moyen.
 \end{remark}
 
-Solving the game assuming player~0 has bounded memory $k$ given as input consists in guessing this strategy as a machine, which is an exponential object if $k$ is given in binary.
-Then the machine is synchronized with the game, yielding a single-player game, to be played by player~1.
-In this game, only memoryless strategies need to be considered.
+Résoudre le jeu en supposant que le \jo a une mémoire finie limitée à un nombre $k$ d'unités fourni en entrée revient à deviner sa stratégie sous forme de machine de Mealy, ce qui constitue un object exponentiel si $k$ est fournie sous forme binaire.
+La machine est alors synchronisée avec le jeu, et retourne un second jeu à un seul joueur, à faire jouer par le \ji.
+Dans ce second jeu, seules les stratégies sans mémoires doivent êtres prises en compte.
 
-Indeed, any infinite path not satisfying $p_e \geq c_e \wedge p_v \geq c_v$ either is such that $p_e$ falls below $c_e$ or the limit average of $p_v$ is below $c_v$.
-In both cases this amounts to finding a lasso path in the graph, which can be guessed.
+En effet, tout chemin infini qui ne satisferait pas $p_e \geq c_e \wedge p_v \geq c_v$ vérifierait, à un moment ou l'autre, soit $p_e < c_e$, soit $p_v < c_v$ (en considérant la limite pour le gain moyen de $p_v$).
+Dans les deux cas cela revient à trouver un chemin en « lasso » dans le graphe, cje qui peut être deviné.
 
-Regarding complexity, the above procedure is in $\NEXPSPACE$ (which is equivalent to $\EXPSPACE$~\cite[Chap.~20]{papadimitriou94}), although the bound is not tight.
+En ce qui concerne la complexité, la procédure que nous venons de décrire est dans $\NEXPSPACE$ (qui est équivalent à $\EXPSPACE$~\cite[Chap.~20]{papadimitriou94}), \todo{although the bound is not tight}.
