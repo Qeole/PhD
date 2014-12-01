@@ -21,7 +21,7 @@
 %\usepackage{listings}
 \usepackage{minitoc}
 %\usepackage{multicol}
-%\usepackage{multirow}
+\usepackage{multirow}
 \usepackage{setspace}
 \usepackage{tikz}
 \usepackage{xcolor}
@@ -62,6 +62,7 @@
 \setdefaultlanguage{french}
 \setotherlanguage{english}
 \defaultfontfeatures{Ligatures=TeX}
+%\defaultfontfeatures{Ligatures={NoRequired,NoCommon,NoContextual}}
 \setmainfont[%
         UprightFeatures={StylisticSet=2},%
         BoldFeatures={StylisticSet=1},%
@@ -86,11 +87,11 @@
     %backref=true,
     breaklinks,
     colorlinks,
-    linkcolor=blueLACL,
-    citecolor=blueLACL,
-    urlcolor=blue,
+    linkcolor     = blueLACL,
+    citecolor     = blueLACL,
+    urlcolor      = blue,
     baseurl       = http://,
-    pdfpagelayout = OneColumn, % pdfpagelayout=SinglePage
+    pdfpagelayout = OneColumn, % pdfpagelayout = SinglePage
     pdfstartpage  = 1,
     pdfcreator    = {Vim, \LaTeX{}, and a lot of packages!},
     %pdfproducer   = {\LaTeX{}},% Contient automatiquement le compilateur
@@ -110,6 +111,7 @@
 % BIBLIO
 \addbibresource{Back/biblio.bib}
 \addbibresource{Back/thjeux.bib}
+\addbibresource{Back/studiauniv.bib}
 % \chapter instead of \chapter*
 \defbibheading{bibliography}[\bibname]{\chapter{#1}}%\markboth{#1}{#1}}
 

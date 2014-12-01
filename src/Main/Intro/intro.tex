@@ -1,0 +1,26 @@
+% vim: set spelllang=fr foldmethod=marker:
+\section{Entrée en matière…}
+Traffic regulation or pollution measurement in water are example activities which require the constant presence of measuring agents over wide ---~and sometimes hard to access~--- areas.
+In such cases, as it is not feasible to send people on site to run measurements, \wsns are used.
+They are made of small devices, sometimes dropped on the spot by helicopter, tasked with gathering data on their physical environment.
+Sensors are able to exchange data through wireless communications.
+Useful data is typically centralized by a \bs, which acts as an interface between the network and the user.
+
+As they are often used in hostile environments with no human assistance, sensors are generally able to self-organize and to form a consistent network.
+But they also embed cheap hardware, as it may be hard, if possible at all, to fetch them once their life cycle is over.
+Consequently, they have restricted resources: low computational capabilities and low available memory.
+They also have limited energy%ONDEMAND \cite{BF12}
+in a single-use battery.
+
+\Wsns are used for many applications%ONDEMAND \cite{RFH12,FH13}
+, some of them being crucial.
+For instance there is a lot at stakes when sensor networks are used for watching forests for fires, for measuring the nuclear activity degree in sensitive areas, or for military operations over battlefields.
+In this context, bringing security guaranties ---~including availability~--- to the network becomes essential.
+
+Based on former studies, the present one relies on the use of monitoring nodes (or ``\cns'') to protect a \wsn again various \dos attacks.
+Actually, it focuses on the election process of those control nodes.
+Our approach consists in taking energy into account at this step, in order to obtain an even better load balancing.
+We propose to designate the sensors for the \cn position according to their residual energy, but we show that several problems occur with deterministic election.
+Indeed compromised nodes could see a flaw to exploit in order to take over the \cn role and decrease the odds of being detected by announcing high residual energy.
+We address this issue by introducing a second role of surveillance: we choose ``\vns'' responsible for watching over the \cns and for matching their announced consumption against mathematical model.
+We also recommend that every node in the cluster be monitored by at least one \cn to prevent all the \cns to be elected inside the same spatial area of the cluster at each election iteration.

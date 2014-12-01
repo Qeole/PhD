@@ -1,0 +1,59 @@
+% vim: set spelllang=fr foldmethod=marker:
+\section{Théorie des jeux}
+
+
+
+
+The authors of~\cite{MT08} categorize game-theoretic approaches in WSNs into three main categories: energy efficiency, security, and pursuit-evasion.
+Pursuit-evasion games consist in a set of mobile players trying to “capture” another set, to optimize tracking, while the opponents aim at avoiding detection.
+The other two categories are rather explicit: when looking for energy efficiency, games are used to save as much energy as possible, by optimizing either the network topology or their own behavior~\cite{CPF09}.
+Security games, of course, oppose normal sensors to attackers from inside or outside the network.
+In a more recent survey~\cite{SWKC12} the pursuit-evasions games are just part of a broader “application” category (along with data collection for instance), whereas energy efficiency has been split into network management (resources, power) and communication (QoS, topology, routing design).
+
+In~\cite{MMZ09} the authors model the interactions between the nodes and an IDS as a Bayesian game (\ie with partial information: the IDS does not know \apriori whether a given node is compromised).
+They analyze the Nash equilibrium of this game to design a secure routing protocol.
+Bayesian games are also used in~\cite{Ham12}, but they are invoked \aposteriori, as a verification tool rather than a way to design the solution.
+
+Repeated games are models involving sequences of history-dependent game strategies: the players perform a sequence of actions, and their strategies is influenced by what the other players have done in the past.
+Those games are used in~\cite{AD07} to set up an IDS, or in a less generic solution in~\cite{Red09}, which relies on the acknowledgments upon transmissions to detect a malicious node located in the forward data path.
+
+Our approach differs as the potential death (by exhaustion) of nodes is included in the game constraints, alongside payoff values.
+To the best of our knowledge, works related to this setting consider all dimensions either as energy or as payoff, and deal only with conjunction~\cite{chatterjee12,velner12a}.
+In this case, the algorithms follow the same structure: the game objective is decomposed according to each dimension and finite-memory winning strategies for each dimension are retrieved.
+Then these strategies are combined, possibly yielding an infinite-memory strategy.
+
+Some other works~\cite{velner12b} deal with more involved objectives based on combination of mean-payoff objectives using sum, $\max$, and $\min$ operators.
+
+\smallskip
+
+A little bit further from our approach, some authors consider games with both a payoff requirement and a parity objective~\cite{chatterjee05}.
+In that case the parity objective ensures that the system behaves correctly, while the payoff represents a quantitative goal.
+In this case, winning strategies may require infinite memory, although an approximation can be obtained with finite memory.
+This kind of game is however ill suited to the modeling of \wsn, since here the energy is an important factor to the life of the system.
+
+
+
+
+
+% ======== >>> §3 <<< WAS NOT MODIFIED, IS NEW
+Elements from game theory have been used in several studies to detect DoS attacks in WSNs.
+In
+\cite{MMZ09},
+\textit{Mohi et al}. propose another another way to secure the LEACH protocol against selfish behaviors.
+With S-LEACH, the BS uses a global Intrusion Detection System (IDS) while LEACH CHs implement local IDSs.
+The interactions between nodes are modeled as a Bayesian game, that is, a game in which at least one player (here, the BS) has incomplete information about the other player(s) (in this case: whether the sensors have been compromised or not).
+Each node has a ``reputation'' score.
+Selfish nodes can cooperate (so as to avoid detection) or drop packets.
+The authors show that this game has two Bayesian Nash equilibriums which provide a way to detect selfish nodes, or to force them to cooperate to avoid detection.
+
+
+
+
+% A Bayesian Game Approach for Preventing DoS Attacks in WSNs
+Elements from game theory have been used in several studies to detect DoS attacks in WSNs.
+In~\cite{MMZ09}, the authors propose another another way to secure the \leach protocol against selfish behaviors.
+With S-\leach, the BS uses a global Intrusion Detection System (IDS) while \leach CHs implement local IDSs.
+The interactions between nodes are modeled as a Bayesian game, that is, a game in which at least one player (here, the BS) has incomplete information about the other player(s) (in this case: whether the sensors have been compromised or not).
+Each node has a ``reputation'' score.
+Selfish nodes can cooperate (so as to avoid detection) or drop packets.
+The authors show that this game has two Bayesian Nash equilibriums which provide a way to detect selfish nodes, or to force them to cooperate to avoid detection.
