@@ -2,6 +2,7 @@
 \section{Jeux quantitatifs infinis sur graphes finis}
 \label{tj:sec:model}
 
+\subsection{Modèle}
 Nous considérons ici un réseau de capteurs sans fil, qui ne comporte pas nécessairement de clusters, déployé et en cours de fonctionnement.
 L'un (ou plusieurs) des capteurs a été compromis par un attaquant, et tente d'envoyer un maximum de messages, tout en cessant de relayer les messages de ses voisins.
 Les nœuds non compromis tentent de collaborer entre eux, et ils peuvent être vus comme membres d'une \emph{coalition} dont le but est d'assurer le bon fonctionnement du réseau global.
@@ -9,8 +10,8 @@ Le nœud compromis poursuit un objectif différent: il tente d'envoyer le plus d
 Tous les capteurs doivent faire face aux même contraintes énergétiques.
 L'envoi de données est plus coûteux pour un capteur, en termes d'énergie, que de rester inactif: envoyer trop de données peut naturellement conduire à l'épuisement des réserves des nœuds.
 
-\subsection{L'arène}
-L'\emph{arène} du jeu est un graphe~$\G = (V,E)$ où $V = V_c \uplus V_g$ est l'ensemble des états, divisé entre l'ensemble~$V_g$ des états des capteurs non compromis et les états~$V_c$ des capteurs compromis.
+\subsection{Graphe du jeu}
+L'\emph{arène} du jeu est un graphe~$\G = (V,E)$ où $V = V_c \uplus V_g$ est l'ensemble des états, partitionné entre l'ensemble~$V_g$ des états des capteurs non compromis et les états~$V_c$ des capteurs compromis.
 L'ensemble~$E$ des arêtes est un sous-ensemble de~$V \times V$ tel que pour tout~$q \in V, \exists q' \in V, (q,q')\in E$, autrement dit: il n'existe pas d'état final.
 Le graphe est \emph{pondéré} sur $k$ dimensions, ce qui signifie que l'on fait appel à une fonction~$w: E \rightarrow \Z^k$ qui assigne des poids pour chaque dimension considérée, à chaque arête du graphe.
 
@@ -24,7 +25,7 @@ Un préfixe fini d'une exécution est appelé un \emph{historique}.
 La partition de~$V$ détermine le joueur qui, depuis un état, choisira l'arête suivante.
 Une \emph{stratégie}, pour un joueur donné, est une fonction qui détermine le prochain état qui sera atteint (autrement dit, l'arête qui sera empruntée): $\sigma_c: V^* V_c \rightarrow V$, $\sigma_g: V^* V_g \rightarrow V$.
 
-Si l'on considère une paire de ces stratégies ainsi qu'une configuration initiale donnée, le jeu produit une unique exécution appelée \emph{issue} des stratégies: $\outcome(\sigma_c,\sigma_g)$.
+Si l'on considère une paire de ces stratégies ainsi qu'une configuration initiale donnée, le jeu produit une unique exécution appelée \emph{résultat} des stratégies: $\outcome(\sigma_c,\sigma_g)$.
 
 \begin{remark}
 Toutes les notions définies ci-dessus s'étendent naturellement au cas des jeux impliquant plus de deux joueurs.
@@ -39,7 +40,7 @@ Pour des raisons pratiques, les conditions de victoire étudiées dans la litté
 Dans notre cas, les dimensions relatives aux poids correspondent soit à un niveau d'énergie, soit à un gain.
 Elles peuvent donc être dissociées en deux ensembles: $k_e$ dimensions relatives à l'énergie, et $k_v$ relatives aux gains.
 Une configuration du jeu devient alors $(q,\val,\energ)$.
-Les niveaux d'énergie doivent rester supérieur à zéro, quelles que soient leurs valeurs par ailleurs.
+Les niveaux d'énergie doivent rester supérieurs à zéro, quelles que soient leurs valeurs par ailleurs.
 Les gains peuvent être négatifs, bien que le but des joueurs soit de le maximiser.
 Comme l'on considère des exécutions infinies, il est plus pertinent de considérer la moyenne du gain sur la durée des exécutions, \cad de prendre le \emph{gain moyen} pour objectif.
 
@@ -63,8 +64,7 @@ La sémantique employée est la suivante:
 Autrement dit, pour une composante donnée, on considère la somme de tous les poids divisée par le nombre d'étapes menées.
 Puisque les exécutions sont infinies, on considère la limite de la moyenne pour des préfixes de taille croissant vers l'infini.
 Comme la limite en elle-même n'existe pas toujours (si la valeur oscille, par exemple), nous choisissons la limite supérieure.
-Cela s'accorde avec l'idée que le réseau considère le pire scénario possible: le joueur gagne si, au pire, son gain moyen repasse périodiquement au-dessus de $c$ lorsque la longueur du préfixe de l'exécution tend vers l'infini.
-L'utilisation de la limite inférieure ne serait pas faux par rapport au modèle choisi, mais la résolution des jeux s'en retrouverait compliquée.
+Cela s'accorde avec l'idée que le réseau considère le pire scénario possible: le joueur gagne si, au pire, son gain moyen repasse périodiquement au-dessus de $c$ lorsque la longueur du préfixe de l'exécution tend vers l'infini (bien que l'utilisation de la limite inférieure soit également possible, elle conduirait à la conception d'un modèle différent (d'une vision différente du problème), qui serait par ailleurs plus compliqué à résoudre).
 
 La satisfaction d'une combinaison booléenne d'atomes est définie de la manière classique.
 La négation ne peut être appliquée que sur des atomes.
@@ -76,7 +76,7 @@ Les gains des joueurs débuteront avec la valeur $0$, tandis que les niveaux en 
 
 \subsection{Problèmes de décision}
 
-Les problèmes de décisions qui sont soulevés dans ce contexte sont les suivants:
+Les problèmes de décisions qui sont étudiés dans ce contexte sont les suivants:
 
 \begin{itemize}
     \item \textbf{Problème de victoire:} étant données une configuration initiale ainsi qu'une formule de gain $\varphi$, existe-t-il une stratégie $\sigma_c$ pour le capteur compromis telle que pour toute stratégie $\sigma_g$ des capteurs « sains », $\outcome(\sigma_c,\sigma_g) \vDash \varphi$?

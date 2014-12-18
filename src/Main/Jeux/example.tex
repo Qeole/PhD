@@ -15,10 +15,10 @@ Nous définissons quatre états distincts pour les capteurs:
 
         \subsubsection{Nœud légitime}
 La machine à états pour un nœud légitime (non compromis) est présentée sur la \figref{tj:fig:autGoodNode}.
-Pour les nœuds non compromis par un attaquant, l'énergie décroit lorsque le composant radio est utilisé, \cad lors de l'écoute ainsi que lors de l'envoi de données.
+Pour les nœuds non compromis par un attaquant, l'énergie décroît lorsque le composant radio est utilisé, \cad lors de l'écoute ainsi que lors de l'envoi de données.
 Lorsqu'un paquet est reçu, il est d'abord placé en mémoire tampon, avant de subir éventuellement des opérations de traitement (agrégation, compression, traitement sémantique) puis d'être transmis vers la station de base.
 Un nœud accumule du gain lorsqu'il envoie ses propres paquets.
-Il n'en accumule pas, en revanche, lorsqu'il ne fait que retransmettre des paquets (opération de routage) envoyé par un autre nœud.
+Il n'en accumule pas, en revanche, lorsqu'il ne fait que retransmettre des paquets (opération de routage) envoyés par un autre nœud.
 
 Nous supposons qu'un capteur est capable de recharger sa batterie lorsqu'il reste au repos (\cad lorsqu'il boucle sur l'état \emph{idle}).
 Ce pourrait être le cas, par exemple, de capteurs équipés de panneaux solaires.
@@ -32,7 +32,7 @@ En pratique, la plupart des capteurs sont incapables de recharger leurs batterie
         \subsubsection{Nœud compromis}
 La machine à états pour un nœud compromis est présentée sur la \figref{tj:fig:autBadNode}.
 Contrairement aux capteurs légitimes, un capteur compromis ne cherche pas nécessairement à retransmettre les paquets aux nœuds auxquels ils sont destinés.
-Aussi peuvent-ils revenir sur l'état \emph{idle} sans retransmettre les paquets enregistrés en mémoire tampons.
+Aussi peuvent-ils revenir sur l'état \emph{idle} sans retransmettre les paquets enregistrés en mémoire tampon.
 \begin{figure}[H]
     \centering
     \input{\chapterpath/Automata/BadNode.tikz}
@@ -40,9 +40,9 @@ Aussi peuvent-ils revenir sur l'état \emph{idle} sans retransmettre les paquets
 \end{figure}
 
 \subsection{L'arène}
-Nous considérons pour cet exercice un réseau contenant trois capteurs.
+Nous considérons pour cet exercice un réseau contenant trois capteurs sans fil.
 L'un d'entre eux exactement a été compromis par un attaquant.
-Nous nommerons les joueurs $g1$, $g2$ et $b3$, $b3$ étant le nœud compromis.
+Nous nommerons les nœuds $g1$, $g2$ et $b3$, $b3$ étant le nœud compromis.
 Pour représenter le comportement asynchrone des nœuds sur le graphe, nous choisissons de découper le temps en intervalles.
 Nous considérons alors que pour chaque intervalle, chaque capteur a le temps d'exécuter exactement une action\footnote{À noter qu'une « action » correspond ici à un état, et peut entre autres consister à « rester au repos ».}.
 Sur chaque intervalle, les participants jouent de manière séquentielle (les uns après les autres) en se déplaçant sur le graphe.
@@ -56,7 +56,7 @@ La forme donnée aux états du graphe de jeu indique quelle « équipe » est 
 
 Chaque arête du graphe représente l'action réalisée par le joueur qui a la main.
 Elles correspondent aux arêtes empruntées par les joueurs sur leurs propres machines à états, auxquelles seraient ajoutées des valeur nulles en gain et en énergie pour les deux autres joueurs qui attendent leur tour.
-\figref{tj:fig:autFirstTurn} présente le premier tour du jeu pour chacun des trois joueurs (autrement dit, le premier intervalle de temps).
+La \figref{tj:fig:autFirstTurn} présente le premier tour du jeu pour chacun des trois joueurs (autrement dit, le premier intervalle de temps).
 \begin{figure*}[p]
     \centering
     \input{\chapterpath/Automata/FirstTurn.tikz}

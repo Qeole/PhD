@@ -11,7 +11,7 @@ Nous nous concentrerons ensuite sur le segment positif de ces formules, et donne
 Afin de clarifier la présentation, nous considérons dans cette section deux joueurs, simplement désignés par les termes \jo et \ji.
 Le \jo est celui qui cherche à atteindre l'objectif décrit par la formule de gain, et représente donc le nœud compromis.
 Conformément à la convention adoptée dans la section précédente, ses états seront représentés sous forme de rectangles.
-Le \ji quant à lui représente l'« équipe » (l'ensemble) des autres nœuds, et ses états seront de forme circulaire.
+Le \ji quant à lui représente la coalition (l'ensemble) des autres nœuds, et ses états seront de forme circulaire.
 
 \subsection{Indécidabilité du cas général}
 
@@ -21,7 +21,7 @@ Le théorème établi est le suivant:
 Le problème de victoire, ainsi que le problème de crédit initial, sont indécidables pour des objectifs définis par une formule de gain comportant quatre composantes relatives à l'énergie et une composante relative au gain.
 \end{theorem}
 
-La preuve de ce théorème consiste à encoder, à l'aide d'un jeu du type étudié, le problème de terminaison à l'aide d'une machine à deux compteurs: le problème équivalent ainsi obtenu est connu comme étant indécidable\cite{minsky67}.
+La preuve de ce théorème consiste à encoder, à l'aide d'un jeu du type étudié, le problème de terminaison à l'aide d'une machine à deux compteurs: le problème équivalent ainsi obtenu est connu comme étant indécidable~\cite{minsky67}.
 Chaque compteur est représenté par deux composantes d'énergie (une pour chacun des deux joueurs), qui contiennent chacune une copie de la valeur du compteur en question.
 Pour l'instruction $0$-test (présentée ci-dessous), le \jo peut prétendre que son compteur est nul, ou bien qu'il ne l'est pas; le second joueur peut vérifier si cette affirmation est valide ou non.
 Si la machine atteint son état d'arrêt, une composante de gain est incrémentée, et tous les autres composantes sont réinitialisées à $0$.
@@ -43,7 +43,7 @@ Au lancement du jeu toutes les composantes ont pour valeur\footnote{Pour obtenir
 
 Le but du \jo est d'obtenir un gain strictement positif, tout en simulant fidèlement la machine.
 Il faut entendre par cette expression que les valeurs des composantes $c$ et $d$ doivent demeurer positives.
-Les composantes $c'$ et $d'$ permettent de s'assurer que le \ji ne pourra prétendre à tord que le \jo a triché.
+Les composantes $c'$ et $d'$ permettent de s'assurer que le \ji ne pourra prétendre à tort que le \jo a triché.
 Si le cas devait se produire, les valeurs de ces composantes seraient strictement négatives.
 À présent la condition de victoire s'exprime comme la satisfaction de la formule de gain suivante:
 \[(c\geq0 \wedge d\geq0 \wedge p>0) \vee (c'<0 \wedge c\geq0) \vee (d'<0 \wedge d\geq0)\]
@@ -57,10 +57,10 @@ De manière formelle, on suppose que $\ell$ est « si $c=0$ alors aller à l'é
 Il y a alors deux arêtes sortant de l'état $\ell$: l'une correspondant à l'annonce $c=0$, l'autre à l'annonce $c>0$, comme indiqué sur la \figref{tj:fig:zerotest}.
 L'arête portant l'affirmation $c=0$ atteint un état possédé par le \ji, qui peut soit accepter l'affirmation (et aller dans ce cas à $\ell_1$), soit la rejeter.
 Le rejet de cette affirmation implique de décrémenter $c'$ (mais non $c$) et de se rendre sur un état \emph{stop}: cet état possède une unique arête sortante, qui boucle sur lui-même avec les poids $(0,0,0,0,0)$, signifiant que la simulation s'est arrêtée.
-Si l'affirmation est rejetée à tord, on obtient $c'<0$ tandis que $c=0$, puisque les valeurs de $c$ et $c'$ étaient égales.
+Si l'affirmation est rejetée à tort, on obtient $c'<0$ tandis que $c=0$, puisque les valeurs de $c$ et $c'$ étaient égales.
 Si l'affirmation a été rejetée à raison, alors le gain est nul.
 
-\begin{figure}
+\begin{figure}[ht]
 \centering
 \begin{tikzpicture}[auto,thick,>=stealth,xscale=1.05]
 \tikzstyle{stateComp}=[state, shape=rectangle]
@@ -103,7 +103,7 @@ On procède de façon identique pour $d$.
 Enfin, une arête retourne depuis l'état \emph{check} jusqu'à l'état initial et rapporte une récompense à la composante de gain~$p$: son poids est $(0,0,0,0,1)$.
 Ce module est représenté sur la \figref{tj:fig:halt}.
 
-\begin{figure}
+\begin{figure}[ht]
 \centering
 \begin{tikzpicture}[auto, thick,>=stealth]
 \tikzstyle{stateComp}=[state, shape=rectangle]
@@ -133,7 +133,7 @@ Ce module est représenté sur la \figref{tj:fig:halt}.
 Supposons à présent que \machine s'arrête.
 Considérons la stratégie du \jo qui consiste à jouer honnêtement, \cad à annoncer les valeurs correctes du compteur (et à décrémenter les composantes d'énergie, de sorte qu'elles atteignent exactement $0$).
 Alors si le \ji ne lance aucune accusation de tricherie, les compteurs $c$ et $d$ restent tous deux positifs, comme pour \machine.
-Supposons de plus que \machine a terminé son exécution en $k$ étape, et dénotons par $c_k$ et $d_k$ les valeurs respectives de $c$ et $d$ lorsque l'on atteint les instructions d"arrêt.
+Supposons de plus que \machine a terminé son exécution en $k$ étape, et dénotons par $c_k$ et $d_k$ les valeurs respectives de $c$ et $d$ lorsque l'on atteint les instructions d'arrêt.
 Dans ce cas l'exécution de la simulation sur la machine correspond au plus à $2k$ étapes du jeu (à cause des affirmations qui doivent être acceptées), et le jeu nécessite $c_k+d_k+2$ étapes depuis l'état \emph{halt} pour atteindre à nouveau l'état initial: il s'agit du nombre d'étapes requises pour décrémenter chaque compteur et pour traverser le module de la \figref{tj:fig:halt}.
 En conséquence la valeur minimale du gain moyen est de $\frac1{2k+c_k+d_k+2}>0$.
 
@@ -147,7 +147,7 @@ Au final, on retient que la stratégie de simulation « loyale » est gagnante
 
 \bigskip
 
-Supposons maintenant que \machine ne s'arrête pas: la simulation « loyale » retourne une valeur de gain de $0$ si le \ji ne porte aucune accusation à tord (l'état d'arrêt \emph{halt} n'est jamais atteint, et si le \ji ne réfute aucune annonce, l'état \emph{stop$'$} n'est pas non plus atteint.)
+Supposons maintenant que \machine ne s'arrête pas: la simulation « loyale » retourne une valeur de gain de $0$ si le \ji ne porte aucune accusation à tort (l'état d'arrêt \emph{halt} n'est jamais atteint, et si le \ji ne réfute aucune annonce, l'état \emph{stop$'$} n'est pas non plus atteint.)
 Dans le cas où le \jo « ment » lors de ses annonces, il suffit au \ji de détecter cette erreur pour que l'on obtienne soit $c<0$, soit une valeur de gain définitivement nulle.
 
 \bigskip
@@ -187,7 +187,7 @@ Nous allons fournir des conditions suffisantes pour obtenir une telle stratégie
 Dans les jeux à deux joueurs, il est courant de faire appel à la notion d'\emph{attracteurs} d'un ensemble $Q$ pour désigner les états depuis lesquels un joueur peut forcer le jeu à se déplacer dans $Q$.
 
 \begin{definition}
-Les \emph{attracteurs une-étape} d'un ensemble d'états $Q$ pour les joueurs~0 et~1 sont définis ainsi:
+Les \emph{attracteurs en une-étape} d'un ensemble d'états $Q$ pour les joueurs~0 et~1 sont définis ainsi:
 \begin{eqnarray*}
 1\!\attractor{0}(Q) &=& \left\{q \in V_0 \mmid \exists (q,q') \in E \textrm{ s.t. } q' \in Q \right\}
 \\&&\quad
@@ -198,10 +198,10 @@ Les \emph{attracteurs une-étape} d'un ensemble d'états $Q$ pour les joueurs~0 
 \\&&\quad
 \cup \;\left\{q \in V_1 \mmid \exists (q,q') \in E \textrm{ s.t. } q' \in Q \right\}
 \end{eqnarray*}
-Les \emph{attracteurs} pour le \jo (respectivement pour le \ji) d'un ensemble $Q$ d'étatssont les points fixes des attracteurs une-étape, en partant de $Q$: pour $i \in \{0,1\}$, \[\attractor{i}(Q) = \bigcup_{j \in \N} \left(1\!\attractor{i}\right)^j(Q)\]
+Les \emph{attracteurs} pour le \jo (respectivement pour le \ji) d'un ensemble $Q$ d'états sont les points fixes des attracteurs en une-étape, en partant de $Q$: pour $i \in \{0,1\}$, \[\attractor{i}(Q) = \bigcup_{j \in \N} \left(1\!\attractor{i}\right)^j(Q)\]
 \end{definition}
-L'attracteur pour le joueur~$i$ est donc l'ensemble des états depuis lesquels ce joueur est en mesure de s'assurer que le jeu atteigne $Q$.
-On notera que pour tout état de $(1\!\attractor{i})^j(Q)$, le joueur~$i$ a une stratégie sans mémoire lui permettant d'atteindre $Q$ en $j$ étapes au plus.player $i$ has a memoryless strategy to reach $Q$ in at most $j$ steps.
+L'attracteur pour le joueur~$i$ est donc l'ensemble des états depuis lesquels ce joueur est en mesure de s'assurer que le jeu atteindra $Q$.
+On notera que pour tout état de $(1\!\attractor{i})^j(Q)$, le joueur~$i$ a une stratégie sans mémoire lui permettant d'atteindre $Q$ en au plus $j$ étapes.
 Puisque le point fixe est atteint en $|V|$ itérations au plus, $Q$ peut être atteint avec un maximum de $|V|$ étapes depuis n'importe quel état de $\attractor{i}(Q)$.
 On notera aussi que cette borne entraîne la possibilité de calculer les attracteurs en un temps polynomial.
 
@@ -215,11 +215,11 @@ Soit $\G = \langle V_0, V_1, E\rangle$ le graphe d'un jeu (\cad tel que tout ét
 Soit un joueur $j \in \{0,1\}$.
 Soit $Q \subseteq V$.
 Considérons le graphe $\G' = (V_0', V_1', E \cap (V' \times V'))$ with $V_i' = V_i \setminus \attractor{j}(Q)$ pour $i \in \{0,1\}$.
-Alors tout état de $V'$ a une arête sortante allant dans $E \cap (V' \times V')$, autrement dit$\G'$ est aussi un graphe de jeu.
+Alors tout état de $V'$ a une arête sortante allant dans $E \cap (V' \times V')$, autrement dit $\G'$ est aussi un graphe de jeu.
 \end{lemma}
 
 \begin{proof}
-Supposons que la contradiction soit vraie, \cad qu'il existe $q \in V'$ tel que $q$ n'a aucune arête sortante.
+Supposons par contradiction que ce ne soit pas le cas, \cad qu'il existe $q \in V'$ tel que $q$ n'a aucune arête sortante.
 Comme $q$ avait une arête sortante dans le graphe de jeu $E$, cela signifie que tous les états successeurs de $q$ appartiennent à $\attractor{j}(Q)$.
 Par définition d'un attracteur, on a alors $q \in \attractor{j}(Q)$, et $q \notin V'$.
 \end{proof}
@@ -230,9 +230,9 @@ Dans ce premier exemple simple, nous étudions les objectifs, pour le \jo, de la
 De tels objectifs se traduisent par le besoin d'atteindre une certaine valeur de gain tandis que le niveau d'énergie demeure supérieur à une limite donnée.
 Un comportement cupide est une illustration simple d'un objectif de ce type: le nœud compromis cherche à rester « en vie » ($p_e \geq 1$) tout en émettant au moins un message toutes les $6$ étapes ($p_v \geq \frac1{6}$, mais comme nous l'avons remarqué plus haut, il est possible d'obtenir un seuil à valeur entière en multipliant tous les poids de la composante par $6$).
 
-Tout d'abord, nous pouvons clairement établie que depuis un état à partir duquel au moins un des objectifs ne peut être rempli, le \jo ne peut pas gagner.
+Tout d'abord, nous pouvons clairement établir que depuis un état à partir duquel au moins un des objectifs ne peut être rempli, le \jo ne peut pas gagner.
 De plus, si le \ji peut forcer le \jo à atteindre l'un de ces états, alors l'objectif du \jo ne sera pas rempli.
-De là nous pouvons utiliser la notion classique d'\emph{attractors} dont nous avons rappelé la définition.
+De là nous pouvons utiliser la notion classique d'\emph{attracteurs} dont nous avons rappelé la définition.
 Nous notons $L_e$ les états où le \jo perd pour $p_e \geq c_e$ (\cad où le \ji possède une stratégie pour l'empêcher de gagner), et $L_v$ les états pour lesquels le \jo perd pour $p_v \geq c_v$.
 Le \ji peut évidemment empêcher le \jo d'atteindre son objectif $p_e \geq c_e \wedge p_v \geq c_v$ depuis tout état de $\attractor{g}(L_e \cup L_v)$.
 Par conséquent toute stratégie gagnante pour le \jo doit rester dans l'ensemble $\G \setminus\attractor{1}(L_e \cup L_v)$.
@@ -258,7 +258,7 @@ De même si $\beta > 0$, alors $\lambda_v$ vérifie l'objectif $p_e \geq c_e$ po
 
 Si la condition suffisante que nous venons de présenter n'est pas remplie, nous n'avons pas, à ce jour, de solution pour résoudre ces jeux dans un contexte général.
 Des stratégies gagnantes pour chaque composante pourraient en effet se révéler incompatibles entre elles.
-Prenons, pour illustrer, l'exemple du jeu à un joueur présenté en \figref{tj:fig:infmemoryneeded}.
+Prenons, pour illustrer, l'exemple du jeu à un seul joueur présenté en \figref{tj:fig:infmemoryneeded}.
 Dans cet exemple, $q_0$ agit comme un état de recharge (en énergie) tandis que $q_1$ est un état actif qui produit un effet utile récompensé par une valeur de gain.
 On constate que recharger la batterie est bien plus lent que de consommer l'énergie, puisqu'il faut 42 « unités d'énergie\footnote{Ce peut être, par exemple, une joule, ce qui signifierait que l'étape active consommerait avec une puissance de 42~W, tandis que la puissance de la recharge serait de 1~W. La valeur 42 a été choisie arbitrairement pour cet exemple.} » par étape active.
 
@@ -266,7 +266,7 @@ Il est possible de maintenir un niveau d'énergie constamment positif (pour la p
 Il est aussi possible d'atteindre un gain moyen de $1$ en demeurant sur $q_1$ (ou en s'y rendant si l'on démarre sur $q_0$, car le poids de l'unique arête empruntée est négligeable sur une longue exécution).
 Cependant, il n'est pas possible de conserver un gain moyen de $1$ tout en maintenant un niveau d'énergie positif, puisqu'une fois le crédit initial écoulé, 42~étapes de recharge doivent impérativement être effectuées avant de réaliser toute action susceptible de rapporter un gain.
 
-\begin{figure}
+\begin{figure}[ht]
 \centering
 \begin{tikzpicture}[auto, thick,>=stealth]
 \tikzstyle{stateComp}=[state, shape=rectangle]
@@ -296,7 +296,7 @@ Cette machine possède 46~états, puisqu'elle nécessite de compter (et donc gar
 Si l'on devait démarrer en $q_1$, la machine se rendrait tout d'abord en $q_0$ avant d'appliquer la stratégie que nous venons de décrire.
 La machine doit être complète au niveau des entrées possibles, aussi faut-il autoriser $q_1$ à survenir depuis n'importe quel état mémoire (dans notre cas elle retourne à l'état mémoire initial, tandis que le jeu retourne en $q_0$).
 
-\begin{figure}
+\begin{figure}[ht]
 \centering
 \begin{tikzpicture}[auto, thick,>=stealth]
 \useasboundingbox (-1.25,1.45) rectangle (7.8,-3.15);
@@ -333,13 +333,13 @@ Considérons par exemple le jeu de la \figref{tj:fig:infmemoryneeded} avec pour 
 Une stratégie à mémoire infinie pourrait remporter la victoire sur ce jeu.
 Elle serait découpée en phases qui se dérouleraient de la manière suivante: à la $k$\textsuperscript{ième} phase, il faudrait boucler $42k$~fois sur $q_0$, puis se rendre en $q_1$; il faudrait alors boucler $k$~fois avant de retourner sur $q_0$.
 Cela permettrait de faire en sorte que les poids des transitions entre $q_0$ et $q_1$ soient négligeables, et d'obtenir une limite, pour le gain moyen, de $\frac1{43}$, puisque 43~étapes seraient nécessaires pour incrémenter le compteur de gain d'une unité.
-De plus, à chaque phase, le niveau d'énergie retombe à sa valeur initiale, puis ne prend que des valeurs positives.
+De plus, à chaque phase, le niveau d'énergie retombe à sa valeur initiale, puis ne prend que des valeurs supérieures à celle-ci.
 
 En revanche, si seulement $m$ états de mémoire sont autorisés, la meilleure valeur de gain moyen que l'on peut espérer obtenir est de $\frac{m}{43m+2}$ (la stratégie correspondante consiste à répéter la phase $m$).
 Ainsi, avec une mémoire finie, non seulement le gain moyen optimal ne peut pas être atteint, mais on constate de plus que l'allocation de davantage de mémoire permet d'atteindre une meilleure valeur de gain moyen.
 \end{remark}
 
-Résoudre le jeu en supposant que le \jo a une mémoire finie limitée à un nombre $k$ d'unités fourni en entrée revient à deviner sa stratégie sous forme de machine de Mealy, ce qui constitue un object exponentiel si $k$ est fournie sous forme binaire.
+Résoudre le jeu en supposant que le \jo a une mémoire finie limitée à un nombre $k$ d'unités fourni en entrée revient à deviner sa stratégie sous forme de machine de Mealy, ce qui constitue un objet de taille exponentielle si $k$ est fournie sous forme binaire.
 La machine est alors synchronisée avec le jeu, et retourne un second jeu à un seul joueur, à faire jouer par le \ji.
 Dans ce second jeu, seules les stratégies sans mémoires doivent êtres prises en compte.
 

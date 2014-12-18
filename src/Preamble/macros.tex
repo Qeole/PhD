@@ -52,13 +52,13 @@
 
 % Définitions Mathieu
 \makeatletter
-\newcommand{\m@ken@medcal}[2][\@error]{\expandafter\def\csname #1\endcsname{\ensuremath{\mathcal{#2}}}}
+\newcommand{\m@ken@medcal}[2][\@error]{\expandafter\def\csname #1\endcsname{\ensuremath{\mathcal{#2}}\xspace}}
 \newcommand{\m@kecal}{\@dblarg\m@ken@medcal}
-\newcommand{\m@ken@medbb}[2][\@error]{\expandafter\def\csname #1\endcsname{{\ensuremath{\mathbb{#2}}}}}
+\newcommand{\m@ken@medbb}[2][\@error]{\expandafter\def\csname #1\endcsname{{\ensuremath{\mathbb{#2}}}\xspace}}
 \newcommand{\m@kebb}{\@dblarg\m@ken@medbb}
-\newcommand{\m@ken@medsf}[2][\@error]{\expandafter\def\csname #1\endcsname{{\ensuremath{\mathsf{#2}}}}}
+\newcommand{\m@ken@medsf}[2][\@error]{\expandafter\def\csname #1\endcsname{{\ensuremath{\mathsf{#2}}}\xspace}}
 \newcommand{\m@kesf}{\@dblarg\m@ken@medsf}
-\newcommand{\m@ken@medmathtxt}[2][\@error]{\expandafter\def\csname #1\endcsname{{\ensuremath{\textit{#2}}}}}
+\newcommand{\m@ken@medmathtxt}[2][\@error]{\expandafter\def\csname #1\endcsname{{\ensuremath{\textit{#2}}}\xspace}}
 \newcommand{\m@kemathtxt}{\@dblarg\m@ken@medmathtxt}
 % CALligraphie
 \m@kecal{A}
