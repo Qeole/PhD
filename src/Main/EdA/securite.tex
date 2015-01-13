@@ -11,11 +11,13 @@ Les principales garanties que l'on cherche à apporter à un réseau sont les su
     \item l'intégrité des messages, autrement dit l'assurance qu'ils n'ont pas été modifiés par un attaquant durant leur transfert;
     \item l'authentification des correspondants, propriété qui assure à un agent du réseau que son interlocuteur est bien celui qu'il prétend être;
     \item la non-répudiation, qui empêche un agent de nier l'envoi d'un message émis;
+    \item la protection contre le rejeu vise à prévenir les attaques basées sur l'injection de paquets capturés au préalable par l'attaquant dans le but de générer du trafic supplémentaire;
     \item la sécurité physique des capteurs, nécessaire pour prévenir l'accès au contenu des communications ou au matériel cryptographique par exemple;
     \item la disponibilité, c'est à dire la résistance aux attaques de déni de service. Cette problématique est centrale pour les travaux présentés ici, et sera développée plus largement que les autres dans la \sref{ea:sec:dos};
-    \item la sureté et la résilience ne sont pas des problématiques de sécurité (car aucune attaque ne rentre en compte), mais il s'agit de problématiques assez proches de la disponibilité des réseaux, qui ont elles aussi fait l'objet d'études dans le contexte des réseaux de capteurs.
 \end{itemize}
-À noter qu'il existe de nombreuses études qui se sont déjà concentrées sur la sécurité des réseaux de capteurs~\cite{DYK12,AD14}.
+À noter qu'il existe de nombreuses études, voire même des travaux de synthèse, qui se sont déjà concentrés sur la sécurité des réseaux de capteurs~\cite{DYK12,AD14}.
+
+La sureté et la résilience des réseaux, traités en \ssref{ea:ssec:safety}, ne sont pas des problématiques de sécurité (car aucune attaque ne rentre en compte), mais il s'agit de problématiques assez proches de la disponibilité des réseaux.
 
 \subsection{Confidentialité}
 
@@ -27,39 +29,20 @@ Il convient donc de trouver des solutions permettant de dissimuler le contenu de
 
 Les méthodes conventionnelles pour assurer la confidentialité des communications sont donc des solutions cryptographiques: des algorithmes de chiffrement symétrique (une même clé sert à chiffrer puis déchiffrer le message) ou bien asymétrique (une clé pour le chiffrement, une autre pour déchiffrer) sont utilisés dans tous types de communications pour empêcher l'accès à l'information à quiconque ne possède pas la clé adéquate.
 \textsc{Aes} (\textit{Advanced Encryption Standard})~\cite{aes}, basé sur l'algorithme Rijndael, en est l'un des exemples les plus célèbres et les plus utilisés aujourd'hui.
-Ces algorithmes de chiffrement, cependant, nécessitent en général de nombreux calculs, voire beaucoup de mémoire tampon, pour être appliqués, ce qui les rend parfois inadaptés aux réseaux de capteurs.
+
+Ces algorithmes de chiffrement, cependant, nécessitent en général de nombreux calculs, voire beaucoup de mémoire tampon, pour être appliqués, ce qui les rend parfois peu adaptés aux réseaux de capteurs.
+Qui plus est, ils requièrent la plupart du temps la mise en place d'une architecture d'échange et de gestion du matériel cryptographique, notamment en ce qui concerne les échanges de clés: cette architecture peut considérablement alourdir la structure du réseau ainsi que les échanges en termes de volume de données de contrôle.
 
 Plusieurs solutions adaptées aux capacités limitées des capteurs ont donc été proposées~\cite{OX09}.
-Si certaines d'entre elles demeurent basées sur des algorithmes de chiffrement, qui sont adaptés aux capacités des capteurs~\cite{SOBMCN11}, d'autres mettent en place des mécanismes propres à profiter de l'architecture particulière de ces réseaux.
+Si certaines d'entre elles demeurent basées sur des algorithmes de chiffrement, qui se voient adaptés aux capacités des capteurs, d'autres mettent en place des mécanismes propres à profiter de l'architecture particulière de ces réseaux.
 
 
 
 
+secure data aggregation without persistent cryptographic operations\cite{WDSX07}
 
+Many other mechanisms related to authentication are resumed and compared in surveys such as~\cite{SOBMCN11}.
 
-
-
-
-
-
-% ======== >>> §1 <<<
-%\subsection{[AP01] -- Modifié}
-%% OLD VERSION
-%\textit{Perrig et al}.
-%\cite{AP01}
-%proposed SPINS (Security Protocols for Sensor Networks) which include two efficient symmetric key based security building blocks: SNEP and $\mu$TESLA.
-%SNEP provides data confidentiality, two-party data authentication, and data freshness, with low overhead.
-%It uses MAC and a shared counter between the sender and the receiver for the cipher block in counter mode which is incremented after each block to achieve two-party authentication and data integrity.
-%$\mu$TESLA provides authenticated broadcast using one-way key chains constructed with secure hash functions.
-%It divides a time into time intervals and the sender associates each key of the one-way key chain with one time interval to do cryptographic operations.
-
-%% SPINS: Security Protocols for Sensor Networks
-Back in 2001, most works focused on making WSNs feasible and useful.
-But some people already involved themselves into security.
-For instance, SPINS (Security Protocols for Sensor Networks) was proposed in~\cite{PSWCT02} to provide networks with two symmetric key-based security building blocks.
-The first block, called SNEP (Secure Network Encryption Protocol), provides data confidentiality, two-party data authentication and data freshness.
-The second block, called $\mu$TESLA (``micro'' version of the Timed, Efficient, Streaming, Loss-tolerant Authentication Protocol) assumes authenticated broadcast using one-way key chains constructed with secure hash functions.
-No mechanism was put forward to detect DoS attacks.
 
 
 % ======== >>> §5 <<<
@@ -152,46 +135,66 @@ Proposés pour les réseaux de capteurs~\cite{BBTY14}, ces algorithmes permetten
 Mais à part les solutions de chiffrement, d'autres méthodes consistent plus simplement à compliquer l'accès aux paquets plutôt qu'à chiffrer le contenu.
 Moins robustes, ces solutions sont aussi moins coûteuses en termes de calculs et, \infine, de consommation énergétique.
 
-But encryption itself is not always necessary: another example concerning confidentiality is~\cite{MMB13}, where we proposed several ways to split messages and to send them through several distinct paths in the network to avoid using systematical strong encryption.
-Depending on the importance of the data contained in each packet, we propose to send it using one of the three: the SDMP method\cite{BM10}, a secret sharing scheme such as Shamir's\cite{Sha79}, or standard encryption.
+Certaines méthodes proposent de découper les paquets à envoyer en fragments, qui seront envoyés à travers le réseau par des routes distinctes.
+Ces fragments seront combinés de telle sorte que seule la détention d'un certain nombre d'entre eux permette de reconstituer le message original.
+Cette combination des fragments peut faire appel à des mécanismes très simples, par exemple un « ou exclusif » logique comme avec la méthode \textsc{Sdmp} (\textit{Securing Data based on Multi-Path routing})~\cite{BM10}, ou bien à un mécanisme un peu plus élaboré de partage de secret entre plusieurs entités, comme l'a proposé par exemple \textsc{Schamir}~\cite{Sha79}.
+Ces méthodes ont pour intérêt de gêner l'attaquant pour la reconstruction des messages dont il ne dispose que de quelques fragments.
+Elles sont inefficaces en revanche si l'attaquant contrôle toutes les routes du réseau, ou simplement s'il se trouve très proche géographiquement de l'émetteur ou du destinataire pour l'échange concerné.
 
+Plusieurs de ces méthodes peuvent être associées, pour ajuster au mieux le compromis entre la sécurité et l'économie des ressources.
+Nous avons ainsi proposé une solution pour assurer la confidentialité des échanges basée sur un système de priorités~\cite{MMB13}:
+\begin{itemize}
+    \item les paquets d'importance moindre peuvent être simplement découpés en fragment et envoyés par plusieurs routes distinctes selon la méthode \textsc{Sdmp};
+    \item les paquets dont le contenu est plus important peuvent se voir rajouter une couche de sécurité, comme avec l'usage de la méthode de secret partagé;
+    \item enfin, les messages d'importance critique, moins fréquents, utilisent des solutions plus lourdes, mais plus efficaces, de chiffrement cryptographique, qui seules sont à même d'apporter dans ce cas un degré convenable de sécurité.
+\end{itemize}
 
-
-Il est à noter que ces méthodes n'empêchent pas l'attaquant, de manière générale, de pouvoir récolter des métadonnées sur les échanges effectués, et d'en déduire par exemple qui communique avec qui, ou quel est le volume de données échangé.
+Il est à noter qu'aucune des méthodes présentées ici, qu'elles reposent ou non sur l'usage de chiffrement, n'empêchent un attaquant de pouvoir récolter des métadonnées sur les échanges effectués, et d'en déduire par exemple qui communique avec qui, ou quel est le volume des données échangées.
 Ces métadonnées n'ont que rarement une valeur importante dans les réseaux de capteurs, et peuvent être en partie masquées, au besoin, par l'envoi de faux messages supplémentaires pour « brouiller les pistes », mais cela s'avèrerait très coûteux pour le réseau.
+Néanmoins certaines études considèrent que toute information peut avoir de la valeur, et se proposent par exemple de dissimuler l'emplacement géographique des différents nœuds d'un réseau de capteurs, que ce soit à travers l'usage d'algorithmes de clustering~\cite{GK13} ou bien de dissémination de l'information sur le modèle des épidémies~\cite{KDA14}.
+
+\subsection{Intégrité, authentification, non-répudiation, protection contre le rejeu}
+
+Assurer l'intégrité d'un message revient à s'assurer que le contenu utile du message n'a pas été altéré ou amputé entre sa création par l'émetteur et la réception par le destinataire final.
+Des méthodes cryptographiques peuvent être employées pour créer un condensat ou (s'il est utilisé avec une clé symétrique) un code d'authentification (\textsc{Mac} en anglais, pour \textit{Message Authentication Code}) des messages, permettant cette vérification.
+
+L'authentification sert à prouver la validité de l'expéditeur des messages.
+Il n'est pas suffisant, pour assurer la sécurité d'un réseau, de s'assurer que le contenu des messages est chiffré: il faut également s'assurer que l'entité avec laquelle on communique est bien qui elle prétend être.
+Cette précaution permet notamment de se prémunir de l'attaque de \textit{l'homme du milieu}.
+L'authentification regroupe en réalité à la fois l'authentification de deux parties l'une envers l'autre, et l'authentification d'un agent aux yeux de tous, dans le cas d'une diffusion générale (\textit{broadcast}) des messages.
+La signature des messages est le plus souvent réalisée à l'aide de mécanismes cryptographiques asymétriques (condensat signé à l'aide d'une clé privée).
+
+La non-répudiation consiste à assurer qu'un agent du réseau ne peut plus nier avoir émis un paquet une fois celui-ci reçu par son destinataire.
+Concrètement, si un agent est le seul à posséder une clé privée utilisée pour la signature d'un paquet, il ne fait nul doute, une fois ce paquet reçu, que cet agent en question est bien à l'origine de la création du paquet, puisque nul autre agent du réseau n'est en mesure de le signer à sa place.
+L'usage de ces dispositifs de signature en font un aspect étroitement liée à l'authentification des messages.
+Indispensable dans les transactions en ligne, la non-répudiation n'est pas toujours essentielle dans les réseaux de capteurs, mais peut s'avérer utile pour identifier de manière certaine l'auteur de comportements malveillants dans le réseau.
+
+Les attaques par rejeu consistent pour un attaquant à capturer des paquets, même chiffrés, en transit sur le réseau, puis à les injecter à nouveau dans le réseau.
+Le but visé peut être de générer davantage de trafic, dans le but d'augmenter le volume de données capturées.
+Il s'agit par exemple de la méthode utilisée pour accélérer considérablement l'obtention de la clé d'accès à un réseau sans fil sécurisé à l'aide de la suite WEP (\textit{Wired Equivalent Privacy})~\cite{BGW01}.
+Un autre but recherché peut être de générer du trafic superflu dans le but de consommer inutilement les ressources du réseau, ce qui en fait potentiellement une attaque de déni de service.
+Pour se prévenir de ce genre d'attaques, des moyens cryptographiques peuvent ici encore être mis en œuvre pour associer un identifiant unique à chaque paquet, de sorte qu'un paquet rejoué soit rejeté par les agents du réseau.
+
+Ces différentes propriétés sont distinctes, mais reposent presque toujours sur l'usage de solution cryptographiques pour être préservées dans un réseau.
+Elles sont souvent liées, et liées à la confidentialité des données, car il est fréquent qu'un dispositif mis en place pour assurer l'une de ces propriétés permette également d'en assurer d'autre.
+Par exemple, l'usage d'un condensat signé permet d'assurer à la fois l'intégrité d'un message, la validité de son auteur, et d'empêcher ce dernier de répudier le message dans le futur.
+
+Ainsi \textsc{Spins} (\textit{Security Protocols for Sensor Networks}), élaboré en 2002~\cite{PSWCT02}, est l'une des premières solutions proposées dans la littérature pour sécuriser les échanges dans les réseaux de capteurs, et se propose de répondre à l'ensemble de ces problématiques.
+Il s'agit d'un système reposant sur deux blocs: \textsc{Snep} (\textit{Secure Network Encryption Protocol}) fournit la confidentialité, l'authentification entre deux parties, l'intégrité et la protection contre le rejeu, le tout en ajoutant peu de données de contrôle aux paquets.
+Des codes d'authentification des messages associés à un compteur partagé entre les interlocuteurs, et utilisé pour le bloc de chiffrement (le compteur est incrémenté après chaque bloc), sont employés à cette fin.
+Le second bloc est appelé $\mu$\textsc{Tesla} (version « micro » du \textit{Timed, Efficient, Streaming, Loss-tolerant Authentication Protocol}) fournit des diffusions générales (\textit{broadcast}) authentifiées à l'aide de chaînes de clés: ces chaînes à sens uniques fournissent des clés associées à chaque intervalle de temps pour la signature des messages.
 
 
-Apart from those, there have been a variety of proposals to secure other elements, on a basis than any information about any aspect of the network might be valuable to an attacker.
-Hence there are approaches, for instance, to secure the geographical location of the nodes through epidemical information dissemination~\cite{KDA14} as well as through more conventional mechanisms~\cite{GK13}.
-
-\subsection{Intégrité, authentification, non-répudiation}
 
 
-
-Authentication brings to participants the guaranty that the peer they are communicating with truly is what it pretends to be; that is another important point.
-It has been deeply investigating as well~\cite{GWZC13}.
-Many lightweight proposals for key management in WSNs have been suggested~\cite{GWZCK13,BSK13}.
+Authentication has been deeply investigating as well~\cite{GWZC13}.
+Many lightweight proposals for key management in WSNs have been suggested~\cite{GWZCK13,BSK13}. % #NotTheSame
 
 
 
-Another issue consists in ensuring that every node actually is who it pretends to be (thus preventing address spoofing).
-This is called authentication.
-It often comes along with data integrity.
-For instance the proposals in~\cite{PSWCT02} are based on two symmetric key-based security building blocks.
-The first block is called Secure Network Encryption Protocol.
-It provides data confidentiality, two-party data authentication and data freshness.
-The second block is called $\mu$TESLA (for ``micro'' version of the Timed, Efficient, Streaming, Loss-tolerant Authentication Protocol) and assumes authenticated broadcast using one-way key chains constructed with secure hash functions.
-Many other mechanisms related to authentication are resumed and compared in surveys such as~\cite{SOBMCN11}.
+
+
+
 
 \subsection{Sécurité physique}
 
-\subsection{Sureté, résilience}
-
-
-
-
-
-
-For sensitive operations involving the deployment of a \wsn, all security aspects of the network must be reviewed.
-WSN-addressed protocols to provide data privacy\cite{OX09} and authentication\cite{SOBMCN11} have been subject to deep research investigation, and led for example to the proposal of mechanisms for secure data aggregation without persistent cryptographic operations\cite{WDSX07} or for authenticated broadcast such as $\mu$TESLA\cite{PSWCT02}.
-But cryptography is of no use if the network is down: in this paper we focused on resistance against \dos (DoS) attacks.
