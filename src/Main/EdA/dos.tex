@@ -9,6 +9,9 @@ mote-class/laptop-class attack
 
 attaques sur protocoles de clustering
 
+La sureté et la résilience des réseaux, traités en \ssref{ea:ssec:safety}, ne sont pas des problématiques de sécurité (car aucune attaque ne rentre en compte), mais il s'agit de problématiques assez proches de la disponibilité des réseaux.
+
+
 \subsection{Différents types d'attaques}
 
 \subsection{Différents mécanismes de protection}
@@ -170,6 +173,79 @@ On reception of reports from several distinct \cns (to prevent false denunciatio
 The authors show the benefit of their method by presenting numerical analysis of detection rate.
 Although the method is efficient for detecting rogue nodes, the authors do not give details of the election mechanism to choose the \cns.
 Also, there is no mention in their study of renewing the election in time, which causes the appointed \cns to endorse a heavier energy consumption on a long period.
+
+
+
+
+
+
+% ======== >>> §5 <<<
+%\subsection{[MH07] -- Modifié}
+
+%% Adaptive security design with malicious node detection in cluster-based sensor networks
+%% OLD VERSION
+%An adaptive security design (SecCBSN) to secure cluster-based communication in sensor networks, is proposed by \textit{Hsieh et al.} in
+%\cite{MH07}.
+%It consists of three modules, which can detect malicious nodes by providing secure communication and authentication protocols between nodes.
+%In each cluster, a CH schedules transmission and monitors periods for its sensor nodes.
+%The primary security module uses the TESLA certificate (TCert) to enable existing nodes to authenticate new incoming nodes, triggering the establishment of secure links and broadcast authentication between neighboring nodes.
+%In SecCBSN, the intrusion detection module prevents against compromised nodes.
+%It uses alarm return protocols, trust value evaluation, and the propagation of black and white lists of nodes.
+
+%% Adaptive security design with malicious node detection in cluster-based sensor networks
+Sensors authentication and DoS detection in clustered networks may be assumed by a single architecture.
+SecCBSN is described in~\cite{HHC07}.
+It is an adaptive security design intended to Secure Cluster-Based Communication in Sensor Networks.
+Each node is equipped with a system that includes three modules.
+One is involved in the cluster head election, and responsible for remembering the decision which were made.
+Another module provides ciphered communication and secure authentication protocols between sensors.
+It uses the TESLA certificate to enable deployed sensors to authenticate new incoming nodes.
+It allows the creation of secure channels as well as broadcast authentication between neighboring sensors.
+The last security module is responsible for the detection of compromised nodes.
+When a node is suspected to harm the network, alarm protocols are used to warn the base station.
+The use of trust value evaluation then enables the setting and the propagation of black and white lists of sensors.
+
+
+
+
+
+
+
+% ======== >>> §2 <<<
+%\subsection{[LB09] -- Modifié}
+
+%% Using mobile agents to recover from node and database compromise in path-based DoS attacks in wireless sensor network
+\textit{Li} and \textit{Batten} expose in
+\cite{LB09}
+their method to detect and to recover from Path-based DoS (PDoS) attacks in wireless sensor networks.
+They consider WSNs whose aim is to collect data and to store it into small databases.
+PDoS attacks may prevent legitimate communication, lead the sensors to battery exhaustion and corrupt the gathered data.
+So the authors introduce the use of Mobile Agents (MAs), which use hash function values, node IDs and traffic table to analyze the traffic and identify compromised sensors.
+Thus the MAs are able to detect PDoS attacks with ease and efficiency, and to reply to the attack by proceeding to a recovery process.
+There are three distinct recovery processes available, depending on the percentage of compromised nodes in the network.
+Note that the authors use the assumption that MAs can not be compromised.
+%% OLD VERSION
+%A new detection and recovery method for compromised nodes in Path-based DoS (PDoS) attacks in wireless sensor network is presented in \cite{LB09} by \textit{Li} and \textit{Batten}. In this paper, the authors consider WSNs designed to collect and to store data in which path-based attacks can be carried on both the sensor nodes and the database containing the collected data. The contribution of this paper is the use of mobile agents (MAs) for the attack detection and the recovery process. The MAs detect PDoS attacks easily and efficiently. The solution is based on the use of hash function values, node IDs and traffic tables. By analyzing the traffic, the MA can detect the abnormal traffic and can designate the compromised nodes.
+
+
+% ======== >>> §2 <<<
+%\subsection{[LO07] -- Modifié}
+%% OLD VERSION
+%Hierarchical sensor networks where clusters are formed dynamically and periodically using the LEACH algorithm, allow to distribute the energy load among sensor nodes.
+%The problem of adding security to this type of network is raised by \textit{Oliveira et al}
+%\cite{LO07}
+%who propose SecLEACH which is a revised version of LEACH.
+%It applies random key pre-distribution and $\mu$TESLA.
+%They can be used both to secure communications in a hierarchical network with dynamic cluster establishment.
+
+%% SecLEACH -- On the security of clustered sensor networks
+A sensor network may be recursively and periodically reclustered with an algorithm such as \leach, as in our proposal.
+The resulting hierarchically clustered network often presents a good ability for distributing the energy consumption among the sensor nodes.
+But security concerns (other than DoS) also apply to those networks.
+In~\cite{OFVWBDL07}, the authors propose to add security mechanisms \via a revised version of \leach protocol.
+\textit{SecLEACH}\ uses random key pre-distribution as well as $\mu$TESLA (authenticated broadcast) so as to protect communications.
+But the authors do not mention any mechanism to fight DoS attacks.
+
 
 
 

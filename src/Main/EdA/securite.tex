@@ -3,7 +3,7 @@
 
 \subsection{Plusieurs problématiques}
 
-La sécurité des systèmes informatiques a pour particularité de constituer un domaine transversal à pratiquement tous les domaines de l'informatique, dans le sens où pour sécuriser la totalité d'un système, chaque couche, chaque technologie utilisée doit être sure.
+La sécurité des systèmes informatiques a pour particularité de constituer un domaine transversal à pratiquement tous les autres domaines de l'informatique, dans le sens où pour sécuriser la totalité d'un système, chaque couche, chaque technologie utilisée doit être sure.
 Ainsi, la sécurité des réseaux constitue en soi tout un domaine d'étude, qui se décompose à son tour en plusieurs problématiques.
 Les principales garanties que l'on cherche à apporter à un réseau sont les suivantes:
 \begin{itemize}
@@ -17,8 +17,6 @@ Les principales garanties que l'on cherche à apporter à un réseau sont les su
 \end{itemize}
 À noter qu'il existe de nombreuses études, voire même des travaux de synthèse, qui se sont déjà concentrés sur la sécurité des réseaux de capteurs~\cite{DYK12,AD14}.
 
-La sureté et la résilience des réseaux, traités en \ssref{ea:ssec:safety}, ne sont pas des problématiques de sécurité (car aucune attaque ne rentre en compte), mais il s'agit de problématiques assez proches de la disponibilité des réseaux.
-
 \subsection{Confidentialité}
 
 Les informations échangées sur un réseau sont dites confidentielles si un attaquant se retrouve dans l'impossibilité d'accéder au contenu utile de l'échange.
@@ -27,120 +25,29 @@ Pour de nombreux réseaux plus « classiques », l'utilisation d'un câble de 
 Mais dans les réseaux de capteurs, les données sont échangées par le biais d'ondes électromagnétiques que tout attaquant à portée peut recevoir.
 Il convient donc de trouver des solutions permettant de dissimuler le contenu des messages échangés, à défaut de prévenir l'accès aux messages eux-mêmes.
 
-Les méthodes conventionnelles pour assurer la confidentialité des communications sont donc des solutions cryptographiques: des algorithmes de chiffrement symétrique (une même clé sert à chiffrer puis déchiffrer le message) ou bien asymétrique (une clé pour le chiffrement, une autre pour déchiffrer) sont utilisés dans tous types de communications pour empêcher l'accès à l'information à quiconque ne possède pas la clé adéquate.
+Les méthodes conventionnelles pour assurer la confidentialité des communications sont donc des solutions cryptographiques: des algorithmes de chiffrement symétrique (une même clé sert à chiffrer puis déchiffrer le message) ou bien asymétrique (une clé pour le chiffrement, une seconde pour déchiffrer) sont utilisés dans tous types de communications pour empêcher l'accès à l'information à quiconque ne possède pas la clé adéquate.
 \textsc{Aes} (\textit{Advanced Encryption Standard})~\cite{aes}, basé sur l'algorithme Rijndael, en est l'un des exemples les plus célèbres et les plus utilisés aujourd'hui.
+Certaines études se sont penchées sur les vitesses d'exécution relatives de différents algorithmes utilisés pour le chiffrement et l'authentification des données~\cite{SOBMCN11}.
 
-Ces algorithmes de chiffrement, cependant, nécessitent en général de nombreux calculs, voire beaucoup de mémoire tampon, pour être appliqués, ce qui les rend parfois peu adaptés aux réseaux de capteurs.
+Ces algorithmes de chiffrement nécessitent en général de nombreux calculs, voire beaucoup de mémoire tampon, pour être mis en œuvre, surtout lorsque l'appareil ne dispose pas de matériel dédié~\cite{PLP06}, ce qui les rend parfois peu adaptés aux réseaux de capteurs.
 Qui plus est, ils requièrent la plupart du temps la mise en place d'une architecture d'échange et de gestion du matériel cryptographique, notamment en ce qui concerne les échanges de clés: cette architecture peut considérablement alourdir la structure du réseau ainsi que les échanges en termes de volume de données de contrôle.
-
 Plusieurs solutions adaptées aux capacités limitées des capteurs ont donc été proposées~\cite{OX09}.
-Si certaines d'entre elles demeurent basées sur des algorithmes de chiffrement, qui se voient adaptés aux capacités des capteurs, d'autres mettent en place des mécanismes propres à profiter de l'architecture particulière de ces réseaux.
+Certaines d'entre elles demeurent basées sur des suites de protocoles dont les algorithmes de chiffrement sont choisis au mieux pour répondre aux capacités des capteurs~\cite{BN07}; ces solutions couvrent le plus souvent d'autres problématiques que la seule confidentialité des données, et certaines seront présentées dans la sous-section suivante.
+D'autres mettent en place des mécanismes propres à profiter de l'architecture particulière de ces réseaux, en voici certains exemples.
 
-
-
-
-secure data aggregation without persistent cryptographic operations\cite{WDSX07}
-
-Many other mechanisms related to authentication are resumed and compared in surveys such as~\cite{SOBMCN11}.
-
-
-
-% ======== >>> §5 <<<
-%\subsection{[MH07] -- Modifié}
-
-%% Adaptive security design with malicious node detection in cluster-based sensor networks
-%% OLD VERSION
-%An adaptive security design (SecCBSN) to secure cluster-based communication in sensor networks, is proposed by \textit{Hsieh et al.} in
-%\cite{MH07}.
-%It consists of three modules, which can detect malicious nodes by providing secure communication and authentication protocols between nodes.
-%In each cluster, a CH schedules transmission and monitors periods for its sensor nodes.
-%The primary security module uses the TESLA certificate (TCert) to enable existing nodes to authenticate new incoming nodes, triggering the establishment of secure links and broadcast authentication between neighboring nodes.
-%In SecCBSN, the intrusion detection module prevents against compromised nodes.
-%It uses alarm return protocols, trust value evaluation, and the propagation of black and white lists of nodes.
-
-%% Adaptive security design with malicious node detection in cluster-based sensor networks
-Sensors authentication and DoS detection in clustered networks may be assumed by a single architecture.
-SecCBSN is described in~\cite{HHC07}.
-It is an adaptive security design intended to Secure Cluster-Based Communication in Sensor Networks.
-Each node is equipped with a system that includes three modules.
-One is involved in the cluster head election, and responsible for remembering the decision which were made.
-Another module provides ciphered communication and secure authentication protocols between sensors.
-It uses the TESLA certificate to enable deployed sensors to authenticate new incoming nodes.
-It allows the creation of secure channels as well as broadcast authentication between neighboring sensors.
-The last security module is responsible for the detection of compromised nodes.
-When a node is suspected to harm the network, alarm protocols are used to warn the base station.
-The use of trust value evaluation then enables the setting and the propagation of black and white lists of sensors.
-
-
-
-% ======== >>> §2 <<<
-%\subsection{[LB09] -- Modifié}
-
-%% Using mobile agents to recover from node and database compromise in path-based DoS attacks in wireless sensor network
-\textit{Li} and \textit{Batten} expose in
-\cite{LB09}
-their method to detect and to recover from Path-based DoS (PDoS) attacks in wireless sensor networks.
-They consider WSNs whose aim is to collect data and to store it into small databases.
-PDoS attacks may prevent legitimate communication, lead the sensors to battery exhaustion and corrupt the gathered data.
-So the authors introduce the use of Mobile Agents (MAs), which use hash function values, node IDs and traffic table to analyze the traffic and identify compromised sensors.
-Thus the MAs are able to detect PDoS attacks with ease and efficiency, and to reply to the attack by proceeding to a recovery process.
-There are three distinct recovery processes available, depending on the percentage of compromised nodes in the network.
-Note that the authors use the assumption that MAs can not be compromised.
-%% OLD VERSION
-%A new detection and recovery method for compromised nodes in Path-based DoS (PDoS) attacks in wireless sensor network is presented in \cite{LB09} by \textit{Li} and \textit{Batten}. In this paper, the authors consider WSNs designed to collect and to store data in which path-based attacks can be carried on both the sensor nodes and the database containing the collected data. The contribution of this paper is the use of mobile agents (MAs) for the attack detection and the recovery process. The MAs detect PDoS attacks easily and efficiently. The solution is based on the use of hash function values, node IDs and traffic tables. By analyzing the traffic, the MA can detect the abnormal traffic and can designate the compromised nodes.
-
-
-% ======== >>> §2 <<<
-%\subsection{[LO07] -- Modifié}
-%% OLD VERSION
-%Hierarchical sensor networks where clusters are formed dynamically and periodically using the LEACH algorithm, allow to distribute the energy load among sensor nodes.
-%The problem of adding security to this type of network is raised by \textit{Oliveira et al}
-%\cite{LO07}
-%who propose SecLEACH which is a revised version of LEACH.
-%It applies random key pre-distribution and $\mu$TESLA.
-%They can be used both to secure communications in a hierarchical network with dynamic cluster establishment.
-
-%% SecLEACH -- On the security of clustered sensor networks
-A sensor network may be recursively and periodically reclustered with an algorithm such as \leach, as in our proposal.
-The resulting hierarchically clustered network often presents a good ability for distributing the energy consumption among the sensor nodes.
-But security concerns (other than DoS) also apply to those networks.
-In~\cite{OFVWBDL07}, the authors propose to add security mechanisms \via a revised version of \leach protocol.
-\textit{SecLEACH}\ uses random key pre-distribution as well as $\mu$TESLA (authenticated broadcast) so as to protect communications.
-But the authors do not mention any mechanism to fight DoS attacks.
-
-
-
-
-Some of these studies led to new protocols to provide confidentiality in WSNs, \ie to prevent unauthorized intruders to access to the meaningful data that nodes exchange in the network.
-In~\cite{LPH08} for example, the authors introduce a method to ensure data confidentiality against parasitic adversaries.
-The use a very simple key management scheme, roughly consisting in sharing a key between each node and the \bs.
-They also introduce en route encryption mechanism to reinforce the confidentiality against compromised nodes: a special subset of nodes in the network re-encrypt the message on its way to the base station.
-A periodic renewing of the keys of the node is deployed, to prevent attackers to use compromised keys at will.
-The authors claim a low energy consumption in regard with classic public key encryption schemes.
-
-
-
-
-
-
-
-
-
-
-
+Dans le cas d'un attaquant « parasite » qui chercherait à exploiter les mesures relevées par le réseau de capteurs déployé par d'autres, des solutions comme GossiCrypt~\cite{LPH08}, basée sur un algorithme simple d'échanges de clés entre les nœuds et la station de base, ainsi que sur un renouvellement probabiliste du chiffrement: à chaque étape du message dans le réseau, le nœud relai charger de renvoyer le message choisit aléatoirement de chiffrer à son tour, ou non, le contenu du paquet.
+Les clés de chiffrement des nœuds sont renouvelées régulièrement, mais pas toutes à la fois, de telle sorte qu'un nœud compromis par un attaquant ne devrait pouvoir déchiffrer le contenu que d'un nombre restreints de paquets.
 
 Un usage intéressant de la cryptographie est le recours au chiffrement dit « homomorphique », qui permet d'effectuer certaines opérations sur des données chiffrées sans avoir besoin, justement, de les déchiffrer.
 Proposés pour les réseaux de capteurs~\cite{BBTY14}, ces algorithmes permettent de procéder, dans une certaine mesure, à des opérations de compression et d'agrégation de données (par exemple) au cours du trajet d'un paquet, sans avoir à déchiffrer puis chiffrer à nouveau son contenu à chaque étape.
 
-Mais à part les solutions de chiffrement, d'autres méthodes consistent plus simplement à compliquer l'accès aux paquets plutôt qu'à chiffrer le contenu.
+À part les solutions de chiffrement, d'autres méthodes consistent plus simplement à compliquer l'accès aux paquets plutôt qu'à chiffrer le contenu.
 Moins robustes, ces solutions sont aussi moins coûteuses en termes de calculs et, \infine, de consommation énergétique.
-
-Certaines méthodes proposent de découper les paquets à envoyer en fragments, qui seront envoyés à travers le réseau par des routes distinctes.
+Certaines méthodes proposent ainsi de découper les paquets à envoyer en fragments, qui seront envoyés à travers le réseau par des routes distinctes.
 Ces fragments seront combinés de telle sorte que seule la détention d'un certain nombre d'entre eux permette de reconstituer le message original.
 Cette combination des fragments peut faire appel à des mécanismes très simples, par exemple un « ou exclusif » logique comme avec la méthode \textsc{Sdmp} (\textit{Securing Data based on Multi-Path routing})~\cite{BM10}, ou bien à un mécanisme un peu plus élaboré de partage de secret entre plusieurs entités, comme l'a proposé par exemple \textsc{Schamir}~\cite{Sha79}.
 Ces méthodes ont pour intérêt de gêner l'attaquant pour la reconstruction des messages dont il ne dispose que de quelques fragments.
 Elles sont inefficaces en revanche si l'attaquant contrôle toutes les routes du réseau, ou simplement s'il se trouve très proche géographiquement de l'émetteur ou du destinataire pour l'échange concerné.
-
 Plusieurs de ces méthodes peuvent être associées, pour ajuster au mieux le compromis entre la sécurité et l'économie des ressources.
 Nous avons ainsi proposé une solution pour assurer la confidentialité des échanges basée sur un système de priorités~\cite{MMB13}:
 \begin{itemize}
@@ -175,7 +82,7 @@ Il s'agit par exemple de la méthode utilisée pour accélérer considérablemen
 Un autre but recherché peut être de générer du trafic superflu dans le but de consommer inutilement les ressources du réseau, ce qui en fait potentiellement une attaque de déni de service.
 Pour se prévenir de ce genre d'attaques, des moyens cryptographiques peuvent ici encore être mis en œuvre pour associer un identifiant unique à chaque paquet, de sorte qu'un paquet rejoué soit rejeté par les agents du réseau.
 
-Ces différentes propriétés sont distinctes, mais reposent presque toujours sur l'usage de solution cryptographiques pour être préservées dans un réseau.
+Ces différentes propriétés sont distinctes, mais elles reposent presque toujours sur l'usage de solution cryptographiques pour être préservées dans un réseau.
 Elles sont souvent liées, et liées à la confidentialité des données, car il est fréquent qu'un dispositif mis en place pour assurer l'une de ces propriétés permette également d'en assurer d'autre.
 Par exemple, l'usage d'un condensat signé permet d'assurer à la fois l'intégrité d'un message, la validité de son auteur, et d'empêcher ce dernier de répudier le message dans le futur.
 
@@ -184,17 +91,26 @@ Il s'agit d'un système reposant sur deux blocs: \textsc{Snep} (\textit{Secure N
 Des codes d'authentification des messages associés à un compteur partagé entre les interlocuteurs, et utilisé pour le bloc de chiffrement (le compteur est incrémenté après chaque bloc), sont employés à cette fin.
 Le second bloc est appelé $\mu$\textsc{Tesla} (version « micro » du \textit{Timed, Efficient, Streaming, Loss-tolerant Authentication Protocol}) fournit des diffusions générales (\textit{broadcast}) authentifiées à l'aide de chaînes de clés: ces chaînes à sens uniques fournissent des clés associées à chaque intervalle de temps pour la signature des messages.
 
+Une solution intéressante pour économiser des ressources consiste à n'introduire l'usage de solutions cryptographiques que lorsqu'elles deviennent nécessaires, et à s'en dispenser lorsque le réseau fonctionne correctement.
+Ce système a été proposé en association avec l'usage d'un « arbre d'agrégation sécurisée », structure du réseau utilisée pour le routage des paquets~\cite{WDSX07}.
+Lorsqu'un comportement malveillant est détecté dans le réseau, cet arbre permet de mettre en place rapidement et avec peu de données de contrôle un mécanisme d'authentification et de chiffrement des messages.
+Le danger de cette proposition repose sur la capacité du réseau à détecter les attaques: si aucun comportement suspect n'est constaté, aucune mesure de sécurité n'est mise en place.
+En cas d'écoute passive de la part de l'attaquant notamment, aucune mesure n'est appliquée pour protéger la confidentialité des données échangées.
 
+Plusieurs propositions concernent la mise en place de solutions classiques, mais « allégées », comme avec la mise en place d'une autorité de certification spécifique permettant l'authentification réciproque des nœuds deux à deux~\cite{GWZCK13}, ou bien basé sur des clés pré-distribuées~\cite{BSK13}.
 
-
-Authentication has been deeply investigating as well~\cite{GWZC13}.
-Many lightweight proposals for key management in WSNs have been suggested~\cite{GWZCK13,BSK13}. % #NotTheSame
-
-
-
-
-
-
+Les problèmes d'authentification, et dans une moindre mesure les autres problématiques soulevées dans cette sous-section, ont également fait l'objet de plusieurs études~\cite{GWZC13}.
 
 \subsection{Sécurité physique}
 
+L'accès au réseau pour un attaquant peut passer par la compromission de l'un des nœud du réseau.
+Dans le pire des cas, tout le système peut être modifié et détourné de son but d'origine, pour mener d'autres attaques par la suite, tandis que la mémoire ---~et notamment le matériel cryptographique embarqué~--- peut être entièrement analysée.
+
+Les systèmes d'exploitation utilisés par les capteurs sont généralement conçus pour être légers et s'adapter aux contraintes des capteurs.
+Mais ils ne rajoutent pas de problématiques particulières en termes de sécurité système par rapport à d'autres machines, et le peu de fonctionnalités dont ils disposent joue plutôt en leur faveur pour ce qui est de la sécurité logicielle.
+Leur faiblesse réside donc dans leur déploiement en milieu ouvert et potentiellement hostile, ce qui peut permettre aux attaquants d'y accéder physiquement et de manière prolongée.
+
+L'une des solutions proposées consiste donc à considérer un nœud comme ayant épuisé sa batterie s'il ne répond plus pendant une période prolongée; si en revanche le capteur redevient actif par la suite, on suppose que son absence était due à son extraction du réseau par un attaquant, et le capteur est alors considéré comme compromis~\cite{Ho10}.
+
+La compromission d'un nœud peut être extrêmement nuisible pour le réseau de capteurs.
+Non content d'accéder aux données reçues par ce nœud, ou aux clés de chiffrement et de signature qu'il peut contenir, l'attaquant peut en plus chercher à mener des attaques de déni de service visant à perturber le bon fonctionnement du réseau.
