@@ -7,7 +7,7 @@
     Afin d'étudier les avantages concrets apportés par l'élection dynamique des \cns, nous avons réalisé une série de simulations à l'aide du logiciel \nsii~\cite{ns2}.
 Les résultats obtenus sont présentés dans cette section.
 Ils sont issus de tests simulant le comportement d'un cluster se présentant sous la forme d'une grille régulière de dix nœuds par dix (voir figure~\ref{sa:fig:grille}).
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=6.5cm]{\chapterfig/WSN_topo.pdf}
     \caption{Cluster sous forme de grille régulière $10 \times 10$, de côté de longueur $a$}\label{sa:fig:grille}
@@ -26,7 +26,7 @@ Ses caractéristiques sont les suivantes:
 
 Pour mesurer l'efficacité des \cns, nous avons effectué plusieurs tests avec \nsii.
 La \tabref{sa:table:parametres1} indique les valeurs (ou les fourchettes de valeurs) utilisées comme paramètres au cours des différentes simulations.
-\begin{table}[ht]
+\begin{table}[H]
     \centering
     \caption{Paramètres de simulation}\label{sa:table:parametres1}
     \medskip
@@ -53,7 +53,7 @@ Lorsque ce nombre s'accroît encore, il n'y a plus d'évolution notable.
 Quinze \cns semblent donc être une mesure idéale pour notre réseau, si l'on considère une élection statique.
 En revanche, on peut très bien descendre à dix \cns si l'on envisage un processus d'élection dynamique: le nœud compromis ne sera peut-être pas détecté sur une période donnée, mais le renouvellement rapide des \cns permet de s'assurer qu'il sera détecté rapidement sur la période suivante.
 On note par ailleurs que jusqu'à quarante pour cent (soit quatre nœuds sur dix) ont pu détecter simultanément le nœud compromis sur les périodes~7,~8~et~9.
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=7cm]{\chapterfig/graphe1.pdf}
     \caption{Taux de détection en fonction du groupe}\label{sa:fig:graphe1}
@@ -62,7 +62,7 @@ On note par ailleurs que jusqu'à quarante pour cent (soit quatre nœuds sur dix
 La valeur de $\lambda$ a elle aussi un rôle à jouer dans la détection: plus le nœud compromis émet, plus il est probable que les \cns mesureront efficacement un dépassement par rapport au seuil théorique d'un nœud honnête.
 Mais ici encore, le renouvellement rapide des \cns apporte une meilleure détection, puisque statistiquement, davantage de voisins proches du nœud compromis se retrouveront \cn à un moment ou l'autre au cours de la simulation.
 La courbe présentée en figure~\ref{sa:fig:graphe4} illustre cet état de fait.
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=7cm]{\chapterfig/graphe4.pdf}
     \caption{Taux de détection en fonction de $\lambda$}\label{sa:fig:graphe4}
@@ -72,7 +72,7 @@ La courbe présentée en figure~\ref{sa:fig:graphe4} illustre cet état de fait.
     \subsection{Consommation énergétique}
 
 Les paramètres utilisés pour les simulations présentées dans cette sous-section sont synthétisés en \tabref{sa:table:parametres2}.
-\begin{table}[ht]
+\begin{table}[H]
     \centering
     \caption{Paramètres de simulation}\label{sa:table:parametres2}
     \medskip
@@ -88,7 +88,7 @@ Les paramètres utilisés pour les simulations présentées dans cette sous-sect
 L'histogramme exposé en figure~\ref{sa:fig:conso-moyenne} expose la consommation en énergie des nœuds, pour la méthode d'élection statique et pour la méthode dynamique, en fonction du pourcentage de \cns.
 Par «~consommation en énergie~», on entend ici la consommation moyenne en fin de simulation ramenée sur la totalité des nœuds, à l'exception du \ch ainsi que du nœud compromis, qui consomment évidemment plus que les autres, et dont le comportement est invariant entre les méthodes statiques et dynamiques.
 Pour rappel, les nœuds normaux (non \cns) ne reçoivent pas les messages de leurs voisins et donc ne consomment pas d'énergie en dehors de leur période d'émission (voir le fonctionnement détaillé de \leach en \sssref{st:subsubsec:leach}).
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=7cm]{\chapterfig/mean.pdf}
     \caption{Consommation moyenne en énergie}\label{sa:fig:conso-moyenne}
@@ -98,7 +98,7 @@ La consommation moyenne en fin de simulation est identique pour les deux méthod
 En revanche, si l'on compare les écarts types à la moyenne, on relève des différences notables.
 Elles sont manifestes sur l'histogramme présenté en figure~\ref{sa:fig:conso-ecart-type}, qui présente, pour différents pourcentages de \cns, les écarts types à la moyenne précédente de la consommation en énergie des nœuds, à la fin de la simulation.
 Ici encore, \ch et nœud compromis ont été laissés de côté.
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=7cm]{\chapterfig/stddev.pdf}
     \caption{Écart type à la moyenne de la consommation en énergie}\label{sa:fig:conso-ecart-type}
@@ -108,7 +108,7 @@ Avec la méthode dynamique cependant, les écarts de consommations sont lissés 
 Nous observons ainsi une meilleure répartition de la charge.
 
 L'histogramme de la figure~\ref{sa:fig:premier-deces} présente l'instant de décès du premier nœud à épuiser sa batterie au sein du cluster simulé.
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=7cm]{\chapterfig/fstdth.pdf}
     \caption{Instant de premier décès dans le réseau}\label{sa:fig:premier-deces}
@@ -143,7 +143,7 @@ Au cours de cette dernière simulation, nous avons observé le nombre de nœuds 
 La durée de la simulation a été étendue à une heure, et les nœuds se sont vus allouer une réserve initiale d'énergie égale à 10~J.
 Dix pour cent d'entre eux, soit dix à la fois, ont été désignés en tant que \cns.
 Ces données, et les autres paramètres utilisés, sont présentés en \tabref{sa:table:parametres3}.
-\begin{table}[ht]
+\begin{table}[H]
     \centering
     \caption{Paramètres de simulation}\label{sa:table:parametres3}
     \medskip
@@ -159,7 +159,7 @@ Ces données, et les autres paramètres utilisés, sont présentés en \tabref{s
     \end{tabular}
 \end{table}
 La courbe de la figure~\ref{sa:fig:capteurs-en-vie} montre l'évolution dans le temps du nombre de capteurs en vie.
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=7cm]{\chapterfig/plot_nogrid.pdf}
     \caption{Nombre de capteurs toujours en vie}\label{sa:fig:capteurs-en-vie}
@@ -175,7 +175,7 @@ Ce décès «~prématuré~» des nœuds pour la méthode dynamique est tout à f
 Il est alors intéressant d'observer combien de nœuds sont toujours non seulement en vie, mais aussi capables de détecter l'attaque du nœud compromis au cours du temps.
 Les résultats sont exposés par la courbe donnée en figure~\ref{sa:fig:detection-dos}.
 Le nombre de \cns ayant détecté l'attaque est indiqué sur chaque période de soixante secondes.
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=7cm]{\chapterfig/plot_rate_nogrid.pdf}
     \caption{Détection des attaques de déni de service}\label{sa:fig:detection-dos}

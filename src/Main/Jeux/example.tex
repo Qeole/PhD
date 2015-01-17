@@ -57,11 +57,11 @@ La forme donnée aux états du graphe de jeu indique quelle « équipe » est 
 Chaque arête du graphe représente l'action réalisée par le joueur qui a la main.
 Elles correspondent aux arêtes empruntées par les joueurs sur leurs propres machines à états, auxquelles seraient ajoutées des valeur nulles en gain et en énergie pour les deux autres joueurs qui attendent leur tour.
 La \figref{tj:fig:autFirstTurn} présente le premier tour du jeu pour chacun des trois joueurs (autrement dit, le premier intervalle de temps).
-\begin{figure*}[p]
+\begin{figure}[p]
     \centering
     \input{\chapterpath/Automata/FirstTurn.tikz}
     \caption{Un sous-ensemble du graphe associé au jeu, représentant le premier tour du jeu}\label{tj:fig:autFirstTurn}
-\end{figure*}
+\end{figure}
 Les états \emph{treat\_msg} ne peuvent pas être atteints avant le second tour de jeu, puisqu'ils requièrent que l'un des joueurs au moins soit passé auparavant par l'état \emph{listen}.
 Comme précisé plus haut, le graphe complet n'a pas d'état final.
 

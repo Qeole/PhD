@@ -13,7 +13,7 @@ We launched several simulation instances and chose to focus on the energy consum
 To obtain data about detection rate or false positive values of the \cns scheme, the reader is redirected to our previous work\cite{GMT12, BMM13}.
 When we implemented our solution, we set the parameters of the simulation as detailed in Table~\ref{se:table:parameters}.
 
-\begin{table}[ht]
+\begin{table}[h!]
     \centering
     \caption{Paramètres utilisés pour les simulations}
     \medskip
@@ -40,7 +40,7 @@ When we implemented our solution, we set the parameters of the simulation as det
 Ces simulations ont permis d'obtenir l'énergie résiduelle de chaque capteur à intervalles réguliers (une minute).
 À partir de ces données, nous avons pu retracer les courbes d'évolution de la moyenne et de l'écart-type de la distribution de l'énergie résiduelle entre les nœuds.
 L'énergie résiduelle du \ch a été volontairement ignorée.
-\begin{figure}[ht]
+\begin{figure}[h!]
     \centering
     \includegraphics[width=.96\linewidth]{\chapterfig/mean.eps}
     \caption{Valeur moyenne de l'énergie des nœuds (à l'exception du \ch) en fonction du temps}\label{se:fig:mean}
@@ -51,7 +51,7 @@ Ces résultats sont conformes aux attentes: le processus de sélection par l'én
 Étant donné que les \vns vont avoir à sortir périodiquement de leur état de veille pour envoyer une requête au \cn surveillé, écouter la réponse, et calculer une consommation théorique, le besoin en ressources énergétiques se retrouve logiquement affecté par rapport au processus de sélection pseudo-aléatoire.
 
 Les données de contrôle des deux méthodes proposées apparaissent sur la \figref{se:fig:overhead}.
-\begin{figure}[ht]
+\begin{figure}[h!]
     \centering
     \includegraphics[width=.96\linewidth]{\chapterfig/overhead.eps}
     \caption{Estimation du nombre total de paquets générés au cours de la simulation au cours du temps}\label{se:fig:overhead}
@@ -59,7 +59,7 @@ Les données de contrôle des deux méthodes proposées apparaissent sur la \fig
 Ici encore, l'usage des \vns entraîne une augmentation des ressources consommées; il faut également tenir compte des messages (moins nombreux) envoyés par chaque capteur au moment du renouvellement de la sélection.
 
 L'écart-type de la distribution en énergie résiduelle des nœuds est présenté sur la \figref{se:fig:stddev}.
-\begin{figure}[ht]
+\begin{figure}[h!]
     \centering
     \includegraphics[width=.96\linewidth]{\chapterfig/stddev.eps}
     \caption{Écart-type pour l'énergie résiduelle des nœuds (à l'exception du \ch) au cours du temps}\label{se:fig:stddev}

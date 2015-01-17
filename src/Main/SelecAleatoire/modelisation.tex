@@ -40,7 +40,7 @@ L'équation est donnée en figure~\ref{sa:fig:eqtrans}
 \addtolength{\fboxlinelen}{-4\fboxsep}
 \addtolength{\fboxlinelen}{-2\fboxrule}
 
-\begin{figure}[ht]
+\begin{figure}[H]
     \fbox{
         \begin{minipage}{\fboxlinelen}
             \begin{eqnarray*}
@@ -113,7 +113,7 @@ Nous avons aussi recours à des arcs inhibiteurs.
 Il s'agit d'arêtes dont la flèche sur les représentations graphiques est remplacée par un cercle (par exemple, l'arc reliant la place \textsf{P1} à la transition \textsf{T2} dans l'exemple de droite de la figure~\ref{sa:fig:gspnex1}), et accompagnées d'un chiffre.
 Les règles de franchissement des transitions sont légèrement différentes avec ces arcs, puisque ces franchissement ne peuvent être effectués que si le nombre de jetons en amont de la transition est strictement inférieur au nombre indiqué sur l'arc.
 Par exemple, sur la partie droite de la figure~\ref{sa:fig:gspnex1}, la transition \textsf{T2} peut être franchie, car \textsf{P1} ne contient que deux jetons (on a bien $2<3$).
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=.8\linewidth]{\chapterfig/GSPNex1.pdf}
     \caption{Exemples simples d'eGSPN: transitions immédiates, transition minutée et arcs inhibiteurs}\label{sa:fig:gspnex1}
@@ -130,7 +130,7 @@ Nous allons procéder par étapes en modélisant:
             \paragraph{Modélisation des capteurs simples}
 Le comportement des capteurs basiques est simple: chaque capteur $i$ envoie des paquets selon un processus de Poisson de paramètre $\lambda_i$.
 Ce comportement est modélisé par le RPSG présenté en figure~\ref{sa:fig:snodegspn}.
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=.5\linewidth]{\chapterfig/sNode_GSPN.pdf}
     \caption{Modèle RPSG d'un nœud capteur simple}\label{sa:fig:snodegspn}
@@ -145,7 +145,7 @@ Un nœud compromis $c$ sera également représenté selon le même modèle, avec
             \paragraph{Modélisation des \cns élus de façon statique}
 Un \cn élu de façon statique joue uniquement son rôle de \cn: il monitore le trafic, mais n'effectue pas de mesure sur son environnement.
 Le modèle RPGSE associé à ce type de nœud est présenté en figure~\ref{sa:fig:cnodegspn1}.
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=.6\linewidth]{\chapterfig/cNode_GSPN.pdf}
     \caption{Modèle RPSGE d'un \cn élu de manière \emph{statique}}\label{sa:fig:cnodegspn1}
@@ -171,7 +171,7 @@ Il est donc nécessaire d'ajouter, aux places et transitions des précédents \c
 La première permet d'indiquer à chaque instant si le nœud joue le rôle de \cn (si la place contient un jeton) ou bien de capteur simple (cas contraire).
 La seconde permet de produire des jetons selon un processus de Poisson lorsque le nœud fait office de capteur simple (dans ce cas la place \textsf{cNode} est vide et l'arc inhibiteur autorise le franchissement de la transition \textsf{TX}; le nœud se comporte exactement comme avec le modèle de la figure~\ref{sa:fig:snodegspn}).
 Le modèle est représenté sur la figure~\ref{sa:fig:cnodegspn2}.
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=.6\linewidth]{\chapterfig/genNode_GSPN.pdf}
     \caption{Modèle RPSGE d'un \cn élu de manière \emph{dynamique}}\label{sa:fig:cnodegspn2}
@@ -186,7 +186,7 @@ Pour simplifier la représentation graphique, nous choisissons de représenter u
 Parmi ces nœuds, deux exactement jouent le rôle de \cn (les nœuds \textsf{3} et \textsf{4} dans notre cas), et un exactement (le nœud \textsf{1}) est un capteur compromis (distinct des \cns).
 Cette représentation peut être facilement étendue pour modéliser le réseau tout entier.
 La représentation du cluster est donnée en figure~\ref{sa:fig:petricluster}.
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{\chapterfig/PetriNet_DoS_9x9_fixedGnodes.pdf}
     \caption{Modèle RPSGE d'un cluster (topologie: grille $3\times3$) comprenant un nœud compromis et deux \cns statiques}\label{sa:fig:petricluster}
@@ -284,7 +284,7 @@ L'automate linéaire hybride que nous utilisons fait appel aux variables valuée
     \item $x_{\mathit{bf}_i}$: nombre de paquets reçus et placés dans le tampon en entrée du nœud $i$.
 \end{itemize}
 L'automate linéaire hybride est présenté en figure~\ref{sa:fig:lha}.
-\begin{figure}[ht]
+\begin{figure}[H]
     \centering
     \includegraphics[width=.8\linewidth]{\chapterfig/LHA1.pdf}
     \caption{Automate linéaire hybride permettant d'effectuer des mesures sur le modèle RPSGE proposé}\label{sa:fig:lha}
