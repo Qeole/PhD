@@ -1,5 +1,5 @@
 % vim: set spelllang=fr foldmethod=marker:
-\section{Sécurité dans les réseaux de capteurs}
+\section{Sécurité dans les réseaux de capteurs}\label{ea:sec:secu}
 
 \subsection{Plusieurs problématiques}
 
@@ -32,7 +32,7 @@ Certaines études se sont penchées sur les vitesses d'exécution relatives de d
 Ces algorithmes de chiffrement nécessitent en général de nombreux calculs, voire beaucoup de mémoire tampon, pour être mis en œuvre, surtout lorsque l'appareil ne dispose pas de matériel dédié~\cite{PLP06}, ce qui les rend parfois peu adaptés aux réseaux de capteurs.
 Qui plus est, ils requièrent la plupart du temps la mise en place d'une architecture d'échange et de gestion du matériel cryptographique, notamment en ce qui concerne les échanges de clés: cette architecture peut considérablement alourdir la structure du réseau ainsi que les échanges en termes de volume de données de contrôle.
 Plusieurs solutions adaptées aux capacités limitées des capteurs ont donc été proposées~\cite{OX09}.
-Certaines d'entre elles demeurent basées sur des suites de protocoles dont les algorithmes de chiffrement sont choisis au mieux pour répondre aux capacités des capteurs~\cite{BN07}; ces solutions couvrent le plus souvent d'autres problématiques que la seule confidentialité des données, et certaines seront présentées dans la sous-section suivante.
+Certaines d'entre elles demeurent basées sur des suites de protocoles dont les algorithmes de chiffrement sont choisis au mieux pour répondre aux capacités des capteurs~\cite{SOBMCN11}; ces solutions couvrent le plus souvent d'autres problématiques que la seule confidentialité des données, et certaines seront présentées dans la sous-section suivante.
 D'autres mettent en place des mécanismes propres à profiter de l'architecture particulière de ces réseaux, en voici certains exemples.
 
 Dans le cas d'un attaquant « parasite » qui chercherait à exploiter les mesures relevées par le réseau de capteurs déployé par d'autres, des solutions comme GossiCrypt~\cite{LPH08}, basée sur un algorithme simple d'échanges de clés entre les nœuds et la station de base, ainsi que sur un renouvellement probabiliste du chiffrement: à chaque étape du message dans le réseau, le nœud relai charger de renvoyer le message choisit aléatoirement de chiffrer à son tour, ou non, le contenu du paquet.
@@ -58,7 +58,7 @@ Nous avons ainsi proposé une solution pour assurer la confidentialité des éch
 
 Il est à noter qu'aucune des méthodes présentées ici, qu'elles reposent ou non sur l'usage de chiffrement, n'empêchent un attaquant de pouvoir récolter des métadonnées sur les échanges effectués, et d'en déduire par exemple qui communique avec qui, ou quel est le volume des données échangées.
 Ces métadonnées n'ont que rarement une valeur importante dans les réseaux de capteurs, et peuvent être en partie masquées, au besoin, par l'envoi de faux messages supplémentaires pour « brouiller les pistes », mais cela s'avèrerait très coûteux pour le réseau.
-Néanmoins certaines études considèrent que toute information peut avoir de la valeur, et se proposent par exemple de dissimuler l'emplacement géographique des différents nœuds d'un réseau de capteurs, que ce soit à travers l'usage d'algorithmes de clustering~\cite{GK13} ou bien de dissémination de l'information sur le modèle des épidémies~\cite{KDA14}.
+Néanmoins certaines études considèrent que toute information peut avoir de la valeur, et se proposent par exemple de dissimuler l'emplacement géographique des différents nœuds d'un réseau de capteurs, que ce soit à travers l'usage d'algorithmes de clusterisation~\cite{GK13} ou bien de dissémination de l'information sur le modèle des épidémies~\cite{KDA14}.
 
 \subsection{Intégrité, authentification, non-répudiation, protection contre le rejeu}
 
@@ -90,6 +90,33 @@ Ainsi \textsc{Spins} (\textit{Security Protocols for Sensor Networks}), élabor�
 Il s'agit d'un système reposant sur deux blocs: \textsc{Snep} (\textit{Secure Network Encryption Protocol}) fournit la confidentialité, l'authentification entre deux parties, l'intégrité et la protection contre le rejeu, le tout en ajoutant peu de données de contrôle aux paquets.
 Des codes d'authentification des messages associés à un compteur partagé entre les interlocuteurs, et utilisé pour le bloc de chiffrement (le compteur est incrémenté après chaque bloc), sont employés à cette fin.
 Le second bloc est appelé $\mu$\textsc{Tesla} (version « micro » du \textit{Timed, Efficient, Streaming, Loss-tolerant Authentication Protocol}) fournit des diffusions générales (\textit{broadcast}) authentifiées à l'aide de chaînes de clés: ces chaînes à sens uniques fournissent des clés associées à chaque intervalle de temps pour la signature des messages.
+
+Une étude de 2007 s'intéresse à plusieurs architectures de sécurité compatibles avec la suite de protocoles \textsc{IEEE} 802.15.4, utilisée dans certains réseaux sans fil et parfois avec les capteurs~\cite{BN07}.
+Les modèles considérés sont \textsc{Spins}, présenté ci-dessus, \textsc{Leap}, \textsc{Tinysec}, ZigBee (notamment dans son mode « commercial ») et Security Manager.
+Sans rentrer dans les détails de fonctionnement de ces solutions, la \tabref{ea:tab:proto} compare brièvement les fonctionnalités apportées par ces différentes modèles.
+\begin{table}[!ht]
+    \caption{Brève comparaison d'architectures de sécurité pour réseaux de capteurs}\label{ea:tab:proto}
+    \medskip
+    \centering
+    \newcolumntype{X}{>{\centering\arraybackslash}m}
+    \begin{footnotesize}
+        \begin{tabular}{X{.12\textwidth}|X{.10\textwidth} X{.13\textwidth} X{.11\textwidth} X{.11\textwidth} X{.21\textwidth}}
+            \toprule
+            Architecture & Chiffrement & Code d'authentification des messages & Protection contre le rejeu & Données de contrôle & Échange de clés\tabularnewline
+            \toprule
+            \textsc{Spins} & oui & oui & 8 octets & oui & chaînes de clés symétriques\tabularnewline
+            \midrule
+            \textsc{Leap} & oui & non & variable & oui & clés pré-déployées, renouvelables\tabularnewline
+            \midrule
+            \textsc{Tinysec} & oui & non & 4 octets & oui & au choix\tabularnewline
+            \midrule
+            ZigBee (mode commercial) & oui & oui & 4, 8 ou 16 octets & oui & « centre de confiance »\tabularnewline
+            \midrule
+            Security Manager & oui & non & variable & oui & \textsc{Ec-Mvq} (courbes elliptiques); confiance initiale\tabularnewline
+            \bottomrule
+        \end{tabular}
+    \end{footnotesize}
+\end{table}
 
 Une solution intéressante pour économiser des ressources consiste à n'introduire l'usage de solutions cryptographiques que lorsqu'elles deviennent nécessaires, et à s'en dispenser lorsque le réseau fonctionne correctement.
 Ce système a été proposé en association avec l'usage d'un « arbre d'agrégation sécurisée », structure du réseau utilisée pour le routage des paquets~\cite{WDSX07}.
