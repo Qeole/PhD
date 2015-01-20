@@ -69,7 +69,7 @@ Les paradigmes suivants peuvent être considérés:
 \end{itemize}
 Cette méthode de classement est la plus utile pour se concentrer sur un point particulier du fonctionnement d'un réseau, et relever toutes les failles susceptibles d'affecter les opérations concernées.
 
-La \tabref{ea:tab:paradigm} située plus bas présente un classement des attaques que nous allons évoquer selon ces paradigmes.
+La \tabref{ea:tab:paradigm} située plus bas présente un classement selon ces paradigmes des attaques que nous allons évoquer.
 
 \subsubsection{Selon les couches de protocoles concernées}
 Une seconde méthode efficace de classement consiste à procéder par couches de protocoles, en se basant sur le modèle \textsc{Tcp/Ip} (schéma concret lui-même issu du modèle théorique \textsc{Osi}, de l'anglais \textit{Open Systems Interconnection}).
@@ -99,23 +99,63 @@ C'est donc selon ce critère que nous allons maintenant présenter les principal
 
 \subsection{Différents types d'attaques}
 
-
+\begin{table}[!ht]
+    \newcounter{LayerNumber}
+    \setcounter{LayerNumber}{1}
+    \newcommand\num[1]{\theLayerNumber.~#1\stepcounter{LayerNumber}}
+    \caption{Classement des attaques par couche du modèle \textsc{Tcp/Ip}}\label{ea:tab:layer}
+    \centering
+    \medskip
+    \begin{small}
+        \begin{tabular}{m{.21\textwidth}|p{.75\textwidth}}
+            \toprule
+            \multirow{2}{*}{Couche physique}%
+                & \num{Brouillage}\\
+                & \num{Altération des données}\\
+            \midrule
+            \multirow{4}{*}{\parbox{.2\textwidth}{Couche liaison de données}}%
+                & \num{Création de collisions}\\
+                & \num{Épuisement de la batterie}\\
+                & \num{Accaparement du canal de transmission}\\
+                & \num{Falsification d'accusés de réception}\\
+            \midrule
+            \multirow{7}{*}{Couche réseau}%
+                & \num{Falsification des informations de routage (accaparement du canal, création de boucles, \etc)}\\
+                & \num{Retransmission sélective de paquets (trous gris, attaques « on/off »)}\\
+                & \num{Puits}\\
+                & \num{Trou noir}\\
+                & \num{Trou de ver}\\
+                & \num{Déluge de paquets « hello »}\\
+                & \num{Attaque Sybil}\\
+            \midrule
+            \multirow{2}{*}{Couche transport}%
+                & \num{Déluge \textsc{Tcp} (ou équivalents)}\\
+                & \num{Désynchronisation \textsc{Tcp} (ou équivalents)}\\
+            \midrule
+            \multirow{3}{*}{Couche application}%
+                & \num{Données erronées}\\
+                & \num{Déluge de paquets}\\
+                & \num{Désynchronisation}\\
+            \bottomrule
+        \end{tabular}
+    \end{small}
+\end{table}
 
 \begin{table}[!ht]
     \caption{Classement des attaques par paradigme (voir \sssref{ea:sss:paradigm})}\label{ea:tab:paradigm}
     \centering
     \medskip
     \begin{small}
-        \begin{tabular}{m{.3\textwidth}|m{.63\textwidth}}
+        \begin{tabular}{m{.3\textwidth}|m{.62\textwidth}}
             \toprule
-            Operational Paradigm & Vulnerabilities\\
+            Paradigme & Vulnérabilités \\
             \midrule
-            1. Simple Collection and Transmittal model & Jamming, collision induction, spoofing through spurious broadcasts, loss of confidentiality, physical tampering\\
-            2. Collect and Forward model & Simple attacks against routing: Selective forwarding, Black hole, Resource exhaustion, Data Corruption\\
-            3. Receive and Process commands model & All of the above and Spoofing attack by an adversary issuing spurious commands\\
-            4. Self organizing model & All of the above and against routing protocol viz. Induced routing loops, Sink hole, Wormhole, Hello flooding\\
-            5. Data Aggregation model & All of the above and particularly vulnerable to Replay attack\\
-            6. Optimizing model & All of the above\\
+            Collecte et transmission simples & Jamming, collision induction, spoofing through spurious broadcasts, loss of confidentiality, physical tampering\\
+            Routage des données dans le réseau & Simple attacks against routing: Selective forwarding, Black hole, Resource exhaustion, Data Corruption\\
+            Réception et traitement de commandes & All of the above and Spoofing attack by an adversary issuing spurious commands\\
+            Organisation autonome du réseau & All of the above and against routing protocol viz. Induced routing loops, Sink hole, Wormhole, Hello flooding\\
+            Agrégation de données & All of the above and particularly vulnerable to Replay attack\\
+            Optimisation des modèles & All of the above\\
             \bottomrule
          \end{tabular}
      \end{small}
