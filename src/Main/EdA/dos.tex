@@ -99,6 +99,120 @@ C'est donc selon ce critère que nous allons maintenant présenter les principal
 
 \subsection{Différents types d'attaques}
 
+    \subsubsection{Couche physique}
+La couche physique du réseau correspond au medium physique employé pour la transmission des données entre deux nœuds, et à la façon dont le signal est transmis au travers de ce medium.
+Dans le cas de réseaux sans fil, le signal est propagé sous forme d'ondes électromagnétiques qui se déplacent dans le vide (ou bien, sans en être affectées, à travers l'atmosphère).
+Sauf s'il est fait usage d'une antenne directionnelle pour l'émission, ces ondes sont envoyées dans toutes les directions, et tout appareil à portée équipé d'un récepteur se retrouve donc en mesure de recevoir les paquets émis.
+
+        \paragraph{Brouillage de fréquences}
+Le brouillage de fréquences (\textit{frequency jamming} en anglais) consiste pour l'attaquant à émettre un signal parasite, un « bruit » électromagnétique, sur les fréquences concernées, de façon à ce que la cible visée ne puisse plus recevoir de façon correcte les paquets qui lui sont envoyés par les nœuds légitimes.
+Le brouillage peut être réalisé à l'aide d'une antenne directionnelle pour viser une cible en particulier; mais dans le cas d'un réseau de capteurs, l'attaquant cherche en général à émettre un bruit dans toutes les directions afin d'affecter le plus grand nombre de nœuds possible.
+L'attaque peut être menée de façon sporadique, de manière à produire un déni de service partiel, ou bien en continu.
+Si la ou les machine(s) émettant le signal parasite possède(nt) une portée suffisante pour couvrir toute l'étendue géographique du réseau, l'intégralité des capteurs peuvent se retrouver dans l'impossibilité d'utiliser les fréquences brouillées.
+Si de plus, le brouillage est mené sur toute la plage de fréquences accessibles aux capteurs, les communications deviennent totalement impossibles à établir dans le réseau.\\
+Il est à noter que mener une telle attaque peut être coûteux en matériel pour l'attaquant, surtout s'il vise plusieurs fréquences et/ou un brouillage continu dans le temps.
+Typiquement, un capteur corrompu ne sera pas en mesure de mener cette attaque sans épuiser très rapidement sa batterie.
+
+    \subsubsection{Couche liaison de données}
+La couche de liaison de données fournit les moyens fonctionnels et procéduraux pour le transfert des données entre deux entités du réseau.
+Elle permet aussi, le plus souvent, de détecter et éventuellement corriger certaines erreurs survenues sur la couche physique (en cas de perturbation ou dégradation du signal électromagnétique).
+Elle se décompose en deux sous-couches: la couche de contrôle de la liaison logique (\textsc{Llc}, pour \textit{Logical Link Control} en anglais) et la couche du contrôle d'accès au support (\textsc{Mac}, pour \textit{Media Access Control}).
+C'est principalement cette seconde couche qui nous intéresse ici: le protocole de couche \textsc{Mac} définit la manière dont les différents agents du réseau accèdent au medium de transmission de façon à limiter les collisions, et à garantir un accès le plus souvent équivalent au medium pour tous les nœuds.
+Les différents modes d'accès au medium existants sont résumés dans la \tabref{ea:tab:mac}; certains consistent à créer des canaux de transmission distincts, tandis que d'autres déterminent l'accès à une même bande de fréquence en instaurant des règles.
+Ces règles peuvent être contournées, et la couche \textsc{Mac} va donc se retrouver associée à plusieurs types d'attaques.
+
+\begin{table}[!ht]
+    \caption{Méthodes d'accès au medium de transmission}\label{ea:tab:mac}
+    \centering
+    \medskip
+    \begin{small}
+        \begin{tabular}{m{.2\textwidth}|m{.2\textwidth}|m{.48\textwidth}}
+            \toprule
+            \textbf{Nom anglais} & \textbf{Traduction} & \textbf{Description}\\
+            \midrule
+            \multicolumn{3}{c}{Commutation de circuits et création de canaux}\\
+            \midrule
+            \textit{Frequency Division Multiple Access} (\textsc{Fdma}) & Accès multiple par répartition en fréquence & Plusieurs canaux basés sur des fréquences différentes\\
+            \midrule
+            \textit{Code division multiple access} (\textsc{Cdma}) & Accès multiple par répartition en code & Étalement du spectre de fréquence utilisé en conjonction avec techniques comme les sauts de fréquences ou la génération de bruit pseudo-aléatoires (avec la même séquence pseudo-aléatoire appliquée au signal côté émetteur comme côté destinataire)\\
+            \midrule
+            \textit{Time division multiple access} (\textsc{Tdma}) & Accès multiple à répartition dans le temps & Un seul canal dont l'accès est réparti par créneaux dans le temps\\
+            \midrule
+            \textit{Space division multiple access} (\textsc{Sdma}) & Accès multiple à répartition dans l'espace & Plusieurs canaux spatiaux obtenus à l'aide d'antennes directionnelles. À noter: les antennes directionnelles augmentent sensiblement le coût de production des capteurs.\\
+            \midrule
+            \multicolumn{3}{c}{Mode d'accès par paquet}\\
+            \midrule
+            \textit{Contention based random multiple access methods} & Accès par contention & Contention par le nœud du paquet à envoyer jusqu'à ce que le protocole le lui autorise. Dans cette catégorie se trouve notamment le protocole \textsc{Csma/Ca} (\textit{Carrier Sense Multiple Access with Collision Avoidance}, accès multiple par écoute du canal avec esquive de collision), très utilisé dans les réseaux sans fil (\textsc{Ieee~802.11} entre autres).\\
+            \midrule
+            \textit{Resource reservation (scheduled) packet-mode protocols} & Réservation des ressources & Réservation par un nœud des ressources (par exemple: créneau temporel) nécessaires à la transmission)\\
+            \midrule
+            \multicolumn{3}{p{.95\textwidth}}{D'autres modes d'accès par paquet (\textit{token passing, polling}) existent mais ne sont pas utilisés dans les réseaux de capteurs}\\
+            \bottomrule
+         \end{tabular}
+     \end{small}
+\end{table}
+
+        \paragraph{Création de collisions et brouillage « intelligent »}
+Lorsque plusieurs nœuds dont les portées se chevauchent émettent de façon simultanée en utilisant la même fréquence (donc sur un même canal), il se produit des collisions.
+La plupart des protocoles \textsc{Mac} employés avec les réseaux de capteurs introduisent dans les trames un champ contenant une somme de contrôle, qui permet de vérifier l'intégrité de la trame.
+Mais cette somme de contrôle ne permet pas, la plupart du temps, de corriger d'éventuelles erreurs (aucun des standards \textsc{Ieee} 802.11 (Wi-Fi), 802.15.1 (Bluetooth) ou 802.15.4 (ZigBee, 6LoWPAN) n'inclue de code de correction des erreurs).
+Si un seul bit de la trame est altéré, celle-ci est donc rejetée par le destinataire.
+Un attaquant peut donc chercher à produire des collisions en émettant un signal en même temps qu'un nœud légitime, afin que le destinataire ne puisse pas recevoir correctement la trame qui lui est destinée.
+Ce principe de collision est identique au brouillage mené sur la couche physique; mais lorsque l'attaquant a connaissance du protocole de couche \textsc{Mac} employé, il lui est possible d'affiner son attaque, et de remplacer un brouillage « brut », continu et onéreux, par un brouillage « intelligent ».
+Il existe plusieurs façons de procéder~\cite{PI11}:
+\begin{itemize}
+    \item la première, comme vu plus haut, n'est pas « intelligente » et consiste à brouiller les fréquences de manière continue, en produisant un bruit aléatoire;
+    \item une technique plus difficile à détecter consiste à envoyer des paquets normaux mais de façon continue, de façon à occuper le canal sans interruption. Elle empêche les nœuds légitimes de transmettre dans le cas ou le protocole de couche \textsc{Mac} est \textsc{Csma/Ca} par exemple;
+    \item une technique plus économe consiste à envoyer des bits à intervalles distincts (réguliers ou non), dans l'espoir de créer des collisions. Il n'est alors plus nécessaire d'émettre en continu, et l'attaque est moins facile à détecter. Elle est bien sûr moins efficace, car l'attaquant n'a plus la garantie de brouiller tous les paquets émis;
+    \item les attaques « intelligentes » à proprement parler reposent sur la connaissance des spécifications du protocole \textsc{Mac} employé, et consistent à jouer sur la nature des paquets de contrôle et les délais d'attente. Ainsi, pour le protocole \textsc{Csma/Ca} employé avec la suite \textsc{Ieee~802.11}~\cite{ieee802.11}, une trame spécifique dite \textsc{Rts} (\textit{Request To Send} en anglais) de demande de réservation du canal est suivie d'une trame \textsc{Cts} (\textit{Clear To Send}) après une durée \textsc{Sifs} (\textit{Short InterFrame Space}) si le destinataire est près à recevoir des données. En créant une collision sur la seule trame \textsc{Cts}, l'attaquant prévient entièrement l'échange de données utiles entre les nœuds.
+D'autres trames peuvent être utilisées dans le même but, leurs acronymes sont dans la \tabref{ea:tab:smartjam}.
+\end{itemize}
+
+\begin{table}[!ht]
+    \caption{Brouillage « intelligent »: corruption des trames de contrôle}\label{ea:tab:smartjam}
+    \centering
+    \medskip
+    \begin{tabular}{c c c}
+        \toprule
+        Paquet analysé & Temps d'attente & Paquet à corrompre\\
+        \midrule
+        \textsc{Rts} & \textsc{Sifs} & \textsc{Cts}\\
+        \textsc{Data} & \textsc{Sifs} & \textsc{Ack}\\
+        \textsc{Rts} & \textsc{Difs} & \textsc{Data}\\
+        Quelconque & \textsc{Difs} & \textsc{Rts} ou \textsc{Data}\\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+        \paragraph{Épuisement de la batterie}
+        \paragraph{Accaparement du canal de transmission}
+        \paragraph{Falsification d'accusés de réception}
+
+    \subsubsection{Couche réseau}
+        \paragraph{Falsification des informations de routage (accaparement du canal, création de boucles, \etc)}
+        \paragraph{Retransmission sélective de paquets (trous gris, attaques « on/off »)}
+        \paragraph{Puits}
+        \paragraph{Trou noir}
+        \paragraph{Trou de ver}
+        \paragraph{Déluge de paquets « hello »}
+        \paragraph{Attaque Sybil}
+        \paragraph{Altération des données}
+
+    \subsubsection{Couche transport}
+        \paragraph{Déluge \textsc{Tcp} (ou équivalents)}
+        \paragraph{Désynchronisation \textsc{Tcp} (ou équivalents)}
+
+    \subsubsection{Couche application}
+        \paragraph{Données erronées}
+        \paragraph{Déluge de paquets}
+        \paragraph{Désynchronisation}
+
+    \subsubsection{Hors modèle}
+        \paragraph{Destruction physique des capteurs}
+        \paragraph{Altération des mesures}
+        \paragraph{Attaques portées sur l'organisation du réseau (par exemple lors de l'application d'un protocole de clusterisation)}
+
+
 \begin{table}[!ht]
     \newcounter{LayerNumber}
     \setcounter{LayerNumber}{1}
@@ -107,19 +221,23 @@ C'est donc selon ce critère que nous allons maintenant présenter les principal
     \centering
     \medskip
     \begin{small}
-        \begin{tabular}{m{.21\textwidth}|p{.75\textwidth}}
+        \begin{tabular}{m{.21\textwidth}|p{.71\textwidth}}
             \toprule
-            \multirow{2}{*}{Couche physique}%
+            \multirow{3}{*}{Hors modèle}%
+                & \num{Destruction physique des capteurs}\\
+                & \num{Altération des mesures}\\
+                & \num{Attaques portées sur l'organisation du réseau (par exemple lors de l'application d'un protocole de clusterisation)}\\
+            \midrule
+            \multirow{1}{*}{Couche physique}%
                 & \num{Brouillage}\\
-                & \num{Altération des données}\\
             \midrule
             \multirow{4}{*}{\parbox{.2\textwidth}{Couche liaison de données}}%
-                & \num{Création de collisions}\\
+                & \num{Création de collisions, brouillage « intelligent »}\\
                 & \num{Épuisement de la batterie}\\
                 & \num{Accaparement du canal de transmission}\\
                 & \num{Falsification d'accusés de réception}\\
             \midrule
-            \multirow{7}{*}{Couche réseau}%
+            \multirow{8}{*}{Couche réseau}%
                 & \num{Falsification des informations de routage (accaparement du canal, création de boucles, \etc)}\\
                 & \num{Retransmission sélective de paquets (trous gris, attaques « on/off »)}\\
                 & \num{Puits}\\
@@ -127,6 +245,7 @@ C'est donc selon ce critère que nous allons maintenant présenter les principal
                 & \num{Trou de ver}\\
                 & \num{Déluge de paquets « hello »}\\
                 & \num{Attaque Sybil}\\
+                & \num{Altération des données}\\
             \midrule
             \multirow{2}{*}{Couche transport}%
                 & \num{Déluge \textsc{Tcp} (ou équivalents)}\\
