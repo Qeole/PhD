@@ -92,7 +92,7 @@ Des codes d'authentification des messages associés à un compteur partagé entr
 Le second bloc est appelé $\mu$\textsc{Tesla} (version « micro » du \textit{Timed, Efficient, Streaming, Loss-tolerant Authentication Protocol}) fournit des diffusions générales (\textit{broadcast}) authentifiées à l'aide de chaînes de clés: ces chaînes à sens uniques fournissent des clés associées à chaque intervalle de temps pour la signature des messages.
 
 Une étude de 2007 s'intéresse à plusieurs architectures de sécurité compatibles avec la suite de protocoles \textsc{IEEE} 802.15.4, utilisée dans certains réseaux sans fil et parfois avec les capteurs~\cite{BN07}.
-Les modèles considérés sont \textsc{Spins}, présenté ci-dessus, \textsc{Leap}, \textsc{Tinysec}, ZigBee (notamment dans son mode « commercial ») et Security Manager.
+Les modèles considérés sont \textsc{Spins}, présenté ci-dessus, \textsc{Leap}, \textsc{TinySec}, ZigBee (notamment dans son mode « commercial ») et Security Manager.
 Sans rentrer dans les détails de fonctionnement de ces solutions, la \tabref{ea:tab:proto} compare brièvement les fonctionnalités apportées par ces différentes modèles.
 \begin{table}[!ht]
     \caption{Brève comparaison d'architectures de sécurité pour réseaux de capteurs}\label{ea:tab:proto}
@@ -108,7 +108,7 @@ Sans rentrer dans les détails de fonctionnement de ces solutions, la \tabref{ea
             \midrule
             \textsc{Leap} & oui & non & variable & oui & clés pré-déployées, renouvelables\tabularnewline
             \midrule
-            \textsc{Tinysec} & oui & non & 4 octets & oui & au choix\tabularnewline
+            \textsc{TinySec} & oui & non & 4 octets & oui & au choix\tabularnewline
             \midrule
             ZigBee (mode commercial) & oui & oui & 4, 8 ou 16 octets & oui & « centre de confiance »\tabularnewline
             \midrule
@@ -125,6 +125,7 @@ Le danger de cette proposition repose sur la capacité du réseau à détecter l
 En cas d'écoute passive de la part de l'attaquant notamment, aucune mesure n'est appliquée pour protéger la confidentialité des données échangées.
 
 Plusieurs propositions concernent la mise en place de solutions classiques, mais « allégées », comme avec la mise en place d'une autorité de certification spécifique permettant l'authentification réciproque des nœuds deux à deux~\cite{GWZCK13}, ou bien basé sur des clés pré-distribuées~\cite{BSK13}.
+Le protocole MSPQS (\textit{Modified Secured Query Processing Scheme}~\cite{GD14} a été proposé pour sécurisé le transfert des données à travers un découpage des échanges sous formes de requêtes et de réponses authentifiées qui contiennent des marqueurs temporels, et ne peuvent être réinjectés dans le réseau, ce qui le rend efficace pour protéger les nœuds des attaques par rejeu.
 
 Les problèmes d'authentification, et dans une moindre mesure les autres problématiques soulevées dans cette sous-section, ont également fait l'objet de plusieurs études~\cite{GWZC13}.
 

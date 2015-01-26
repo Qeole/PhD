@@ -1,5 +1,6 @@
 % vim: set spelllang=fr foldmethod=marker:
 \section{Déni de service}\label{ea:sec:dos}
+%{{{2
 
 Une attaque dite de « déni de service » menée dans un réseau informatique est une attaque réalisée dans le but de nuire au fonctionnement normal de ce réseau.
 Il existe de très nombreuses façons de procéder, et on recense par conséquent une multitude d'attaques par déni de service existantes.
@@ -19,10 +20,13 @@ Les réseaux de capteurs se retrouvent malheureusement très exposés aux attaqu
 
 Dans cette section nous présenterons d'abord les principales attaques répertoriées dans les réseaux de capteurs, puis nous aborderons les mécanismes proposés en réponse dans la littérature.
 Auparavant, nous allons voir qu'il existe plusieurs façons de classer ces attaques.
+%2}}}
 
 \subsection{Différentes classifications}
+%{{{1
 
 \subsubsection{Selon l'objectif recherché}
+%{{{2
 Une première façon de classer les attaques est de considérer l'objectif de l'attaquant.
 Les buts principaux de ces attaques sont:
 \begin{itemize}
@@ -30,8 +34,10 @@ Les buts principaux de ces attaques sont:
     \item la réduction, voir l'annihilation de la capacité du réseau à assurer correctement les services pour lequel il a été déployé, afin de nuire aux exploitants de ce réseau. Cette nuisance peut s'exprimer par des pertes financières, par exemple lorsqu'une telle attaque est menée sur Internet contre un site de commerce en ligne; dans le cas des réseaux de capteurs sans fils, et notamment lorsqu'ils sont utilisés dans un cadre militaire, l'exploitant d'un réseau peut alors se voir priver de l'accès aux informations stratégiques que devaient récolter les capteurs. On parle le plus souvent d'attaques de type \textit{jamming} en anglais, qui se traduit selon le cas par « brouillage », « encombrement », mais d'autres attaques reposant sur la privation de sommeil des capteurs, ou bien leur destruction physique, peuvent aussi être réalisées dans cet objectif;
     \item plus rarement, l'induction en erreur de l'exploitant du réseau de capteurs. Pour ceci l'attaquant cherche à fausser les résultats collectés (changement d'environnement des capteurs) ou transmis (altération du contenu ou du volume de données transmises).
 \end{itemize}
+%2}}}
 
 \subsubsection{Selon la situation de l'attaquant}
+%{{{2
 On distingue également les attaques selon la provenance de l'attaquant, à savoir s'il fait partie du réseau, et mène par exemple une attaque sur le protocole de routage employé, ou bien s'il agit depuis l'extérieur du réseau, depuis une machine qui n'est pas reconnue comme faisant partie du réseau de capteurs.
 Ce deuxième cas peut être illustré par un attaquant qui chercherait à brouiller de manière globale toutes les fréquences radio utilisées par les capteurs pour communiquer.
 
@@ -41,20 +47,26 @@ Cette intrusion peut être réalisée par l'attaquant soit en faisant accepter l
 Une fois l'accès interne obtenu, il devient généralement beaucoup plus facile d'accéder à des informations sur le fonctionnement du réseau.
 L'attaquant, en fonction des mesures mises en place, devient aussi susceptibles d'être détecté et exclu du réseau.
 Les attaques menées depuis l'intérieur jouent souvent sur les paramètres des protocoles employés, et sont souvent plus « subtiles », plus délicates à détecter et identifier pour l'opérateur du réseau si aucune méthode de détection d'intrusion n'a été mise en place.
+%2}}}
 
 \subsubsection{Selon les capacités de l'attaquant}
+%{{{2
 On peut encore distinguer les attaques selon la puissance dont dispose l'attaquant, que ce soit en terme de calcul, d'émission électromagnétiques, ou bien d'alimentation en énergie.
 Un attaquant peut n'avoir à disposition qu'un capteur normal (\textit{mote-class attacks} en anglais), qu'il lui appartienne ou bien qu'il ait été compromis parmi les capteurs déployés à l'origine.
 Il se retrouve dans ce cas avec des machines similaires aux appareils attaqués, mais n'a pas besoin de rester sur place et peut mener des attaques sur la durée.
 Il peut également être équipé d'un ordinateur plus puissant (\textit{laptop-class attacks}), voir de matériel militaire spécialisé.
 Dans ce cas, il est plus aisé de déployer de la puissance (puisque l'attaquant peut s'affranchir des limites imposées par les batteries des capteurs) et par exemple de brouiller en continu toute une plage de fréquence.
 Il faut néanmoins que le matériel utilisé reste déployé le temps de mener l'attaque, ce qui peut s'avérer coûteux sur la durée.
+%2}}}
 
 \subsubsection{Attaques actives, passives}
+%{{{2
 Cette méthode de classement ne s'applique pas ici.
 Les attaques dites « passives » n'interfèrent pas avec le fonctionnement normal du réseau: il peut s'agir par exemple d'écoute clandestine en vue de collecter des données (atteinte à la confidentialité des communications), mais par définition les attaques de déni de service sont des attaques dites « actives », au cours desquelles l'attaquant introduit de nouveaux comportement dans le réseau.
+%2}}}
 
 \subsubsection{Selon le paradigme considéré}\label{ea:sss:paradigm}
+%{{{2
 Nous abordons à présent des méthodes effectives de classement, qui permettent de catégoriser plus précisément les attaques (plutôt que d'établir une simple dissociation des catégories sur un nombre restreint de critères).
 
 Certaines études se penchent sur une classe d'opérations réalisées par les réseaux de capteurs, et répertorient les attaques et les contre-mesures qui s'appliquent à cette classe~\cite{JPD06,OX09}.
@@ -69,9 +81,13 @@ Les paradigmes suivants peuvent être considérés:
 \end{itemize}
 Cette méthode de classement est la plus utile pour se concentrer sur un point particulier du fonctionnement d'un réseau, et relever toutes les failles susceptibles d'affecter les opérations concernées.
 
-La \tabref{ea:tab:paradigm} située plus bas présente un classement selon ces paradigmes des attaques que nous allons évoquer.
+À noter qu'il existe dans la littérature des classifications ontologiques (le système est représenté sous forme de graphe relationnel) des attaques de déni de service~\cite{VS10}, qui se rapproche quelque peu de la méthode présentée ici, même si les exemples traités portent le plus souvent sur les réseaux en général sans évoquer les capteurs.
+
+La \tabref{ea:tab:paradigm} située plus bas présente un classement selon les paradigmes des attaques que nous allons introduire.
+%2}}}
 
 \subsubsection{Selon les couches de protocoles concernées}
+%{{{2
 Une seconde méthode efficace de classement consiste à procéder par couches de protocoles, en se basant sur le modèle \textsc{Tcp/Ip} (schéma concret lui-même issu du modèle théorique \textsc{Osi}, de l'anglais \textit{Open Systems Interconnection}).
 Ce modèle est rappelé en \figref{ea:fig:tcpip}.
 \begin{table}[!ht]
@@ -96,10 +112,14 @@ Ce modèle est rappelé en \figref{ea:fig:tcpip}.
 
 Ce classement permet une revue efficace, couche par couche, de la plupart des attaques connues.
 C'est donc selon ce critère que nous allons maintenant présenter les principales attaques de déni de service connues dans les réseaux de capteurs.
+%2}}}
+%1}}}
 
 \subsection{Différents types d'attaques}
+%{{{1
 
     \subsubsection{Couche physique}
+%{{{2
 La couche physique du réseau correspond au medium physique employé pour la transmission des données entre deux nœuds, et à la façon dont le signal est transmis au travers de ce medium.
 Dans le cas de réseaux sans fil, le signal est propagé sous forme d'ondes électromagnétiques qui se déplacent dans le vide (ou bien, sans en être affectées, à travers l'atmosphère).
 Sauf s'il est fait usage d'une antenne directionnelle pour l'émission, ces ondes sont envoyées dans toutes les directions, et tout appareil à portée équipé d'un récepteur se retrouve donc en mesure de recevoir les paquets émis.
@@ -109,11 +129,14 @@ Le brouillage de fréquences (\textit{frequency jamming} en anglais) consiste po
 Le brouillage peut être réalisé à l'aide d'une antenne directionnelle pour viser une cible en particulier; mais dans le cas d'un réseau de capteurs, l'attaquant cherche en général à émettre un bruit dans toutes les directions afin d'affecter le plus grand nombre de nœuds possible.
 L'attaque peut être menée de façon sporadique, de manière à produire un déni de service partiel, ou bien en continu.
 Si la ou les machine(s) émettant le signal parasite possède(nt) une portée suffisante pour couvrir toute l'étendue géographique du réseau, l'intégralité des capteurs peuvent se retrouver dans l'impossibilité d'utiliser les fréquences brouillées.
-Si de plus, le brouillage est mené sur toute la plage de fréquences accessibles aux capteurs, les communications deviennent totalement impossibles à établir dans le réseau.\\
+Si de plus, le brouillage est mené sur toute la plage de fréquences accessibles aux capteurs, les communications deviennent totalement impossibles à établir dans le réseau.
+
 Il est à noter que mener une telle attaque peut être coûteux en matériel pour l'attaquant, surtout s'il vise plusieurs fréquences et/ou un brouillage continu dans le temps.
 Typiquement, un capteur corrompu ne sera pas en mesure de mener cette attaque sans épuiser très rapidement sa batterie.
+%2}}}
 
     \subsubsection{Couche liaison de données}
+%{{{2
 La couche de liaison de données fournit les moyens fonctionnels et procéduraux pour le transfert des données entre deux entités du réseau.
 Elle permet aussi, le plus souvent, de détecter et éventuellement corriger certaines erreurs survenues sur la couche physique (en cas de perturbation ou dégradation du signal électromagnétique).
 Elle se décompose en deux sous-couches: la couche de contrôle de la liaison logique (\textsc{Llc}, pour \textit{Logical Link Control} en anglais) et la couche du contrôle d'accès au support (\textsc{Mac}, pour \textit{Media Access Control}).
@@ -200,9 +223,11 @@ Le but final de telles attaques peut être d'envoyer plus de données à la stat
 La falsification d'un accusé de réception, à destination d'un nœud venant d'émettre des données, permet à un attaquant d'empêcher ce nœud de réaliser d'autres tentatives de transmission de la trame.
 Elle n'est utile, bien entendu, que dans le cas où l'attaquant pense que l'émission de la trame d'origine a échoué, par exemple parce qu'il a créé une collision sur le canal lors de cette première émission.
 C'est une attaque qui vient compléter les techniques de brouillage de façon à empêcher la transmission de l'information dans le réseau.
+%2}}}
 
     \subsubsection{Couche réseau}
-La couche réseau, pour les capteurs sans fils, repose le plus souvent sur le protocole \textsc{Ip} (\textsc{Internet Protocol} an anglais), que ce soit en version 4 ou 6 (la version 6 est notamment utilisée avec la pile 6Lo\textsc{wpan}), pour l'adressage, et sur un protocole de routage qui détermine comment les paquets sont retransmis saut après saut dans le réseau.
+%{{{2
+La couche réseau, pour les capteurs sans fils, repose le plus souvent sur le protocole \textsc{Ip} (\textit{Internet Protocol} an anglais), que ce soit en version 4 ou 6 (la version 6 est notamment utilisée avec la pile 6Lo\textsc{wpan}), pour l'adressage, et sur un protocole de routage qui détermine comment les paquets sont retransmis saut après saut dans le réseau.
 Dans le cas d'un réseau clusterisé, il arrive que tous les capteurs soient à portée directe de leur \ch, et que ce dernier soit en mesure d'atteindre directement la station de base.
 Le routage est alors très simple.
 Mais dans d'autres cas, il est nécessaire d'établir une structure pour le réseau permettant l'acheminement des paquets jusqu'à leur destinataire.
@@ -216,14 +241,17 @@ Toutes les routes qui passent par ce nœud compromis mènent donc à la suppress
 
         \paragraph{Retransmission sélective de paquets (trous gris (\textit{grey holes}), attaques « on/off » (\textit{on/off holes}))}
 Là où une attaque de type « trou noir » supprime tous les paquets au lieu de les retransmettre, il est possible de ne retransmettre à la place qu'un sous-ensemble de paquets.
-L'attaque devient plus difficile à détecter, puisque le nœud compromis retransmet tout de même des paquets de temps à autre.\\
+L'attaque devient plus difficile à détecter, puisque le nœud compromis retransmet tout de même des paquets de temps à autre.
+
 Les attaques basées sur ce mécanisme sont dites à retransmission « on/off » (\textit{on/off holes} en anglais) lorsque la retransmission de tous les paquets est soit complètement assurée, soit complètement suspendue en alternant entre ces deux phases au fil du temps.
 On parlera plutôt d'attaques de type « trou gris » (\textit{grey holes} en anglais) lorsque la retransmission est partielle mais constante dans le temps, qu'elle soit basée sur un mécanisme aléatoire (paquets supprimés au hasard plutôt que d'être retransmis) ou selon des règles (selon le contenu utile, ou selon l'expéditeur ou le destinataire par exemple).
 
-        \paragraph{Falsification des informations de routage (accaparement du canal, création de boucles, \etc)}
+        \paragraph{Falsification des informations de routage (accaparement du canal de transmission, création de boucles, \etc)}
 Une attaque peut être menée dès le déploiement du réseau en transmettant de fausses informations lors de la mise en place des règles de routages.
-Ces informations vont alors chercher à nuire au routage des paquets, en créant des boucles cycliques dans la structure de routage, en partitionnant le réseau, en attirant à tord le trafic vers un nœud corrompu (par exemple pour exploiter les données et porter une attaque sur la confidentialité) ou vers un nœud légitime (pour surcharger ses capacités de traitement)\dots\\
-De telles attaques peuvent aussi être menées lorsqu'un protocole de clusterisation est mis en application, dans le but de gêner l'organisation structurelle du réseau (puisque la mise en place des clusters définit le plus souvent la façon dont les paquets seront routés dans le réseau).\\
+Ces informations vont alors chercher à nuire au routage des paquets, en créant des boucles cycliques dans la structure de routage, en partitionnant le réseau, en attirant à tord le trafic vers un nœud corrompu (par exemple pour exploiter les données et porter une attaque sur la confidentialité) ou vers un nœud légitime (pour surcharger ses capacités de traitement)\dots
+
+De telles attaques peuvent aussi être menées lorsqu'un protocole de clusterisation est mis en application, dans le but de gêner l'organisation structurelle du réseau (puisque la mise en place des clusters définit le plus souvent la façon dont les paquets seront routés dans le réseau).
+
 Plusieurs autres attaques présentées ci-dessous reposent sur la falsification des informations de routage.
 
         \paragraph{Puits (\textit{sinkhole})}
@@ -231,9 +259,11 @@ Une attaque \textit{sinkhole} en anglais est la combinaison d'une attaque de typ
 Concrètement, un nœud corrompu peut se déclarer voisin direct de la station de base et annoncer une route de coût nul vers cette dernière.
 Ses voisins vont estimer qu'il s'agit du plus court chemin pour acheminer les paquets jusqu'à la station de base, et vont transmettre l'information à leur tour.
 Au final une part importante des routes créées, et en conséquence du trafic routé, va passer par ce nœud compromis, ce qui peut mener à des congestions dans le réseau.
-Rentre alors en jeu l'attaque \textit{blackhole}, qui supprime tous les paquets reçus plutôt que de les retransmettre à leur destinataire légitime.\\
+Rentre alors en jeu l'attaque \textit{blackhole}, qui supprime tous les paquets reçus plutôt que de les retransmettre à leur destinataire légitime.
+
 Il est à noter que la littérature inverse parfois, et même confond de temps en temps, la terminologie des attaques de type \textit{blackhole} et \textit{sinkhole}.
 Les définitions présentées ici sont celles qui semblent revenir le plus couramment.
+Par ailleurs, tous les « trous » ne font pas nécessairement référence à des pertes de paquets: des trous physiques, logiques ou sémantiques peuvent se former dès le déploiement du réseau~\cite{JSM13}, mais il s'agit d'un problème qui tient davantage de la sureté et de la résilience que de la sécurité.
 
         \paragraph{Trou de ver (\textit{wormhole})}
 Lorsque deux agents ou plus du réseau sont compromis par un attaquant, il leur est possible de mener une attaque de type « trou de ver » (\textit{wormhole attack} en anglais).
@@ -269,8 +299,10 @@ Le mécanisme peut également être utilisé dans le but d'intensifier d'autres 
     \item l'accaparement de ressources, en réservant des ressources (créneaux temporels pour l'accès au canal\dots) pour plusieurs nœuds virtuels, mais qui ne seront utilisées que par le seul capteur menant l'attaque.
 \end{itemize}
 De manière générale, en l'absence d'un système efficace d'authentification, les attaques reposant sur des techniques d'usurpation d'identité peuvent être très compliquées à détecter et à contrecarrer correctement.
+%2}}}
 
     \subsubsection{Couche transport}
+%{{{2
 La couche transport gère les communications de bout en bout entre processus.
 Les protocoles les plus fréquemment utilisés, \textsc{Tcp} (\textit{Transmission Control Protocol}) et \textsc{Udp} (\textit{User Datagram Protocol}) assurent l'ordonnancement des paquets et permettent d'éviter les pertes, les doublons et la corruption des paquets.
 Le protocole \textsc{Tcp} permet en plus à deux entités de communiquer en mode connecté en établissant une session (début, fin et validation des échanges).
@@ -283,8 +315,10 @@ Cette attaque requiert une machine plus puissante (surtout, avec une meilleure a
         \paragraph{Désynchronisation \textsc{Tcp} (ou équivalents)}
 Dans le même registre, un attaquant peut forger des demande de désynchronisation pour mettre fin à des sessions \textsc{Tcp} établies entre deux entités légitimes.
 Les échanges de ces sessions sont donc interrompus jusqu'au rétablissement d'une nouvelle connexion: ces connexions impliquent l'envoi de données de contrôle (elle s'effectue en trois temps, on parle de \textit{three-way handshake} en anglais) qui consomment une quantité d'énergie précieuse pour les capteurs.
+%2}}}
 
     \subsubsection{Couche application}
+%{{{2
 La couche application implémente éventuellement l'application utilisée au niveau le plus haut par le réseau de capteur pour assurer un service en particulier.
 Les protocoles utilisés sur cette couche dépendent donc totalement de l'objectif final du réseau, il n'y a pas ici de standard à proprement parler.
 Certaines attaques sont néanmoins applicables au niveau applicatif.
@@ -298,9 +332,10 @@ Suivant l'application mise en place, il peut être envisageable pour un attaquan
 
         \paragraph{Désynchronisation}
 Si jamais le protocole utilisé sur la couche application induit la création de sessions en mode connecté (comme pour \textsc{Tcp} sur la couche transport), des attaques de désynchronisation peuvent être menées par un attaquant en vue de briser ces sessions.
+%2}}}
 
     \subsubsection{Hors modèle}
-
+%{{{2
         \paragraph{Destruction physique des capteurs}
 Les capteurs sont des appareils de petite taille déployés en nombre, et dont la production ne doit par conséquent pas être trop coûteuse.
 Cela implique que les appareils sont relativement fragiles, et d'autant plus difficiles à sécuriser que le réseau est souvent déployé en extérieur, parfois en environnement hostile.
@@ -387,44 +422,55 @@ Toutes les attaques exposées dans cette sous-section ont été décrites à mai
          \end{tabular}
      \end{small}
 \end{table}
+%2}}}
+%1}}}
 
 \subsection{Différents mécanismes de protection}
+%{{{1
 
-\subsubsection{Détection}
-\subsubsection{Réaction}
 \subsubsection{Prévention}
+%{{{2
+    \paragraph{Authentification et problématiques similaires}
+La sécurité est transversale à l'ensemble des domaines d'études en informatique, et la protection contre le déni de service\dots est elle-même liée aux autres problématiques de sécurité.
+Il faut entendre par là que si des failles du système compromettant l'authentification des agents ou l'intégrité des données peuvent également être exploitées d'une façon ou d'une autre pour nuire au bon fonctionnement du réseau, alors l'attaque en question vient également se classer parmi les attaques de déni de service.
 
-Indeed there are many existing attacks able to compromise the good working of a \wsn.%ONDEMAND \cite{ZJ09}.
-Several mechanisms have been proposed to detect it and to provide countermeasures\cite{SSS11}. %ONDEMAND ,SSF13}.
-Many consist in the implementation of trust based mechanisms\cite{MC10,F-GRL07} with agents applying set of rules\cite{RKKK13} on traffic to attribute a trust value to each of the nodes in the network.
-In particular, Lai and Chen\cite{LC08} proposed to elect control nodes to monitor the traffic in clustered networks and to detect and react to \dos attacks.
+De manière plus concrète, assurer correctement l'authentification des nœuds du réseau empêchera un attaquant de mener des attaques basées sur l'usurpation de l'identité d'un autre nœud.
+Les attaques par désynchronisation, ou la falsification d'accusés de réception par exemple, deviennent inapplicables.
+Si des mécanismes permettant de limiter le rejeu de paquets capturés sont rajoutés, l'ampleur des attaques Sybil ainsi que des attaques par trou de ver se verront fortement réduites.
+La protection de l'intégrité des données assure de son côté l'échec de toute tentative d'altération des valeurs transmises lors des opérations de routage.
 
-
-
-In a first attempt to bring load balancing to this solution, we propose in other papers\cite{GMT12,BMM13} to reiterate the election periodically.
-Simulations show a better load repartition among the cluster, but at this time our focus was not on designing an energy efficient election process for the \cns.
-
-%%%%%%%%%%%%%%%%%%%================================================
-% Detecting Denial of Service Attacks in Sensor Networks
-%\subsection{[LC08] -- Inchangé}
-
-%\subsubsection{Ancienne version}
-%A cluster-based intrusion detection system is proposed in
-%\cite{LC08}.
-%It prevents sensor networks from DoS attacks.
-%This solution deploys a set of special nodes called ``guarding nodes'' (gNodes) which observe, analyze the network traffic and report DoS attacks to their cluster head if an abnormal event happens.
-%In each cluster there are three types of nodes, gNode, cluster head and sensor node.
-%Any kind of nodes may be compromised.
-%In this study, the detection approach for diverse attack types and the actions taken after detection are explored for the different node types.
-
-%\subsubsection{Version Camera-Ready}
-In
-\cite{LC08},
-the authors propose a system detection based on static election of a set of special nodes called ``guarding nodes'' which analyze the network traffic.
-When detecting abnormal traffic from a given node, ``guarding nodes'' identify it as a compromised node and they inform the cluster head of it.
-In this study, the authors show the benefit of their method by presenting numerical analysis of detection rate but they don't consider the energy of the elected node which dies very quickly.
+Les mécanismes dédiés à la protection de l'authentification, de l'intégrité, ou contre le rejeu sont donc également utiles pour protéger un réseau de capteurs de certaines attaques de déni de service.
+On parle de mesures de prévention, dans le sens où il s'agit de méthodes mises en place pour empêcher une attaque de survenir.
 
 
+%{{{3
+% ======== >>> §1 <<<
+% Denial of service attack-resistant flooding authentication in wireless sensor networks
+%\subsection{[JS10] -- Inchangé}
+
+\textit{Son et al}. propose in
+\cite{SLS10}
+a novel broadcast authentication mechanism to cope with DoS attacks in sensor networks.
+This scheme uses an asymmetric distribution of keys between sensor nodes and the BS, and uses the Bloom filter as an authenticator, which efficiently compresses multiple authentication information.
+In this model, the BS or sink shares symmetric keys with each sensor node, and proves its knowledge of the information through multiple MAC values in its flooding messages.
+When the sink floods the network with control messages it constructs a Bloom filter as an authenticator for the message.
+When a sensor node receives a flooded control message, it generates their Bloom filter with its keys and in the same way the sink verifies message authentication.
+
+% Denial of service attack-resistant flooding authentication in wireless sensor networks
+A novel broadcast authentication mechanism can also be deployed so as to cope with DoS attacks in sensor networks such as in~\cite{SLS10}.
+This scheme uses an asymmetric distribution of keys between sensor nodes and the BS, and uses the Bloom filter as an authenticator, which efficiently compresses multiple authentication information.
+In this model, the BS or sink shares symmetric keys with each sensor node, and proves its knowledge of the information through multiple MAC values in its flooding messages.
+When the sink floods the network with control messages it constructs a Bloom filter as an authenticator for the message.
+When a sensor node receives a flooded control message, it generates their Bloom filter with its keys and in the same way the sink verifies message authentication.
+%3}}}
+
+
+
+    \paragraph{Des protocoles de routage spécifiques}
+
+Various studies have been realized in the purpose of countering one specific kind of attack, sometimes on specific protocols, thus leading to the proposals of hardened versions of AODV\cite{DLA02} or DSR\cite{CT04} for instance.
+
+%{{{3
 % ======== >>> §3 <<<
 %\subsection{[SM10] -- Ajouté}
 
@@ -443,77 +489,34 @@ This routing protocol called DLSR aims at detecting distributed denial of servic
 To that end, the authors introduce two alert thresholds regarding this server's service capacity.
 The authors also use Learning Automata (LAs), automatic systems whose choice of next action depends on the result of its previous action.
 There is no indication in their work about the overhead or the energy load resulting from the use of the DLSR protocol.
+%3}}}
 
-
-% ======== >>> §4 <<<
-%\subsection{[HI09] -- Modifié}
-
-%% Optimal Sensor Placement for Detection against Distributed Denial of Service Attacks
-The best way to detect for sure a DoS attack in a WSN is simply to run a detection mechanism on each single sensor.
-Of course, this solution is not feasible in a network with constraints.
-Instead of fitting out each sensor with such mechanism, \textit{Islam et al}. propose in
-\cite{INK09}
-to resort to heuristics in order to set a few nodes equipped with detection systems at critical spots in the network topology.
-This optimized placement enables distributed detection of DoS attacks as well as reducing costs and processing overheads, since the number of required detectors is minimized.
-But those few selected nodes are likely to run out of battery power much faster than normal nodes.
-
+%{{{3
+% ======== >>> §2 <<<
+%\subsection{[LO07] -- Modifié}
 %% OLD VERSION
-%The running of a detection mechanism on every node in the network allows achieving a perfect detection against DoS attacks but it is not a feasible solution in a constrained network.
-%In
-%\cite{HI09},
-%an optimized placement of detection nodes in a network for distributed detection of DoS attacks is proposed.
-%In addition to placing detection nodes at critical points in a network, this proposition minimizes the number of these required nodes and therefore reduces the cost and processing overheads.
+%Hierarchical sensor networks where clusters are formed dynamically and periodically using the LEACH algorithm, allow to distribute the energy load among sensor nodes.
+%The problem of adding security to this type of network is raised by \textit{Oliveira et al}
+%\cite{LO07}
+%who propose SecLEACH which is a revised version of LEACH.
+%It applies random key pre-distribution and $\mu$TESLA.
+%They can be used both to secure communications in a hierarchical network with dynamic cluster establishment.
 
-%% Optimal Sensor Placement for Detection against Distributed Denial of Service Attacks
-The best way to detect for sure a DoS attack in a WSN is simply to run a detection mechanism on each single sensor.
-Of course, this solution is not feasible in a network with constraints.
-Instead of fitting out each sensor with such mechanism, it is proposed in~\cite{INK09} to resort to heuristics in order to set a few nodes equipped with detection systems at critical spots in the network topology.
-This optimized placement enables distributed detection of DoS attacks as well as reducing costs and processing overheads, since the number of required detectors is minimized.
-But those few selected nodes are likely to run out of battery power much faster than normal nodes.
-
-
-% ======== >>> §1 <<<
-% Denial of service attack-resistant flooding authentication in wireless sensor networks
-%\subsection{[JS10] -- Inchangé}
-
-\textit{Son et al}. propose in
-\cite{JS10}
-a novel broadcast authentication mechanism to cope with DoS attacks in sensor networks.
-This scheme uses an asymmetric distribution of keys between sensor nodes and the BS, and uses the Bloom filter as an authenticator, which efficiently compresses multiple authentication information.
-In this model, the BS or sink shares symmetric keys with each sensor node, and proves its knowledge of the information through multiple MAC values in its flooding messages.
-When the sink floods the network with control messages it constructs a Bloom filter as an authenticator for the message.
-When a sensor node receives a flooded control message, it generates their Bloom filter with its keys and in the same way the sink verifies message authentication.
-
-% Denial of service attack-resistant flooding authentication in wireless sensor networks
-A novel broadcast authentication mechanism can also be deployed so as to cope with DoS attacks in sensor networks such as in~\cite{SLS10}.
-This scheme uses an asymmetric distribution of keys between sensor nodes and the BS, and uses the Bloom filter as an authenticator, which efficiently compresses multiple authentication information.
-In this model, the BS or sink shares symmetric keys with each sensor node, and proves its knowledge of the information through multiple MAC values in its flooding messages.
-When the sink floods the network with control messages it constructs a Bloom filter as an authenticator for the message.
-When a sensor node receives a flooded control message, it generates their Bloom filter with its keys and in the same way the sink verifies message authentication.
+%% SecLEACH -- On the security of clustered sensor networks
+A sensor network may be recursively and periodically reclustered with an algorithm such as \leach, as in our proposal.
+The resulting hierarchically clustered network often presents a good ability for distributing the energy consumption among the sensor nodes.
+But security concerns (other than DoS) also apply to those networks.
+In~\cite{OFVWBDL07}, the authors propose to add security mechanisms \via a revised version of \leach protocol.
+\textit{SecLEACH}\ uses random key pre-distribution as well as $\mu$TESLA (authenticated broadcast) so as to protect communications.
+But the authors do not mention any mechanism to fight DoS attacks.
+%3}}}
 
 
+    \paragraph{Prévenir la compromission des capteurs}
 
-
-Several mechanisms have been proposed to detect it and to provide countermeasures\cite{SSS11,RM11}.
-Even restricted to the data link, media access control and network layers of the network, there are many different existing \DoS attacks.
-Consequently, even more solutions have been proposed to counter them.
-Various studies have been realized in the purpose of countering one specific kind of attack, sometimes on specific protocols, thus leading to the proposals of hardened versions of AODV\cite{DLA02} or DSR\cite{CT04} for instance.
 Some researchers prefer to ensure that nodes are not physically withdrawn from the network to get modified\cite{Ho10}, considering any returning node as compromised (but not detecting nodes modified on site), or to verify by means of mobile agents that the binary code run by the nodes has not been modified\cite{HR13}, although this solution makes use of cryptography mechanisms and can limit the evolution of the network.
 
-Many other systems, often more convenient to deploy, consist in the implementation of trust based mechanisms\cite{MC10,F-GRL07} with agents applying set of rules\cite{RKKK13} on traffic to attribute a trust value to each of the nodes in the network.
-Each enforced rule is expected to protect the network against one kind of attacks: intruders are detected on breaking the rules.
-We are particularly interested in the solution of Lai and Chen\cite{LC08} who proposed to elect control nodes to monitor the traffic in clustered networks so as to detect and react to \dos attacks.
-In such a scheme, clustered networks are partitioned into clusters \via algorithms such as \leach\cite{HHT02} or VSR\cite{TV08}.
-
-
-
-
-
-To deal with DoS attacks in wireless sensor networks, many research studies have been conducted: there are many existing attacks able to compromise the good working of a \wsn.
-Even more mechanisms have been proposed to detect it and to provide countermeasures~\cite{SSS11}.
-Many consist in the implementation of trust based mechanisms~\cite{MC10,F-GRL07} with agents applying set of rules~\cite{RKKK13} on traffic to attribute a trust value to each of the nodes in the network.
-Below are outlined some notable proposals.
-
+%{{{3
 % ======== >>> §2 <<<
 %\subsection{[JH10] -- Ajouté}
 
@@ -534,7 +537,38 @@ The Sequential Probability Radio Test (SPRT) is used to determinate a dynamic ti
 When a node appears to be missing for a period longer that this threshold, it is considered to be dead or captured by an attacker.
 If this node is later redeployed in the network, it will immediately be considered as compromised without having a chance to be harmful.
 Nothing is done, however, if an attacker manages to compromise the node without extracting the sensor from its environment.
+%3}}}
 
+
+%2}}}
+\subsubsection{Détection}
+%{{{2
+
+\cite{HI12}
+
+Many other systems, often more convenient to deploy, consist in the implementation of trust based mechanisms\cite{MC10,F-GRL07} with agents applying set of rules\cite{RKKK13} on traffic to attribute a trust value to each of the nodes in the network.
+Each enforced rule is expected to protect the network against one kind of attacks: intruders are detected on breaking the rules.
+We are particularly interested in the solution of Lai and Chen\cite{LC08} who proposed to elect control nodes to monitor the traffic in clustered networks so as to detect and react to \dos attacks.
+In such a scheme, clustered networks are partitioned into clusters \via algorithms such as \leach\cite{HHT02} or VSR\cite{TV08}.
+
+
+%{{{3
+% ======== >>> §2 <<<
+%\subsection{[LB09] -- Modifié}
+
+%% Using mobile agents to recover from node and database compromise in path-based DoS attacks in wireless sensor network
+\textit{Li} and \textit{Batten} expose in
+\cite{LB09}
+their method to detect and to recover from Path-based DoS (PDoS) attacks in wireless sensor networks.
+They consider WSNs whose aim is to collect data and to store it into small databases.
+PDoS attacks may prevent legitimate communication, lead the sensors to battery exhaustion and corrupt the gathered data.
+So the authors introduce the use of Mobile Agents (MAs), which use hash function values, node IDs and traffic table to analyze the traffic and identify compromised sensors.
+Thus the MAs are able to detect PDoS attacks with ease and efficiency, and to reply to the attack by proceeding to a recovery process.
+There are three distinct recovery processes available, depending on the percentage of compromised nodes in the network.
+Note that the authors use the assumption that MAs can not be compromised.
+
+%% OLD VERSION
+%A new detection and recovery method for compromised nodes in Path-based DoS (PDoS) attacks in wireless sensor network is presented in \cite{LB09} by \textit{Li} and \textit{Batten}. In this paper, the authors consider WSNs designed to collect and to store data in which path-based attacks can be carried on both the sensor nodes and the database containing the collected data. The contribution of this paper is the use of mobile agents (MAs) for the attack detection and the recovery process. The MAs detect PDoS attacks easily and efficiently. The solution is based on the use of hash function values, node IDs and traffic tables. By analyzing the traffic, the MA can detect the abnormal traffic and can designate the compromised nodes.
 %% Using mobile agents to recover from node and database compromise in path-based DoS attacks in wireless sensor network
 In~\cite{LB09} is described a method to detect and to recover from Path-based DoS (PDoS) attacks in wireless sensor networks.
 The authors consider WSNs whose aim is to collect data and to store it into small databases.
@@ -543,20 +577,9 @@ Thus the use of Mobile Agents (MAs) is introduced: they use hash function values
 In this way the MAs are able to detect PDoS attacks with ease and efficiency, and to reply to the attack by proceeding to a recovery process.
 There are three distinct recovery processes available, depending on the percentage of compromised nodes in the network.
 Note that the authors use the assumption that MAs can not be compromised.
+%3}}}
 
-%% Detecting denial of service attacks in sensor networks
-Much of our work relies on the work of Lai and Chen who proposed in~\cite{LC08} a system detection based on static election of a set of nodes called ``guarding nodes'' which analyze traffic in a clustered network.
-When detecting abnormal traffic from a given node, ``guarding nodes'' ---~we call them \cns~--- identify it as a compromised node and inform the \ch of it.
-On reception of reports from several distinct \cns (to prevent false denunciation from a compromised node), the \CH virtually excludes the suspicious node from the cluster.
-The authors show the benefit of their method by presenting numerical analysis of detection rate.
-Although the method is efficient for detecting rogue nodes, the authors do not give details of the election mechanism to choose the \cns.
-Also, there is no mention in their study of renewing the election in time, which causes the appointed \cns to endorse a heavier energy consumption on a long period.
-
-
-
-
-
-
+%{{{3
 % ======== >>> §5 <<<
 %\subsection{[MH07] -- Modifié}
 
@@ -582,61 +605,83 @@ It allows the creation of secure channels as well as broadcast authentication be
 The last security module is responsible for the detection of compromised nodes.
 When a node is suspected to harm the network, alarm protocols are used to warn the base station.
 The use of trust value evaluation then enables the setting and the propagation of black and white lists of sensors.
+%3}}}
 
 
+Many consist in the implementation of trust based mechanisms\cite{MC10,F-GRL07} with agents applying set of rules\cite{RKKK13} on traffic to attribute a trust value to each of the nodes in the network.
+
+%{{{3
+In particular, Lai and Chen\cite{LC08} proposed to elect control nodes to monitor the traffic in clustered networks and to detect and react to \dos attacks.
+%%%%%%%%%%%%%%%%%%%================================================
+% Detecting Denial of Service Attacks in Sensor Networks
+%\subsection{[LC08] -- Inchangé}
+
+%\subsubsection{Ancienne version}
+%A cluster-based intrusion detection system is proposed in
+%\cite{LC08}.
+%It prevents sensor networks from DoS attacks.
+%This solution deploys a set of special nodes called ``guarding nodes'' (gNodes) which observe, analyze the network traffic and report DoS attacks to their cluster head if an abnormal event happens.
+%In each cluster there are three types of nodes, gNode, cluster head and sensor node.
+%Any kind of nodes may be compromised.
+%In this study, the detection approach for diverse attack types and the actions taken after detection are explored for the different node types.
+
+%\subsubsection{Version Camera-Ready}
+In
+\cite{LC08},
+the authors propose a system detection based on static election of a set of special nodes called ``guarding nodes'' which analyze the network traffic.
+When detecting abnormal traffic from a given node, ``guarding nodes'' identify it as a compromised node and they inform the cluster head of it.
+In this study, the authors show the benefit of their method by presenting numerical analysis of detection rate but they don't consider the energy of the elected node which dies very quickly.
 
 
+%% Detecting denial of service attacks in sensor networks
+Much of our work relies on the work of Lai and Chen who proposed in~\cite{LC08} a system detection based on static election of a set of nodes called ``guarding nodes'' which analyze traffic in a clustered network.
+When detecting abnormal traffic from a given node, ``guarding nodes'' ---~we call them \cns~--- identify it as a compromised node and inform the \ch of it.
+On reception of reports from several distinct \cns (to prevent false denunciation from a compromised node), the \CH virtually excludes the suspicious node from the cluster.
+The authors show the benefit of their method by presenting numerical analysis of detection rate.
+Although the method is efficient for detecting rogue nodes, the authors do not give details of the election mechanism to choose the \cns.
+Also, there is no mention in their study of renewing the election in time, which causes the appointed \cns to endorse a heavier energy consumption on a long period.
 
+[ Rules; Watch dogs -> + clustering = guarding nodes ]
+%3}}}
 
+In a first attempt to bring load balancing to this solution, we propose in other papers\cite{GMT12,BMM13} to reiterate the election periodically.
+Simulations show a better load repartition among the cluster, but at this time our focus was not on designing an energy efficient election process for the \cns.
 
-% ======== >>> §2 <<<
-%\subsection{[LB09] -- Modifié}
-
-%% Using mobile agents to recover from node and database compromise in path-based DoS attacks in wireless sensor network
-\textit{Li} and \textit{Batten} expose in
-\cite{LB09}
-their method to detect and to recover from Path-based DoS (PDoS) attacks in wireless sensor networks.
-They consider WSNs whose aim is to collect data and to store it into small databases.
-PDoS attacks may prevent legitimate communication, lead the sensors to battery exhaustion and corrupt the gathered data.
-So the authors introduce the use of Mobile Agents (MAs), which use hash function values, node IDs and traffic table to analyze the traffic and identify compromised sensors.
-Thus the MAs are able to detect PDoS attacks with ease and efficiency, and to reply to the attack by proceeding to a recovery process.
-There are three distinct recovery processes available, depending on the percentage of compromised nodes in the network.
-Note that the authors use the assumption that MAs can not be compromised.
-%% OLD VERSION
-%A new detection and recovery method for compromised nodes in Path-based DoS (PDoS) attacks in wireless sensor network is presented in \cite{LB09} by \textit{Li} and \textit{Batten}. In this paper, the authors consider WSNs designed to collect and to store data in which path-based attacks can be carried on both the sensor nodes and the database containing the collected data. The contribution of this paper is the use of mobile agents (MAs) for the attack detection and the recovery process. The MAs detect PDoS attacks easily and efficiently. The solution is based on the use of hash function values, node IDs and traffic tables. By analyzing the traffic, the MA can detect the abnormal traffic and can designate the compromised nodes.
-
-
-% ======== >>> §2 <<<
-%\subsection{[LO07] -- Modifié}
-%% OLD VERSION
-%Hierarchical sensor networks where clusters are formed dynamically and periodically using the LEACH algorithm, allow to distribute the energy load among sensor nodes.
-%The problem of adding security to this type of network is raised by \textit{Oliveira et al}
-%\cite{LO07}
-%who propose SecLEACH which is a revised version of LEACH.
-%It applies random key pre-distribution and $\mu$TESLA.
-%They can be used both to secure communications in a hierarchical network with dynamic cluster establishment.
-
-%% SecLEACH -- On the security of clustered sensor networks
-A sensor network may be recursively and periodically reclustered with an algorithm such as \leach, as in our proposal.
-The resulting hierarchically clustered network often presents a good ability for distributing the energy consumption among the sensor nodes.
-But security concerns (other than DoS) also apply to those networks.
-In~\cite{OFVWBDL07}, the authors propose to add security mechanisms \via a revised version of \leach protocol.
-\textit{SecLEACH}\ uses random key pre-distribution as well as $\mu$TESLA (authenticated broadcast) so as to protect communications.
-But the authors do not mention any mechanism to fight DoS attacks.
-
-
-
-
-
-Denial of service attacks embraces many different attacks, which can target all layers of the network~\cite{VS10}.
-Jamming the radio frequencies as well as disturbing the routing protocols are just a few examples of ways to harm the network.
-In reaction to these, a number of solutions have been proposed~\cite{SSS11}.
-
-As stated in the introduction, we focus in this paper on inside attackers attempting to bend the MAC protocol parameters to their needs, be it to achieve better performances for themselves (\emph{greedy} attacks) or to generally harm the network (\emph{jamming} attacks or sleep deprivation).
-To detect such attackers, many solutions rely on trust models~\cite{MC10}.
-We base our own work on Lai's and Chen's approach~\cite{LC08}, which consists in assigning monitoring nodes in the network.
-Those monitoring nodes, also called \cns in this article, apply a set of rules~\cite{RKKK13} to overheard traffic so as to detect misbehaving nodes.
-On multiple rule breaks, they report the suspicious node to the \ch.
-To prevent false positive detection, the \CH waits for several reports about a given node before considering it as compromised.
-After that, it virtually excludes the misbehaving node from the cluster by broadcasting a warning to all sensors.
 We have observed in previous studies that renewing periodically the selection process of those monitoring nodes (\cns) helps saving energy in the network~\cite{BMM13}, and we have tried ever since to find an optimal selection algorithm to obtain a good equilibrium between security, attack detection and energy preservation~\cite{MMB14}.
+
+%{{{3
+% ======== >>> §4 <<<
+%\subsection{[HI09] -- Modifié}
+
+%% Optimal Sensor Placement for Detection against Distributed Denial of Service Attacks
+The best way to detect for sure a DoS attack in a WSN is simply to run a detection mechanism on each single sensor.
+Of course, this solution is not feasible in a network with constraints.
+Instead of fitting out each sensor with such mechanism, \textit{Islam et al}. propose in
+\cite{INK09}
+to resort to heuristics in order to set a few nodes equipped with detection systems at critical spots in the network topology.
+This optimized placement enables distributed detection of DoS attacks as well as reducing costs and processing overheads, since the number of required detectors is minimized.
+But those few selected nodes are likely to run out of battery power much faster than normal nodes.
+
+%% OLD VERSION
+%The running of a detection mechanism on every node in the network allows achieving a perfect detection against DoS attacks but it is not a feasible solution in a constrained network.
+%In
+%\cite{HI09},
+%an optimized placement of detection nodes in a network for distributed detection of DoS attacks is proposed.
+%In addition to placing detection nodes at critical points in a network, this proposition minimizes the number of these required nodes and therefore reduces the cost and processing overheads.
+
+%% Optimal Sensor Placement for Detection against Distributed Denial of Service Attacks
+The best way to detect for sure a DoS attack in a WSN is simply to run a detection mechanism on each single sensor.
+Of course, this solution is not feasible in a network with constraints.
+Instead of fitting out each sensor with such mechanism, it is proposed in~\cite{INK09} to resort to heuristics in order to set a few nodes equipped with detection systems at critical spots in the network topology.
+This optimized placement enables distributed detection of DoS attacks as well as reducing costs and processing overheads, since the number of required detectors is minimized.
+But those few selected nodes are likely to run out of battery power much faster than normal nodes.
+%3}}}
+
+
+
+%2}}}
+\subsubsection{Réaction}
+%{{{2
+%2}}}
+
+%1}}}
