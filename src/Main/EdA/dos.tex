@@ -425,12 +425,12 @@ Toutes les attaques exposées dans cette sous-section ont été décrites à mai
 %2}}}
 %1}}}
 
-\subsection{Différents mécanismes de protection}
+\subsection{Prévenir les attaques}
 %{{{1
 
-\subsubsection{Prévention}
+    \subsubsection{Authentification et problématiques similaires}
 %{{{2
-    \paragraph{Authentification et problématiques similaires}
+
 La sécurité est transversale à l'ensemble des domaines d'études en informatique, et la protection contre le déni de service\dots est elle-même liée aux autres problématiques de sécurité.
 Il faut entendre par là que si des failles du système compromettant l'authentification des agents ou l'intégrité des données peuvent également être exploitées d'une façon ou d'une autre pour nuire au bon fonctionnement du réseau, alors l'attaque en question vient également se classer parmi les attaques de déni de service.
 
@@ -464,9 +464,10 @@ When the sink floods the network with control messages it constructs a Bloom fil
 When a sensor node receives a flooded control message, it generates their Bloom filter with its keys and in the same way the sink verifies message authentication.
 %3}}}
 
+%2}}}
 
-
-    \paragraph{Des protocoles de routage spécifiques}
+    \subsubsection{Des protocoles de routage spécifiques}
+%{{{2
 
 Various studies have been realized in the purpose of countering one specific kind of attack, sometimes on specific protocols, thus leading to the proposals of hardened versions of AODV\cite{DLA02} or DSR\cite{CT04} for instance.
 
@@ -511,8 +512,10 @@ In~\cite{OFVWBDL07}, the authors propose to add security mechanisms \via a revis
 But the authors do not mention any mechanism to fight DoS attacks.
 %3}}}
 
+%2}}}
 
-    \paragraph{Prévenir la compromission des capteurs}
+    \subsubsection{Prévenir la compromission des capteurs}
+%{{{2
 
 Some researchers prefer to ensure that nodes are not physically withdrawn from the network to get modified\cite{Ho10}, considering any returning node as compromised (but not detecting nodes modified on site), or to verify by means of mobile agents that the binary code run by the nodes has not been modified\cite{HR13}, although this solution makes use of cryptography mechanisms and can limit the evolution of the network.
 
@@ -541,8 +544,10 @@ Nothing is done, however, if an attacker manages to compromise the node without 
 
 
 %2}}}
-\subsubsection{Détection}
-%{{{2
+%1}}}
+
+\subsection{Détecter puis déjouer les attaques}
+%{{{1
 
 \cite{HI12}
 
@@ -678,10 +683,5 @@ But those few selected nodes are likely to run out of battery power much faster 
 %3}}}
 
 
-
-%2}}}
-\subsubsection{Réaction}
-%{{{2
-%2}}}
 
 %1}}}
