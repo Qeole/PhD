@@ -127,11 +127,12 @@
 \renewcommand\dblfloatpagefraction{.5}
 \newcommand\@blueLACL{0,101,189}
 \newcommand\@chapterLACL{5598d3}
+\newcommand\@chapterLACLbis{85,152,211}
 \if@twoside
   \def\ps@headings{%
       \let\@oddfoot\@empty\let\@evenfoot\@empty
-      \def\@evenhead{\sffamily\thepage\hfil\slshape\leftmark}%
-      \def\@oddhead{{\sffamily\slshape\rightmark}\hfil\thepage}%
+      \def\@evenhead{\color[RGB]{\@blueLACL}\sffamily\thepage\hfil\slshape\leftmark}%
+      \def\@oddhead{\color[RGB]{\@blueLACL}{\sffamily\slshape\rightmark}\hfil\thepage}%
       \let\@mkboth\markboth
     \def\chaptermark##1{%
       \markboth {\MakeUppercase{%
@@ -257,15 +258,14 @@
       %\parbox[b][96mm]{\linewidth}{%
         %\raggedleft\fontsize{20}{25}\selectfont\@title\vfill%
       %}%
+      \color{white}%
       \setsansfont[%
-            Color=FFFFFE,%
             Numbers=OldStyle,%
             UprightFeatures={Ligatures={TeX,Rare,Historic},StylisticSet=2},%
             BoldFeatures={Ligatures={TeX,Historic},StylisticSet=1},%
             BoldItalicFeatures={Ligatures={TeX,Historic},StylisticSet=1}%
         ]{Linux Biolinum O}
       \setmainfont[%
-            Color=FFFFFE,%
             Numbers=OldStyle,%
             UprightFeatures={Ligatures={TeX,Rare,Historic},StylisticSet=2},%
             BoldFeatures={Ligatures={TeX,Historic},StylisticSet=1},%
@@ -449,7 +449,8 @@
               \fi}
 \newcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
                     \def\ps@plainsf{\let\@mkboth\@gobbletwo
-                    \let\@oddhead\@empty\def\@oddfoot{\reset@font\hfil\sffamily\thepage
+                    \let\@oddhead\@empty\def\@oddfoot{\reset@font\hfil
+                    \color[RGB]{\@blueLACL}\sffamily\thepage
                     \hfil}\let\@evenhead\@empty\let\@evenfoot\@oddfoot}
                     \thispagestyle{plainsf}%
                     \global\@topnum\z@
@@ -519,6 +520,7 @@
                                    {-3.5ex \@plus -1ex \@minus -.2ex}%
                                    {2.3ex \@plus.2ex}%
                                    {\normalfont\Large\bfseries}}
+                                   %{\normalfont\Large\bfseries\fontspec[Color=\@chapterLACL]{Linux Libertine O}}}
 \newcommand\subsection{\@startsection{subsection}{2}{\z@}%
                                      {-3.25ex\@plus -1ex \@minus -.2ex}%
                                      {1.5ex \@plus .2ex}%
@@ -682,7 +684,7 @@
 \newcommand\@pnumwidth{1.55em}
 \newcommand\@tocrmarg{2.55em}
 \newcommand\@dotsep{4.5}
-\setcounter{tocdepth}{2}
+\setcounter{tocdepth}{3}
 \newcommand\tableofcontents{%
     \if@twocolumn
       \@restonecoltrue\onecolumn

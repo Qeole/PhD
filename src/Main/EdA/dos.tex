@@ -471,26 +471,8 @@ When a sensor node receives a flooded control message, it generates their Bloom 
 
 Various studies have been realized in the purpose of countering one specific kind of attack, sometimes on specific protocols, thus leading to the proposals of hardened versions of AODV\cite{DLA02} or DSR\cite{CT04} for instance.
 
-%{{{3
-% ======== >>> §3 <<<
-%\subsection{[SM10] -- Ajouté}
 
-% An adaptive learning routing protocol for the prevention of DDoS attacks in wireless mesh networks
-In
-\cite{MKASF10},
-\textit{Misra et al}. propose a revised version of the OLSR protocol.
-This routing protocol called DLSR aims at detecting distributed denial of service (DDoS) attacks and at dropping malicious requests before they can saturate a server's capacity to answer.
-To that end, the authors introduce two alert thresholds regarding this server's service capacity.
-They also introduce the use of Learning Automata (LAs), automatic systems whose choice of next action depends on the result of its previous action.
-There is no indication in their work about the overhead or the energy load resulting from the use of the DLSR protocol.
 
-% An adaptive learning routing protocol for the prevention of DDoS attacks in wireless mesh networks
-In~\cite{MKASF10}, a revised version of the OLSR protocol is proposed.
-This routing protocol called DLSR aims at detecting distributed denial of service (DDoS) attacks and at dropping malicious requests before they can saturate a server's capacity to answer.
-To that end, the authors introduce two alert thresholds regarding this server's service capacity.
-The authors also use Learning Automata (LAs), automatic systems whose choice of next action depends on the result of its previous action.
-There is no indication in their work about the overhead or the energy load resulting from the use of the DLSR protocol.
-%3}}}
 
 %{{{3
 % ======== >>> §2 <<<
@@ -552,6 +534,13 @@ La sécurité du système peut éventuellement être spécifiquement renforcée,
 
 \subsection{Détecter puis déjouer les attaques}
 %{{{1
+
+%{{{3
+\textsc{Olsr} (\textit{Optimized Link State Routing protocol}) est l'un des protocoles de routages souvent déployé dans les réseaux de capteurs.
+Une nouvelle version de ce protocole, appelée \textsc{Dlsr}~\cite{MKASF10}, a été proposée en vue de reprendre ses fonctionnalités tout en ajoutant des mécanismes de détection contre les attaques de déni de service distribuées.
+Lorsque la station de base reçoit un trafic trop important, qui menace de saturer sa capacité de traitement ou bien qui crée de trop fortes congestions sur ses liens, elle envoie un signal dans tout le réseau en vue de prévenir les nœuds; le trafic est alors analysé, par chaque nœud-relais, par un automate d'apprentissage afin de détecter et supprimer les paquets malveillants.
+\textsc{Dlsr} fait signaler par la station de base la fin de l'attaque, afin que les nœuds cessent les opérations nécessaires au filtrage des paquets.
+%3}}}
 
 \subsubsection{HIDS}\label{ea:sss:hids}
 Some researchers prefer to ensure that nodes are not physically withdrawn from the network to get modified\cite{Ho10}, considering any returning node as compromised (but not detecting nodes modified on site), or to verify by means of mobile agents that the binary code run by the nodes has not been modified\cite{HR13}, although this solution makes use of cryptography mechanisms and can limit the evolution of the network.

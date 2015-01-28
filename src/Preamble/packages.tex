@@ -19,7 +19,6 @@
 \usepackage[unicode]{hyperref}
 \usepackage{iftex}
 %\usepackage{listings}
-\usepackage{minitoc}
 %\usepackage{multicol}
 \usepackage{multirow}
 \usepackage{setspace}
@@ -79,6 +78,7 @@
 
 \makeatletter
     \definecolor{blueLACL}{RGB}{\@blueLACL}
+    \definecolor{chapterLACL}{RGB}{\@chapterLACLbis}
 \makeatother
 
 % HYPERSETUP
@@ -104,6 +104,7 @@
 }
 
 % MINITOC
+\usepackage{minitoc}
 \mtcsetdepth{minitoc}{1}
 \mtcsettitle{minitoc}{}
 %\mtcselectlanguage{french}
@@ -111,9 +112,58 @@
 % BIBLIO
 \addbibresource{Back/biblio.bib}
 \addbibresource{Back/thjeux.bib}
-\addbibresource{Back/studiauniv.bib}
 % \chapter instead of \chapter*
 \defbibheading{bibliography}[\bibname]{\chapter{#1}}%\markboth{#1}{#1}}
 
 % OPTIONS
 \renewcommand{\labelitemi}{\textbullet}
+
+% TITRES SECTIONS, SOUS-SECTIONS
+\usepackage{titlesec}
+\newlength\sectionnode
+\setlength\sectionnode{\textwidth}
+\addtolength\sectionnode{-16pt}
+\newcommand{\sectionheader}[1]{%
+  \begin{tikzpicture}
+    \node[draw,color=chapterLACL!20,fill=chapterLACL!20,inner sep=8pt] (sectiontitle) {\begin{minipage}{\sectionnode}\color{white}\color{black}\thesection \quad #1\end{minipage}};
+    \fill[fill=chapterLACL] (sectiontitle.north west) -- ++(0,8pt) -- ++(3cm,0) -- +(0.3cm,-8pt) -- cycle;
+  \end{tikzpicture}%
+}
+\titleformat{\section}
+  [hang]% style : hang, display, runin, leftmargin, ...
+  {\Large}% fonte numéro + titre
+  {}% numéro
+  {0em}% espace entre le numéro et le titre
+  {\sectionheader}% fonte titre
+%\titlespacing*{\section}
+  %{0pt}% retrait à gauche
+  %{2em plus 0.3em minus .1em}% espace avant
+  %{1.5em plus 0.25em}% espace après
+  %[0pt]% retrait à droite
+
+\newcommand{\newthesubsection}{%
+  \begin{tikzpicture}[baseline=(noexo.base)]
+    \node[right,inner sep=3pt] (noexo) {\phantom{\thesubsection}};
+    \filldraw[color=chapterLACL, rounded corners=1pt] (noexo.south west) -- (noexo.north west) -- ($ (noexo.north east) + (6pt,0)$) -- ($ (noexo.south east) + (3pt,0)$) -- cycle;
+    \node[right,inner sep=3pt] {\color{white}\thesubsection};
+  \end{tikzpicture}%
+  \vrule height 0em depth 0.75em width 0pt%
+}
+\titleformat{\subsection}
+  [hang]% style : hang, display, runin, leftmargin, ...
+  {\normalfont\large\bfseries}% fonte numéro + titre
+  {\newthesubsection}% numéro
+  {0.5em}% espace entre le numéro et le titre
+  {}% fonte titre
+%\titlespacing*{\subsection}
+  %{0pt}% retrait à gauche
+  %{1em plus 0.3em minus .1em}% espace avant
+  %{0.5em plus 0.25em}% espace après
+  %[0pt]% retrait à droite
+
+\titleformat{\subsubsection}
+  [hang]% style : hang, display, runin, leftmargin, ...
+  {\normalfont\bfseries}% fonte numéro + titre
+  {}% numéro
+  {0.5em}% espace entre le numéro et le titre
+  {{\large\color{chapterLACL}▶}\hspace{0.5em}}% fonte titre
