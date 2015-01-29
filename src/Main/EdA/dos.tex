@@ -1,5 +1,6 @@
 % vim: set spelllang=fr foldmethod=marker:
 \section{Déni de service}\label{ea:sec:dos}
+%{{{1
 %{{{2
 
 Une attaque dite de « déni de service » menée dans un réseau informatique est une attaque réalisée dans le but de nuire au fonctionnement normal de ce réseau.
@@ -21,6 +22,7 @@ Les réseaux de capteurs se retrouvent malheureusement très exposés aux attaqu
 Dans cette section nous présenterons d'abord les principales attaques répertoriées dans les réseaux de capteurs, puis nous aborderons les mécanismes proposés en réponse dans la littérature.
 Auparavant, nous allons voir qu'il existe plusieurs façons de classer ces attaques.
 %2}}}
+%1}}}
 
 \subsection{Différentes classifications}
 %{{{1
@@ -88,26 +90,26 @@ La \tabref{ea:tab:paradigm} située plus bas présente un classement selon les p
 
 \subsubsection{Selon les couches de protocoles concernées}
 %{{{2
-Une seconde méthode efficace de classement consiste à procéder par couches de protocoles, en se basant sur le modèle \textsc{Tcp/Ip} (schéma concret lui-même issu du modèle théorique \textsc{Osi}, de l'anglais \textit{Open Systems Interconnection}).
+Une seconde méthode efficace de classement consiste à procéder par couches de protocoles, en se basant sur le modèle TCP/IP (schéma concret lui-même issu du modèle théorique OSI, de l'anglais \textit{Open Systems Interconnection}).
 Ce modèle est rappelé en \figref{ea:fig:tcpip}.
 \begin{table}[!ht]
     \centering
     \begin{tabular}{c |c| l}
         \multicolumn{2}{c}{} & Exemple:\\
         \cline{2-2}
-        5 & Application & \textsc{Http, Ftp, Ssh}\\
+        5 & Application & HTTP, FTP, SSH\\
         \cline{2-2}
-        4 & Transport & \textsc{Tcp, Udp}\\
+        4 & Transport & TCP, UDP\\
         \cline{2-2}
-        3 & Réseau & \textsc{Ip}\\
+        3 & Réseau & IP\\
         \cline{2-2}
-        2 & Liaison & \textsc{Ieee 802.11 (Cdma/Ca)}\\
+        2 & Liaison & IEEE 802.11 (CDMA/CA)\\
         \cline{2-2}
         1 & Physique & ondes électromagnétiques\\
         \cline{2-2}
      \end{tabular}
     \medskip
-    \caption{Modèle \textsc{Tcp/Ip}}\label{ea:fig:tcpip}
+    \caption{Modèle TCP/IP}\label{ea:fig:tcpip}
 \end{table}
 
 Ce classement permet une revue efficace, couche par couche, de la plupart des attaques connues.
@@ -139,10 +141,10 @@ Typiquement, un capteur corrompu ne sera pas en mesure de mener cette attaque sa
 %{{{2
 La couche de liaison de données fournit les moyens fonctionnels et procéduraux pour le transfert des données entre deux entités du réseau.
 Elle permet aussi, le plus souvent, de détecter et éventuellement corriger certaines erreurs survenues sur la couche physique (en cas de perturbation ou dégradation du signal électromagnétique).
-Elle se décompose en deux sous-couches: la couche de contrôle de la liaison logique (\textsc{Llc}, pour \textit{Logical Link Control} en anglais) et la couche du contrôle d'accès au support (\textsc{Mac}, pour \textit{Media Access Control}).
-C'est principalement cette seconde couche qui nous intéresse ici: le protocole de couche \textsc{Mac} définit la manière dont les différents agents du réseau accèdent au medium de transmission de façon à limiter les collisions, et à garantir un accès le plus souvent équivalent au medium pour tous les nœuds.
+Elle se décompose en deux sous-couches: la couche de contrôle de la liaison logique (LLC, pour \textit{Logical Link Control} en anglais) et la couche du contrôle d'accès au support (MAC, pour \textit{Media Access Control}).
+C'est principalement cette seconde couche qui nous intéresse ici: le protocole de couche MAC définit la manière dont les différents agents du réseau accèdent au medium de transmission de façon à limiter les collisions, et à garantir un accès le plus souvent équivalent au medium pour tous les nœuds.
 Les différents modes d'accès au medium existants sont résumés dans la \tabref{ea:tab:mac}; certains consistent à créer des canaux de transmission distincts, tandis que d'autres déterminent l'accès à une même bande de fréquence en instaurant des règles.
-Ces règles peuvent être contournées, et la couche \textsc{Mac} va donc se retrouver associée à plusieurs types d'attaques.
+Ces règles peuvent être contournées, et la couche MAC va donc se retrouver associée à plusieurs types d'attaques.
 
 \begin{table}[!ht]
     \caption{Méthodes d'accès au medium de transmission}\label{ea:tab:mac}
@@ -155,17 +157,17 @@ Ces règles peuvent être contournées, et la couche \textsc{Mac} va donc se ret
             \midrule
             \multicolumn{3}{c}{Commutation de circuits et création de canaux}\\
             \midrule
-            \textit{Frequency Division Multiple Access} (\textsc{Fdma}) & Accès multiple par répartition en fréquence & Plusieurs canaux basés sur des fréquences différentes\\
+            \textit{Frequency Division Multiple Access} (FDMA) & Accès multiple par répartition en fréquence & Plusieurs canaux basés sur des fréquences différentes\\
             \midrule
-            \textit{Code division multiple access} (\textsc{Cdma}) & Accès multiple par répartition en code & Étalement du spectre de fréquence utilisé en conjonction avec techniques comme les sauts de fréquences ou la génération de bruit pseudo-aléatoires (avec la même séquence pseudo-aléatoire appliquée au signal côté émetteur comme côté destinataire)\\
+            \textit{Code division multiple access} (CDMA) & Accès multiple par répartition en code & Étalement du spectre de fréquence utilisé en conjonction avec techniques comme les sauts de fréquences ou la génération de bruit pseudo-aléatoires (avec la même séquence pseudo-aléatoire appliquée au signal côté émetteur comme côté destinataire)\\
             \midrule
-            \textit{Time division multiple access} (\textsc{Tdma}) & Accès multiple à répartition dans le temps & Un seul canal dont l'accès est réparti par créneaux dans le temps\\
+            \textit{Time division multiple access} (TDMA) & Accès multiple à répartition dans le temps & Un seul canal dont l'accès est réparti par créneaux dans le temps\\
             \midrule
-            \textit{Space division multiple access} (\textsc{Sdma}) & Accès multiple à répartition dans l'espace & Plusieurs canaux spatiaux obtenus à l'aide d'antennes directionnelles. À noter: les antennes directionnelles augmentent sensiblement le coût de production des capteurs.\\
+            \textit{Space division multiple access} (SDMA) & Accès multiple à répartition dans l'espace & Plusieurs canaux spatiaux obtenus à l'aide d'antennes directionnelles. À noter: les antennes directionnelles augmentent sensiblement le coût de production des capteurs.\\
             \midrule
             \multicolumn{3}{c}{Mode d'accès par paquet}\\
             \midrule
-            \textit{Contention based random multiple access methods} & Accès par contention & Contention par le nœud du paquet à envoyer jusqu'à ce que le protocole le lui autorise. Dans cette catégorie se trouve notamment le protocole \textsc{Csma/Ca} (\textit{Carrier Sense Multiple Access with Collision Avoidance}, accès multiple par écoute du canal avec esquive de collision), très utilisé dans les réseaux sans fil (\textsc{Ieee~802.11} entre autres).\\
+            \textit{Contention based random multiple access methods} & Accès par contention & Contention par le nœud du paquet à envoyer jusqu'à ce que le protocole le lui autorise. Dans cette catégorie se trouve notamment le protocole CSMA/CA (\textit{Carrier Sense Multiple Access with Collision Avoidance}, accès multiple par écoute du canal avec esquive de collision), très utilisé dans les réseaux sans fil (IEEE~802.11 entre autres).\\
             \midrule
             \textit{Resource reservation (scheduled) packet-mode protocols} & Réservation des ressources & Réservation par un nœud des ressources (par exemple: créneau temporel) nécessaires à la transmission)\\
             \midrule
@@ -177,17 +179,17 @@ Ces règles peuvent être contournées, et la couche \textsc{Mac} va donc se ret
 
         \paragraph{Création de collisions et brouillage « intelligent »}
 Lorsque plusieurs nœuds dont les portées se chevauchent émettent de façon simultanée en utilisant la même fréquence (donc sur un même canal), il se produit des collisions.
-La plupart des protocoles \textsc{Mac} employés avec les réseaux de capteurs introduisent dans les trames un champ contenant une somme de contrôle, qui permet de vérifier l'intégrité de la trame.
-Mais cette somme de contrôle ne permet pas, la plupart du temps, de corriger d'éventuelles erreurs (aucun des standards \textsc{Ieee} 802.11 (Wi-Fi), 802.15.1 (Bluetooth) ou 802.15.4 (ZigBee, 6Lo\textsc{wpan}) n'inclue de code de correction des erreurs).
+La plupart des protocoles MAC employés avec les réseaux de capteurs introduisent dans les trames un champ contenant une somme de contrôle, qui permet de vérifier l'intégrité de la trame.
+Mais cette somme de contrôle ne permet pas, la plupart du temps, de corriger d'éventuelles erreurs (aucun des standards IEEE 802.11 (Wi-Fi), 802.15.1 (Bluetooth) ou 802.15.4 (ZigBee, 6LoWPAN) n'inclue de code de correction des erreurs).
 Si un seul bit de la trame est altéré, celle-ci est donc rejetée par le destinataire.
 Un attaquant peut donc chercher à produire des collisions en émettant un signal en même temps qu'un nœud légitime, afin que le destinataire ne puisse pas recevoir correctement la trame qui lui est destinée.
-Ce principe de collision est identique au brouillage mené sur la couche physique; mais lorsque l'attaquant a connaissance du protocole de couche \textsc{Mac} employé, il lui est possible d'affiner son attaque, et de remplacer un brouillage « brut », continu et onéreux, par un brouillage « intelligent ».
+Ce principe de collision est identique au brouillage mené sur la couche physique; mais lorsque l'attaquant a connaissance du protocole de couche MAC employé, il lui est possible d'affiner son attaque, et de remplacer un brouillage « brut », continu et onéreux, par un brouillage « intelligent ».
 Il existe plusieurs façons de procéder~\cite{PI11}:
 \begin{itemize}
     \item la première, comme vu plus haut, n'est pas « intelligente » et consiste à brouiller les fréquences de manière continue, en produisant un bruit aléatoire;
-    \item une technique plus difficile à détecter consiste à envoyer des paquets normaux mais de façon continue, de façon à occuper le canal sans interruption. Elle empêche les nœuds légitimes de transmettre dans le cas ou le protocole de couche \textsc{Mac} est \textsc{Csma/Ca} par exemple;
+    \item une technique plus difficile à détecter consiste à envoyer des paquets normaux mais de façon continue, de façon à occuper le canal sans interruption. Elle empêche les nœuds légitimes de transmettre dans le cas ou le protocole de couche MAC est CSMA/CA par exemple;
     \item une technique plus économe consiste à envoyer des bits à intervalles distincts (réguliers ou non), dans l'espoir de créer des collisions. Il n'est alors plus nécessaire d'émettre en continu, et l'attaque est moins facile à détecter. Elle est bien sûr moins efficace, car l'attaquant n'a plus la garantie de brouiller tous les paquets émis;
-    \item les attaques « intelligentes » à proprement parler reposent sur la connaissance des spécifications du protocole \textsc{Mac} employé, et consistent à jouer sur la nature des paquets de contrôle et les délais d'attente. Ainsi, pour le protocole \textsc{Csma/Ca} employé avec la suite \textsc{Ieee~802.11}~\cite{ieee802.11}, une trame spécifique dite \textsc{Rts} (\textit{Request To Send} en anglais) de demande de réservation du canal est suivie d'une trame \textsc{Cts} (\textit{Clear To Send}) après une durée \textsc{Sifs} (\textit{Short InterFrame Space}) si le destinataire est prêt à recevoir des données. En créant une collision sur la seule trame \textsc{Cts}, l'attaquant prévient entièrement l'échange de données utiles entre les nœuds.
+    \item les attaques « intelligentes » à proprement parler reposent sur la connaissance des spécifications du protocole MAC employé, et consistent à jouer sur la nature des paquets de contrôle et les délais d'attente. Ainsi, pour le protocole CSMA/CA employé avec la suite IEEE~802.11~\cite{ieee802.11}, une trame spécifique dite RTS (\textit{Request To Send} en anglais) de demande de réservation du canal est suivie d'une trame CTS (\textit{Clear To Send}) après une durée SIFS (\textit{Short InterFrame Space}) si le destinataire est prêt à recevoir des données. En créant une collision sur la seule trame CTS, l'attaquant prévient entièrement l'échange de données utiles entre les nœuds.
 D'autres trames peuvent être utilisées dans le même but, leurs acronymes sont dans la \tabref{ea:tab:smartjam}.
 \end{itemize}
 
@@ -199,10 +201,10 @@ D'autres trames peuvent être utilisées dans le même but, leurs acronymes sont
         \toprule
         Paquet analysé & Temps d'attente & Paquet à corrompre\\
         \midrule
-        \textsc{Rts} & \textsc{Sifs} & \textsc{Cts}\\
-        \textsc{Data} & \textsc{Sifs} & \textsc{Ack}\\
-        \textsc{Rts} & \textsc{Difs} & \textsc{Data}\\
-        Quelconque & \textsc{Difs} & \textsc{Rts} ou \textsc{Data}\\
+        RTS & SIFS & CTS\\
+        DATA & SIFS & ACK\\
+        RTS & DIFS & DATA\\
+        Quelconque & DIFS & RTS ou DATA\\
         \bottomrule
     \end{tabular}
 \end{table}
@@ -212,11 +214,12 @@ Corrompre des trames à moindre coût permet à un attaquant de forcer une cible
 À chaque nouvel essai, la cible doit émettre à nouveau la trame complète, et puise donc dans ses réserves énergétiques pour alimenter son bloc d'émission.
 Étant donné qu'il est très difficile de changer la batterie d'un capteur une fois le réseau déployé, un capteur dont la batterie est vide cesse d'être opérationnel, et ne remplit plus du tout son rôle.
 L'attaquant peut donc chercher à épuiser la batterie d'un ou de plusieurs nœuds à portée, soit en leur faisant émettre plus de trames que nécessaires (collisions), soit en les retenant le plus possible en état d'activité (émission ou écoute du canal) pour les empêcher de rentrer dans un état de veille qui permet l'économie des ressources (attaque par privation de sommeil).
+Une autre méthode consiste encore à pousser la cible à mener des calculs intensifs: morsque des algorithmes cryptographiques sont mis en application notamment, chaque requête, même rejetée, se traduit par un nombre important de calculs nécessaires pour vérifier la signature d'un message.
 Si l'attaquant se sert d'un capteur corrompu ou d'un appareil équivalent pour mener son attaque, il lui est essentiel d'émettre le moins de signaux possibles pour économiser son énergie, et ne pas vider sa batterie au même rythme que ses cibles (au risque de devenir inactif avant les nœuds visés).
 
         \paragraph{Accaparement du canal de transmission}
 Un appareil compromis introduit dans le réseau peut chercher à s'octroyer un accès plus important que les agents légitimes au canal de transmission.
-Ce comportement cupide (ou \textit{greedy} en anglais) peut être atteint par exemple en jouant sur les paramètres du protocole de couche \textsc{Mac}: non respect des durées minimales \textsc{Difs} entre deux envois (pout \textsc{Ieee~802.11} par exemple), non respect des valeurs employées pour la taille des fenêtres de congestion, non respect de la réservation des ressources par d'autres nœuds, \etc.
+Ce comportement cupide (ou \textit{greedy} en anglais) peut être atteint par exemple en jouant sur les paramètres du protocole de couche MAC: non respect des durées minimales DIFS entre deux envois (pout IEEE~802.11 par exemple), non respect des valeurs employées pour la taille des fenêtres de congestion, non respect de la réservation des ressources par d'autres nœuds, \etc.
 Le but final de telles attaques peut être d'envoyer plus de données à la station de base, dans le but par exemple de fausser une moyenne, ou bien de transmettre les données écoutées (attaque sur la confidentialité) dans le voisinage à une autre machine corrompue du réseau, en vue de l'exfiltration de ces données utiles capturées.
 
         \paragraph{Falsification d'accusés de réception}
@@ -227,7 +230,7 @@ C'est une attaque qui vient compléter les techniques de brouillage de façon à
 
     \subsubsection{Couche réseau}
 %{{{2
-La couche réseau, pour les capteurs sans fils, repose le plus souvent sur le protocole \textsc{Ip} (\textit{Internet Protocol} an anglais), que ce soit en version 4 ou 6 (la version 6 est notamment utilisée avec la pile 6Lo\textsc{wpan}), pour l'adressage, et sur un protocole de routage qui détermine comment les paquets sont retransmis saut après saut dans le réseau.
+La couche réseau, pour les capteurs sans fils, repose le plus souvent sur le protocole IP (\textit{Internet Protocol} an anglais), que ce soit en version 4 ou 6 (la version 6 est notamment utilisée avec la pile 6LoWPAN), pour l'adressage, et sur un protocole de routage qui détermine comment les paquets sont retransmis saut après saut dans le réseau.
 Dans le cas d'un réseau clusterisé, il arrive que tous les capteurs soient à portée directe de leur \ch, et que ce dernier soit en mesure d'atteindre directement la station de base.
 Le routage est alors très simple.
 Mais dans d'autres cas, il est nécessaire d'établir une structure pour le réseau permettant l'acheminement des paquets jusqu'à leur destinataire.
@@ -304,16 +307,16 @@ De manière générale, en l'absence d'un système efficace d'authentification, 
     \subsubsection{Couche transport}
 %{{{2
 La couche transport gère les communications de bout en bout entre processus.
-Les protocoles les plus fréquemment utilisés, \textsc{Tcp} (\textit{Transmission Control Protocol}) et \textsc{Udp} (\textit{User Datagram Protocol}) assurent l'ordonnancement des paquets et permettent d'éviter les pertes, les doublons et la corruption des paquets.
-Le protocole \textsc{Tcp} permet en plus à deux entités de communiquer en mode connecté en établissant une session (début, fin et validation des échanges).
+Les protocoles les plus fréquemment utilisés, TCP (\textit{Transmission Control Protocol}) et UDP (\textit{User Datagram Protocol}) assurent l'ordonnancement des paquets et permettent d'éviter les pertes, les doublons et la corruption des paquets.
+Le protocole TCP permet en plus à deux entités de communiquer en mode connecté en établissant une session (début, fin et validation des échanges).
 En raison des données de contrôle que ces protocoles impliquent, ils ne sont pas systématiquement implémentés dans les réseaux de capteurs (ils le sont parfois dans des versions allégées).
 
-        \paragraph{Déluge de paquets \textsc{Syn} (ou équivalents) (\textsc{Syn flooding})}
-Les attaques par déni de service existant sur les réseaux classiques au niveau de la couche transport peuvent aussi être appliquées dans les réseaux de capteurs: par exemple, si le protocole \textsc{Tcp} est utilisé dans le réseau, un attaquant peut inonder le réseau de paquets \textsc{Syn} utilisés pour initier des connexions entre deux nœuds.
-Cette attaque requiert une machine plus puissante (surtout, avec une meilleure alimentation en énergie) qu'un capteur, mais permet à la fois de créer des congestions dans le réseau, et de saturer les capacités des capteurs en ouvrant un nombre trop grand de sessions \textsc{Tcp}.
+        \paragraph{Déluge de paquets SYN (ou équivalents) (\textit{SYN flooding})}
+Les attaques par déni de service existant sur les réseaux classiques au niveau de la couche transport peuvent aussi être appliquées dans les réseaux de capteurs: par exemple, si le protocole TCP est utilisé dans le réseau, un attaquant peut inonder le réseau de paquets SYN utilisés pour initier des connexions entre deux nœuds.
+Cette attaque requiert une machine plus puissante (surtout, avec une meilleure alimentation en énergie) qu'un capteur, mais permet à la fois de créer des congestions dans le réseau, et de saturer les capacités des capteurs en ouvrant un nombre trop grand de sessions TCP.
 
-        \paragraph{Désynchronisation \textsc{Tcp} (ou équivalents)}
-Dans le même registre, un attaquant peut forger des demande de désynchronisation pour mettre fin à des sessions \textsc{Tcp} établies entre deux entités légitimes.
+        \paragraph{Désynchronisation TCP (ou équivalents)}
+Dans le même registre, un attaquant peut forger des demande de désynchronisation pour mettre fin à des sessions TCP établies entre deux entités légitimes.
 Les échanges de ces sessions sont donc interrompus jusqu'au rétablissement d'une nouvelle connexion: ces connexions impliquent l'envoi de données de contrôle (elle s'effectue en trois temps, on parle de \textit{three-way handshake} en anglais) qui consomment une quantité d'énergie précieuse pour les capteurs.
 %2}}}
 
@@ -331,7 +334,7 @@ Les valeurs transmises au niveau application viendront alors fausser les résult
 Suivant l'application mise en place, il peut être envisageable pour un attaquant d'inonder le réseau de données utiles, qu'elles aient été effectivement mesurées ou non, soit dans une tentative de fausser les résultats obtenus par la station de base en faisant des moyennes sur les valeurs rapportées par l'ensemble des capteurs, soit pour créer des congestions dans le réseau.
 
         \paragraph{Désynchronisation}
-Si jamais le protocole utilisé sur la couche application induit la création de sessions en mode connecté (comme pour \textsc{Tcp} sur la couche transport), des attaques de désynchronisation peuvent être menées par un attaquant en vue de briser ces sessions.
+Si jamais le protocole utilisé sur la couche application induit la création de sessions en mode connecté (comme pour TCP sur la couche transport), des attaques de désynchronisation peuvent être menées par un attaquant en vue de briser ces sessions.
 %2}}}
 
     \subsubsection{Hors modèle}
@@ -349,13 +352,13 @@ Des engins munis de caméras peuvent ainsi voir leur objectif obstrué (par une 
 Les capteurs continuent dans ce cas à mesurer des valeurs et à les retransmettre jusqu'à la station de base, mais ces mesures elles-mêmes (et donc les résultats obtenus par l'exploitant) se retrouvent faussées dès le départ.
 
         \paragraph{}
-Les tables~\ref{ea:tab:layer} et~\ref{ea:tab:paradigm} synthétisent le classement de ces différentes attaques, respectivement par couche du modèle \textsc{Tcp/Ip} et par paradigme considéré.
+Les tables~\ref{ea:tab:layer} et~\ref{ea:tab:paradigm} synthétisent le classement de ces différentes attaques, respectivement par couche du modèle TCP/IP et par paradigme considéré.
 Toutes les attaques exposées dans cette sous-section ont été décrites à maintes reprises dans la littérature, et notamment réunies au travers de plusieurs études portant sur l'état de l'art de la sécurité dans les réseaux de capteurs~\cite{SSS11,RM11,AD14}
 \begin{table}[!ht]
     \newcounter{LayerNumber}
     \setcounter{LayerNumber}{1}
     \newcommand\num[1]{\theLayerNumber.~#1\stepcounter{LayerNumber}}
-    \caption{Classement des attaques par couche du modèle \textsc{Tcp/Ip}}\label{ea:tab:layer}
+    \caption{Classement des attaques par couche du modèle TCP/IP}\label{ea:tab:layer}
     \centering
     \medskip
     \begin{small}
@@ -387,8 +390,8 @@ Toutes les attaques exposées dans cette sous-section ont été décrites à mai
                 & \num{Attaque Sybil}\\
             \midrule
             \multirow{2}{*}{Couche transport}%
-                & \num{Déluge \textsc{Tcp} (ou équivalents)}\\
-                & \num{Désynchronisation \textsc{Tcp} (ou équivalents)}\\
+                & \num{Déluge TCP (ou équivalents)}\\
+                & \num{Désynchronisation TCP (ou équivalents)}\\
             \midrule
             \multirow{3}{*}{Couche application}%
                 & \num{Données erronées}\\
@@ -422,6 +425,10 @@ Toutes les attaques exposées dans cette sous-section ont été décrites à mai
          \end{tabular}
      \end{small}
 \end{table}
+
+Il est bien sûr très difficile de prétendre à l'exhaustivité, et il existe d'autres attaques de déni de service applicables au réseaux de capteurs: certaines dépendent d'applications particulières ou sont introduites par des configurations spécifiques (mobilité des nœuds, structures spécifiques: grille, recherche de couverture maximale\dots).
+D'autres n'ont sans doute pas encore été découvertes.
+Les attaques que nous avons présentées regroupent néanmoins les principales menaces, en termes de déni de service, auxquelles peuvent faire face les réseaux de capteurs.
 %2}}}
 %1}}}
 
@@ -439,60 +446,20 @@ Les attaques par désynchronisation, ou la falsification d'accusés de réceptio
 Si des mécanismes permettant de limiter le rejeu de paquets capturés sont rajoutés, l'ampleur des attaques Sybil ainsi que des attaques par trou de ver se verront fortement réduites.
 La protection de l'intégrité des données assure de son côté l'échec de toute tentative d'altération des valeurs transmises lors des opérations de routage.
 
-Les mécanismes dédiés à la protection de l'authentification, de l'intégrité, ou contre le rejeu sont donc également utiles pour protéger un réseau de capteurs de certaines attaques de déni de service.
+Les mécanismes dédiés à la protection de l'authentification, de l'intégrité, ou contre le rejeu, présentés en \sref{ea:sec:secu}, sont donc également utiles pour protéger un réseau de capteurs de certaines attaques de déni de service.
 On parle de mesures de prévention, dans le sens où il s'agit de méthodes mises en place pour empêcher une attaque de survenir.
-
-
-%{{{3
-% ======== >>> §1 <<<
-% Denial of service attack-resistant flooding authentication in wireless sensor networks
-%\subsection{[JS10] -- Inchangé}
-
-\textit{Son et al}. propose in
-\cite{SLS10}
-a novel broadcast authentication mechanism to cope with DoS attacks in sensor networks.
-This scheme uses an asymmetric distribution of keys between sensor nodes and the BS, and uses the Bloom filter as an authenticator, which efficiently compresses multiple authentication information.
-In this model, the BS or sink shares symmetric keys with each sensor node, and proves its knowledge of the information through multiple MAC values in its flooding messages.
-When the sink floods the network with control messages it constructs a Bloom filter as an authenticator for the message.
-When a sensor node receives a flooded control message, it generates their Bloom filter with its keys and in the same way the sink verifies message authentication.
-
-% Denial of service attack-resistant flooding authentication in wireless sensor networks
-A novel broadcast authentication mechanism can also be deployed so as to cope with DoS attacks in sensor networks such as in~\cite{SLS10}.
-This scheme uses an asymmetric distribution of keys between sensor nodes and the BS, and uses the Bloom filter as an authenticator, which efficiently compresses multiple authentication information.
-In this model, the BS or sink shares symmetric keys with each sensor node, and proves its knowledge of the information through multiple MAC values in its flooding messages.
-When the sink floods the network with control messages it constructs a Bloom filter as an authenticator for the message.
-When a sensor node receives a flooded control message, it generates their Bloom filter with its keys and in the same way the sink verifies message authentication.
-%3}}}
 
 %2}}}
 
     \subsubsection{Des protocoles de routage spécifiques}
 %{{{2
+Toujours dans le but de prévenir les attaques, il est possible d'utiliser des protocoles de routage spécifiquement étudiés pour limiter les risques.
+Ainsi, le protocole de routage AODV (\textit{Ad hoc On-demand Distance Vector routing}), très utilisé dans les réseaux de capteurs, a fait l'objet de propositions destinées à améliorer sa résistance aux attaques de déni de service de type \textit{blackhole} et \textit{sinkhole}: une étude propose par exemple de faire vérifier par chaque nœud, lors de la création des routes, que ses voisins de deuxième degré sont bel et bien accessibles~\cite{DLA02}.
+Ainsi chaque nœud $x$ ayant un voisin $n$ qui lui propose une route vers une destination donnée, $x$ demande à $n$ quel est le prochain saut $n+1$ sur cette route et tente de contacter ce nœud $n+1$ pour vérifier qu'il est effectivement accessible.
+Si $n+1$ répond, alors $n$ est digne de confiance pour cette route; puisqu'il est digne de confiance, on admet qu'il pourra à son tour vérifier l'accessibilité du nœud $n+2$ à travers le saut annoncé par $n+1$, et ainsi de suite tout au long de la route empruntée pour les données.
 
-Various studies have been realized in the purpose of countering one specific kind of attack, sometimes on specific protocols, thus leading to the proposals of hardened versions of AODV\cite{DLA02} or DSR\cite{CT04} for instance.
-
-
-
-
-%{{{3
-% ======== >>> §2 <<<
-%\subsection{[LO07] -- Modifié}
-%% OLD VERSION
-%Hierarchical sensor networks where clusters are formed dynamically and periodically using the LEACH algorithm, allow to distribute the energy load among sensor nodes.
-%The problem of adding security to this type of network is raised by \textit{Oliveira et al}
-%\cite{LO07}
-%who propose SecLEACH which is a revised version of LEACH.
-%It applies random key pre-distribution and $\mu$TESLA.
-%They can be used both to secure communications in a hierarchical network with dynamic cluster establishment.
-
-%% SecLEACH -- On the security of clustered sensor networks
-A sensor network may be recursively and periodically reclustered with an algorithm such as \leach, as in our proposal.
-The resulting hierarchically clustered network often presents a good ability for distributing the energy consumption among the sensor nodes.
-But security concerns (other than DoS) also apply to those networks.
-In~\cite{OFVWBDL07}, the authors propose to add security mechanisms \via a revised version of \leach protocol.
-\textit{SecLEACH}\ uses random key pre-distribution as well as $\mu$TESLA (authenticated broadcast) so as to protect communications.
-But the authors do not mention any mechanism to fight DoS attacks.
-%3}}}
+Toujours pour parer aux attaques sur le routage, d'autres méthodes se basent sur des mécanismes de redondance et de résilience, pour faire en sorte que si l'une des routes se révèle défectueuse, d'autres exemplaires des paquets, envoyés par des routes distinctes, puissent attendre leur destination.
+Des mécanismes tels que le partage de secret peuvent être utilisés à cette fin de redondance, pour limiter l'augmentation du volume de données envoyées~\cite{MMB13}.
 
 %2}}}
 
@@ -513,7 +480,7 @@ Un mécanisme pour disséminer l'information, basé sur le modèle des épidémi
 Si l'on se concentre uniquement sur le déni de service, il est tout à fait possible d'imaginer l'utilisation de techniques similaires afin de dissimuler à l'attaquant quels sont les nœuds à compromettre pour infliger un maximum de dégâts au bon fonctionnement du réseau.
 
 Une autre approche possible~\cite{Ho10} est de considérer que tout capteur ayant cessé de donner des « signes de vie » pendant une période prolongée est devenu hors-service, et qu'à ce titre il n'est plus censé réintégrer le réseau à l'avenir.
-Cette période est par exemple déterminée à l'aide d'un algorithme \textsc{Sprt} (\textit{Sequential Probability Radio Test}) qui calcule la durée au-delà de laquelle l'absence de signal devient anormal.
+Cette période est par exemple déterminée à l'aide d'un algorithme SPRT (\textit{Sequential Probability Radio Test}) qui calcule la durée au-delà de laquelle l'absence de signal devient anormal.
 Si le nœud tentait malgré tout de reprendre son activité au-delà de la période, alors supposition est faite que le capteur a été retiré du réseau par un attaquant le temps de procéder à une modification de son code, et ce nœud se retrouve alors volontairement exclu du réseau par mesure de précaution.
 %3}}}
 
@@ -535,12 +502,35 @@ La sécurité du système peut éventuellement être spécifiquement renforcée,
 \subsection{Détecter puis déjouer les attaques}
 %{{{1
 
+Les architectures de sécurité plus complexes traitées en \sssref{ea:sss:archi} introduises par ailleurs des mécanismes qui sont fréquemment réutilisés dans d'autres solutions qui visent également à prévenir les attaques de déni de service.
 %{{{3
-\textsc{Olsr} (\textit{Optimized Link State Routing protocol}) est l'un des protocoles de routages souvent déployé dans les réseaux de capteurs.
-Une nouvelle version de ce protocole, appelée \textsc{Dlsr}~\cite{MKASF10}, a été proposée en vue de reprendre ses fonctionnalités tout en ajoutant des mécanismes de détection contre les attaques de déni de service distribuées.
+OLSR (\textit{Optimized Link State Routing protocol}) est l'un des protocoles de routages souvent déployé dans les réseaux de capteurs.
+Une nouvelle version de ce protocole, appelée DLSR~\cite{MKASF10}, a été proposée en vue de reprendre ses fonctionnalités tout en ajoutant des mécanismes de détection contre les attaques de déni de service distribuées.
 Lorsque la station de base reçoit un trafic trop important, qui menace de saturer sa capacité de traitement ou bien qui crée de trop fortes congestions sur ses liens, elle envoie un signal dans tout le réseau en vue de prévenir les nœuds; le trafic est alors analysé, par chaque nœud-relais, par un automate d'apprentissage afin de détecter et supprimer les paquets malveillants.
-\textsc{Dlsr} fait signaler par la station de base la fin de l'attaque, afin que les nœuds cessent les opérations nécessaires au filtrage des paquets.
+DLSR fait signaler par la station de base la fin de l'attaque, afin que les nœuds cessent les opérations nécessaires au filtrage des paquets.
 %3}}}
+%{{{3
+% ======== >>> §2 <<<
+%\subsection{[LO07] -- Modifié}
+%% OLD VERSION
+%Hierarchical sensor networks where clusters are formed dynamically and periodically using the LEACH algorithm, allow to distribute the energy load among sensor nodes.
+%The problem of adding security to this type of network is raised by \textit{Oliveira et al}
+%\cite{LO07}
+%who propose SecLEACH which is a revised version of LEACH.
+%It applies random key pre-distribution and $\mu$TESLA.
+%They can be used both to secure communications in a hierarchical network with dynamic cluster establishment.
+
+%% SecLEACH -- On the security of clustered sensor networks
+A sensor network may be recursively and periodically reclustered with an algorithm such as \leach, as in our proposal.
+The resulting hierarchically clustered network often presents a good ability for distributing the energy consumption among the sensor nodes.
+But security concerns (other than DoS) also apply to those networks.
+In~\cite{OFVWBDL07}, the authors propose to add security mechanisms \via a revised version of \leach protocol.
+\textit{SecLEACH}\ uses random key pre-distribution as well as $\mu$TESLA (authenticated broadcast) so as to protect communications.
+But the authors do not mention any mechanism to fight DoS attacks.
+%3}}}
+
+
+REWARD
 
 \subsubsection{HIDS}\label{ea:sss:hids}
 Some researchers prefer to ensure that nodes are not physically withdrawn from the network to get modified\cite{Ho10}, considering any returning node as compromised (but not detecting nodes modified on site), or to verify by means of mobile agents that the binary code run by the nodes has not been modified\cite{HR13}, although this solution makes use of cryptography mechanisms and can limit the evolution of the network.
