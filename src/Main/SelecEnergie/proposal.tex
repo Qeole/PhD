@@ -3,12 +3,12 @@
 
 Le \chapref{sa} expose un algorithme de sélection pseudo-aléatoire des nœuds de surveillance.
 L'un des inconvénients de cet algorithme est que l'énergie résiduelle des capteurs, \cad le niveau d'énergie restant dans leur batterie, n'est pas mesurée, et surtout n'est pas prise en compte lors du processus de renouvellement des \cns.
-Pourtant, la surveillance que ces derniers mènent dans leur \cluster entraîne une consommation énergétique accrue, puisqu'ils doivent demeurer en écoute sur le médium de façon continue.
+Pourtant, la surveillance que ces derniers mènent dans leur cluster entraine une consommation énergétique accrue, puisqu'ils doivent demeurer en écoute sur le médium de façon continue.
 
 Dans ce chapitre, une deuxième méthode de sélection des \cns est introduite.
 Le concept initial de l'algorithme est extrêmement simple: à chaque renouvellement du processus, l'énergie résiduelle des capteurs est évaluée, et ceux possédant le plus de réserves deviennent \cns.
-Le but de cette méthode est évidemment d'atteindre une meilleure répartition de la consommation d'énergie dans le \cluster: les capteurs possédant le plus haut niveau de charge de leur batterie se verront attribuer le rôle qui consomme le plus d'énergie.
-Néanmoins, la perte de l'aspect aléatoire au profit d'une méthode purement déterministe va entraîner un certain nombre de contraintes en termes de sécurité et de couverture spatiale.
+Le but de cette méthode est évidemment d'atteindre une meilleure répartition de la consommation d'énergie dans le cluster: les capteurs possédant le plus haut niveau de charge de leur batterie se verront attribuer le rôle qui consomme le plus d'énergie.
+Néanmoins, la perte de l'aspect aléatoire au profit d'une méthode purement déterministe va entrainer un certain nombre de contraintes en termes de sécurité et de couverture spatiale.
 
     \subsection{Utilisation des \vns pour sécuriser le processus de sélection}\label{se:subsubsec:elec1}
 
@@ -133,7 +133,7 @@ Au contraire, nous préférons obtenir l'énergie annoncée par les nœuds pour 
 Les \cns appliquent un mécanisme très simple de surveillance par la confiance dans le cluster: lorsqu'un capteur enfreint une règle, par exemple lorsque le débit des paquets qu'il envoie excède un seuil prédéterminé, il est considéré comme indigne de confiance (compromis).
 Il existe de nombreux autres mécanismes de confiance dans la littérature, et la plupart sont plus élaborés que le modèle présenté ici \todo{set ref to related work}.
 Les \cns pourraient en réalité implémenter de nombreux autres mécanismes, par exemple en décrémentant un score de réputation pour chaque comportement suspect observé chez un nœud.
-Mais comme des systèmes plus complexes entraîneraient une augmentation des messages de contrôle (\textit{overhead}), il a semblé naturel de se limiter à cette méthode plus simple dans la présente étude.
+Mais comme des systèmes plus complexes entraineraient une augmentation des messages de contrôle (\textit{overhead}), il a semblé naturel de se limiter à cette méthode plus simple dans la présente étude.
 
 \paragraph{Alourdissement du modèle}
 La solution introduite de par le recours aux \vns consiste littéralement à choisir des nœuds chargés de surveiller les surveillants: le concept de surveillance devient récursif.

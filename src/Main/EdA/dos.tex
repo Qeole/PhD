@@ -16,7 +16,7 @@ Les réseaux de capteurs se retrouvent malheureusement très exposés aux attaqu
     \item leur exposition aux attaques physiques;
     \item la faible fiabilité du medium de transmission, en termes de confidentialité ou de collisions
     \item leur gestion réalisée à distance;
-    \item l'absence d'une gestion centralisée (et l'impossibilité de connaître avec précision le statut des autres nœuds);
+    \item l'absence d'une gestion centralisée (et l'impossibilité de connaitre avec précision le statut des autres nœuds);
 \end{itemize}
 
 Dans cette section nous présenterons d'abord les principales attaques répertoriées dans les réseaux de capteurs, puis nous aborderons les mécanismes proposés en réponse dans la littérature.
@@ -58,7 +58,7 @@ Un attaquant peut n'avoir à disposition qu'un capteur normal (\textit{mote-clas
 Il se retrouve dans ce cas avec des machines similaires aux appareils attaqués, mais n'a pas besoin de rester sur place et peut mener des attaques sur la durée.
 Il peut également être équipé d'un ordinateur plus puissant (\textit{laptop-class attacks}), voir de matériel militaire spécialisé.
 Dans ce cas, il est plus aisé de déployer de la puissance (puisque l'attaquant peut s'affranchir des limites imposées par les batteries des capteurs) et par exemple de brouiller en continu toute une plage de fréquence.
-Il faut néanmoins que le matériel utilisé reste déployé le temps de mener l'attaque, ce qui peut s'avérer coûteux sur la durée.
+Il faut néanmoins que le matériel utilisé reste déployé le temps de mener l'attaque, ce qui peut s'avérer couteux sur la durée.
 %2}}}
 
 \subsubsection{Attaques actives, passives}
@@ -133,7 +133,7 @@ L'attaque peut être menée de façon sporadique, de manière à produire un dé
 Si la ou les machine(s) émettant le signal parasite possède(nt) une portée suffisante pour couvrir toute l'étendue géographique du réseau, l'intégralité des capteurs peuvent se retrouver dans l'impossibilité d'utiliser les fréquences brouillées.
 Si de plus, le brouillage est mené sur toute la plage de fréquences accessibles aux capteurs, les communications deviennent totalement impossibles à établir dans le réseau.
 
-Il est à noter que mener une telle attaque peut être coûteux en matériel pour l'attaquant, surtout s'il vise plusieurs fréquences et/ou un brouillage continu dans le temps.
+Il est à noter que mener une telle attaque peut être couteux en matériel pour l'attaquant, surtout s'il vise plusieurs fréquences et/ou un brouillage continu dans le temps.
 Typiquement, un capteur corrompu ne sera pas en mesure de mener cette attaque sans épuiser très rapidement sa batterie.
 %2}}}
 
@@ -163,7 +163,7 @@ Ces règles peuvent être contournées, et la couche MAC va donc se retrouver as
             \midrule
             \textit{Time division multiple access} (TDMA) & Accès multiple à répartition dans le temps & Un seul canal dont l'accès est réparti par créneaux dans le temps\\
             \midrule
-            \textit{Space division multiple access} (SDMA) & Accès multiple à répartition dans l'espace & Plusieurs canaux spatiaux obtenus à l'aide d'antennes directionnelles. À noter: les antennes directionnelles augmentent sensiblement le coût de production des capteurs.\\
+            \textit{Space division multiple access} (SDMA) & Accès multiple à répartition dans l'espace & Plusieurs canaux spatiaux obtenus à l'aide d'antennes directionnelles. À noter: les antennes directionnelles augmentent sensiblement le cout de production des capteurs.\\
             \midrule
             \multicolumn{3}{c}{Mode d'accès par paquet}\\
             \midrule
@@ -210,7 +210,7 @@ D'autres trames peuvent être utilisées dans le même but, leurs acronymes sont
 \end{table}
 
         \paragraph{Épuisement de la batterie}
-Corrompre des trames à moindre coût permet à un attaquant de forcer une cible à émettre davantage de trames que prévu, puisqu'un échec de communication est généralement suivi de plusieurs autres tentatives.
+Corrompre des trames à moindre cout permet à un attaquant de forcer une cible à émettre davantage de trames que prévu, puisqu'un échec de communication est généralement suivi de plusieurs autres tentatives.
 À chaque nouvel essai, la cible doit émettre à nouveau la trame complète, et puise donc dans ses réserves énergétiques pour alimenter son bloc d'émission.
 Étant donné qu'il est très difficile de changer la batterie d'un capteur une fois le réseau déployé, un capteur dont la batterie est vide cesse d'être opérationnel, et ne remplit plus du tout son rôle.
 L'attaquant peut donc chercher à épuiser la batterie d'un ou de plusieurs nœuds à portée, soit en leur faisant émettre plus de trames que nécessaires (collisions), soit en les retenant le plus possible en état d'activité (émission ou écoute du canal) pour les empêcher de rentrer dans un état de veille qui permet l'économie des ressources (attaque par privation de sommeil).
@@ -234,7 +234,7 @@ La couche réseau, pour les capteurs sans fils, repose le plus souvent sur le pr
 Dans le cas d'un réseau clusterisé, il arrive que tous les capteurs soient à portée directe de leur \ch, et que ce dernier soit en mesure d'atteindre directement la station de base.
 Le routage est alors très simple.
 Mais dans d'autres cas, il est nécessaire d'établir une structure pour le réseau permettant l'acheminement des paquets jusqu'à leur destinataire.
-Un protocole de routage efficace doit minimiser les pertes de paquets ainsi que les coûts de retransmission et éviter la création de boucles dans le réseau.
+Un protocole de routage efficace doit minimiser les pertes de paquets ainsi que les couts de retransmission et éviter la création de boucles dans le réseau.
 À l'inverse, un attaquant peut tenter de mener une attaque par déni de service en gênant le plus possible l'acheminement de ces paquets.
 
         \paragraph{Trou noir (\textit{blackhole})}
@@ -259,7 +259,7 @@ Plusieurs autres attaques présentées ci-dessous reposent sur la falsification 
 
         \paragraph{Puits (\textit{sinkhole})}
 Une attaque \textit{sinkhole} en anglais est la combinaison d'une attaque de type « trou noir » avec la diffusion de fausses informations de routage, en vue d'attirer le maximum de paquets possible vers le nœud attaquant.
-Concrètement, un nœud corrompu peut se déclarer voisin direct de la station de base et annoncer une route de coût nul vers cette dernière.
+Concrètement, un nœud corrompu peut se déclarer voisin direct de la station de base et annoncer une route de cout nul vers cette dernière.
 Ses voisins vont estimer qu'il s'agit du plus court chemin pour acheminer les paquets jusqu'à la station de base, et vont transmettre l'information à leur tour.
 Au final une part importante des routes créées, et en conséquence du trafic routé, va passer par ce nœud compromis, ce qui peut mener à des congestions dans le réseau.
 Rentre alors en jeu l'attaque \textit{blackhole}, qui supprime tous les paquets reçus plutôt que de les retransmettre à leur destinataire légitime.
@@ -340,7 +340,7 @@ Si jamais le protocole utilisé sur la couche application induit la création de
     \subsubsection{Hors modèle}
 %{{{2
         \paragraph{Destruction physique des capteurs}
-Les capteurs sont des appareils de petite taille déployés en nombre, et dont la production ne doit par conséquent pas être trop coûteuse.
+Les capteurs sont des appareils de petite taille déployés en nombre, et dont la production ne doit par conséquent pas être trop couteuse.
 Cela implique que les appareils sont relativement fragiles, et d'autant plus difficiles à sécuriser que le réseau est souvent déployé en extérieur, parfois en environnement hostile.
 Un attaquant peut donc parfois accéder directement au capteur lui-même.
 C'est l'une des manières de s'emparer d'un capteur pour le reprogrammer et introduire un agent corrompu dans le réseau (l'autre méthode reposant sur des failles logicielles, qui permettent parfois l'injection distante de code).

@@ -48,7 +48,7 @@ Un usage intéressant de la cryptographie est le recours au chiffrement dit « 
 Proposés pour les réseaux de capteurs~\cite{BBTY14}, ces algorithmes permettent de procéder, dans une certaine mesure, à des opérations de compression et d'agrégation de données (par exemple) au cours du trajet d'un paquet, sans avoir à déchiffrer puis chiffrer à nouveau son contenu à chaque étape.
 
 À part les solutions de chiffrement, d'autres méthodes consistent plus simplement à compliquer l'accès aux paquets plutôt qu'à chiffrer le contenu.
-Moins robustes, ces solutions sont aussi moins coûteuses en termes de calculs et, \infine, de consommation énergétique.
+Moins robustes, ces solutions sont aussi moins couteuses en termes de calculs et, \infine, de consommation énergétique.
 Certaines méthodes proposent ainsi de découper les paquets à envoyer en fragments, qui seront envoyés à travers le réseau par des routes distinctes.
 Ces fragments seront combinés de telle sorte que seule la détention d'un certain nombre d'entre eux permette de reconstituer le message original.
 Cette combination des fragments peut faire appel à des mécanismes très simples, par exemple un « ou exclusif » logique comme avec la méthode SDMP (\textit{Securing Data based on Multi-Path routing})~\cite{BM10}, ou bien à un mécanisme un peu plus élaboré de partage de secret entre plusieurs entités, comme l'a proposé par exemple \textsc{Schamir}~\cite{Sha79}.
@@ -63,7 +63,7 @@ Nous avons ainsi proposé une solution pour assurer la confidentialité des éch
 \end{itemize}
 
 Il est à noter qu'aucune des méthodes présentées ici, qu'elles reposent ou non sur l'usage de chiffrement, n'empêchent un attaquant de pouvoir récolter des métadonnées sur les échanges effectués, et d'en déduire par exemple qui communique avec qui, ou quel est le volume des données échangées.
-Ces métadonnées n'ont que rarement une valeur importante dans les réseaux de capteurs, et peuvent être en partie masquées, au besoin, par l'envoi de faux messages supplémentaires pour « brouiller les pistes », mais cela s'avèrerait très coûteux pour le réseau.
+Ces métadonnées n'ont que rarement une valeur importante dans les réseaux de capteurs, et peuvent être en partie masquées, au besoin, par l'envoi de faux messages supplémentaires pour « brouiller les pistes », mais cela s'avèrerait très couteux pour le réseau.
 
 \subsection{Intégrité, authentification, non-répudiation, rejeu}
 
@@ -112,7 +112,7 @@ Les solutions proposées sont multiples~\cite{HI12,GWZC13,SS14-rev}; nous allons
 Ainsi SPINS (\textit{Security Protocols for Sensor Networks}), élaboré en 2002~\cite{PSWCT02}, est l'une des premières solutions proposées dans la littérature pour sécuriser les échanges dans les réseaux de capteurs, et sert de base pour de nombreuses solutions plus récentes.
 Il s'agit d'un système reposant sur deux blocs: SNEP (\textit{Secure Network Encryption Protocol}) fournit la confidentialité, l'authentification entre deux parties, l'intégrité et la protection contre le rejeu, le tout en préservant un faible volume de données de contrôle en en-tête des paquets.
 Des codes d'authentification des messages associés à un compteur partagé entre les interlocuteurs, et utilisé pour le bloc de chiffrement (le compteur est incrémenté après chaque bloc), sont employés à cette fin.
-Le second bloc est appelé $\mu$TESLA (version « micro » du \textit{Timed, Efficient, Streaming, Loss-tolerant Authentication Protocol}), il fournit des diffusions générales (\textit{broadcast}) authentifiées à l'aide de chaînes de clés: ces chaînes à sens uniques fournissent des clés associées à chaque intervalle de temps pour la signature des messages.
+Le second bloc est appelé $\mu$TESLA (version « micro » du \textit{Timed, Efficient, Streaming, Loss-tolerant Authentication Protocol}), il fournit des diffusions générales (\textit{broadcast}) authentifiées à l'aide de chaines de clés: ces chaines à sens uniques fournissent des clés associées à chaque intervalle de temps pour la signature des messages.
 Les paquets ainsi envoyés pendant l'intervalle en cours sont signés de manière symétrique à l'aide de la clé, tenue secrète correspondant à l'intervalle temporel; à la fin de cet intervalle, la clé est envoyée à tous les correspondants qui peuvent alors vérifier la légitimité des paquets enregistrés pendant la période.
 Le module SNEP a fait l'objet d'études comparatives sur les performances que lui confèrent différents algorithmes de chiffrement~\cite{SS14-snep}.
 
@@ -122,7 +122,7 @@ Elle écarte volontairement la protection contre le rejeu, mais se penche très 
 Les algorithmes possibles de chiffrement, leurs différents modes, leurs vecteurs d'initialisation, les codes d'authentification, les mécanismes d'échange de clés possibles sont tous analysés en détail, afin de déterminer les avantages et les inconvénients de chacun pour un réseau de capteurs.
 
 MiniSec~\cite{LMPG07} est basé sur TinySec.
-Au mode CBC (\textit{Cipher Block Chaining mode}, mode par enchaînement des blocs), cette architecture proposée en 2007 préfère l'utilisation du mode de chiffrement OBC (\textit{Offset CodeBook mode}, « dictionnaire avec décalage »), qui réalise à la fois le chiffrement et la signature des données et ne nécessite donc pas de code d'authentification distinct.
+Au mode CBC (\textit{Cipher Block Chaining mode}, mode par enchainement des blocs), cette architecture proposée en 2007 préfère l'utilisation du mode de chiffrement OBC (\textit{Offset CodeBook mode}, « dictionnaire avec décalage »), qui réalise à la fois le chiffrement et la signature des données et ne nécessite donc pas de code d'authentification distinct.
 Elle adopte une approche particulière du vecteur d'initialisation pour le chiffrement, qui lui permet de minimiser le volume des données d'en-tête.
 Enfin elle fait une distinction entre les diffusions nœud-à-nœud et les diffusions générales, pour lesquelles un filtre de \textsc{Bloom} est utilisé, avec pour objectif final de réduire sensiblement l'énergie consommée lors des envois.
 
@@ -165,15 +165,15 @@ La \tabref{ea:tab:proto} compare brièvement les fonctionnalités apportées par
             \toprule
             \textsc{Archi\-tecture} & \textsc{Mode de chiffrement} & \textsc{Algorithme de chiffrement} & \textsc{Clés utilisées}                                                        & \textsc{Sécurité apportée}                                                            & \textsc{Année}\\
             \midrule
-            SPINS                   & CTR                          & RC5                                & Clé maîtresse, chaîne de clés symétriques                                      & *: Chiffrement, authentification et intégrité des données, protection contre le rejeu & 2002\\
+            SPINS                   & CTR                          & RC5                                & Clé maitresse, chaine de clés symétriques                                      & *: Chiffrement, authentification et intégrité des données, protection contre le rejeu & 2002\\
             TinySec                 & CBC                          & Au choix                           & Au choix                                                                       & (*) moins protection contre le rejeu                                                  & 2004\\
             TinyKey                 & CBC-MAC                      & SkipJack                           & Clés pré-installées sur les nœuds                                              & (*)                                                                                   & 2011\\
             MiniSec                 & OBC ou CBC-MAC               & SkipJack ou RC5                    & Clés pré-installées sur les nœuds                                              & (*)                                                                                   & 2007\\
             LEAP                    & RC5                          & RC5                                & Clé individuelle, clé globale, clé de cluster, clés pair-à-pair                & (*)                                                                                   & 2003\\
             LEAP+                   & RC5                          & RC5                                & Clé individuelle, clé globale, clé de cluster, clés pair-à-pair                & (*)                                                                                   & 2006\\
-            pDCS                    & RC5                          & RC5                                & Clé maîtresse, clés pair-à-pairs, clés de cellule, clés de rangée, clé globale & (*) plus dissimulation de la provenance des données                                   & 2009\\
+            pDCS                    & RC5                          & RC5                                & Clé maitresse, clés pair-à-pairs, clés de cellule, clés de rangée, clé globale & (*) plus dissimulation de la provenance des données                                   & 2009\\
             ERP-DCS                 & RC5                          & RC5                                & Clés pair-à-pair, clé de cellule, clé ESB                                      & (*) plus dissimulation de la provenance des données                                   & 2013\\
-            ZigBee                  & CBC-MAC                      & AES, modes CTR ou CCM              & Clé maîtresse, clés pair-à-pair, clé globale                                   & (*)                                                                                   & 2005\\
+            ZigBee                  & CBC-MAC                      & AES, modes CTR ou CCM              & Clé maitresse, clés pair-à-pair, clé globale                                   & (*)                                                                                   & 2005\\
             \bottomrule
         \end{tabular}
     \end{footnotesize}

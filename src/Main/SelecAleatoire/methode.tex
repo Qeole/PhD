@@ -114,7 +114,7 @@ Si ce nombre est en-dessous du pourcentage de \cns désirés dans le réseau (et
 Autrement, il reste un capteur normal.
 
 Cette méthode présente deux inconvénients.
-Tout d'abord, elle impose à chaque nœud de calculer un nombre pseudo-aléatoire --- calcul parfois coûteux ---, ce qui n'est pas nécessaire avec les deux autres méthodes.
+Tout d'abord, elle impose à chaque nœud de calculer un nombre pseudo-aléatoire --- calcul parfois couteux ---, ce qui n'est pas nécessaire avec les deux autres méthodes.
 Ensuite, chaque nœud choisit lui-même de se désigner (ou non) \cn, sans tenir compte de la décision de ses voisins.
 Si bien que l'élection des \cns ne prend en compte à aucun moment la clusterisation du réseau.
 Il est très peu probable que les \cns ainsi élus soient uniformément répartis entre les différents $2$-clusters du réseau.
@@ -151,8 +151,8 @@ L'élection centralisée peut également être effectuée au niveau de la statio
     \caption{Élection des \cns réalisée par la station de base}\label{sa:fig:elecbs}
 \end{figure}
 Les $2$-\CH du réseau font alors remonter à la \BS la liste des nœuds de leurs $2$-clusters respectifs, et la \BS retourne une liste de \cns pour chacun d'entre eux.
-Les capacités (en mémoire, calcul, énergie) de la station de base étant considérées comme illimitées, cette méthode a pour avantage de déporter toutes les tâches coûteuses dans un environnement «~sans contraintes~».
-Le calcul des nombres pseudo-aléatoires par la station de base ne lui coûte, pour ainsi dire, rien.
+Les capacités (en mémoire, calcul, énergie) de la station de base étant considérées comme illimitées, cette méthode a pour avantage de déporter toutes les tâches couteuses dans un environnement «~sans contraintes~».
+Le calcul des nombres pseudo-aléatoires par la station de base ne lui coute, pour ainsi dire, rien.
 
 En revanche cette méthode n'offre pas une meilleure fiabilité que la précédente.
 Si un nœud compromis se déclare en temps que \CH, il risque fortement d'annoncer à la \BS que son cluster est vide (il enverrait une liste vide en lieu et place de la liste des capteurs qui sont réellement présents dans son cluster).

@@ -5,10 +5,10 @@
 Nous avons détaillé la solution proposée. À présent, nous allons présenter plusieurs modèles possibles permettant de représenter cette solution, et d'en évaluer les performances selon divers critères.
 
 %===============================================================================
-    \subsection{Chaînes de Markov}
+    \subsection{Chaines de Markov}
 
         \subsubsection{Présentation et hypothèses de travail}
-Nous avons modélisé notre solution sous la forme d'un processus de Markov à temps continu (CMTC, pour chaîne de Markov à temps continu).
+Nous avons modélisé notre solution sous la forme d'un processus de Markov à temps continu (CMTC, pour chaine de Markov à temps continu).
 
 Notre modèle représente un cluster d'un réseau de capteurs sans fil qui vérifie les hypothèses suivantes:
 \begin{itemize}
@@ -71,7 +71,7 @@ La fonction $f$ est appliquée sur l'ensemble des $x_{k_i}$, $i$ allant de $1$ �
 Si l'un des capteurs a envoyé un nombre de paquets supérieur à la valeur de seuil (\cad si l'on a $f(x_k)\geq \mathit{seuil}$), le drapeau $x_{k_d}$ est levé.
 Un message d'alerte est alors envoyé du \cn $k$ au \ch.
 Si, en revanche, aucune anomalie n'est à rapporter, le drapeau $x_{k_i}$ est laissé à $0$, et rien n'est envoyé.
-Dans les deux cas, tous les compteurs $x_{k_i}$ sont réinitialisés à $0$, afin que la prochaine vérification soit effectuée sur des données «~fraîches~» (et pour ne pas déclencher par erreur une fausse détection par cumul des nombres de paquets envoyés d'une période sur l'autre).
+Dans les deux cas, tous les compteurs $x_{k_i}$ sont réinitialisés à $0$, afin que la prochaine vérification soit effectuée sur des données «~fraiches~» (et pour ne pas déclencher par erreur une fausse détection par cumul des nombres de paquets envoyés d'une période sur l'autre).
 
 La probabilité de détection du nœud compromis par le \cn $k$, notée $\Delta_k$, est la suivante:
 \[\Delta_k=\sum_{x_{k_1},\dots,x_{k_s}}^\infty\pi(x_{k_1},\dots,x_{k_s},x_{k_d}=1)\]
@@ -191,7 +191,7 @@ La représentation du cluster est donnée en figure~\ref{sa:fig:petricluster}.
     \includegraphics[width=\linewidth]{\chapterfig/PetriNet_DoS_9x9_fixedGnodes.pdf}
     \caption{Modèle RPSGE d'un cluster (topologie: grille $3\times3$) comprenant un nœud compromis et deux \cns statiques}\label{sa:fig:petricluster}
 \end{figure}
-Également dans l'optique de simplifier la représentation graphique, les transitions \textsf{e-on} et \textsf{e-end}, ainsi que la place \textsf{emptying buff}, ont été remplacées par une boîte blanche associée à la fonction de vidage de la place \textsf{In\_buff} des nœuds.
+Également dans l'optique de simplifier la représentation graphique, les transitions \textsf{e-on} et \textsf{e-end}, ainsi que la place \textsf{emptying buff}, ont été remplacées par une boite blanche associée à la fonction de vidage de la place \textsf{In\_buff} des nœuds.
 
             \paragraph{\cns élus de façon dynamique}
 L'élection dynamique des \cns vient compliquer un peu la modélisation de notre cluster.
