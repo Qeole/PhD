@@ -502,11 +502,93 @@ La sécurité du système peut éventuellement être spécifiquement renforcée,
 
 \subsubsection{Différents systèmes de détection d'intrusion}
 %{{{2
-IDS!!!!!!!!!!!
-
+La détection des attaques de déni de service passe par la mise en place d'un système spécifique, apte à collecter des indices permettant de déterminer si une attaque a lieu et, si possible, quelle en est l'origine.
+On parle de « systèmes de détection d'intrusion », ou IDS pour \textit{Intrusion Detection System}.
+Pour être précis, il convient de relever que ces systèmes sont utilisés pour la détection de tous types d'attaques, y compris lorsqu'il ne s'agit pas de déni de service.
+Les usages et les spécifications des IDS sont donc multiples: la \figref{ea:fig:idsmap} résume les différentes catégories existantes, que nous allons brièvement décrire.
+Il existe différentes façon de les distinguer.
 \input{\chapterpath/Figures/ids.tikz}
 
+\paragraph{Selon l'origine de l'attaque}
+Un système de détection d'intrusion peut se concentrer sur les attaques provenant de l'\textbf{extérieur} du réseau, menées par un attaquant qui chercherait à brouiller les fréquences utilisées ou bien, justement, à pénétrer dans le réseau.
+
+À l'inverse, d'autres systèmes vont surveiller l'\textbf{activité interne} du réseau, afin de détecter d'éventuels nœuds corrompus, soit qu'ils cherchent à accaparer les ressources pour leur propre compte, soit qu'ils cherchent à détruire les ressources du réseau.
+
+\paragraph{Selon l'objet de la surveillance}
+Un IDS peut avoir pour tâche de surveiller l'\textbf{activité du réseau}, en analysant le trafic: le nombre de paquets transmis, leur origine ou leur destination, leur contenu, le taux de succès des transmissions sont autant d'indices à collecter pour déterminer si le réseau fonctionne dans des conditions normales.
+
+En parallèle, d'autres systèmes peuvent être orientés vers la \textbf{sécurité de l'hôte} sur lequel ils sont exécuté.
+Leur but est de détecter d'éventuelles tentatives de compromission de la machine.
+Les opérations menées à cette fin peuvent comprendre:
+\begin{itemize}
+    \item la vérification de l'intégrité du système (par exemple en calculant périodiquement un condensat des fichiers exécutables critiques, afin de les comparer avec le condensat de leur version d'origine);
+    \item la surveillance des journaux concernant les tentatives de connexion, afin de détecter des échecs répétitifs d'accès au système;
+    \item la détection d'une activité inhabituelle au niveau de l'activité du processeur, des allocations mémoires, ou des entrées sorties, qui risqueraient de pénaliser le système d'exploitation en termes de performance et de consommation énergétiques. Cette surveillance peut être menée en temps réel, ou via la journalisation des évènements système.
+\end{itemize}
+
+On parle en anglais de NIDS (\textit{Network Intrusion Detection System}) ou de HIDS (\textit{Host based Intrusion Detection System}) pour les IDS orientés réseau ou machine, respectivement.
+De nombreux IDS cumulent à la fois des mécanismes de surveillance du réseau et du comportement de leurs voisins, et une surveillance des évènements système survenant sur leur hôte.
+
+\paragraph{Selon le type d'intrusion à détecter}
+Les IDS sont utilisés pour lutter contre tous types d'« intrusions » (ou d'attaques dans le sens plus général), pas seulement contre le déni de service, bien que ce soit le point qui nous préoccupe le plus dans cette thèse.
+Ainsi ils peuvent être utilisés afin de détecter:
+\begin{itemize}
+    \item des \textbf{tentatives d'accès au réseau} de la part d'un attaquant externe (qui chercherait à passer par exemple par la compromission d'un nœud ou par l'obtention de matériel cryptographique); cette étape n'est souvent qu'un prélude à d'autres attaques (de déni de service notamment);
+    \item un \textbf{accès à des ressources non autorisées}, lorsque qu'un capteur tente par exemple de procéder à certaines opérations dans un cluster qui n'est pas le sien;
+    \item les \textbf{fuites de données}, qui peuvent être difficiles à détecter si l'attaque est passive (simple écoute des données circulant sur le réseau), mais peuvent être identifiées lors de l'extraction de ces données vers l'extérieur du réseau;
+    \item les \textbf{comportements cupides} provoquant le blocage des ressources, par accaparement;
+    \item les autres attaques de service, \cad les \textbf{comportements destructeurs}, visant à nuire au fonctionnement du réseau par l'anéantissement des ressources, qu'elles soient virtuelles (mise hors service des transmissions) ou bien physique (épuisement de la batterie des capteurs).
+\end{itemize}
+
+\paragraph{Selon les méthodes employées pour la détection}
+Les méthodes utilisées pour déterminer l'existence et l'identité d'un attaquant sont nombreuses, et se divisent en trois catégories: la détection \textbf{basée sur les anomalies}, la détection \textbf{basée sur des signatures d'attaques}, et la détection reposant \textbf{sur la vérification du respect des spécifications}.
+Ces catégories, et les principales méthodes qu'elles regroupent, sont détaillées plus bas en \sssref{ea:sss:detect}.
+
+\paragraph{Selon l'infrastructure du réseau}
+Si de nombreux IDS ne se préoccupent pas de savoir quelle est la configuration exacte du réseau, et sont élaborés sur des architectures « plates », \textbf{sur un seul niveau}, d'autres en revanche sont spécifiquement construits avec l'idée de tirer profit d'une \textbf{architecture clusterisée}.
+La partition du réseau en clusters va de fait permettre la mise en place d'algorithme différents, le plus souvent distribués au sein des clusters.
+
+Il est également intéressant de noter que la clusterisation en soi d'un réseau est un mécanisme efficace pour limiter la portée de la plupart des attaques de déni de service, dont les dommages seront en général circonscrit au cluster dans lequel elles sont menées.
+Une exception concerne toutefois les attaques qui sont menées avec succès contre les \ch (notamment lorsque celui-ci se voit compromis), puisque ce peut être alors le cluster entier qui se retrouve hors service.
+
+\paragraph{Selon la distribution des calculs}
+La détection passe par la collecte puis le traitement d'indices sur le fonctionnement des nœuds ou du réseau global.
+Collecte comme traitement peuvent être réalisés par différenties entités ou associations d'entités, à savoir:
+\begin{itemize}
+    \item le traitement, les calculs peuvent être \textbf{centralisés} et réalisés seulement par la station de base, à laquelle les capteurs font remonter les informations brutes relevées sur le fonctionnement du réseau. Dans certains cas extrêmes, même la collecte d'indices n'est réalisée que par la station de base;
+    \item chaque capteur peut implémenter son propre système de détection d'intrusions: « \textbf{chacun pour soi} », quitte à garder pour lui ses conclusions sur le statut des autres nœuds. À l'inverse de la solution précédente, chaque capteur réalise alors de bout en bout les opérations de surveillance;
+    \item la détection peut être menée par des \textbf{agents mobiles}, qui se déplacent de nœuds en nœuds dans un réseau de capteurs autrement statiques (ou peu mobiles en comparaison avec les agents de surveillance). Ces agents mobiles disposent en principe de ressources plus importantes que les capteurs ordinaires. Cette configuration ne peut bien sûr pas être déployée pour tous les usages des réseaux de capteurs;
+    \item la collecte d'informations peut être \textbf{distribuée entre les nœuds} situés sur un même niveau d'horizontalité dans l'architecture du réseau: cette configuration leur permet d'échanger des informations entre eux, notamment des indices de confiance, et de déclencher des observations coordonnées lorsqu'un nœud « suspecte » un pair d'être compromis, sans en avoir la « certitude ». Lorsqu'un capteur est jugé définitivement compromis, l'information est partagée entre les nœuds. Dans certains systèmes, les calculs eux-mêmes peuvent être distribués;
+    \item enfin, la distribution peut également être réalisée de façon \textbf{hiérarchique}, sur un plan vertical, dans les réseaux clusterisés. Il y a alors interaction entre les membres d'un cluster et leur \ch, qui se charge au minimum de la propagation des alertes, et parfois également des calculs à mener.
+\end{itemize}
+La gestion de la collecte et des calculs vont bien évidemment influencer l'opérateur du réseau sur le choix du type de méthode de détection (voir plus haut) à mettre en place.
+
+\paragraph{Selon la fréquence d'usage du système}
+La plupart des IDS sont prévus pour fonctionner \textbf{de manière continue} sur leur hôte, mais certaines solutions adoptent des comportement différents: le système de détection n'est exécuté que \textbf{de façon périodique}, ou bien se voit activé à la réception d'alerte (émanant de la station de base par exemple, qui dispose pour sa part des ressources nécessaires au maintien en continu d'un IDS).
+
+\paragraph{Systèmes hybrides}
+En pratique, pour un critère donné, la plupart des IDS proposés se retrouvent dans plusieurs catégories à la fois: on retrouve ainsi beaucoup de systèmes hybrides surveillant tout à la fois l'hôte sur lequel ils tournent, et le trafic intercepté par le nœud.
+De même, le type d'attaques recherchées par les systèmes sont généralement multiples, et portent souvent sur plusieurs couches protocolaires (en référence au modèle TCP/IP).
+Et pour en détecter un maximum, il n'est pas rare qu'un IDS combine plusieurs méthodes de détection.
+On voit ainsi souvent apparaître en anglais le terme \textit{cross-layer IDS}, littéralement « IDS sur plusieurs couches ».
+%2}}}
+
+\subsubsection{Les méthodes de détection}\label{ea:sss:detect}
+%{{{2
+\paragraph{Détection basée sur les anomalies} jhkfds hife hgfudgh jdgh fdighdsmgji kdfgjfdk mhgdsgkh dkgmh.
+dsfgje gofigj odgj iogj ojeogj odf
+
+        child  node {M\'ethode de d\'etection}
+            child { node {Anomalies} }
+            child { node {Signatures} }
+            child { node {Sp\'ecifications} }
 with agents applying set of rules\cite{RKKK13} on traffic to attribute a trust value to each of the nodes in the network.
+%2}}}
+
+\subsubsection{Des architectures adaptées}
+%{{{2
+Nous allons donner ici quelques exemples de propositions concrètes de systèmes de détection d'intrusion.
+La plupart d'entre elles se basent sur l'emploi d'architectures (clusterisation, architectures de sécurité) ou de protocoles (routage) déjà existants, auxquelles elles rajoutent des systèmes dédiés à la détection des attaques.
 
 Le système SecCBSN (\textit{Secure Communications of Cluster-Based Sensor Network}, « communications sécurisées des réseaux de capteurs clusterisés ») introduit une architecture de sécurité à laquelle est adjointe un système de détection d'intrusion pour sécuriser au mieux possible les réseaux clusterisés~\cite{HHC07}.
 Chaque nœud implémente trois modules: l'un intervient pour l'élection du \ch, réalisée sur le modèle de \leach.
@@ -524,7 +606,6 @@ Bien que les simulations menées fournissent de bons résultats en termes de pr�
 C'est sur ces points que se concentrent la majeure partie des travaux présentés dans cette thèse: les \cns que nous utilisons ne sont qu'une version renommée des \textit{gNodes}, pour lesquels a été proposé dans un premier temps un renouvellement périodique~\cite{GMT12}.
 %2}}}
 
-\subsubsection{Des architectures adaptées}
 %{{{2
 À travers l'usage plus ou moins direct de systèmes de détection d'intrusions, plusieurs architectures déjà établies ont été adaptées dans le but de faciliter la détection de nœuds corrompus au sein du réseau.
 

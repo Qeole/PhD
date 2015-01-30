@@ -32,16 +32,16 @@
             child { node {Signatures} }
             child { node {Sp\'ecifications} }
         }
-        child { node {Fr\'equence d'usage}
-            child { node {En continu} }
-            child { node {P\'eriodique} }
-        }
-        child { node {Sujet audit\'e}
+        child { node {Objet de surveillance}
             child { node {Machine} }
             child { node {R\'eseau} }
             child { node {Syst\`eme hybride} }
         }
-        child { node {Gestion des calculs}
+        child { node {Fr\'equence d'usage}
+            child { node {En continu} }
+            child { node {P\'eriodique} }
+        }
+        child { node {Distribution des calculs}
             child { node {Centralis\'es} }
             child { node {Chacun pour soi} }
             child { node {Distribu\'es} }
