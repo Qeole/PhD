@@ -179,14 +179,15 @@ La \tabref{ea:tab:proto} compare brièvement les fonctionnalités apportées par
     \end{footnotesize}
 \end{table}
 
-Des mécanismes introduits dans architectures complexes présentées ci-dessus ont été repris dans des solutions ultérieures.
-Par exemple, il existe une proposition concernant la combinaison de signatures numériques (cryptographie asymétrique), du bloc $\mu$TESLA (asymétrie temporelle) introduit avec SPINS mais sans reprendre SNEP, et d'un filtre de \textsc{Bloom} pour créer un mécanisme d'\textit{Information Asymmetry}, qui assure des diffusions générales (\textit{broadcast}) authentifiées~\cite{SLS10}.
-Le filtre de \textsc{Bloom} est utilisé pour condenser plusieurs codes d'authentification de messages (MAC), qui sont ajoutés aux paquets pour l'authentification des transmissions par les nœuds.
-Plusieurs codes sont vérifiés par chaque nœud, qui possède son propre sous-ensemble de clés, de sorte que si certaines clés ont été compromises, il en reste d'autres à vérifier.
-
 On constate que la gestion des clés occupe une place essentielle dans la plupart des systèmes proposés: il est en effet essentiel de disposer d'un moyen d'échanger, et au besoin de renouveler les clés nécessaires à ces architectures, sans compromettre leur sécurité mais sans pour autant consommer trop de ressources.
 De nombreux mécanismes ont été proposés et continuent de l'être~\cite{DSK10,BSK13}, et ont même fait l'objet de travaux de synthèse~\cite{HWMRKP06,XRSDHG07}.
 Nous ne les détaillerons pas ici.
+
+On peut également observer dans la littérature que des mécanismes introduits dans les architectures complexes présentées ci-dessus ont été repris dans des solutions ultérieures.
+Par exemple, il existe une proposition concernant la combinaison de signatures numériques (cryptographie asymétrique), du bloc $\mu$TESLA (asymétrie temporelle) introduit avec SPINS mais sans reprendre SNEP, et d'un filtre de \textsc{Bloom} pour créer un mécanisme d'\textit{Information Asymmetry}, qui assure des diffusions générales (\textit{broadcast}) authentifiées~\cite{SLS10}.
+Le filtre de \textsc{Bloom} est utilisé pour condenser plusieurs codes d'authentification de messages (MAC), qui sont ajoutés aux paquets pour l'authentification des transmissions par les nœuds.
+Plusieurs codes sont vérifiés par chaque nœud, qui possède son propre sous-ensemble de clés, de sorte que si certaines clés ont été compromises, il en reste d'autres à vérifier.
+Le bloc $\mu$TESLA en particulier est par ailleurs repris dans de nombreuses propositions, notamment avec le protocole SecLEACH qui l'introduit dans un réseau clusterisé de façon hiérarchique pour combler certains manques de l'algorithme \leach en termes de sécurité~\cite{OFVWBDL07}.
 
 \subsection{Sécurité physique}
 

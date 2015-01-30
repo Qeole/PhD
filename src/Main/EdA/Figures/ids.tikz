@@ -1,0 +1,52 @@
+% vim:se ft=tex:
+\begin{figure}[!ht]
+    \caption{Critères de classification pour les systèmes de détection d'intrusion}\label{ea:fig:idsmap}
+    \medskip
+    \centering
+    \begin{tikzpicture}[%
+            small mindmap, every node/.style=concept, concept color=chapterLACL!50,
+            grow cyclic,
+            level 1/.append style={level distance=3.8cm,sibling angle=51.5},
+            level 2/.append style={level distance=1.7cm,sibling angle=45}%
+        ]
+
+        \node {Syst\`emes de d\'etection d'intrusion}
+        child { node {Provenance de l'attaquant}
+            child { node {Externe} }
+            child { node {Interne} }
+        }
+        child { node {Type d'intrusion}
+            child { node {Tentatives d'acc\`es au r\'eseau} }
+            child { node {Usurpation d'identit\'e} }
+            child { node {Acc\`es non authoris\'e} }
+            child { node {Fuite de donn\'ees} }
+            child { node {Blocage des ressources} }
+            child { node {Destruction des ressources} }
+        }
+        child { node {Infrastructure}
+            child { node {Plate} }
+            child { node {Clusteris\'ee} }
+        }
+        child { node {M\'ethode de d\'etection}
+            child { node {Anomalies} }
+            child { node {Signatures} }
+            child { node {Sp\'ecifications} }
+        }
+        child { node {Fr\'equence d'usage}
+            child { node {En continu} }
+            child { node {P\'eriodique} }
+        }
+        child { node {Sujet audit\'e}
+            child { node {Machine} }
+            child { node {R\'eseau} }
+            child { node {Syst\`eme hybride} }
+        }
+        child { node {Gestion des calculs}
+            child { node {Centralis\'es} }
+            child { node {Chacun pour soi} }
+            child { node {Distribu\'es} }
+            child { node {Hi\'erarchiques} }
+            child { node {Agents mobiles} }
+        };
+    \end{tikzpicture}
+\end{figure}
