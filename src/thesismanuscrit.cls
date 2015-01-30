@@ -364,7 +364,7 @@
 %{\par\vfil\null\endtitlepage}
 
 \newcommand*\chaptermark[1]{}
-\setcounter{secnumdepth}{2}
+\setcounter{secnumdepth}{3}
 \newcounter {part}
 \newcounter {chapter}
 \newcounter {section}[chapter]
