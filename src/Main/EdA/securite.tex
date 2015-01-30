@@ -20,7 +20,13 @@ Les principales garanties que l'on cherche à apporter à un réseau sont les su
 \subsection{Confidentialité}
 
 Les informations échangées sur un réseau sont dites confidentielles si un attaquant se retrouve dans l'impossibilité d'accéder au contenu utile de l'échange.
-L'attaquant peut être passif (simplement à l'écoute du trafic) ou bien actif (injection de paquets pour déclencher l'envoi de paquets en réponse, détournement de trafic).
+On trouve en anglais les termes \textit{data secrecy}, \textit{privacy} ou encore \textit{confidentiality} pour traiter de cette notion: la plupart des auteurs n'établissent pas de distinctions spécifiques entre ces notions.
+Dans notre cas, il s'agit d'interdire l'accès aux données utiles des paquets à des agents extérieurs au réseau, ou bien même aux nœuds du réseau qui ne sont pas concernés par ces données et n'ont donc aucun besoin d'y accéder (afin de limiter les risques de fuites de données si l'un des nœuds devient compromis).
+Mais le terme \textit{privacy}, qui se traduit par « vie privée », « intimité », présente aussi l'intérêt de s'appliquer également aux questions d'accès aux données: lorsque des capteurs sont utilisés sur des patients humains à des fins de surveillance médicale~\cite{SZFDXC14}, il est essentiel d'établir un contrôle sur l'accès aux données collectées: le patient et son médecin doivent y avoir accès, et il serait souhaitable que d'autres médecins urgentistes puissent y recourir au besoin; tout autre accès doit impérativement être refusé.
+Cette notion ne sera pas abordée plus avant dans cette étude, nous conserverons un point de vue interne au réseau.
+
+Les attaques portant sur la confidentialité des données sont multiples.
+L'attaquant peut adopter un comportement passif (simplement à l'écoute du trafic) ou bien actif (injection de paquets pour déclencher l'envoi de paquets en réponse, détournement de trafic).
 Pour de nombreux réseaux plus « classiques », l'utilisation d'un câble de transmission (Ethernet, fibre optique\dots) permet de poser une première barrière pour les écoutes passives.
 Mais dans les réseaux de capteurs, les données sont échangées par le biais d'ondes électromagnétiques que tout attaquant à portée peut recevoir.
 Il convient donc de trouver des solutions permettant de dissimuler le contenu des messages échangés, à défaut de prévenir l'accès aux messages eux-mêmes.
@@ -86,7 +92,7 @@ Ces différentes propriétés sont distinctes, mais elles reposent presque toujo
 Elles sont souvent liées entre elles, ainsi qu'à la confidentialité des données, car il est fréquent qu'un dispositif mis en place pour assurer l'une de ces propriétés permette également d'en assurer d'autre.
 Par exemple, l'usage d'un condensat signé permet d'assurer à la fois l'intégrité d'un message, la validité de son auteur, et d'empêcher ce dernier de répudier le message dans le futur.
 
-    \subsubsection{D'autres solutions}
+    \subsubsection{Les solutions}
 Une solution intéressante pour économiser des ressources consiste à n'introduire l'usage de solutions cryptographiques que lorsqu'elles deviennent nécessaires, et à s'en dispenser lorsque le réseau fonctionne correctement.
 Ce système a été proposé en association avec l'usage d'un « arbre d'agrégation sécurisée », structure du réseau utilisée pour le routage des paquets~\cite{WDSX07}.
 Lorsqu'un comportement malveillant est détecté dans le réseau, cet arbre permet de mettre en place rapidement et avec peu de données de contrôle un mécanisme d'authentification et de chiffrement des messages.
@@ -94,13 +100,14 @@ Le danger de cette proposition repose sur la capacité du réseau à détecter l
 En cas d'écoute passive de la part de l'attaquant notamment, aucune mesure n'est appliquée pour protéger la confidentialité des données échangées.
 
 Plusieurs propositions concernent la mise en place de solutions classiques, mais « allégées »~\cite{HWMRKP06}, comme avec la mise en place d'une autorité de certification spécifique permettant l'authentification réciproque des nœuds deux à deux~\cite{GWZCK13}, ou bien basé sur des clés pré-distribuées~\cite{BSK13}.
-Le protocole MSPQS (\textit{Modified Secured Query Processing Scheme}~\cite{GD14} a été proposé pour sécurisé le transfert des données à travers un découpage des échanges sous formes de requêtes et de réponses authentifiées qui contiennent des marqueurs temporels, et ne peuvent être réinjectés dans le réseau, ce qui le rend efficace pour protéger les nœuds des attaques par rejeu.
+Le protocole MSPQS (\textit{Modified Secured Query Processing Scheme})~\cite{GD14} a été proposé pour sécurisé le transfert des données dans un réseau clusterisé à travers un découpage des échanges sous formes de requêtes et de réponses authentifiées qui contiennent des marqueurs temporels, et ne peuvent être réinjectés dans le réseau, ce qui le rend efficace pour protéger les nœuds des attaques par rejeu.
 
-De manière générale, les problèmes d'authentification, et dans une moindre mesure les autres problématiques soulevées dans cette sous-section, ont également fait l'objet de nombreuses études~\cite{GWZC13,SS14-rev}.
+De manière générale, les problèmes d'authentification, et dans une moindre mesure les autres problématiques soulevées dans cette sous-section, ont mené à la proposition de nombreuses architectures dédiées.
 
     \subsubsection{Architectures de sécurité}\label{ea:sss:archi}
 On entend par « architecture de sécurité » un ensemble de protocoles et de mécanismes déployés dans le réseau en vue d'apporter certaines garanties en termes de sécurité.
-Les solutions proposées sont multiples; nous allons présenter ici les plus connues.
+L'équivalent anglais serait \textit{secutity framework}.
+Les solutions proposées sont multiples~\cite{HI12,GWZC13,SS14-rev}; nous allons présenter ici les plus connues.
 
 Ainsi SPINS (\textit{Security Protocols for Sensor Networks}), élaboré en 2002~\cite{PSWCT02}, est l'une des premières solutions proposées dans la littérature pour sécuriser les échanges dans les réseaux de capteurs, et sert de base pour de nombreuses solutions plus récentes.
 Il s'agit d'un système reposant sur deux blocs: SNEP (\textit{Secure Network Encryption Protocol}) fournit la confidentialité, l'authentification entre deux parties, l'intégrité et la protection contre le rejeu, le tout en préservant un faible volume de données de contrôle en en-tête des paquets.
@@ -156,17 +163,17 @@ La \tabref{ea:tab:proto} compare brièvement les fonctionnalités apportées par
     \begin{footnotesize}
         \begin{tabular}{@{}m{.1\textwidth} m{.12\textwidth} m{.12\textwidth} m{.2\textwidth} m{.2\textwidth} m{.08\textwidth}@{}}
             \toprule
-            Architecture & Mode de chiffrement & Algorithme de chiffrement & Clés utilisées                                                                 & Sécurité apportée                                                                     & Année\\
+            \textsc{Archi\-tecture} & \textsc{Mode de chiffrement} & \textsc{Algorithme de chiffrement} & \textsc{Clés utilisées}                                                        & \textsc{Sécurité apportée}                                                            & \textsc{Année}\\
             \midrule
-            SPINS        & CTR                 & RC5                       & Clé maîtresse, chaîne de clés symétriques                                      & *: Chiffrement, authentification et intégrité des données, protection contre le rejeu & 2002\\
-            TinySec      & CBC                 & Au choix                  & Au choix                                                                       & (*) moins protection contre le rejeu                                                  & 2004\\
-            TinyKey      & CBC-MAC             & SkipJack                  & Clés pré-installées sur les nœuds                                              & (*)                                                                                   & 2011\\
-            MiniSec      & OBC ou CBC-MAC      & SkipJack ou RC5           & Clés pré-installées sur les nœuds                                              & (*)                                                                                   & 2007\\
-            LEAP         & RC5                 & RC5                       & Clé individuelle, clé globale, clé de cluster, clés pair-à-pair                & (*)                                                                                   & 2003\\
-            LEAP+        & RC5                 & RC5                       & Clé individuelle, clé globale, clé de cluster, clés pair-à-pair                & (*)                                                                                   & 2006\\
-            pDCS         & RC5                 & RC5                       & Clé maîtresse, clés pair-à-pairs, clés de cellule, clés de rangée, clé globale & (*) plus dissimulation de la provenance des données                                   & 2009\\
-            ERP-DCS      & RC5                 & RC5                       & Clés pair-à-pair, clé de cellule, clé ESB                                      & (*) plus dissimulation de la provenance des données                                   & 2013\\
-            ZigBee       & CBC-MAC             & AES, modes CTR ou CCM     & Clé maîtresse, clés pair-à-pair, clé globale                                   & (*)                                                                                   & 2005\\
+            SPINS                   & CTR                          & RC5                                & Clé maîtresse, chaîne de clés symétriques                                      & *: Chiffrement, authentification et intégrité des données, protection contre le rejeu & 2002\\
+            TinySec                 & CBC                          & Au choix                           & Au choix                                                                       & (*) moins protection contre le rejeu                                                  & 2004\\
+            TinyKey                 & CBC-MAC                      & SkipJack                           & Clés pré-installées sur les nœuds                                              & (*)                                                                                   & 2011\\
+            MiniSec                 & OBC ou CBC-MAC               & SkipJack ou RC5                    & Clés pré-installées sur les nœuds                                              & (*)                                                                                   & 2007\\
+            LEAP                    & RC5                          & RC5                                & Clé individuelle, clé globale, clé de cluster, clés pair-à-pair                & (*)                                                                                   & 2003\\
+            LEAP+                   & RC5                          & RC5                                & Clé individuelle, clé globale, clé de cluster, clés pair-à-pair                & (*)                                                                                   & 2006\\
+            pDCS                    & RC5                          & RC5                                & Clé maîtresse, clés pair-à-pairs, clés de cellule, clés de rangée, clé globale & (*) plus dissimulation de la provenance des données                                   & 2009\\
+            ERP-DCS                 & RC5                          & RC5                                & Clés pair-à-pair, clé de cellule, clé ESB                                      & (*) plus dissimulation de la provenance des données                                   & 2013\\
+            ZigBee                  & CBC-MAC                      & AES, modes CTR ou CCM              & Clé maîtresse, clés pair-à-pair, clé globale                                   & (*)                                                                                   & 2005\\
             \bottomrule
         \end{tabular}
     \end{footnotesize}
@@ -176,6 +183,10 @@ Des mécanismes introduits dans architectures complexes présentées ci-dessus o
 Par exemple, il existe une proposition concernant la combinaison de signatures numériques (cryptographie asymétrique), du bloc $\mu$TESLA (asymétrie temporelle) introduit avec SPINS mais sans reprendre SNEP, et d'un filtre de \textsc{Bloom} pour créer un mécanisme d'\textit{Information Asymmetry}, qui assure des diffusions générales (\textit{broadcast}) authentifiées~\cite{SLS10}.
 Le filtre de \textsc{Bloom} est utilisé pour condenser plusieurs codes d'authentification de messages (MAC), qui sont ajoutés aux paquets pour l'authentification des transmissions par les nœuds.
 Plusieurs codes sont vérifiés par chaque nœud, qui possède son propre sous-ensemble de clés, de sorte que si certaines clés ont été compromises, il en reste d'autres à vérifier.
+
+On constate que la gestion des clés occupe une place essentielle dans la plupart des systèmes proposés: il est en effet essentiel de disposer d'un moyen d'échanger, et au besoin de renouveler les clés nécessaires à ces architectures, sans compromettre leur sécurité mais sans pour autant consommer trop de ressources.
+De nombreux mécanismes ont été proposés et continuent de l'être~\cite{DSK10,BSK13}, et ont même fait l'objet de travaux de synthèse~\cite{HWMRKP06,XRSDHG07}.
+Nous ne les détaillerons pas ici.
 
 \subsection{Sécurité physique}
 

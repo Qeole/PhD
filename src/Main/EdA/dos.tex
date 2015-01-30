@@ -92,10 +92,10 @@ La \tabref{ea:tab:paradigm} située plus bas présente un classement selon les p
 %{{{2
 Une seconde méthode efficace de classement consiste à procéder par couches de protocoles, en se basant sur le modèle TCP/IP (schéma concret lui-même issu du modèle théorique OSI, de l'anglais \textit{Open Systems Interconnection}).
 Ce modèle est rappelé en \figref{ea:fig:tcpip}.
-\begin{table}[!ht]
+\begin{figure}[!ht]
     \centering
     \begin{tabular}{c |c| l}
-        \multicolumn{2}{c}{} & Exemple:\\
+        \multicolumn{2}{c}{} & Exemples:\\
         \cline{2-2}
         5 & Application & HTTP, FTP, SSH\\
         \cline{2-2}
@@ -110,7 +110,7 @@ Ce modèle est rappelé en \figref{ea:fig:tcpip}.
      \end{tabular}
     \medskip
     \caption{Modèle TCP/IP}\label{ea:fig:tcpip}
-\end{table}
+\end{figure}
 
 Ce classement permet une revue efficace, couche par couche, de la plupart des attaques connues.
 C'est donc selon ce critère que nous allons maintenant présenter les principales attaques de déni de service connues dans les réseaux de capteurs.
@@ -153,7 +153,7 @@ Ces règles peuvent être contournées, et la couche MAC va donc se retrouver as
     \begin{small}
         \begin{tabular}{m{.2\textwidth}|m{.2\textwidth}|m{.48\textwidth}}
             \toprule
-            \textbf{Nom anglais} & \textbf{Traduction} & \textbf{Description}\\
+            \textsc{Nom anglais} & \textsc{Traduction} & \textsc{Description}\\
             \midrule
             \multicolumn{3}{c}{Commutation de circuits et création de canaux}\\
             \midrule
@@ -199,7 +199,7 @@ D'autres trames peuvent être utilisées dans le même but, leurs acronymes sont
     \medskip
     \begin{tabular}{c c c}
         \toprule
-        Paquet analysé & Temps d'attente & Paquet à corrompre\\
+        \textsc{Paquet analysé} & \textsc{Temps d'attente} & \textsc{Paquet à corrompre}\\
         \midrule
         RTS & SIFS & CTS\\
         DATA & SIFS & ACK\\
@@ -364,7 +364,7 @@ Toutes les attaques exposées dans cette sous-section ont été décrites à mai
     \begin{small}
         \begin{tabular}{m{.21\textwidth}|p{.71\textwidth}}
             \toprule
-            \textbf{Couche} & \textbf{Attaques possibles}\\
+            \textsc{Couche} & \textsc{Attaques possibles}\\
             \midrule
             \multirow{2}{*}{Hors modèle}%
                 & \num{Destruction physique des capteurs}\\
@@ -408,7 +408,7 @@ Toutes les attaques exposées dans cette sous-section ont été décrites à mai
     \begin{small}
         \begin{tabular}{m{.3\textwidth}|m{.62\textwidth}}
             \toprule
-            \textbf{Paradigme} & \textbf{Attaques possibles}\\
+            \textsc{Paradigme} & \textsc{Attaques possibles}\\
             \midrule
             Collecte et transmission simples & Brouillage, création de collisions, destruction des capteurs, altération des mesures, altération des données (applicatif)\\
             \midrule
@@ -437,7 +437,6 @@ Les attaques que nous avons présentées regroupent néanmoins les principales m
 
     \subsubsection{Authentification et problématiques similaires}
 %{{{2
-
 La sécurité est transversale à l'ensemble des domaines d'études en informatique, et la protection contre le déni de service\dots est elle-même liée aux autres problématiques de sécurité.
 Il faut entendre par là que si des failles du système compromettant l'authentification des agents ou l'intégrité des données peuvent également être exploitées d'une façon ou d'une autre pour nuire au bon fonctionnement du réseau, alors l'attaque en question vient également se classer parmi les attaques de déni de service.
 
@@ -448,7 +447,7 @@ La protection de l'intégrité des données assure de son côté l'échec de tou
 
 Les mécanismes dédiés à la protection de l'authentification, de l'intégrité, ou contre le rejeu, présentés en \sref{ea:sec:secu}, sont donc également utiles pour protéger un réseau de capteurs de certaines attaques de déni de service.
 On parle de mesures de prévention, dans le sens où il s'agit de méthodes mises en place pour empêcher une attaque de survenir.
-
+De nombreuses architectures de sécurité, qui apportent authentification, chiffrement, intégrité et protection contre le rejeu aux échanges, et parmi lesquelles une bonne partie des solutions présentées en \sssref{ea:sss:archi}, se « vantent » ainsi d'atténuer, voire de prévenir totalement plusieurs types d'attaques de déni de service.
 %2}}}
 
     \subsubsection{Des protocoles de routage spécifiques}
@@ -460,7 +459,6 @@ Si $n+1$ répond, alors $n$ est digne de confiance pour cette route; puisqu'il e
 
 Toujours pour parer aux attaques sur le routage, d'autres méthodes se basent sur des mécanismes de redondance et de résilience, pour faire en sorte que si l'une des routes se révèle défectueuse, d'autres exemplaires des paquets, envoyés par des routes distinctes, puissent attendre leur destination.
 Des mécanismes tels que le partage de secret peuvent être utilisés à cette fin de redondance, pour limiter l'augmentation du volume de données envoyées~\cite{MMB13}.
-
 %2}}}
 
     \subsubsection{Prévenir la compromission des capteurs}
@@ -502,13 +500,36 @@ La sécurité du système peut éventuellement être spécifiquement renforcée,
 \subsection{Détecter puis déjouer les attaques}
 %{{{1
 
-Les architectures de sécurité plus complexes traitées en \sssref{ea:sss:archi} introduises par ailleurs des mécanismes qui sont fréquemment réutilisés dans d'autres solutions qui visent également à prévenir les attaques de déni de service.
-%{{{3
+\subsubsection{Systèmes de détection d'intrusion}
+%{{{2
+IDS!!!!!!!!!!!
+
+with agents applying set of rules\cite{RKKK13} on traffic to attribute a trust value to each of the nodes in the network.
+
+Le système SecCBSN (\textit{Secure Communications of Cluster-Based Sensor Network}, « communications sécurisées des réseaux de capteurs clusterisés ») introduit une architecture de sécurité à laquelle est adjointe un système de détection d'intrusion pour sécuriser au mieux possible les réseaux clusterisés~\cite{HHC07}.
+Chaque nœud implémente trois modules: l'un intervient pour l'élection du \ch, réalisée sur le modèle de \leach.
+Le deuxième module est chargé d'apporter authentification et chiffrement pour les communications entre les capteurs au sein du réseau, et utilise notamment une version retouchée du certificat TESLA.
+Ajout notable par rapport aux architectures que nous avions vues jusque là, un troisième module module est chargé de la détection des nœuds compromis.
+Lorsqu'il détecte des comportements anormaux de la part de nœuds donnés, ce module fait propager une alarme jusqu'à la station de base pour l'informer de l'état malicieux de ces capteurs.
+Ce module se base sur un ensemble assez complexe de règles permettant de vérifier à la fois le bon comportement (non compromission) et le bon fonctionnement (disponibilité) des nœuds voisins.
+Le système dans son ensemble est finalement proche des mécanismes que nous utilisons, sauf que tous les capteurs réalisent une activité de surveillance.
+
+Notre système en question repose sur les travaux de \textsc{Lai} et \textsc{Chen}, qui ont proposé en 2008 une solution proche mais dont seuls certains capteurs effectuent des opérations de surveillance~\cite{LC08}.
+Ces nœuds de contrôle, appelés \textit{gNodes} (pour \textit{guarding nodes}) par leurs auteurs, sont sélectionnés au sein du cluster pour effectuer les opérations de surveillance, permettant ainsi aux autres nœuds d'économiser d'autant en énergie.
+Lorsque le \ch reçoit plusieurs rapports de la part de \textit{gNodes} distincts (ceci afin de limiter les cas de faux positifs), le \CH en vient à considérer le capteur dénoncé comme étant corrompu et prend des mesures en conséquences.
+Bien que les simulations menées fournissent de bons résultats en termes de préservation des ressources, l'étude ne se penche pas sur le processus utilisé pour la désignation des nœuds de contrôle, et ne traite pas de leur renouvellement dans le temps, ce qui fait que les même capteurs supportent la tâche de surveillance sur de longues durées.
+
+C'est sur ces points que se concentrent la majeure partie des travaux présentés dans cette thèse: les \cns que nous utilisons ne sont qu'une version renommée des \textit{gNodes}, pour lesquels a été proposé dans un premier temps un renouvellement périodique~\cite{GMT12}.
+%2}}}
+
+\subsubsection{Architectures et protocoles adaptés}
+%{{{2
+À travers l'usage plus ou moins direct de systèmes de détection d'intrusions, plusieurs architectures déjà établies ont été adaptées dans le but de faciliter la détection de nœuds corrompus au sein du réseau.
+
 OLSR (\textit{Optimized Link State Routing protocol}) est l'un des protocoles de routages souvent déployé dans les réseaux de capteurs.
 Une nouvelle version de ce protocole, appelée DLSR~\cite{MKASF10}, a été proposée en vue de reprendre ses fonctionnalités tout en ajoutant des mécanismes de détection contre les attaques de déni de service distribuées.
-Lorsque la station de base reçoit un trafic trop important, qui menace de saturer sa capacité de traitement ou bien qui crée de trop fortes congestions sur ses liens, elle envoie un signal dans tout le réseau en vue de prévenir les nœuds; le trafic est alors analysé, par chaque nœud-relais, par un automate d'apprentissage afin de détecter et supprimer les paquets malveillants.
+Lorsque la station de base reçoit un trafic trop important, qui menace de saturer sa capacité de traitement ou bien qui crée de trop fortes congestions sur ses liens, elle envoie un signal dans tout le réseau en vue de prévenir les nœuds; le trafic est alors analysé, par chaque nœud relais, par un automate d'apprentissage afin de détecter et supprimer les paquets malveillants.
 DLSR fait signaler par la station de base la fin de l'attaque, afin que les nœuds cessent les opérations nécessaires au filtrage des paquets.
-%3}}}
 %{{{3
 % ======== >>> §2 <<<
 %\subsection{[LO07] -- Modifié}
@@ -529,131 +550,9 @@ In~\cite{OFVWBDL07}, the authors propose to add security mechanisms \via a revis
 But the authors do not mention any mechanism to fight DoS attacks.
 %3}}}
 
-
 REWARD
 
-\subsubsection{HIDS}\label{ea:sss:hids}
-Some researchers prefer to ensure that nodes are not physically withdrawn from the network to get modified\cite{Ho10}, considering any returning node as compromised (but not detecting nodes modified on site), or to verify by means of mobile agents that the binary code run by the nodes has not been modified\cite{HR13}, although this solution makes use of cryptography mechanisms and can limit the evolution of the network.
-
-
-\cite{HI12}
-
-Many other systems, often more convenient to deploy, consist in the implementation of trust based mechanisms\cite{MC10,F-GRL07} with agents applying set of rules\cite{RKKK13} on traffic to attribute a trust value to each of the nodes in the network.
-Each enforced rule is expected to protect the network against one kind of attacks: intruders are detected on breaking the rules.
-We are particularly interested in the solution of Lai and Chen\cite{LC08} who proposed to elect control nodes to monitor the traffic in clustered networks so as to detect and react to \dos attacks.
-In such a scheme, clustered networks are partitioned into clusters \via algorithms such as \leach\cite{HHT02} or VSR\cite{TV08}.
-
-
 %{{{3
-% ======== >>> §2 <<<
-%\subsection{[LB09] -- Modifié}
-
-%% Using mobile agents to recover from node and database compromise in path-based DoS attacks in wireless sensor network
-\textit{Li} and \textit{Batten} expose in
-\cite{LB09}
-their method to detect and to recover from Path-based DoS (PDoS) attacks in wireless sensor networks.
-They consider WSNs whose aim is to collect data and to store it into small databases.
-PDoS attacks may prevent legitimate communication, lead the sensors to battery exhaustion and corrupt the gathered data.
-So the authors introduce the use of Mobile Agents (MAs), which use hash function values, node IDs and traffic table to analyze the traffic and identify compromised sensors.
-Thus the MAs are able to detect PDoS attacks with ease and efficiency, and to reply to the attack by proceeding to a recovery process.
-There are three distinct recovery processes available, depending on the percentage of compromised nodes in the network.
-Note that the authors use the assumption that MAs can not be compromised.
-
-%% OLD VERSION
-%A new detection and recovery method for compromised nodes in Path-based DoS (PDoS) attacks in wireless sensor network is presented in \cite{LB09} by \textit{Li} and \textit{Batten}. In this paper, the authors consider WSNs designed to collect and to store data in which path-based attacks can be carried on both the sensor nodes and the database containing the collected data. The contribution of this paper is the use of mobile agents (MAs) for the attack detection and the recovery process. The MAs detect PDoS attacks easily and efficiently. The solution is based on the use of hash function values, node IDs and traffic tables. By analyzing the traffic, the MA can detect the abnormal traffic and can designate the compromised nodes.
-%% Using mobile agents to recover from node and database compromise in path-based DoS attacks in wireless sensor network
-In~\cite{LB09} is described a method to detect and to recover from Path-based DoS (PDoS) attacks in wireless sensor networks.
-The authors consider WSNs whose aim is to collect data and to store it into small databases.
-PDoS attacks may prevent legitimate communication, lead the sensors to battery exhaustion and corrupt the gathered data.
-Thus the use of Mobile Agents (MAs) is introduced: they use hash function values, node IDs and traffic table to analyze the traffic and identify compromised sensors.
-In this way the MAs are able to detect PDoS attacks with ease and efficiency, and to reply to the attack by proceeding to a recovery process.
-There are three distinct recovery processes available, depending on the percentage of compromised nodes in the network.
-Note that the authors use the assumption that MAs can not be compromised.
-%3}}}
-
-%{{{3
-% ======== >>> §5 <<<
-%\subsection{[MH07] -- Modifié}
-
-%% Adaptive security design with malicious node detection in cluster-based sensor networks
-%% OLD VERSION
-%An adaptive security design (SecCBSN) to secure cluster-based communication in sensor networks, is proposed by \textit{Hsieh et al.} in
-%\cite{MH07}.
-%It consists of three modules, which can detect malicious nodes by providing secure communication and authentication protocols between nodes.
-%In each cluster, a CH schedules transmission and monitors periods for its sensor nodes.
-%The primary security module uses the TESLA certificate (TCert) to enable existing nodes to authenticate new incoming nodes, triggering the establishment of secure links and broadcast authentication between neighboring nodes.
-%In SecCBSN, the intrusion detection module prevents against compromised nodes.
-%It uses alarm return protocols, trust value evaluation, and the propagation of black and white lists of nodes.
-
-%% Adaptive security design with malicious node detection in cluster-based sensor networks
-Sensors authentication and DoS detection in clustered networks may be assumed by a single architecture.
-SecCBSN is described in~\cite{HHC07}.
-It is an adaptive security design intended to Secure Cluster-Based Communication in Sensor Networks.
-Each node is equipped with a system that includes three modules.
-One is involved in the cluster head election, and responsible for remembering the decision which were made.
-Another module provides ciphered communication and secure authentication protocols between sensors.
-It uses the TESLA certificate to enable deployed sensors to authenticate new incoming nodes.
-It allows the creation of secure channels as well as broadcast authentication between neighboring sensors.
-The last security module is responsible for the detection of compromised nodes.
-When a node is suspected to harm the network, alarm protocols are used to warn the base station.
-The use of trust value evaluation then enables the setting and the propagation of black and white lists of sensors.
-%3}}}
-
-
-Many consist in the implementation of trust based mechanisms\cite{MC10,F-GRL07} with agents applying set of rules\cite{RKKK13} on traffic to attribute a trust value to each of the nodes in the network.
-
-%{{{3
-In particular, Lai and Chen\cite{LC08} proposed to elect control nodes to monitor the traffic in clustered networks and to detect and react to \dos attacks.
-%%%%%%%%%%%%%%%%%%%================================================
-% Detecting Denial of Service Attacks in Sensor Networks
-%\subsection{[LC08] -- Inchangé}
-
-%\subsubsection{Ancienne version}
-%A cluster-based intrusion detection system is proposed in
-%\cite{LC08}.
-%It prevents sensor networks from DoS attacks.
-%This solution deploys a set of special nodes called ``guarding nodes'' (gNodes) which observe, analyze the network traffic and report DoS attacks to their cluster head if an abnormal event happens.
-%In each cluster there are three types of nodes, gNode, cluster head and sensor node.
-%Any kind of nodes may be compromised.
-%In this study, the detection approach for diverse attack types and the actions taken after detection are explored for the different node types.
-
-%\subsubsection{Version Camera-Ready}
-In
-\cite{LC08},
-the authors propose a system detection based on static election of a set of special nodes called ``guarding nodes'' which analyze the network traffic.
-When detecting abnormal traffic from a given node, ``guarding nodes'' identify it as a compromised node and they inform the cluster head of it.
-In this study, the authors show the benefit of their method by presenting numerical analysis of detection rate but they don't consider the energy of the elected node which dies very quickly.
-
-
-%% Detecting denial of service attacks in sensor networks
-Much of our work relies on the work of Lai and Chen who proposed in~\cite{LC08} a system detection based on static election of a set of nodes called ``guarding nodes'' which analyze traffic in a clustered network.
-When detecting abnormal traffic from a given node, ``guarding nodes'' ---~we call them \cns~--- identify it as a compromised node and inform the \ch of it.
-On reception of reports from several distinct \cns (to prevent false denunciation from a compromised node), the \CH virtually excludes the suspicious node from the cluster.
-The authors show the benefit of their method by presenting numerical analysis of detection rate.
-Although the method is efficient for detecting rogue nodes, the authors do not give details of the election mechanism to choose the \cns.
-Also, there is no mention in their study of renewing the election in time, which causes the appointed \cns to endorse a heavier energy consumption on a long period.
-
-[ Rules; Watch dogs -> + clustering = guarding nodes ]
-%3}}}
-
-In a first attempt to bring load balancing to this solution, we propose in other papers\cite{GMT12,BMM13} to reiterate the election periodically.
-Simulations show a better load repartition among the cluster, but at this time our focus was not on designing an energy efficient election process for the \cns.
-
-We have observed in previous studies that renewing periodically the selection process of those monitoring nodes (\cns) helps saving energy in the network~\cite{BMM13}, and we have tried ever since to find an optimal selection algorithm to obtain a good equilibrium between security, attack detection and energy preservation~\cite{MMB14}.
-
-%{{{3
-% ======== >>> §4 <<<
-%\subsection{[HI09] -- Modifié}
-
-%% Optimal Sensor Placement for Detection against Distributed Denial of Service Attacks
-The best way to detect for sure a DoS attack in a WSN is simply to run a detection mechanism on each single sensor.
-Of course, this solution is not feasible in a network with constraints.
-Instead of fitting out each sensor with such mechanism, \textit{Islam et al}. propose in
-\cite{INK09}
-to resort to heuristics in order to set a few nodes equipped with detection systems at critical spots in the network topology.
-This optimized placement enables distributed detection of DoS attacks as well as reducing costs and processing overheads, since the number of required detectors is minimized.
-But those few selected nodes are likely to run out of battery power much faster than normal nodes.
-
 %% OLD VERSION
 %The running of a detection mechanism on every node in the network allows achieving a perfect detection against DoS attacks but it is not a feasible solution in a constrained network.
 %In
@@ -669,6 +568,40 @@ This optimized placement enables distributed detection of DoS attacks as well as
 But those few selected nodes are likely to run out of battery power much faster than normal nodes.
 %3}}}
 
+%% Optimal Sensor Placement for Detection against Distributed Denial of Service Attacks
+The best way to detect for sure a DoS attack in a WSN is simply to run a detection mechanism on each single sensor.
+Of course, this solution is not feasible in a network with constraints.
+Instead of fitting out each sensor with such mechanism, \textit{Islam et al}. propose in
+\cite{INK09}
+to resort to heuristics in order to set a few nodes equipped with detection systems at critical spots in the network topology.
+This optimized placement enables distributed detection of DoS attacks as well as reducing costs and processing overheads, since the number of required detectors is minimized.
+But those few selected nodes are likely to run out of battery power much faster than normal nodes.
+%2}}}
+
+\subsubsection{Réagir face aux attaques}
+%{{{2
+
+Inscrire les nœuds corrompus sur une liste noire n'est pas nécessairement la seule réponse possible.
+Une étude propose, pour un réseau dont les capteurs ne seraient pas trop difficiles d'accès, l'usage d'agents mobiles pour récupérer au mieux d'attaques de déni de service « sur les chemins »~\cite{LB09}.
+Ces attaques consistent à compromettre plusieurs nœuds, qui a leur tour mènent des attaques par déluge de paquets dans le but de créer des congestions et d'épuiser la batterie de tous leurs voisins, allant ainsi jusqu'à créer de grands espaces vides dans le réseau.
+La solution proposée repose sur l'usage d'entités mobiles qui sont capables de se déplacer dans le réseau pour rétablir le statut initial des capteurs et si possible récupérer le contenu de leur base de données.
+Mais ce déplacement prend du temps: si moins de 15~\% des capteurs sont suspects, il est envisageable de laisser les agents mobiles tourner dans le réseau pour restaurer leur configuration d'origine.
+Les nœuds suspects ne sont pas exclus, ce qui limite le risque de faux positifs.
+Lorsque le taux de capteurs suspects est évalué entre 15~\% et 60~\%, une liste noire est créée pour limiter les dégâts infligés nœuds légitimes le temps que les agents mobiles puissent d'agir.
+Enfin, lorsque le seuil critique de 60~\% est dépassé, les agents mobiles s'appliquent avant tout à restaurer l'image mémoire et logicielle des nœuds jugés les plus essentiels au bon fonctionnement du réseau sur des capteurs encore en état de marche, et à entretenir ces derniers.
+%2}}}
+
+\subsubsection{Notion de confiance}
+%{{{2
+
+Many consist in the implementation of trust based mechanisms\cite{MC10,F-GRL07} 
 
 
+
+%2}}}
+
+\subsubsection{Détection d'intrusion machine}\label{ea:sss:hids}
+%{{{2
+Some researchers prefer to ensure that nodes are not physically withdrawn from the network to get modified\cite{Ho10}, considering any returning node as compromised (but not detecting nodes modified on site), or to verify by means of mobile agents that the binary code run by the nodes has not been modified\cite{HR13}, although this solution makes use of cryptography mechanisms and can limit the evolution of the network.
+%2}}}
 %1}}}

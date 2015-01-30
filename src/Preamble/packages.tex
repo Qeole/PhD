@@ -89,7 +89,7 @@
     colorlinks,
     linkcolor     = blueLACL,
     citecolor     = blueLACL,
-    urlcolor      = blue,
+    urlcolor      = blueLACL,
     baseurl       = http://,
     pdfpagelayout = OneColumn, % pdfpagelayout = SinglePage
     pdfstartpage  = 1,
@@ -120,13 +120,23 @@
 
 % TITRES SECTIONS, SOUS-SECTIONS
 \usepackage{titlesec}
+\colorlet{SecHead}{blueLACL}
+\colorlet{SecTab}{chapterLACL!50}
+\colorlet{SecText}{white}
+\colorlet{SSHead}{blueLACL}
+\colorlet{SSText}{white}
+%\colorlet{SecHead}{chapterLACL!20}
+%\colorlet{SecTab}{chapterLACL}
+%\colorlet{SecText}{black}
+%\colorlet{SSHead}{chapterLACL}
+%\colorlet{SSText}{white}
 \newlength\sectionnode
 \setlength\sectionnode{\textwidth}
 \addtolength\sectionnode{-16pt}
 \newcommand{\sectionheader}[1]{%
   \begin{tikzpicture}
-    \node[draw,color=chapterLACL!20,fill=chapterLACL!20,inner sep=8pt] (sectiontitle) {\begin{minipage}{\sectionnode}\color{white}\color{black}\thesection \quad #1\end{minipage}};
-    \fill[fill=chapterLACL] (sectiontitle.north west) -- ++(0,8pt) -- ++(3cm,0) -- +(0.3cm,-8pt) -- cycle;
+  \node[draw,color=SecHead,fill=SecHead,inner sep=8pt] (sectiontitle) {\begin{minipage}{\sectionnode}\color{white}\color{SecText}\thesection \quad #1\end{minipage}};
+    \fill[fill=SecTab] (sectiontitle.north west) -- ++(0,8pt) -- ++(3cm,0) -- +(0.3cm,-8pt) -- cycle;
   \end{tikzpicture}%
 }
 \titleformat{\section}
@@ -144,8 +154,8 @@
 \newcommand{\newthesubsection}{%
   \begin{tikzpicture}[baseline=(noexo.base)]
     \node[right,inner sep=3pt] (noexo) {\phantom{\thesubsection}};
-    \filldraw[color=chapterLACL, rounded corners=1pt] (noexo.south west) -- (noexo.north west) -- ($ (noexo.north east) + (6pt,0)$) -- ($ (noexo.south east) + (3pt,0)$) -- cycle;
-    \node[right,inner sep=3pt] {\color{white}\thesubsection};
+    \filldraw[color=SSHead, rounded corners=1pt] (noexo.south west) -- (noexo.north west) -- ($ (noexo.north east) + (6pt,0)$) -- ($ (noexo.south east) + (3pt,0)$) -- cycle;
+    \node[right,inner sep=3pt] {\color{SSText}\thesubsection};
   \end{tikzpicture}%
   \vrule height 0em depth 0.75em width 0pt%
 }
