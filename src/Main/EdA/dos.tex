@@ -497,10 +497,10 @@ La sécurité du système peut éventuellement être spécifiquement renforcée,
 %2}}}
 %1}}}
 
-\subsection{Détecter puis déjouer les attaques}
+\subsection{Détecter les attaques: systèmes de détection d'intrusion}
 %{{{1
 
-\subsubsection{Systèmes de détection d'intrusion}
+\subsubsection{Différents systèmes de détection d'intrusion}
 %{{{2
 IDS!!!!!!!!!!!
 
@@ -524,7 +524,7 @@ Bien que les simulations menées fournissent de bons résultats en termes de pr�
 C'est sur ces points que se concentrent la majeure partie des travaux présentés dans cette thèse: les \cns que nous utilisons ne sont qu'une version renommée des \textit{gNodes}, pour lesquels a été proposé dans un premier temps un renouvellement périodique~\cite{GMT12}.
 %2}}}
 
-\subsubsection{Architectures et protocoles adaptés}
+\subsubsection{Des architectures adaptées}
 %{{{2
 À travers l'usage plus ou moins direct de systèmes de détection d'intrusions, plusieurs architectures déjà établies ont été adaptées dans le but de faciliter la détection de nœuds corrompus au sein du réseau.
 
@@ -562,8 +562,14 @@ This optimized placement enables distributed detection of DoS attacks as well as
 But those few selected nodes are likely to run out of battery power much faster than normal nodes.
 %2}}}
 
-\subsubsection{Réagir face aux attaques}
+\subsubsection{Détection d'intrusion machine}\label{ea:sss:hids}
 %{{{2
+Some researchers prefer to ensure that nodes are not physically withdrawn from the network to get modified\cite{Ho10}, considering any returning node as compromised (but not detecting nodes modified on site), or to verify by means of mobile agents that the binary code run by the nodes has not been modified\cite{HR13}, although this solution makes use of cryptography mechanisms and can limit the evolution of the network.
+%2}}}
+%1}}}
+
+\subsection{Rétablir le fonctionnement normal}
+%{{{1
 
 Inscrire les nœuds corrompus sur une liste noire n'est pas nécessairement la seule réponse possible.
 Une étude propose, pour un réseau dont les capteurs ne seraient pas trop difficiles d'accès, l'usage d'agents mobiles pour récupérer au mieux d'attaques de déni de service « sur les chemins »~\cite{LB09}.
@@ -573,19 +579,9 @@ Mais ce déplacement prend du temps: si moins de 15~\% des capteurs sont suspect
 Les nœuds suspects ne sont pas exclus, ce qui limite le risque de faux positifs.
 Lorsque le taux de capteurs suspects est évalué entre 15~\% et 60~\%, une liste noire est créée pour limiter les dégâts infligés nœuds légitimes le temps que les agents mobiles puissent d'agir.
 Enfin, lorsque le seuil critique de 60~\% est dépassé, les agents mobiles s'appliquent avant tout à restaurer l'image mémoire et logicielle des nœuds jugés les plus essentiels au bon fonctionnement du réseau sur des capteurs encore en état de marche, et à entretenir ces derniers.
-%2}}}
 
-\subsubsection{Notion de confiance}
-%{{{2
-
+Notion de confiance
 Many consist in the implementation of trust based mechanisms\cite{MC10,F-GRL07} 
 
 
-
-%2}}}
-
-\subsubsection{Détection d'intrusion machine}\label{ea:sss:hids}
-%{{{2
-Some researchers prefer to ensure that nodes are not physically withdrawn from the network to get modified\cite{Ho10}, considering any returning node as compromised (but not detecting nodes modified on site), or to verify by means of mobile agents that the binary code run by the nodes has not been modified\cite{HR13}, although this solution makes use of cryptography mechanisms and can limit the evolution of the network.
-%2}}}
 %1}}}

@@ -74,7 +74,8 @@ Des méthodes cryptographiques peuvent être employées pour créer un condensat
 L'authentification sert à prouver la validité de l'expéditeur des messages.
 Il n'est pas suffisant, pour assurer la sécurité d'un réseau, de s'assurer que le contenu des messages est chiffré: il faut également s'assurer que l'entité avec laquelle on communique est bien qui elle prétend être.
 Cette précaution permet notamment de se prémunir de l'attaque de \textit{l'homme du milieu}.
-L'authentification regroupe en réalité à la fois l'authentification de deux parties l'une envers l'autre, et l'authentification d'un agent aux yeux de tous, dans le cas d'une diffusion générale (\textit{broadcast}) des messages.
+L'authentification regroupe en réalité à la fois l'authentification de deux parties l'une envers l'autre, et l'authentification d'un agent aux yeux de tous les autres membres du réseau, dans le cas d'une diffusion générale (\textit{broadcast}) des messages.
+Selon le cas, les réseaux de capteurs peuvent également avoir besoin qu'un nœud s'identifie de façon spécifique auprès de la station de base, ou bien encore, pour certains réseaux clusterisés, qu'il puisse s'authentifier auprès des autres membres du cluster (et prouver son appartenance à ce dernier).
 La signature des messages est le plus souvent réalisée à l'aide de mécanismes cryptographiques asymétriques (condensat signé à l'aide d'une clé privée).
 
 La non-répudiation consiste à assurer qu'un agent du réseau ne peut plus nier avoir émis un paquet une fois celui-ci reçu par son destinataire.
@@ -155,7 +156,7 @@ La sécurité apportée vient toutefois au prix d'en-têtes et de calculs qui pe
 
 La \tabref{ea:tab:proto} compare brièvement les fonctionnalités apportées par ces différentes modèles.
 
-\begin{table}[ht]
+\begin{table}[ht] %{{{
     \caption{Brève comparaison d'architectures de sécurité pour réseaux de capteurs}\label{ea:tab:proto}
     \medskip
     \centering
@@ -178,6 +179,7 @@ La \tabref{ea:tab:proto} compare brièvement les fonctionnalités apportées par
         \end{tabular}
     \end{footnotesize}
 \end{table}
+%}}}
 
 On constate que la gestion des clés occupe une place essentielle dans la plupart des systèmes proposés: il est en effet essentiel de disposer d'un moyen d'échanger, et au besoin de renouveler les clés nécessaires à ces architectures, sans compromettre leur sécurité mais sans pour autant consommer trop de ressources.
 De nombreux mécanismes ont été proposés et continuent de l'être~\cite{DSK10,BSK13}, et ont même fait l'objet de travaux de synthèse~\cite{HWMRKP06,XRSDHG07}.
