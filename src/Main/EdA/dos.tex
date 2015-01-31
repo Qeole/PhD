@@ -81,6 +81,7 @@ Les paradigmes suivants peuvent être considérés:
     \item l'agrégation de données (qui consiste à agréger, éventuellement compresser les données reçues avant retransmission, dans le but de limiter la taille et le nombre de paquets envoyés, afin de minimiser l'utilisation du canal de transmission, et surtout la consommation en énergie des capteurs);
     \item l'optimisation du modèle utilisé (qui intervient lorsque les capteurs ont des décisions à prendre, basées sur le contenu des paquets, telles que la retransmission directe ou différée, le niveau de sécurité à fournir\dots).
 \end{itemize}
+
 Cette méthode de classement est la plus utile pour se concentrer sur un point particulier du fonctionnement d'un réseau, et relever toutes les failles susceptibles d'affecter les opérations concernées.
 
 À noter qu'il existe dans la littérature des classifications ontologiques (le système est représenté sous forme de graphe relationnel) des attaques de déni de service~\cite{VS10}, qui se rapproche quelque peu de la méthode présentée ici, même si les exemples traités portent le plus souvent sur les réseaux en général sans évoquer les capteurs.
@@ -527,7 +528,6 @@ Les opérations menées à cette fin peuvent comprendre:
     \item la surveillance des journaux concernant les tentatives de connexion, afin de détecter des échecs répétitifs d'accès au système;
     \item la détection d'une activité inhabituelle au niveau de l'activité du processeur, des allocations mémoires, ou des entrées sorties, qui risqueraient de pénaliser le système d'exploitation en termes de performance et de consommation énergétiques. Cette surveillance peut être menée en temps réel, ou via la journalisation des évènements système.
 \end{itemize}
-
 On parle en anglais de NIDS (\textit{Network Intrusion Detection System}) ou de HIDS (\textit{Host based Intrusion Detection System}) pour les IDS orientés réseau ou machine, respectivement.
 De nombreux IDS cumulent à la fois des mécanismes de surveillance du réseau et du comportement de leurs voisins, et une surveillance des évènements système survenant sur leur hôte.
 
@@ -563,6 +563,7 @@ Collecte comme traitement peuvent être réalisés par différenties entités ou
     \item la collecte d'informations peut être \textbf{distribuée entre les nœuds} situés sur un même niveau d'horizontalité dans l'architecture du réseau: cette configuration leur permet d'échanger des informations entre eux, notamment des indices de confiance, et de déclencher des observations coordonnées lorsqu'un nœud « suspecte » un pair d'être compromis, sans en avoir la « certitude ». Lorsqu'un capteur est jugé définitivement compromis, l'information est partagée entre les nœuds. Dans certains systèmes, les calculs eux-mêmes peuvent être distribués;
     \item enfin, la distribution peut également être réalisée de façon \textbf{hiérarchique}, sur un plan vertical, dans les réseaux clusterisés. Il y a alors interaction entre les membres d'un cluster et leur \ch, qui se charge au minimum de la propagation des alertes, et parfois également des calculs à mener.
 \end{itemize}
+
 La gestion de la collecte et des calculs vont bien évidemment influencer l'opérateur du réseau sur le choix du type de méthode de détection (voir plus haut) à mettre en place.
 
 \paragraph{Selon la fréquence d'usage du système}
@@ -611,6 +612,7 @@ Les règles peuvent être nombreuses et variées, en voici quelques exemples rep
     \item \textbf{Règle sur les collisions}: pour lutter contre les tentatives de brouillage, un seuil peut être instauré pour le nombre maximum d'échecs de transmission dû à des collisions. Si ces collisions sont trop fréquentes et que le capteur qui en est à l'origine peut être identifié, il est considéré comme compromis.
     \item \textbf{Règles sur les accès}: si le nombre de tentatives d'un nœud pour s'enregistrer et obtenir un accès à certaines ressources dépasse un certain seuil, une alarme est déclenchée. Cette règle peut notamment s'appliquer à la détection des intrusions au niveau machine, lorsqu'une entité tente et échoue plusieurs fois de se connecter sur le système.
 \end{itemize}
+
 Lorsque les règles sont transgressées, une « alarme » est déclenchée.
 Suivant le modèle de l'IDS, cette alarme peut n'être qu'une notification interne au capteur qui héberge le système, ou bien il peut partager l'information avec son entourage ainsi que, généralement, la station de base.
 Les mesures à prendre en guise de réactions seront traitées plus bas.
