@@ -14,7 +14,7 @@ Les réseaux de capteurs se retrouvent malheureusement très exposés aux attaqu
     \item leurs ressources extrêmement limitées, et principalement en termes d'énergie;
     \item leurs faibles capacités, qui peuvent introduire des délais (latence dans les communications ou délai de traitement)
     \item leur exposition aux attaques physiques;
-    \item la faible fiabilité du medium de transmission, en termes de confidentialité ou de collisions
+    \item la faible fiabilité du médium de transmission, en termes de confidentialité ou de collisions
     \item leur gestion réalisée à distance;
     \item l'absence d'une gestion centralisée (et l'impossibilité de connaitre avec précision le statut des autres nœuds);
 \end{itemize}
@@ -122,7 +122,7 @@ C'est donc selon ce critère que nous allons maintenant présenter les principal
 
     \subsubsection{Couche physique}
 %{{{2
-La couche physique du réseau correspond au medium physique employé pour la transmission des données entre deux nœuds, et à la façon dont le signal est transmis au travers de ce medium.
+La couche physique du réseau correspond au médium physique employé pour la transmission des données entre deux nœuds, et à la façon dont le signal est transmis au travers de ce médium.
 Dans le cas de réseaux sans fil, le signal est propagé sous forme d'ondes électromagnétiques qui se déplacent dans le vide (ou bien, sans en être affectées, à travers l'atmosphère).
 Sauf s'il est fait usage d'une antenne directionnelle pour l'émission, ces ondes sont envoyées dans toutes les directions, et tout appareil à portée équipé d'un récepteur se retrouve donc en mesure de recevoir les paquets émis.
 
@@ -142,12 +142,12 @@ Typiquement, un capteur corrompu ne sera pas en mesure de mener cette attaque sa
 La couche de liaison de données fournit les moyens fonctionnels et procéduraux pour le transfert des données entre deux entités du réseau.
 Elle permet aussi, le plus souvent, de détecter et éventuellement corriger certaines erreurs survenues sur la couche physique (en cas de perturbation ou dégradation du signal électromagnétique).
 Elle se décompose en deux sous-couches: la couche de contrôle de la liaison logique (LLC, pour \textit{Logical Link Control} en anglais) et la couche du contrôle d'accès au support (MAC, pour \textit{Media Access Control}).
-C'est principalement cette seconde couche qui nous intéresse ici: le protocole de couche MAC définit la manière dont les différents agents du réseau accèdent au medium de transmission de façon à limiter les collisions, et à garantir un accès le plus souvent équivalent au medium pour tous les nœuds.
-Les différents modes d'accès au medium existants sont résumés dans la \tabref{ea:tab:mac}; certains consistent à créer des canaux de transmission distincts, tandis que d'autres déterminent l'accès à une même bande de fréquence en instaurant des règles.
+C'est principalement cette seconde couche qui nous intéresse ici: le protocole de couche MAC définit la manière dont les différents agents du réseau accèdent au médium de transmission de façon à limiter les collisions, et à garantir un accès le plus souvent équivalent au médium pour tous les nœuds.
+Les différents modes d'accès au médium existants sont résumés dans la \tabref{ea:tab:mac}; certains consistent à créer des canaux de transmission distincts, tandis que d'autres déterminent l'accès à une même bande de fréquence en instaurant des règles.
 Ces règles peuvent être contournées, et la couche MAC va donc se retrouver associée à plusieurs types d'attaques.
 
 \begin{table}[!ht]
-    \caption{Méthodes d'accès au medium de transmission}\label{ea:tab:mac}
+    \caption{Méthodes d'accès au médium de transmission}\label{ea:tab:mac}
     \centering
     \medskip
     \begin{small}
@@ -263,6 +263,8 @@ Concrètement, un nœud corrompu peut se déclarer voisin direct de la station d
 Ses voisins vont estimer qu'il s'agit du plus court chemin pour acheminer les paquets jusqu'à la station de base, et vont transmettre l'information à leur tour.
 Au final une part importante des routes créées, et en conséquence du trafic routé, va passer par ce nœud compromis, ce qui peut mener à des congestions dans le réseau.
 Rentre alors en jeu l'attaque \textit{blackhole}, qui supprime tous les paquets reçus plutôt que de les retransmettre à leur destinataire légitime.
+
+Une conséquence supplémentaire de cette attaque est l'épuisement de la batterie des nœuds voisins de l'attaquant: comme celui-ci se déclare très proche de la station de base, un grand nombre de routes vont rediriger les paquets vers lui, et ses voisins vont donc se retrouver fortement sollicités par des nœuds plus éloignés pour lui acheminer des paquets.
 
 Il est à noter que la littérature inverse parfois, et même confond de temps en temps, la terminologie des attaques de type \textit{blackhole} et \textit{sinkhole}.
 Les définitions présentées ici sont celles qui semblent revenir le plus couramment.
@@ -514,7 +516,7 @@ Un système de détection d'intrusion peut se concentrer sur les attaques proven
 
 À l'inverse, d'autres systèmes vont surveiller l'\textbf{activité interne} du réseau, afin de détecter d'éventuels nœuds corrompus, soit qu'ils cherchent à accaparer les ressources pour leur propre compte, soit qu'ils cherchent à détruire les ressources du réseau.
 
-\paragraph{Selon l'objet de la surveillance}
+\paragraph{Selon l'objet de la surveillance}\label{ea:sss:hids}
 Un IDS peut avoir pour tâche de surveiller l'\textbf{activité du réseau}, en analysant le trafic: le nombre de paquets transmis, leur origine ou leur destination, leur contenu, le taux de succès des transmissions sont autant d'indices à collecter pour déterminer si le réseau fonctionne dans des conditions normales.
 
 En parallèle, d'autres systèmes peuvent être orientés vers la \textbf{sécurité de l'hôte} sur lequel ils sont exécuté.
@@ -575,21 +577,70 @@ On voit ainsi souvent apparaître en anglais le terme \textit{cross-layer IDS}, 
 
 \subsubsection{Les méthodes de détection}\label{ea:sss:detect}
 %{{{2
-\paragraph{Détection basée sur les anomalies} jhkfds hife hgfudgh jdgh fdighdsmgji kdfgjfdk mhgdsgkh dkgmh.
-dsfgje gofigj odgj iogj ojeogj odf
+Une fois le réseau déployé, et le système de détection d'intrusion mis en place, les nœuds chargés de la surveillance du réseau analysent le trafic environnant et en tirent des déductions sur l'état des réseau.
+Ces déductions résultent de l'application d'algorithmes précis sur les données.
+Ces algorithmes sont de plusieurs sortes, que l'on regroupe dans les méthodes de détection basées sur des anomalies, sur des signatures d'attaques, ou sur le non-respect de spécifications prédéfinies.
 
-        child  node {M\'ethode de d\'etection}
-            child { node {Anomalies} }
-            child { node {Signatures} }
-            child { node {Sp\'ecifications} }
-with agents applying set of rules\cite{RKKK13} on traffic to attribute a trust value to each of the nodes in the network.
+\paragraph{Détection basée sur les anomalies}
+Détecter les attaques selon les anomalies qui surviennent dans le réseau revient à établir, dans un premier temps, un modèle du fonctionnement normal du réseau.
+Dans un second temps, la surveillance en elle-même est déclenchée, et si les variables observées dérogent sensiblement au modèle généré, une alerte est levée.
+Ces méthodes permettent donc d'intervenir lorsqu'un problème survient effectivement dans le réseau, sans que son origine n'ait nécessairement été identifiée.
+Elles ont pour avantage de s'adapter à de nouveaux types d'attaques, pour lesquelles elles n'avaient pas été imaginées au départ.
+En revanche, elles peuvent être amenées à manquer certaines attaques connues dont les conséquences sont suffisamment discrètes.
+Un second inconvénient existe: elles requièrent un réajustement constant du modèle par rapport à l'évolution normale du réseau, et la surveillance doit donc être maintenue tout à la fois pour détecter les attaques et pour mettre à jour le modèle.
+
+La détection basée sur les anomalies regroupe trois sous-catégories.
+\begin{itemize}
+    \item La première est celle des \textbf{modèles statistiques}, qui enregistrent dans un premier temps des séries de valeurs pour des variables liées au bon fonctionnement du réseau, et cherchent par la suite à repérer les écarts importants à ces valeurs de référence. Les variables observées, directement liées au trafic, peuvent être considérées comme des variables indépendantes suivant des lois de \textsc{Gauss}, comme des variables corrélées, ou encore comme des séries temporelles.
+    \item Une deuxième regroupe les modèles basés sur les \textbf{connaissances} modélisées du fonctionnement normal du réseau, et utilise un modèle généré en fonction des données et à l'aide d'outils tels que des langages de description ou des automates finis.
+    \item Enfin, la détection peut être basée sur des \textbf{méthodes d'apprentissage}, où des modèles sont créés et actualisés \via des outils formels comme les processus de \textsc{Markov}, les réseaux bayésiens, la logique floue, les algorithmes génétiques, les réseaux de neurones, ou encore les modèles d'intelligence en essaim.
+\end{itemize}
+
+\paragraph{Règles et signatures des attaques}
+Plutôt que d'attendre que des anomalies de fonctionnement, de performances, soient détectés, d'autres IDS prennent les devants et mettent en place un système de surveillance du voisinage en établissant un ensemble de règles à ne pas transgresser.
+Ces règles sont construites à partir de la « signature » des attaques connues \cad, pour une attaque donnée, à partir du comportement type adopté par un nœud qui tenterait de mener cette attaque.
+
+Les règles peuvent être nombreuses et variées, en voici quelques exemples représentatifs.
+\begin{itemize}
+    \item \textbf{Règle sur la fréquence des envois}: le délai entre deux paquets consécutifs, ou plus généralement la fréquence des messages émis sur un intervalle de temps par le nœud surveillé, ne doivent pas dépasser un certain seuil (minimal si l'on parle de délai, maximal pour une fréquence). Cette règle empêche un capteur de procéder à des attaques par déluge de paquets, ou bien d'accaparer le médium de transmission, sans être détecté.
+    \item \textbf{Règle de retransmission}: les messages reçus par un nœud relais, mais à destination d'un autre nœud, doivent impérativement être retransmis par ce relais au nœud suivant sur la route définie pour ces paquets, ceci afin de détecter les attaques de type \textit{blackhole} ou \textit{sinkhole}.
+    \item \textbf{Règle sur le délai de retransmission}: la retransmission en question par le relais ne doit pas être effectuée après un certain délai, afin d'éviter des ralentissements importants dans le réseau (cette règle est très proche de la précédente, qui est bien obligée de se baser sur un délai limite pour considérer que le paquet ne sera pas retransmis).
+    \item \textbf{Règle sur l'intégrité}: Le contenu du message retransmis par le relais ne doit pas être altérée. Cette règle est bien entendu inapplicable lorsque le relais est censé effectuer un traitement (agrégation, traitement sémantique\dots) sur ce contenu avant de le retransmettre. Les attaques visées sont principalement celles visant l'intégrité des paquets.
+    \item \textbf{Règle sur la répétition}: un message ne peut être transmis par un nœud donné au plus qu'un certain nombre de fois. Si ce seuil est dépassé, le nœud peut être suspecté de vouloir influencer les résultats collectés par la station de base. Si la répétition est espacée dans le temps, il peut aussi s'agir d'une tentative d'attaque par rejeu de paquets.
+    \item \textbf{Règle sur la portée de transmission}: les paquets « entendus » par les nœuds de surveillance ne devraient provenir que de nœuds voisins dans le réseau, et non de nœuds que l'on sait éloignés. Réciproquement, les nœuds voisins ne sont pas censés émettre avec une puissance dépassant un certain seuil. Cette règle peut permettre de détecter des nœuds qui tenteraient de produire une fuite de données vers l'extérieur du réseau, ou bien de mener des attaques dans des zones plus éloignées du réseau (notamment des attaques sur le routage, en prétendant être voisin de nœuds distants, ou bien des attaques par trous de ver).
+    \item \textbf{Règle sur les collisions}: pour lutter contre les tentatives de brouillage, un seuil peut être instauré pour le nombre maximum d'échecs de transmission dû à des collisions. Si ces collisions sont trop fréquentes et que le capteur qui en est à l'origine peut être identifié, il est considéré comme compromis.
+    \item \textbf{Règles sur les accès}: si le nombre de tentatives d'un nœud pour s'enregistrer et obtenir un accès à certaines ressources dépasse un certain seuil, une alarme est déclenchée. Cette règle peut notamment s'appliquer à la détection des intrusions au niveau machine, lorsqu'une entité tente et échoue plusieurs fois de se connecter sur le système.
+\end{itemize}
+Lorsque les règles sont transgressées, une « alarme » est déclenchée.
+Suivant le modèle de l'IDS, cette alarme peut n'être qu'une notification interne au capteur qui héberge le système, ou bien il peut partager l'information avec son entourage ainsi que, généralement, la station de base.
+Les mesures à prendre en guise de réactions seront traitées plus bas.
+
+Les nœuds qui observent le comportement de leurs voisins et veillent à l'application des règles choisies pour le réseau sont désignés de plusieurs façons: on parle de nœuds de contrôle, de nœuds de surveillance, éventuellement de sentinelles; en anglais, ce seront le plus souvent des \textit{monitoring nodes} (nœuds moniteurs).
+L'expression \textit{watch dogs}, pour « chiens de garde », est aussi régulièrement employée.
+Dans nos travaux, les nœuds chargés de cette surveillance sont appelés \cns.
+
+La détection basée sur la signature des attaques est relativement simple à appréhender et à mettre en œuvre.
+Elle est très efficace pour détecter les attaques connues, dont la signature est transcrite sous forme de règle servant à proscrire les comportements malicieux.
+Ces règles sont faites de telle façon que le taux de faux positifs soit peu élevé.
+De plus, cette méthode de détection est centrée sur l'observation du comportement individuel des nœuds voisins des sentinelles, et permet donc le plus souvent de localiser efficacement l'origine d'une attaque.
+En revanche, elle souffre d'une mauvaise adaptation aux attaques nouvelles, dont le profil n'est pas connu, et risque ainsi de ne pas détecter d'intrusion alors même que les performances du réseau se retrouvent fortement dégradées.
+
+\paragraph{Respect des spécifications}
+Une troisième classe de méthodes de détection regroupe les méthodes, moins fréquentes, basées sur le respect de spécifications réalisées en amont du déploiement du réseau.
+La détection basée sur les anomalies détecte les écarts de performance, celle basée sur les signatures relève les comportements suspects; cette troisième catégorie cherche à combiner les avantages de chacune, en se reposant sur des spécifications élaborées par l'opérateur ainsi que sur des contraintes qui caractérisent le bon fonctionnement du réseau.
+Les écarts au profil normal spécifié permettent de détecter les attaques en identifiant leur effet, tandis que les contraintes fixées par ces spécifications entraînent la détection de comportement individuels malicieux.
+
+Comme les spécifications sont réalisées par un opérateur humain (il ne s'agit pas d'un modèle généré par un algorithme), le taux de faux positifs est relativement faible.
+En revanche, l'élaboration de ces spécifications peut s'avérer très complexe, et prendre beaucoup de temps.
+Ces méthodes sont relativement peu implémentées dans la littérature.
 %2}}}
 
 \subsubsection{Des architectures adaptées}
 %{{{2
-Nous allons donner ici quelques exemples de propositions concrètes de systèmes de détection d'intrusion.
+Nous allons donner ici quelques exemples de propositions concrètes de systèmes de détection d'intrusion, sans chercher à couvrir l'ensemble des nombreuses catégories présentées.
 La plupart d'entre elles se basent sur l'emploi d'architectures (clusterisation, architectures de sécurité) ou de protocoles (routage) déjà existants, auxquelles elles rajoutent des systèmes dédiés à la détection des attaques.
 
+\paragraph{Quelques IDS pour réseaux clusterisés}
 Le système SecCBSN (\textit{Secure Communications of Cluster-Based Sensor Network}, « communications sécurisées des réseaux de capteurs clusterisés ») introduit une architecture de sécurité à laquelle est adjointe un système de détection d'intrusion pour sécuriser au mieux possible les réseaux clusterisés~\cite{HHC07}.
 Chaque nœud implémente trois modules: l'un intervient pour l'élection du \ch, réalisée sur le modèle de \leach.
 Le deuxième module est chargé d'apporter authentification et chiffrement pour les communications entre les capteurs au sein du réseau, et utilise notamment une version retouchée du certificat TESLA.
@@ -604,9 +655,9 @@ Lorsque le \ch reçoit plusieurs rapports de la part de \textit{gNodes} distinct
 Bien que les simulations menées fournissent de bons résultats en termes de préservation des ressources, l'étude ne se penche pas sur le processus utilisé pour la désignation des nœuds de contrôle, et ne traite pas de leur renouvellement dans le temps, ce qui fait que les même capteurs supportent la tâche de surveillance sur de longues durées.
 
 C'est sur ces points que se concentrent la majeure partie des travaux présentés dans cette thèse: les \cns que nous utilisons ne sont qu'une version renommée des \textit{gNodes}, pour lesquels a été proposé dans un premier temps un renouvellement périodique~\cite{GMT12}.
-%2}}}
+Nous nous attachons, dans le choix des nœuds de surveillance, à répartir au mieux la consommation énergétique dans le cluster; d'autres études cherchent à désigner ces nœuds de manière à obtenir la meilleure couverture possible, et à maximiser les chances de détection des nœuds compromis à l'aide d'heuristiques pour le placement de l'IDS~\cite{INK09}.
 
-%{{{2
+\paragraph{Lutter contre les pertes de paquets}
 À travers l'usage plus ou moins direct de systèmes de détection d'intrusions, plusieurs architectures déjà établies ont été adaptées dans le but de faciliter la détection de nœuds corrompus au sein du réseau.
 
 OLSR (\textit{Optimized Link State Routing protocol}) est l'un des protocoles de routages souvent déployés dans les réseaux de capteurs.
@@ -614,38 +665,25 @@ Une nouvelle version de ce protocole, appelée DLSR~\cite{MKASF10}, a été prop
 Lorsque la station de base reçoit un trafic trop important, qui menace de saturer sa capacité de traitement ou bien qui crée de trop fortes congestions sur ses liens, elle envoie un signal dans tout le réseau en vue de prévenir les nœuds; le trafic est alors analysé, par chaque nœud relais, par un automate d'apprentissage afin de détecter et supprimer les paquets malveillants.
 DLSR fait signaler par la station de base la fin de l'attaque, afin que les nœuds cessent les opérations nécessaires au filtrage des paquets.
 
+Basé sur des mécanismes simples, REWARD reprend la règle de retransmission pour assurer qu'aucun nœud ne commet d'attaque de type \textit{blackhole}~\cite{Kar05}.
+À chaque émission de paquet, le nœud émetteur (qu'il soit émetteur d'origine ou relais, sauf s'il est le dernier relais de la route empruntée) vérifie que le destinataire retransmet le paquet sur le saut suivant.
+Cette procédure ne permet pas de détecter deux attaquants « alignés » sur la route des paquets, qui agiraient de concert, le premier transmettant le paquet au second, sans lever d'alerte lorsque celui-ci se contenterait de supprimer le paquet.
+Aussi lorsque l'on suspecte une attaque de ce type d'avoir lieu, REWARD ne se contente plus de ne faire surveiller que ses voisins directs par un capteur, mais propose d'augmenter la puissance de transmission lors du transit du paquet, de sorte que la règle puisse être vérifiée par chaque nœud sur les deux sauts suivant son émission.
 
-REWARD
+Une conséquence des attaques de type \textit{sinkhole}, outre la perte des paquets, est la consommation supplémentaire en énergie que l'attaquant impose à ses voisins.
+Une étude se base sur ce constat pour établir une méthode « géostatistique » de détection pour ces attaques~\cite{SKDM14}.
+Le principe consiste à échantillonner périodiquement des zones du réseau, en demandant aux nœuds leur énergie résiduelle.
+Un traitement sur ces données permet de déterminer les zones ou l'énergie des nœuds est plus faible qu'elle ne le devrait, et donc où une attaque de type \textit{sinkhole} est peut-être en cours.
+Ce traitement consiste en l'application d'un modèle de survie, plus précisément une régression de C\textsc{ox} (modèle à risque proportionnel), qui est réalisé soit par la station de base, soit, dans une version adaptée, par des nœuds de confiance au sein du réseau.
 
-%{{{3
-%% OLD VERSION
-%The running of a detection mechanism on every node in the network allows achieving a perfect detection against DoS attacks but it is not a feasible solution in a constrained network.
-%In
-%\cite{HI09},
-%an optimized placement of detection nodes in a network for distributed detection of DoS attacks is proposed.
-%In addition to placing detection nodes at critical points in a network, this proposition minimizes the number of these required nodes and therefore reduces the cost and processing overheads.
+\paragraph{Sécurité système}
+Outre les systèmes de détection d'intrusion machine, qui surveillent le système d'exploitation du nœud même sur lequel ils s'exécutent, il est possible de faire vérifier l'intégrité des systèmes par d'autres entités.
+Il existe ainsi une proposition concernant l'usage d'agents mobiles dans le réseau, qui se déplacent de nœud en nœud pour vérifier que le code binaire de leur système n'a pas été altéré~\cite{HR13}.
+Si des capteurs corrompus sont détectés et que leur état ne peut être immédiatement restauré (soit que l'opération soit impossible, soit que l'agent mobile reçoive l'alarme d'un autre capteur et n'ait pas encore eu le temps d'accéder au nœud affecté), ces agents permettent également de propager l'alerte dans le réseau.
 
-%% Optimal Sensor Placement for Detection against Distributed Denial of Service Attacks
-The best way to detect for sure a DoS attack in a WSN is simply to run a detection mechanism on each single sensor.
-Of course, this solution is not feasible in a network with constraints.
-Instead of fitting out each sensor with such mechanism, it is proposed in~\cite{INK09} to resort to heuristics in order to set a few nodes equipped with detection systems at critical spots in the network topology.
-This optimized placement enables distributed detection of DoS attacks as well as reducing costs and processing overheads, since the number of required detectors is minimized.
-But those few selected nodes are likely to run out of battery power much faster than normal nodes.
-%3}}}
-
-%% Optimal Sensor Placement for Detection against Distributed Denial of Service Attacks
-The best way to detect for sure a DoS attack in a WSN is simply to run a detection mechanism on each single sensor.
-Of course, this solution is not feasible in a network with constraints.
-Instead of fitting out each sensor with such mechanism, \textit{Islam et al}. propose in
-\cite{INK09}
-to resort to heuristics in order to set a few nodes equipped with detection systems at critical spots in the network topology.
-This optimized placement enables distributed detection of DoS attacks as well as reducing costs and processing overheads, since the number of required detectors is minimized.
-But those few selected nodes are likely to run out of battery power much faster than normal nodes.
-%2}}}
-
-\subsubsection{Détection d'intrusion machine}\label{ea:sss:hids}
-%{{{2
-Some researchers prefer to ensure that nodes are not physically withdrawn from the network to get modified\cite{Ho10}, considering any returning node as compromised (but not detecting nodes modified on site), or to verify by means of mobile agents that the binary code run by the nodes has not been modified\cite{HR13}, although this solution makes use of cryptography mechanisms and can limit the evolution of the network.
+\paragraph{}
+Plusieurs études ont tenté d'établir une synthèse des solutions proposées en termes de systèmes de détection d'intrusion~\cite{ME13,MS14}, et fournissent de nombreux autres exemples.
+Les travaux de synthèse récents de \textsc{Butun, Morgera} et \textsc{Sankar}, qui classent et détaillent les IDS pour MANET (\textit{Mobile Ad hoc Networks}, \textit{réseaux ad hoc mobiles}) et réseaux de capteurs sans fil~\cite{BMS13} sont notamment très complets.
 %2}}}
 %1}}}
 

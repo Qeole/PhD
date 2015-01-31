@@ -9,45 +9,6 @@ Question is: what are those methods?
 We will first list the existing (in literature, at least) \dos attacks.
 Then to attempt to bring an answer to the previous question, we will try to bring out attackers' motivations for their acts, and then to categorize the attacks according to their suitability to address those motivations.
 
-\subsubsection{List of known \dos attacks in WSNs}
-
-\newcounter{ItemNumber}
-\setcounter{ItemNumber}{1}
-\newcommand\num[1]{\theItemNumber.~#1\stepcounter{ItemNumber}}
-\begin{center} \begin{small}
-\noindent%
-\begin{tabular}{c|l}
-	\toprule
-	\multirow{2}{*}{Physical layer}%
-		& \num{Jamming}\\
-		& \num{Tampering}\\
-	\midrule
-	\multirow{3}{*}{Data link layer}%
-		& \num{Producing collisions}\\
-		& \num{Exhaustion of energy}\\
-		& \num{Unfairness}\\
-	\midrule
-	\multirow{7}{*}{Network layer}%
-		& \num{Spoofing routing information (greediness, cycling loops, \etc)}\\
-		& \num{Selective packet forwarding (grey hole, on/off hole attacks)}\\
-		& \num{Sink hole (no forwarding)}\\
-		& \num{Black hole (no forwarding, after announcing short route to \BS)}\\
-		& \num{Wormhole}\\
-		& \num{Hello flood, ACK spoofing, \etc}\\
-		& \num{Sybil attack}\\
-	\midrule
-	\multirow{2}{*}{Transport layer}%
-		& \num{TCP or likes flooding}\\
-		& \num{TCP or likes de-synchronisation}\\
-	\midrule
-	\multirow{3}{*}{Application layer}%
-		& \num{False data}\\
-		& \num{Flooding}\\
-		& \num{De-synchronisation}\\
-	\bottomrule
-\end{tabular}
-\end{small} \end{center}
-
 \subsubsection{Motivations for the attackers}
 
 We are assuming that the reasons pushing the attackers into setting up a \dos attack may be the following.
