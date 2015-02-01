@@ -21,7 +21,8 @@ def build(bld):
     #bld.add_group()
 
     deps_str = ''
-    for i in bld.path.ant_glob('src/**/*'):
+    #for i in bld.path.ant_glob('src/**/*'):
+    for i in bld.path.ant_glob('src/**'):
         deps_str += i.path_from(bld.path.search(top)) + " "
 
     bld(

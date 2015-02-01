@@ -1,0 +1,94 @@
+% vim: set spelllang=fr foldmethod=marker foldlevel=1:
+\subsection{Différentes classifications}
+%{{{1
+
+    \subsubsection{Selon l'objectif recherché}
+%{{{2
+Une première façon de classer les attaques est de considérer l'objectif de l'attaquant.
+Les buts principaux de ces attaques sont:
+\begin{itemize}
+    \item l'accaparement de ressources pour les besoins propres de l'attaquant, au détriment des autres agents du réseau (par exemple, monopolisation du canal de transmission pour l'envoi des données de l'attaquant exclusivement). Il s'agit de comportements « cupides » (\textit{greedy} en anglais);
+    \item la réduction, voir l'annihilation de la capacité du réseau à assurer correctement les services pour lequel il a été déployé, afin de nuire aux exploitants de ce réseau. Cette nuisance peut s'exprimer par des pertes financières, par exemple lorsqu'une telle attaque est menée sur Internet contre un site de commerce en ligne; dans le cas des réseaux de capteurs sans fils, et notamment lorsqu'ils sont utilisés dans un cadre militaire, l'exploitant d'un réseau peut alors se voir priver de l'accès aux informations stratégiques que devaient récolter les capteurs. On parle le plus souvent d'attaques de type \textit{jamming} en anglais, qui se traduit selon le cas par « brouillage », « encombrement », mais d'autres attaques reposant sur la privation de sommeil des capteurs, ou bien leur destruction physique, peuvent aussi être réalisées dans cet objectif;
+    \item plus rarement, l'induction en erreur de l'exploitant du réseau de capteurs. Pour ceci l'attaquant cherche à fausser les résultats collectés (changement d'environnement des capteurs) ou transmis (altération du contenu ou du volume de données transmises).
+\end{itemize}
+%2}}}
+
+    \subsubsection{Selon la situation de l'attaquant}
+%{{{2
+On distingue également les attaques selon la provenance de l'attaquant, à savoir s'il fait partie du réseau, et mène par exemple une attaque sur le protocole de routage employé, ou bien s'il agit depuis l'extérieur du réseau, depuis une machine qui n'est pas reconnue comme faisant partie du réseau de capteurs.
+Ce deuxième cas peut être illustré par un attaquant qui chercherait à brouiller de manière globale toutes les fréquences radio utilisées par les capteurs pour communiquer.
+
+Un attaquant extérieur n'a pas forcément connaissance de la façon dont fonctionne le réseau (architecture, protocoles employés, mesure de détection mises en place).
+Il peut mener une attaque sans ces informations (cas du brouillage des fréquences par exemple), ou bien justement chercher à s'introduire dans le réseau.
+Cette intrusion peut être réalisée par l'attaquant soit en faisant accepter l'un de ses appareils propre aux autres agents du réseau, soit en compromettant l'un des agents jusqu'alors légitime dans le réseau.
+Une fois l'accès interne obtenu, il devient généralement beaucoup plus facile d'accéder à des informations sur le fonctionnement du réseau.
+L'attaquant, en fonction des mesures mises en place, devient aussi susceptibles d'être détecté et exclu du réseau.
+Les attaques menées depuis l'intérieur jouent souvent sur les paramètres des protocoles employés, et sont souvent plus « subtiles », plus délicates à détecter et identifier pour l'opérateur du réseau si aucune méthode de détection d'intrusion n'a été mise en place.
+%2}}}
+
+    \subsubsection{Selon les capacités de l'attaquant}
+%{{{2
+On peut encore distinguer les attaques selon la puissance dont dispose l'attaquant, que ce soit en terme de calcul, d'émission électromagnétiques, ou bien d'alimentation en énergie.
+Un attaquant peut n'avoir à disposition qu'un capteur normal (\textit{mote-class attacks} en anglais), qu'il lui appartienne ou bien qu'il ait été compromis parmi les capteurs déployés à l'origine.
+Il se retrouve dans ce cas avec des machines similaires aux appareils attaqués, mais n'a pas besoin de rester sur place et peut mener des attaques sur la durée.
+Il peut également être équipé d'un ordinateur plus puissant (\textit{laptop-class attacks}), voir de matériel militaire spécialisé.
+Dans ce cas, il est plus aisé de déployer de la puissance (puisque l'attaquant peut s'affranchir des limites imposées par les batteries des capteurs) et par exemple de brouiller en continu toute une plage de fréquence.
+Il faut néanmoins que le matériel utilisé reste déployé le temps de mener l'attaque, ce qui peut s'avérer couteux sur la durée.
+%2}}}
+
+    \subsubsection{Attaques actives, passives}
+%{{{2
+Cette méthode de classement ne s'applique pas ici.
+Les attaques dites « passives » n'interfèrent pas avec le fonctionnement normal du réseau: il peut s'agir par exemple d'écoute clandestine en vue de collecter des données (atteinte à la confidentialité des communications), mais par définition les attaques de déni de service sont des attaques dites « actives », au cours desquelles l'attaquant introduit de nouveaux comportement dans le réseau.
+%2}}}
+
+    \subsubsection{Selon le paradigme considéré}\label{ea:sss:paradigm}
+%{{{2
+Nous abordons à présent des méthodes effectives de classement, qui permettent de catégoriser plus précisément les attaques (plutôt que d'établir une simple dissociation des catégories sur un nombre restreint de critères).
+
+Certaines études se penchent sur une classe d'opérations réalisées par les réseaux de capteurs, et répertorient les attaques et les contre-mesures qui s'appliquent à cette classe~\cite{JPD06,OX09}.
+Les paradigmes suivants peuvent être considérés:
+\begin{itemize}
+    \item la collecte et la transmission simples des données (paradigme qui se concentre sur une collecte simple et un envoi direct à la station de base, sans traitement, sans routage dans le réseau);
+    \item la transmission des données d'un point à un autre du réseau (\cad tout ce qui touche au routage des paquets dans le réseau, donc en faisant intervenir la retransmission des paquets par plusieurs nœuds intermédiaires);
+    \item la réception et le traitement de commandes (dans le cas où les nœuds sont susceptibles de communiquer entre eux et de s'échanger des commandes, pouvant mener à des changement de configuration des capteurs);
+    \item l'organisation autonome du réseau (les réseaux de capteurs s'organisent de façon autonome, mais des attaques peuvent chercher à interférer avec la formation d'une architecture cohérente; dans ce paradigme sont inclus les protocoles de clusterisation éventuellement mis en application);
+    \item l'agrégation de données (qui consiste à agréger, éventuellement compresser les données reçues avant retransmission, dans le but de limiter la taille et le nombre de paquets envoyés, afin de minimiser l'utilisation du canal de transmission, et surtout la consommation en énergie des capteurs);
+    \item l'optimisation du modèle utilisé (qui intervient lorsque les capteurs ont des décisions à prendre, basées sur le contenu des paquets, telles que la retransmission directe ou différée, le niveau de sécurité à fournir\dots).
+\end{itemize}
+
+Cette méthode de classement est la plus utile pour se concentrer sur un point particulier du fonctionnement d'un réseau, et relever toutes les failles susceptibles d'affecter les opérations concernées.
+
+À noter qu'il existe dans la littérature des classifications ontologiques (le système est représenté sous forme de graphe relationnel) des attaques de déni de service~\cite{VS10}, qui se rapproche quelque peu de la méthode présentée ici, même si les exemples traités portent le plus souvent sur les réseaux en général sans évoquer les capteurs.
+
+La \tabref{ea:tab:paradigm} située plus bas présente un classement selon les paradigmes des attaques que nous allons introduire.
+%2}}}
+
+    \subsubsection{Selon les couches de protocoles concernées}
+%{{{2
+Une seconde méthode efficace de classement consiste à procéder par couches de protocoles, en se basant sur le modèle TCP/IP (schéma concret lui-même issu du modèle théorique OSI, de l'anglais \textit{Open Systems Interconnection}).
+Ce modèle est rappelé en \figref{ea:fig:tcpip}.
+\begin{figure}[!ht]
+    \centering
+    \begin{tabular}{c |c| l}
+        \multicolumn{2}{c}{} & Exemples:\\
+        \cline{2-2}
+        5 & Application & HTTP, FTP, SSH\\
+        \cline{2-2}
+        4 & Transport & TCP, UDP\\
+        \cline{2-2}
+        3 & Réseau & IP\\
+        \cline{2-2}
+        2 & Liaison & IEEE 802.11 (CDMA/CA)\\
+        \cline{2-2}
+        1 & Physique & ondes électromagnétiques\\
+        \cline{2-2}
+     \end{tabular}
+    \medskip
+    \caption{Modèle TCP/IP}\label{ea:fig:tcpip}
+\end{figure}
+
+Ce classement permet une revue efficace, couche par couche, de la plupart des attaques connues.
+C'est donc selon ce critère que nous allons maintenant présenter les principales attaques de déni de service connues dans les réseaux de capteurs.
+%2}}}
+%1}}}

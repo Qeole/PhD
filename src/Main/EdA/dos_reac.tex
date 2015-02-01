@@ -1,0 +1,71 @@
+% vim: set spelllang=fr foldmethod=marker foldlevel=1:
+\subsection{Réagir aux attaques}
+%{{{1
+Savoir qu'une attaque est en cours dans le réseau est une information de grande valeur; mais encore faut-il savoir l'utiliser pour réagir efficacement.
+
+    \subsubsection{Alertes et exclusion du coupable}
+%{{{2
+        \paragraph{Exclure l'attaquant}
+Lorsque l'auteur d'une attaque a été clairement identifié, la réponse la plus souvent employée consiste à exclure virtuellement du réseau, c'est à dire à ne plus lui envoyer de paquets, et à ignorer totalement les trames provenant de ce nœud.
+Cette exclusion peut permettre d'empêcher le nœud corrompu de procéder à ses attaques, du moment que ses paquets peuvent effectivement être ignorés.
+Pour tout ce qui concerne les comportements cupides, la falsification d'accusés de réception, puis de manière générale l'ensemble des attaques portant sur les couche réseau ou supérieures de la pile TCP/IP, ignorer les paquets émis par le capteur s'avère efficace: puisque les informations qu'il envoie ne sont plus traitées, il n'y a plus de danger.
+Elle sera sans effet en revanche sur des attaques de type brouillage, ou de création de collisions: non seulement l'attaquant est difficile à identifier, car il ne renseigne pas son identité dans les trames malicieuses, mais en plus le fait de l'« exclure » ne permet en aucun cas de supprimer les collisions produites sur des paquets légitimes par ses émissions.
+
+        \paragraph{Identifier l'attaquant}
+Suivant le modèle utilisé, et notamment lorsque la détection est basée sur le relevé d'anomalies, détecter une attaque ne revient pas nécessairement à identifier son auteur.
+Pour pouvoir exclure l'attaquant, il est pourtant nécessaire de connaitre son identité: la détection d'une anomalie peut donc parfois être suivie de l'activation d'un processus de surveillance des nœuds voisins, afin de repérer quelle entité est à l'origine de l'attaque.
+
+        \paragraph{Diffuser un message d'alerte}
+Si le système de détection d'intrusion mis en place fonctionne de manière indépendante sur chaque capteur, il est possible que les nœuds ne diffusent pas d'information lorsqu'ils identifient un nœud corrompu.
+Mais dans la majorité des cas, il est utile de le faire savoir au voisinage ainsi qu'à la station de base.
+Différents niveaux de diffusion de l'alerte sont donc proposés selon les systèmes.
+Certains ne déclenchent une alerte qu'à destination de la station de base, d'autres préviennent l'ensemble des agents du réseau.
+Dans les réseaux clusterisés, la constante est de remonter une alerte au \ch, qui la transmet à la station de base et la rediffuse au sein de son cluster.
+%2}}}
+
+    \subsubsection{Rétablissement du réseau}
+%{{{2
+        \paragraph{Restauration des systèmes compromis}
+Inscrire les nœuds corrompus sur une liste noire n'est pas nécessairement la seule réponse possible: il est parfois possible de rétablir la configuration initiale des capteurs.
+Une étude propose, pour un réseau dont les capteurs ne seraient pas trop difficiles d'accès, l'usage d'agents mobiles pour récupérer au mieux d'attaques de déni de service « sur les chemins »~\cite{LB09}.
+Ces attaques consistent à compromettre plusieurs nœuds, qui a leur tour mènent des attaques par déluge de paquets dans le but de créer des congestions et d'épuiser la batterie de tous leurs voisins, allant ainsi jusqu'à créer de grands espaces vides dans le réseau.
+La solution proposée repose sur l'usage d'entités mobiles qui sont capables de se déplacer dans le réseau pour rétablir le statut initial des capteurs et si possible récupérer le contenu de leur base de données.
+Mais ce déplacement prend du temps: si moins de 15~\% des capteurs sont suspects, il est envisageable de laisser les agents mobiles tourner dans le réseau pour restaurer leur configuration d'origine.
+Les nœuds suspects ne sont pas exclus, ce qui limite le risque de faux positifs.
+Lorsque le taux de capteurs suspects est évalué entre 15~\% et 60~\%, une liste noire est créée pour limiter les dégâts infligés nœuds légitimes le temps que les agents mobiles puissent d'agir.
+Enfin, lorsque le seuil critique de 60~\% est dépassé, les agents mobiles s'appliquent avant tout à restaurer l'image mémoire et logicielle des nœuds jugés les plus essentiels au bon fonctionnement du réseau sur des capteurs encore en état de marche, et à entretenir ces derniers.
+
+        \paragraph{Résilience du réseau}
+Il n'est pas toujours possible d'annuler les effets d'un attaque en excluant un capteur corrompu du réseau, à plus forte raison si l'attaque est menée depuis l'extérieur.
+Il faut dans ce cas trouver des méthodes alternatives pour composer avec l'attaque en cours.
+
+Ainsi, l'impact du brouillage de certaines fréquences peut être limité, par exemple en changeant la fréquence utilisée pour le canal de transmission.
+Si l'attaquant parvient à s'adapter, un changement de fréquences très rapide ou « sauts de fréquence », utilisé par les protocoles de couche liaison de donnée de type CDMA (\textit{Code Division Multiple Access}, consistant à étendre le spectre d'émission et à convenir, entre pairs, d'une séquence pseudo-aléatoire guidant les sauts rapides de fréquences), peut permettre d'échapper au collisions.
+Des antennes directionnelles peuvent permettre une meilleure qualité de signal, et rendent parfois possibles les communications au travers d'une tentative de brouillage.
+Enfin, si les nœuds sont mobiles, ils peuvent tenter de sortir de la zone affectée par les émissions de l'attaquant.
+
+Lorsque toute une zone du réseau est sous l'effet d'une attaque de brouillage et se retrouve coupé de la station de base, une possibilité intéressante est d'établir un « trou de ver », légitime cette fois-ci, entre un relais de la zone atteinte et un nœud extérieur, qui sert alors de passerelle vers le reste du réseau~\cite{CCH07}.
+Ce tunnel permet de n'équiper qu'un sous-ensemble réduit de capteurs en matériel nécessaire pour contrer les attaques de brouillage radio, et de compter sur eux pour établir la passerelle salvatrice.
+
+En dehors de ce tunnel, les dispositions évoquées jusque là pour échapper au brouillage sont très couteuses pour des réseaux de capteurs, car elles demandent un équipement ou bien une capacité de calculs conséquents.
+Une technique plus simple pour réagir à du brouillage « intelligent », dans le cas où l'attaquant n'émet que quelques bits de données pour corrompre un paquet, il est possible d'ajouter des codes de correction d'erreur aux messages.
+Ces codes demandent un peu plus de calculs que les sommes de contrôle; mais tandis que celles-ci ne font que déceler les erreurs, les codes correcteurs permettent parfois de les corriger (et d'éviter ainsi la suppression pure et simple du paquet corrompu, qui mènerait à une demande de retransmission des données).
+
+Laissons à présent de côté les tentatives de brouillage pour nous intéresser au routage: les attaques sur les protocoles sont stoppées par l'exclusion de l'attaquant du réseau, mais les dégâts causés ne se réparent pas seuls.
+Il faut donc relancer les algorithmes afin de rétablir des routes efficaces.
+Le problème s'accentue lorsque l'attaquant est parvenu à mettre des nœuds hors service en les poussant à vider leur batterie.
+Des capteurs peuvent également se retrouver coupés du reste du réseau.
+Il faut alors trouver de nouveaux chemins pour les données, éventuellement en recréer si les nœuds sont mobiles.
+Un certain niveau de résilience est donc nécessaire dans la conception des protocoles de routage, de sorte qu'ils soient capables de s'adapter à l'évolution du réseau.
+
+Certains mécanismes proposent même l'intervention d'un opérateur humain pour déclencher une modification de certaines routes et « emprisonner » le trafic frauduleux, qui vise à créer des congestions dans le réseau, sur des nœuds \textit{Shield} (bouclier en anglais) qui se contenteront de le supprimer~\cite{HSP13}.
+Si l'intervention d'un opérateur humain n'est pas forcément souhaitable dans les réseaux de capteurs, ce mécanisme a pour avantage de désarmer l'attaque sans mettre au courant l'attaquant de son échec (tandis qu'une exclusion directe du réseau serait plus facile à remarquer).
+%2}}}
+
+    \subsubsection{Notion de confiance}
+%{{{2
+Plusieurs travaux de synthèse portent sur ces systèmes~\cite{F-GRL07,MC10}
+
+
+%2}}}
+%1}}}
