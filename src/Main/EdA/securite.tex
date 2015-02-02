@@ -20,7 +20,7 @@ Les principales garanties que l'on cherche à apporter à un réseau sont les su
 \subsection{Confidentialité}
 
 Les informations échangées sur un réseau sont dites confidentielles si un attaquant se retrouve dans l'impossibilité d'accéder au contenu utile de l'échange.
-On trouve en anglais les termes \textit{data secrecy}, \textit{privacy} ou encore \textit{confidentiality} pour traiter de cette notion: la plupart des auteurs n'établissent pas de distinctions spécifiques entre ces notions.
+On trouve en anglais les termes \textit{data secrecy}, \textit{privacy} ou encore \textit{confidentiality} pour traiter de cette notion: la plupart des auteurs n'établissent pas de distinctions spécifiques entre ces expressions.
 Dans notre cas, il s'agit d'interdire l'accès aux données utiles des paquets à des agents extérieurs au réseau, ou bien même aux nœuds du réseau qui ne sont pas concernés par ces données et n'ont donc aucun besoin d'y accéder (afin de limiter les risques de fuites de données si l'un des nœuds devient compromis).
 Mais le terme \textit{privacy}, qui se traduit par « vie privée », « intimité », présente aussi l'intérêt de s'appliquer également aux questions d'accès aux données: lorsque des capteurs sont utilisés sur des patients humains à des fins de surveillance médicale~\cite{SZFDXC14}, il est essentiel d'établir un contrôle sur l'accès aux données collectées: le patient et son médecin doivent y avoir accès, et il serait souhaitable que d'autres médecins urgentistes puissent y recourir au besoin; tout autre accès doit impérativement être refusé.
 Cette notion ne sera pas abordée plus avant dans cette étude, nous conserverons un point de vue interne au réseau.
@@ -35,7 +35,14 @@ Les méthodes conventionnelles pour assurer la confidentialité des communicatio
 AES (\textit{Advanced Encryption Standard})~\cite{aes}, basé sur l'algorithme Rijndael, en est l'un des exemples les plus célèbres et les plus utilisés aujourd'hui.
 Certaines études se sont penchées sur les vitesses d'exécution relatives de différents algorithmes utilisés pour le chiffrement et l'authentification des données~\cite{SOBMCN11}.
 
-Ces algorithmes de chiffrement nécessitent en général de nombreux calculs, voire beaucoup de mémoire tampon, pour être mis en œuvre, surtout lorsque l'appareil ne dispose pas de matériel dédié~\cite{PLP06}, ce qui les rend parfois peu adaptés aux réseaux de capteurs.
+Idéalement, pour des réseaux de capteurs, ces algorithmes doivent être implémentés de telle façon que soit respectées deux sous-problématiques liéés au chiffrement:
+\begin{itemize}
+    \item la confidentialité persistante (\textit{forward secrecy} en anglais, littéralement « confidentialité vers l'avant »), qui permet d'empêcher un nœud de déchiffrer les messages une fois qu'il a quitté le réseau;
+    \item la confidentialité « vers l'arrière » (\textit{backward secrecy}), chargée d'assurer qu'un nouveau nœud entrant sur le réseau n'est pas en mesure de déchiffrer un message émis avant son arrivée.
+\end{itemize}
+Nous n'entrerons pas plus en détail dans les mécanismes cryptographiques impliqués.
+
+Les algorithmes de chiffrement nécessitent en général de nombreux calculs, voire beaucoup de mémoire tampon, pour être mis en œuvre, surtout lorsque l'appareil ne dispose pas de matériel dédié~\cite{PLP06}, ce qui les rend parfois peu adaptés aux réseaux de capteurs.
 Qui plus est, ils requièrent la plupart du temps la mise en place d'une architecture d'échange et de gestion du matériel cryptographique, notamment en ce qui concerne les échanges de clés: cette architecture peut considérablement alourdir la structure du réseau ainsi que les échanges en termes de volume de données de contrôle.
 Plusieurs solutions adaptées aux capacités limitées des capteurs ont donc été proposées~\cite{OX09}.
 Certaines d'entre elles demeurent basées sur des suites de protocoles dont les algorithmes de chiffrement sont choisis au mieux pour répondre aux capacités des capteurs~\cite{SOBMCN11,KR12}; ces solutions couvrent le plus souvent d'autres problématiques que la seule confidentialité des données, et certaines seront présentées dans la sous-section suivante.

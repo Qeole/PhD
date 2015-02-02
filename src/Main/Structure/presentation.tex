@@ -1,10 +1,8 @@
 % vim: set spelllang=fr foldmethod=marker:
-\section{Contexte}
+\section{Réseaux de capteurs sans fil}
 \label{st:sec:contexte}
 %===============================================================================
-    \subsection{Réseaux de capteurs sans fil}
-
-        \subsubsection{De quoi s'agit-il?}
+    \subsection{De quoi s'agit-il?}
 Les réseaux de capteurs sans fil, ou \textit{WSN} (pour \textit{Wireless Sensor Networks} en anglais), sont des réseaux constitués de petits appareils, les capteurs, ainsi que d'une station de base.
 Les capteurs échangent par communications hertziennes, en utilisant des protocoles tels IEEE~802.11.
 Le routage des paquets dans le réseau peut faire appel à l'un des nombreux protocoles développés à cet effet (par exemple: \textit{AODV}, \textit{OLSR}), qu'il repose sur un algorithme centralisé (dirigé par une seule entité) ou distribué (exécuté par chaque entité du réseau).
@@ -16,7 +14,7 @@ Quel que soit le protocole de liaison de données utilisé, il est rare que tous
 À la topologie d'un réseau donné est donc très souvent associé le graphe de connectivité du réseau.
 Pour cette raison, dans la littérature comme dans la suite de ce document, il sera souvent fait référence aux capteurs sous le terme de \textit{nœuds} (\textit{nodes} en anglais).
 
-        \subsubsection{Applications}
+    \subsection{Applications}
 Le champ d'application des WSN est très vaste.
 Des réseaux peuvent être mis en place en forêt, par exemple, afin de détecter les départs de feu et de lutter plus efficacement contre les incendies.
 D'autres peuvent être déployés en mer, afin de mesurer le taux de pollution des eaux.
@@ -28,7 +26,7 @@ Un autre, de taille, est leur exploitation intensive par les militaires sur les 
 
 Un autre domaine d'application en voie de développement est ce que l'on appelle l'\textit{Internet des objets} (\textit{the Internet of things} en anglais), et qui consiste en quelque sorte à étendre Internet au monde réel, par le biais d'une interconnexion réseau entre les objets de la vie courante.
 
-        \subsubsection{Contraintes en ressources}
+    \subsection{Contraintes en ressources}
 De par leur petite taille, et à cause de leurs déploiement dans des zones souvent difficiles d'accès, les capteurs n'embarquent qu'une quantité limitée de matériel, qui ne peut pas toujours être remplacé.
 Les capteurs se retrouvent donc avec des capacités limitées, notamment en ce qui concerne:
 \begin{itemize}
@@ -43,21 +41,32 @@ Les capteurs se retrouvent donc avec des capacités limitées, notamment en ce q
 
 Il est à noter qu'au regard de ces contraintes qui affectent les capteurs, la station de base est considérée comme disposant de capacités « illimitées ».
 
-        \subsubsection{Sécurité}
-En raison de leurs faibles capacités, conjuguées aux domaines critiques dans lesquels ils interviennent parfois, les capteurs peuvent présenter des cibles de choix pour un attaquant.
-Les algorithmes et mécanismes classiques utilisés en cryptographie afin d'assurer la confidentialité ou l'authentification des données sont souvent très exigeants en ressources (en termes de calcul notamment, et donc de consommation énergétique).
-Il a fallu adapter ces mécanismes aux capteurs.
+%===============================================================================
+\section{Quelques problématiques}
 
-D'autres attaques peuvent être menées, non plus pour intercepter des données, mais dans le but de perturber le bon fonctionnement du réseau.
-Ce sont les attaques dites de \textit{déni de service}.
-Un attaquant, par le biais d'un nœud compromis par exemple, peut ainsi chercher à détourner des flux de données au sein du réseau, à empêcher des paquets de parvenir à destination (en les supprimant), à maximiser le débit du nœud compromis au détriment de celui des autres nœuds, à saturer le canal pour empêcher les nœuds légitimes de l'utiliser, ou encore à pousser les autres capteurs à l'épuisement de leurs réserves en énergie, \etc.
-Les problématiques de sécurité dans les réseaux de capteurs sont développées plus en détail dans le \chapref{ea}.
+De part leurs ressources faibles, leur dispersion dans un environnement parfois hostile, leurs communications sans fil, et les différentes missions qui leur sont confiées, les réseaux de capteurs sans fil introduisent une multitude de problématiques que l'on ne retrouve pas ou peu dans d'autres types de réseaux.
+Nous allons introduisons ici celles qui sont indispensables à la compréhension des travaux de cette thèse.
 
-\todo{Corriger ici}
-Notre but est ici de proposer, modéliser et tester une solution permettant de détecter, puis de réagir à une attaque de ce type, tout en assurant une consommation minimale en ressources pour les capteurs du réseau.
+    \subsection{Gestion des ressources et performances}
+
+
+Power conservation and security enhancement in WSNs - a priority based approach (2014 Sivakumar Amirthavalli Senthil)
+
+K. Piotrowski, P. Langendoerfer, and S. Peter. How Public Key Cryptography Influences Wireless Sensor Node Lifetime. In Proc. of the 4th ACM SASN, 2006.
+PLP06
+
+Y. Law, J. Doumen, and P. Hartel. Survey and benchmark of block ciphers for wireless sensor networks. Technical Report TR-CTIT-04-07, Centre for Telematics and Information Technology, University of Twente, The Nether- lands, 2004.
+
+
+In addition, WSNs have following specific objects:
+- Scalability: supporting a great number of nodes
+- Efficiency: storage, processing and communication limitations on sensor nodes must be
+considered
+(2008 Li Gong)
+
+
 L'une des possibilités permettant de réduire la consommation en énergie est l'utilisation d'un réseau hiérarchiquement clusterisé.
 
-%===============================================================================
     \subsection{Partition hiérarchique des nœuds du réseau}
     \label{st:subsec:partition}
 
@@ -159,3 +168,26 @@ Par ailleurs, la répartition géographique (au regard de la puissance de transm
 Au contraire, il est même probable d'obtenir, pour certaines rondes, une concentration importante de \chs dans une zone restreinte du réseau, tandis que d'autres régions seront mal couvertes.
 Il n'y a pas grand-chose à faire dans ce cas, sinon espérer que la prochaine ronde sera plus favorable.
 Si toutefois un nœud ne parvient à capter les messages d'aucun \ch, il se déclare généralement lui-même \CH.
+
+    \subsection{Sécurité, sureté et résilience}
+
+%La sureté et la résilience des réseaux ne sont pas des problématiques de sécurité (car aucune attaque volontaire ne rentre en compte), mais il s'agit de problématiques assez proches de la disponibilité des réseaux.
+
+        \subsubsection{Sécurité}
+En raison de leurs faibles capacités, conjuguées aux domaines critiques dans lesquels ils interviennent parfois, les capteurs peuvent présenter des cibles de choix pour un attaquant.
+Les algorithmes et mécanismes classiques utilisés en cryptographie afin d'assurer la confidentialité ou l'authentification des données sont souvent très exigeants en ressources (en termes de calcul notamment, et donc de consommation énergétique).
+Il a fallu adapter ces mécanismes aux capteurs.
+
+D'autres attaques peuvent être menées, non plus pour intercepter des données, mais dans le but de perturber le bon fonctionnement du réseau.
+Ce sont les attaques dites de \textit{déni de service}.
+Un attaquant, par le biais d'un nœud compromis par exemple, peut ainsi chercher à détourner des flux de données au sein du réseau, à empêcher des paquets de parvenir à destination (en les supprimant), à maximiser le débit du nœud compromis au détriment de celui des autres nœuds, à saturer le canal de transmission pour empêcher les nœuds légitimes de l'utiliser, ou encore à pousser les autres capteurs à l'épuisement de leurs réserves en énergie, \etc.
+Les problématiques de sécurité dans les réseaux de capteurs sont développées plus en détail dans le \chapref{ea}.
+
+\todo{Corriger ici}
+Notre but est ici de proposer, modéliser et tester une solution permettant de détecter, puis de réagir à une attaque de ce type, tout en assurant une consommation minimale en ressources pour les capteurs du réseau.
+
+    \subsection{Déploiement autonome, mobilité}
+    scalabilité
+
+%===============================================================================
+\section{Hypothèses de travail}
