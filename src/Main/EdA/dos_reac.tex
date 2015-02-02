@@ -64,8 +64,29 @@ Si l'intervention d'un opérateur humain n'est pas forcément souhaitable dans l
 
     \subsubsection{Notion de confiance}
 %{{{2
-Plusieurs travaux de synthèse portent sur ces systèmes~\cite{F-GRL07,MC10}
+Il existe, liée aux IDS, une notion intéressante de « confiance » qui peut être mise en place dans un réseau de capteurs.
+Plutôt que de considérer les capteurs « tout blanc » ou « tout noir », beaucoup de systèmes de détection leur attribue un score de « réputation », qui évolue dans le temps, et reflète la « confiance » (en anglais: \textit{trust}) que l'on peut avoir en tel nœud.
 
+Cette notion de confiance intervient en plusieurs endroits.
+Elle fait parfois partie intégrante du système de détection.
+Prenons ainsi l'exemple d'un réseau utilisant un système basé sur les signatures d'attaques: les nœuds exécutant l'IDS surveillent leurs voisins et, lorsqu'une règle est enfreinte de manière exceptionnelle, ne vont pas immédiatement déclarer le coupable comme étant compromis.
+À la place, son score de réputation diminue.
+Ce n'est que lorsque ce score atteint un certain seuil minimal que le nœud est considéré comme étant corrompu.
+Comme nous l'avons évoqué plus haut, la surveillance peut être réalisée de façon distribuée, ou chacun de son côté.
+Il en va de même pour la réputation, dont le score de ses voisins peut très bien n'être établi par un nœud que pour son propre usage.
+Mais elle se prête particulièrement bien à la distribution de la tâche: les nœuds peuvent échanger entre eux le niveau de confiance qu'ils attribuent à leurs différents voisins, et adapter leurs valeurs en fonction des données reçues: si $A$ se méfie de $B$ et en informe $C$, tandis que $C$ a pleinement confiance en $A$, alors $C$ va légèrement décrémenter le score de réputation qu'il attribue à $B$.
+Si par ailleurs $C$ constate lui aussi des manquements aux règles commis par $B$, alors les nœuds $A$ et $C$ peuvent décider de concert que $B$ doit être considéré comme corrompu.
 
+Mais la confiance n'est pas qu'une modulation de la détection: elle permet aussi de prendre des décisions plus adaptées à la situation du réseau.
+Ainsi, il est tout à fait d'introduire un mécanisme basé sur la confiance pour protéger l'élection des \chs dans le réseau~\cite{CPG06}.
+Si chaque les nœuds procèdent à une élection du \CH, ils vont alors prendre en compte différents paramètres (distances, réserves énergétiques\dots) pour déterminer leur vote, parmi lesquelles le score de réputation de leurs voisins jouera un rôle prépondérant: ils ne vont pas voter pour un nœud qui est susceptible d'être compromis, mais au contraire pour ceux en lesquels ils ont le plus confiance.
+
+Les mêmes décisions peuvent être appliquées à la création de routes pour la retransmission des paquets.
+Si un capteur a une mauvaise réputation, \cad s'il est peu fiable, par exemple parce qu'il a déjà perdu de nombreux messages, mieux vaut éviter de le choisir comme relais.
+Des protocoles de routages intègrent, dès leur déploiement, des mécanismes de confiance~\cite{ZTLMK13}.
+
+Pour prendre ces décisions de manière efficace, il est nécessaire d'adapter en temps réel le score de réputation de chaque voisin d'un nœud: les mécanismes de confiance sont donc indissociables de la surveillance propre aux IDS.
+Ils se prêtent bien à la détection basée sur les signatures d'attaques, puisqu'il suffit de mettre à jour les scores lorsque des infractions sont constatées (ou de les remonter au bout d'une période donnée sans faute observée).
+Ils peuvent aussi être utilisés en conjonction avec des approches plus formelles utilisées notamment dans les modèles de détection par apprentissage~\cite{F-GRL07,MC10}: la logique floue, les réseaux bayésiens, ou même des éléments de la théorie des jeux sont utilisés dans de nombreux systèmes pour établir des scores de confiance efficaces.
 %2}}}
 %1}}}
