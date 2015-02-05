@@ -94,7 +94,7 @@ Plus particulièrement, nous allons utiliser des réseaux de Petri stochastiques
 Les réseaux de Petri stochastiques généralisés (RPSG) sont une classe de réseaux de Petri destinée à modéliser des processus stochastiques.
 Leur version étendue (RPSGE) permet de représenter des transitions dont les délais sont distribués de façon quelconque~\cite{ABCDF95}.
 Il s'agit d'un langage de haut niveau permettant de représenter des processus stochastiques à événements discrets (PSED, ou processus semi-markoviens généralisés, PSMG), qui au contraire des processus markoviens «~classiques~» ne sont pas limités à la représentation d'événements à distribution exponentielle.
-RPGSE reprend, à quelques différences près, les définitions, la syntaxe et la représentation graphique des réseaux de Petri classiques, enrichis par des propriétés supplémentaires portant sur les transitions.
+RPSGE reprend, à quelques différences près, les définitions, la syntaxe et la représentation graphique des réseaux de Petri classiques, enrichis par des propriétés supplémentaires portant sur les transitions.
 Ces dernières sont dites soit \textit{immédiates}, soit \textit{minutées}.
 Elles sont de plus caractérisées par les éléments suivants:
 \begin{enumerate}
@@ -144,7 +144,7 @@ Un nœud compromis $c$ sera également représenté selon le même modèle, avec
 
             \paragraph{Modélisation des \cns élus de façon statique}
 Un \cn élu de façon statique joue uniquement son rôle de \cn: il monitore le trafic, mais n'effectue pas de mesure sur son environnement.
-Le modèle RPGSE associé à ce type de nœud est présenté en figure~\ref{sa:fig:cnodegspn1}.
+Le modèle RPSGE associé à ce type de nœud est présenté en figure~\ref{sa:fig:cnodegspn1}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=.6\linewidth]{\chapterfig/cNode_GSPN.pdf}
@@ -165,7 +165,7 @@ Le processus est répété jusqu'à ce que la place \textsf{In\_buff} soit vide;
 Les étapes permettant de vider le tampon ne consomment pas de temps, et permettent de repartir avec un compteur neutre pour la période qui mènera à la vérifiation suivante.
 
             \paragraph{Modélisation des \cns élus de façon statique}
-Le modèle RPGSE représentant le \cn élu de façon dynamique ressemble à son homologue élu de façon statique.
+Le modèle RPSGE représentant le \cn élu de façon dynamique ressemble à son homologue élu de façon statique.
 Cependant, en raison de l'élection dynamique, tous les nœuds vont assumer périodiquement le rôle de \cn et le rôle de capteur simple.
 Il est donc nécessaire d'ajouter, aux places et transitions des précédents \cns, une place \textsf{cNode} ainsi qu'une transition toujours autorisée, associée à une distribution exponentielle.
 La première permet d'indiquer à chaque instant si le nœud joue le rôle de \cn (si la place contient un jeton) ou bien de capteur simple (cas contraire).
