@@ -5,18 +5,18 @@
 Nous avons détaillé la solution proposée. À présent, nous allons présenter plusieurs modèles possibles permettant de représenter cette solution, et d'en évaluer les performances selon divers critères.
 
 %===============================================================================
-    \subsection{Chaines de Markov}
+    \subsection{Chaines de \textsc{Markov}}
 
         \subsubsection{Présentation et hypothèses de travail}
-Nous avons modélisé notre solution sous la forme d'un processus de Markov à temps continu (CMTC, pour chaine de Markov à temps continu).
+Nous avons modélisé notre solution sous la forme d'un processus de \textsc{Markov} à temps continu (CMTC, pour chaine de \textsc{Markov} à temps continu).
 
 Notre modèle représente un cluster d'un réseau de capteurs sans fil qui vérifie les hypothèses suivantes:
 \begin{itemize}
     \item seul le cluster est modélisé;
     \item le cluster contient exactement un \CH, $s$ capteurs chargés d'effectuer des mesures, et $m$ nœuds jouant le rôle de \cns\footnote{$s$ pour \textit{sensing node}, $m$ pour \textit{monitoring node}.};
     \item il existe exactement un nœud compromis parmi les $s$ capteurs;
-    \item le capteur $i$ ($1 \leq i \leq s$) génère du trafic selon un processus de Poisson de paramètre $\lambda_i$;
-    \item le nœud compromis $c$ génère du trafic selon un processus de Poisson de paramètre $\lambda_i$ (tel que $\forall i\in[\![1;s]\!]\backslash\{c\},\; \lambda_c\gg\lambda_i$);
+    \item le capteur $i$ ($1 \leq i \leq s$) génère du trafic selon un processus de \textsc{Poisson} de paramètre $\lambda_i$;
+    \item le nœud compromis $c$ génère du trafic selon un processus de \textsc{Poisson} de paramètre $\lambda_i$ (tel que $\forall i\in[\![1;s]\!]\backslash\{c\},\; \lambda_c\gg\lambda_i$);
     \item chaque \cn effectue une détection du trafic environnant de façon périodique, selon une distribution exponentielle de paramètre $\mu$; si un trafic anormal est observé, le \cn transmet un rapport d'anomalie au \CH;
     \item la topologie du cluster correspond à un graphe connexe: chaque nœud peut atteindre directement chacun des autres nœuds du cluster.
 \end{itemize}
@@ -59,7 +59,7 @@ L'équation est donnée en figure~\ref{sa:fig:eqtrans}
             \end{eqnarray*}
         \end{minipage}
     }
-    \caption{Équation de transition du processus de Markov à temps continu modélisant le cluster}\label{sa:fig:eqtrans}
+    \caption{Équation de transition du processus de \textsc{Markov} à temps continu modélisant le cluster}\label{sa:fig:eqtrans}
 \end{figure}
 
 \bigskip
@@ -78,23 +78,23 @@ La probabilité de détection du nœud compromis par le \cn $k$, notée $\Delta_
 où $\pi(x_{k_1},x_{k_2},\dots,x_{k_{s}},x_{k_d})$ représente la distribution stationnaire du macro-état $x_k\!=\!(x_{k_1},x_{k_2},\dots,x_{k_{s}},x_{k_d})$.
 
         \subsubsection{Limites du modèle}
-Représenté sous la forme d'un processus de Markov à temps continu, le modèle suppose que la période séparant deux vérifications consécutives du trafic par un \cn est une variable aléatoire qui suit une distribution exponentielle.
+Représenté sous la forme d'un processus de \textsc{Markov} à temps continu, le modèle suppose que la période séparant deux vérifications consécutives du trafic par un \cn est une variable aléatoire qui suit une distribution exponentielle.
 Il s'agit là d'une approximation grossière; en réalité, la vérification intervient à intervalles réguliers (de longueur fixe), voire même en continu.
-Il est donc nécessaire de choisir d'autres systèmes que les processus de Markov pour modéliser notre solution avec plus de précision.
+Il est donc nécessaire de choisir d'autres systèmes que les processus de \textsc{Markov} pour modéliser notre solution avec plus de précision.
 Nous allons nous tourner par exemple vers des processus non-markoviens, qui ne présentent pas cette contrainte.
 
 %===============================================================================
-    \subsection{Réseaux de Petri}
-Une autre représentation possible de notre système passe ainsi par l'utilisation de processus stochastiques à évènements discrets (PSED, ou DESP, \textit{Discrete-Event Stochastic Processes}, ou encore \textit{Generalized Semi-Markov Processes}).
-Leur avantage principal sur les processus de Markov est leur capacité à représenter des événements dont la distribution n'est pas nécessairement exponentielle.
-Plus particulièrement, nous allons utiliser des réseaux de Petri stochastiques généralisés étendus.
+    \subsection{Réseaux de \textsc{Petri}}
+Une autre représentation possible de notre système passe ainsi par l'utilisation de processus stochastiques à évènements discrets (PSED, ou DESP, \textit{Discrete-Event Stochastic Processes}, ou encore \textit{Generalized Semi-\textsc{Markov} Processes}).
+Leur avantage principal sur les processus de \textsc{Markov} est leur capacité à représenter des événements dont la distribution n'est pas nécessairement exponentielle.
+Plus particulièrement, nous allons utiliser des réseaux de \textsc{Petri} stochastiques généralisés étendus.
 
-        \subsubsection{Présentation des réseaux de Petri stochastiques généralisés étendus}
+        \subsubsection{Présentation des réseaux de \textsc{Petri} stochastiques généralisés étendus}
 \label{sa:subsubsec:presRPSGE}
-Les réseaux de Petri stochastiques généralisés (RPSG) sont une classe de réseaux de Petri destinée à modéliser des processus stochastiques.
+Les réseaux de \textsc{Petri} stochastiques généralisés (RPSG) sont une classe de réseaux de \textsc{Petri} destinée à modéliser des processus stochastiques.
 Leur version étendue (RPSGE) permet de représenter des transitions dont les délais sont distribués de façon quelconque~\cite{ABCDF95}.
 Il s'agit d'un langage de haut niveau permettant de représenter des processus stochastiques à événements discrets (PSED, ou processus semi-markoviens généralisés, PSMG), qui au contraire des processus markoviens «~classiques~» ne sont pas limités à la représentation d'événements à distribution exponentielle.
-RPSGE reprend, à quelques différences près, les définitions, la syntaxe et la représentation graphique des réseaux de Petri classiques, enrichis par des propriétés supplémentaires portant sur les transitions.
+RPSGE reprend, à quelques différences près, les définitions, la syntaxe et la représentation graphique des réseaux de \textsc{Petri} classiques, enrichis par des propriétés supplémentaires portant sur les transitions.
 Ces dernières sont dites soit \textit{immédiates}, soit \textit{minutées}.
 Elles sont de plus caractérisées par les éléments suivants:
 \begin{enumerate}
@@ -128,7 +128,7 @@ Nous allons procéder par étapes en modélisant:
 \end{enumerate}
 
             \paragraph{Modélisation des capteurs simples}
-Le comportement des capteurs basiques est simple: chaque capteur $i$ envoie des paquets selon un processus de Poisson de paramètre $\lambda_i$.
+Le comportement des capteurs basiques est simple: chaque capteur $i$ envoie des paquets selon un processus de \textsc{Poisson} de paramètre $\lambda_i$.
 Ce comportement est modélisé par le RPSG présenté en figure~\ref{sa:fig:snodegspn}.
 \begin{figure}[H]
     \centering
@@ -169,7 +169,7 @@ Le modèle RPSGE représentant le \cn élu de façon dynamique ressemble à son 
 Cependant, en raison de l'élection dynamique, tous les nœuds vont assumer périodiquement le rôle de \cn et le rôle de capteur simple.
 Il est donc nécessaire d'ajouter, aux places et transitions des précédents \cns, une place \textsf{cNode} ainsi qu'une transition toujours autorisée, associée à une distribution exponentielle.
 La première permet d'indiquer à chaque instant si le nœud joue le rôle de \cn (si la place contient un jeton) ou bien de capteur simple (cas contraire).
-La seconde permet de produire des jetons selon un processus de Poisson lorsque le nœud fait office de capteur simple (dans ce cas la place \textsf{cNode} est vide et l'arc inhibiteur autorise le franchissement de la transition \textsf{TX}; le nœud se comporte exactement comme avec le modèle de la figure~\ref{sa:fig:snodegspn}).
+La seconde permet de produire des jetons selon un processus de \textsc{Poisson} lorsque le nœud fait office de capteur simple (dans ce cas la place \textsf{cNode} est vide et l'arc inhibiteur autorise le franchissement de la transition \textsf{TX}; le nœud se comporte exactement comme avec le modèle de la figure~\ref{sa:fig:snodegspn}).
 Le modèle est représenté sur la figure~\ref{sa:fig:cnodegspn2}.
 \begin{figure}[H]
     \centering
@@ -227,7 +227,7 @@ Ceux-ci sont envoyés dans les places \textsf{cNode} des nœuds élus pour la p�
     \subsection{Logique stochastique avec automates hybrides}
 
         \subsubsection{Présentation de la logique stochastique avec automates hybrides}
-La logique stochastique avec automates hybrides (LSAH, ou bien \textit{Hybrid Automata Stochastic Logic}, \textit{HASL}) est un langage récent, qui introduit un framework regroupant des études de \textit{model checking} et d'évaluation des performances ainsi que de fiabilité sur des processus stochastiques à événements discrets (PSED) exprimés sous forme de réseaux de Petri sthochastiques généralisés (RPSG)~\cite{BDDHP11hasl}.
+La logique stochastique avec automates hybrides (LSAH, ou bien \textit{Hybrid Automata Stochastic Logic}, \textit{HASL}) est un langage récent, qui introduit un framework regroupant des études de \textit{model checking} et d'évaluation des performances ainsi que de fiabilité sur des processus stochastiques à événements discrets (PSED) exprimés sous forme de réseaux de \textsc{Petri} stochastiques généralisés (RPSG)~\cite{BDDHP11hasl}.
 Plus concrètement, à partir d'un modèle RPSG, les mesures de performances sont exprimées à l'aide de formules LSAH avant que leur soit appliquées des fonctions de \textit{model checking} statique permettant de vérifier automatiquement ces formules.
 %en place de vérifications, en termes d'études statistiques, de modèles stochastiques~\cite{BDDHP11hasl}.
 
@@ -272,7 +272,7 @@ Au final, LSAH fonctionne de la façon suivante:
 
         \subsubsection{Automate linéaire hybride et formule LSAH associés au modèle utilisé}
 Nous présentons ici quelques exemples de formules LSAH, constitués des expressions LSAH et d'un automate hybride linéaire hybride (ALH) associé au modèle RPSGE présenté plus haut (en figure~\ref{sa:fig:petridyn}).
-Ces exemples présentent une manière de mesurer des données sur un nœud du réseau de capteurs à partir de la version modélisée sous forme de réseaux de Petri, à fin d'étude, ou bien de comparaison de notre solution avec d'autres systèmes de détection des attaques de type «~déni de service~».
+Ces exemples présentent une manière de mesurer des données sur un nœud du réseau de capteurs à partir de la version modélisée sous forme de réseaux de \textsc{Petri}, à fin d'étude, ou bien de comparaison de notre solution avec d'autres systèmes de détection des attaques de type «~déni de service~».
 Ces exemples peuvent en outre être modélisés facilement avec l'outil de \textit{model checking} \textsf{COSMOS}~\cite{BDDHP11cosmos}.
 
 On considère un nœud quelconque $i$ ($1\leq i\leq$~nombre de capteurs).
@@ -299,15 +299,15 @@ L'état de gauche, que l'on nommera $e_1$, contient le taux de variation (autrem
     \item $x_{\mathit{bf}_i}$ est incrémentée avec un taux proportionnel au nombre de jetons présents dans le tampon d'entrée de $i$ (lorsque $i$ joue le rôle de \cn).
         On notera ce taux $\dot{x}_{\mathit{bf}_i}$.
 \end{itemize}
-$e_1$ comporte également trois transitions, exprimées sous la forme suivante: $<$\textit{condition temporelle (sur x\_t)}$>, <$\textit{ensemble des transitions franchies sur le réseau de Petri pour déclencher l'évènement}$>, <$\textit{action associée sur les variables de l'automate}$>$.
+$e_1$ comporte également trois transitions, exprimées sous la forme suivante: $<$\textit{condition temporelle (sur x\_t)}$>, <$\textit{ensemble des transitions franchies sur le réseau de \textsc{Petri} pour déclencher l'évènement}$>, <$\textit{action associée sur les variables de l'automate}$>$.
 Il s'agit des transitions suivantes:
 \begin{itemize}
     \item la première transition qui boucle sur $e_1$: $e_1\xrightarrow{\mathit{true},\{\mathsf{chkYES_i}\},(x_{d_i}:=x_{d_i}+1)}{e_1}$.
         Elle correspond à l'évènement associé au passage de la transition \textsf{check\_YES} du nœud $i$ sur le modèle RPSGE du cluster (présenté en figure~\ref{sa:fig:petridyn}).
-        Lorsque la transition est franchie sur le réseau de Petri, quelle que soit la valeur de l'«~horloge~» $x_t$ (condition $\mathit{true}$), la transition correspondante sur l'automate linéaire hybride est elle-aussi franchie\footnote{Attention: les transitions du réseau de Petri, représentées par des rectangles et reliées aux places par des arcs, ne doivent pas être confondues avec les transitions des automates, représentées par des arcs, et reliant les états.}.
-        Comme la transition du réseau de Petri correspond à une nouvelle détection de trafic anormal par le nœud $i$, la transition de l'automate a pour effet de mettre à jour la valeur de $x_{d_i}$, en l'incrémentant de $1$;
+        Lorsque la transition est franchie sur le réseau de \textsc{Petri}, quelle que soit la valeur de l'«~horloge~» $x_t$ (condition $\mathit{true}$), la transition correspondante sur l'automate linéaire hybride est elle-aussi franchie\footnote{Attention: les transitions du réseau de \textsc{Petri}, représentées par des rectangles et reliées aux places par des arcs, ne doivent pas être confondues avec les transitions des automates, représentées par des arcs, et reliant les états.}.
+        Comme la transition du réseau de \textsc{Petri} correspond à une nouvelle détection de trafic anormal par le nœud $i$, la transition de l'automate a pour effet de mettre à jour la valeur de $x_{d_i}$, en l'incrémentant de $1$;
     \item une deuxième transition qui boucle elle aussi sur $e_1$: $e_1\xrightarrow{\mathit{true},\{\mathsf{TX_i}\},(x_{\mathit{TX}_i}:=x_{\mathit{TX}_i}+1)}{e_1}$.
-        Cette transition fonctionne de façon identique à la précédente, à la différence près que la transition du réseau de Petri concernée n'est plus \textsf{check\_YES} mais \textsf{TX}, et la variable de l'automate est $x_{\mathit{TX}_i}$: lorsque le nœud $i$ envoie un message (et que \textsf{TX} est franchie sur le modèle RPSGE), la variable $x_{\mathit{TX}_i}$ est incrémentée de $1$;
+        Cette transition fonctionne de façon identique à la précédente, à la différence près que la transition du réseau de \textsc{Petri} concernée n'est plus \textsf{check\_YES} mais \textsf{TX}, et la variable de l'automate est $x_{\mathit{TX}_i}$: lorsque le nœud $i$ envoie un message (et que \textsf{TX} est franchie sur le modèle RPSGE), la variable $x_{\mathit{TX}_i}$ est incrémentée de $1$;
     \item une dernière transition qui mène de $e_1$ à $e_2$.
         Cette transition conduit à l'état final de l'automate, qui accepte et valide le chemin des transitions parcourues pour l'étudier à l'aide des formules LSAH: $e_1\xrightarrow{(x_t==T),\{\mathit{ALL}\},\emptyset}{e_2}$.
         La transition est autorisée lorsque $x_t$ vaut $T$, autrement dit: elle est déclenchée toutes les $T$ unités de temps.
@@ -330,7 +330,7 @@ Voici quelques exemples de formules LSAH permettant d'obtenir plusieurs valeurs 
 
 Ici se termine la section sur la modélisation.
 Après avoir étudié les limites des processus markoviens, qui sont orientés vers la modélisation d'événements à distribution exponentielle, nous avons présenté deux autres évaluations formelles possibles pour notre solution.
-L'une d'elles a fait intervenir une version étendue des réseaux de Petri, dédiée à la représentation de toutes sortes de distributions événementielles, et permet la visualisation de la solution sous l'aspect classique des réseaux de Petri.
+L'une d'elles a fait intervenir une version étendue des réseaux de \textsc{Petri}, dédiée à la représentation de toutes sortes de distributions événementielles, et permet la visualisation de la solution sous l'aspect classique des réseaux de \textsc{Petri}.
 La dernière est basée sur un langage récent, la logique stochastique avec automates hybrides, et permet l'évaluation formelle des performances de notre solution.
 Toutes ont bien sûr pour objectif de modéliser notre solution afin d'en souligner les avantages et inconvénients, mais aussi de présenter aux lecteurs différents moyens existants d'employer les méthodes formelles en vue de modéliser des réseaux de capteurs, et ce de façon plus générale que dans le seul contexte de notre solution.
 
