@@ -151,7 +151,11 @@ Rentre alors en jeu l'attaque \textit{blackhole}, qui supprime tous les paquets 
 Une conséquence supplémentaire de cette attaque est l'épuisement de la batterie des nœuds voisins de l'attaquant: comme celui-ci se déclare très proche de la station de base, un grand nombre de routes vont rediriger les paquets vers lui, et ses voisins vont donc se retrouver fortement sollicités par des nœuds plus éloignés pour lui acheminer des paquets.
 
 Il est à noter que la littérature inverse parfois, et même confond de temps en temps, la terminologie des attaques de type \textit{blackhole} et \textit{sinkhole}.
-Les définitions présentées ici sont celles qui semblent revenir le plus couramment.
+Les définitions présentées ici sont celles qui semblent revenir le plus couramment%
+\footnote{%
+    NdA: Cette terminologie est donc contraire à l'image que l'on pourrait se faire d'un trou noir qui attire à lui la matière environnante sous l'effet de la gravité, tandis qu'un simple puits n'attire rien.
+    En l'état actuel je suppose, sans avoir réussi à le vérifier, que le nom de l'attaque \textit{sinkhole} provient de la station de base, souvent appelée « puits » ou \textit{sink}, dont le nœud compromis se fait passer pour un voisin immédiat lors de l'attaque, et qu'il « remplace » en quelque sorte.%
+}.
 Par ailleurs, tous les « trous » ne font pas nécessairement référence à des pertes de paquets: des trous physiques, logiques ou sémantiques peuvent se former dès le déploiement du réseau~\cite{JSM13}, mais il s'agit d'un problème qui tient davantage de la sureté et de la résilience que de la sécurité.
 
         \paragraph{Trou de ver (\textit{wormhole})}
@@ -388,19 +392,20 @@ La modification des paquets peut être menée sur un grand nombre d'entre eux po
         \paragraph{}
 Les attaques qui nous semblent les plus plausibles sont donc au final les suivantes:
 \begin{itemize}
-	\item le brouillage radio, notamment au niveau physique, pour neutraliser les communications;
+    \item le brouillage radio, notamment au niveau physique, pour neutraliser les communications;
     \item certaines attaques de routage et notamment les attaques de type \textit{sinkhole}, pour pénaliser les communications mais aussi et surtout pour la collecte parasite de données;
     \item les attaques par épuisement de la batterie, ou la destruction physique des capteurs, pour mettre le réseau hors service de manière définitive;
-	\item la corruption des données remontées à l'opérateur, pour lui fournir des résultats erronés et influencer sa prise de décisions.
+    \item la corruption des données remontées à l'opérateur, pour lui fournir des résultats erronés et influencer sa prise de décisions.
 \end{itemize}
 
 Du point de vue de l'attaquant les techniques de brouillage « intelligentes » peuvent nécessiter des ajustements en fonction du protocole MAC employé dans le réseau, et mieux vaut mener des tests pour s'assurer que les attaques fonctionnent correctement.
 Les autres attaques servant à neutraliser les communications sont beaucoup plus complexes à mettre en place, et requièrent des connaissances sur les mécanismes internes du réseau.
-Il n'est pas évident de trouver un intérêt concret aux comportement cupides dans les réseaux de capteurs en dehors de la collecte parasite d'informations.
+Il n'est pas évident de trouver un intérêt concret aux comportements cupides dans les réseaux de capteurs en dehors de la collecte parasite d'informations.
 
-Encore une fois, l'évaluation de la plausibilité des attaques réalisée ici n'est que le produit d'hypothèses et n'a pas pu être vérifiée par une étude concrète.
+Il serait intéressant de pouvoir recouper ces hypothèses avec des statistiques issues de déploiements réels: savoir quelles sont les attaques les plus utilisées permettrait de déterminer dans quelle direction diriger les efforts pour la défense du réseau, et par conséquent comment axer la recherche de solutions.
+Mais encore une fois, l'évaluation de la plausibilité des attaques réalisée ici n'est que le produit de conjectures et n'a pas pu être vérifiée par une étude concrète.
 En particulier, on imagine sans mal que pour un but spécifique, un attaquant disposant de suffisamment de moyens prenne le temps d'implémenter une attaque très complexe, après avoir analysé en profondeur le fonctionnement du réseau ciblé; l'intrusion se retrouverait alors plus efficace dans les dégâts infligés, et/ou plus difficile à détecter.
-L'actualité de ces dernières années en matière de sécurité informatique, principalement depuis la découverte du logiciel malveillant Stuxnet~\cite{stuxnet} en 2010, tend en effet à prouver que des organismes importants sont prêts à investir des moyens considérables dans la mise en place d'attaques très développées.
+L'actualité de ces dernières années en matière de sécurité informatique, principalement depuis la découverte du logiciel malveillant Stuxnet~\cite{stuxnet} en 2010, tend en effet à prouver que des organismes importants sont prêts à investir des moyens considérables dans la mise en place d'attaques très sophistiquées.
 Il n'est pas difficile d'imaginer que ce comportement puisse être appliqué dans le domaine des réseaux de capteurs si le besoin s'en fait ressentir.
 %2}}}
 %1}}}
