@@ -115,6 +115,13 @@
 % \chapter instead of \chapter*
 \defbibheading{bibliography}[\bibname]{\chapter{#1}}%\markboth{#1}{#1}}
 
+% INDEX
+\usepackage{makeidx}
+\makeindex
+\usepackage[intoc]{nomencl}
+\renewcommand{\nomname}{Liste des abréviations}
+\makenomenclature
+
 % OPTIONS
 \renewcommand{\labelitemi}{\textbullet}
 

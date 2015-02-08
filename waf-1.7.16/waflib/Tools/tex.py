@@ -92,6 +92,11 @@ class tex(Task.Task):
 	Execute the program **makeindex**
 	"""
 
+	makenomen_fun, _ = Task.compile_fun('${MAKEINDEX} ${MAKENOMENFLAGS} ${SRCFILE} -o ${TARGETFILE}', shell=False)
+	makenomen_fun.__doc__ = """
+	Execute the program **makeindex** to create a list of abbreviations
+	"""
+
 	def exec_command(self, cmd, **kw):
 		"""
 		Override :py:meth:`waflib.Task.Task.exec_command` to execute the command without buffering (latex may prompt for inputs)
@@ -256,6 +261,24 @@ class tex(Task.Task):
 			self.env.env = {}
 			self.check_status('error when calling makeindex %s' % idx_path, self.makeindex_fun())
 
+	def makenomen(self):
+		"""
+		Look on the filesystem if there is a *.nlo* file to process. If yes, execute
+		:py:meth:`waflib.Tools.tex.tex.makenomen_fun`
+		"""
+		try:
+			nlo_path = self.nlo_node.abspath()
+			os.stat(nlo_path)
+		except OSError:
+			Logs.warn('nomen file %s absent, not calling makenomen' % nlo_path)
+		else:
+			Logs.warn('calling makenomen')
+
+			self.env.TARGETFILE = self.nls_node.name
+			self.env.SRCFILE = self.nlo_node.name
+			self.env.env = {}
+			self.check_status('error when calling makenomen %s' % nlo_path, self.makenomen_fun())
+
 	def bibtopic(self):
 		"""
 		Additional .aux files from the bibtopic package
@@ -308,6 +331,41 @@ class tex(Task.Task):
 			hash_bcf = Utils.h_list(hashes)
 		except (OSError, IOError):
 			pass
+		hash_bbl = ''
+		try:
+			self.bbl_node = node.change_ext('.bbl')
+			hashes = [Utils.h_file(self.bbl_node.abspath())]
+			hash_bbl = Utils.h_list(hashes)
+		except (OSError, IOError):
+			pass
+		hash_idx = ''
+		try:
+			self.idx_node = node.change_ext('.idx')
+			hashes = [Utils.h_file(self.idx_node.abspath())]
+			hash_idx = Utils.h_list(hashes)
+		except (OSError, IOError):
+			pass
+		hash_ind = ''
+		try:
+			self.ind_node = node.change_ext('.ind')
+			hashes = [Utils.h_file(self.ind_node.abspath())]
+			hash_ind = Utils.h_list(hashes)
+		except (OSError, IOError):
+			pass
+		hash_nlo = ''
+		try:
+			self.nlo_node = node.change_ext('.nlo')
+			hashes = [Utils.h_file(self.nlo_node.abspath())]
+			hash_nlo = Utils.h_list(hashes)
+		except (OSError, IOError):
+			pass
+		hash_nls = ''
+		self.nls_node = node.change_ext('.nls')
+		try:
+			hashes = [Utils.h_file(self.nls_node.abspath())]
+			hash_nls = Utils.h_list(hashes)
+		except (OSError, IOError):
+			pass
 
 		self.env.env = {}
 		self.env.env.update(os.environ)
@@ -334,7 +392,31 @@ class tex(Task.Task):
 		else:
 			Logs.warn('%s unchanged, not calling bibliography engine' % (self.bcf_node))
 
-		self.makeindex()
+		prev_idx_hash = hash_idx
+		try:
+			self.idx_node = node.change_ext('.idx')
+			hashes = [Utils.h_file(self.idx_node.abspath())]
+			hash_idx = Utils.h_list(hashes)
+		except (OSError, IOError):
+			Logs.error('could not read idx.h')
+			pass
+		if hash_idx and hash_idx != prev_idx_hash:
+			self.makeindex()
+		else:
+			Logs.warn('%s unchanged, not calling indexing engine' % (self.idx_node))
+
+		prev_nlo_hash = hash_nlo
+		try:
+			self.nlo_node = node.change_ext('.nlo')
+			hashes = [Utils.h_file(self.nlo_node.abspath())]
+			hash_nlo = Utils.h_list(hashes)
+		except (OSError, IOError):
+			Logs.error('could not read nlo.h')
+			pass
+		if hash_nlo and hash_nlo != prev_nlo_hash:
+			self.makenomen()
+		else:
+			Logs.warn('%s unchanged, not calling nomenclature engine' % (self.nlo_node))
 
 		for i in range(10):
 			# prevent against infinite loops - one never knows
@@ -347,7 +429,37 @@ class tex(Task.Task):
 			except (OSError, IOError):
 				Logs.error('could not read aux.h')
 				pass
+			prev_hash_bbl = hash_bbl
+			try:
+				hashes = [Utils.h_file(self.bbl_node.abspath())]
+				hash_bbl = Utils.h_list(hashes)
+			except (OSError, IOError):
+				Logs.error('could not read bbl.h')
+				pass
+			prev_hash_ind = hash_ind
+			try:
+				hashes = [Utils.h_file(self.ind_node.abspath())]
+				hash_ind = Utils.h_list(hashes)
+			except (OSError, IOError):
+				Logs.error('could not read ind.h')
+				pass
+			prev_hash_nls = hash_nls
+			try:
+				hashes = [Utils.h_file(self.nls_node.abspath())]
+				hash_nls = Utils.h_list(hashes)
+			except (OSError, IOError):
+				Logs.error('could not read nls.h')
+				pass
 			if hash and hash == prev_hash:
+				Logs.warn('.aux files unchanged')
+			if hash_bbl and hash_bbl == prev_hash_bbl:
+				Logs.warn('%s unchanged' % (self.bcf_node))
+			if hash_ind and hash_ind == prev_hash_ind:
+				Logs.warn('%s unchanged' % (self.ind_node))
+			if hash_nls and hash_nls == prev_hash_nls:
+				Logs.warn('%s unchanged' % (self.nls_node))
+			if hash and hash == prev_hash and hash_bbl and hash_bbl == prev_hash_bbl and hash_ind and hash_ind == prev_hash_ind and hash_nls and hash_nls == prev_hash_nls:
+				Logs.warn('Breaking loop now.')
 				break
 
 			# run the command

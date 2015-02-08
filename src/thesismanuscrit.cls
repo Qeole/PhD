@@ -792,10 +792,10 @@
                 \else
                   \@restonecoltrue
                 \fi
-                \twocolumn[\@makeschapterhead{\indexname}]%
-                \@mkboth{\MakeUppercase\indexname}%
-                        {\MakeUppercase\indexname}%
-                \thispagestyle{plain}\parindent\z@
+                \twocolumn
+                \chapter{\indexname}%
+                \@mkboth{\MakeUppercase\indexname}{\MakeUppercase\indexname}%
+                \parindent\z@
                 \parskip\z@ \@plus .3\p@\relax
                 \columnseprule \z@
                 \columnsep 35\p@

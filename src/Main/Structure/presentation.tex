@@ -4,8 +4,8 @@
 %===============================================================================
     \subsection{De quoi s'agit-il?}
 Les réseaux de capteurs sans fil, ou \textit{WSN} (pour \textit{Wireless Sensor Networks} en anglais), sont des réseaux constitués de petits appareils, les capteurs, ainsi que d'une station de base.
-Les capteurs échangent par communications hertziennes, en utilisant des protocoles tels IEEE~802.11.
-Le routage des paquets dans le réseau peut faire appel à l'un des nombreux protocoles développés à cet effet (par exemple: \textit{AODV}, \textit{OLSR}), qu'il repose sur un algorithme centralisé (dirigé par une seule entité) ou distribué (exécuté par chaque entité du réseau).
+Les capteurs échangent par communications hertziennes, en utilisant des protocoles tels ceux définis dans la pile \idx{IEEE~802.11}.
+Le routage des paquets dans le réseau peut faire appel à l'un des nombreux protocoles développés à cet effet (par exemple: \idx{AODV}, \idx{OLSR}), qu'il repose sur un algorithme centralisé (dirigé par une seule entité) ou distribué (exécuté par chaque entité du réseau).
 Ils collectent des informations sur leur environnement et les font remonter à la station de base.
 Cette station de base, ou \BS (pour \textit{Base Station}), parfois appelée \textit{puits} (ou \textit{sink} en anglais), est chargée de récolter et traiter les données provenant des capteurs.
 Une fois les capteurs déployés, l'administrateur n'interagit plus avec le réseau que par le biais de la station de base.
@@ -24,7 +24,7 @@ Les WSN sont également utilisés dans certains milieux critiques.
 Un exemple serait leur usage dans le domaine du nucléaire.
 Un autre, de taille, est leur exploitation intensive par les militaires sur les champs de batailles, afin de relier fantassins et véhicules de tous types; un maximum d'informations doit alors être remonté au centre de commandement, afin de permettre une supervision optimale des forces en mouvement.
 
-Un autre domaine d'application en voie de développement est ce que l'on appelle l'\textit{Internet des objets} (\textit{the Internet of things} en anglais), et qui consiste en quelque sorte à étendre Internet au monde réel, par le biais d'une interconnexion réseau entre les objets de la vie courante.
+Un autre domaine d'application en voie de développement est ce que l'on appelle l'\textit{\idx{Internet des objets}} (\textit{the Internet of things} en anglais), et qui consiste en quelque sorte à étendre \idx{Internet} au monde réel, par le biais d'une interconnexion réseau entre les objets de la vie courante.
 
     \subsection{Contraintes en ressources}
 De par leur petite taille, et à cause de leurs déploiement dans des zones souvent difficiles d'accès, les capteurs n'embarquent qu'une quantité limitée de matériel, qui ne peut pas toujours être remplacé.
@@ -32,11 +32,11 @@ Les capteurs se retrouvent donc avec des capacités limitées, notamment en ce q
 \begin{itemize}
     \item les capacités de calcul: les processeurs embarqués sont relativement peu puissants.
         Les algorithmes exécutés par les capteurs doivent donc être de complexité relativement basse;
-    \item les capacités de mémoire: les capteurs disposent de RAM et d'un peu d'espace de stockage, mais ils ne sont pas du tout conçus pour sauvegarder de grandes bases de données.
+    \item les capacités de mémoire: les capteurs disposent de mémoire vive (RAM, \textit{Random Access Memory}, « mémoire à accès non séquentiel » en anglais) et d'un peu d'espace de stockage, mais ils ne sont pas du tout conçus pour sauvegarder de grandes bases de données.
         Les informations récoltées doivent être acheminées à la station de base, et non stockées sur le long terme par les capteurs eux-mêmes;
     \item l'énergie disponible: les capteurs disposent d'une batterie qui leur fournit une quantité d'énergie finie, et (la plupart du temps) non rechargeable.
         Il est donc essentiel de conserver à l'esprit une gestion parcimonieuse de l'énergie pour tout programme implémenté sur les capteurs.
-        Des calculs importants, ainsi que des émissions/réceptions d'ondes électromagnétiques nombreuses ou mal gérées, sont les principaux facteurs d'un épuisement prématuré de la batterie. 
+        Des calculs importants, ainsi que des émissions/réceptions d'ondes électromagnétiques nombreuses ou mal gérées, sont les principaux facteurs d'un épuisement prématuré de la batterie.
 \end{itemize}
 
 Il est à noter qu'au regard de ces contraintes qui affectent les capteurs, la station de base est considérée comme disposant de capacités « illimitées ».
@@ -44,8 +44,8 @@ Il est à noter qu'au regard de ces contraintes qui affectent les capteurs, la s
 %===============================================================================
 \section{Quelques problématiques}
 
-De part leurs ressources faibles, leur dispersion dans un environnement parfois hostile, leurs communications sans fil, et les différentes missions qui leur sont confiées, les réseaux de capteurs sans fil introduisent une multitude de problématiques que l'on ne retrouve pas ou peu dans d'autres types de réseaux.
-Nous allons introduisons ici celles qui sont indispensables à la compréhension des travaux de cette thèse.
+De par leurs ressources faibles, leur dispersion dans un environnement parfois hostile, leurs communications sans fil, et les différentes missions qui leur sont confiées, les réseaux de capteurs sans fil introduisent une multitude de problématiques que l'on ne retrouve pas ou peu dans d'autres types de réseaux.
+Nous introduisons ici celles qui sont indispensables à la compréhension des travaux de cette thèse.
 
     \subsection{Gestion des ressources et performances}
 
@@ -65,9 +65,9 @@ considered
 (2008 Li Gong)
 
 
-L'une des possibilités permettant de réduire la consommation en énergie est l'utilisation d'un réseau hiérarchiquement clusterisé.
+L'une des possibilités permettant de réduire la consommation en énergie est l'utilisation d'un réseau \index{clusterisation hiérarchique} hiérarchiquement clusterisé.
 
-    \subsection{Partition hiérarchique des nœuds du réseau}
+    \subsection{Partition hiérarchique des nœuds du réseau}%
     \label{st:subsec:partition}
 
         \subsubsection{Partition du réseau}
@@ -90,14 +90,14 @@ Le schéma d'un réseau clusterisé est présenté en \figref{st:fig:wsn}.
 L'appel à un algorithme de « clusterisation » a pour effet de limiter les émissions à «~longue portée~» (relativement aux communications intra-clusters) aux \chs seulement.
 Hors les communications sur de plus grandes distances se traduisent par une plus grande consommation en énergie (puisqu'une plus grande puissance d'émission est nécessaire).
 Les capteurs «~normaux~» (non \chs) n'ont pas à atteindre directement des nœuds situés en dehors de leur cluster; ils économisent d'autant en énergie.
-De plus, dans la limite de leurs capacités, les \chs sont généralement amenés à réaliser des opérations d'agrégation voire parfois de compression sur les paquets qu'ils reçoivent, afin de limiter encore les transmissions couteuses.
+De plus, dans la limite de leurs capacités, les \chs sont généralement amenés à réaliser des opérations d'\idx{agrégation} voire parfois de \idx{compression} sur les paquets qu'ils reçoivent, afin de limiter encore les transmissions couteuses.
 
 De nombreux algorithmes de clusterisation de données existent.
 Plusieurs d'entre eux sont même spécifiquement adaptés aux réseaux de capteurs sans fil.
-Parmi les plus fréquemment utilisés, on trouve des algorithmes comme \leach~\cite{HCB00} ou \heed~\cite{YF04}.
-D'autres sont moins connus, comme \ffuca~\cite{FL11}, qui repose sur l'exploitation de propriétés ultramétriques dans le réseau.
+Parmi les plus fréquemment utilisés, on trouve des algorithmes comme \idx{\leach}~\cite{HCB00} ou \idx{HEED}~\cite{YF04}.
+D'autres sont moins connus, comme \idx{FFUCA}~\cite{FL11}, qui repose sur l'exploitation de propriétés ultramétriques dans le réseau.
 
-        \subsubsection{Clusterisation hiérarchique}
+        \subsubsection{Clusterisation hiérarchique\index{clusterisation hiérarchique}}
 Une fois le réseau de capteurs divisé en clusters, rien n'empêche de considérer les clusters un à un et de leur appliquer à nouveau un algorithme de clusterisation, de façon à établir des sous-ensembles dans chaque cluster.
 Et ainsi de suite, de façon récursive, jusqu'à atteindre le degré de hiérarchie désiré.
 L'intérêt de cette méthode est de créer une partition hiérarchique dans le réseau, permettant un meilleur contrôle des sous-ensembles de capteurs.
@@ -112,9 +112,9 @@ De même, on désignera par \textit{$k$-\ch} (ou bien par \textit{$k$-CH}) les \
 Le rôle de $0$-cluster pourra alors être attribué à la station de base.
 Chaque \textit{$k$-CH} reçoit des données (provenant soit de nœuds normaux si $k$ est le dernier degré de la hiérarchie constituée, soit de \textit{$k+1$-CH}), les agrège et les transmet au \textit{$k-1$-CH} auquel il est rattaché.
 
-        \subsubsection{Exemple: fonctionnement de l'algorithme \leach}
+        \subsubsection{Exemple: fonctionnement de l'algorithme \idx{\leach}}%
         \label{st:subsubsec:leach}
-L'un des algorithmes de clusterisation les plus simples et les plus couramment employés dans les réseaux de capteurs sans fil est l'algorithme \leach (\textit{Low Energy Adaptive Clustering Hierarchy with deterministic \ch selection}).
+        L'un des algorithmes de clusterisation les plus simples et les plus couramment employés dans les réseaux de capteurs sans fil est l'algorithme \idx{\leach} (\textit{Low Energy Adaptive Clustering Hierarchy with deterministic \ch selection}).
 Il s'agit d'un algorithme dynamique (il effectue de nouvelles clusterisations du réseau régulièrement dans le temps) qui, par la formation de clusters, met en place une solution de routage des paquets dans le réseau.
 
 Voici le fonctionnement détaillé de cet algorithme.
@@ -136,46 +136,46 @@ Chaque ronde $r$  est organisée de la façon suivante:
         Il est à noter que le calcul de $S(i)$ est réalisé de telle façon que chaque nœud devienne \ch une fois et une fois seulement au cours de chaque cycle de $\frac{1}{P}$~rondes: le taux de probabilité d'auto-désignation $S(i)$ est égal à $1$ lorsque la fin du cycle est atteinte (autrement dit, lorsque $r = \frac{1}{P}-1$).
     \item Les \chs auto-désignés informent leurs nœuds voisins de leur changement de statut à l'aide de messages en \textit{broadcast}.
         Tous ces messages sont envoyés en utilisant la même puissance de transmission (valeur fixe et prédéterminée lors de l'implémentation).
-        Pour limiter les collisions, il est fait usage de la méthode \textit{Carrier Sense Multiple Access} (\textit{CSMA}) au niveau de la couche \textit{MAC}.
+        Pour limiter les collisions, il est fait usage de la méthode \textit{Carrier Sense Multiple Access} (\idx{CSMA}) au niveau de la couche MAC.\nomenclature{CSMA}{\textit{Carrier Sense Multiple Access}}\nomenclature{MAC}{\textit{Media Access Control}}
     \item Les autres nœuds, qui ne se sont pas désignés en tant que \chs pour la ronde en cours, choisissent de se joindre au cluster du \CH dont ils perçoivent le signal avec l'intensité la plus élevée, \cad le \CH le plus proche en termes d'émissions électromagnétiques.
         Chaque nœud prévient le \ch qu'il décide de rejoindre en lui envoyant un message.
         La méthode \textit{CSMA} est là encore appliquée.
     \item Au vu des réponses reçues, chaque \ch calcule un «~ordre de transmission~» pour les nœuds qui l'ont rejoint.
         Il annonce alors à chacun de ces nœuds l'instant auquel le nœud doit lui transmettre ses données.
-        Dans chaque cluster, les nœuds s'adresseront donc à leur \ch à tour de rôle, selon l'ordre déterminé par le \CH, ce qui revient à utiliser la méthode appelée \textit{Time Division Multiple Access} (\textit{TDMA}).
+        Dans chaque cluster, les nœuds s'adresseront donc à leur \ch à tour de rôle, selon l'ordre déterminé par le \CH, ce qui revient à utiliser la méthode appelée \textit{Time Division Multiple Access} (\idx{TDMA}).\nomenclature{TDMA}{\textit{Time Division Multiple Access}}
     \item La phase de collecte des données peut débuter.
         Les \chs restent en écoute et reçoivent les données des autres capteurs de leur cluster.
         Les capteurs «~normaux~» effectuent leur mission (en général, ils réalisent des mesures sur leur environnement), et envoient leurs résultats au \ch lorsque c'est à leur tour de le faire.
         Lorsque ce n'est pas à leur tour de communiquer, ces nœuds mettent leur équipement radio en veille afin d'économiser leur énergie.
-        Les collisions entre les transmissions des nœuds de différents clusters sont évitées grâce à la méthode appelée \textit{Code Division Multiple Access} (\textit{CDMA}).
-    \item Au fur et à mesure qu'ils reçoivent les données, les \chs agrègent, et éventuellement compressent ces dernières.
+        Les collisions entre les transmissions des nœuds de différents clusters sont évitées grâce à la méthode appelée \textit{Code Division Multiple Access} (\idx{CDMA}).\nomenclature{CDMA}{\textit{Code Division Multiple Access}}
+    \item Au fur et à mesure qu'ils reçoivent les données, les \chs agrègent\idx{agrégation}, et éventuellement compressent\idx{compression} ces dernières.
         Ils les envoient ensuite à la station de base, soit au cours d'une unique transmission directe, soit en faisant relayer les paquets par d'autres \chs.
-    \item Les étapes 5) et 6) sont répétées jusqu'à la fin de la ronde.
+    \item Les étapes~5 et~6 sont répétées jusqu'à la fin de la ronde.
 \end{enumerate}
 
 Plusieurs remarques sont à énoncer.
 Tout d'abord: pour un cluster donné, il est alors possible de réitérer l'application de l'algorithme \leach, afin de créer une nouvelle partition au sein même d'un cluster.
-Et ainsi de suite par récursivité, jusqu'à obtenir le degré de hiérarchie désiré dans le réseau.
+Et ainsi de suite par récursivité, jusqu'à obtenir le degré de hiérarchie\index{clusterisation hiérarchique} désiré dans le réseau.
 Nous appellerons $k$-\leach cet algorithme appliqué de façon à créer $k$ degrés hiérarchiques.
 
-Seconde remarque: il est possible d'étendre \leach pour prendre en compte l'énergie restante dont dispose chaque nœud lors de l'élection des \CH.
+Seconde remarque: il est possible d'étendre \idx{\leach} pour prendre en compte l'énergie restante dont dispose chaque nœud lors de l'élection des \CH.
 Cette énergie restante intervient alors en temps que paramètre supplémentaire lors du calcul de la valeur de seuil $S(i)$~\cite{HHT02}.
 
-Troisième point: l'un des aspects importants de \leach est que lors de la première étape, chaque nœud choisi d'être, ou non, un \ch pour la ronde en cours.
+Troisième point: l'un des aspects importants de \idx{\leach} est que lors de la première étape, chaque nœud choisi d'être, ou non, un \ch pour la ronde en cours.
 Ce choix est basé uniquement sur la valeur de seuil calculée, et sur le nombre pseudo-aléatoire généré; à aucun moment un nœud ne fait intervenir dans sa décision le comportement de ses voisins.
 En conséquence, le pourcentage $P$ de \chs désirés dans le réseau n'est qu'une valeur moyenne sur l'ensemble des rondes de chaque cycle.
-Par ailleurs, la répartition géographique (au regard de la puissance de transmission nécessaire) idéale des \chs n'est en rien assuré.
+Par ailleurs, la \idx{répartition géographique} (au regard de la puissance de transmission nécessaire) idéale des \chs n'est en rien assuré.
 Au contraire, il est même probable d'obtenir, pour certaines rondes, une concentration importante de \chs dans une zone restreinte du réseau, tandis que d'autres régions seront mal couvertes.
 Il n'y a pas grand-chose à faire dans ce cas, sinon espérer que la prochaine ronde sera plus favorable.
 Si toutefois un nœud ne parvient à capter les messages d'aucun \ch, il se déclare généralement lui-même \CH.
 
-    \subsection{Sécurité, sureté et résilience}
+        \subsection{Sécurité, \idx{sureté} et \idx{résilience}}
 
 %La sureté et la résilience des réseaux ne sont pas des problématiques de sécurité (car aucune attaque volontaire ne rentre en compte), mais il s'agit de problématiques assez proches de la disponibilité des réseaux.
 
         \subsubsection{Sécurité}
 En raison de leurs faibles capacités, conjuguées aux domaines critiques dans lesquels ils interviennent parfois, les capteurs peuvent présenter des cibles de choix pour un attaquant.
-Les algorithmes et mécanismes classiques utilisés en cryptographie afin d'assurer la confidentialité ou l'authentification des données sont souvent très exigeants en ressources (en termes de calcul notamment, et donc de consommation énergétique).
+Les algorithmes et mécanismes classiques utilisés en \idx{cryptographie} afin d'assurer la confidentialité ou l'authentification des données sont souvent très exigeants en ressources (en termes de calculs notamment, et donc de consommation énergétique).
 Il a fallu adapter ces mécanismes aux capteurs.
 
 D'autres attaques peuvent être menées, non plus pour intercepter des données, mais dans le but de perturber le bon fonctionnement du réseau.
@@ -186,7 +186,7 @@ Les problématiques de sécurité dans les réseaux de capteurs sont développé
 \todo{Corriger ici}
 Notre but est ici de proposer, modéliser et tester une solution permettant de détecter, puis de réagir à une attaque de ce type, tout en assurant une consommation minimale en ressources pour les capteurs du réseau.
 
-    \subsection{Déploiement autonome, mobilité}
+        \subsection{Déploiement autonome, \idx{mobilité}}
     scalabilité
 
 %===============================================================================

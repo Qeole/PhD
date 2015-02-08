@@ -20,9 +20,9 @@ def build(bld):
         #tg = bld(rule='${DOT} -Tpdf -o${TGT[0].get_bld().abspath()} ${SRC[0].abspath()}', source=x, target=x.change_ext('.pdf'))
     #bld.add_group()
 
-    deps_str = ''
-    #for i in bld.path.ant_glob('src/**/*'):
-    for i in bld.path.ant_glob('src/**'):
+    deps_str = 'src/thesismanuscrit.cls '
+    for i in bld.path.ant_glob('src/**/*'):
+    #for i in bld.path.ant_glob('src/**'):
         deps_str += i.path_from(bld.path.search(top)) + " "
 
     bld(
@@ -33,6 +33,8 @@ def build(bld):
         prompt   = 1, # put 0 for the batchmode (conceals the debug output)
         deps     = deps_str # src/thesismanuscrit.cls' # use this to give dependencies directly
     )
+    bld.env.MAKEINDEXFLAGS = ['-s', '../../src/style.ist']
+    bld.env.MAKENOMENFLAGS = ['-s', '../../src/nomencl.ist']
 
     if bld.options.view:
         bld.add_post_fun(display)
