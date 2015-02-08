@@ -45,7 +45,7 @@ Il est à noter qu'au regard de ces contraintes qui affectent les capteurs, la \
 
     \subsection{Communications sans fil}
 
-Comme l'indique leur nom, les réseaux de capteurs sans fil n'utilisent aucun câble physique pour communiquer entre eux ou avec la \sdb: toutes les transmissions sont effectuées par voie hertzienne.
+Comme l'indique leur nom, les \rcsfs n'utilisent aucun câble physique pour communiquer entre eux ou avec la \sdb: toutes les transmissions sont effectuées par voie hertzienne.
 Chaque capteur est équipé d'un module radio utilisé alternativement pour émettre et pour recevoir.
 La plupart du temps ces modules sont capables de changer de fréquence de communication, ainsi que de moduler la puissance d'émission utilisée pour les transmissions.
 
@@ -80,7 +80,7 @@ Comme dans la plupart des réseaux informatiques, l'empilement des protocoles re
 \nomenclature{SSH}{\textit{Secure Shell}}
 
 Certains standards normalisés définissent l'usage de protocoles spécifiques sur les trois premières couches.
-Les principaux standards qui sont employés dans les réseaux de capteurs sont les piles \ieeee (correspondant à la marque \wifi) et \ieeeff (sur laquelle sont basée la marque \zigbee et le standard \ietf \slowpan), et dans une moindre mesure la pile \ieeefo (correspondant à la marque \bluetooth).
+Les principaux standards qui sont employés dans les \rcs sont les piles \ieeee (correspondant à la marque \wifi) et \ieeeff (sur laquelle sont basée la marque \zigbee et le standard \ietf \slowpan), et dans une moindre mesure la pile \ieeefo (correspondant à la marque \bluetooth).
 \nomenclature{IETF}{\textit{Internet Engineering Task Force}}
 \nomenclature{IEEE}{\textit{Institute of Electrical and Electronics Engineers}}
 \nomenclature{6LoWPAN}{\textit{IPv6 over Low power Wireless Personal Area Networks}}
@@ -93,7 +93,7 @@ Nous n'aurons pas besoin de l'étudier en détail ici.
 La deuxième couche du modèle fournit les moyens fonctionnels et procéduraux pour le transfert des données entre deux entités du réseau.
 Elle permet aussi, le plus souvent, de détecter et éventuellement corriger certaines erreurs survenues sur la couche physique (en cas de perturbation ou dégradation du signal électromagnétique).
 Elle se décompose en deux sous-couches: la couche de contrôle de la liaison logique (LLC, pour \textit{Logical Link Control} en anglais, « contrôle de la liaison logique ») et la couche du contrôle d'accès au support (MAC, pour \textit{Media Access Control}, « contrôle d'accès au support »).
-LLC est la sous-couche haute, utilisée pour fiabiliser la sous-couche MAC, intervient peu dans les réseaux de capteurs.
+LLC est la sous-couche haute, utilisée pour fiabiliser la sous-couche MAC, intervient peu dans les \rcs.
 Le protocole de couche MAC définit la manière dont les différents agents du réseau accèdent au médium de transmission de façon à limiter les collisions, et à garantir un accès le plus souvent équivalent au médium pour tous les nœuds.
 Les différents modes d'accès au médium existants sont résumés dans la \tabref{st:tab:mac}; certains consistent à créer des canaux de transmission distincts, tandis que d'autres déterminent l'accès à une même bande de fréquence en instaurant des règles.
 \nomenclature{MAC}{\textit{Media Access Control}}
@@ -124,7 +124,7 @@ Les différents modes d'accès au médium existants sont résumés dans la \tabr
             \midrule
             \textit{Resource reservation (scheduled) packet-mode protocols} & Réservation des ressources & Réservation par un nœud des ressources (par exemple: créneau temporel) nécessaires à la transmission)\\
             \midrule
-            \multicolumn{3}{p{.95\textwidth}}{D'autres modes d'accès par paquet (\textit{token passing, polling}) existent mais ne sont pas utilisés dans les réseaux de capteurs}\\
+            \multicolumn{3}{p{.95\textwidth}}{D'autres modes d'accès par paquet (\textit{token passing, polling}) existent mais ne sont pas utilisés dans les \rcs}\\
             \bottomrule
          \end{tabular}
      \end{small}
@@ -136,7 +136,7 @@ Les différents modes d'accès au médium existants sont résumés dans la \tabr
 \nomenclature{CSMA}{\textit{Carrier Sense Multiple Access}}
 \nomenclature{CSMA/CA}{\textit{Carrier Sense Multiple Access with Collision Avoidance}}
 
-De ces modes d'accès sont dérivés de très nombreux protocoles de couche MAC, dont plusieurs ont été conçus spécifiquement pour les réseaux de capteurs~\cite{YB09}.
+De ces modes d'accès sont dérivés de très nombreux protocoles de couche MAC, dont plusieurs ont été conçus spécifiquement pour les \rcs~\cite{YB09}.
 Par exemple, en dehors des standards \ieee, le protocole \smac~\cite{YHE02} fait alterner périodes « actives » et périodes de sommeil aux capteurs afin de préserver leur batterie.
 Les capteurs sont associés dans des groupes (qui ne correspondent pas tout à fait à des clusters) dont tous les membres sont en éveil de manière simultanée, afin de pouvoir communiquer à l'aide d'une version modifiée de \csmaca tel que défini dans le standard \ieeee.
 \nomenclature{S-MAC}{\textit{Sensor-MAC}}
@@ -154,7 +154,7 @@ Des exemples classiques de ces algorithmes de routage incluent \aodv (\textit{Ad
 Cette couche gère les communications de bout en bout entre processus.
 Les protocoles les plus fréquemment utilisés, \tcp (\textit{Transmission Control Protocol}) et \udp (\textit{User Datagram Protocol}) assurent l'ordonnancement des paquets et permettent d'éviter les pertes, les doublons et la corruption des paquets.
 Le protocole \tcp permet en plus à deux entités de communiquer en mode connecté en établissant une session (début, fin et validation des échanges).
-En raison des données de contrôle que ces protocoles impliquent, ils ne sont pas systématiquement implémentés dans les réseaux de capteurs (ils le sont parfois dans des versions allégées).
+En raison des données de contrôle que ces protocoles impliquent, ils ne sont pas systématiquement implémentés dans les \rcs (ils le sont parfois dans des versions allégées).
 
             \paragraph{La couche application}
 La dernière couche gère les échanges applicatifs entre les différents agents du réseau, et encapsule les données utiles au format désiré pour leur traitement final.

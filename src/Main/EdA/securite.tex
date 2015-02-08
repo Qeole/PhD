@@ -1,5 +1,5 @@
 % vim: set spelllang=fr foldmethod=marker:
-\section{Sécurité dans les réseaux de capteurs}\label{ea:sec:secu}
+\section{Sécurité dans les \rcs}\label{ea:sec:secu}
 
 \subsection{Plusieurs problématiques}
 
@@ -13,9 +13,9 @@ Les principales garanties que l'on cherche à apporter à un réseau sont les su
     \item la non-répudiation, qui empêche un agent de nier l'envoi d'un message émis;
     \item la protection contre le rejeu vise à prévenir les attaques basées sur l'injection de paquets capturés au préalable par l'attaquant dans le but de générer du trafic supplémentaire;
     \item la sécurité physique des capteurs, nécessaire pour prévenir l'accès au contenu des communications ou au matériel cryptographique par exemple;
-    \item la disponibilité, c'est à dire la résistance aux attaques de déni de service. Cette problématique est centrale pour les travaux présentés ici, et sera développée plus largement que les autres dans la \sref{ea:sec:dos};
+    \item la disponibilité, c'est à dire la résistance aux attaques de \dds. Cette problématique est centrale pour les travaux présentés ici, et sera développée plus largement que les autres dans la \sref{ea:sec:dos};
 \end{itemize}
-À noter qu'il existe de nombreuses études, voire même des travaux de synthèse, qui se sont déjà concentrés sur la sécurité des réseaux de capteurs~\cite{DYK12,AD14}.
+À noter qu'il existe de nombreuses études, voire même des travaux de synthèse, qui se sont déjà concentrés sur la sécurité des \rcs~\cite{DYK12,AD14}.
 
 \subsection{Confidentialité}
 
@@ -28,31 +28,31 @@ Cette notion ne sera pas abordée plus avant dans cette étude, nous conserveron
 Les attaques portant sur la confidentialité des données sont multiples.
 L'attaquant peut adopter un comportement passif (simplement à l'écoute du trafic) ou bien actif (injection de paquets pour déclencher l'envoi de paquets en réponse, détournement de trafic).
 Pour de nombreux réseaux plus « classiques », l'utilisation d'un câble de transmission (Ethernet, fibre optique\dots) permet de poser une première barrière pour les écoutes passives.
-Mais dans les réseaux de capteurs, les données sont échangées par le biais d'ondes électromagnétiques que tout attaquant à portée peut recevoir.
+Mais dans les \rcs, les données sont échangées par le biais d'ondes électromagnétiques que tout attaquant à portée peut recevoir.
 Il convient donc de trouver des solutions permettant de dissimuler le contenu des messages échangés, à défaut de prévenir l'accès aux messages eux-mêmes.
 
 Les méthodes conventionnelles pour assurer la confidentialité des communications sont donc des solutions cryptographiques: des algorithmes de chiffrement symétrique (une même clé sert à chiffrer puis déchiffrer le message) ou bien asymétrique (une clé pour le chiffrement, une seconde pour déchiffrer) sont utilisés dans tous types de communications pour empêcher l'accès à l'information à quiconque ne possède pas la clé adéquate.
 AES (\textit{Advanced Encryption Standard})~\cite{aes}, basé sur l'algorithme Rijndael, en est l'un des exemples les plus célèbres et les plus utilisés aujourd'hui.
 Certaines études se sont penchées sur les vitesses d'exécution relatives de différents algorithmes utilisés pour le chiffrement et l'authentification des données~\cite{SOBMCN11}.
 
-Idéalement, pour des réseaux de capteurs, ces algorithmes doivent être implémentés de telle façon que soit respectées deux sous-problématiques liéés au chiffrement:
+Idéalement, pour des \rcs, ces algorithmes doivent être implémentés de telle façon que soit respectées deux sous-problématiques liéés au chiffrement:
 \begin{itemize}
     \item la confidentialité persistante (\textit{forward secrecy} en anglais, littéralement « confidentialité vers l'avant »), qui permet d'empêcher un nœud de déchiffrer les messages une fois qu'il a quitté le réseau;
     \item la confidentialité « vers l'arrière » (\textit{backward secrecy}), chargée d'assurer qu'un nouveau nœud entrant sur le réseau n'est pas en mesure de déchiffrer un message émis avant son arrivée.
 \end{itemize}
 Nous n'entrerons pas plus en détail dans les mécanismes cryptographiques impliqués.
 
-Les algorithmes de chiffrement nécessitent en général de nombreux calculs, voire beaucoup de mémoire tampon, pour être mis en œuvre, surtout lorsque l'appareil ne dispose pas de matériel dédié~\cite{PLP06}, ce qui les rend parfois peu adaptés aux réseaux de capteurs.
+Les algorithmes de chiffrement nécessitent en général de nombreux calculs, voire beaucoup de mémoire tampon, pour être mis en œuvre, surtout lorsque l'appareil ne dispose pas de matériel dédié~\cite{PLP06}, ce qui les rend parfois peu adaptés aux \rcs.
 Qui plus est, ils requièrent la plupart du temps la mise en place d'une architecture d'échange et de gestion du matériel cryptographique, notamment en ce qui concerne les échanges de clés: cette architecture peut considérablement alourdir la structure du réseau ainsi que les échanges en termes de volume de données de contrôle.
 Plusieurs solutions adaptées aux capacités limitées des capteurs ont donc été proposées~\cite{OX09}.
 Certaines d'entre elles demeurent basées sur des suites de protocoles dont les algorithmes de chiffrement sont choisis au mieux pour répondre aux capacités des capteurs~\cite{SOBMCN11,KR12}; ces solutions couvrent le plus souvent d'autres problématiques que la seule confidentialité des données, et certaines seront présentées dans la sous-section suivante.
 D'autres mettent en place des mécanismes propres à profiter de l'architecture particulière de ces réseaux, en voici certains exemples.
 
-Dans le cas d'un attaquant « parasite » qui chercherait à exploiter les mesures relevées par le réseau de capteurs déployé par d'autres, des solutions comme GossiCrypt~\cite{LPH08}, basée sur un algorithme simple d'échanges de clés entre les nœuds et la station de base, ainsi que sur un renouvellement probabiliste du chiffrement: à chaque étape du message dans le réseau, le nœud relai charger de renvoyer le message choisit aléatoirement de chiffrer à son tour, ou non, le contenu du paquet.
+Dans le cas d'un attaquant « parasite » qui chercherait à exploiter les mesures relevées par le \rc déployé par d'autres, des solutions comme GossiCrypt~\cite{LPH08}, basée sur un algorithme simple d'échanges de clés entre les nœuds et la \sdb, ainsi que sur un renouvellement probabiliste du chiffrement: à chaque étape du message dans le réseau, le nœud relai charger de renvoyer le message choisit aléatoirement de chiffrer à son tour, ou non, le contenu du paquet.
 Les clés de chiffrement des nœuds sont renouvelées régulièrement, mais pas toutes à la fois, de telle sorte qu'un nœud compromis par un attaquant ne devrait pouvoir déchiffrer le contenu que d'un nombre restreints de paquets.
 
 Un usage intéressant de la cryptographie est le recours au chiffrement dit « homomorphique », qui permet d'effectuer certaines opérations sur des données chiffrées sans avoir besoin, justement, de les déchiffrer.
-Proposés pour les réseaux de capteurs~\cite{BBTY14}, ces algorithmes permettent de procéder, dans une certaine mesure, à des opérations de compression et d'agrégation de données (par exemple) au cours du trajet d'un paquet, sans avoir à déchiffrer puis chiffrer à nouveau son contenu à chaque étape.
+Proposés pour les \rcs~\cite{BBTY14}, ces algorithmes permettent de procéder, dans une certaine mesure, à des opérations de compression et d'agrégation de données (par exemple) au cours du trajet d'un paquet, sans avoir à déchiffrer puis chiffrer à nouveau son contenu à chaque étape.
 
 À part les solutions de chiffrement, d'autres méthodes consistent plus simplement à compliquer l'accès aux paquets plutôt qu'à chiffrer le contenu.
 Moins robustes, ces solutions sont aussi moins couteuses en termes de calculs et, \infine, de consommation énergétique.
@@ -70,7 +70,7 @@ Nous avons ainsi proposé une solution pour assurer la confidentialité des éch
 \end{itemize}
 
 Il est à noter qu'aucune des méthodes présentées ici, qu'elles reposent ou non sur l'usage de chiffrement, n'empêchent un attaquant de pouvoir récolter des métadonnées sur les échanges effectués, et d'en déduire par exemple qui communique avec qui, ou quel est le volume des données échangées.
-Ces métadonnées n'ont que rarement une valeur importante dans les réseaux de capteurs, et peuvent être en partie masquées, au besoin, par l'envoi de faux messages supplémentaires pour « brouiller les pistes », mais cela s'avèrerait très couteux pour le réseau.
+Ces métadonnées n'ont que rarement une valeur importante dans les \rcs, et peuvent être en partie masquées, au besoin, par l'envoi de faux messages supplémentaires pour « brouiller les pistes », mais cela s'avèrerait très couteux pour le réseau.
 
 \subsection{Intégrité, authentification, non-répudiation, rejeu}
 
@@ -82,18 +82,18 @@ L'authentification sert à prouver la validité de l'expéditeur des messages.
 Il n'est pas suffisant, pour assurer la sécurité d'un réseau, de s'assurer que le contenu des messages est chiffré: il faut également s'assurer que l'entité avec laquelle on communique est bien qui elle prétend être.
 Cette précaution permet notamment de se prémunir de l'attaque de \textit{l'homme du milieu}.
 L'authentification regroupe en réalité à la fois l'authentification de deux parties l'une envers l'autre, et l'authentification d'un agent aux yeux de tous les autres membres du réseau, dans le cas d'une diffusion générale (\textit{broadcast}) des messages.
-Selon le cas, les réseaux de capteurs peuvent également avoir besoin qu'un nœud s'identifie de façon spécifique auprès de la station de base, ou bien encore, pour certains réseaux clusterisés, qu'il puisse s'authentifier auprès des autres membres du cluster (et prouver son appartenance à ce dernier).
+Selon le cas, les \rcs peuvent également avoir besoin qu'un nœud s'identifie de façon spécifique auprès de la \sdb, ou bien encore, pour certains réseaux clusterisés, qu'il puisse s'authentifier auprès des autres membres du cluster (et prouver son appartenance à ce dernier).
 La signature des messages est le plus souvent réalisée à l'aide de mécanismes cryptographiques asymétriques (condensat signé à l'aide d'une clé privée).
 
 La non-répudiation consiste à assurer qu'un agent du réseau ne peut plus nier avoir émis un paquet une fois celui-ci reçu par son destinataire.
 Concrètement, si un agent est le seul à posséder une clé privée utilisée pour la signature d'un paquet, il ne fait nul doute, une fois ce paquet reçu, que cet agent en question est bien à l'origine de la création du paquet, puisque nul autre agent du réseau n'est en mesure de le signer à sa place.
 L'usage de ces dispositifs de signature en font un aspect étroitement liée à l'authentification des messages.
-Indispensable dans les transactions en ligne, la non-répudiation n'est pas toujours essentielle dans les réseaux de capteurs, mais peut s'avérer utile pour identifier de manière certaine l'auteur de comportements malveillants dans le réseau.
+Indispensable dans les transactions en ligne, la non-répudiation n'est pas toujours essentielle dans les \rcs, mais peut s'avérer utile pour identifier de manière certaine l'auteur de comportements malveillants dans le réseau.
 
 Les attaques par rejeu consistent pour un attaquant à capturer des paquets, même chiffrés, en transit sur le réseau, puis à les injecter à nouveau dans le réseau.
 Le but visé peut être de générer davantage de trafic, dans le but d'augmenter le volume de données capturées.
 Il s'agit par exemple de la méthode utilisée pour accélérer considérablement l'obtention de la clé d'accès à un réseau sans fil sécurisé à l'aide de la suite WEP (\textit{Wired Equivalent Privacy})~\cite{BGW01}.
-Un autre but recherché peut être de générer du trafic superflu dans le but de consommer inutilement les ressources du réseau, ce qui en fait potentiellement une attaque de déni de service.
+Un autre but recherché peut être de générer du trafic superflu dans le but de consommer inutilement les ressources du réseau, ce qui en fait potentiellement une attaque de \dds.
 Pour se prévenir de ce genre d'attaques, des moyens cryptographiques peuvent ici encore être mis en œuvre pour associer un identifiant unique à chaque paquet, de sorte qu'un paquet rejoué soit rejeté par les agents du réseau.
 
 Ces différentes propriétés sont distinctes, mais elles reposent presque toujours sur l'usage de solution cryptographiques pour être préservées dans un réseau.
@@ -117,7 +117,7 @@ On entend par « architecture de sécurité » un ensemble de protocoles et de
 L'équivalent anglais serait \textit{secutity framework}.
 Les solutions proposées sont multiples~\cite{HI12,GWZC13,SS14-rev}; nous allons présenter ici les plus connues.
 
-Ainsi SPINS (\textit{Security Protocols for Sensor Networks}), élaboré en 2002~\cite{PSWCT02}, est l'une des premières solutions proposées dans la littérature pour sécuriser les échanges dans les réseaux de capteurs, et sert de base pour de nombreuses solutions plus récentes.
+Ainsi SPINS (\textit{Security Protocols for Sensor Networks}), élaboré en 2002~\cite{PSWCT02}, est l'une des premières solutions proposées dans la littérature pour sécuriser les échanges dans les \rcs, et sert de base pour de nombreuses solutions plus récentes.
 Il s'agit d'un système reposant sur deux blocs: SNEP (\textit{Secure Network Encryption Protocol}) fournit la confidentialité, l'authentification entre deux parties, l'intégrité et la protection contre le rejeu, le tout en préservant un faible volume de données de contrôle en en-tête des paquets.
 Des codes d'authentification des messages associés à un compteur partagé entre les interlocuteurs, et utilisé pour le bloc de chiffrement (le compteur est incrémenté après chaque bloc), sont employés à cette fin.
 Le second bloc est appelé $\mu$TESLA (version « micro » du \textit{Timed, Efficient, Streaming, Loss-tolerant Authentication Protocol}), il fournit des diffusions générales (\textit{broadcast}) authentifiées à l'aide de chaines de clés: ces chaines à sens uniques fournissent des clés associées à chaque intervalle de temps pour la signature des messages.
@@ -127,7 +127,7 @@ Le module SNEP a fait l'objet d'études comparatives sur les performances que lu
 TinySec~\cite{KSW04}, proposé en 2004, se réfère à SNEP, mais lui reproche une spécification incomplète.
 Cette architecture propose l'authentification seule, ou bien accompagnée de chiffrement, des paquets.
 Elle écarte volontairement la protection contre le rejeu, mais se penche très sérieusement sur l'implémentation d'une solution classique basée sur un algorithme de chiffrement en conjonction avec un code d'authentification des messages (MAC).
-Les algorithmes possibles de chiffrement, leurs différents modes, leurs vecteurs d'initialisation, les codes d'authentification, les mécanismes d'échange de clés possibles sont tous analysés en détail, afin de déterminer les avantages et les inconvénients de chacun pour un réseau de capteurs.
+Les algorithmes possibles de chiffrement, leurs différents modes, leurs vecteurs d'initialisation, les codes d'authentification, les mécanismes d'échange de clés possibles sont tous analysés en détail, afin de déterminer les avantages et les inconvénients de chacun pour un \rc.
 
 MiniSec~\cite{LMPG07} est basé sur TinySec.
 Au mode CBC (\textit{Cipher Block Chaining mode}, mode par enchainement des blocs), cette architecture proposée en 2007 préfère l'utilisation du mode de chiffrement OBC (\textit{Offset CodeBook mode}, « dictionnaire avec décalage »), qui réalise à la fois le chiffrement et la signature des données et ne nécessite donc pas de code d'authentification distinct.
@@ -136,12 +136,12 @@ Enfin elle fait une distinction entre les diffusions nœud-à-nœud et les diffu
 
 TinyKey~\cite{CRS11} est une autre architecture basée sur TinySec, mais date de 2011.
 Elle reprend l'architecture de TinySec, mais rajoute un numéro de séquence aux paquets pour éviter les attaques par rejeu.
-Surtout, là où les auteurs de TinySec se contentent de passer en revue les mécanismes de gestion de clés qui peuvent être utilisés, les auteurs de TinyKey proposent une implémentation concrète de cette gestion, qui est assurée par deux modules centralisés sur la station de base: KMS (\textit{Key Management Submodule}, « sous-module de gestion de clé » en anglais) et KDM (\textit{Key Distribution Manager}, « gestionnaire de distribution des clés»).
+Surtout, là où les auteurs de TinySec se contentent de passer en revue les mécanismes de gestion de clés qui peuvent être utilisés, les auteurs de TinyKey proposent une implémentation concrète de cette gestion, qui est assurée par deux modules centralisés sur la \sdb: KMS (\textit{Key Management Submodule}, « sous-module de gestion de clé » en anglais) et KDM (\textit{Key Distribution Manager}, « gestionnaire de distribution des clés»).
 
 D'autres architectures encore se concentrent sur la gestion des clés dans le réseau.
 Avec LEAP (\textit{Localized Encryption and Authentication Protocol}, « protocole de chiffrement et d'authentification localisés »), proposé en 2003~\cite{ZSJ03}, la gestion est décentralisée, et porte sur quatre types de clés:
 \begin{itemize}
-    \item des clés individuelles permettant de communiquer de façon sécurisée avec la station de base;
+    \item des clés individuelles permettant de communiquer de façon sécurisée avec la \sdb;
     \item une clé de groupe, utilisée par l'ensemble du réseau, pour protéger des diffusions générales d'un attaquant extérieur;
     \item des clés de cluster, à utiliser, le cas échéant, au sein d'un cluster du réseau;
     \item des clés pour les communications pair-à-pair.
@@ -149,22 +149,22 @@ Avec LEAP (\textit{Localized Encryption and Authentication Protocol}, « protoc
 Les mécanismes déployés ont pour but, encore une fois, de minimiser l'énergie consommée.
 Ils ont été améliorés dans une seconde version du protocole, baptisée LEAP+, et publiée en 2006~\cite{ZSJ06}.
 
-L'architecture pDCS, proposée en 2009~\cite{SZZCY09} (\textit{privacy-enhanced Data-Centric Sensor networks}, « réseaux de capteurs centrés sur les données, de confidentialité améliorée ») divise le réseau en cellules rectangulaires à l'aide d'arbres euclidiens de \textsc{Steiner}, et introduit des clés de cellules et de rangées.
+L'architecture pDCS, proposée en 2009~\cite{SZZCY09} (\textit{privacy-enhanced Data-Centric Sensor networks}, « \rcs centrés sur les données, de confidentialité améliorée ») divise le réseau en cellules rectangulaires à l'aide d'arbres euclidiens de \textsc{Steiner}, et introduit des clés de cellules et de rangées.
 Des capteurs se trouvent dans les cellules, tandis que des « puits » de données mobiles se déplacent et récoltent les informations.
 Mais le chiffrement est fait de telles sorte qu'un puits illégitime ne soit pas en mesure de remonter au capteur qui a initialement détecté un événement donné.
 Un filtre de \textsc{Bloom} est là encore utilisé pour minimiser le volume de données de contrôle produites.
 pDCS a été amélioré en 2013 par ERP-DCS (\textit{Efficient Rekeying Protocol for DCS sensor networks}, « protocole efficace de régénération de clés pour les réseaux DCS »)~\cite{HYD13}, qui se concentre sur l'amélioration du mécanisme de gestion des clés qui intervient dans le cas où un agent a été compromis et identifié comme tel, en utilisant à cette fin un système d'exclusion appelé EBC (\textit{Exclusion Basis System}).
 
-ZigBee\cite{zigbee} est un protocole basé sur la pile IEEE~802.15.4, parfois utilisé dans les réseaux de capteurs, bien que son orientation soit plus large.
+\zigbee\cite{zigbee} est un protocole basé sur la pile \ieeeff, parfois utilisé dans les \rcs, bien que son orientation soit plus large.
 Il est en quelque sorte actuellement candidat pour devenir un standard pour les objets connectés dans le contexte d'un « Internet des objets ».
 Utilisés avec les capteurs, il apporte chiffrement, authentification, protection contre le rejeu.
-La gestion des clés est centralisée (ZigBee introduit une notion de « centre de confiance »).
+La gestion des clés est centralisée (\zigbee introduit une notion de « centre de confiance »).
 La sécurité apportée vient toutefois au prix d'en-têtes et de calculs qui peuvent être plus importants qu'avec d'autres architectures.
 
 La \tabref{ea:tab:proto} compare brièvement les fonctionnalités apportées par ces différentes modèles.
 
 \begin{table}[ht] %{{{
-    \caption{Brève comparaison d'architectures de sécurité pour réseaux de capteurs}\label{ea:tab:proto}
+    \caption{Brève comparaison d'architectures de sécurité pour \rcs}\label{ea:tab:proto}
     \medskip
     \centering
     %\newcolumntype{X}{>{\centering\arraybackslash}m}
@@ -181,7 +181,7 @@ La \tabref{ea:tab:proto} compare brièvement les fonctionnalités apportées par
             LEAP+                   & RC5                          & RC5                                & Clé individuelle, clé globale, clé de cluster, clés pair-à-pair                & (*)                                                                                   & 2006\\
             pDCS                    & RC5                          & RC5                                & Clé maitresse, clés pair-à-pairs, clés de cellule, clés de rangée, clé globale & (*) plus dissimulation de la provenance des données                                   & 2009\\
             ERP-DCS                 & RC5                          & RC5                                & Clés pair-à-pair, clé de cellule, clé ESB                                      & (*) plus dissimulation de la provenance des données                                   & 2013\\
-            ZigBee                  & CBC-MAC                      & AES, modes CTR ou CCM              & Clé maitresse, clés pair-à-pair, clé globale                                   & (*)                                                                                   & 2005\\
+            \zigbee                 & CBC-MAC                      & AES, modes CTR ou CCM              & Clé maitresse, clés pair-à-pair, clé globale                                   & (*)                                                                                   & 2005\\
             \bottomrule
         \end{tabular}
     \end{footnotesize}
@@ -209,5 +209,5 @@ Leur faiblesse réside donc dans leur déploiement en milieu ouvert et potentiel
 
 L'une des solutions proposées consiste donc à considérer un nœud comme ayant épuisé sa batterie s'il ne répond plus pendant une période prolongée; si en revanche le capteur redevient actif par la suite, on suppose que son absence était due à son extraction du réseau par un attaquant, et le capteur est alors considéré comme compromis~\cite{Ho10}.
 
-La compromission d'un nœud peut être extrêmement nuisible pour le réseau de capteurs.
-Non content d'accéder aux données reçues par ce nœud, ou aux clés de chiffrement et de signature qu'il peut contenir, l'attaquant peut en plus chercher à mener des attaques de déni de service visant à perturber le bon fonctionnement du réseau.
+La compromission d'un nœud peut être extrêmement nuisible pour le \rc.
+Non content d'accéder aux données reçues par ce nœud, ou aux clés de chiffrement et de signature qu'il peut contenir, l'attaquant peut en plus chercher à mener des attaques de \dds visant à perturber le bon fonctionnement du réseau.

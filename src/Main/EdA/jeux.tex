@@ -10,7 +10,7 @@ La théorie des jeux est très fréquemment utilisée en économie.
 Elle intervient aussi régulièrement en politique, en biologie ou même en philosophie.
 Lui font appel, de manière plus ponctuelle, de nombreux autres domaines, dont l'informatique.
 
-Appliquée au réseaux de capteurs sans fil, une étude classe la théorie des jeux selon trois approches: les performances énergétiques, la sécurité, et les jeux de poursuite-évasion~\cite{MT08}.
+Appliquée au \rcsfs, une étude classe la théorie des jeux selon trois approches: les performances énergétiques, la sécurité, et les jeux de poursuite-évasion~\cite{MT08}.
 Les jeux de poursuite-évasion impliquent un ensemble de joueurs mobiles qui tentent de « capturer » un second ensemble de nœuds, d'en optimiser le suivi; les agents du second groupe, pour leur part, cherche à éviter de se faire détecter.
 Les deux autres catégories parlent d'elles-mêmes: les jeux appliqués aux performances énergétiques recherchent des solutions optimales permettant de minimiser la consommation, que ce soit en agissant sur la topologie du réseau ou bien sur le comportement des nœuds~\cite{CPF09}.
 En sécurité, bien entendu, les jeux opposent les capteurs « normaux » aux agents attaquant de l'extérieur ou bien (dans le cas de nœuds corrompus) de l'intérieur du réseau.
@@ -20,7 +20,7 @@ De même, les performances énergétiques ont été divisées en deux catégorie
 
 Mais revenons sur le domaine de la sécurité des réseaux, pour nous intéresser à quelques exemples d'applications.
 Le protocole \leach a été sujet à de nombreuses propositions d'améliorations, comme nous l'avons déjà signalé, et l'une d'entre elles a recours à la théorie des jeux~\cite{MMZ09}.
-Avec le protocole S-\leach, la station de base utilise un système de détection d'intrusion centralisé tandis que les \chs utilisent des versions locales allégées, pour détecter les nœuds responsables de pertes de paquets dans le réseau.
+Avec le protocole S-\leach, la \sdb utilise un système de détection d'intrusion centralisé tandis que les \chs utilisent des versions locales allégées, pour détecter les nœuds responsables de pertes de paquets dans le réseau.
 Les interactions entre les capteurs et l'IDS sont modélisées sous la forme d'un jeu bayésien (\cad avec information partielle: l'IDS ne sait pas, en débutant la partie, si un nœud donné est compromis ou non).
 Chaque nœud se voit affecter un score de réputation.
 Les nœuds corrompus peuvent coopérer (pour éviter d'être détectés) ou bien supprimer des paquets.
@@ -41,4 +41,4 @@ D'autres travaux~\cite{velner12b} traitent d'objectifs plus complexes basés sur
 Dépassant le cadre de nos travaux, on trouve aussi l'étude de jeux comportant à la fois des conditions sur le gain et un objectif de parité (où pour remporter la victoire, un joueur a besoin d'accéder au gain maximum qui sera récolté à l'infini sur le chemin, infini lui aussi, qui représente le déroulement de la partie)~\cite{chatterjee05}.
 Dans ce cas l'objectif de parité assure que le système se comporte de façon cohérente, tandis que le gain représente un but quantitatif plus concret.
 Les stratégies gagnantes pour ces jeux peuvent nécessiter une mémoire infinie, mais il est possible d'en obtenir une approximation exécutable avec une mémoire finie.
-Ce type de jeux ne convient néanmoins pas parfaitement pour modéliser les réseaux de capteurs, car ils laissent de côté l'énergie qui est un paramètre essentiel de notre contexte de travail.
+Ce type de jeux ne convient néanmoins pas parfaitement pour modéliser les \rcs, car ils laissent de côté l'énergie qui est un paramètre essentiel de notre contexte de travail.

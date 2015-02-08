@@ -10,8 +10,8 @@ Sauf s'il est fait usage d'une antenne directionnelle pour l'émission, ces onde
 
         \paragraph{Brouillage de fréquences}
 Le brouillage de fréquences (\textit{frequency jamming} en anglais) consiste pour l'attaquant à émettre un signal parasite, un « bruit » électromagnétique, sur les fréquences concernées, de façon à ce que la cible visée ne puisse plus recevoir de façon correcte les paquets qui lui sont envoyés par les nœuds légitimes.
-Le brouillage peut être réalisé à l'aide d'une antenne directionnelle pour viser une cible en particulier; mais dans le cas d'un réseau de capteurs, l'attaquant cherche en général à émettre un bruit dans toutes les directions afin d'affecter le plus grand nombre de nœuds possible.
-L'attaque peut être menée de façon sporadique, de manière à produire un déni de service partiel, ou bien en continu.
+Le brouillage peut être réalisé à l'aide d'une antenne directionnelle pour viser une cible en particulier; mais dans le cas d'un \rc, l'attaquant cherche en général à émettre un bruit dans toutes les directions afin d'affecter le plus grand nombre de nœuds possible.
+L'attaque peut être menée de façon sporadique, de manière à produire un \dds partiel, ou bien en continu.
 Si la ou les machine(s) émettant le signal parasite possède(nt) une portée suffisante pour couvrir toute l'étendue géographique du réseau, l'intégralité des capteurs peuvent se retrouver dans l'impossibilité d'utiliser les fréquences brouillées.
 Si de plus, le brouillage est mené sur toute la plage de fréquences accessibles aux capteurs, les communications deviennent totalement impossibles à établir dans le réseau.
 
@@ -29,8 +29,8 @@ Ces règles peuvent être contournées, et la couche MAC va donc se retrouver as
 
         \paragraph{Création de collisions et brouillage « intelligent »}
 Lorsque plusieurs nœuds dont les portées se chevauchent émettent de façon simultanée en utilisant la même fréquence (donc sur un même canal), il se produit des collisions.
-La plupart des protocoles MAC employés avec les réseaux de capteurs introduisent dans les trames un champ contenant une somme de contrôle, qui permet de vérifier l'intégrité de la trame.
-Mais cette somme de contrôle ne permet pas, la plupart du temps, de corriger d'éventuelles erreurs (aucun des standards IEEE 802.11 (Wi-Fi), 802.15.1 (Bluetooth) ou 802.15.4 (ZigBee, 6LoWPAN) n'inclue de code de correction des erreurs).
+La plupart des protocoles MAC employés avec les \rcs introduisent dans les trames un champ contenant une somme de contrôle, qui permet de vérifier l'intégrité de la trame.
+Mais cette somme de contrôle ne permet pas, la plupart du temps, de corriger d'éventuelles erreurs (aucun des standards \ieeee (\wifi), \ieeefo (\bluetooth) ou \ieeeff (\zigbee, \slowpan) n'inclue de code de correction des erreurs).
 Si un seul bit de la trame est altéré, celle-ci est donc rejetée par le destinataire.
 Un attaquant peut donc chercher à produire des collisions en émettant un signal en même temps qu'un nœud légitime, afin que le destinataire ne puisse pas recevoir correctement la trame qui lui est destinée.
 Ce principe de collision est identique au brouillage mené sur la couche physique; mais lorsque l'attaquant a connaissance du protocole de couche MAC employé, il lui est possible d'affiner son attaque, et de remplacer un brouillage « brut », continu et onéreux, par un brouillage « intelligent ».
@@ -87,7 +87,7 @@ Dans le cas d'un réseau clusterisé, il arrive que tous les capteurs soient à 
 Le routage est alors très simple.
 Mais dans d'autres cas, il est nécessaire d'établir une structure pour le réseau permettant l'acheminement des paquets jusqu'à leur destinataire.
 Un protocole de routage efficace doit minimiser les pertes de paquets ainsi que les couts de retransmission et éviter la création de boucles dans le réseau.
-À l'inverse, un attaquant peut tenter de mener une attaque par déni de service en gênant le plus possible l'acheminement de ces paquets.
+À l'inverse, un attaquant peut tenter de mener une attaque par \dds en gênant le plus possible l'acheminement de ces paquets.
 
         \paragraph{Trou noir (\textit{blackhole})}
 Une attaque de type « trou noir » (ou \textit{blackhole} en anglais) consiste pour un nœud compromis à n'effectuer aucune retransmission des paquets qui lui sont envoyés.
@@ -134,7 +134,7 @@ Il est intéressant, pour les nœuds menant l'attaque, de retransmettre par exem
 Ou plus simplement, l'injection en un autre point des paquets utilisés pour la découverte de routes lors de la mise en place de la structure de routage peut nuire grandement à l'organisation du réseau, et conduire un nœud légitime à imaginer des voisins virtuels qui sont en réalité absolument hors de sa portée d'émission.
 
         \paragraph{Déluge de paquets « hello » (\textit{“hello” flooding})}
-Un mécanisme souvent mis en place dans les réseaux de capteurs est l'envoi de paquets de type « hello » pour découvrir quels sont les nœuds dans leur voisinage.
+Un mécanisme souvent mis en place dans les \rcs est l'envoi de paquets de type « hello » pour découvrir quels sont les nœuds dans leur voisinage.
 À la réception d'un tel paquet, les nœuds voisins émettent en réponse un paquet « hello-reply » indiquant au premier capteur qu'ils ont reçu le message.
 Un attaquant, s'il dispose d'une machine plus puissante que la moyenne des capteurs, peut forger et envoyer des paquets « hello-reply » avec une portée supérieure à celle des capteurs, pour leur faire enregistrer des voisins qui sont en réalité bien au-delà de leur portée d'émission, et désorganiser complètement le routage de paquets dans le réseau.
 
@@ -167,7 +167,7 @@ De manière générale, en l'absence d'un système efficace d'authentification, 
 Les protocoles de couche transport ne sont pas toujours implémentés dans les \rcsfs, mais lorsqu'ils sont présents, des attaques peuvent profiter de leurs spécifications.
 
         \paragraph{Déluge de paquets SYN (ou équivalents) (\textit{SYN flooding})}
-Les attaques par déni de service existant sur les réseaux classiques au niveau de la couche transport peuvent aussi être appliquées dans les réseaux de capteurs: par exemple, si le protocole TCP est utilisé dans le réseau, un attaquant peut inonder le réseau de paquets SYN utilisés pour initier des connexions entre deux nœuds.
+Les attaques par \dds existant sur les réseaux classiques au niveau de la couche transport peuvent aussi être appliquées dans les \rcs: par exemple, si le protocole TCP est utilisé dans le réseau, un attaquant peut inonder le réseau de paquets SYN utilisés pour initier des connexions entre deux nœuds.
 Cette attaque requiert une machine plus puissante (surtout, avec une meilleure alimentation en énergie) qu'un capteur, mais permet à la fois de créer des congestions dans le réseau, et de saturer les capacités des capteurs en ouvrant un nombre trop grand de sessions TCP.
 
         \paragraph{Désynchronisation TCP (ou équivalents)}
@@ -208,7 +208,7 @@ Les capteurs continuent dans ce cas à mesurer des valeurs et à les retransmett
 
         \paragraph{}
 Les tables~\ref{ea:tab:layer} et~\ref{ea:tab:paradigm} synthétisent le classement de ces différentes attaques, respectivement par couche du modèle TCP/IP et par paradigme considéré.
-Toutes les attaques exposées dans cette sous-section ont été décrites à maintes reprises dans la littérature, et notamment réunies au travers de plusieurs études portant sur l'état de l'art de la sécurité dans les réseaux de capteurs~\cite{SSS11,RM11,AD14}
+Toutes les attaques exposées dans cette sous-section ont été décrites à maintes reprises dans la littérature, et notamment réunies au travers de plusieurs études portant sur l'état de l'art de la sécurité dans les \rcs~\cite{SSS11,RM11,AD14}
 \begin{table}[!ht]
     \newcounter{LayerNumber}
     \setcounter{LayerNumber}{1}
@@ -281,9 +281,9 @@ Toutes les attaques exposées dans cette sous-section ont été décrites à mai
      \end{small}
 \end{table}
 
-Il est bien sûr très difficile de prétendre à l'exhaustivité, et il existe d'autres attaques de déni de service applicables au réseaux de capteurs: certaines dépendent d'applications particulières ou sont introduites par des configurations spécifiques (mobilité des nœuds, structures spécifiques: grille, recherche de couverture maximale\dots).
+Il est bien sûr très difficile de prétendre à l'exhaustivité, et il existe d'autres attaques de \dds applicables au \rcs: certaines dépendent d'applications particulières ou sont introduites par des configurations spécifiques (mobilité des nœuds, structures spécifiques: grille, recherche de couverture maximale\dots).
 D'autres n'ont sans doute pas encore été découvertes.
-Les attaques que nous avons présentées regroupent néanmoins les principales menaces, en termes de déni de service, auxquelles peuvent faire face les réseaux de capteurs.
+Les attaques que nous avons présentées regroupent néanmoins les principales menaces, en termes de \dds, auxquelles peuvent faire face les \rcs.
 %2}}}
 
     \subsubsection{Discussion: plausibilité des attaques}
@@ -292,7 +292,7 @@ Toutes les attaques que nous avons présenté dans cette sous-section sont abond
 Mais parmi elles, toutes ne rencontreront pas forcément le même « succès » dans le monde réel, et l'on peut s'interroger: quelles sont les attaques les plus plausibles, \cad celles qui ont le plus de chances d'être implémentées par un attaquant réel?
 
 Il est bien sûr très difficile de se procurer des données à ce sujet, puisque lorsqu'une véritable attaque est menée, ses conséquences, et surtout son mode opératoire, ne sont pour ainsi dire jamais rendus publics.
-L'organisme qui gère le réseau de capteurs attaqué, surtout s'il fait partie du domaine militaire, n'a pas d'intérêt à communiquer sur les spécifications de son système, et encore moins sur ses vulnérabilités.
+L'organisme qui gère le \rc attaqué, surtout s'il fait partie du domaine militaire, n'a pas d'intérêt à communiquer sur les spécifications de son système, et encore moins sur ses vulnérabilités.
 
 Cela ne nous empêche pas néanmoins de nous livrer à quelques conjectures.
 
@@ -312,13 +312,13 @@ Voici nos suppositions concernant les principales motivations des attaquants.
 \begin{itemize}
     \item \textbf{Neutraliser les communications}: l'attaquant souhaite mettre le réseau hors service. Il veut empêcher l'exploitant du réseau d'accéder aux informations collectées, que ce soit pour des raisons financières ou militaires. Il ne veut pas de communication entre les nœuds, et surtout, pas de remontées d'informations vers la \sdb.
     \item \textbf{Détruire définitivement le réseau}: l'existence en soi du réseau est une nuisance pour l'attaquant. Celui-ci souhaite désactiver le réseau de façon définitive, car il ne peut pas se permettre de le mettre simplement hors service de façon ponctuelle lorsque le besoin s'en ferait sentir.
-    \item \textbf{Parasiter la collecte de donnés}: l'attaquant souhaite profiter du réseau mis en place par un concurrent pour obtenir des informations stratégiques à moindre frais. Il récupère et exporte des données circulant sur le réseau. Bien que cela ne soit pas une attaque de déni de service en soi, l'usage d'attaques par trous de ver, par accaparement du médium peuvent être menées pour rendre la tâche plus aisée, sans compter que la circulation supplémentaire des données exfiltrées risque de puiser davantage dans la batterie des capteurs légitimes.
+    \item \textbf{Parasiter la collecte de donnés}: l'attaquant souhaite profiter du réseau mis en place par un concurrent pour obtenir des informations stratégiques à moindre frais. Il récupère et exporte des données circulant sur le réseau. Bien que cela ne soit pas une attaque de \dds en soi, l'usage d'attaques par trous de ver, par accaparement du médium peuvent être menées pour rendre la tâche plus aisée, sans compter que la circulation supplémentaire des données exfiltrées risque de puiser davantage dans la batterie des capteurs légitimes.
     \item \textbf{Altérer les résultats}: l'attaquant souhaite induire sa cible en erreur en lui faisant parvenir des résultats erronés. Les prises de décision de l'opérateur vont alors se retrouver basées sur une vision erronée de la situation en cours. C'est l'exemple classique des séries d'espionnage, dans lesquelles les agents infiltrés font en sorte d'afficher l'image d'une pièce vide dans la salle de contrôle des dispositifs de vidéosurveillance afin de camoufler leur intrusion.
 \end{itemize}
 
         \paragraph{Les attaques correspondantes}
             \subparagraph{Neutraliser les communications}
-Le moyen le plus simple de mener une attaque de déni de service contre un réseau est encore de brouiller son signal, au niveau physique.
+Le moyen le plus simple de mener une attaque de \dds contre un réseau est encore de brouiller son signal, au niveau physique.
 La mise en place peut être couteuse en matériel, mais elle est très facile à mette en place.
 Menées de l'extérieur du réseau, elle ne requiert aucune connaissance sur le fonctionnement interne de celui-ci.
 L'attaquant n'a besoin de connaitre que la plage de fréquences à neutraliser, et à calculer la puissance d'émission nécessaire.
@@ -365,12 +365,12 @@ Les attaques qui nous semblent les plus plausibles sont donc au final les suivan
 
 Du point de vue de l'attaquant les techniques de brouillage « intelligentes » peuvent nécessiter des ajustements en fonction du protocole MAC employé dans le réseau, et mieux vaut mener des tests pour s'assurer que les attaques fonctionnent correctement.
 Les autres attaques servant à neutraliser les communications sont beaucoup plus complexes à mettre en place, et requièrent des connaissances sur les mécanismes internes du réseau.
-Il n'est pas évident de trouver un intérêt concret aux comportements cupides dans les réseaux de capteurs en dehors de la collecte parasite d'informations.
+Il n'est pas évident de trouver un intérêt concret aux comportements cupides dans les \rcs en dehors de la collecte parasite d'informations.
 
 Il serait intéressant de pouvoir recouper ces hypothèses avec des statistiques issues de déploiements réels: savoir quelles sont les attaques les plus utilisées permettrait de déterminer dans quelle direction diriger les efforts pour la défense du réseau, et par conséquent comment axer la recherche de solutions.
 Mais encore une fois, l'évaluation de la plausibilité des attaques réalisée ici n'est que le produit de conjectures et n'a pas pu être vérifiée par une étude concrète.
 En particulier, on imagine sans mal que pour un but spécifique, un attaquant disposant de suffisamment de moyens prenne le temps d'implémenter une attaque très complexe, après avoir analysé en profondeur le fonctionnement du réseau ciblé; l'intrusion se retrouverait alors plus efficace dans les dégâts infligés, et/ou plus difficile à détecter.
 L'actualité de ces dernières années en matière de sécurité informatique, principalement depuis la découverte du logiciel malveillant Stuxnet~\cite{stuxnet} en 2010, tend en effet à prouver que des organismes importants sont prêts à investir des moyens considérables dans la mise en place d'attaques très sophistiquées.
-Il n'est pas difficile d'imaginer que ce comportement puisse être appliqué dans le domaine des réseaux de capteurs si le besoin s'en fait ressentir.
+Il n'est pas difficile d'imaginer que ce comportement puisse être appliqué dans le domaine des \rcs si le besoin s'en fait ressentir.
 %2}}}
 %1}}}

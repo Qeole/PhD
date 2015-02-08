@@ -1,10 +1,10 @@
 % vim: set spelllang=fr foldmethod=marker:
-\section{Détection des attaques de déni de service}
+\section{Détection des attaques de \dds}
 \label{sa:sec:detection}
 %===============================================================================
     \subsection{Usage des \cns}
 
-À côté des nœuds «~normaux~» et des \chs, un troisième rôle va être attribué à certains capteurs, directement en lien avec la détection des attaques de type «~déni de service~».
+À côté des nœuds «~normaux~» et des \chs, un troisième rôle va être attribué à certains capteurs, directement en lien avec la détection des attaques de type «~\dds~».
 Certains capteurs se voient ainsi confier le rôle de «~nœuds de contrôle~», ou \cns (introduits dans~\cite{LC08}), et sont chargés de surveiller le trafic entrant et sortant des \chs.
 
 Si un \cn constate qu'un capteur envoie, au cours d'une unité de temps, plus de données à leur \CH qu'une valeur de seuil déterminée $S_{debit}$, il retient que le nœud a eu un comportement anormal (il y a eu un écart important à la moyenne de la quantité de données envoyées par unité de temps).
@@ -21,7 +21,7 @@ Dans ce cas, l'élection d'un nouveau \CH dans le cluster est déclenchée.
 %===============================================================================
     \subsection{Objectifs à atteindre}
 
-Le but de la solution proposée est de fournir un moyen efficace de lutter contre un nœud qui tenterait de corrompre les résultats envoyés à la station de base, ou bien de saturer les capacités de communication du réseau, en envoyant un flux de données plus important que les nœuds «~honnêtes~».
+Le but de la solution proposée est de fournir un moyen efficace de lutter contre un nœud qui tenterait de corrompre les résultats envoyés à la \sdb, ou bien de saturer les capacités de communication du réseau, en envoyant un flux de données plus important que les nœuds «~honnêtes~».
 L'efficacité de cette méthode peut être mesurée sur deux aspects:
 \begin{itemize}
     \item le taux de détection des nœuds compromis dans le réseau;
@@ -36,7 +36,7 @@ Pour obtenir une méthode efficace sur les deux points évoqués, nous proposons
 %===============================================================================
     \subsection{Partition hiérarchique du réseau}
 
-Le fait de clusteriser le réseau de capteurs tel que présenté en \ssref{st:subsec:partition} permet de limiter la consommation en énergie de la plupart des nœuds du réseau, puisque seuls les \chs se retrouvent à effectuer des émissions sur des distances plus longues que le rayon d'un cluster.
+Le fait de clusteriser le \rc tel que présenté en \ssref{st:subsec:partition} permet de limiter la consommation en énergie de la plupart des nœuds du réseau, puisque seuls les \chs se retrouvent à effectuer des émissions sur des distances plus longues que le rayon d'un cluster.
 La partition hiérarchique permet d'obtenir une gestion encore plus efficace des clusters, puisqu'elle introduit plus de granularité.
 Nous proposons, pour notre solution (et pour nos tests, voir \sref{sa:sec:resultats}), une hiérarchie à deux degrés: nous avons clusterisé notre réseau en utilisant $k$-\leach, en fixant $k=2$ (voir figure~\ref{sa:fig:network}).
 \begin{figure}[ht]
@@ -98,7 +98,7 @@ Il convient naturellement d'attribuer une graine différente à chaque nœud du 
 Ceci peut être réalisé en initialisant l'algorithme avec une mesure physique ---~après tout, il s'agit de capteurs!~--- dont la valeur est ramenée à l'entier impair le plus proche.
 
 Mais une question subsiste: quelle va-t-être l'entité chargée d'exécuter cet algorithme et de procéder à l'élection des \cns?
-Trois méthodes différentes sont ici proposées: une auto-élection distribuée, une élection centralisée au niveau des \CH, ou alors une élection centralisée au niveau de la station de base.
+Trois méthodes différentes sont ici proposées: une auto-élection distribuée, une élection centralisée au niveau des \CH, ou alors une élection centralisée au niveau de la \sdb.
 %===============================================================================
     \subsection{Processus d'élection des \cns}
 
@@ -143,21 +143,21 @@ Qui plus est, il faut garder à l'esprit que rien n'empêche un nœud compromis 
 
 Cette méthode est néanmoins celle qui est implémentée dans les travaux de la référence~\cite{GMT12}, et que nous reprenons pour nos tests (dont les résultats sont disponibles en \sref{sa:sec:resultats}).
 
-        \subsubsection{Élection centralisée au niveau de la station de base}
-L'élection centralisée peut également être effectuée au niveau de la station de base (\BS), comme représenté sur la figure~\ref{sa:fig:elecbs}.
+        \subsubsection{Élection centralisée au niveau de la \sdb}
+L'élection centralisée peut également être effectuée au niveau de la \sdb (\BS), comme représenté sur la figure~\ref{sa:fig:elecbs}.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.5\linewidth]{\chapterfig/elec_bs.pdf}
-    \caption{Élection des \cns réalisée par la station de base}\label{sa:fig:elecbs}
+    \caption{Élection des \cns réalisée par la \sdb}\label{sa:fig:elecbs}
 \end{figure}
 Les $2$-\CH du réseau font alors remonter à la \BS la liste des nœuds de leurs $2$-clusters respectifs, et la \BS retourne une liste de \cns pour chacun d'entre eux.
-Les capacités (en mémoire, calcul, énergie) de la station de base étant considérées comme illimitées, cette méthode a pour avantage de déporter toutes les tâches couteuses dans un environnement «~sans contraintes~».
-Le calcul des nombres pseudo-aléatoires par la station de base ne lui coute, pour ainsi dire, rien.
+Les capacités (en mémoire, calcul, énergie) de la \sdb étant considérées comme illimitées, cette méthode a pour avantage de déporter toutes les tâches couteuses dans un environnement «~sans contraintes~».
+Le calcul des nombres pseudo-aléatoires par la \sdb ne lui coute, pour ainsi dire, rien.
 
 En revanche cette méthode n'offre pas une meilleure fiabilité que la précédente.
 Si un nœud compromis se déclare en temps que \CH, il risque fortement d'annoncer à la \BS que son cluster est vide (il enverrait une liste vide en lieu et place de la liste des capteurs qui sont réellement présents dans son cluster).
-Dans ce cas, la station de base ne déclarera aucun \cn dans le cluster attaqué, et le \CH compromis ne sera pas détecté.
-Pour parer à cette éventualité, la station de base pourrait agir autrement lorsqu'elle reçoit une liste de capteurs vide.
+Dans ce cas, la \sdb ne déclarera aucun \cn dans le cluster attaqué, et le \CH compromis ne sera pas détecté.
+Pour parer à cette éventualité, la \sdb pourrait agir autrement lorsqu'elle reçoit une liste de capteurs vide.
 Plus spécifiquement, elle devrait considérer que les nœuds dont elle n'a pas eu de nouvelles \via les listes des \CH ne sont peut-être pas simplement morts, mais escamotés par un \ch corrompu.
 Ces nœuds disparus devraient donc être considérés comme potentiellement éligibles, de sorte que certains d'entre eux au moins soient déclarés \cns.
 
@@ -185,7 +185,7 @@ Les avantages et inconvénients de chacune de ces trois méthodes présentées s
                         & %
                         \textbullet~Si le \CH est compromis, il ne désigne aucun \cn (un nœud compromis peut se déclarer \CH à chaque ronde de \leach)\tabularnewline
             \midrule
-            \centering Élection des \cns par la station de base                & %
+            \centering Élection des \cns par la \sdb                & %
                         \textbullet~Aucun calcul réalisé par les nœuds\newline%
                         \textbullet~Distribution spatiale idéale des \cns%
                         & %

@@ -1,7 +1,7 @@
 % vim: set spelllang=fr foldmethod=marker:
 \section{Quelques problématiques}
 
-De par leurs ressources faibles, leur dispersion dans un environnement parfois hostile, leurs communications sans fil, et les différentes missions qui leur sont confiées, les réseaux de capteurs sans fil introduisent une multitude de problématiques que l'on ne retrouve pas ou peu dans d'autres types de réseaux.
+De par leurs ressources faibles, leur dispersion dans un environnement parfois hostile, leurs communications sans fil, et les différentes missions qui leur sont confiées, les \rcsfs introduisent une multitude de problématiques que l'on ne retrouve pas ou peu dans d'autres types de réseaux.
 Nous introduisons ici celles qui sont indispensables à la compréhension des travaux de cette thèse.
 
     \subsection{Gestion des ressources et performances}
@@ -29,20 +29,20 @@ L'une des possibilités permettant de réduire la consommation en énergie est l
 
         \subsubsection{Partition du réseau}
 «~Clusteriser~» un ensemble d'éléments revient à le diviser en sous-ensembles appelés \textit{clusters}.
-Dans le cas des réseaux de capteurs sans fil, cette partition permet d'obtenir un routage efficace des paquets, en adoptant la configuration suivante:
+Dans le cas des \rcsfs, cette partition permet d'obtenir un routage efficace des paquets, en adoptant la configuration suivante:
 \begin{enumerate}
     \item tous les nœuds réunis au sein d'un même cluster sont capables de communiquer directement entre eux (\textit{one-hop transmission});
     \item lors de la partition, un unique nœud par cluster est désigné «~chef~» du cluster.
         Il est choisi, de façon déterministe ou bien aléatoire selon l'algorithme employé, parmi les nœuds «~normaux~» du cluster.
         Ce «~chef~» est appelé \ch (\CH);
-    \item lorsqu'un capteur quelconque d'un cluster souhaite faire parvenir des informations à un nœud d'un autre cluster\footnote{Pour une grande partie des applications, les communications entre nœuds de différents clusters, hors \chs, ne se produisent pas. La totalité du trafic «~utile~», acheminant des données, est généralement à destination de la station de base.}, ou bien à la station de base, il envoie ses paquets de données au \ch de son cluster ;
-    \item le \ch transmet alors les paquets de données, soit directement à la cible s'il s'agit de la station de base et qu'il peut l'atteindre, soit en passant par d'autres \chs (\textit{multi-hops transmission}), jusqu'à atteindre le destinataire.
+    \item lorsqu'un capteur quelconque d'un cluster souhaite faire parvenir des informations à un nœud d'un autre cluster\footnote{Pour une grande partie des applications, les communications entre nœuds de différents clusters, hors \chs, ne se produisent pas. La totalité du trafic «~utile~», acheminant des données, est généralement à destination de la \sdb.}, ou bien à la \sdb, il envoie ses paquets de données au \ch de son cluster ;
+    \item le \ch transmet alors les paquets de données, soit directement à la cible s'il s'agit de la \sdb et qu'il peut l'atteindre, soit en passant par d'autres \chs (\textit{multi-hops transmission}), jusqu'à atteindre le destinataire.
 \end{enumerate}
 Le schéma d'un réseau clusterisé est présenté en \figref{st:fig:wsn}.
 \begin{figure}
     \centering
     \includegraphics[width=0.8\linewidth]{\chapterfig/WSN.eps}
-    \caption{Schéma d'un réseau de capteurs clusterisé}\label{st:fig:wsn}
+    \caption{Schéma d'un \rc clusterisé}\label{st:fig:wsn}
 \end{figure}
 L'appel à un algorithme de « clusterisation » a pour effet de limiter les émissions à «~longue portée~» (relativement aux communications intra-clusters) aux \chs seulement.
 Hors les communications sur de plus grandes distances se traduisent par une plus grande consommation en énergie (puisqu'une plus grande puissance d'émission est nécessaire).
@@ -50,12 +50,12 @@ Les capteurs «~normaux~» (non \chs) n'ont pas à atteindre directement des nœ
 De plus, dans la limite de leurs capacités, les \chs sont généralement amenés à réaliser des opérations d'\idx{agrégation} voire parfois de \idx{compression} sur les paquets qu'ils reçoivent, afin de limiter encore les transmissions couteuses.
 
 De nombreux algorithmes de clusterisation de données existent.
-Plusieurs d'entre eux sont même spécifiquement adaptés aux réseaux de capteurs sans fil.
+Plusieurs d'entre eux sont même spécifiquement adaptés aux \rcsfs.
 Parmi les plus fréquemment utilisés, on trouve des algorithmes comme \leach~\cite{HCB00} ou \heed~\cite{YF04}.
 D'autres sont moins connus, comme \ffuca~\cite{FL11}, qui repose sur l'exploitation de propriétés ultramétriques dans le réseau.
 
         \subsubsection{Clusterisation hiérarchique\index{clusterisation hiérarchique}}
-Une fois le réseau de capteurs divisé en clusters, rien n'empêche de considérer les clusters un à un et de leur appliquer à nouveau un algorithme de clusterisation, de façon à établir des sous-ensembles dans chaque cluster.
+Une fois le \rc divisé en clusters, rien n'empêche de considérer les clusters un à un et de leur appliquer à nouveau un algorithme de clusterisation, de façon à établir des sous-ensembles dans chaque cluster.
 Et ainsi de suite, de façon récursive, jusqu'à atteindre le degré de hiérarchie désiré.
 L'intérêt de cette méthode est de créer une partition hiérarchique dans le réseau, permettant un meilleur contrôle des sous-ensembles de capteurs.
 Par ailleurs, les clusters situés tout en bas dans la hiérarchie constituée seront de petite taille.
@@ -66,12 +66,12 @@ En suivant cette convention, l'unique $0$-cluster est alors le réseau tout enti
 Lorsque nous parlons simplement de \textit{clusters}, il faudra comprendre \textit{$1$-clusters}; autrement dit, des clusters issus d'une partition simple, sans degré supplémentaire de hiérarchie.
 
 De même, on désignera par \textit{$k$-\ch} (ou bien par \textit{$k$-CH}) les \chs de chacun des $k$-clusters du réseau.
-Le rôle de $0$-cluster pourra alors être attribué à la station de base.
+Le rôle de $0$-cluster pourra alors être attribué à la \sdb.
 Chaque \textit{$k$-CH} reçoit des données (provenant soit de nœuds normaux si $k$ est le dernier degré de la hiérarchie constituée, soit de \textit{$k+1$-CH}), les agrège et les transmet au \textit{$k-1$-CH} auquel il est rattaché.
 
         \subsubsection{Exemple: fonctionnement de l'algorithme \leach}%
         \label{st:subsubsec:leach}
-        L'un des algorithmes de clusterisation les plus simples et les plus couramment employés dans les réseaux de capteurs sans fil est l'algorithme \leach (\textit{Low Energy Adaptive Clustering Hierarchy with deterministic \ch selection}).
+        L'un des algorithmes de clusterisation les plus simples et les plus couramment employés dans les \rcsfs est l'algorithme \leach (\textit{Low Energy Adaptive Clustering Hierarchy with deterministic \ch selection}).
 Il s'agit d'un algorithme dynamique (il effectue de nouvelles clusterisations du réseau régulièrement dans le temps) qui, par la formation de clusters, met en place une solution de routage des paquets dans le réseau.
 
 Voici le fonctionnement détaillé de cet algorithme.
@@ -106,7 +106,7 @@ Chaque ronde $r$  est organisée de la façon suivante:
         Lorsque ce n'est pas à leur tour de communiquer, ces nœuds mettent leur équipement radio en veille afin d'économiser leur énergie.
         Les collisions entre les transmissions des nœuds de différents clusters sont évitées grâce à la méthode appelée \textit{Code Division Multiple Access} (\cdma).
     \item Au fur et à mesure qu'ils reçoivent les données, les \chs agrègent\idx{agrégation}, et éventuellement compressent\idx{compression} ces dernières.
-        Ils les envoient ensuite à la station de base, soit au cours d'une unique transmission directe, soit en faisant relayer les paquets par d'autres \chs.
+        Ils les envoient ensuite à la \sdb, soit au cours d'une unique transmission directe, soit en faisant relayer les paquets par d'autres \chs.
     \item Les étapes~5 et~6 sont répétées jusqu'à la fin de la ronde.
 \end{enumerate}
 
@@ -136,9 +136,9 @@ Les algorithmes et mécanismes classiques utilisés en \idx{cryptographie} afin 
 Il a fallu adapter ces mécanismes aux capteurs.
 
 D'autres attaques peuvent être menées, non plus pour intercepter des données, mais dans le but de perturber le bon fonctionnement du réseau.
-Ce sont les attaques dites de \textit{déni de service}.
+Ce sont les attaques dites de \textit{\dds}.
 Un attaquant, par le biais d'un nœud compromis par exemple, peut ainsi chercher à détourner des flux de données au sein du réseau, à empêcher des paquets de parvenir à destination (en les supprimant), à maximiser le débit du nœud compromis au détriment de celui des autres nœuds, à saturer le canal de transmission pour empêcher les nœuds légitimes de l'utiliser, ou encore à pousser les autres capteurs à l'épuisement de leurs réserves en énergie, \etc.
-Les problématiques de sécurité dans les réseaux de capteurs sont développées plus en détail dans le \chapref{ea}.
+Les problématiques de sécurité dans les \rcs sont développées plus en détail dans le \chapref{ea}.
 
 \todo{Corriger ici}
 Notre but est ici de proposer, modéliser et tester une solution permettant de détecter, puis de réagir à une attaque de ce type, tout en assurant une consommation minimale en ressources pour les capteurs du réseau.

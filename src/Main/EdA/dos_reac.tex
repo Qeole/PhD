@@ -17,17 +17,17 @@ Pour pouvoir exclure l'attaquant, il est pourtant nécessaire de connaitre son i
 
         \paragraph{Diffuser un message d'alerte}
 Si le système de détection d'intrusion mis en place fonctionne de manière indépendante sur chaque capteur, il est possible que les nœuds ne diffusent pas d'information lorsqu'ils identifient un nœud corrompu.
-Mais dans la majorité des cas, il est utile de le faire savoir au voisinage ainsi qu'à la station de base.
+Mais dans la majorité des cas, il est utile de le faire savoir au voisinage ainsi qu'à la \sdb.
 Différents niveaux de diffusion de l'alerte sont donc proposés selon les systèmes.
-Certains ne déclenchent une alerte qu'à destination de la station de base, d'autres préviennent l'ensemble des agents du réseau.
-Dans les réseaux clusterisés, la constante est de remonter une alerte au \ch, qui la transmet à la station de base et la rediffuse au sein de son cluster.
+Certains ne déclenchent une alerte qu'à destination de la \sdb, d'autres préviennent l'ensemble des agents du réseau.
+Dans les réseaux clusterisés, la constante est de remonter une alerte au \ch, qui la transmet à la \sdb et la rediffuse au sein de son cluster.
 %2}}}
 
     \subsubsection{Rétablissement du réseau}
 %{{{2
         \paragraph{Restauration des systèmes compromis}
 Inscrire les nœuds corrompus sur une liste noire n'est pas nécessairement la seule réponse possible: il est parfois possible de rétablir la configuration initiale des capteurs.
-Une étude propose, pour un réseau dont les capteurs ne seraient pas trop difficiles d'accès, l'usage d'agents mobiles pour récupérer au mieux d'attaques de déni de service « sur les chemins »~\cite{LB09}.
+Une étude propose, pour un réseau dont les capteurs ne seraient pas trop difficiles d'accès, l'usage d'agents mobiles pour récupérer au mieux d'attaques de \dds « sur les chemins »~\cite{LB09}.
 Ces attaques consistent à compromettre plusieurs nœuds, qui a leur tour mènent des attaques par déluge de paquets dans le but de créer des congestions et d'épuiser la batterie de tous leurs voisins, allant ainsi jusqu'à créer de grands espaces vides dans le réseau.
 La solution proposée repose sur l'usage d'entités mobiles qui sont capables de se déplacer dans le réseau pour rétablir le statut initial des capteurs et si possible récupérer le contenu de leur base de données.
 Mais ce déplacement prend du temps: si moins de 15~\% des capteurs sont suspects, il est envisageable de laisser les agents mobiles tourner dans le réseau pour restaurer leur configuration d'origine.
@@ -44,10 +44,10 @@ Si l'attaquant parvient à s'adapter, un changement de fréquences très rapide 
 Des antennes directionnelles peuvent permettre une meilleure qualité de signal, et rendent parfois possibles les communications au travers d'une tentative de brouillage.
 Enfin, si les nœuds sont mobiles, ils peuvent tenter de sortir de la zone affectée par les émissions de l'attaquant.
 
-Lorsque toute une zone du réseau est sous l'effet d'une attaque de brouillage et se retrouve coupé de la station de base, une possibilité intéressante est d'établir un « trou de ver », légitime cette fois-ci, entre un relais de la zone atteinte et un nœud extérieur, qui sert alors de passerelle vers le reste du réseau~\cite{CCH07}.
+Lorsque toute une zone du réseau est sous l'effet d'une attaque de brouillage et se retrouve coupé de la \sdb, une possibilité intéressante est d'établir un « trou de ver », légitime cette fois-ci, entre un relais de la zone atteinte et un nœud extérieur, qui sert alors de passerelle vers le reste du réseau~\cite{CCH07}.
 Ce tunnel permet de n'équiper qu'un sous-ensemble réduit de capteurs en matériel nécessaire pour contrer les attaques de brouillage radio, et de compter sur eux pour établir la passerelle salvatrice.
 
-En dehors de ce tunnel, les dispositions évoquées jusque là pour échapper au brouillage sont très couteuses pour des réseaux de capteurs, car elles demandent un équipement ou bien une capacité de calculs conséquents.
+En dehors de ce tunnel, les dispositions évoquées jusque là pour échapper au brouillage sont très couteuses pour des \rcs, car elles demandent un équipement ou bien une capacité de calculs conséquents.
 Une technique plus simple pour réagir à du brouillage « intelligent », dans le cas où l'attaquant n'émet que quelques bits de données pour corrompre un paquet, il est possible d'ajouter des codes de correction d'erreur aux messages.
 Ces codes demandent un peu plus de calculs que les sommes de contrôle; mais tandis que celles-ci ne font que déceler les erreurs, les codes correcteurs permettent parfois de les corriger (et d'éviter ainsi la suppression pure et simple du paquet corrompu, qui mènerait à une demande de retransmission des données).
 
@@ -59,12 +59,12 @@ Il faut alors trouver de nouveaux chemins pour les données, éventuellement en 
 Un certain niveau de résilience est donc nécessaire dans la conception des protocoles de routage, de sorte qu'ils soient capables de s'adapter à l'évolution du réseau.
 
 Certains mécanismes proposent même l'intervention d'un opérateur humain pour déclencher une modification de certaines routes et « emprisonner » le trafic frauduleux, qui vise à créer des congestions dans le réseau, sur des nœuds \textit{Shield} (bouclier en anglais) qui se contenteront de le supprimer~\cite{HSP13}.
-Si l'intervention d'un opérateur humain n'est pas forcément souhaitable dans les réseaux de capteurs, ce mécanisme a pour avantage de désarmer l'attaque sans mettre au courant l'attaquant de son échec (tandis qu'une exclusion directe du réseau serait plus facile à remarquer).
+Si l'intervention d'un opérateur humain n'est pas forcément souhaitable dans les \rcs, ce mécanisme a pour avantage de désarmer l'attaque sans mettre au courant l'attaquant de son échec (tandis qu'une exclusion directe du réseau serait plus facile à remarquer).
 %2}}}
 
     \subsubsection{Notion de confiance}
 %{{{2
-Il existe, liée aux IDS, une notion intéressante de « confiance » qui peut être mise en place dans un réseau de capteurs.
+Il existe, liée aux IDS, une notion intéressante de « confiance » qui peut être mise en place dans un \rc.
 Plutôt que de considérer les capteurs « tout blanc » ou « tout noir », beaucoup de systèmes de détection leur attribuent un score de « réputation », qui évolue dans le temps, et reflète la « confiance » (en anglais: \textit{trust}) que l'on peut avoir en tel nœud.
 
 Cette notion de confiance intervient en plusieurs endroits.
