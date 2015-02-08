@@ -1,3 +1,5 @@
+\newcommand\idx[1]{#1\index{#1}}
+
 \newcommand\mac{{\fontspec{Lucida Sans}Mac}\xspace}
 \newcommand\wikipedia{\textsc{\fontspec[StylisticSet=5]{Linux Libertine O} WikipédiA}\xspace}
 \newcommand\windows{{\fontspec{segoeui}Windows}\xspace}
@@ -11,6 +13,8 @@
 \newcommand\tabref[1]{table~\ref{#1}\xspace}
 %\newcommand\tabloref[1]{tableau~\ref{#1}\xspace}
 
+%------------------------------------------------------------------------------
+% latin
 \newcommand\apriori{\textit{a~priori}\xspace}
 \newcommand\aposteriori{\textit{a~posteriori}\xspace}
 \newcommand\defacto{\textit{de~facto}\xspace}
@@ -20,14 +24,19 @@
 \newcommand\ie{\textit{i.e.}\xspace}
 \newcommand\infine{\textit{in fine}\xspace}
 \newcommand\via{\textit{via}\xspace}
-
-\newcommand\Wsns{Wireless sensor networks\xspace}
-\newcommand\wsns{wireless sensor networks\xspace}
-\newcommand\Wsn{Wireless sensor network\xspace}
-\newcommand\wsn{wireless sensor network\xspace}
-\newcommand\dos{denial of service\xspace}
+% WSNs & DoS
+\newcommand\WSN{WSN\xspace}
+\newcommand\wsn{\textit{Wireless Sensor Network}\xspace}
+\newcommand\wsns{\textit{Wireless Sensor Networks}\xspace}
+\newcommand\rc{réseau de capteurs\xspace}
+\newcommand\rcs{réseaux de capteurs\xspace}
+\newcommand\rcsf{réseau de capteurs sans fil\xspace}
+\newcommand\rcsfs{réseaux de capteurs sans fil\xspace}
+\newcommand\dos{\textit{denial of service}\xspace}
 \newcommand\DoS{DoS\xspace}
-\newcommand\bs{base station\xspace}
+\newcommand\dds{déni de service\xspace}
+\newcommand\bs{\textit{Base Station}\xspace}
+\newcommand\sdb{station de base\xspace}
 \newcommand\BS{BS\xspace}
 \newcommand\ch{cluster head\xspace}
 \newcommand\chs{cluster heads\xspace}
@@ -37,16 +46,42 @@
 \newcommand\cns{\textit{cNodes}\xspace}
 \newcommand\vn{\textit{vNode}\xspace}
 \newcommand\vns{\textit{vNodes}\xspace}
-
-\newcommand\ffuca{FFUCA\xspace}
-\newcommand\heed{HEED\xspace}
-\newcommand\leach{LEACH\xspace}
-\newcommand\nsii{\textsf{ns-2}\xspace}
-\newcommand\nsiii{\textsf{ns-3}\xspace}
-
+% standards
+\newcommand\ietf{\idx{IEEE}\xspace}
+\newcommand\ieee{\idx{IETF}\xspace}
+\newcommand\ieeee{\idx{IEEE~802.11}\xspace}
+\newcommand\ieeeff{\idx{IEEE~802.15.4}\xspace}
+\newcommand\ieeefo{\idx{IEEE~802.15.1}\xspace}
+\newcommand\wifi{\idx{Wi-Fi}\xspace}
+\newcommand\zigbee{\idx{ZigBee}\xspace}
+\newcommand\slowpan{\idx{6LoWPAN}\xspace}
+\newcommand\bluetooth{\idx{Bluetooth}\xspace}
+% MAC
+\newcommand\smac{\idx{S-MAC}\xspace}
+\newcommand\cdma{\idx{CDMA}\xspace}
+\newcommand\fdma{\idx{FDMA}\xspace}
+\newcommand\sdma{\idx{SDMA}\xspace}
+\newcommand\tdma{\idx{TDMA}\xspace}
+\newcommand\csma{\idx{CSMA}\xspace}
+\newcommand\csmaca{\idx{CSMA/CA}\xspace}
+% routage
+\newcommand\ip{\idx{IP}\xspace}
+\newcommand\tcpip{\idx{TCP/IP}\xspace}
+\newcommand\tcp{\idx{TCP}\xspace}
+\newcommand\udp{\idx{UDP}\xspace}
+\newcommand\leach{\idx{LEACH}\xspace}
+\newcommand\heed{\idx{HEED}\xspace}
+\newcommand\ffuca{\idx{FFUCA}\xspace}
+\newcommand\aodv{\idx{AODV}\xspace}
+\newcommand\dsr{\idx{DSR}\xspace}
+\newcommand\olsr{\idx{OLSR}\xspace}
+\newcommand\dsdv{\idx{DSDV}\xspace}
+\newcommand\batman{\idx{B.A.T.M.A.N.}\xspace}
+% misc
+\newcommand\nsii{\textsf{ns-2}\index{ns-2@\textsf{ns-2}}\xspace}
+\newcommand\nsiii{\textsf{ns-3}\index{ns-3@\textsf{ns-3}}\xspace}
 \newcommand\todo[1]{\textcolor{red}{\textbf{TO DO: }#1}}
-
-\newcommand\idx[1]{#1\index{#1}}
+%------------------------------------------------------------------------------
 
 \newcommand\chapterpath{}
 \newcommand\chapterfig{}

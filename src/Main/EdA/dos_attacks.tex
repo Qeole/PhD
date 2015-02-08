@@ -23,41 +23,9 @@ Typiquement, un capteur corrompu ne sera pas en mesure de mener cette attaque sa
 %{{{2
 La couche de liaison de données fournit les moyens fonctionnels et procéduraux pour le transfert des données entre deux entités du réseau.
 Elle permet aussi, le plus souvent, de détecter et éventuellement corriger certaines erreurs survenues sur la couche physique (en cas de perturbation ou dégradation du signal électromagnétique).
-Elle se décompose en deux sous-couches: la couche de contrôle de la liaison logique (LLC, pour \textit{Logical Link Control} en anglais) et la couche du contrôle d'accès au support (MAC, pour \textit{Media Access Control}).
-C'est principalement cette seconde couche qui nous intéresse ici: le protocole de couche MAC définit la manière dont les différents agents du réseau accèdent au médium de transmission de façon à limiter les collisions, et à garantir un accès le plus souvent équivalent au médium pour tous les nœuds.
-Les différents modes d'accès au médium existants sont résumés dans la \tabref{ea:tab:mac}; certains consistent à créer des canaux de transmission distincts, tandis que d'autres déterminent l'accès à une même bande de fréquence en instaurant des règles.
+Des deux sous-couches LLC et MAC, c'est principalement la seconde qui nous intéresse ici: le protocole utilisé à ce niveau définit la manière dont les différents agents du réseau accèdent au médium de transmission de façon à limiter les collisions, et à garantir un accès le plus souvent équivalent au médium pour tous les nœuds.
+Les différents modes d'accès au médium existants ont été résumés en \ssref{st:ssec:mac}: certains consistent à créer des canaux de transmission distincts, tandis que d'autres déterminent l'accès à une même bande de fréquence en instaurant des règles.
 Ces règles peuvent être contournées, et la couche MAC va donc se retrouver associée à plusieurs types d'attaques.
-
-\begin{table}[!ht]
-    \caption{Méthodes d'accès au médium de transmission}\label{ea:tab:mac}
-    \centering
-    \medskip
-    \begin{small}
-        \begin{tabular}{m{.2\textwidth}|m{.2\textwidth}|m{.48\textwidth}}
-            \toprule
-            \textsc{Nom anglais} & \textsc{Traduction} & \textsc{Description}\\
-            \midrule
-            \multicolumn{3}{c}{Commutation de circuits et création de canaux}\\
-            \midrule
-            \textit{Frequency Division Multiple Access} (FDMA) & Accès multiple par répartition en fréquence & Plusieurs canaux basés sur des fréquences différentes\\
-            \midrule
-            \textit{Code division multiple access} (CDMA) & Accès multiple par répartition en code & Étalement du spectre de fréquence utilisé en conjonction avec techniques comme les sauts de fréquences ou la génération de bruit pseudo-aléatoires (avec la même séquence pseudo-aléatoire appliquée au signal côté émetteur comme côté destinataire)\\
-            \midrule
-            \textit{Time division multiple access} (TDMA) & Accès multiple à répartition dans le temps & Un seul canal dont l'accès est réparti par créneaux dans le temps\\
-            \midrule
-            \textit{Space division multiple access} (SDMA) & Accès multiple à répartition dans l'espace & Plusieurs canaux spatiaux obtenus à l'aide d'antennes directionnelles. À noter: les antennes directionnelles augmentent sensiblement le cout de production des capteurs.\\
-            \midrule
-            \multicolumn{3}{c}{Mode d'accès par paquet}\\
-            \midrule
-            \textit{Contention based random multiple access methods} & Accès par contention & Contention par le nœud du paquet à envoyer jusqu'à ce que le protocole le lui autorise. Dans cette catégorie se trouve notamment le protocole CSMA/CA (\textit{Carrier Sense Multiple Access with Collision Avoidance}, accès multiple par écoute du canal avec esquive de collision), très utilisé dans les réseaux sans fil (IEEE~802.11 entre autres).\\
-            \midrule
-            \textit{Resource reservation (scheduled) packet-mode protocols} & Réservation des ressources & Réservation par un nœud des ressources (par exemple: créneau temporel) nécessaires à la transmission)\\
-            \midrule
-            \multicolumn{3}{p{.95\textwidth}}{D'autres modes d'accès par paquet (\textit{token passing, polling}) existent mais ne sont pas utilisés dans les réseaux de capteurs}\\
-            \bottomrule
-         \end{tabular}
-     \end{small}
-\end{table}
 
         \paragraph{Création de collisions et brouillage « intelligent »}
 Lorsque plusieurs nœuds dont les portées se chevauchent émettent de façon simultanée en utilisant la même fréquence (donc sur un même canal), il se produit des collisions.
@@ -102,8 +70,8 @@ Si l'attaquant se sert d'un capteur corrompu ou d'un appareil équivalent pour m
 
         \paragraph{Accaparement du canal de transmission}
 Un appareil compromis introduit dans le réseau peut chercher à s'octroyer un accès plus important que les agents légitimes au canal de transmission.
-Ce comportement cupide (ou \textit{greedy} en anglais) peut être atteint par exemple en jouant sur les paramètres du protocole de couche MAC: non respect des durées minimales DIFS entre deux envois (pout IEEE~802.11 par exemple), non respect des valeurs employées pour la taille des fenêtres de congestion, non respect de la réservation des ressources par d'autres nœuds, \etc.
-Le but final de telles attaques peut être d'envoyer plus de données à la station de base, dans le but par exemple de fausser une moyenne, ou bien de transmettre les données écoutées (attaque sur la confidentialité) dans le voisinage à une autre machine corrompue du réseau, en vue de l'exfiltration de ces données utiles capturées.
+Ce comportement cupide (ou \textit{greedy} en anglais) peut être atteint par exemple en jouant sur les paramètres du protocole de couche MAC: non respect des durées minimales DIFS entre deux envois (pour IEEE~802.11 par exemple), non respect des valeurs employées pour la taille des fenêtres de congestion, non respect de la réservation des ressources par d'autres nœuds, \etc.
+Le but final de telles attaques peut être d'envoyer plus de données à la \sdb, dans le but par exemple de fausser une moyenne, ou bien de transmettre les données écoutées (attaque sur la confidentialité) dans le voisinage à une autre machine corrompue du réseau, en vue de l'exfiltration de ces données utiles capturées.
 On parle aussi parfois en anglais d'\textit{unfairness} (« injustice ») lorsque les spécifications des protocoles mis en place sont délibérément ignorées par un nœud corrompu
 
 \paragraph{Falsification d'accusés de réception (\textit{ACK spoofing})}
@@ -114,8 +82,8 @@ C'est une attaque qui vient compléter les techniques de brouillage de façon à
 
     \subsubsection{Couche réseau}
 %{{{2
-La couche réseau, pour les capteurs sans fils, repose le plus souvent sur le protocole IP (\textit{Internet Protocol} an anglais), que ce soit en version 4 ou 6 (la version 6 est notamment utilisée avec la pile 6LoWPAN), pour l'adressage, et sur un protocole de routage qui détermine comment les paquets sont retransmis saut après saut dans le réseau.
-Dans le cas d'un réseau clusterisé, il arrive que tous les capteurs soient à portée directe de leur \ch, et que ce dernier soit en mesure d'atteindre directement la station de base.
+Le protocole IP est le plus employé sur la couche réseau dans les \rcs, pour assurer l'adressage des paquets indispensable à la mise en place d'un algorithme de routage qui détermine comment ces derniers sont retransmis saut après saut dans le réseau.
+Dans le cas d'un réseau clusterisé, il arrive que tous les capteurs soient à portée directe de leur \ch, et que ce dernier soit en mesure d'atteindre directement la \sdb.
 Le routage est alors très simple.
 Mais dans d'autres cas, il est nécessaire d'établir une structure pour le réseau permettant l'acheminement des paquets jusqu'à leur destinataire.
 Un protocole de routage efficace doit minimiser les pertes de paquets ainsi que les couts de retransmission et éviter la création de boucles dans le réseau.
@@ -143,18 +111,18 @@ Plusieurs autres attaques présentées ci-dessous reposent sur la falsification 
 
         \paragraph{Puits (\textit{sinkhole})}
 Une attaque \textit{sinkhole} en anglais est la combinaison d'une attaque de type « trou noir » avec la diffusion de fausses informations de routage, en vue d'attirer le maximum de paquets possible vers le nœud attaquant.
-Concrètement, un nœud corrompu peut se déclarer voisin direct de la station de base et annoncer une route de cout nul vers cette dernière.
-Ses voisins vont estimer qu'il s'agit du plus court chemin pour acheminer les paquets jusqu'à la station de base, et vont transmettre l'information à leur tour.
+Concrètement, un nœud corrompu peut se déclarer voisin direct de la \sdb et annoncer une route de cout nul vers cette dernière.
+Ses voisins vont estimer qu'il s'agit du plus court chemin pour acheminer les paquets jusqu'à la \sdb, et vont transmettre l'information à leur tour.
 Au final une part importante des routes créées, et en conséquence du trafic routé, va passer par ce nœud compromis, ce qui peut mener à des congestions dans le réseau.
 Rentre alors en jeu l'attaque \textit{blackhole}, qui supprime tous les paquets reçus plutôt que de les retransmettre à leur destinataire légitime.
 
-Une conséquence supplémentaire de cette attaque est l'épuisement de la batterie des nœuds voisins de l'attaquant: comme celui-ci se déclare très proche de la station de base, un grand nombre de routes vont rediriger les paquets vers lui, et ses voisins vont donc se retrouver fortement sollicités par des nœuds plus éloignés pour lui acheminer des paquets.
+Une conséquence supplémentaire de cette attaque est l'épuisement de la batterie des nœuds voisins de l'attaquant: comme celui-ci se déclare très proche de la \sdb, un grand nombre de routes vont rediriger les paquets vers lui, et ses voisins vont donc se retrouver fortement sollicités par des nœuds plus éloignés pour lui acheminer des paquets.
 
 Il est à noter que la littérature inverse parfois, et même confond de temps en temps, la terminologie des attaques de type \textit{blackhole} et \textit{sinkhole}.
 Les définitions présentées ici sont celles qui semblent revenir le plus couramment%
 \footnote{%
     NdA: Cette terminologie est donc contraire à l'image que l'on pourrait se faire d'un trou noir qui attire à lui la matière environnante sous l'effet de la gravité, tandis qu'un simple puits n'attire rien.
-    En l'état actuel je suppose, sans avoir réussi à le vérifier, que le nom de l'attaque \textit{sinkhole} provient de la station de base, souvent appelée « puits » ou \textit{sink}, dont le nœud compromis se fait passer pour un voisin immédiat lors de l'attaque, et qu'il « remplace » en quelque sorte.%
+    En l'état actuel je suppose, sans avoir réussi à le vérifier, que le nom de l'attaque \textit{sinkhole} provient de la \sdb, souvent appelée « puits » ou \textit{sink}, dont le nœud compromis se fait passer pour un voisin immédiat lors de l'attaque, et qu'il « remplace » en quelque sorte.%
 }.
 Par ailleurs, tous les « trous » ne font pas nécessairement référence à des pertes de paquets: des trous physiques, logiques ou sémantiques peuvent se former dès le déploiement du réseau~\cite{JSM13}, mais il s'agit d'un problème qui tient davantage de la sureté et de la résilience que de la sécurité.
 
@@ -162,7 +130,7 @@ Par ailleurs, tous les « trous » ne font pas nécessairement référence à 
 Lorsque deux agents ou plus du réseau sont compromis par un attaquant, il leur est possible de mener une attaque de type « trou de ver » (\textit{wormhole attack} en anglais).
 Cette attaque consiste à capturer du trafic en un point donner du réseau pour le réinjecter en un autre point.
 Il faut donc au moins deux agents complices, l'un qui capture et l'autre qui injecte le trafic, et qui communiquent l'un avec l'autre par le biais d'un canal auxiliaire généralement distinct des canaux légitimes utilisés sur le réseau (un tunnel, ou « trou de ver », qui donne son nom à l'attaque).
-Il est intéressant, pour les nœuds menant l'attaque, de retransmettre par exemple les informations (de routage, notamment) provenant du voisinage de la station de base en un point éloigné du réseau, de façon à faire passer le tunnel pour une route de bonne qualité vers la station de base, puis de mener des attaques de retransmission sélective.
+Il est intéressant, pour les nœuds menant l'attaque, de retransmettre par exemple les informations (de routage, notamment) provenant du voisinage de la \sdb en un point éloigné du réseau, de façon à faire passer le tunnel pour une route de bonne qualité vers la \sdb, puis de mener des attaques de retransmission sélective.
 Ou plus simplement, l'injection en un autre point des paquets utilisés pour la découverte de routes lors de la mise en place de la structure de routage peut nuire grandement à l'organisation du réseau, et conduire un nœud légitime à imaginer des voisins virtuels qui sont en réalité absolument hors de sa portée d'émission.
 
         \paragraph{Déluge de paquets « hello » (\textit{“hello” flooding})}
@@ -196,10 +164,7 @@ De manière générale, en l'absence d'un système efficace d'authentification, 
 
     \subsubsection{Couche transport}
 %{{{2
-La couche transport gère les communications de bout en bout entre processus.
-Les protocoles les plus fréquemment utilisés, TCP (\textit{Transmission Control Protocol}) et UDP (\textit{User Datagram Protocol}) assurent l'ordonnancement des paquets et permettent d'éviter les pertes, les doublons et la corruption des paquets.
-Le protocole TCP permet en plus à deux entités de communiquer en mode connecté en établissant une session (début, fin et validation des échanges).
-En raison des données de contrôle que ces protocoles impliquent, ils ne sont pas systématiquement implémentés dans les réseaux de capteurs (ils le sont parfois dans des versions allégées).
+Les protocoles de couche transport ne sont pas toujours implémentés dans les \rcsfs, mais lorsqu'ils sont présents, des attaques peuvent profiter de leurs spécifications.
 
         \paragraph{Déluge de paquets SYN (ou équivalents) (\textit{SYN flooding})}
 Les attaques par déni de service existant sur les réseaux classiques au niveau de la couche transport peuvent aussi être appliquées dans les réseaux de capteurs: par exemple, si le protocole TCP est utilisé dans le réseau, un attaquant peut inonder le réseau de paquets SYN utilisés pour initier des connexions entre deux nœuds.
@@ -221,7 +186,7 @@ Un nœud compromis peut envoyer des données en parfaite contradiction avec les 
 Les valeurs transmises au niveau application viendront alors fausser les résultats obtenus par l'exploitant du réseau.
 
         \paragraph{Déluge de paquets}
-Suivant l'application mise en place, il peut être envisageable pour un attaquant d'inonder le réseau de données utiles, qu'elles aient été effectivement mesurées ou non, soit dans une tentative de fausser les résultats obtenus par la station de base en faisant des moyennes sur les valeurs rapportées par l'ensemble des capteurs, soit pour créer des congestions dans le réseau.
+Suivant l'application mise en place, il peut être envisageable pour un attaquant d'inonder le réseau de données utiles, qu'elles aient été effectivement mesurées ou non, soit dans une tentative de fausser les résultats obtenus par la \sdb en faisant des moyennes sur les valeurs rapportées par l'ensemble des capteurs, soit pour créer des congestions dans le réseau.
 
         \paragraph{Désynchronisation}
 Si jamais le protocole utilisé sur la couche application induit la création de sessions en mode connecté (comme pour TCP sur la couche transport), des attaques de désynchronisation peuvent être menées par un attaquant en vue de briser ces sessions.
@@ -239,7 +204,7 @@ Mais sans s'embarrasser de les reprogrammer, l'attaquant peut aussi se contenter
         \paragraph{Altération des mesures}
 Toujours en raison de leur exposition physique, les capteurs peuvent être manipulés par un attaquant pour mesurer des données.
 Des engins munis de caméras peuvent ainsi voir leur objectif obstrué (par une couche de peinture par exemple); ou bien des capteurs chargés de mesurer la température d'un élément donné peuvent être déplacés, de sorte à ce que leur thermomètre ne soit plus en contact avec cet élément.
-Les capteurs continuent dans ce cas à mesurer des valeurs et à les retransmettre jusqu'à la station de base, mais ces mesures elles-mêmes (et donc les résultats obtenus par l'exploitant) se retrouvent faussées dès le départ.
+Les capteurs continuent dans ce cas à mesurer des valeurs et à les retransmettre jusqu'à la \sdb, mais ces mesures elles-mêmes (et donc les résultats obtenus par l'exploitant) se retrouvent faussées dès le départ.
 
         \paragraph{}
 Les tables~\ref{ea:tab:layer} et~\ref{ea:tab:paradigm} synthétisent le classement de ces différentes attaques, respectivement par couche du modèle TCP/IP et par paradigme considéré.
@@ -345,7 +310,7 @@ Enfin, les attaques les moins « efficaces », celles qui n'ont que peu de cha
 Nous avons présenté plus haut les conséquences directes sur le réseau que pouvait rechercher un attaquant, analysons maintenant l'objectif final qui le pousse à mener son attaque.
 Voici nos suppositions concernant les principales motivations des attaquants.
 \begin{itemize}
-    \item \textbf{Neutraliser les communications}: l'attaquant souhaite mettre le réseau hors service. Il veut empêcher l'exploitant du réseau d'accéder aux informations collectées, que ce soit pour des raisons financières ou militaires. Il ne veut pas de communication entre les nœuds, et surtout, pas de remontées d'informations vers la station de base.
+    \item \textbf{Neutraliser les communications}: l'attaquant souhaite mettre le réseau hors service. Il veut empêcher l'exploitant du réseau d'accéder aux informations collectées, que ce soit pour des raisons financières ou militaires. Il ne veut pas de communication entre les nœuds, et surtout, pas de remontées d'informations vers la \sdb.
     \item \textbf{Détruire définitivement le réseau}: l'existence en soi du réseau est une nuisance pour l'attaquant. Celui-ci souhaite désactiver le réseau de façon définitive, car il ne peut pas se permettre de le mettre simplement hors service de façon ponctuelle lorsque le besoin s'en ferait sentir.
     \item \textbf{Parasiter la collecte de donnés}: l'attaquant souhaite profiter du réseau mis en place par un concurrent pour obtenir des informations stratégiques à moindre frais. Il récupère et exporte des données circulant sur le réseau. Bien que cela ne soit pas une attaque de déni de service en soi, l'usage d'attaques par trous de ver, par accaparement du médium peuvent être menées pour rendre la tâche plus aisée, sans compter que la circulation supplémentaire des données exfiltrées risque de puiser davantage dans la batterie des capteurs légitimes.
     \item \textbf{Altérer les résultats}: l'attaquant souhaite induire sa cible en erreur en lui faisant parvenir des résultats erronés. Les prises de décision de l'opérateur vont alors se retrouver basées sur une vision erronée de la situation en cours. C'est l'exemple classique des séries d'espionnage, dans lesquelles les agents infiltrés font en sorte d'afficher l'image d'une pièce vide dans la salle de contrôle des dispositifs de vidéosurveillance afin de camoufler leur intrusion.
@@ -387,7 +352,7 @@ Elles peuvent être utiliser pour neutraliser la remontée d'informations, mais 
 Les attaques portant sur l'intégrité des données sur les différentes couches semblent efficace pour altérer les résultats perçus par l'exploitant.
 Il y a toutefois une limite relative à l'application pour laquelle le réseau a été déployé: si les résultats finaux sont similaires à des moyennes calculées sur toute la zone couverte par les capteurs, influer significativement sur cette moyenne va demander d'altérer un grand nombre de paquets.
 L'envoi de messages en déluge pour augmenter artificiellement le nombre de valeurs et fausser les résultats ne semble pas très intéressant, car le procédé est extrêmement facile à détecter dès lors qu'un mécanisme d'authentification a été mis en place et que l'attaquant ne peut pas masquer son identité.
-La modification des paquets peut être menée sur un grand nombre d'entre eux pour peu que le nœud compromis soit bien situé, \cad s'il s'agir d'un relais proche de la station de base.
+La modification des paquets peut être menée sur un grand nombre d'entre eux pour peu que le nœud compromis soit bien situé, \cad s'il s'agir d'un relais proche de la \sdb.
 
         \paragraph{}
 Les attaques qui nous semblent les plus plausibles sont donc au final les suivantes:

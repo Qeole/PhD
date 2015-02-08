@@ -1,6 +1,9 @@
 %heading_prefix "{\\hfil\\color{blueLACL}\\Large\\sffamily ---\\quad "
 heading_prefix "{\\hfil\\color{blueLACL}\\Large\\sffamily\\quad "
 heading_suffix "\\quad\\hfil}\\nopagebreak\n"
+symhead_positive "Divers"
+numhead_positive "Nombres"
+
 headings_flag 1
 
 delim_0 "\\dotfill"

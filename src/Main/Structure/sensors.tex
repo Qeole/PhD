@@ -1,0 +1,162 @@
+% vim: set spelllang=fr foldmethod=marker:
+\section{Réseaux de capteurs sans fil}
+\label{st:sec:contexte}
+
+    \subsection{De quoi s'agit-il?}
+    Les \rcsfs, ou \textit{\WSN} (pour \wsns en anglais), sont des réseaux constitués de petits appareils, les capteurs, ainsi que d'une \sdb.
+\nomenclature{WSN}{\wsns}
+Les capteurs échangent par communications hertziennes, en utilisant des protocoles tels ceux définis dans la pile \ieeee.
+Le routage des paquets dans le réseau peut faire appel à l'un des nombreux protocoles développés à cet effet (par exemple: \aodv, \olsr), qu'il repose sur un algorithme centralisé (dirigé par une seule entité) ou distribué (exécuté par chaque entité du réseau).
+Ils collectent des informations sur leur environnement et les font remonter à la \sdb.
+Cette \sdb, ou \BS (pour \bs), parfois appelée \textit{puits} (ou \textit{sink} en anglais), est chargée de récolter et traiter les données provenant des capteurs.
+Une fois les capteurs déployés, l'administrateur n'interagit plus avec le réseau que par le biais de la \sdb.
+\nomenclature{BS}{\bs}
+
+Quel que soit le protocole de liaison de données utilisé, il est rare que tous les capteurs d'un \WSN soit directement connectés les uns aux autres.
+À la topologie d'un réseau donné est donc très souvent associé le graphe de connectivité du réseau.
+Pour cette raison, dans la littérature comme dans la suite de ce document, il sera souvent fait référence aux capteurs sous le terme de \textit{nœuds} (\textit{nodes} en anglais).
+
+    \subsection{Applications}
+Le champ d'application des \WSN est très vaste.
+Des réseaux peuvent être mis en place en forêt, par exemple, afin de détecter les départs de feu et de lutter plus efficacement contre les incendies.
+D'autres peuvent être déployés en mer, afin de mesurer le taux de pollution des eaux.
+En zones à risques, les capteurs peuvent être utilisés pour mesurer l'activité sismique ou volcanique du sol, et permettre une meilleure anticipation des phénomènes naturels.
+
+Les \rcsfs sont également utilisés dans certains milieux critiques.
+Un exemple serait leur usage dans le domaine du nucléaire.
+Un autre, de taille, est leur exploitation intensive par les militaires sur les champs de batailles, afin de relier fantassins et véhicules de tous types; un maximum d'informations doit alors être remonté au centre de commandement, afin de permettre une supervision optimale des forces en mouvement.
+
+Un autre domaine d'application en voie de développement est ce que l'on appelle l'\textit{\idx{Internet des objets}} (\textit{the Internet of things} en anglais), et qui consiste en quelque sorte à étendre \idx{Internet} au monde réel, par le biais d'une interconnexion réseau entre les objets de la vie courante.
+
+    \subsection{Contraintes en ressources}
+De par leur petite taille, et à cause de leurs déploiement dans des zones souvent difficiles d'accès, les capteurs n'embarquent qu'une quantité limitée de matériel, qui ne peut pas toujours être remplacé.
+Les capteurs se retrouvent donc avec des capacités limitées, notamment en ce qui concerne:
+\begin{itemize}
+    \item les capacités de calcul: les processeurs embarqués sont relativement peu puissants.
+        Les algorithmes exécutés par les capteurs doivent donc être de complexité relativement basse;
+    \item les capacités de mémoire: les capteurs disposent de mémoire vive (RAM, \textit{Random Access Memory}, « mémoire à accès non séquentiel » en anglais) et d'un peu d'espace de stockage, mais ils ne sont pas du tout conçus pour sauvegarder de grandes bases de données.\nomenclature{RAM}{\textit{Random Access Memory}}
+        Les informations récoltées doivent être acheminées à la \sdb, et non stockées sur le long terme par les capteurs eux-mêmes;
+    \item l'énergie disponible: les capteurs disposent d'une batterie qui leur fournit une quantité d'énergie finie, et (la plupart du temps) non rechargeable.
+        Il est donc essentiel de conserver à l'esprit une gestion parcimonieuse de l'énergie pour tout programme implémenté sur les capteurs.
+        Des calculs importants, ainsi que des émissions/réceptions d'ondes électromagnétiques nombreuses ou mal gérées, sont les principaux facteurs d'un épuisement prématuré de la batterie.
+\end{itemize}
+
+Il est à noter qu'au regard de ces contraintes qui affectent les capteurs, la \sdb est considérée comme disposant de capacités « illimitées ».
+
+    \subsection{Communications sans fil}
+
+Comme l'indique leur nom, les réseaux de capteurs sans fil n'utilisent aucun câble physique pour communiquer entre eux ou avec la \sdb: toutes les transmissions sont effectuées par voie hertzienne.
+Chaque capteur est équipé d'un module radio utilisé alternativement pour émettre et pour recevoir.
+La plupart du temps ces modules sont capables de changer de fréquence de communication, ainsi que de moduler la puissance d'émission utilisée pour les transmissions.
+
+Les protocoles de communication déployés sur cette architecture sont multiples (on parle d'\textit{encapsulation} des données).
+Il faut pouvoir communiquer de pair à pair entre nœuds voisins, tout comme il faut être capable de faire parvenir un message à un nœud éloigner en faisant retransmettre les paquets par des nœuds relais successifs, d'assurer certains services comme le maintien de session, ou de gérer des applications.
+Comme dans la plupart des réseaux informatiques, l'empilement des protocoles reprend donc le modèle \tcpip (schéma concret lui-même issu du modèle théorique \idx{OSI}, de l'anglais \textit{Open Systems Interconnection}), présenté en \figref{st:fig:tcpip}.
+\nomenclature{OSI}{\textit{Open Systems Interconnection}}
+\begin{figure}[!ht]
+    \centering
+    \begin{tabular}{c |c| l}
+        \multicolumn{2}{c}{} & Exemples:\\
+        \cline{2-2}
+        5           & Application & HTTP, FTP, SSH\\
+        \cline{2-2}
+        4           & Transport   & TCP, UDP\\
+        \cline{2-2}
+        3           & Réseau      & IP\\
+        \cline{2-2}
+        2           & Liaison     & \ieeee (\csmaca)\\
+        \cline{2-2}
+        1           & Physique    & ondes électromagnétiques\\
+        \cline{2-2}
+     \end{tabular}
+    \medskip
+    \caption{Modèle TCP/IP}\label{st:fig:tcpip}
+\end{figure}
+\nomenclature{TCP}{\textit{Transmission Control Protocol}}
+\nomenclature{IP}{\textit{Internet Protocol}}
+\nomenclature{UDP}{\textit{User Datagram Protocol}}
+\nomenclature{HTTP}{\textit{Hypertext Transfer Protocol}}
+\nomenclature{FTP}{\textit{File Transfer Protocol}}
+\nomenclature{SSH}{\textit{Secure Shell}}
+
+Certains standards normalisés définissent l'usage de protocoles spécifiques sur les trois premières couches.
+Les principaux standards qui sont employés dans les réseaux de capteurs sont les piles \ieeee (correspondant à la marque \wifi) et \ieeeff (sur laquelle sont basée la marque \zigbee et le standard \ietf \slowpan), et dans une moindre mesure la pile \ieeefo (correspondant à la marque \bluetooth).
+\nomenclature{IETF}{\textit{Internet Engineering Task Force}}
+\nomenclature{IEEE}{\textit{Institute of Electrical and Electronics Engineers}}
+\nomenclature{6LoWPAN}{\textit{IPv6 over Low power Wireless Personal Area Networks}}
+
+            \paragraph{La couche physique}
+Cette couche concerne l'émission et la réception en soi des ondes électromagnétiques, et l'encodage utilisé pour leur faire porter des valeurs numériques (par opposition à un signal analogique).
+Nous n'aurons pas besoin de l'étudier en détail ici.
+
+\paragraph{La couche de liaison de données}\label{st:ssec:mac}
+La deuxième couche du modèle fournit les moyens fonctionnels et procéduraux pour le transfert des données entre deux entités du réseau.
+Elle permet aussi, le plus souvent, de détecter et éventuellement corriger certaines erreurs survenues sur la couche physique (en cas de perturbation ou dégradation du signal électromagnétique).
+Elle se décompose en deux sous-couches: la couche de contrôle de la liaison logique (LLC, pour \textit{Logical Link Control} en anglais, « contrôle de la liaison logique ») et la couche du contrôle d'accès au support (MAC, pour \textit{Media Access Control}, « contrôle d'accès au support »).
+LLC est la sous-couche haute, utilisée pour fiabiliser la sous-couche MAC, intervient peu dans les réseaux de capteurs.
+Le protocole de couche MAC définit la manière dont les différents agents du réseau accèdent au médium de transmission de façon à limiter les collisions, et à garantir un accès le plus souvent équivalent au médium pour tous les nœuds.
+Les différents modes d'accès au médium existants sont résumés dans la \tabref{st:tab:mac}; certains consistent à créer des canaux de transmission distincts, tandis que d'autres déterminent l'accès à une même bande de fréquence en instaurant des règles.
+\nomenclature{MAC}{\textit{Media Access Control}}
+\nomenclature{LLC}{\textit{Logical Link Control}}
+
+\begin{table}[!ht]
+    \caption{Méthodes d'accès au médium de transmission}\label{st:tab:mac}
+    \centering
+    \medskip
+    \begin{small}
+        \begin{tabular}{m{.2\textwidth}|m{.2\textwidth}|m{.48\textwidth}}
+            \toprule
+            \textsc{Nom anglais} & \textsc{Traduction} & \textsc{Description}\\
+            \midrule
+            \multicolumn{3}{c}{Commutation de circuits et création de canaux}\\
+            \midrule
+            \textit{Frequency Division Multiple Access} (\fdma) & Accès multiple par répartition en fréquence & Plusieurs canaux basés sur des fréquences différentes\\
+            \midrule
+            \textit{Code division multiple access} (\cdma) & Accès multiple par répartition en code & Étalement du spectre de fréquence utilisé en conjonction avec techniques comme les sauts de fréquences ou la génération de bruit pseudo-aléatoires (avec la même séquence pseudo-aléatoire appliquée au signal côté émetteur comme côté destinataire)\\
+            \midrule
+            \textit{Time division multiple access} (\tdma) & Accès multiple à répartition dans le temps & Un seul canal dont l'accès est réparti par créneaux dans le temps\\
+            \midrule
+            \textit{Space division multiple access} (\sdma) & Accès multiple à répartition dans l'espace & Plusieurs canaux spatiaux obtenus à l'aide d'antennes directionnelles. À noter: les antennes directionnelles augmentent sensiblement le cout de production des capteurs.\\
+            \midrule
+            \multicolumn{3}{c}{Mode d'accès par paquet}\\
+            \midrule
+            \textit{Contention based random multiple access methods} & Accès par contention & Contention par le nœud du paquet à envoyer jusqu'à ce que le protocole le lui autorise. Dans cette catégorie se trouve notamment le protocole \csmaca (\textit{Carrier Sense Multiple Access with Collision Avoidance}, accès multiple par écoute du canal avec esquive de collision), très utilisé dans les réseaux sans fil (\ieeee entre autres).\\
+            \midrule
+            \textit{Resource reservation (scheduled) packet-mode protocols} & Réservation des ressources & Réservation par un nœud des ressources (par exemple: créneau temporel) nécessaires à la transmission)\\
+            \midrule
+            \multicolumn{3}{p{.95\textwidth}}{D'autres modes d'accès par paquet (\textit{token passing, polling}) existent mais ne sont pas utilisés dans les réseaux de capteurs}\\
+            \bottomrule
+         \end{tabular}
+     \end{small}
+\end{table}
+\nomenclature{FDMA}{\textit{Frequency Division Multiple Access}}
+\nomenclature{CDMA}{\textit{Code Division Multiple Access}}
+\nomenclature{SDMA}{\textit{Space Division Multiple Access}}
+\nomenclature{TDMA}{\textit{Time  Division Multiple Access}}
+\nomenclature{CSMA}{\textit{Carrier Sense Multiple Access}}
+\nomenclature{CSMA/CA}{\textit{Carrier Sense Multiple Access with Collision Avoidance}}
+
+De ces modes d'accès sont dérivés de très nombreux protocoles de couche MAC, dont plusieurs ont été conçus spécifiquement pour les réseaux de capteurs~\cite{YB09}.
+Par exemple, en dehors des standards \ieee, le protocole \smac~\cite{YHE02} fait alterner périodes « actives » et périodes de sommeil aux capteurs afin de préserver leur batterie.
+Les capteurs sont associés dans des groupes (qui ne correspondent pas tout à fait à des clusters) dont tous les membres sont en éveil de manière simultanée, afin de pouvoir communiquer à l'aide d'une version modifiée de \csmaca tel que défini dans le standard \ieeee.
+\nomenclature{S-MAC}{\textit{Sensor-MAC}}
+
+            \paragraph{La couche réseau}
+Cette couche, pour les capteurs sans fil, repose le plus souvent sur le protocole \ip (\textit{Internet Protocol} an anglais), que ce soit en version 4 ou 6 (la version 6 est notamment utilisée avec la pile \slowpan), pour l'adressage, et sur un protocole de routage qui détermine comment les paquets sont retransmis saut après saut dans le réseau.
+Des exemples classiques de ces algorithmes de routage incluent \aodv (\textit{Ad hoc On-Demand Distance Vector Routing})~\cite{aodv} ou son évolution \dsr~\cite{dsr} (\textit{Dynamic Source Routing}), \olsr~\cite{olsr} (\textit{Optimized Link State Routing Protocol}) ou ses évolutions \dsdv (\textit{Destination-Sequenced Distance Vector routing}) et \batman (\textit{Better Approach To Mobile Adhoc Networking}), \etc.
+\nomenclature{AODV}{\textit{Ad hoc On-Demand Distance Vector Routing}}
+\nomenclature{DSR}{\textit{Dynamic Source Routing}}
+\nomenclature{OLSR}{\textit{Optimized Link State Routing Protocol}}
+\nomenclature{DSDV}{\textit{Destination-Sequenced Distance Vector routing}}
+\nomenclature{B.A.T.M.A.N.}{\textit{Better Approach To Mobile Adhoc Networking}}
+
+            \paragraph{La couche transport}
+Cette couche gère les communications de bout en bout entre processus.
+Les protocoles les plus fréquemment utilisés, \tcp (\textit{Transmission Control Protocol}) et \udp (\textit{User Datagram Protocol}) assurent l'ordonnancement des paquets et permettent d'éviter les pertes, les doublons et la corruption des paquets.
+Le protocole \tcp permet en plus à deux entités de communiquer en mode connecté en établissant une session (début, fin et validation des échanges).
+En raison des données de contrôle que ces protocoles impliquent, ils ne sont pas systématiquement implémentés dans les réseaux de capteurs (ils le sont parfois dans des versions allégées).
+
+            \paragraph{La couche application}
+La dernière couche gère les échanges applicatifs entre les différents agents du réseau, et encapsule les données utiles au format désiré pour leur traitement final.
+Il s'agit de la couche la plus haut niveau  du modèle.
+Elle assure un service propre à l'application déployée, et les protocoles déployés à ce niveau dépendent donc totalement de l'objectif final du réseau, il n'y a donc pas de standard propre aux \rcs.
