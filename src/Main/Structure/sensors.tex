@@ -92,9 +92,9 @@ Nous n'aurons pas besoin de l'étudier en détail ici.
 \paragraph{La couche de liaison de données}\label{st:ssec:mac}
 La deuxième couche du modèle fournit les moyens fonctionnels et procéduraux pour le transfert des données entre deux entités du réseau.
 Elle permet aussi, le plus souvent, de détecter et éventuellement corriger certaines erreurs survenues sur la couche physique (en cas de perturbation ou dégradation du signal électromagnétique).
-Elle se décompose en deux sous-couches: la couche de contrôle de la liaison logique (LLC, pour \textit{Logical Link Control} en anglais, « contrôle de la liaison logique ») et la couche du contrôle d'accès au support (MAC, pour \textit{Media Access Control}, « contrôle d'accès au support »).
-LLC est la sous-couche haute, utilisée pour fiabiliser la sous-couche MAC, intervient peu dans les \rcs.
-Le protocole de couche MAC définit la manière dont les différents agents du réseau accèdent au médium de transmission de façon à limiter les collisions, et à garantir un accès le plus souvent équivalent au médium pour tous les nœuds.
+Elle se décompose en deux sous-couches: la couche de contrôle de la liaison logique (\llc, pour \textit{Logical Link Control} en anglais, « contrôle de la liaison logique ») et la couche du contrôle d'accès au support (\mac, pour \textit{Media Access Control}, « contrôle d'accès au support »).
+\llc est la sous-couche haute, utilisée pour fiabiliser la sous-couche \mac, intervient peu dans les \rcs.
+Le protocole de couche \mac définit la manière dont les différents agents du réseau accèdent au médium de transmission de façon à limiter les collisions, et à garantir un accès le plus souvent équivalent au médium pour tous les nœuds.
 Les différents modes d'accès au médium existants sont résumés dans la \tabref{st:tab:mac}; certains consistent à créer des canaux de transmission distincts, tandis que d'autres déterminent l'accès à une même bande de fréquence en instaurant des règles.
 \nomenclature{MAC}{\textit{Media Access Control}}
 \nomenclature{LLC}{\textit{Logical Link Control}}
@@ -136,7 +136,7 @@ Les différents modes d'accès au médium existants sont résumés dans la \tabr
 \nomenclature{CSMA}{\textit{Carrier Sense Multiple Access}}
 \nomenclature{CSMA/CA}{\textit{Carrier Sense Multiple Access with Collision Avoidance}}
 
-De ces modes d'accès sont dérivés de très nombreux protocoles de couche MAC, dont plusieurs ont été conçus spécifiquement pour les \rcs~\cite{YB09}.
+De ces modes d'accès sont dérivés de très nombreux protocoles de couche \mac, dont plusieurs ont été conçus spécifiquement pour les \rcs~\cite{YB09}.
 Par exemple, en dehors des standards \ieee, le protocole \smac~\cite{YHE02} fait alterner périodes « actives » et périodes de sommeil aux capteurs afin de préserver leur batterie.
 Les capteurs sont associés dans des groupes (qui ne correspondent pas tout à fait à des clusters) dont tous les membres sont en éveil de manière simultanée, afin de pouvoir communiquer à l'aide d'une version modifiée de \csmaca tel que défini dans le standard \ieeee.
 \nomenclature{S-MAC}{\textit{Sensor-MAC}}

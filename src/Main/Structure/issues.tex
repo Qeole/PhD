@@ -22,7 +22,7 @@ considered
 (2008 Li Gong)
 
 
-L'une des possibilités permettant de réduire la consommation en énergie est l'utilisation d'un réseau \index{clusterisation hiérarchique} hiérarchiquement clusterisé.
+L'une des possibilités permettant de réduire la consommation en énergie est l'utilisation d'un réseau \index{clusterisation!clusterisation hiérarchique} hiérarchiquement clusterisé.
 
     \subsection{Partition hiérarchique des nœuds du réseau}%
     \label{st:subsec:partition}
@@ -34,7 +34,7 @@ Dans le cas des \rcsfs, cette partition permet d'obtenir un routage efficace des
     \item tous les nœuds réunis au sein d'un même cluster sont capables de communiquer directement entre eux (\textit{one-hop transmission});
     \item lors de la partition, un unique nœud par cluster est désigné «~chef~» du cluster.
         Il est choisi, de façon déterministe ou bien aléatoire selon l'algorithme employé, parmi les nœuds «~normaux~» du cluster.
-        Ce «~chef~» est appelé \ch (\CH);
+        Ce «~chef~» est appelé \ch (\CH);\nomenclature{CH}{\textit{Cluster Head}}
     \item lorsqu'un capteur quelconque d'un cluster souhaite faire parvenir des informations à un nœud d'un autre cluster\footnote{Pour une grande partie des applications, les communications entre nœuds de différents clusters, hors \chs, ne se produisent pas. La totalité du trafic «~utile~», acheminant des données, est généralement à destination de la \sdb.}, ou bien à la \sdb, il envoie ses paquets de données au \ch de son cluster ;
     \item le \ch transmet alors les paquets de données, soit directement à la cible s'il s'agit de la \sdb et qu'il peut l'atteindre, soit en passant par d'autres \chs (\textit{multi-hops transmission}), jusqu'à atteindre le destinataire.
 \end{enumerate}
@@ -44,24 +44,27 @@ Le schéma d'un réseau clusterisé est présenté en \figref{st:fig:wsn}.
     \includegraphics[width=0.8\linewidth]{\chapterfig/WSN.eps}
     \caption{Schéma d'un \rc clusterisé}\label{st:fig:wsn}
 \end{figure}
-L'appel à un algorithme de « clusterisation » a pour effet de limiter les émissions à «~longue portée~» (relativement aux communications intra-clusters) aux \chs seulement.
+L'appel à un algorithme de « \idx{clusterisation} » a pour effet de limiter les émissions à «~longue portée~» (relativement aux communications intra-clusters) aux \chs seulement.
 Hors les communications sur de plus grandes distances se traduisent par une plus grande consommation en énergie (puisqu'une plus grande puissance d'émission est nécessaire).
 Les capteurs «~normaux~» (non \chs) n'ont pas à atteindre directement des nœuds situés en dehors de leur cluster; ils économisent d'autant en énergie.
 De plus, dans la limite de leurs capacités, les \chs sont généralement amenés à réaliser des opérations d'\idx{agrégation} voire parfois de \idx{compression} sur les paquets qu'ils reçoivent, afin de limiter encore les transmissions couteuses.
 
-De nombreux algorithmes de clusterisation de données existent.
+De nombreux algorithmes de \idx{clusterisation} de données existent.
 Plusieurs d'entre eux sont même spécifiquement adaptés aux \rcsfs.
 Parmi les plus fréquemment utilisés, on trouve des algorithmes comme \leach~\cite{HCB00} ou \heed~\cite{YF04}.
 D'autres sont moins connus, comme \ffuca~\cite{FL11}, qui repose sur l'exploitation de propriétés ultramétriques dans le réseau.
+\nomenclature{LEACH}{\textit{Low-Energy Adaptive Clustering Hierarchy}}
+\nomenclature{HEED}{\textit{Hybrid, Energy-Efficient Distributed clustering}}
+\nomenclature{FFUCA}{\textit{Fast and Flexible Unsupervised Clustering Algorithm }}
 
-        \subsubsection{Clusterisation hiérarchique\index{clusterisation hiérarchique}}
-Une fois le \rc divisé en clusters, rien n'empêche de considérer les clusters un à un et de leur appliquer à nouveau un algorithme de clusterisation, de façon à établir des sous-ensembles dans chaque cluster.
+        \subsubsection{Clusterisation hiérarchique\index{clusterisation!clusterisation hiérarchique}}
+Une fois le \rc divisé en clusters, rien n'empêche de considérer les clusters un à un et de leur appliquer à nouveau un algorithme de \idx{clusterisation}, de façon à établir des sous-ensembles dans chaque cluster.
 Et ainsi de suite, de façon récursive, jusqu'à atteindre le degré de hiérarchie désiré.
 L'intérêt de cette méthode est de créer une partition hiérarchique dans le réseau, permettant un meilleur contrôle des sous-ensembles de capteurs.
 Par ailleurs, les clusters situés tout en bas dans la hiérarchie constituée seront de petite taille.
 Les communications intra-clusters seront donc peu consommatrices en énergie.
 
-Pour pouvoir distinguer plus facilement le niveau de hiérarchie auquel nous nous plaçons, nous désignerons par la suite sous le terme \textit{$k$-cluster} ($0 \leq k \leq$~nombre de capteurs) un sous-ensemble obtenu après $k$ applications de l'algorithme de clusterisation.
+Pour pouvoir distinguer plus facilement le niveau de hiérarchie auquel nous nous plaçons, nous désignerons par la suite sous le terme \textit{$k$-cluster} ($0 \leq k \leq$~nombre de capteurs) un sous-ensemble obtenu après $k$ applications de l'algorithme de \idx{clusterisation}.
 En suivant cette convention, l'unique $0$-cluster est alors le réseau tout entier.
 Lorsque nous parlons simplement de \textit{clusters}, il faudra comprendre \textit{$1$-clusters}; autrement dit, des clusters issus d'une partition simple, sans degré supplémentaire de hiérarchie.
 
@@ -71,8 +74,8 @@ Chaque \textit{$k$-CH} reçoit des données (provenant soit de nœuds normaux si
 
         \subsubsection{Exemple: fonctionnement de l'algorithme \leach}%
         \label{st:subsubsec:leach}
-        L'un des algorithmes de clusterisation les plus simples et les plus couramment employés dans les \rcsfs est l'algorithme \leach (\textit{Low Energy Adaptive Clustering Hierarchy with deterministic \ch selection}).
-Il s'agit d'un algorithme dynamique (il effectue de nouvelles clusterisations du réseau régulièrement dans le temps) qui, par la formation de clusters, met en place une solution de routage des paquets dans le réseau.
+L'un des algorithmes de \idx{clusterisation} les plus simples et les plus couramment employés dans les \rcsfs est l'algorithme \leach (\textit{Low Energy Adaptive Clustering Hierarchy with deterministic \ch selection}).
+Il s'agit d'un algorithme dynamique (il effectue de nouvelles clusterisations\index{clusterisation} du réseau régulièrement dans le temps) qui, par la formation de clusters, met en place une solution de routage des paquets dans le réseau.
 
 Voici le fonctionnement détaillé de cet algorithme.
 Soit $P$ le pourcentage moyen de clusters que nous désirons obtenir dans le réseau à un instant quelconque $t$.
@@ -96,7 +99,7 @@ Chaque ronde $r$  est organisée de la façon suivante:
         Pour limiter les collisions, il est fait usage de la méthode \textit{Carrier Sense Multiple Access} (\csma) au niveau de la couche MAC.
     \item Les autres nœuds, qui ne se sont pas désignés en tant que \chs pour la ronde en cours, choisissent de se joindre au cluster du \CH dont ils perçoivent le signal avec l'intensité la plus élevée, \cad le \CH le plus proche en termes d'émissions électromagnétiques.
         Chaque nœud prévient le \ch qu'il décide de rejoindre en lui envoyant un message.
-        La méthode \textit{CSMA} est là encore appliquée.
+        La méthode \csma est là encore appliquée.
     \item Au vu des réponses reçues, chaque \ch calcule un «~ordre de transmission~» pour les nœuds qui l'ont rejoint.
         Il annonce alors à chacun de ces nœuds l'instant auquel le nœud doit lui transmettre ses données.
         Dans chaque cluster, les nœuds s'adresseront donc à leur \ch à tour de rôle, selon l'ordre déterminé par le \CH, ce qui revient à utiliser la méthode appelée \textit{Time Division Multiple Access} (\tdma).
@@ -112,7 +115,7 @@ Chaque ronde $r$  est organisée de la façon suivante:
 
 Plusieurs remarques sont à énoncer.
 Tout d'abord: pour un cluster donné, il est alors possible de réitérer l'application de l'algorithme \leach, afin de créer une nouvelle partition au sein même d'un cluster.
-Et ainsi de suite par récursivité, jusqu'à obtenir le degré de hiérarchie\index{clusterisation hiérarchique} désiré dans le réseau.
+Et ainsi de suite par récursivité, jusqu'à obtenir le degré de hiérarchie\index{clusterisation!clusterisation hiérarchique} désiré dans le réseau.
 Nous appellerons $k$-\leach cet algorithme appliqué de façon à créer $k$ degrés hiérarchiques.
 
 Seconde remarque: il est possible d'étendre \leach pour prendre en compte l'énergie restante dont dispose chaque nœud lors de l'élection des \CH.
@@ -121,12 +124,12 @@ Cette énergie restante intervient alors en temps que paramètre supplémentaire
 Troisième point: l'un des aspects importants de \leach est que lors de la première étape, chaque nœud choisi d'être, ou non, un \ch pour la ronde en cours.
 Ce choix est basé uniquement sur la valeur de seuil calculée, et sur le nombre pseudo-aléatoire généré; à aucun moment un nœud ne fait intervenir dans sa décision le comportement de ses voisins.
 En conséquence, le pourcentage $P$ de \chs désirés dans le réseau n'est qu'une valeur moyenne sur l'ensemble des rondes de chaque cycle.
-Par ailleurs, la \idx{répartition géographique} (au regard de la puissance de transmission nécessaire) idéale des \chs n'est en rien assuré.
+Par ailleurs, la répartition géographique (au regard de la puissance de transmission nécessaire) idéale des \chs n'est en rien assuré.
 Au contraire, il est même probable d'obtenir, pour certaines rondes, une concentration importante de \chs dans une zone restreinte du réseau, tandis que d'autres régions seront mal couvertes.
 Il n'y a pas grand-chose à faire dans ce cas, sinon espérer que la prochaine ronde sera plus favorable.
 Si toutefois un nœud ne parvient à capter les messages d'aucun \ch, il se déclare généralement lui-même \CH.
 
-        \subsection{Sécurité, \idx{sureté} et \idx{résilience}}
+        \subsection{Sécurité, \idx{sureté} et \resilience}
 
 %La sureté et la résilience des réseaux ne sont pas des problématiques de sécurité (car aucune attaque volontaire ne rentre en compte), mais il s'agit de problématiques assez proches de la disponibilité des réseaux.
 
@@ -145,3 +148,7 @@ Notre but est ici de proposer, modéliser et tester une solution permettant de d
 
         \subsection{Déploiement autonome, \idx{mobilité}}
     scalabilité
+
+    MANET, VANET
+\nomenclature{MANET}{\textit{Mobile Ad hoc Networks}}
+\nomenclature{VANET}{\textit{Vehicular Ad hoc Networks}}

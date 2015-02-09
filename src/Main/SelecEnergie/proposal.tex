@@ -67,13 +67,13 @@ Comme ce dernier rôle consomme plus d'énergie que le relevé et la transmissio
 On remarquera que les points~2 et~3 énoncés ci-dessus correspondent à un nœud compromis qui décrémente volontairement son énergie annoncée au cours du temps; même si des irrégularités peuvent être détectées et le nœud compromis être ainsi démasqué, le seul fait qu'il applique ce comportement assure tout de même que le capteur compromis cessera d'être désigné \cn pour un cycle ou pour un autre dans le futur.
 
 Le modèle énergétique implémenté par les \vns pour vérifier les affirmations des \cns ne doit pas être trop lourd, mais il doit demeurer suffisamment précis pour pouvoir déterminer si un \cn s'en éloigne véritablement, tout en limitant les faux positifs.
-Nous proposons ici d'utiliser le modèle de diffusion de Rakhmatov et Vrudhula~\cite{RV01}.\label{se:rakvru-formula}
+Nous proposons ici d'utiliser le modèle de diffusion de \textsc{Rakhmatov} et \textsc{Vrudhula}~\cite{RV01}.\label{se:rakvru-formula}
 Ce choix repose sur plusieurs observations:
 \begin{itemize}
     \item ce modèle fournit une approximation assez précise de la consommation réelle d'une batterie, et tient compte des processus chimiques internes à la batterie tels que les effets de récupération (\textit{recovery effect}) ou de perte de capacité selon la tension de décharge (\textit{rate capacity effect});
     \item il s'agit de l'un des modèles implémentés dans \nsiii, ce qui permet, pour les simulations basées sur ce logiciel, de bénéficier d'une implémentation déjà existante, et surtout d'un modèle théorique parfait. Il ne faut pas craindre cependant que ce modèle ne soit « trop parfait » pour être utilisé par les \vns, étant donné que ces derniers estimeront l'énergie consommée par les \cns à partir de messages émis par ces derniers, sans connaissance des mécanismes internes au nœud (calcul, écoute) comme le fait le cœur du simulateur. Les valeurs calculées par les \vns demeurent donc approximatives par rapport à la consommation des \cns réellement calculée par \nsiii.
 \end{itemize}
-Le modèle de diffusion de Rakhmatov et Vrudhula se réfère aux réactions chimiques qui se produisent à l'intérieur de l'électrolyte de la batterie, et elle est résumée par l'\equaref{se:eqn:rvdm}
+Le modèle de diffusion de \textsc{Rakhmatov} et \textsc{Vrudhula} se réfère aux réactions chimiques qui se produisent à l'intérieur de l'électrolyte de la batterie, et elle est résumée par l'\equaref{se:eqn:rvdm}
 \begin{equation}
     \label{se:eqn:rvdm}
     \sigma(t) = \underbrace{\int_{0}^{t} i(\tau) \, \mathrm d\tau}_{l(t)} \;+\; \overbrace{\int_{0}^{t} i(\tau) \left(2 \sum_{m=1}^{\infty} \exp^{-\beta^2 m^2 (t-r)} \right) \mathrm d\tau}^{u(t)}

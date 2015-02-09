@@ -73,6 +73,7 @@ Cet algorithme se doit de respecter les points suivants:
     \item les valeurs générées doivent être indépendantes et distribuées uniformément.
 \end{itemize}
 Nous nous sommes tournés vers un type connu de générateurs, les \textit{Multiplicative Linear-Congruential Generators} (ou MLCG), possédant une grande période~\cite{RJ91}.
+\nomenclature{MLGG}{\textit{Multiplicative Linear-Congruential Generators}}
 Plus précisément, le générateur retenu est de type $x_n = a\cdot x_{n-1}\bmod m$, où:
 \begin{itemize}
     \item le nombre pseudo-aléatoire $x_n$ est généré en fonction de son prédécesseur $x_{n-1}$;

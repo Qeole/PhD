@@ -4,37 +4,37 @@
 
     \subsubsection{Authentification et problématiques similaires}
 %{{{2
-La sécurité est transversale à l'ensemble des domaines d'études en informatique, et la protection contre le \dds\dots\ est elle-même liée aux autres problématiques de sécurité.
-Il faut entendre par là que si des failles du système compromettant l'authentification des agents ou l'intégrité des données peuvent également être exploitées d'une façon ou d'une autre pour nuire au bon fonctionnement du réseau, alors l'attaque en question vient également se classer parmi les attaques de \dds.
+La \secu est transversale à l'ensemble des domaines d'études en informatique, et la protection contre le \dds\dots\ est elle-même liée aux autres problématiques de \secu.
+Il faut entendre par là que si des failles du système compromettant l'\idx{authentification} des agents ou l'\integrite des données peuvent également être exploitées d'une façon ou d'une autre pour nuire au bon fonctionnement du réseau, alors l'attaque en question vient également se classer parmi les attaques de \dds.
 
-De manière plus concrète, assurer correctement l'authentification des nœuds du réseau empêchera un attaquant de mener des attaques basées sur l'usurpation de l'identité d'un autre nœud.
-Les attaques par désynchronisation, ou la falsification d'accusés de réception par exemple, deviennent inapplicables.
-Si des mécanismes permettant de limiter le rejeu de paquets capturés sont rajoutés, l'ampleur des attaques Sybil ainsi que des attaques par trou de ver se verront fortement réduites.
-La protection de l'intégrité des données assure de son côté l'échec de toute tentative d'altération des valeurs transmises lors des opérations de routage.
+De manière plus concrète, assurer correctement l'\idx{authentification} des nœuds du réseau empêchera un attaquant de mener des attaques basées sur l'usurpation de l'identité d'un autre nœud.
+Les attaques par \desync, ou la \idx{falsification} d'accusés de réception par exemple, deviennent inapplicables.
+Si des mécanismes permettant de limiter le \idx{rejeu} de paquets capturés sont rajoutés, l'ampleur des attaques Sybil\index{attaque Sybil} ainsi que des attaques par trou de ver\index{trou!trou de ver} se verront fortement réduites.
+La protection de l'\integrite des données assure de son côté l'échec de toute tentative d'\idx{altération} des valeurs transmises lors des opérations de \idx{routage}.
 
-Les mécanismes dédiés à la protection de l'authentification, de l'intégrité, ou contre le rejeu, présentés en \sref{ea:sec:secu}, sont donc également utiles pour protéger un \rc de certaines attaques de \dds.
+Les mécanismes dédiés à la protection de l'\idx{authentification}, de l'\integrite, ou contre le \idx{rejeu}, présentés en \sref{ea:sec:secu}, sont donc également utiles pour protéger un \rc de certaines attaques de \dds.
 On parle de mesures de prévention, dans le sens où il s'agit de méthodes mises en place pour empêcher une attaque de survenir.
-De nombreuses architectures de sécurité, qui apportent authentification, chiffrement, intégrité et protection contre le rejeu aux échanges, et parmi lesquelles une bonne partie des solutions présentées en \sssref{ea:sss:archi}, se « vantent » ainsi d'atténuer, voire de prévenir totalement plusieurs types d'attaques de \dds.
+De nombreuses architectures de sécurité\index{architecture de sécurité}, qui apportent \idx{authentification}, chiffrement, \integrite et protection contre le \idx{rejeu} aux échanges, et parmi lesquelles une bonne partie des solutions présentées en \sssref{ea:sss:archi}, se « vantent » ainsi d'atténuer, voire de prévenir totalement plusieurs types d'attaques de \dds.
 %2}}}
 
-    \subsubsection{Des protocoles de routage spécifiques}
+    \subsubsection{Des protocoles de \idx{routage} spécifiques}
 %{{{2
 Toujours dans le but de prévenir les attaques, il est possible d'utiliser des protocoles de routage spécifiquement étudiés pour limiter les risques.
-Ainsi, le protocole de routage AODV (\textit{Ad hoc On-demand Distance Vector routing}), très utilisé dans les \rcs, a fait l'objet de propositions destinées à améliorer sa résistance aux attaques de \dds de type \textit{blackhole} et \textit{sinkhole}: une étude propose par exemple de faire vérifier par chaque nœud, lors de la création des routes, que ses voisins de deuxième degré sont bel et bien accessibles~\cite{DLA02}.
+Ainsi, le protocole de routage \aodv (\textit{Ad hoc On-demand Distance Vector routing}), très utilisé dans les \rcs, a fait l'objet de propositions destinées à améliorer sa résistance aux attaques de \dds de type \textit{blackhole}\index{trou!trou noir} et \textit{sinkhole}\index{trou!puits}: une étude propose par exemple de faire vérifier par chaque nœud, lors de la création des routes, que ses voisins de deuxième degré sont bel et bien accessibles~\cite{DLA02}.
 Ainsi chaque nœud $x$ ayant un voisin $n$ qui lui propose une route vers une destination donnée, $x$ demande à $n$ quel est le prochain saut $n+1$ sur cette route et tente de contacter ce nœud $n+1$ pour vérifier qu'il est effectivement accessible.
 Si $n+1$ répond, alors $n$ est digne de confiance pour cette route; puisqu'il est digne de confiance, on admet qu'il pourra à son tour vérifier l'accessibilité du nœud $n+2$ à travers le saut annoncé par $n+1$, et ainsi de suite tout au long de la route empruntée pour les données.
 
-Toujours pour parer aux attaques sur le routage, d'autres méthodes se basent sur des mécanismes de redondance et de résilience, pour faire en sorte que si l'une des routes se révèle défectueuse, d'autres exemplaires des paquets, envoyés par des routes distinctes, puissent attendre leur destination.
-Des mécanismes tels que le partage de secret peuvent être utilisés à cette fin de redondance, pour limiter l'augmentation du volume de données envoyées~\cite{MMB13}.
+Toujours pour parer aux attaques sur le routage, d'autres méthodes se basent sur des mécanismes de \idx{redondance} et de \resilience, pour faire en sorte que si l'une des routes se révèle défectueuse, d'autres exemplaires des paquets, envoyés par des routes distinctes, puissent attendre leur destination.
+Des mécanismes tels que le \idx{partage de secret} peuvent être utilisés à cette fin de redondance, pour limiter l'augmentation du volume de données envoyées~\cite{MMB13}.
 %2}}}
 
     \subsubsection{Prévenir la compromission des capteurs}
 %{{{2
         \paragraph{Compliquer l'accès aux capteurs}
 %{{{3
-Il est en fin de compte très difficile de cacher la localisation géographique d'un capteur à un attaquant déterminé.
+Il est en fin de compte très difficile de cacher la \idx{localisation géographique} d'un capteur à un attaquant déterminé.
 Des mécanismes alliant clusterisation et usage de fausses sources pour les messages peuvent être employés afin de compliquer la tâche à l'attaquant~\cite{GK13}.
-L'usage d'antennes directionnelles peut également complexifier la localisation des nœuds, mais n'est pas adapté à toutes les utilisations des \rcs.
+L'usage d'antennes directionnelles\index{antenne directionnelle} peut également complexifier la localisation des nœuds, mais n'est pas adapté à toutes les utilisations des \rcs.
 Au final, un attaquant correctement équipé pourra toujours trouver un capteur en procédant par triangulation du signal électromagnétique.
 
 Il peut alors devenir intéressant de cacher à l'attaquant quels sont les nœuds qui représenteraient le plus d'intérêt pour lui.
@@ -46,10 +46,11 @@ Si l'on se concentre uniquement sur le \dds, il est tout à fait possible d'imag
 
 Une autre approche possible~\cite{Ho10} est de considérer que tout capteur ayant cessé de donner des « signes de vie » pendant une période prolongée est devenu hors-service, et qu'à ce titre il n'est plus censé réintégrer le réseau à l'avenir.
 Cette période est par exemple déterminée à l'aide d'un algorithme SPRT (\textit{Sequential Probability Radio Test}) qui calcule la durée au-delà de laquelle l'absence de signal devient anormal.
-Si le nœud tentait malgré tout de reprendre son activité au-delà de la période, alors supposition est faite que le capteur a été retiré du réseau par un attaquant le temps de procéder à une modification de son code, et ce nœud se retrouve alors volontairement exclu du réseau par mesure de précaution.
+Si le nœud tentait malgré tout de reprendre son activité au-delà de la période, alors supposition est faite que le capteur a été retiré du réseau par un attaquant le temps de procéder à une modification de son code, et ce nœud se retrouve alors volontairement exclu\index{exclusion} du réseau par mesure de précaution.
+\nomenclature{SPRT}{\textit{Sequential Probability Radio Test}}
 %3}}}
 
-        \paragraph{Durcir la sécurité logicielle}
+\paragraph{Durcir la sécurité logicielle\index{securité@sécurité!sécurité logicielle}}
 %{{{3
 Si un attaquant parvient à accéder physiquement à un capteur, il devient très compliqué de l'empêcher d'accéder au contenu de la mémoire de l'appareil, et/ou de le reprogrammer selon ses besoins.
 Des méthodes de chiffrement de la mémoire (principalement pour la mémoire non volatile) existent, mais sont peu implémentés sur les capteurs, car ils augmentent significativement la consommation en ressources de la machine et diminuent ses performances.
@@ -57,9 +58,9 @@ Des modifications malveillantes du code exécuté par un nœud peuvent parfois �
 
 Mais outre les accès physiques directs, un attaquant peut très bien tenter de compromettre à distance un capteur, en exploitant des failles logicielles.
 Des injections de code ont déjà été menées avec succès sur des capteurs, en utilisant par exemple des dépassements de tampons pour injecter une fausse pile d'exécution et mener une attaque dite \textit{return-into-libc}~\cite{FC08}.
-La sécurité logicielle des capteurs doit donc être vérifiées avant même le déploiement du réseau.
-Les bonnes pratiques d'ordre générale en sécurité s'appliquent ici comme ailleurs: de bonne pratique de développement pour le système sont indispensables, de même que la désactivation des services non utilisés (qui de toute façon consommeraient inutilement de l'énergie).
-La sécurité du système peut éventuellement être spécifiquement renforcée, comme par exemple avec grsecurity pour des systèmes basés sur Linux~\cite{GFN11}.
+La sécurité logicielle\index{securité@sécurité!sécurité logicielle} des capteurs doit donc être vérifiées avant même le déploiement du réseau.
+Les bonnes pratiques d'ordre générale en \secu s'appliquent ici comme ailleurs: de bonne pratique de développement pour le système sont indispensables, de même que la désactivation des services non utilisés (qui de toute façon consommeraient inutilement de l'énergie).
+La sécurité du système\index{securité@sécurité!sécurité système} peut éventuellement être spécifiquement renforcée, comme par exemple avec grsecurity pour des systèmes basés sur Linux~\cite{GFN11}.
 %3}}}
 %2}}}
 %1}}}

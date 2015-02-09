@@ -8,7 +8,8 @@ Nous avons détaillé la solution proposée. À présent, nous allons présenter
     \subsection{Chaines de \textsc{Markov}}
 
         \subsubsection{Présentation et hypothèses de travail}
-Nous avons modélisé notre solution sous la forme d'un processus de \textsc{Markov} à temps continu (CMTC, pour chaine de \textsc{Markov} à temps continu).
+Nous avons modélisé notre solution sous la forme d'un processus de \textsc{Markov} à temps continu (\cmtc, pour chaine de \textsc{Markov} à temps continu).
+\nomenclature{CMTC}{Chaîne de \textsc{Markov} à temps continu}
 
 Notre modèle représente un cluster d'un \rcsf qui vérifie les hypothèses suivantes:
 \begin{itemize}
@@ -22,7 +23,7 @@ Notre modèle représente un cluster d'un \rcsf qui vérifie les hypothèses sui
 \end{itemize}
 
         \subsubsection{Modélisation}
-Sous les hypothèses précédentes, notre modèle peut être représenté par une CMTC multi-dimensionnelle de taille $m$.
+Sous les hypothèses précédentes, notre modèle peut être représenté par une \cmtc multi-dimensionnelle de taille $m$.
 Il est alors exprimé sous la forme d'un $m$-uplet $x\!=\!(x_1,x_2,\dots,x_m)$ de macro-états $x_k\!=\!(x_{k_1},x_{k_2},\dots,x_{k_s},x_{k_d})$.
 Chaque macro-état $x_k$    garde en mémoire le nombre de paquets détectés par le \cn $k$ ($1\leq k\leq m$).
 Plus exactement, chaque $x_{k_i}$ ($1\leq i\leq s$) est un compteur, initialisé à $0$, qui est incrémenté à chaque fois que le \cn $k$ détecte un paquet en provenance du capteur $i$.
@@ -85,16 +86,17 @@ Nous allons nous tourner par exemple vers des processus non-markoviens, qui ne p
 
 %===============================================================================
     \subsection{Réseaux de \textsc{Petri}}
-Une autre représentation possible de notre système passe ainsi par l'utilisation de processus stochastiques à évènements discrets (PSED, ou DESP, \textit{Discrete-Event Stochastic Processes}, ou encore \textit{Generalized Semi-\textsc{Markov} Processes}).
+Une autre représentation possible de notre système passe ainsi par l'utilisation de processus stochastiques à évènements discrets (PSED, en anglais \textit{Discrete-Event Stochastic Processes}, ou encore \textit{Generalized Semi-\textsc{Markov} Processes} pour « processus semi-markoviens généralisés »).
 Leur avantage principal sur les processus de \textsc{Markov} est leur capacité à représenter des événements dont la distribution n'est pas nécessairement exponentielle.
 Plus particulièrement, nous allons utiliser des réseaux de \textsc{Petri} stochastiques généralisés étendus.
+\nomenclature{PSED}{Processus stochastiques à événements discrets}
 
         \subsubsection{Présentation des réseaux de \textsc{Petri} stochastiques généralisés étendus}
-\label{sa:subsubsec:presRPSGE}
-Les réseaux de \textsc{Petri} stochastiques généralisés (RPSG) sont une classe de réseaux de \textsc{Petri} destinée à modéliser des processus stochastiques.
-Leur version étendue (RPSGE) permet de représenter des transitions dont les délais sont distribués de façon quelconque~\cite{ABCDF95}.
-Il s'agit d'un langage de haut niveau permettant de représenter des processus stochastiques à événements discrets (PSED, ou processus semi-markoviens généralisés, PSMG), qui au contraire des processus markoviens «~classiques~» ne sont pas limités à la représentation d'événements à distribution exponentielle.
-RPSGE reprend, à quelques différences près, les définitions, la syntaxe et la représentation graphique des réseaux de \textsc{Petri} classiques, enrichis par des propriétés supplémentaires portant sur les transitions.
+\label{sa:subsubsec:presRPSGe}
+Les réseaux de \textsc{Petri} stochastiques généralisés (\rpsg) sont une classe de réseaux de \textsc{Petri} destinée à modéliser des processus stochastiques.
+Leur version étendue (\rpsge) permet de représenter des transitions dont les délais sont distribués de façon quelconque~\cite{ABCDF95}.
+Il s'agit d'un langage de haut niveau permettant de représenter des processus stochastiques à événements discrets, qui au contraire des processus markoviens «~classiques~» ne sont pas limités à la représentation d'événements à distribution exponentielle.
+\rpsge reprend, à quelques différences près, les définitions, la syntaxe et la représentation graphique des réseaux de \textsc{Petri} classiques, enrichis par des propriétés supplémentaires portant sur les transitions.
 Ces dernières sont dites soit \textit{immédiates}, soit \textit{minutées}.
 Elles sont de plus caractérisées par les éléments suivants:
 \begin{enumerate}
@@ -102,6 +104,8 @@ Elles sont de plus caractérisées par les éléments suivants:
     \item une priorité qui établit de façon déterministe la transition à franchir en premier, en cas d'égalité;
     \item un poids qui est utilisé pour tirer de façon aléatoire la transition à franchir en premier, en cas de conflits sur le délai écoulé et sur les priorités.
 \end{enumerate}
+\nomenclature{RPSG}{Réseaux de \textsc{Petri} stochastiques généralisés}
+\nomenclature{RPSGe}{Réseaux de \textsc{Petri} stochastiques généralisés étendus}
 
 Nous utilisons deux types de transitions minutées:
 \begin{itemize}
@@ -116,7 +120,7 @@ Par exemple, sur la partie droite de la figure~\ref{sa:fig:gspnex1}, la transiti
 \begin{figure}[H]
     \centering
     \includegraphics[width=.8\linewidth]{\chapterfig/GSPNex1.pdf}
-    \caption{Exemples simples d'eGSPN: transitions immédiates, transition minutée et arcs inhibiteurs}\label{sa:fig:gspnex1}
+    \caption{Exemples simples de \rpsge: transitions immédiates, transition minutée et arcs inhibiteurs}\label{sa:fig:gspnex1}
 \end{figure}
 
         \subsubsection{Modélisation des nœuds}
@@ -129,11 +133,11 @@ Nous allons procéder par étapes en modélisant:
 
             \paragraph{Modélisation des capteurs simples}
 Le comportement des capteurs basiques est simple: chaque capteur $i$ envoie des paquets selon un processus de \textsc{Poisson} de paramètre $\lambda_i$.
-Ce comportement est modélisé par le RPSG présenté en figure~\ref{sa:fig:snodegspn}.
+Ce comportement est modélisé par le \rpsg présenté en figure~\ref{sa:fig:snodegspn}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=.5\linewidth]{\chapterfig/sNode_GSPN.pdf}
-    \caption{Modèle RPSG d'un nœud capteur simple}\label{sa:fig:snodegspn}
+    \caption{Modèle \rpsg d'un nœud capteur simple}\label{sa:fig:snodegspn}
 \end{figure}
 Le nœud est symbolisé par les pointillés bleus.
 Dans ce nœud $i$ se trouve une unique transition \textsf{TX}, sans place en entrée, autrement dit: toujours active.
@@ -144,11 +148,11 @@ Un nœud compromis $c$ sera également représenté selon le même modèle, avec
 
             \paragraph{Modélisation des \cns élus de façon statique}
 Un \cn élu de façon statique joue uniquement son rôle de \cn: il monitore le trafic, mais n'effectue pas de mesure sur son environnement.
-Le modèle RPSGE associé à ce type de nœud est présenté en figure~\ref{sa:fig:cnodegspn1}.
+Le modèle \rpsge associé à ce type de nœud est présenté en figure~\ref{sa:fig:cnodegspn1}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=.6\linewidth]{\chapterfig/cNode_GSPN.pdf}
-    \caption{Modèle RPSGE d'un \cn élu de manière \emph{statique}}\label{sa:fig:cnodegspn1}
+    \caption{Modèle \rpsge d'un \cn élu de manière \emph{statique}}\label{sa:fig:cnodegspn1}
 \end{figure}
 La place \textsf{In\_buff} représente le tampon contenant les messages reçu par le nœud.
 Un jeton arrivant dans cette place (depuis un nœud «~normal~») représente un message capté par le \cn\footnote{En réalité, il devrait y avoir une place \textsf{In\_buff$_i$} distincte pour les jetons provenant de chaque nœud voisin $i$ du \cn. Pour simplifier la représentation, tous les jetons arrivant au modèle du nœud sont rassemblés dans une place unique.}.
@@ -165,7 +169,7 @@ Le processus est répété jusqu'à ce que la place \textsf{In\_buff} soit vide;
 Les étapes permettant de vider le tampon ne consomment pas de temps, et permettent de repartir avec un compteur neutre pour la période qui mènera à la vérifiation suivante.
 
             \paragraph{Modélisation des \cns élus de façon statique}
-Le modèle RPSGE représentant le \cn élu de façon dynamique ressemble à son homologue élu de façon statique.
+Le modèle \rpsge représentant le \cn élu de façon dynamique ressemble à son homologue élu de façon statique.
 Cependant, en raison de l'élection dynamique, tous les nœuds vont assumer périodiquement le rôle de \cn et le rôle de capteur simple.
 Il est donc nécessaire d'ajouter, aux places et transitions des précédents \cns, une place \textsf{cNode} ainsi qu'une transition toujours autorisée, associée à une distribution exponentielle.
 La première permet d'indiquer à chaque instant si le nœud joue le rôle de \cn (si la place contient un jeton) ou bien de capteur simple (cas contraire).
@@ -174,7 +178,7 @@ Le modèle est représenté sur la figure~\ref{sa:fig:cnodegspn2}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=.6\linewidth]{\chapterfig/genNode_GSPN.pdf}
-    \caption{Modèle RPSGE d'un \cn élu de manière \emph{dynamique}}\label{sa:fig:cnodegspn2}
+    \caption{Modèle \rpsge d'un \cn élu de manière \emph{dynamique}}\label{sa:fig:cnodegspn2}
 \end{figure}
 
         \subsubsection{Modélisation du cluster}
@@ -189,7 +193,7 @@ La représentation du cluster est donnée en figure~\ref{sa:fig:petricluster}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=\linewidth]{\chapterfig/PetriNet_DoS_9x9_fixedGnodes.pdf}
-    \caption{Modèle RPSGE d'un cluster (topologie: grille $3\times3$) comprenant un nœud compromis et deux \cns statiques}\label{sa:fig:petricluster}
+    \caption{Modèle \rpsge d'un cluster (topologie: grille $3\times3$) comprenant un nœud compromis et deux \cns statiques}\label{sa:fig:petricluster}
 \end{figure}
 Également dans l'optique de simplifier la représentation graphique, les transitions \textsf{e-on} et \textsf{e-end}, ainsi que la place \textsf{emptying buff}, ont été remplacées par une boite blanche associée à la fonction de vidage de la place \textsf{In\_buff} des nœuds.
 
@@ -202,14 +206,14 @@ Tout d'abord, la figure~\ref{sa:fig:petridyn} représente le cluster comme nous 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{\chapterfig/PetriNet_DoS_9x9_noElection.pdf}
-    \caption{Modèle RPSGE pour le trafic d'un cluster (topologie: grille $3\times3$) comprenant un nœud compromis et deux \cns élus de façon dynamique}\label{sa:fig:petridyn}
+    \caption{Modèle \rpsge pour le trafic d'un cluster (topologie: grille $3\times3$) comprenant un nœud compromis et deux \cns élus de façon dynamique}\label{sa:fig:petridyn}
 \end{figure}
 Les huit nœuds non compromis peuvent endosser alternativement les rôles de capteur simple et de \cn (leur représentation a été simplifiée par rapport à la figure~\ref{sa:fig:cnodegspn2}).
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{\chapterfig/PetriNet_DoS_9x9_gNodeElection.pdf}
-    \caption{Modèle RPSGE pour l'élection dynamique de deux \cns parmi les nœuds du cluster}\label{sa:fig:petrielec}
+    \caption{Modèle \rpsge pour l'élection dynamique de deux \cns parmi les nœuds du cluster}\label{sa:fig:petrielec}
 \end{figure}
 En considérant $n$ comme le nombre de résultats possibles à l'élection, le module représentant l'élection dynamique des \cns comprend:
 \begin{itemize}
@@ -221,17 +225,18 @@ Dans notre cas, pour élire deux \cns au sein du cluster, et en supposant que le
 À la fin d'une période d'activité des \cns, une nouvelle élection est déclenchée.
 La transition minutée correspondant aux \cns élus pour la période qui s'achève est déclenchée; les jetons présents dans les places \textsf{cNode} de ces \cns sont consommés, et produisent ainsi un jeton dans l'unique place centrale du module.
 Chaque transition immédiate tente alors de produire un jeton.
-Comme elles sont mutuellement exclusives, mais ont la même priorité et le même poids (voir \sssref{sa:subsubsec:presRPSGE}), un tirage aléatoire a lieu pour déterminer l'unique transition qui est franchie et produit ses jetons.
+Comme elles sont mutuellement exclusives, mais ont la même priorité et le même poids (voir \sssref{sa:subsubsec:presRPSGe}), un tirage aléatoire a lieu pour déterminer l'unique transition qui est franchie et produit ses jetons.
 Ceux-ci sont envoyés dans les places \textsf{cNode} des nœuds élus pour la période qui débute, activant au passage leurs fonctionnalités de \cns.
 %===============================================================================
     \subsection{Logique stochastique avec automates hybrides}
 
         \subsubsection{Présentation de la logique stochastique avec automates hybrides}
-La logique stochastique avec automates hybrides (LSAH, ou bien \textit{Hybrid Automata Stochastic Logic}, \textit{HASL}) est un langage récent, qui introduit un framework regroupant des études de \textit{model checking} et d'évaluation des performances ainsi que de fiabilité sur des processus stochastiques à événements discrets (PSED) exprimés sous forme de réseaux de \textsc{Petri} stochastiques généralisés (RPSG)~\cite{BDDHP11hasl}.
-Plus concrètement, à partir d'un modèle RPSG, les mesures de performances sont exprimées à l'aide de formules LSAH avant que leur soit appliquées des fonctions de \textit{model checking} statique permettant de vérifier automatiquement ces formules.
+La logique stochastique avec automates hybrides (\lsah; \textit{Hybrid Automata Stochastic Logic} en anglais) est un langage récent, qui introduit une architecture regroupant des études de \textit{model checking} et d'évaluation des performances ainsi que de fiabilité sur des processus stochastiques à événements discrets (PSED) exprimés sous forme de réseaux de \textsc{Petri} stochastiques généralisés (\rpsg)~\cite{BDDHP11hasl}.
+Plus concrètement, à partir d'un modèle \rpsg, les mesures de performances sont exprimées à l'aide de formules \lsah avant que leur soit appliquées des fonctions de \textit{model checking} statique permettant de vérifier automatiquement ces formules.
 %en place de vérifications, en termes d'études statistiques, de modèles stochastiques~\cite{BDDHP11hasl}.
+\nomenclature{LSAH}{Logique stochastique avec automates hybrides}
 
-Pour bien comprendre le fonctionnement de LSAH, voici quelques rappels sur le \textit{model checking}: il s'agit d'une procédure de vérification formelle utilisant:
+Pour bien comprendre le fonctionnement de \lsah, voici quelques rappels sur le \textit{model checking}: il s'agit d'une procédure de vérification formelle utilisant:
 \begin{itemize}
     \item un modèle $M$ à états discrets;
     \item une propriété formelle exprimée par une formule de logique temporelle $\phi$.
@@ -239,13 +244,14 @@ Pour bien comprendre le fonctionnement de LSAH, voici quelques rappels sur le \t
 Un algorithme est alors utilisé pour déterminer automatiquement si $\phi$ vérifie $M$ (ce que l'on note $M\models\phi$).
 Dans le cas d'un modèle stochastique, des probabilités sont associées aux formules.
 Vérifier que $M\models\phi$ revient alors à déterminer la probabilité de la formule $\phi$ dans le contexte du modèle $M$.
-LSAH étend ce concept dans le sens où l'évaluation d'une formule peut donner n'importe quel nombre réel, et représenter ainsi une probabilité aussi bien que toute autre mesure de performance.
-À cette fin, LSAH fait appel à des automates linéaires hybrides (ALH).
-Un ALH résulte, de manière résumée, de la généralisation des automates temporels dont les variables «~horloges~» sont remplacées par des variables de données réellement évaluées.
-Basée sur ce modèle une formule LSAH comprend ainsi deux sous-éléments:
+\lsah étend ce concept dans le sens où l'évaluation d'une formule peut donner n'importe quel nombre réel, et représenter ainsi une probabilité aussi bien que toute autre mesure de performance.
+À cette fin, \lsah fait appel à des automates linéaires hybrides (\alh).
+\nomenclature{ALH}{Automate linéaire hybride}
+Un \alh résulte, de manière résumée, de la généralisation des automates temporels dont les variables «~horloges~» sont remplacées par des variables de données réellement évaluées.
+Basée sur ce modèle une formule \lsah comprend ainsi deux sous-éléments:
 \begin{itemize}
-    \item un ALH permettant la sélection des exécutions temporelles à retenir à partir du modèle RPSG considéré, cette sélection étant le fruit de la syncronisation entre une exécution générée par le modèle RPSG et l'ALH;
-    \item une expression $Z$, représentant la mesure à évaluer, construite à l'aide des variables de l'ALH selon la syntaxe suivante:
+    \item un \alh permettant la sélection des exécutions temporelles à retenir à partir du modèle \rpsg considéré, cette sélection étant le fruit de la syncronisation entre une exécution générée par le modèle \rpsg et l'\alh;
+    \item une expression $Z$, représentant la mesure à évaluer, construite à l'aide des variables de l'\alh selon la syntaxe suivante:
     \[
         \begin{split}
             Z ::= & \ E(Y)\ |\ Z+Z\ |\ Z \times Z\\
@@ -258,20 +264,20 @@ Basée sur ce modèle une formule LSAH comprend ainsi deux sous-éléments:
     \begin{itemize}
         \item $x$ est une variable de données de l'automate:
         \item $y$ est une expression arithmétique à partir de ces variables de données;
-        \item $Y$ est une variable de chemin aléatoire, \cad une variable évaluée à l'aide d'un chemin de syncronisation, lui-même créé par la syncronisation entre une trajectoire du modèle RPSG et l'ALH;
+        \item $Y$ est une variable de chemin aléatoire, \cad une variable évaluée à l'aide d'un chemin de syncronisation, lui-même créé par la syncronisation entre une trajectoire du modèle \rpsg et l'\alh;
         \item $\mbox{last}(y)$ est la dernière des valeurs endossées par l'expression $y$ le long d'un chemin syncronisé; $\mbox{min}(y)$ et $\mbox{max}(y)$ sont les valeurs optimales obtenues le long de ce chemin. $\mbox{int}(y)$ est l'intégrale d'$y$, et $\mbox{avg}(y)$ la moyenne des valeurs obtenues le long du chemin.
     \end{itemize}
 \end{itemize}
 
-Au final, LSAH fonctionne de la façon suivante:
+Au final, \lsah fonctionne de la façon suivante:
 \begin{enumerate}
-    \item le système est exprimé sous la forme d'un modèle RPSG et d'une formule LSAH;
-    \item LSAH génère de façon itérative les trajectoires à partir de l'espace d'états du modèle RPSG et les syncronise avec l'ALH;
-    \item les trajectoires acceptées par l'ALH sont évaluées pour obtenir l'estimation de la mesure étudiée. Les trajectoires refusées sont abandonnées.
+    \item le système est exprimé sous la forme d'un modèle \rpsg et d'une formule \lsah;
+    \item \lsah génère de façon itérative les trajectoires à partir de l'espace d'états du modèle \rpsg et les syncronise avec l'\alh;
+    \item les trajectoires acceptées par l'\alh sont évaluées pour obtenir l'estimation de la mesure étudiée. Les trajectoires refusées sont abandonnées.
 \end{enumerate}
 
-        \subsubsection{Automate linéaire hybride et formule LSAH associés au modèle utilisé}
-Nous présentons ici quelques exemples de formules LSAH, constitués des expressions LSAH et d'un automate hybride linéaire hybride (ALH) associé au modèle RPSGE présenté plus haut (en figure~\ref{sa:fig:petridyn}).
+        \subsubsection{Automate linéaire hybride et formule \lsah associés au modèle utilisé}
+Nous présentons ici quelques exemples de formules \lsah, constitués des expressions \lsah et d'un automate hybride linéaire hybride (\alh) associé au modèle \rpsge présenté plus haut (en figure~\ref{sa:fig:petridyn}).
 Ces exemples présentent une manière de mesurer des données sur un nœud du \rc à partir de la version modélisée sous forme de réseaux de \textsc{Petri}, à fin d'étude, ou bien de comparaison de notre solution avec d'autres systèmes de détection des attaques de type «~\dds~».
 Ces exemples peuvent en outre être modélisés facilement avec l'outil de \textit{model checking} \textsf{COSMOS}~\cite{BDDHP11cosmos}.
 
@@ -287,14 +293,14 @@ L'automate linéaire hybride est présenté en figure~\ref{sa:fig:lha}.
 \begin{figure}[H]
     \centering
     \includegraphics[width=.8\linewidth]{\chapterfig/LHA1.pdf}
-    \caption{Automate linéaire hybride permettant d'effectuer des mesures sur le modèle RPSGE proposé}\label{sa:fig:lha}
+    \caption{Automate linéaire hybride permettant d'effectuer des mesures sur le modèle \rpsge proposé}\label{sa:fig:lha}
 \end{figure}
 Cet automate comprend deux états, et fait références aux variables que nous venons de définir.
-Ses transitions sont franchies lorsqu'un élément survient (par exemple: égalité de $x_t$ à $T$, ou franchissement d'une transition sur le modèle RPSGE); nous y reviendrons.
+Ses transitions sont franchies lorsqu'un élément survient (par exemple: égalité de $x_t$ à $T$, ou franchissement d'une transition sur le modèle \rpsge); nous y reviendrons.
 L'état de gauche, que l'on nommera $e_1$, contient le taux de variation (autrement dit, la dérivée première) de chacune des quatre variables décrites:
 \begin{itemize}
     \item À chaque unité de temps passée, le temps global (la variable $x_t$) est incrémenté de $\dot{x}_t=1$;
-    \item $x_{d_i}$ et $x_{\mathit{TX}_i}$ sont inchangées tant qu'aucune transition du modèle RPSGE n'est franchie.
+    \item $x_{d_i}$ et $x_{\mathit{TX}_i}$ sont inchangées tant qu'aucune transition du modèle \rpsge n'est franchie.
         Leurs taux de variation $\dot{x}_{d_i}$ et $\dot{x}_{\mathit{TX}_i}$ sont nuls;
     \item $x_{\mathit{bf}_i}$ est incrémentée avec un taux proportionnel au nombre de jetons présents dans le tampon d'entrée de $i$ (lorsque $i$ joue le rôle de \cn).
         On notera ce taux $\dot{x}_{\mathit{bf}_i}$.
@@ -303,21 +309,21 @@ $e_1$ comporte également trois transitions, exprimées sous la forme suivante: 
 Il s'agit des transitions suivantes:
 \begin{itemize}
     \item la première transition qui boucle sur $e_1$: $e_1\xrightarrow{\mathit{true},\{\mathsf{chkYES_i}\},(x_{d_i}:=x_{d_i}+1)}{e_1}$.
-        Elle correspond à l'évènement associé au passage de la transition \textsf{check\_YES} du nœud $i$ sur le modèle RPSGE du cluster (présenté en figure~\ref{sa:fig:petridyn}).
+        Elle correspond à l'évènement associé au passage de la transition \textsf{check\_YES} du nœud $i$ sur le modèle \rpsge du cluster (présenté en figure~\ref{sa:fig:petridyn}).
         Lorsque la transition est franchie sur le réseau de \textsc{Petri}, quelle que soit la valeur de l'«~horloge~» $x_t$ (condition $\mathit{true}$), la transition correspondante sur l'automate linéaire hybride est elle-aussi franchie\footnote{Attention: les transitions du réseau de \textsc{Petri}, représentées par des rectangles et reliées aux places par des arcs, ne doivent pas être confondues avec les transitions des automates, représentées par des arcs, et reliant les états.}.
         Comme la transition du réseau de \textsc{Petri} correspond à une nouvelle détection de trafic anormal par le nœud $i$, la transition de l'automate a pour effet de mettre à jour la valeur de $x_{d_i}$, en l'incrémentant de $1$;
     \item une deuxième transition qui boucle elle aussi sur $e_1$: $e_1\xrightarrow{\mathit{true},\{\mathsf{TX_i}\},(x_{\mathit{TX}_i}:=x_{\mathit{TX}_i}+1)}{e_1}$.
-        Cette transition fonctionne de façon identique à la précédente, à la différence près que la transition du réseau de \textsc{Petri} concernée n'est plus \textsf{check\_YES} mais \textsf{TX}, et la variable de l'automate est $x_{\mathit{TX}_i}$: lorsque le nœud $i$ envoie un message (et que \textsf{TX} est franchie sur le modèle RPSGE), la variable $x_{\mathit{TX}_i}$ est incrémentée de $1$;
+        Cette transition fonctionne de façon identique à la précédente, à la différence près que la transition du réseau de \textsc{Petri} concernée n'est plus \textsf{check\_YES} mais \textsf{TX}, et la variable de l'automate est $x_{\mathit{TX}_i}$: lorsque le nœud $i$ envoie un message (et que \textsf{TX} est franchie sur le modèle \rpsge), la variable $x_{\mathit{TX}_i}$ est incrémentée de $1$;
     \item une dernière transition qui mène de $e_1$ à $e_2$.
-        Cette transition conduit à l'état final de l'automate, qui accepte et valide le chemin des transitions parcourues pour l'étudier à l'aide des formules LSAH: $e_1\xrightarrow{(x_t==T),\{\mathit{ALL}\},\emptyset}{e_2}$.
+        Cette transition conduit à l'état final de l'automate, qui accepte et valide le chemin des transitions parcourues pour l'étudier à l'aide des formules \lsah: $e_1\xrightarrow{(x_t==T),\{\mathit{ALL}\},\emptyset}{e_2}$.
         La transition est autorisée lorsque $x_t$ vaut $T$, autrement dit: elle est déclenchée toutes les $T$ unités de temps.
         Elle accepte donc n'importe quel chemin dans l'automate, dont la durée est de $T$ unités de temps.
-        Elle ne dépend pas d'une transition particulière du modèle RPSGE (puisqu'elle les acceptes toutes, $\{\mathit{ALL}\}$).
+        Elle ne dépend pas d'une transition particulière du modèle \rpsge (puisqu'elle les acceptes toutes, $\{\mathit{ALL}\}$).
         Aucune action sur les variables n'est effectuée lorsque la transition est franchie.
 \end{itemize}
 
-Une fois un chemin validé par l'automate, il peut être analysé à l'aide de formule LSAH.
-Voici quelques exemples de formules LSAH permettant d'obtenir plusieurs valeurs sur le cluster considéré à partir des variables définies plus haut pour l'automate:
+Une fois un chemin validé par l'automate, il peut être analysé à l'aide de formules \lsah.
+Voici quelques exemples de formules \lsah permettant d'obtenir plusieurs valeurs sur le cluster considéré à partir des variables définies plus haut pour l'automate:
 \begin{itemize}
     \item $Z_1\equiv E(\mbox{last}(x_{d_i}))$: le nombre attendu d'attaques détectées par le \cn $i$ après $T$ unités de temps;
     \item $Z_2\equiv E(\mbox{last}(x_{d_i}+x_{d_{i'}}))$: la somme attendue des attaques détectées par les nœuds $i$ et $i'$ après $T$ unités de temps;

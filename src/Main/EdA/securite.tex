@@ -1,23 +1,23 @@
 % vim: set spelllang=fr foldmethod=marker:
-\section{Sécurité dans les \rcs}\label{ea:sec:secu}
+\section{Sécurité\index{securité@sécurité} dans les \rcs}\label{ea:sec:secu}
 
 \subsection{Plusieurs problématiques}
 
-La sécurité des systèmes informatiques a pour particularité de constituer un domaine transversal à pratiquement tous les autres domaines de l'informatique, dans le sens où pour sécuriser la totalité d'un système, chaque couche, chaque technologie utilisée doit être sure.
-Ainsi, la sécurité des réseaux constitue en soi tout un domaine d'étude, qui se décompose à son tour en plusieurs problématiques.
+La \secu des systèmes informatiques a pour particularité de constituer un domaine transversal à pratiquement tous les autres domaines de l'informatique, dans le sens où pour sécuriser la totalité d'un système, chaque couche, chaque technologie utilisée doit être sure.
+Ainsi, la \secu des réseaux constitue en soi tout un domaine d'étude, qui se décompose à son tour en plusieurs problématiques.
 Les principales garanties que l'on cherche à apporter à un réseau sont les suivantes:
 \begin{itemize}
-    \item la confidentialité des communications, \cad qu'un attaquant ne doit pas être en mesure d'accéder au contenu utile des messages échangés;
-    \item l'intégrité des messages, autrement dit l'assurance qu'ils n'ont pas été modifiés par un attaquant durant leur transfert;
-    \item l'authentification des correspondants, propriété qui assure à un agent du réseau que son interlocuteur est bien celui qu'il prétend être;
-    \item la non-répudiation, qui empêche un agent de nier l'envoi d'un message émis;
-    \item la protection contre le rejeu vise à prévenir les attaques basées sur l'injection de paquets capturés au préalable par l'attaquant dans le but de générer du trafic supplémentaire;
-    \item la sécurité physique des capteurs, nécessaire pour prévenir l'accès au contenu des communications ou au matériel cryptographique par exemple;
-    \item la disponibilité, c'est à dire la résistance aux attaques de \dds. Cette problématique est centrale pour les travaux présentés ici, et sera développée plus largement que les autres dans la \sref{ea:sec:dos};
+    \item la \idx{confidentialité} des communications, \cad qu'un attaquant ne doit pas être en mesure d'accéder au contenu utile des messages échangés;
+    \item l'\integrite des messages, autrement dit l'assurance qu'ils n'ont pas été modifiés par un attaquant durant leur transfert;
+    \item l'\idx{authentification} des correspondants, propriété qui assure à un agent du réseau que son interlocuteur est bien celui qu'il prétend être;
+    \item la \idx{non-répudiation}, qui empêche un agent de nier l'envoi d'un message émis;
+    \item la protection contre le \idx{rejeu} vise à prévenir les attaques basées sur l'\idx{injection} de paquets capturés au préalable par l'attaquant dans le but de générer du trafic supplémentaire;
+    \item la sécurité physique\index{securité@sécurité!sécurité physique} des capteurs, nécessaire pour prévenir l'accès au contenu des communications ou au matériel cryptographique\index{cryptographie} par exemple;
+    \item la \idx{disponibilité}, c'est à dire la résistance aux attaques de \dds. Cette problématique est centrale pour les travaux présentés ici, et sera développée plus largement que les autres dans la \sref{ea:sec:dos};
 \end{itemize}
-À noter qu'il existe de nombreuses études, voire même des travaux de synthèse, qui se sont déjà concentrés sur la sécurité des \rcs~\cite{DYK12,AD14}.
+À noter qu'il existe de nombreuses études, voire même des travaux de synthèse, qui se sont déjà concentrés sur la \secu des \rcs~\cite{DYK12,AD14}.
 
-\subsection{Confidentialité}
+\subsection{Confidentialité\index{confidentialité}}
 
 Les informations échangées sur un réseau sont dites confidentielles si un attaquant se retrouve dans l'impossibilité d'accéder au contenu utile de l'échange.
 On trouve en anglais les termes \textit{data secrecy}, \textit{privacy} ou encore \textit{confidentiality} pour traiter de cette notion: la plupart des auteurs n'établissent pas de distinctions spécifiques entre ces expressions.
@@ -25,146 +25,164 @@ Dans notre cas, il s'agit d'interdire l'accès aux données utiles des paquets �
 Mais le terme \textit{privacy}, qui se traduit par « vie privée », « intimité », présente aussi l'intérêt de s'appliquer également aux questions d'accès aux données: lorsque des capteurs sont utilisés sur des patients humains à des fins de surveillance médicale~\cite{SZFDXC14}, il est essentiel d'établir un contrôle sur l'accès aux données collectées: le patient et son médecin doivent y avoir accès, et il serait souhaitable que d'autres médecins urgentistes puissent y recourir au besoin; tout autre accès doit impérativement être refusé.
 Cette notion ne sera pas abordée plus avant dans cette étude, nous conserverons un point de vue interne au réseau.
 
-Les attaques portant sur la confidentialité des données sont multiples.
-L'attaquant peut adopter un comportement passif (simplement à l'écoute du trafic) ou bien actif (injection de paquets pour déclencher l'envoi de paquets en réponse, détournement de trafic).
+Les attaques portant sur la \idx{confidentialité} des données sont multiples.
+L'attaquant peut adopter un comportement passif (simplement à l'écoute du trafic) ou bien actif (\idx{injection} de paquets pour déclencher l'envoi de paquets en réponse, détournement de trafic).
 Pour de nombreux réseaux plus « classiques », l'utilisation d'un câble de transmission (Ethernet, fibre optique\dots) permet de poser une première barrière pour les écoutes passives.
 Mais dans les \rcs, les données sont échangées par le biais d'ondes électromagnétiques que tout attaquant à portée peut recevoir.
 Il convient donc de trouver des solutions permettant de dissimuler le contenu des messages échangés, à défaut de prévenir l'accès aux messages eux-mêmes.
 
-Les méthodes conventionnelles pour assurer la confidentialité des communications sont donc des solutions cryptographiques: des algorithmes de chiffrement symétrique (une même clé sert à chiffrer puis déchiffrer le message) ou bien asymétrique (une clé pour le chiffrement, une seconde pour déchiffrer) sont utilisés dans tous types de communications pour empêcher l'accès à l'information à quiconque ne possède pas la clé adéquate.
-AES (\textit{Advanced Encryption Standard})~\cite{aes}, basé sur l'algorithme Rijndael, en est l'un des exemples les plus célèbres et les plus utilisés aujourd'hui.
-Certaines études se sont penchées sur les vitesses d'exécution relatives de différents algorithmes utilisés pour le chiffrement et l'authentification des données~\cite{SOBMCN11}.
+Les méthodes conventionnelles pour assurer la \idx{confidentialité} des communications sont donc des solutions cryptographiques: des algorithmes de chiffrement symétrique\index{cryptographie!cryptographie symétrique} (une même clé sert à chiffrer puis déchiffrer le message) ou bien asymétrique\index{cryptographie!cryptographie asymétrique} (une clé pour le \idx{chiffrement}, une seconde pour déchiffrer) sont utilisés dans tous types de communications pour empêcher l'accès à l'information à quiconque ne possède pas la clé adéquate.
+\idx{AES} (\textit{Advanced Encryption Standard})~\cite{aes}, basé sur l'algorithme Rijndael, en est l'un des exemples les plus célèbres et les plus utilisés aujourd'hui.
+Certaines études se sont penchées sur les vitesses d'exécution relatives de différents algorithmes utilisés pour le \idx{chiffrement} et l'\idx{authentification} des données~\cite{SOBMCN11}.
+\nomenclature{AES}{\textit{Advanced Encryption Standard}}
 
-Idéalement, pour des \rcs, ces algorithmes doivent être implémentés de telle façon que soit respectées deux sous-problématiques liéés au chiffrement:
+Idéalement, pour des \rcs, ces algorithmes doivent être implémentés de telle façon que soit respectées deux sous-problématiques liéés au \idx{chiffrement}:
 \begin{itemize}
-    \item la confidentialité persistante (\textit{forward secrecy} en anglais, littéralement « confidentialité vers l'avant »), qui permet d'empêcher un nœud de déchiffrer les messages une fois qu'il a quitté le réseau;
-    \item la confidentialité « vers l'arrière » (\textit{backward secrecy}), chargée d'assurer qu'un nouveau nœud entrant sur le réseau n'est pas en mesure de déchiffrer un message émis avant son arrivée.
+    \item la confidentialité persistante\index{confidentialité!confidentialité persistante} (\textit{forward secrecy} en anglais, littéralement « confidentialité vers l'avant »), qui permet d'empêcher un nœud de déchiffrer les messages une fois qu'il a quitté le réseau;
+    \item la confidentialité « vers l'arrière »\index{confidentialité!confidentialité vers l'arrière} (\textit{backward secrecy}), chargée d'assurer qu'un nouveau nœud entrant sur le réseau n'est pas en mesure de déchiffrer un message émis avant son arrivée.
 \end{itemize}
-Nous n'entrerons pas plus en détail dans les mécanismes cryptographiques impliqués.
+Nous n'entrerons pas plus en détail dans les mécanismes cryptographiques\index{cryptographie} impliqués.
 
-Les algorithmes de chiffrement nécessitent en général de nombreux calculs, voire beaucoup de mémoire tampon, pour être mis en œuvre, surtout lorsque l'appareil ne dispose pas de matériel dédié~\cite{PLP06}, ce qui les rend parfois peu adaptés aux \rcs.
-Qui plus est, ils requièrent la plupart du temps la mise en place d'une architecture d'échange et de gestion du matériel cryptographique, notamment en ce qui concerne les échanges de clés: cette architecture peut considérablement alourdir la structure du réseau ainsi que les échanges en termes de volume de données de contrôle.
+Les algorithmes de \idx{chiffrement} nécessitent en général de nombreux calculs, voire beaucoup de mémoire tampon, pour être mis en œuvre, surtout lorsque l'appareil ne dispose pas de matériel dédié~\cite{PLP06}, ce qui les rend parfois peu adaptés aux \rcs.
+Qui plus est, ils requièrent la plupart du temps la mise en place d'une architecture d'échange et de gestion du matériel cryptographique\index{cryptographie}, notamment en ce qui concerne les échanges de clés: cette architecture peut considérablement alourdir la structure du réseau ainsi que les échanges en termes de volume de données de contrôle.
 Plusieurs solutions adaptées aux capacités limitées des capteurs ont donc été proposées~\cite{OX09}.
-Certaines d'entre elles demeurent basées sur des suites de protocoles dont les algorithmes de chiffrement sont choisis au mieux pour répondre aux capacités des capteurs~\cite{SOBMCN11,KR12}; ces solutions couvrent le plus souvent d'autres problématiques que la seule confidentialité des données, et certaines seront présentées dans la sous-section suivante.
+Certaines d'entre elles demeurent basées sur des suites de protocoles dont les algorithmes de \idx{chiffrement} sont choisis au mieux pour répondre aux capacités des capteurs~\cite{SOBMCN11,KR12}; ces solutions couvrent le plus souvent d'autres problématiques que la seule \idx{confidentialité} des données, et certaines seront présentées dans la sous-section suivante.
 D'autres mettent en place des mécanismes propres à profiter de l'architecture particulière de ces réseaux, en voici certains exemples.
 
-Dans le cas d'un attaquant « parasite » qui chercherait à exploiter les mesures relevées par le \rc déployé par d'autres, des solutions comme GossiCrypt~\cite{LPH08}, basée sur un algorithme simple d'échanges de clés entre les nœuds et la \sdb, ainsi que sur un renouvellement probabiliste du chiffrement: à chaque étape du message dans le réseau, le nœud relai charger de renvoyer le message choisit aléatoirement de chiffrer à son tour, ou non, le contenu du paquet.
-Les clés de chiffrement des nœuds sont renouvelées régulièrement, mais pas toutes à la fois, de telle sorte qu'un nœud compromis par un attaquant ne devrait pouvoir déchiffrer le contenu que d'un nombre restreints de paquets.
+Dans le cas d'un attaquant « parasite » qui chercherait à exploiter les mesures relevées par le \rc déployé par d'autres, des solutions comme GossiCrypt~\cite{LPH08}, basée sur un algorithme simple d'échanges de clés entre les nœuds et la \sdb, ainsi que sur un \idx{renouvellement} probabiliste du \idx{chiffrement}: à chaque étape du message dans le réseau, le nœud relai chargé de renvoyer le message choisit aléatoirement de chiffrer à son tour, ou non, le contenu du paquet.
+Les clés de \idx{chiffrement} des nœuds sont renouvelées régulièrement, mais pas toutes à la fois, de telle sorte qu'un nœud compromis par un attaquant ne devrait pouvoir déchiffrer le contenu que d'un nombre restreints de paquets.
 
-Un usage intéressant de la cryptographie est le recours au chiffrement dit « homomorphique », qui permet d'effectuer certaines opérations sur des données chiffrées sans avoir besoin, justement, de les déchiffrer.
-Proposés pour les \rcs~\cite{BBTY14}, ces algorithmes permettent de procéder, dans une certaine mesure, à des opérations de compression et d'agrégation de données (par exemple) au cours du trajet d'un paquet, sans avoir à déchiffrer puis chiffrer à nouveau son contenu à chaque étape.
+Un usage intéressant de la \idx{cryptographie} est le recours au chiffrement dit « homomorphique »\index{chiffrement!chiffrement homomorphique}, qui permet d'effectuer certaines opérations sur des données chiffrées sans avoir besoin, justement, de les déchiffrer.
+Proposés pour les \rcs~\cite{BBTY14}, ces algorithmes permettent de procéder, dans une certaine mesure, à des opérations de \idx{compression} et d'\idx{agrégation} de données (par exemple) au cours du trajet d'un paquet, sans avoir à déchiffrer puis chiffrer à nouveau son contenu à chaque étape.
 
-À part les solutions de chiffrement, d'autres méthodes consistent plus simplement à compliquer l'accès aux paquets plutôt qu'à chiffrer le contenu.
+À part les solutions de \idx{chiffrement}, d'autres méthodes consistent plus simplement à compliquer l'accès aux paquets plutôt qu'à chiffrer le contenu.
 Moins robustes, ces solutions sont aussi moins couteuses en termes de calculs et, \infine, de consommation énergétique.
 Certaines méthodes proposent ainsi de découper les paquets à envoyer en fragments, qui seront envoyés à travers le réseau par des routes distinctes.
 Ces fragments seront combinés de telle sorte que seule la détention d'un certain nombre d'entre eux permette de reconstituer le message original.
-Cette combination des fragments peut faire appel à des mécanismes très simples, par exemple un « ou exclusif » logique comme avec la méthode SDMP (\textit{Securing Data based on Multi-Path routing})~\cite{BM10}, ou bien à un mécanisme un peu plus élaboré de partage de secret entre plusieurs entités, comme l'a proposé par exemple \textsc{Schamir}~\cite{Sha79}.
+Cette combinaison des fragments peut faire appel à des mécanismes très simples, par exemple un « ou exclusif » logique comme avec la méthode SDMP (\textit{Securing Data based on Multi-Path routing})~\cite{BM10}, ou bien à un mécanisme un peu plus élaboré de \idx{partage de secret} entre plusieurs entités, comme l'a proposé par exemple \textsc{Schamir}~\cite{Sha79}.
+\nomenclature{SDMP}{\textit{Securing Data based on Multi-Path routing}}
 Ces méthodes ont pour intérêt de gêner l'attaquant pour la reconstruction des messages dont il ne dispose que de quelques fragments.
 Elles sont inefficaces en revanche si l'attaquant contrôle toutes les routes du réseau, ou simplement s'il se trouve très proche géographiquement de l'émetteur ou du destinataire pour l'échange concerné.
-Plusieurs de ces méthodes peuvent être associées, pour ajuster au mieux le compromis entre la sécurité et l'économie des ressources.
-Nous avons ainsi proposé une solution pour assurer la confidentialité des échanges basée sur un système de priorités~\cite{MMB13}:
+Plusieurs de ces méthodes peuvent être associées, pour ajuster au mieux le compromis entre la \secu et l'économie des ressources.
+Nous avons ainsi proposé une solution pour assurer la \idx{confidentialité} des échanges basée sur un système de priorités~\cite{MMB13}:
 \begin{itemize}
     \item les paquets d'importance moindre peuvent être simplement découpés en fragment et envoyés par plusieurs routes distinctes selon la méthode SDMP;
-    \item les paquets dont le contenu est plus important peuvent se voir rajouter une couche de sécurité, comme avec l'usage de la méthode de secret partagé;
-    \item enfin, les messages d'importance critique, moins fréquents, utilisent des solutions plus lourdes, mais plus efficaces, de chiffrement cryptographique, qui seules sont à même d'apporter dans ce cas un degré convenable de sécurité.
+    \item les paquets dont le contenu est plus important peuvent se voir rajouter une couche de \secu, comme avec l'usage de la méthode de secret partagé;
+    \item enfin, les messages d'importance critique, moins fréquents, utilisent des solutions plus lourdes, mais plus efficaces, de \idx{chiffrement} cryptographique, qui seules sont à même d'apporter dans ce cas un degré convenable de \secu.
 \end{itemize}
 
-Il est à noter qu'aucune des méthodes présentées ici, qu'elles reposent ou non sur l'usage de chiffrement, n'empêchent un attaquant de pouvoir récolter des métadonnées sur les échanges effectués, et d'en déduire par exemple qui communique avec qui, ou quel est le volume des données échangées.
-Ces métadonnées n'ont que rarement une valeur importante dans les \rcs, et peuvent être en partie masquées, au besoin, par l'envoi de faux messages supplémentaires pour « brouiller les pistes », mais cela s'avèrerait très couteux pour le réseau.
+Il est à noter qu'aucune des méthodes présentées ici, qu'elles reposent ou non sur l'usage de \idx{chiffrement}, n'empêchent un attaquant de pouvoir récolter des métadonnées\index{metadonnees@métadonnées} sur les échanges effectués, et d'en déduire par exemple qui communique avec qui, ou quel est le volume des données échangées.
+Ces métadonnées\index{metadonnees@métadonnées} n'ont pas toujours une valeur importante dans les \rcs, et peuvent être en partie masquées, au besoin, par l'envoi de faux messages supplémentaires pour « brouiller les pistes », mais cela s'avèrerait très couteux pour le réseau.
 
-\subsection{Intégrité, authentification, non-répudiation, rejeu}
+\subsection{Intégrité, \idx{authentification}, \idx{non-répudiation}, \idx{rejeu}}
 
     \subsubsection{Les concepts}
-Assurer l'intégrité d'un message revient à s'assurer que le contenu utile du message n'a pas été altéré ou amputé entre sa création par l'émetteur et la réception par le destinataire final.
-Des méthodes cryptographiques peuvent être employées pour créer un condensat ou (s'il est utilisé avec une clé symétrique) un code d'authentification (MAC en anglais, pour \textit{Message Authentication Code}) des messages, permettant cette vérification.
+Assurer l'\integrite d'un message revient à s'assurer que le contenu utile du message n'a pas été altéré\index{altération} ou amputé entre sa création par l'émetteur et la réception par le destinataire final.
+Des méthodes cryptographiques\index{cryptographique} peuvent être employées pour créer un \idx{condensat} ou (s'il est utilisé avec une clé symétrique\index{cryptographie!cryptographie symétrique}) un code d'\idx{authentification} (\macc en anglais, pour \textit{Message Authentication Code}) des messages, permettant cette vérification.
+\nomenclature{MAC}{\textit{Message Authentication Code}}
 
-L'authentification sert à prouver la validité de l'expéditeur des messages.
-Il n'est pas suffisant, pour assurer la sécurité d'un réseau, de s'assurer que le contenu des messages est chiffré: il faut également s'assurer que l'entité avec laquelle on communique est bien qui elle prétend être.
-Cette précaution permet notamment de se prémunir de l'attaque de \textit{l'homme du milieu}.
-L'authentification regroupe en réalité à la fois l'authentification de deux parties l'une envers l'autre, et l'authentification d'un agent aux yeux de tous les autres membres du réseau, dans le cas d'une diffusion générale (\textit{broadcast}) des messages.
-Selon le cas, les \rcs peuvent également avoir besoin qu'un nœud s'identifie de façon spécifique auprès de la \sdb, ou bien encore, pour certains réseaux clusterisés, qu'il puisse s'authentifier auprès des autres membres du cluster (et prouver son appartenance à ce dernier).
-La signature des messages est le plus souvent réalisée à l'aide de mécanismes cryptographiques asymétriques (condensat signé à l'aide d'une clé privée).
+L'\idx{authentification} sert à prouver la validité de l'expéditeur des messages.
+Il n'est pas suffisant, pour assurer la \secu d'un réseau, de s'assurer que le contenu des messages est chiffré: il faut également s'assurer que l'entité avec laquelle on communique est bien qui elle prétend être.
+Cette précaution permet notamment de se prémunir de l'attaque de \textit{l'homme du milieu}\index{attaque de l'homme du milieu}.
+L'\idx{authentification} regroupe en réalité à la fois l'\idx{authentification} de deux parties l'une envers l'autre, et l'\idx{authentification} d'un agent aux yeux de tous les autres membres du réseau, dans le cas d'une diffusion générale (\textit{broadcast}) des messages.
+Selon le cas, les \rcs peuvent également avoir besoin qu'un nœud s'identifie de façon spécifique auprès de la \sdb, ou bien encore, pour certains réseaux clusterisés\index{clusterisation!réseau clusterisé}, qu'il puisse s'authentifier auprès des autres membres du cluster (et prouver son appartenance à ce dernier).
+La \idx{signature} des messages est le plus souvent réalisée à l'aide de mécanismes cryptographiques asymétriques\index{cryptographie!cryptographie asymétrique} (\idx{condensat} signé à l'aide d'une clé privée).
 
-La non-répudiation consiste à assurer qu'un agent du réseau ne peut plus nier avoir émis un paquet une fois celui-ci reçu par son destinataire.
-Concrètement, si un agent est le seul à posséder une clé privée utilisée pour la signature d'un paquet, il ne fait nul doute, une fois ce paquet reçu, que cet agent en question est bien à l'origine de la création du paquet, puisque nul autre agent du réseau n'est en mesure de le signer à sa place.
-L'usage de ces dispositifs de signature en font un aspect étroitement liée à l'authentification des messages.
-Indispensable dans les transactions en ligne, la non-répudiation n'est pas toujours essentielle dans les \rcs, mais peut s'avérer utile pour identifier de manière certaine l'auteur de comportements malveillants dans le réseau.
+La \idx{non-répudiation} consiste à assurer qu'un agent du réseau ne peut plus nier avoir émis un paquet une fois celui-ci reçu par son destinataire.
+Concrètement, si un agent est le seul à posséder une clé privée utilisée pour la \idx{signature} d'un paquet, il ne fait nul doute, une fois ce paquet reçu, que cet agent en question est bien à l'origine de la création du paquet, puisque nul autre agent du réseau n'est en mesure de le signer à sa place.
+L'usage de ces dispositifs de \idx{signature} en font un aspect étroitement liée à l'\idx{authentification} des messages.
+Indispensable dans les transactions en ligne, la \idx{non-répudiation} n'est pas toujours essentielle dans les \rcs, mais peut s'avérer utile pour identifier de manière certaine l'auteur de comportements malveillants dans le réseau.
 
-Les attaques par rejeu consistent pour un attaquant à capturer des paquets, même chiffrés, en transit sur le réseau, puis à les injecter à nouveau dans le réseau.
+Les attaques par \idx{rejeu} consistent pour un attaquant à capturer des paquets, même chiffrés, en transit sur le réseau, puis à les injecter\index{injection} à nouveau dans le réseau.
 Le but visé peut être de générer davantage de trafic, dans le but d'augmenter le volume de données capturées.
 Il s'agit par exemple de la méthode utilisée pour accélérer considérablement l'obtention de la clé d'accès à un réseau sans fil sécurisé à l'aide de la suite WEP (\textit{Wired Equivalent Privacy})~\cite{BGW01}.
+\nomenclature{WEP}{\textit{Wired Equivalent Privacy}}
 Un autre but recherché peut être de générer du trafic superflu dans le but de consommer inutilement les ressources du réseau, ce qui en fait potentiellement une attaque de \dds.
-Pour se prévenir de ce genre d'attaques, des moyens cryptographiques peuvent ici encore être mis en œuvre pour associer un identifiant unique à chaque paquet, de sorte qu'un paquet rejoué soit rejeté par les agents du réseau.
+Pour se prévenir de ce genre d'attaques, des moyens cryptographiques\index{cryptographie} peuvent ici encore être mis en œuvre pour associer un identifiant unique à chaque paquet, de sorte qu'un paquet rejoué soit rejeté par les agents du réseau.
 
-Ces différentes propriétés sont distinctes, mais elles reposent presque toujours sur l'usage de solution cryptographiques pour être préservées dans un réseau.
-Elles sont souvent liées entre elles, ainsi qu'à la confidentialité des données, car il est fréquent qu'un dispositif mis en place pour assurer l'une de ces propriétés permette également d'en assurer d'autre.
-Par exemple, l'usage d'un condensat signé permet d'assurer à la fois l'intégrité d'un message, la validité de son auteur, et d'empêcher ce dernier de répudier le message dans le futur.
+Ces différentes propriétés sont distinctes, mais elles reposent presque toujours sur l'usage de solution cryptographiques\index{cryptographie} pour être préservées dans un réseau.
+Elles sont souvent liées entre elles, ainsi qu'à la \idx{confidentialité} des données, car il est fréquent qu'un dispositif mis en place pour assurer l'une de ces propriétés permette également d'en assurer d'autre.
+Par exemple, l'usage d'un \idx{condensat} signé permet d'assurer à la fois l'\integrite d'un message, la validité de son auteur, et d'empêcher ce dernier de répudier le message dans le futur.
 
     \subsubsection{Les solutions}
-Une solution intéressante pour économiser des ressources consiste à n'introduire l'usage de solutions cryptographiques que lorsqu'elles deviennent nécessaires, et à s'en dispenser lorsque le réseau fonctionne correctement.
-Ce système a été proposé en association avec l'usage d'un « arbre d'agrégation sécurisée », structure du réseau utilisée pour le routage des paquets~\cite{WDSX07}.
-Lorsqu'un comportement malveillant est détecté dans le réseau, cet arbre permet de mettre en place rapidement et avec peu de données de contrôle un mécanisme d'authentification et de chiffrement des messages.
-Le danger de cette proposition repose sur la capacité du réseau à détecter les attaques: si aucun comportement suspect n'est constaté, aucune mesure de sécurité n'est mise en place.
-En cas d'écoute passive de la part de l'attaquant notamment, aucune mesure n'est appliquée pour protéger la confidentialité des données échangées.
+Une solution intéressante pour économiser des ressources consiste à n'introduire l'usage de solutions cryptographiques\index{cryptographie} que lorsqu'elles deviennent nécessaires, et à s'en dispenser lorsque le réseau fonctionne correctement.
+Ce système a été proposé en association avec l'usage d'un « arbre d'\idx{agrégation} sécurisée », structure du réseau utilisée pour le routage des paquets~\cite{WDSX07}.
+Lorsqu'un comportement malveillant est détecté dans le réseau, cet arbre permet de mettre en place rapidement et avec peu de données de contrôle un mécanisme d'\idx{authentification} et de \idx{chiffrement} des messages.
+Le danger de cette proposition repose sur la capacité du réseau à détecter les attaques: si aucun comportement suspect n'est constaté, aucune mesure de \secu n'est mise en place.
+En cas d'écoute passive de la part de l'attaquant notamment, aucune mesure n'est appliquée pour protéger la \idx{confidentialité} des données échangées.
 
-Plusieurs propositions concernent la mise en place de solutions classiques, mais « allégées »~\cite{HWMRKP06}, comme avec la mise en place d'une autorité de certification spécifique permettant l'authentification réciproque des nœuds deux à deux~\cite{GWZCK13}, ou bien basé sur des clés pré-distribuées~\cite{BSK13}.
-Le protocole MSPQS (\textit{Modified Secured Query Processing Scheme})~\cite{GD14} a été proposé pour sécurisé le transfert des données dans un réseau clusterisé à travers un découpage des échanges sous formes de requêtes et de réponses authentifiées qui contiennent des marqueurs temporels, et ne peuvent être réinjectés dans le réseau, ce qui le rend efficace pour protéger les nœuds des attaques par rejeu.
+Plusieurs propositions concernent la mise en place de solutions classiques, mais « allégées »~\cite{HWMRKP06}, comme avec la mise en place d'une autorité de certification spécifique permettant l'\idx{authentification} réciproque des nœuds deux à deux~\cite{GWZCK13}, ou bien basé sur des clés pré-distribuées~\cite{BSK13}.
+Le protocole MSPQS (\textit{Modified Secured Query Processing Scheme})~\cite{GD14} a été proposé pour sécurisé le transfert des données dans un réseau clusterisé à travers un découpage des échanges sous formes de requêtes et de réponses authentifiées qui contiennent des marqueurs temporels, et ne peuvent être réinjectés dans le réseau, ce qui le rend efficace pour protéger les nœuds des attaques par \idx{rejeu}.
+\nomenclature{MSPQS}{\textit{Modified Secured Query Processing Scheme}}
 
-De manière générale, les problèmes d'authentification, et dans une moindre mesure les autres problématiques soulevées dans cette sous-section, ont mené à la proposition de nombreuses architectures dédiées.
+De manière générale, les problèmes d'\idx{authentification}, et dans une moindre mesure les autres problématiques soulevées dans cette sous-section, ont mené à la proposition de nombreuses architectures dédiées.
 
     \subsubsection{Architectures de sécurité}\label{ea:sss:archi}
-On entend par « architecture de sécurité » un ensemble de protocoles et de mécanismes déployés dans le réseau en vue d'apporter certaines garanties en termes de sécurité.
-L'équivalent anglais serait \textit{secutity framework}.
+On entend par « \idx{architecture de sécurité} » un ensemble de protocoles et de mécanismes déployés dans le réseau en vue d'apporter certaines garanties en termes de \secu.
+L'équivalent anglais serait \textit{security framework}.
 Les solutions proposées sont multiples~\cite{HI12,GWZC13,SS14-rev}; nous allons présenter ici les plus connues.
 
-Ainsi SPINS (\textit{Security Protocols for Sensor Networks}), élaboré en 2002~\cite{PSWCT02}, est l'une des premières solutions proposées dans la littérature pour sécuriser les échanges dans les \rcs, et sert de base pour de nombreuses solutions plus récentes.
-Il s'agit d'un système reposant sur deux blocs: SNEP (\textit{Secure Network Encryption Protocol}) fournit la confidentialité, l'authentification entre deux parties, l'intégrité et la protection contre le rejeu, le tout en préservant un faible volume de données de contrôle en en-tête des paquets.
-Des codes d'authentification des messages associés à un compteur partagé entre les interlocuteurs, et utilisé pour le bloc de chiffrement (le compteur est incrémenté après chaque bloc), sont employés à cette fin.
-Le second bloc est appelé $\mu$TESLA (version « micro » du \textit{Timed, Efficient, Streaming, Loss-tolerant Authentication Protocol}), il fournit des diffusions générales (\textit{broadcast}) authentifiées à l'aide de chaines de clés: ces chaines à sens uniques fournissent des clés associées à chaque intervalle de temps pour la signature des messages.
-Les paquets ainsi envoyés pendant l'intervalle en cours sont signés de manière symétrique à l'aide de la clé, tenue secrète correspondant à l'intervalle temporel; à la fin de cet intervalle, la clé est envoyée à tous les correspondants qui peuvent alors vérifier la légitimité des paquets enregistrés pendant la période.
-Le module SNEP a fait l'objet d'études comparatives sur les performances que lui confèrent différents algorithmes de chiffrement~\cite{SS14-snep}.
+Ainsi \idx{SPINS} (\textit{Security Protocols for Sensor Networks}), élaboré en 2002~\cite{PSWCT02}, est l'une des premières solutions proposées dans la littérature pour sécuriser les échanges dans les \rcs, et sert de base pour de nombreuses solutions plus récentes.
+Il s'agit d'un système reposant sur deux blocs: \idx{SNEP} (\textit{Secure Network Encryption Protocol}) fournit la \idx{confidentialité}, l'\idx{authentification} entre deux parties, l'\integrite et la protection contre le \idx{rejeu}, le tout en préservant un faible volume de données de contrôle en en-tête des paquets.
+Des codes d'\idx{authentification} des messages associés à un compteur partagé entre les interlocuteurs, et utilisé pour le bloc de chiffrement\index{chiffrement!bloc de chiffrement} (le compteur est incrémenté après chaque bloc), sont employés à cette fin.
+Le second bloc est appelé \idx{$\mu$TESLA} (version « micro » du \textit{Timed, Efficient, Streaming, Loss-tolerant Authentication Protocol}), il fournit des diffusions générales (\textit{broadcast}) authentifiées à l'aide de chaines de clés: ces chaines à sens uniques fournissent des clés associées à chaque intervalle de temps pour la \idx{signature} des messages.
+Les paquets ainsi envoyés pendant l'intervalle en cours sont signés de manière symétrique\index{cryptographie!cryptographie symétrique} à l'aide de la clé, tenue secrète correspondant à l'intervalle temporel; à la fin de cet intervalle, la clé est envoyée à tous les correspondants qui peuvent alors vérifier la légitimité des paquets enregistrés pendant la période.
+Le module SNEP a fait l'objet d'études comparatives sur les performances que lui confèrent différents algorithmes de \idx{chiffrement}~\cite{SS14-snep}.
+\nomenclature{TESLA}{\textit{Timed Efficient Stream Loss-tolerant Authentication}}
+\nomenclature{$\mu$-TESLA}{\textit{Micro version of the Timed Efficient Stream Loss-tolerant Authentication}}
+\nomenclature{SPINS}{\textit{Security Protocols for Sensor Networks}}
+\nomenclature{SNEP}{\textit{Secure Network Encryption Protocol}}
 
-TinySec~\cite{KSW04}, proposé en 2004, se réfère à SNEP, mais lui reproche une spécification incomplète.
-Cette architecture propose l'authentification seule, ou bien accompagnée de chiffrement, des paquets.
-Elle écarte volontairement la protection contre le rejeu, mais se penche très sérieusement sur l'implémentation d'une solution classique basée sur un algorithme de chiffrement en conjonction avec un code d'authentification des messages (MAC).
-Les algorithmes possibles de chiffrement, leurs différents modes, leurs vecteurs d'initialisation, les codes d'authentification, les mécanismes d'échange de clés possibles sont tous analysés en détail, afin de déterminer les avantages et les inconvénients de chacun pour un \rc.
+\idx{TinySec}~\cite{KSW04}, proposé en 2004, se réfère à \idx{SNEP}, mais lui reproche une spécification incomplète.
+Cette architecture\index{architecture de sécurité} propose l'\idx{authentification} seule, ou bien accompagnée de \idx{chiffrement}, des paquets.
+Elle écarte volontairement la protection contre le \idx{rejeu}, mais se penche très sérieusement sur l'implémentation d'une solution classique basée sur un algorithme de \idx{chiffrement} en conjonction avec un code d'\idx{authentification} des messages (\macc).
+Les algorithmes possibles de \idx{chiffrement}, leurs différents modes, leurs vecteurs d'initialisation, les codes d'\idx{authentification}, les mécanismes d'échange de clés\index{gestion des clés} possibles sont tous analysés en détail, afin de déterminer les avantages et les inconvénients de chacun pour un \rc.
 
-MiniSec~\cite{LMPG07} est basé sur TinySec.
-Au mode CBC (\textit{Cipher Block Chaining mode}, mode par enchainement des blocs), cette architecture proposée en 2007 préfère l'utilisation du mode de chiffrement OBC (\textit{Offset CodeBook mode}, « dictionnaire avec décalage »), qui réalise à la fois le chiffrement et la signature des données et ne nécessite donc pas de code d'authentification distinct.
-Elle adopte une approche particulière du vecteur d'initialisation pour le chiffrement, qui lui permet de minimiser le volume des données d'en-tête.
-Enfin elle fait une distinction entre les diffusions nœud-à-nœud et les diffusions générales, pour lesquelles un filtre de \textsc{Bloom} est utilisé, avec pour objectif final de réduire sensiblement l'énergie consommée lors des envois.
+\idx{MiniSec}~\cite{LMPG07} est basé sur \idx{TinySec}.
+Au mode CBC (\textit{Cipher Block Chaining mode}, mode par enchainement des blocs), cette architecture proposée en 2007 préfère l'utilisation du mode de \idx{chiffrement} OCB (\textit{Offset CodeBook mode}, « dictionnaire avec décalage »), qui réalise à la fois le \idx{chiffrement} et la \idx{signature} des données et ne nécessite donc pas de code d'authentification\index{MAC (code)} distinct.
+Elle adopte une approche particulière du vecteur d'initialisation pour le \idx{chiffrement}, qui lui permet de minimiser le volume des données d'en-tête.
+Enfin elle fait une distinction entre les diffusions nœud à nœud et les diffusions générales, pour lesquelles un filtre de \textsc{Bloom} est utilisé, avec pour objectif final de réduire sensiblement l'énergie consommée lors des envois.
+\nomenclature{CBC}{\textit{Cipher Block Chaining Mode}}
+\nomenclature{OCB}{\textit{Offset Codebook Mode}}
 
-TinyKey~\cite{CRS11} est une autre architecture basée sur TinySec, mais date de 2011.
-Elle reprend l'architecture de TinySec, mais rajoute un numéro de séquence aux paquets pour éviter les attaques par rejeu.
-Surtout, là où les auteurs de TinySec se contentent de passer en revue les mécanismes de gestion de clés qui peuvent être utilisés, les auteurs de TinyKey proposent une implémentation concrète de cette gestion, qui est assurée par deux modules centralisés sur la \sdb: KMS (\textit{Key Management Submodule}, « sous-module de gestion de clé » en anglais) et KDM (\textit{Key Distribution Manager}, « gestionnaire de distribution des clés»).
+\idx{TinyKey}~\cite{CRS11} est une autre architecture basée sur \idx{TinySec}, mais date de 2011.
+Elle reprend l'architecture de \idx{TinySec}, mais rajoute un numéro de séquence aux paquets pour éviter les attaques par \idx{rejeu}.
+Surtout, là où les auteurs de \idx{TinySec} se contentent de passer en revue les mécanismes de \idx{gestion des clés} qui peuvent être utilisés, les auteurs de \idx{TinyKey} proposent une implémentation concrète de cette gestion, qui est assurée par deux modules centralisés sur la \sdb: KMS (\textit{Key Management Submodule}, « sous-module de gestion de clé » en anglais) et KDM (\textit{Key Distribution Manager}, « gestionnaire de distribution des clés»).
+\nomenclature{KMS}{\textit{Key Management Submodule}}
+\nomenclature{KDM}{\textit{Key Distribution Manager}}
 
-D'autres architectures encore se concentrent sur la gestion des clés dans le réseau.
-Avec LEAP (\textit{Localized Encryption and Authentication Protocol}, « protocole de chiffrement et d'authentification localisés »), proposé en 2003~\cite{ZSJ03}, la gestion est décentralisée, et porte sur quatre types de clés:
+D'autres architectures encore se concentrent sur la \idx{gestion des clés} dans le réseau.
+Avec \idx{LEAP} (\textit{Localized Encryption and Authentication Protocol}, « protocole de \idx{chiffrement} et d'\idx{authentification} localisés »), proposé en 2003~\cite{ZSJ03}, la gestion est décentralisée, et porte sur quatre types de clés:
 \begin{itemize}
     \item des clés individuelles permettant de communiquer de façon sécurisée avec la \sdb;
     \item une clé de groupe, utilisée par l'ensemble du réseau, pour protéger des diffusions générales d'un attaquant extérieur;
     \item des clés de cluster, à utiliser, le cas échéant, au sein d'un cluster du réseau;
-    \item des clés pour les communications pair-à-pair.
+    \item des clés pour les communications pair à pair.
 \end{itemize}
 Les mécanismes déployés ont pour but, encore une fois, de minimiser l'énergie consommée.
-Ils ont été améliorés dans une seconde version du protocole, baptisée LEAP+, et publiée en 2006~\cite{ZSJ06}.
+Ils ont été améliorés dans une seconde version du protocole, baptisée \idx{LEAP+}, et publiée en 2006~\cite{ZSJ06}.
+\nomenclature{LEAP}{\textit{Localized Encryption and Authentication Protocol}}
 
-L'architecture pDCS, proposée en 2009~\cite{SZZCY09} (\textit{privacy-enhanced Data-Centric Sensor networks}, « \rcs centrés sur les données, de confidentialité améliorée ») divise le réseau en cellules rectangulaires à l'aide d'arbres euclidiens de \textsc{Steiner}, et introduit des clés de cellules et de rangées.
-Des capteurs se trouvent dans les cellules, tandis que des « puits » de données mobiles se déplacent et récoltent les informations.
-Mais le chiffrement est fait de telles sorte qu'un puits illégitime ne soit pas en mesure de remonter au capteur qui a initialement détecté un événement donné.
+L'architecture \idx{pDCS}, proposée en 2009~\cite{SZZCY09} (\textit{privacy-enhanced Data-Centric Sensor networks}, « \rcs centrés sur les données, de \idx{confidentialité} améliorée ») divise le réseau en cellules rectangulaires à l'aide d'arbres euclidiens de \textsc{Steiner}, et introduit des clés de cellules et de rangées.
+Des capteurs se trouvent dans les cellules, tandis que des « puits » de données mobiles\index{mobilité} se déplacent et récoltent les informations.
+Mais le \idx{chiffrement} est fait de telles sorte qu'un puits illégitime ne soit pas en mesure de remonter au capteur qui a initialement détecté un événement donné.
 Un filtre de \textsc{Bloom} est là encore utilisé pour minimiser le volume de données de contrôle produites.
-pDCS a été amélioré en 2013 par ERP-DCS (\textit{Efficient Rekeying Protocol for DCS sensor networks}, « protocole efficace de régénération de clés pour les réseaux DCS »)~\cite{HYD13}, qui se concentre sur l'amélioration du mécanisme de gestion des clés qui intervient dans le cas où un agent a été compromis et identifié comme tel, en utilisant à cette fin un système d'exclusion appelé EBC (\textit{Exclusion Basis System}).
+pDCS a été amélioré en 2013 par ERP-DCS (\textit{Efficient Rekeying Protocol for DCS sensor networks}, « protocole efficace de régénération de clés pour les réseaux DCS »)~\cite{HYD13}, qui se concentre sur l'amélioration du mécanisme de \idx{gestion des clés} qui intervient dans le cas où un agent a été compromis et identifié comme tel, en utilisant à cette fin un système d'exclusion appelé EBS (\textit{Exclusion Basis System}).
+\nomenclature{DCS}{\textit{Data Centric Sensor Networks}}
+\nomenclature{pDCS}{\textit{Privacy-enhanced DCS}}
+\nomenclature{ERP-DCS}{\textit{Efficient Rekeying Protocol for DCS sensor networks}}
+\nomenclature{EBS}{\textit{Exclusion Basis System}}
 
 \zigbee\cite{zigbee} est un protocole basé sur la pile \ieeeff, parfois utilisé dans les \rcs, bien que son orientation soit plus large.
-Il est en quelque sorte actuellement candidat pour devenir un standard pour les objets connectés dans le contexte d'un « Internet des objets ».
-Utilisés avec les capteurs, il apporte chiffrement, authentification, protection contre le rejeu.
-La gestion des clés est centralisée (\zigbee introduit une notion de « centre de confiance »).
-La sécurité apportée vient toutefois au prix d'en-têtes et de calculs qui peuvent être plus importants qu'avec d'autres architectures.
+Il est en quelque sorte actuellement candidat pour devenir un standard pour les objets connectés dans le contexte d'un « \idx{Internet des objets} ».
+Utilisés avec les capteurs, il apporte \idx{chiffrement}, \idx{authentification}, protection contre le \idx{rejeu}.
+La \idx{gestion des clés} est centralisée (\zigbee introduit une notion de « centre de confiance »).
+La \secu apportée vient toutefois au prix d'en-têtes et de calculs qui peuvent être plus importants qu'avec d'autres architectures.
 
 La \tabref{ea:tab:proto} compare brièvement les fonctionnalités apportées par ces différentes modèles.
 
 \begin{table}[ht] %{{{
-    \caption{Brève comparaison d'architectures de sécurité pour \rcs}\label{ea:tab:proto}
+    \caption{Brève comparaison d'architectures de sécurité\index{architecture de sécurité} pour \rcs}\label{ea:tab:proto}
     \medskip
     \centering
     %\newcolumntype{X}{>{\centering\arraybackslash}m}
@@ -176,38 +194,44 @@ La \tabref{ea:tab:proto} compare brièvement les fonctionnalités apportées par
             SPINS                   & CTR                          & RC5                                & Clé maitresse, chaine de clés symétriques                                      & *: Chiffrement, authentification et intégrité des données, protection contre le rejeu & 2002\\
             TinySec                 & CBC                          & Au choix                           & Au choix                                                                       & (*) moins protection contre le rejeu                                                  & 2004\\
             TinyKey                 & CBC-MAC                      & SkipJack                           & Clés pré-installées sur les nœuds                                              & (*)                                                                                   & 2011\\
-            MiniSec                 & OBC ou CBC-MAC               & SkipJack ou RC5                    & Clés pré-installées sur les nœuds                                              & (*)                                                                                   & 2007\\
-            LEAP                    & RC5                          & RC5                                & Clé individuelle, clé globale, clé de cluster, clés pair-à-pair                & (*)                                                                                   & 2003\\
-            LEAP+                   & RC5                          & RC5                                & Clé individuelle, clé globale, clé de cluster, clés pair-à-pair                & (*)                                                                                   & 2006\\
-            pDCS                    & RC5                          & RC5                                & Clé maitresse, clés pair-à-pairs, clés de cellule, clés de rangée, clé globale & (*) plus dissimulation de la provenance des données                                   & 2009\\
-            ERP-DCS                 & RC5                          & RC5                                & Clés pair-à-pair, clé de cellule, clé ESB                                      & (*) plus dissimulation de la provenance des données                                   & 2013\\
-            \zigbee                 & CBC-MAC                      & AES, modes CTR ou CCM              & Clé maitresse, clés pair-à-pair, clé globale                                   & (*)                                                                                   & 2005\\
+            MiniSec                 & OCB ou CBC-MAC               & SkipJack ou RC5                    & Clés pré-installées sur les nœuds                                              & (*)                                                                                   & 2007\\
+            LEAP                    & RC5                          & RC5                                & Clé individuelle, clé globale, clé de cluster, clés pair à pair                & (*)                                                                                   & 2003\\
+            LEAP+                   & RC5                          & RC5                                & Clé individuelle, clé globale, clé de cluster, clés pair à pair                & (*)                                                                                   & 2006\\
+            pDCS                    & RC5                          & RC5                                & Clé maitresse, clés pair à pairs, clés de cellule, clés de rangée, clé globale & (*) plus dissimulation de la provenance des données                                   & 2009\\
+            ERP-DCS                 & RC5                          & RC5                                & Clés pair à pair, clé de cellule, clé EBS                                      & (*) plus dissimulation de la provenance des données                                   & 2013\\
+            \zigbee                 & CBC-MAC                      & AES, modes CTR ou CCM              & Clé maitresse, clés pair à pair, clé globale                                   & (*)                                                                                   & 2005\\
             \bottomrule
         \end{tabular}
     \end{footnotesize}
+    \index{SPINS}\index{TinySec}\index{TinyKey}\index{MiniSec}\index{LEAP}\index{LEAP+}\index{pDCS}\index{ERP-DCS}\index{architecture de sécurité}\index{chiffrement}
 \end{table}
 %}}}
+\nomenclature{CTR}{\textit{Counter Mode}}
+\nomenclature{CCM}{\textit{Counter Mode CBC-MAC}}
+\nomenclature{CBC-MAC}{\textit{Cipher Block Chaining Message Authentication Code}}
+\nomenclature{RC5}{\textit{\textsc{Rivest} Cipher version 5}}
 
-On constate que la gestion des clés occupe une place essentielle dans la plupart des systèmes proposés: il est en effet essentiel de disposer d'un moyen d'échanger, et au besoin de renouveler les clés nécessaires à ces architectures, sans compromettre leur sécurité mais sans pour autant consommer trop de ressources.
+On constate que la gestion des clés occupe une place essentielle dans la plupart des systèmes proposés: il est en effet essentiel de disposer d'un moyen d'échanger, et au besoin de renouveler les clés nécessaires à ces architectures, sans compromettre leur \secu mais sans pour autant consommer trop de ressources.
 De nombreux mécanismes ont été proposés et continuent de l'être~\cite{DSK10,BSK13}, et ont même fait l'objet de travaux de synthèse~\cite{HWMRKP06,XRSDHG07}.
 Nous ne les détaillerons pas ici.
 
 On peut également observer dans la littérature que des mécanismes introduits dans les architectures complexes présentées ci-dessus ont été repris dans des solutions ultérieures.
-Par exemple, il existe une proposition concernant la combinaison de signatures numériques (cryptographie asymétrique), du bloc $\mu$TESLA (asymétrie temporelle) introduit avec SPINS mais sans reprendre SNEP, et d'un filtre de \textsc{Bloom} pour créer un mécanisme d'\textit{Information Asymmetry}, qui assure des diffusions générales (\textit{broadcast}) authentifiées~\cite{SLS10}.
-Le filtre de \textsc{Bloom} est utilisé pour condenser plusieurs codes d'authentification de messages (MAC), qui sont ajoutés aux paquets pour l'authentification des transmissions par les nœuds.
+Par exemple, il existe une proposition concernant la combinaison de signatures\index{signature} numériques (cryptographie asymétrique)\index{cryptographie!cryptographie asymétrique}, du bloc \idx{$\mu$TESLA} (asymétrie temporelle) introduit avec \idx{SPINS} mais sans reprendre \idx{SNEP}, et d'un filtre de \textsc{Bloom} pour créer un mécanisme d'\textit{Information Asymmetry}, qui assure des diffusions générales (\textit{broadcast}) authentifiées~\cite{SLS10}.
+Le filtre de \textsc{Bloom} est utilisé pour condenser plusieurs codes d'authentification de messages (\macc), qui sont ajoutés aux paquets pour l'\idx{authentification} des transmissions par les nœuds.
 Plusieurs codes sont vérifiés par chaque nœud, qui possède son propre sous-ensemble de clés, de sorte que si certaines clés ont été compromises, il en reste d'autres à vérifier.
-Le bloc $\mu$TESLA en particulier est par ailleurs repris dans de nombreuses propositions, notamment avec le protocole SecLEACH qui l'introduit dans un réseau clusterisé de façon hiérarchique pour combler certains manques de l'algorithme \leach en termes de sécurité~\cite{OFVWBDL07}.
+Le bloc \idx{$\mu$TESLA} en particulier est par ailleurs repris dans de nombreuses propositions, notamment avec le protocole \idx{SecLEACH} qui l'introduit dans un réseau clusterisé de façon hiérarchique pour combler certains manques de l'algorithme \leach en termes de \secu~\cite{OFVWBDL07}.
+\nomenclature{SecLEACH}{\textit{Secure LEACH}}
 
-\subsection{Sécurité physique}
+\subsection{Sécurité physique\index{securité@sécurité!sécurité physique}}
 
 L'accès au réseau pour un attaquant peut passer par la compromission de l'un des nœud du réseau.
-Dans le pire des cas, tout le système peut être modifié et détourné de son but d'origine, pour mener d'autres attaques par la suite, tandis que la mémoire ---~et notamment le matériel cryptographique embarqué~--- peut être entièrement analysée.
+Dans le pire des cas, tout le système peut être modifié et détourné de son but d'origine, pour mener d'autres attaques par la suite, tandis que la mémoire ---~et notamment le matériel cryptographique embarqué\index{cryptographie}~--- peut être entièrement analysée.
 
 Les systèmes d'exploitation utilisés par les capteurs sont généralement conçus pour être légers et s'adapter aux contraintes des capteurs.
-Mais ils ne rajoutent pas de problématiques particulières en termes de sécurité système par rapport à d'autres machines, et le peu de fonctionnalités dont ils disposent joue plutôt en leur faveur pour ce qui est de la sécurité logicielle.
+Mais ils ne rajoutent pas de problématiques particulières en termes de sécurité système\index{securité@sécurité!sécurité système} par rapport à d'autres machines, et le peu de fonctionnalités dont ils disposent joue plutôt en leur faveur pour ce qui est de la sécurité logicielle\index{securité@sécurité!sécurité logicielle}.
 Leur faiblesse réside donc dans leur déploiement en milieu ouvert et potentiellement hostile, ce qui peut permettre aux attaquants d'y accéder physiquement et de manière prolongée.
 
 L'une des solutions proposées consiste donc à considérer un nœud comme ayant épuisé sa batterie s'il ne répond plus pendant une période prolongée; si en revanche le capteur redevient actif par la suite, on suppose que son absence était due à son extraction du réseau par un attaquant, et le capteur est alors considéré comme compromis~\cite{Ho10}.
 
 La compromission d'un nœud peut être extrêmement nuisible pour le \rc.
-Non content d'accéder aux données reçues par ce nœud, ou aux clés de chiffrement et de signature qu'il peut contenir, l'attaquant peut en plus chercher à mener des attaques de \dds visant à perturber le bon fonctionnement du réseau.
+Non content d'accéder aux données reçues par ce nœud, ou aux clés de \idx{chiffrement} et de \idx{signature} qu'il peut contenir, l'attaquant peut en plus chercher à mener des attaques de \dds visant à perturber le bon fonctionnement du réseau.
