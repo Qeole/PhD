@@ -1,21 +1,11 @@
+%% This file is derived from LaTeX book.cls class file version 1.4h
 %%
-%% This is file `book.cls',
-%% generated with the docstrip utility.
-%%
-%% The original source files were:
-%%
-%% classes.dtx  (with options: `book')
-%% 
-%% This is a generated file.
-%% 
-%% Copyright 1993 1994 1995 1996 1997 1998 1999 2000 2001 2002 2003 2004 2005 2006 2007 2008 2009
+%% Copyright 1993-2014
 %% The LaTeX3 Project and any individual authors listed elsewhere
 %% in this file.
-%% 
-%% This file was generated from file(s) of the LaTeX base system.
 %% --------------------------------------------------------------
 %% 
-%% It may be distributed and/or modified under the
+%% This file may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3c
 %% of this license or (at your option) any later version.
 %% The latest version of this license is in
@@ -23,43 +13,18 @@
 %% and version 1.3c or later is part of all distributions of LaTeX
 %% version 2005/12/01 or later.
 %% 
-%% This file has the LPPL maintenance status "maintained".
-%% 
-%% This file may only be distributed together with a copy of the LaTeX
-%% base system. You may however distribute the LaTeX base system without
-%% such generated files.
-%% 
-%% The list of all files belonging to the LaTeX base distribution is
-%% given in the file `manifest.txt'. See also `legal.txt' for additional
-%% information.
-%% 
-%% The list of derived (unpacked) files belonging to the distribution
-%% and covered by LPPL is defined by the unpacking scripts (with
-%% extension .ins) which are part of the distribution.
-%% \CharacterTable
-%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
-%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
-%%   Digits        \0\1\2\3\4\5\6\7\8\9
-%%   Exclamation   \!     Double quote  \"     Hash (number) \#
-%%   Dollar        \$     Percent       \%     Ampersand     \&
-%%   Acute accent  \'     Left paren    \(     Right paren   \)
-%%   Asterisk      \*     Plus          \+     Comma         \,
-%%   Minus         \-     Point         \.     Solidus       \/
-%%   Colon         \:     Semicolon     \;     Less than     \<
-%%   Equals        \=     Greater than  \>     Question mark \?
-%%   Commercial at \@     Left bracket  \[     Backslash     \\
-%%   Right bracket \]     Circumflex    \^     Underscore    \_
-%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
-%%   Right brace   \}     Tilde         \~}
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{thesismanuscrit}
               [2014/04/11 v1.0
  Yet another PhD thesis class]
 \newcommand\@ptsize{}
 \newif\if@restonecol
+\newif\if@minitoc \@minitoctrue
+% Use option nominitoc to disable minitoc call
+\DeclareOption{nominitoc}{\@minitocfalse}
 \newif\if@openright
 \newif\if@mainmatter \@mainmattertrue
-\newif\if@quicktitle \@quicktitlefalse
+\if@compatibility\else
 \DeclareOption{a4paper}
    {\setlength\paperheight {297mm}%
     \setlength\paperwidth  {210mm}}
@@ -82,17 +47,32 @@
    {\setlength\@tempdima   {\paperheight}%
     \setlength\paperheight {\paperwidth}%
     \setlength\paperwidth  {\@tempdima}}
+\fi
+\if@compatibility
+  \renewcommand\@ptsize{0}
+\else
 \DeclareOption{10pt}{\renewcommand\@ptsize{0}}
+\fi
 \DeclareOption{11pt}{\renewcommand\@ptsize{1}}
 \DeclareOption{12pt}{\renewcommand\@ptsize{2}}
+\if@compatibility\else
 \DeclareOption{oneside}{\@twosidefalse \@mparswitchfalse}
+\fi
 \DeclareOption{twoside}{\@twosidetrue  \@mparswitchtrue}
 \DeclareOption{draft}{\setlength\overfullrule{5pt}}
+\if@compatibility\else
+\DeclareOption{final}{\setlength\overfullrule{0pt}}
+\fi
+\if@compatibility
+\@openrighttrue
+\else
 \DeclareOption{openright}{\@openrighttrue}
 \DeclareOption{openany}{\@openrightfalse}
+\fi
+\if@compatibility\else
 \DeclareOption{onecolumn}{\@twocolumnfalse}
+\fi
 \DeclareOption{twocolumn}{\@twocolumntrue}
-\DeclareOption{quicktitle}{\@quicktitletrue}
 \DeclareOption{leqno}{\input{leqno.clo}}
 \DeclareOption{fleqn}{\input{fleqn.clo}}
 \DeclareOption{openbib}{%
@@ -182,41 +162,7 @@
 \newcommand{\@director}{\@latex@warning@no@line{No \noexpand\director given}}
 \newcommand{\jury}[1]{\gdef\@jury{#1}}%
 \newcommand{\@jury}{\@latex@warning@no@line{No \noexpand\jury given}}
-\if@quicktitle
 %% Title page
-\newcommand\maketitle{\begin{titlepage}%
-  \let\footnotesize\small
-  \let\footnoterule\relax
-  \let \footnote \thanks
-  \null\vfil
-  \vskip 60\p@
-  \begin{center}%
-    {\LARGE \@title \par}%
-    \vskip 3em%
-    {\large
-     \lineskip .75em%
-      \begin{tabular}[t]{c}%
-        \@author
-      \end{tabular}\par}%
-      \vskip 1.5em%
-    {\large \@date \par}%       % Set date in \large size.
-  \end{center}\par
-  \@thanks
-  \vfil\null
-  \end{titlepage}%
-  \setcounter{footnote}{0}%
-  \global\let\thanks\relax
-  \global\let\maketitle\relax
-  \global\let\@thanks\@empty
-  \global\let\@author\@empty
-  \global\let\@date\@empty
-  \global\let\@title\@empty
-  \global\let\title\relax
-  \global\let\author\relax
-  \global\let\date\relax
-  \global\let\and\relax
-}
-\else
 \newlength\titlep@getextwidth
 \setlength\titlep@getextwidth{.68\paperwidth} % Blue part width
 \newlength\titlep@gewhitemargin
@@ -351,18 +297,6 @@
   \global\let\date\relax
   \global\let\and\relax
 }
-\fi
-
-%\newenvironment{abstract}{%
-  %\titlepage
-  %\null\vfil
-  %\@beginparpenalty\@lowpenalty
-  %\begin{center}%
-    %\bfseries \abstractname
-    %\@endparpenalty\@M
-%\end{center}}%
-%{\par\vfil\null\endtitlepage}
-
 \newcommand*\chaptermark[1]{}
 \setcounter{secnumdepth}{3}
 \newcounter {part}
@@ -497,7 +431,9 @@
     \Huge %\bfseries
       #1\par\nobreak
     \vskip 40\p@
-    \minitoc
+    \if@minitoc
+      \minitoc
+    \fi
   }}
 \def\@schapter#1{\if@twocolumn
                    \@topnewpage[\@makeschapterhead{#1}]%
@@ -520,7 +456,6 @@
                                    {-3.5ex \@plus -1ex \@minus -.2ex}%
                                    {2.3ex \@plus.2ex}%
                                    {\normalfont\Large\bfseries}}
-                                   %{\normalfont\Large\bfseries\fontspec[Color=\@chapterLACL]{Linux Libertine O}}}
 \newcommand\subsection{\@startsection{subsection}{2}{\z@}%
                                      {-3.25ex\@plus -1ex \@minus -.2ex}%
                                      {1.5ex \@plus .2ex}%
@@ -600,6 +535,21 @@
                {\list{}{\rightmargin\leftmargin}%
                 \item\relax}
                {\endlist}
+\if@compatibility
+\newenvironment{titlepage}
+    {%
+      \cleardoublepage
+      \if@twocolumn
+        \@restonecoltrue\onecolumn
+      \else
+        \@restonecolfalse\newpage
+      \fi
+      \thispagestyle{empty}%
+      \setcounter{page}\z@
+    }%
+    {\if@restonecol\twocolumn \else \newpage \fi
+    }
+\else
 \newenvironment{titlepage}
     {%
       \cleardoublepage
@@ -824,7 +774,6 @@
 \newcommand\partname{Part}
 \newcommand\chaptername{Chapter}
 \newcommand\appendixname{Appendix}
-\newcommand\abstractname{Abstract}
 \def\today{\ifcase\month\or
   January\or February\or March\or April\or May\or June\or
   July\or August\or September\or October\or November\or December\fi
