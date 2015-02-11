@@ -3,12 +3,12 @@
 \label{st:sec:contexte}
 
     \subsection{De quoi s'agit-il?}
-    Les \rcsfs, ou \textit{\WSN} (pour \wsns en anglais), sont des réseaux constitués de petits appareils, les capteurs, ainsi que d'une \sdb.
+Les \rcsfs, ou \textit{\WSN} (pour \wsns en anglais), sont des réseaux constitués de petits appareils, les capteurs, ainsi que d'une \sdb.
 \nomenclature{WSN}{\wsns}
 Les capteurs échangent par communications hertziennes, en utilisant des protocoles tels ceux définis dans la pile \ieeee.
 Le routage des paquets dans le réseau peut faire appel à l'un des nombreux protocoles développés à cet effet (par exemple: \aodv, \olsr), qu'il repose sur un algorithme centralisé (dirigé par une seule entité) ou distribué (exécuté par chaque entité du réseau).
-Ils collectent des informations sur leur environnement et les font remonter à la \sdb.
-Cette \sdb, ou \BS (pour \bs), parfois appelée \textit{puits} (ou \textit{sink} en anglais), est chargée de récolter et traiter les données provenant des capteurs.
+Les capteurs collectent des informations sur leur environnement et les font remonter à la \sdb.
+Cette \sdb, ou \BS (pour \bs), ou encore parfois \textit{puits} (\textit{sink} en anglais), est chargée de récolter et traiter les données provenant des capteurs.
 Une fois les capteurs déployés, l'administrateur n'interagit plus avec le réseau que par le biais de la \sdb.
 \nomenclature{BS}{\bs}
 
@@ -17,16 +17,40 @@ Quel que soit le protocole de liaison de données utilisé, il est rare que tous
 Pour cette raison, dans la littérature comme dans la suite de ce document, il sera souvent fait référence aux capteurs sous le terme de \textit{nœuds} (\textit{nodes} en anglais).
 
     \subsection{Applications}
-Le champ d'application des \WSN est très vaste.
-Des réseaux peuvent être mis en place en forêt, par exemple, afin de détecter les départs de feu et de lutter plus efficacement contre les incendies.
-D'autres peuvent être déployés en mer, afin de mesurer le taux de pollution des eaux.
-En zones à risques, les capteurs peuvent être utilisés pour mesurer l'activité sismique ou volcanique du sol, et permettre une meilleure anticipation des phénomènes naturels.
+Le champ d'application des \WSN est très vaste, et n'a de cesse de s'élargir au fil du temps et des avancées technologiques.
+Toutes ne font pas l'objet de publications scientifiques, mais certaines sont régulièrement évoquées en tant qu'exemples, ou bien font l'actualité dans le domaine des nouvelles technologies voire le domaine commercial.
 
-Les \rcsfs sont également utilisés dans certains milieux critiques.
-Un exemple serait leur usage dans le domaine du nucléaire.
+        \paragraph{Applications environnementales}
+La gestion de l'environnement par l'Homme a de plus en plus recours à des mesures distribuées reposant sur l'usage de capteurs.
+Les prévisions météorologiques (reposant sur des mesures d'hygrométrie, de pression de l'air, \etc) ont été l'un des premiers champs d'application des capteurs.
+Les mesures de qualité de l'air et de taux de pollution, en ville comme en campagne, se généralisent peu à peu.
+Les réseaux de capteurs permettent même de pousser la mesure de ce taux vers de nouveaux milieux, comme les glaciers ou bien les océans.
+
+L'agriculture est également susceptible d'avoir recours aux capteurs: des essais sont menés sur la réalisation de mesures faites par des microcapteurs semés en même temps que les cultures, permettant de surveiller au mieux les conditions de développement de ces dernières.
+Placés judicieusement dans l'habitat naturel de certaines espèces, les capteurs peuvent être utilisés pour suivre et analyser le comportement de la faune d'un milieu~\cite{KDA14}.
+
+En forêt, les \rdcs peuvent permettre de détecter les départs de feu et de lutter plus efficacement contre les incendies.
+Et en zones à risques, ils peuvent être utilisés pour mesurer l'activité sismique ou volcanique du sol, et permettre une meilleure anticipation des phénomènes naturels.
+L'industrie a également recours à ces réseaux pour détecter d'éventuelles fuites de produits toxiques (pétrole, gaz, éléments radioactifs)
+
+        \paragraph{Surveillance et détection}
+Les \rcsfs sont aussi employés pour des mesures de sureté ou de sécurité, par exemple pour surveiller l'intégrité structurelle de certaines architectures (ferroviaires, aérospatiales, maritimes, ou plus simplement dans le bâtiment: gros œuvre, ouvrages d'art) et peuvent permettre une prévention efficace des pannes matérielles~\cite{SCOA13}.
+Mis à part la détection de pannes, les capteurs peuvent être utilisés dans des systèmes de surveillance de sites sensibles afin de prévenir les intrusions humaines, ou bien pour détecter des incidents ou encore établir le suivi de certaines entités; la gestion du trafic routier, ou même seulement des autobus, en sont des exemples.
+Les applications de vidéosurveillance, en milieu urbain par exemple, font de plus en plus appel à des capteurs en réseau.
+
+        \paragraph{Médecine}
+Certains usages des capteurs tiennent du domaine médical.
+Il peut s'agir par exemple de faire communiquer un ou plusieurs implants avec un contrôleur externe.
+Il peut également être question d'employer des microcapteurs pour analyser avec précisions des variables corporelles (taux de glycémie, surveillance des organes vitaux) ou bien, sur une plus courte durée, pour traiter avec précision une pathologie locale (des cellules cancereuses par exemple).
+
+        \paragraph{Grand public}
+Le public a lui aussi de plus en plus accès à des applications reposant sur les capteurs, notamment en domotique,
+Un autre domaine d'application en voie de développement est ce que l'on appelle l'\textit{\idx{Internet des objets}} (\textit{the Internet of things} en anglais), et qui consiste en quelque sorte à étendre \idx{Internet} au monde réel, par le biais d'une interconnexion réseau entre les objets de la vie courante.
+
+        \paragraph{Domaine militaire}
 Un autre, de taille, est leur exploitation intensive par les militaires sur les champs de batailles, afin de relier fantassins et véhicules de tous types; un maximum d'informations doit alors être remonté au centre de commandement, afin de permettre une supervision optimale des forces en mouvement.
 
-Un autre domaine d'application en voie de développement est ce que l'on appelle l'\textit{\idx{Internet des objets}} (\textit{the Internet of things} en anglais), et qui consiste en quelque sorte à étendre \idx{Internet} au monde réel, par le biais d'une interconnexion réseau entre les objets de la vie courante.
+        \paragraph{Structures particulières}
 
     \subsection{Contraintes en ressources}
 De par leur petite taille, et à cause de leurs déploiement dans des zones souvent difficiles d'accès, les capteurs n'embarquent qu'une quantité limitée de matériel, qui ne peut pas toujours être remplacé.
