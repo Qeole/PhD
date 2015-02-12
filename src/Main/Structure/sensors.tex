@@ -19,9 +19,9 @@ Un schéma basique de \rcsf est présenté en \figref{st:fig:wsnintro}
     \caption{Schéma simple d'un \rcsf}\label{st:fig:wsnintro}
 \end{figure}
 
-Quel que soit le protocole de liaison de données utilisé, il est rare que tous les capteurs d'un \WSN soit directement connectés les uns aux autres.
+Il est rare que tous les capteurs d'un \WSN soit directement connectés les uns aux autres.
 À la topologie d'un réseau donné est donc très souvent associé le graphe de connectivité du réseau.
-Pour cette raison, dans la littérature comme dans la suite de ce document, il sera souvent fait référence aux capteurs sous le terme de \textit{nœuds} (\textit{nodes} en anglais).
+Pour cette raison, il est souvent fait référence aux capteurs sous le terme de \textit{nœuds} (ou de \textit{nodes} en anglais).
 
     \subsection{Applications}
 Le champ d'application des \WSN est très vaste, et n'a de cesse de s'élargir au fil du temps et des avancées technologiques.
@@ -69,8 +69,9 @@ En voici quelques exemples:
 \begin{itemize}
     \item les montres (interfacées avec les téléphones « intelligents » pour afficher des notifications diverses);
     \item les ampoules d'éclairage (gestion de la luminosité, de la couleur de l'éclairage, parfois dynamiques);
-    \item les ceintures vestimentaires (réajustement automatique du réglage, collecte de données);
-    \item les réfrigérateurs (gestion des réserves alimentaires, création de listes d'achat).
+    \item les ceintures (accessoires vestimentaires: réajustement automatique du réglage, collecte de données sur le tour de taille pour le contrôle du poids);
+    \item les réfrigérateurs (gestion des réserves alimentaires, création de listes d'achat);
+    \item les véhicules autonomes, tels que les voitures sans conducteurs ou les drones (pilotage de l'engin, relevé de mesures tactiques pour les drones militaires).
 \end{itemize}
 Au fur et à mesure que ces objets intègrent la vie quotidienne des utilisateurs, ils auront probablement tendance à communiquer de plus en plus entre eux, entre objets, en ne centralisant les données que sur une seule interface présentée à l'utilisateur final.
 
@@ -78,11 +79,11 @@ Au fur et à mesure que ces objets intègrent la vie quotidienne des utilisateur
 De par leur petite taille, et à cause de leurs déploiement dans des zones souvent difficiles d'accès, les capteurs n'embarquent qu'une quantité limitée de matériel, qui ne peut pas toujours être remplacé.
 Les capteurs se retrouvent donc avec des capacités limitées, notamment en ce qui concerne:
 \begin{itemize}
-    \item les capacités de calcul: les processeurs embarqués sont relativement peu puissants.
+    \item les \textbf{capacités de calcul}: les processeurs embarqués sont relativement peu puissants, principalement pour des raisons de cout.
         Les algorithmes exécutés par les capteurs doivent donc être de complexité relativement basse;
-    \item les capacités de mémoire: les capteurs disposent de mémoire vive (RAM, \textit{Random Access Memory}, « mémoire à accès non séquentiel » en anglais) et d'un peu d'espace de stockage, mais ils ne sont pas du tout conçus pour sauvegarder de grandes bases de données.\nomenclature{RAM}{\textit{Random Access Memory}}
+    \item les \textbf{capacités de mémoire}: les capteurs disposent de mémoire vive (RAM, \textit{Random Access Memory}, « mémoire à accès non séquentiel » en anglais) et d'un peu d'espace de stockage, mais ils ne sont pas du tout conçus pour sauvegarder de grandes bases de données.\nomenclature{RAM}{\textit{Random Access Memory}}
         Les informations récoltées doivent être acheminées à la \sdb, et non stockées sur le long terme par les capteurs eux-mêmes;
-    \item l'énergie disponible: les capteurs disposent d'une batterie qui leur fournit une quantité d'énergie finie, et (la plupart du temps) non rechargeable.
+    \item l'\textbf{énergie disponible}: les capteurs disposent d'une batterie qui leur fournit une quantité d'énergie finie, et (la plupart du temps) non rechargeable.
         Il est donc essentiel de conserver à l'esprit une gestion parcimonieuse de l'énergie pour tout programme implémenté sur les capteurs.
         Des calculs importants, ainsi que des émissions/réceptions d'ondes électromagnétiques nombreuses ou mal gérées, sont les principaux facteurs d'un épuisement prématuré de la batterie.
 \end{itemize}
@@ -99,7 +100,7 @@ Les protocoles de communication déployés sur cette architecture sont multiples
 Il faut pouvoir communiquer de pair à pair entre nœuds voisins, tout comme il faut être capable de faire parvenir un message à un nœud éloigner en faisant retransmettre les paquets par des nœuds relais successifs, d'assurer certains services comme le maintien de session, ou de gérer des applications.
 Comme dans la plupart des réseaux informatiques, l'empilement des protocoles reprend donc le modèle \tcpip (schéma concret lui-même issu du modèle théorique \idx{OSI}, de l'anglais \textit{Open Systems Interconnection}), présenté en \figref{st:fig:tcpip}.
 \nomenclature{OSI}{\textit{Open Systems Interconnection}}
-\begin{figure}[!ht]
+\begin{figure}[H]
     \centering
     \begin{tabular}{c |c| l}
         \multicolumn{2}{c}{} & Exemples:\\

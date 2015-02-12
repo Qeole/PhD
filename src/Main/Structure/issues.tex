@@ -5,8 +5,10 @@ De par leurs ressources faibles, leur dispersion dans un environnement parfois h
 Nous introduisons ici celles qui sont indispensables à la compréhension des travaux de cette thèse.
 
     \subsection{Gestion des ressources et performances}
+Les évolutions technologiques des dernières décennies n'ont de cesse de rendre les ordinateurs plus performants, plus compacts, plus rapides dans le traitement des données.
+Elles ont rendu possible, à force de miniaturisation et de réduction des couts, la création et le déploiement des \rcsfs, mais ceux-ci restent soumis à des contraintes en ressources très fortes par rapport aux stations de travail « classiques » tel que les ordinateurs personnels (y compris portables).
 
-
+        \subsubsection{Des algorithmes à adapter}
 Power conservation and security enhancement in WSNs - a priority based approach (2014 Sivakumar Amirthavalli Senthil)
 
 K. Piotrowski, P. Langendoerfer, and S. Peter. How Public Key Cryptography Influences Wireless Sensor Node Lifetime. In Proc. of the 4th ACM SASN, 2006.
@@ -14,15 +16,23 @@ PLP06
 
 Y. Law, J. Doumen, and P. Hartel. Survey and benchmark of block ciphers for wireless sensor networks. Technical Report TR-CTIT-04-07, Centre for Telematics and Information Technology, University of Twente, The Nether- lands, 2004.
 
+Aside from clustering, the importance of energetic issues in WSNs have led to the proposals of several mechanisms to cut down its consumption~\cite{ACFP09}, based for example on packets priority~\cite{SAS14}.
 
+        \subsubsection{Une gestion adaptée de l'énergie}
+L'usage d'algorithmes mal adaptés au \rcs ne fait pas que diminuer les performances du réseau au niveau de la vitesse de traitement des données: si le processeur est sollicité davantage, il va drainer plus d'énergie.
+Hors il est essentiel de se montrer économe sur l'usage de la batterie des capteurs, qui ne peut généralement pas être rechargée ni remplacée à moindre frais.
+
+Par conséquent, divers travaux ont été menés pour réduire autant que possible la consommation énergétique.
+Cette thèse s'inscrit d'ailleurs dans cette lignée, pour le domaine spécifique de la lutte contre le \dds.
+À un niveau plus général, on trouve aussi . . . . . . . . . .
 In addition, WSNs have following specific objects:
-- Scalability: supporting a great number of nodes
 - Efficiency: storage, processing and communication limitations on sensor nodes must be
 considered
 (2008 Li Gong)
 
+\todo{Ambient backscatter (articles/A\_TRIER/)}\\
 
-L'une des possibilités permettant de réduire la consommation en énergie est l'utilisation d'un réseau \index{clusterisation!clusterisation hiérarchique} hiérarchiquement clusterisé.
+Une autre possibilité essentielle permettant de réduire la consommation en énergie est l'utilisation d'un réseau \index{clusterisation!clusterisation hiérarchique} hiérarchiquement clusterisé.
 
     \subsection{Partition hiérarchique des nœuds du réseau}%
     \label{st:subsec:partition}
@@ -129,7 +139,40 @@ Au contraire, il est même probable d'obtenir, pour certaines rondes, une concen
 Il n'y a pas grand-chose à faire dans ce cas, sinon espérer que la prochaine ronde sera plus favorable.
 Si toutefois un nœud ne parvient à capter les messages d'aucun \ch, il se déclare généralement lui-même \CH.
 
+
+\bigskip
+But the main purpose of clustering a sensor network usually resides in scaling possibilities, improved nodes management and energy savings brought by partitioning.
+Several clustering algorithms have been proposed~\cite{AY07}.
+
+One of the easiest clustering algorithm to implement, and probably one of the most used is the \leach algorithm~\cite{HHT02}.
+\leach makes each node draw a pseudo-random number and match it with a threshold which was computed from the number of desired \chs in the network and from the last iteration when the sensor was selected as a \CH.
+There is a number of proposals derived from \leach, to improve either its efficiency~\cite{RR13,CJ14} or its security~\cite{OFVWBDL07}.
+Other example clustering algorithms include HEED~\cite{YF04} or FFUCA~\cite{FMMMI12}.
+
+VSR\cite{TV08}
+
         \subsection{Sécurité, \idx{sureté} et \resilience}
+
+
+
+Beside being energy-efficient, it is important for an algorithm to \emph{just work}, and thus for researchers to provide guaranties of its functioning.
+Formal method may help in this, and one of the most interesting techniques is model-checking.
+It is a formal method based technique for verifying finite-state-concurrent systems, and can automatically extract performance or safety properties from a model and to ensure they are asserted at all time in the network.
+Additionally, were a system not to work properly, model-checking tools provide a trace to help finding the source of the error.
+Contrary to testing or simulation, results obtained \via model-checking do not vary between distinct running instances; more important, formal specification enables one to verify the system against every single execution trace, where testing would only raise some encountered errors (maybe not all existing errors).
+Model-checking is used in a wide area of applications, from the validation of network protocols to the verification of safety properties in regard with the non-collision between platoon vehicles\cite{E-ZCGGK12}, for example.
+
+One of the two aforementioned papers already makes use of formal methods, including model-checking, to evaluate its proposal\cite{BMM13}.
+A first attempt is described in the study to model it with CTMC (Continuous Time Markov Chains), but limitations due to the period over which the detection is performed led to put away Markovian processes.
+Instead the nodes and the monitoring agents are modeled with eGSPN (extended Generalized Stochastic Petri Networks), a class of Petri networks including times transitions and suitable for representing stochastic processes.
+From those eGSPNs we could extract a number of performance and dependability properties formally expressed in terms of the Hybrid Automata Stochastic Logic (HASL\cite{BDDHP11hasl}) and relying on Linear Hybrid Automata (LHA).
+These properties were eventually asserted with the COSMOS statistical model-checker\cite{BDDHP11cosmos}.
+
+Other works include model-checking of WSN-addressed systems, though we found few of them concerning protection against \DoS attacks.
+In~\cite{TCCDC09} for example, three security protocols are analyzed through model-checking, nominally TinySec, allowing authentication and encryption, and LEAP and TinyPK, both used for key management. 
+The authors used the AVISTA model-checker, designed for verifying security protocols.
+In our study, we prefer to work with the more general UPPAAL model-checking tool.
+
 
 %La sureté et la résilience des réseaux ne sont pas des problématiques de sécurité (car aucune attaque volontaire ne rentre en compte), mais il s'agit de problématiques assez proches de la disponibilité des réseaux.
 
