@@ -9,14 +9,17 @@ Les évolutions technologiques des dernières décennies n'ont de cesse de rendr
 Elles ont rendu possible, à force de miniaturisation et de réduction des couts, la création et le déploiement des \rcsfs, mais ceux-ci restent soumis à des contraintes en ressources très fortes par rapport aux stations de travail « classiques » tel que les ordinateurs personnels (y compris portables).
 
         \subsubsection{Des algorithmes à adapter}
-Power conservation and security enhancement in WSNs - a priority based approach (2014 Sivakumar Amirthavalli Senthil)
+       based for example on packets priority~\cite{SAS14}.  Power conservation and security enhancement in WSNs - a priority based approach (2014 Sivakumar Amirthavalli Senthil) \cite{SAS14}
 
-K. Piotrowski, P. Langendoerfer, and S. Peter. How Public Key Cryptography Influences Wireless Sensor Node Lifetime. In Proc. of the 4th ACM SASN, 2006.
-PLP06
 
-Y. Law, J. Doumen, and P. Hartel. Survey and benchmark of block ciphers for wireless sensor networks. Technical Report TR-CTIT-04-07, Centre for Telematics and Information Technology, University of Twente, The Nether- lands, 2004.
+Aside from clustering, the importance of energetic issues in WSNs have led to the proposals of several mechanisms to cut down its consumption~\cite{ACFP09},
 
-Aside from clustering, the importance of energetic issues in WSNs have led to the proposals of several mechanisms to cut down its consumption~\cite{ACFP09}, based for example on packets priority~\cite{SAS14}.
+Les mécanismes cryptographiques\index{cryptographie}, souvent déployés pour des raisons de sécurité (et qui seront abordés plus en détail en \chapref{ea}), produisent par nature un grand nombre de calculs: les versions les plus complexes ne peuvent pas toujours être implémentées sur les réseaux de capteurs.
+Le choix des algorithmes à utiliser~\cite{LDH06} en fonction de la mémoire ou de la vitesse du processeur disponibles et du niveau de sécurité requis, leur optimisation (et la création de nouveaux algorithmes)~\cite{GNL12} aussi bien que leur impact sur la durée de vie des réseaux de capteurs~\cite{PLP06} ont donc fait l'objet de plusieurs études.
+
+L'évolution constante des technologies joue aussi son rôle dans ce domaine, et il y a fort à parier que comme partout ailleurs en informatique, des composants de plus en plus performants seront disponibles au fil du temps pour les capteurs.
+Les récentes avancées sur le traitement du silicène pour la fabrication de transistors pourraient ouvrir d'ici quelques années des opportunités nouvelles~\cite{TCCGFDMA15}.
+
 
         \subsubsection{Une gestion adaptée de l'énergie}
 L'usage d'algorithmes mal adaptés au \rcs ne fait pas que diminuer les performances du réseau au niveau de la vitesse de traitement des données: si le processeur est sollicité davantage, il va drainer plus d'énergie.
@@ -24,15 +27,21 @@ Hors il est essentiel de se montrer économe sur l'usage de la batterie des capt
 
 Par conséquent, divers travaux ont été menés pour réduire autant que possible la consommation énergétique.
 Cette thèse s'inscrit d'ailleurs dans cette lignée, pour le domaine spécifique de la lutte contre le \dds.
-À un niveau plus général, on trouve aussi . . . . . . . . . .
-In addition, WSNs have following specific objects:
-- Efficiency: storage, processing and communication limitations on sensor nodes must be
-considered
-(2008 Li Gong)
+
+À un niveau plus général, les performances de chaque opération, qu'il s'agisse de la collecte des données, de leur traitement, de leur occupation de la mémoire, et toutes les étapes relatives à leur transmission peuvent être optimisées dans le but d'économiser de l'énergie.
+
+Les \rcs reprennent des protocoles de \idx{routage} initialement développés pour les \idx{WANET}, qui n'ont pas systématiquement les mêmes contraintes en énergie.
+Ont donc été proposés de nombreux algorithmes de \idx{routage} destinés spécifiquement aux \rcs.
+Ainsi ERAPL (\textit{Energy-Efficient Routing Algorithm to Prolong Lifetime}, « algorithme de routage économe en énergie permettant de prolonger la durée de vie »)~\cite{ZWPT10} repose sur l'usage d'algorithmes génétiques ainsi que d'une « séquence de collecte de données » permettant d'éviter les boucles et les doublons de transmission.
+
+On trouve aussi des solutions qui proposent d'économiser l'énergie en établissant un classement des paquets à transmettre selon leur priorité, \cad selon leur importance pour l'exploitant~\cite{SAS14}.
+Ainsi les paquets prioritaires sont retransmis plus vite, tandis que ceux d'importance moindre peuvent attendre que le trafic soit dans des conditions telles que la transmission ne devrait consommer qu'un minimum d'énergie; la phase d'attente peut également permettre l'arrivée en mémoire tampon d'autres paquets et de procéder à leur \idx{agrégation}.
+
 
 \todo{Ambient backscatter (articles/A\_TRIER/)}\\
+Une récente avancée dans ce domaine réside
 
-Une autre possibilité essentielle permettant de réduire la consommation en énergie est l'utilisation d'un réseau \index{clusterisation!clusterisation hiérarchique} hiérarchiquement clusterisé.
+Enfin, l'une des possibilités essentielles permettant de réduire la consommation en énergie est l'utilisation d'une architecture \index{clusterisation!clusterisation hiérarchique} hiérarchiquement clusterisée dans le réseau.
 
     \subsection{Partition hiérarchique des nœuds du réseau}%
     \label{st:subsec:partition}
@@ -193,5 +202,6 @@ Notre but est ici de proposer, modéliser et tester une solution permettant de d
     scalabilité
 
     MANET, VANET
+    \cite{DYK12}
 \nomenclature{MANET}{\textit{Mobile Ad hoc Networks}}
 \nomenclature{VANET}{\textit{Vehicular Ad hoc Networks}}
