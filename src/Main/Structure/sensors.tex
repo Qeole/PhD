@@ -23,6 +23,46 @@ Il est rare que tous les capteurs d'un \WSN soit directement connectés les uns 
 À la topologie d'un réseau donné est donc très souvent associé le graphe de connectivité du réseau.
 Pour cette raison, il est souvent fait référence aux capteurs sous le terme de \textit{nœuds} (ou de \textit{nodes} en anglais).
 
+Un capteur seul peut être vu comme l'assemblage de quatre modules principaux, représentés en \figref{st:fig:sensor}.
+\begin{figure}[!ht]
+    \centering
+    \begin{tikzpicture}[%
+        scale=.85,
+        sensor/.style={%
+            circle,%
+            minimum size=21em,%
+            very thick,%
+            draw=black!50, %
+            fill=black!20%
+        },%
+        module/.style={%
+            rounded corners,%
+            text width=8em,%
+            minimum height=6em,%
+            align=center,%
+            very thick,%
+            draw=black!50, %
+            top color=white,%
+            bottom color=black!20%
+        }%
+    ]
+    \node (sensor) at (   0, 0) [sensor]{\large Capteur};
+    \draw [rounded corners=7pt,top color=black!20,draw=black!50,very thick] (-3,3)--(-3,5)--(-3.5,5)--(-3.5,3)--cycle ;
+    \node (mesure) at ( 2.2, 2) [module]{Unit\'e de captage\\(mesures physiques)};
+    \node (mesure) at (-2.2, 2) [module]{Unit\'e de\\communication sans fil};
+    \node (mesure) at ( 2.2,-2) [module]{Unit\'e de traitement\\(processeur, m\'emoire)};
+    \node (mesure) at (-2.2,-2) [module]{Batterie\\et contr\^ole de l'\'energie};
+    \end{tikzpicture}
+\caption{Schéma représentant les principaux modules d'un capteur standard}\label{st:fig:sensor}
+\end{figure}
+Il s'agit:
+\begin{itemize}
+    \item d'une unité de captage, chargée de réaliser des mesures physiques (analogiques) sur l'environnement, puis de les convertir en un signal numérique;
+    \item d'un module de traitement, composé principalement d'un processeur et de mémoire (mémoire vive et mémoire non volatile), qui assure le fonctionnement du système d'exploitation, gère les interactions entre les différents modules, et surtout traite les données récoltées;
+    \item d'une unité de transmission/réception utilisée pour les communications hertziennes;
+    \item d'une batterie, accompagnée d'une unité de contrôle de l'énergie elle-même chargée d'alimenter de façon efficace les autres modules du capteur.
+\end{itemize}
+
     \subsection{Applications}
 Le champ d'application des \WSN est très vaste, et n'a de cesse de s'élargir au fil du temps et des avancées technologiques.
 Toutes ne font pas l'objet de publications scientifiques, mais certaines sont régulièrement évoquées en tant qu'exemples, ou bien font l'actualité dans le domaine des nouvelles technologies voire le domaine commercial.
@@ -45,7 +85,8 @@ Il est à noter que certaines de ces applications touchent à des domaines criti
         \paragraph{Surveillance et détection}
 Les \rcsfs sont aussi employés pour des mesures de sureté ou de sécurité, par exemple pour surveiller l'intégrité structurelle de certaines architectures (ferroviaires, aérospatiales, maritimes, ou plus simplement dans le bâtiment: gros œuvre, ouvrages d'art) et peuvent permettre une prévention efficace des pannes matérielles~\cite{SCOA13}.
 Mis à part la détection de pannes, les capteurs peuvent être utilisés dans des systèmes de surveillance de sites sensibles afin de prévenir les intrusions humaines, ou bien pour détecter des incidents ou encore établir le suivi de certaines entités; la gestion du trafic routier, ou même seulement des autobus, en sont des exemples.
-Les applications de vidéosurveillance, en milieu urbain par exemple, font de plus en plus appel à des capteurs en réseau.
+Le CEREMA (Centre d'études et d'expertise sur les risques, l'environnement, la mobilité et l'aménagement) a mis en ligne un site Internet particulièrement riche en exemples d'application des capteurs, et détaillant notamment les différentes technologies utilisées pour réaliser les mesures~\cite{sti}.
+Également en milieu urbain, les applications de vidéosurveillance font de plus en plus appel à des capteurs en réseau.
 
         \paragraph{Domaine militaire}
 La surveillance et la détection sont aussi très utilisés dans le domaine militaire.
