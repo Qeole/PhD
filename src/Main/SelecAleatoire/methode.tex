@@ -81,7 +81,7 @@ Plus précisément, le générateur retenu est de type $x_n = a\cdot x_{n-1}\bmo
     \item $a$ doit être de la forme $8\cdot i\pm3$ (avec $i$ un entier positif) pour que le générateur ait la période maximale, égale à $2^{k-2}$;
     \item $x_0$ (la «~graine~», ou \textit{seed} en anglais) doit être un entier impair (toujours pour avoir la meilleure période).
 \end{itemize}
-La méthode de Schrage permet de reformuler le générateur sous une forme qui prévient tout problème de débordement\footnote{Un débordement désigne le dépassement, au cours des calculs, de la valeur d'entier maximale gérée par le système, qui se traduit par des erreurs de calcul.} lors de l'implémentation~\cite{RJ91}.
+La méthode de Schrage permet de reformuler le générateur sous une forme qui prévient tout problème de débordement\,\footnote{Un débordement désigne le dépassement, au cours des calculs, de la valeur d'entier maximale gérée par le système, qui se traduit par des erreurs de calcul.} lors de l'implémentation~\cite{RJ91}.
 Le générateur est alors écrit sous la forme suivante: $a\cdot x\bmod m=g(x)+m\cdot h(x)$, avec:
 \[\left\{
     \begin{aligned}

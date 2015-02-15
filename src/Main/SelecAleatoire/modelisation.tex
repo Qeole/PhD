@@ -14,7 +14,7 @@ Nous avons modélisé notre solution sous la forme d'un processus de \textsc{Mar
 Notre modèle représente un cluster d'un \rcsf qui vérifie les hypothèses suivantes:
 \begin{itemize}
     \item seul le cluster est modélisé;
-    \item le cluster contient exactement un \CH, $s$ capteurs chargés d'effectuer des mesures, et $m$ nœuds jouant le rôle de \cns\footnote{$s$ pour \textit{sensing node}, $m$ pour \textit{monitoring node}.};
+    \item le cluster contient exactement un \CH, $s$ capteurs chargés d'effectuer des mesures, et $m$ nœuds jouant le rôle de \cns\,\footnote{$s$ pour \textit{sensing node}, $m$ pour \textit{monitoring node}.};
     \item il existe exactement un nœud compromis parmi les $s$ capteurs;
     \item le capteur $i$ ($1 \leq i \leq s$) génère du trafic selon un processus de \textsc{Poisson} de paramètre $\lambda_i$;
     \item le nœud compromis $c$ génère du trafic selon un processus de \textsc{Poisson} de paramètre $\lambda_i$ (tel que $\forall i\in[\![1;s]\!]\backslash\{c\},\; \lambda_c\gg\lambda_i$);
@@ -155,7 +155,7 @@ Le modèle \rpsge associé à ce type de nœud est présenté en figure~\ref{sa:
     \caption{Modèle \rpsge d'un \cn élu de manière \emph{statique}}\label{sa:fig:cnodegspn1}
 \end{figure}
 La place \textsf{In\_buff} représente le tampon contenant les messages reçu par le nœud.
-Un jeton arrivant dans cette place (depuis un nœud «~normal~») représente un message capté par le \cn\footnote{En réalité, il devrait y avoir une place \textsf{In\_buff$_i$} distincte pour les jetons provenant de chaque nœud voisin $i$ du \cn. Pour simplifier la représentation, tous les jetons arrivant au modèle du nœud sont rassemblés dans une place unique.}.
+Un jeton arrivant dans cette place (depuis un nœud «~normal~») représente un message capté par le \cn\,\footnote{En réalité, il devrait y avoir une place \textsf{In\_buff$_i$} distincte pour les jetons provenant de chaque nœud voisin $i$ du \cn. Pour simplifier la représentation, tous les jetons arrivant au modèle du nœud sont rassemblés dans une place unique.}.
 La vérification du respect de la valeur seuil $K$ pour le trafic est réalisée à intervalles de temps constants.
 Les transitions \textsf{check\_YES} et \textsf{check\_NO} sont «~activées~» au bout de chaque période, et servent à assurer la vérification.
 S'il y a au moins $K$ jetons dans la place, la transition \textsf{check\_YES} est franchie.
@@ -310,7 +310,7 @@ Il s'agit des transitions suivantes:
 \begin{itemize}
     \item la première transition qui boucle sur $e_1$: $e_1\xrightarrow{\mathit{true},\{\mathsf{chkYES_i}\},(x_{d_i}:=x_{d_i}+1)}{e_1}$.
         Elle correspond à l'évènement associé au passage de la transition \textsf{check\_YES} du nœud $i$ sur le modèle \rpsge du cluster (présenté en figure~\ref{sa:fig:petridyn}).
-        Lorsque la transition est franchie sur le réseau de \textsc{Petri}, quelle que soit la valeur de l'«~horloge~» $x_t$ (condition $\mathit{true}$), la transition correspondante sur l'automate linéaire hybride est elle-aussi franchie\footnote{Attention: les transitions du réseau de \textsc{Petri}, représentées par des rectangles et reliées aux places par des arcs, ne doivent pas être confondues avec les transitions des automates, représentées par des arcs, et reliant les états.}.
+        Lorsque la transition est franchie sur le réseau de \textsc{Petri}, quelle que soit la valeur de l'«~horloge~» $x_t$ (condition $\mathit{true}$), la transition correspondante sur l'automate linéaire hybride est elle-aussi franchie\,\footnote{Attention: les transitions du réseau de \textsc{Petri}, représentées par des rectangles et reliées aux places par des arcs, ne doivent pas être confondues avec les transitions des automates, représentées par des arcs, et reliant les états.}.
         Comme la transition du réseau de \textsc{Petri} correspond à une nouvelle détection de trafic anormal par le nœud $i$, la transition de l'automate a pour effet de mettre à jour la valeur de $x_{d_i}$, en l'incrémentant de $1$;
     \item une deuxième transition qui boucle elle aussi sur $e_1$: $e_1\xrightarrow{\mathit{true},\{\mathsf{TX_i}\},(x_{\mathit{TX}_i}:=x_{\mathit{TX}_i}+1)}{e_1}$.
         Cette transition fonctionne de façon identique à la précédente, à la différence près que la transition du réseau de \textsc{Petri} concernée n'est plus \textsf{check\_YES} mais \textsf{TX}, et la variable de l'automate est $x_{\mathit{TX}_i}$: lorsque le nœud $i$ envoie un message (et que \textsf{TX} est franchie sur le modèle \rpsge), la variable $x_{\mathit{TX}_i}$ est incrémentée de $1$;

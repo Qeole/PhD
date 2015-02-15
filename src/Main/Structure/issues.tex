@@ -52,11 +52,11 @@ En attendant, l'une des possibilités essentielles permettant de réduire la con
 «~Clusteriser~» un ensemble d'éléments revient à le diviser en sous-ensembles appelés \textit{clusters}.
 Dans le cas des \rcsfs, cette partition permet d'obtenir un routage efficace des paquets, en adoptant la configuration suivante:
 \begin{enumerate}
-    \item tous les nœuds réunis au sein d'un même cluster sont capables de communiquer directement entre eux (\textit{one-hop transmission});
+    \item tous les nœuds réunis au sein d'un même cluster sont capables de communiquer directement entre eux « en un saut » (\textit{one-hop transmission});
     \item lors de la partition, un unique nœud par cluster est désigné «~chef~» du cluster.
         Il est choisi, de façon déterministe ou bien aléatoire selon l'algorithme employé, parmi les nœuds «~normaux~» du cluster.
         Ce «~chef~» est appelé \ch (\CH);\nomenclature{CH}{\textit{Cluster Head}}
-    \item lorsqu'un capteur quelconque d'un cluster souhaite faire parvenir des informations à un nœud d'un autre cluster\footnote{Pour une grande partie des applications, les communications entre nœuds de différents clusters, hors \chs, ne se produisent pas. La totalité du trafic «~utile~», acheminant des données, est généralement à destination de la \sdb.}, ou bien à la \sdb, il envoie ses paquets de données au \ch de son cluster ;
+    \item lorsqu'un capteur quelconque d'un cluster souhaite faire parvenir des informations à un nœud d'un autre cluster\,\footnote{Pour une grande partie des applications, les communications entre nœuds de différents clusters, hors \chs, ne se produisent pas. La totalité du trafic «~utile~», acheminant des données, est généralement à destination de la \sdb.}, ou bien à la \sdb, il envoie ses paquets de données au \ch de son cluster ;
     \item le \ch transmet alors les paquets de données, soit directement à la cible s'il s'agit de la \sdb et qu'il peut l'atteindre, soit en passant par d'autres \chs (\textit{multi-hops transmission}), jusqu'à atteindre le destinataire.
 \end{enumerate}
 Le schéma d'un réseau clusterisé est présenté en \figref{st:fig:wsn}.

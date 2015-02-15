@@ -117,8 +117,8 @@ Aussi l'algorithme de sélection présenté plus haut doit-il être modifié, po
 \begin{enumerate}
     \item Au cours d'une première phase, chaque nœud évalue la valeur de son énergie résiduelle et la transmet au \ch;
     \item Le \ch écoute toutes les valeurs. Les autres nœuds enregistrent également les valeurs de leurs voisins;
-    \item Tous les nœuds envoient au \CH la liste de leurs voisins directs (\textit{1-hop})\footnote{Nous supposons ici que les capteurs ne trichent pas durant cette étape. Ils pourraient en effet annoncer des voisins « virtuels » supplémentaires, pour faire croire qu'ils seront à portée d'un \cn, et ainsi éviter d'être détecté si ce n'est pas le cas.};
-    \item Le \CH sélectionne les $n$ \cns parmi les nœuds ayant le plus d'énergie résiduelle, de telle façon que ces $n$ nœuds couvrent tous les autres nœuds en terme de portée\footnote{Les détails de l'algorithme utilisé pour cette phase ne sont pas précisés dans cette étude.};
+    \item Tous les nœuds envoient au \CH la liste de leurs voisins directs (\textit{1-hop})\,\footnote{Nous supposons ici que les capteurs ne trichent pas durant cette étape. Ils pourraient en effet annoncer des voisins « virtuels » supplémentaires, pour faire croire qu'ils seront à portée d'un \cn, et ainsi éviter d'être détecté si ce n'est pas le cas.};
+    \item Le \CH sélectionne les $n$ \cns parmi les nœuds ayant le plus d'énergie résiduelle, de telle façon que ces $n$ nœuds couvrent tous les autres nœuds en terme de portée\,\footnote{Les détails de l'algorithme utilisé pour cette phase ne sont pas précisés dans cette étude.};
     \item Au besoin (si $n$ est trop bas), le \CH sélectionne des \cns supplémentaires de façon à ce qu'ils couvrent l'intégralité du cluster;
     \item Le \CH envoie un message aux nœuds sélectionnés pour leur notifier leur rôle de \cn.
 \end{enumerate}

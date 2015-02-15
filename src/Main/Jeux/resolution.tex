@@ -39,7 +39,7 @@ Au départ, les deux compteurs sont initialisés à $0$.
 À présent, étant donné une machine $\machine$, nous construisons une arène $\G_\machine$ basée sur des modules « élémentaires » pour chaque type d'instructions (celui du compteur $c$ sera symétrique à celui du compteur $d$).
 L'arène comporte donc 5 composantes $c$,$c'$,$d$,$d'$,$p$, où seule $p$ concerne le gain, les autres étant attachées à des valeurs énergétiques.
 Les composantes $c$ et $c'$ (respectivement $d$ et $d'$) sont supposées toujours conserver la même valeur, excepté pour l'instruction $0$-test.
-Au lancement du jeu toutes les composantes ont pour valeur\footnote{Pour obtenir une simulation plus réaliste, il est possible d'assigner aux composantes la valeur initiale $1$, et de considérer $0$ comme valeur de défaite. Nous choisissons ici d'autoriser un niveau d'énergie nul et considérons le jeu comme « perdu » pour des valeurs strictement négative, et ce afin de rendre plus clair le lien entre les valeurs des compteurs et les niveaux d'énergie.} $0$.
+Au lancement du jeu toutes les composantes ont pour valeur\,\footnote{Pour obtenir une simulation plus réaliste, il est possible d'assigner aux composantes la valeur initiale $1$, et de considérer $0$ comme valeur de défaite. Nous choisissons ici d'autoriser un niveau d'énergie nul et considérons le jeu comme « perdu » pour des valeurs strictement négative, et ce afin de rendre plus clair le lien entre les valeurs des compteurs et les niveaux d'énergie.} $0$.
 
 Le but du \jo est d'obtenir un gain strictement positif, tout en simulant fidèlement la machine.
 Il faut entendre par cette expression que les valeurs des composantes $c$ et $d$ doivent demeurer positives.
@@ -260,7 +260,7 @@ Si la condition suffisante que nous venons de présenter n'est pas remplie, nous
 Des stratégies gagnantes pour chaque composante pourraient en effet se révéler incompatibles entre elles.
 Prenons, pour illustrer, l'exemple du jeu à un seul joueur présenté en \figref{tj:fig:infmemoryneeded}.
 Dans cet exemple, $q_0$ agit comme un état de recharge (en énergie) tandis que $q_1$ est un état actif qui produit un effet utile récompensé par une valeur de gain.
-On constate que recharger la batterie est bien plus lent que de consommer l'énergie, puisqu'il faut 42 « unités d'énergie\footnote{Ce peut être, par exemple, une joule, ce qui signifierait que l'étape active consommerait avec une puissance de 42~W, tandis que la puissance de la recharge serait de 1~W. La valeur 42 a été choisie arbitrairement pour cet exemple.} » par étape active.
+On constate que recharger la batterie est bien plus lent que de consommer l'énergie, puisqu'il faut 42 « unités d'énergie\,\footnote{Ce peut être, par exemple, une joule, ce qui signifierait que l'étape active consommerait avec une puissance de 42~W, tandis que la puissance de la recharge serait de 1~W. La valeur 42 a été choisie arbitrairement pour cet exemple.} » par étape active.
 
 Il est possible de maintenir un niveau d'énergie constamment positif (pour la première composante) en restant dans $q_0$ (où en y allant si l'on commence en $q_1$).
 Il est aussi possible d'atteindre un gain moyen de $1$ en demeurant sur $q_1$ (ou en s'y rendant si l'on démarre sur $q_0$, car le poids de l'unique arête empruntée est négligeable sur une longue exécution).
