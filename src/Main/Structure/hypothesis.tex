@@ -2,34 +2,3 @@
 \section{Hypothèses de travail}
 
 \todo{À déplacer en \chapref{in} ou en début de \chapref{sa}? Terminologie entre sections 1 et 2 de ce chapitre?}
-
-    \subsection{Terminologie employée}
-
-        \paragraph{Capteurs et nœuds}
-Un \rcsf est souvent représenté sous forme de graphe.
-En conséquence, il est souvent fait références aux capteurs eux-mêmes sous le terme de « nœuds ».
-Nous parlerons plutôt de capteurs lorsque nous évoquerons les « \rcs » eux-mêmes, ainsi que les mesures physiques qu'ils réalisent sur leur environnement, et plutôt de nœuds lorsque nous sommes amenés à travailler sur des graphes.
-Mais la plupart du temps, ces deux termes peuvent être employés dans cette thèse de manière complètement interchangeable.
-Leur alternance n'a le plus souvent que pour but de limiter les répétitions au sein d'une phrase.
-
-        \paragraph{Nœuds normaux}
-Les « nœuds normaux » ont deux significations possibles selon le contexte.
-\begin{enumerate}
-    \item Lorsqu'il est question de partition, de « clusterisation » du réseau, un nœud \textit{normal} est un nœud qui n'a pas été sélectionné pour assurer la fonction de « chef » du cluster, de \ch. De même lorsque des nœuds de contrôle (\cns ou \vns) ont été sélectionné, les nœuds \textit{normaux} sont les nœuds qui n'ont pas été sélectionnés (ni comme nœud de contrôle, ni comme \ch): ils poursuivent donc simplement leur rôle de collecte et de transmission des données mesurées.
-    \item Lorsqu'il est question de \secu et d'attaques menées depuis l'intérieur du réseau, un nœud \textit{normal} désigne un nœud non compromis. Les termes « nœud légitime », « nœud sain » ont le même sens dans cette thèse. Ils sont à opposer au nœud « attaquant », « compromis », « corrompu » ou occasionnellement « cupide ».
-\end{enumerate}
-
-        \paragraph{Attaquant}
-Le terme d'« attaquant » fait par principe référence à l'entité consciente qui se trouve à l'origine d'une attaque, qu'il s'agisse d'une personne seule ou d'une organisation.
-Il arrive toutefois que par abus de langage, l'« attaquant » soit utilisé en tant que raccourci pour « le nœud attaquant », c'est à dire le nœud corrompu par l'\textit{attaquant} réel, depuis lequel l'attaque est menée au sein du réseau.
-
-        \paragraph{Exploitant}
-L'\textit{exploitant} du réseau désigne l'entité (entité humaine ou organisation) qui exploite le \rcsfs: l'entité qui interagit avec la \sdb, de l'« autre côté » du réseau, pour récupérer et analyser les données collectées par les capteurs et remontées jusqu'à la \BS.
-Sauf précision contraire, on fait généralement l'amalgame avec l'\textit{administrateur} du réseau, qui procède directement à sa mise en place et éventuellement à son maintien en fonction.
-
-        \paragraph{Des capteurs conscients!}
-Il va de soi qu'un capteur est un appareil dépourvu de vie et de conscience.
-Par abus de langage, des raccourcis sont parfois empruntés dans cette thèse et leur prêtent des intentions ainsi qu'une durée de vie.
-Ainsi il arrive que les capteurs « cherchent à », « essayent de », « veulent » réaliser des actions; ou bien qu'ils « prétendent » être de meilleurs candidats au poste de \ch.
-De même, ils sont susceptibles de « mourir » lorsque leur batterie est épuisée.
-Ces tournures, bien qu'abusives en termes d'exactitude du langage, permettent lorsqu'elles sont employées de simplifier les explications.

@@ -3,6 +3,8 @@
 \label{st:sec:contexte}
 
     \subsection{De quoi s'agit-il?}
+%{{{1
+%{{{2
 Les \rcsfs, ou \textit{\WSN} (pour \wsns en anglais), sont des réseaux constitués de petits appareils, les capteurs, ainsi que d'une \sdb.
 \nomenclature{WSN}{\wsns}
 Les capteurs échangent par communications hertziennes, en utilisant des protocoles tels ceux définis dans la pile \ieeee.
@@ -62,12 +64,16 @@ Il s'agit:
     \item d'une unité de transmission/réception utilisée pour les communications hertziennes;
     \item d'une batterie, accompagnée d'une unité de contrôle de l'énergie elle-même chargée d'alimenter de façon efficace les autres modules du capteur.
 \end{itemize}
+%2}}}
+%1}}}
 
     \subsection{Applications}
+%{{{1
 Le champ d'application des \WSN est très vaste, et n'a de cesse de s'élargir au fil du temps et des avancées technologiques.
 Toutes ne font pas l'objet de publications scientifiques, mais certaines sont régulièrement évoquées en tant qu'exemples, ou bien font l'actualité dans le domaine des nouvelles technologies voire le domaine commercial.
 
         \paragraph{Applications environnementales}
+%{{{2
 La gestion de l'environnement par l'Homme a de plus en plus recours à des mesures distribuées reposant sur l'usage de capteurs.
 Les prévisions météorologiques (reposant sur des mesures d'hygrométrie, de pression de l'air, \etc) ont été l'un des premiers champs d'application des capteurs.
 Les mesures de qualité de l'air et de taux de pollution, en ville comme en campagne, se généralisent peu à peu.
@@ -81,26 +87,34 @@ Et en zones à risques, ils peuvent être utilisés pour mesurer l'activité sis
 L'industrie a également recours à ces réseaux pour détecter d'éventuelles fuites de produits toxiques (pétrole, gaz, éléments radioactifs).
 
 Il est à noter que certaines de ces applications touchent à des domaines critiques (en termes de sécurité des installations, voire de vies humaines): il est indispensable d'assurer le bon fonctionnement du réseau déployé dans un tel contexte.
+%2}}}
 
         \paragraph{Surveillance et détection}
+%{{{2
 Les \rcsfs sont aussi employés pour des mesures de sureté ou de sécurité, par exemple pour surveiller l'intégrité structurelle de certaines architectures (ferroviaires, aérospatiales, maritimes, ou plus simplement dans le bâtiment: gros œuvre, ouvrages d'art) et peuvent permettre une prévention efficace des pannes matérielles~\cite{SCOA13}.
 Mis à part la détection de pannes, les capteurs peuvent être utilisés dans des systèmes de surveillance de sites sensibles afin de prévenir les intrusions humaines, ou bien pour détecter des incidents ou encore établir le suivi de certaines entités; la gestion du trafic routier, ou même seulement des autobus, en sont des exemples.
 Le CEREMA (Centre d'études et d'expertise sur les risques, l'environnement, la mobilité et l'aménagement) a mis en ligne un site Internet particulièrement riche en exemples d'application des capteurs, et détaillant notamment les différentes technologies utilisées pour réaliser les mesures~\cite{sti}.
 Également en milieu urbain, les applications de vidéosurveillance font de plus en plus appel à des capteurs en réseau.
+%2}}}
 
         \paragraph{Domaine militaire}
+%{{{2
 La surveillance et la détection sont aussi très utilisés dans le domaine militaire.
 Qu'il s'agisse de mener des opérations de renseignement ou bien de suivre l'évolution d'un combat sur le champ de bataille, pour analyser les cibles, relier entre eux fantassins et véhicules de tous types, pour détecter les agents radioactifs, chimiques ou biologiques répandus par un ennemi, toutes les informations sont bonnes à prendre.
 Un maximum d'entre elles doivent être remontées au centre de commandement, afin de permettre une supervision optimale des forces en mouvement.
 
 Plus encore que les exemples précédents, l'usage des capteurs en contexte militaire implique de fortes contraintes en termes de \secu du réseau déployé.
+%2}}}
 
         \paragraph{Médecine}
+%{{{2
 Certains usages des capteurs tiennent du domaine médical.
 Il peut s'agir par exemple de faire communiquer un ou plusieurs implants avec un contrôleur externe.
 Il peut également être question d'employer des microcapteurs pour analyser avec précisions des variables corporelles (taux de glycémie, surveillance des organes vitaux) ou bien, sur une plus courte durée, pour traiter avec précision une pathologie locale (des cellules cancéreuses par exemple).
+%2}}}
 
         \paragraph{Grand public}
+%{{{2
 Le public a lui aussi de plus en plus accès à des applications reposant sur les capteurs.
 En domotique par exemple, la température des différentes pièces d'un lieu d'habitation peut être rendue accessible à tout instant, tandis que des fonctions comme l'activation de volets électriques, l'ouverture de portes, l'activation de sources lumineuses ou de dispositifs de chauffage peuvent être effectuées à distance par l'habitant (par exemple par le biais d'une application logicielle sur téléphone portable) ou bien de façon automatique en fonction des besoins identifiés à partir des données récoltées.
 
@@ -114,9 +128,14 @@ En voici quelques exemples:
     \item les réfrigérateurs (gestion des réserves alimentaires, création de listes d'achat);
     \item les véhicules autonomes, tels que les voitures sans conducteurs ou les drones (pilotage de l'engin, relevé de mesures tactiques pour les drones militaires).
 \end{itemize}
+Des puces RFID (de l'anglais \textit{Radio Frequency Identification}, « identification sur fréquences radio ») se retrouvent par ailleurs de plus en plus utilisées, entre autres raisons pour faciliter de telles interactions dans le monde « connecté ».
 Au fur et à mesure que ces objets intègrent la vie quotidienne des utilisateurs, ils auront probablement tendance à communiquer de plus en plus entre eux, entre objets, en ne centralisant les données que sur une seule interface présentée à l'utilisateur final.
+\nomenclature{RFID}{\textit{Radio Frequency Identification}}
+%2}}}
+%1}}}
 
     \subsection{Contraintes en ressources}
+%{{{1
 De par leur petite taille, et à cause de leurs déploiement dans des zones souvent difficiles d'accès, les capteurs n'embarquent qu'une quantité limitée de matériel, qui ne peut pas toujours être remplacé.
 Les capteurs se retrouvent donc avec des capacités limitées, notamment en ce qui concerne:
 \begin{itemize}
@@ -130,9 +149,11 @@ Les capteurs se retrouvent donc avec des capacités limitées, notamment en ce q
 \end{itemize}
 
 Il est à noter qu'au regard de ces contraintes qui affectent les capteurs, la \sdb est considérée comme disposant de capacités « illimitées ».
+%1}}}
 
     \subsection{Communications sans fil}
-
+%{{{1
+%{{{2
 Comme l'indique leur nom, les \rcsfs n'utilisent aucun câble physique pour communiquer entre eux ou avec la \sdb: toutes les transmissions sont effectuées par voie hertzienne.
 Chaque capteur est équipé d'un module radio utilisé alternativement pour émettre et pour recevoir.
 La plupart du temps ces modules sont capables de changer de fréquence de communication, ainsi que de moduler la puissance d'émission utilisée pour les transmissions.
@@ -172,12 +193,16 @@ Les principaux standards qui sont employés dans les \rcs sont les piles \ieeee 
 \nomenclature{IETF}{\textit{Internet Engineering Task Force}}
 \nomenclature{IEEE}{\textit{Institute of Electrical and Electronics Engineers}}
 \nomenclature{6LoWPAN}{\textit{IPv6 over Low power Wireless Personal Area Networks}}
+%2}}}
 
             \paragraph{La couche physique}
+%{{{2
 Cette couche concerne l'émission et la réception en soi des ondes électromagnétiques, et l'encodage utilisé pour leur faire porter des valeurs numériques (par opposition à un signal analogique).
 Nous n'aurons pas besoin de l'étudier en détail ici.
+%2}}}
 
-\paragraph{La couche de liaison de données}\label{st:ssec:mac}
+            \paragraph{La couche de liaison de données}\label{st:ssec:mac}
+%{{{2
 La deuxième couche du modèle fournit les moyens fonctionnels et procéduraux pour le transfert des données entre deux entités du réseau.
 Elle permet aussi, le plus souvent, de détecter et éventuellement corriger certaines erreurs survenues sur la couche physique (en cas de perturbation ou dégradation du signal électromagnétique).
 Elle se décompose en deux sous-couches: la couche de contrôle de la liaison logique (\llc, pour \textit{Logical Link Control} en anglais, « contrôle de la liaison logique ») et la couche du contrôle d'accès au support (\mac, pour \textit{Media Access Control}, « contrôle d'accès au support »).
@@ -228,8 +253,10 @@ De ces modes d'accès sont dérivés de très nombreux protocoles de couche \mac
 Par exemple, en dehors des standards \ieee, le protocole \smac~\cite{YHE02} fait alterner périodes « actives » et périodes de sommeil aux capteurs afin de préserver leur batterie.
 Les capteurs sont associés dans des groupes (qui ne correspondent pas tout à fait à des clusters) dont tous les membres sont en éveil de manière simultanée, afin de pouvoir communiquer à l'aide d'une version modifiée de \csmaca tel que défini dans le standard \ieeee.
 \nomenclature{S-MAC}{\textit{Sensor-MAC}}
+%2}}}
 
             \paragraph{La couche réseau}
+%{{{2
 Cette couche, pour les capteurs sans fil, repose le plus souvent sur le protocole \ip (\textit{Internet Protocol} an anglais), que ce soit en version 4 ou 6 (la version 6 est notamment utilisée avec la pile \slowpan), pour l'adressage, et sur un protocole de routage qui détermine comment les paquets sont retransmis saut après saut dans le réseau.
 
 Les \rcsfs composent en quelque sorte une sous-famille des réseaux sans fil \adhoc (ou \idx{WANET}, de l'anglais \textit{wireless Ad hoc Network}), et une grande partie des protocoles et algorithmes utilisés proviennent du monde des WANET.
@@ -241,14 +268,62 @@ Ces protocoles se répartissent le plus souvent en deux grandes classes: les pro
 \nomenclature{DSDV}{\textit{Destination-Sequenced Distance Vector routing}}
 \nomenclature{B.A.T.M.A.N.}{\textit{Better Approach To Mobile Adhoc Networking}}
 \nomenclature{WANET}{\textit{Wireless Ad hoc Network}}
+%2}}}
 
             \paragraph{La couche transport}
+%{{{2
 Cette couche gère les communications de bout en bout entre processus.
 Les protocoles les plus fréquemment utilisés, \tcp (\textit{Transmission Control Protocol}) et \udp (\textit{User Datagram Protocol}) assurent l'ordonnancement des paquets et permettent d'éviter les pertes, les doublons et la corruption des paquets.
 Le protocole \tcp permet en plus à deux entités de communiquer en mode connecté en établissant une session (début, fin et validation des échanges).
 En raison des données de contrôle que ces protocoles impliquent, ils ne sont pas systématiquement implémentés dans les \rcs (ils le sont parfois dans des versions allégées).
+%2}}}
 
             \paragraph{La couche application}
+%{{{2
 La dernière couche gère les échanges applicatifs entre les différents agents du réseau, et encapsule les données utiles au format désiré pour leur traitement final.
 Il s'agit de la couche la plus haut niveau  du modèle.
 Elle assure un service propre à l'application déployée, et les protocoles déployés à ce niveau dépendent donc totalement de l'objectif final du réseau, il n'y a donc pas de standard propre aux \rcs.
+%2}}}
+%1}}}
+
+    \subsection{Terminologie employée}
+%{{{1
+            \paragraph{Capteurs et nœuds}
+%{{{2
+Un \rcsf est souvent représenté sous forme de graphe.
+En conséquence, il est souvent fait références aux capteurs eux-mêmes sous le terme de « nœuds ».
+Nous parlerons plutôt de capteurs lorsque nous évoquerons les « \rcs » eux-mêmes, ainsi que les mesures physiques qu'ils réalisent sur leur environnement, et plutôt de nœuds lorsque nous sommes amenés à travailler sur des graphes.
+Mais la plupart du temps, ces deux termes peuvent être employés dans cette thèse de manière complètement interchangeable.
+Leur alternance n'a le plus souvent que pour but de limiter les répétitions au sein d'une phrase.
+%2}}}
+
+            \paragraph{Nœuds normaux}
+%{{{2
+Les « nœuds normaux » ont deux significations possibles selon le contexte.
+\begin{enumerate}
+    \item Lorsqu'il est question de partition, de « clusterisation » du réseau, un nœud \textit{normal} est un nœud qui n'a pas été sélectionné pour assurer la fonction de « chef » du cluster, de \ch. De même lorsque des nœuds de contrôle (\cns ou \vns) ont été sélectionné, les nœuds \textit{normaux} sont les nœuds qui n'ont pas été sélectionnés (ni comme nœud de contrôle, ni comme \ch): ils poursuivent donc simplement leur rôle de collecte et de transmission des données mesurées.
+    \item Lorsqu'il est question de \secu et d'attaques menées depuis l'intérieur du réseau, un nœud \textit{normal} désigne un nœud non compromis. Les termes « nœud légitime », « nœud sain » ont le même sens dans cette thèse. Ils sont à opposer au nœud « attaquant », « compromis », « corrompu » ou occasionnellement « cupide ».
+\end{enumerate}
+%2}}}
+
+            \paragraph{Attaquant}
+%{{{2
+Le terme d'« attaquant » fait par principe référence à l'entité consciente qui se trouve à l'origine d'une attaque, qu'il s'agisse d'une personne seule ou d'une organisation.
+Il arrive toutefois que par abus de langage, l'« attaquant » soit utilisé en tant que raccourci pour « le nœud attaquant », c'est à dire le nœud corrompu par l'\textit{attaquant} réel, depuis lequel l'attaque est menée au sein du réseau.
+%2}}}
+
+            \paragraph{Exploitant}
+%{{{2
+L'\textit{exploitant} du réseau désigne l'entité (entité humaine ou organisation) qui exploite le \rcsfs: l'entité qui interagit avec la \sdb, de l'« autre côté » du réseau, pour récupérer et analyser les données collectées par les capteurs et remontées jusqu'à la \BS.
+Sauf précision contraire, on fait généralement l'amalgame avec l'\textit{administrateur} du réseau, qui procède directement à sa mise en place et éventuellement à son maintien en fonction.
+%2}}}
+
+            \paragraph{Des capteurs conscients!}
+%{{{2
+Il va de soi qu'un capteur est un appareil dépourvu de vie et de conscience.
+Par abus de langage, des raccourcis sont parfois empruntés dans cette thèse et leur prêtent des intentions ainsi qu'une durée de vie.
+Ainsi il arrive que les capteurs « cherchent à », « essayent de », « veulent » réaliser des actions; ou bien qu'ils « prétendent » être de meilleurs candidats au poste de \ch.
+De même, ils sont susceptibles de « mourir » lorsque leur batterie est épuisée.
+Ces tournures, bien qu'abusives en termes d'exactitude du langage, permettent lorsqu'elles sont employées de simplifier les explications.
+%2}}}
+%1}}}

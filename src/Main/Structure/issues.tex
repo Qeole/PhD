@@ -165,9 +165,19 @@ Certains protocoles ont des buts plus précis, comme \ffuca~\cite{FL11,FMMMI12} 
 \nomenclature{MPC}{\textit{Multiple Parameter based Clustering}}
 \nomenclature{VSR}{\textit{Virtual Struture Routing protocol}}
 
+        \subsection{Déploiement autonome, \idx{mobilité}}
+    scalabilité
+
+    MANET, VANET
+    \cite{DYK12}
+\nomenclature{MANET}{\textit{Mobile Ad hoc Networks}}
+\nomenclature{VANET}{\textit{Vehicular Ad hoc Networks}}
+
         \subsection{Sécurité, \idx{sureté} et \resilience}
 
-
+Une fois déployés, les \rcs doivent s'organiser et fonctionner seuls, sans intervention humaine.
+Pour autant, ils ne sont pas à l'abri des erreurs ni des pannes.
+L'idéal est donc de pouvoir assurer un certain degré de \idx{sureté} et de 
 
 Beside being energy-efficient, it is important for an algorithm to \emph{just work}, and thus for researchers to provide guaranties of its functioning.
 Formal method may help in this, and one of the most interesting techniques is model-checking.
@@ -176,19 +186,12 @@ Additionally, were a system not to work properly, model-checking tools provide a
 Contrary to testing or simulation, results obtained \via model-checking do not vary between distinct running instances; more important, formal specification enables one to verify the system against every single execution trace, where testing would only raise some encountered errors (maybe not all existing errors).
 Model-checking is used in a wide area of applications, from the validation of network protocols to the verification of safety properties in regard with the non-collision between platoon vehicles\cite{E-ZCGGK12}, for example.
 
-One of the two aforementioned papers already makes use of formal methods, including model-checking, to evaluate its proposal\cite{BMM13}.
-A first attempt is described in the study to model it with CTMC (Continuous Time Markov Chains), but limitations due to the period over which the detection is performed led to put away Markovian processes.
-Instead the nodes and the monitoring agents are modeled with eGSPN (extended Generalized Stochastic Petri Networks), a class of Petri networks including times transitions and suitable for representing stochastic processes.
-From those eGSPNs we could extract a number of performance and dependability properties formally expressed in terms of the Hybrid Automata Stochastic Logic (HASL\cite{BDDHP11hasl}) and relying on Linear Hybrid Automata (LHA).
-These properties were eventually asserted with the COSMOS statistical model-checker\cite{BDDHP11cosmos}.
-
 Other works include model-checking of WSN-addressed systems, though we found few of them concerning protection against \DoS attacks.
 In~\cite{TCCDC09} for example, three security protocols are analyzed through model-checking, nominally TinySec, allowing authentication and encryption, and LEAP and TinyPK, both used for key management. 
 The authors used the AVISTA model-checker, designed for verifying security protocols.
-In our study, we prefer to work with the more general UPPAAL model-checking tool.
 
 
-%La sureté et la résilience des réseaux ne sont pas des problématiques de sécurité (car aucune attaque volontaire ne rentre en compte), mais il s'agit de problématiques assez proches de la disponibilité des réseaux.
+La sureté et la résilience des réseaux ne sont pas des problématiques de sécurité (car aucune attaque volontaire ne rentre en compte), mais il s'agit de problématiques assez proches de la disponibilité des réseaux définie au \chapref{ea}, \ssref{ea:def:dispo}.
 
         \subsubsection{Sécurité}
 En raison de leurs faibles capacités, conjuguées aux domaines critiques dans lesquels ils interviennent parfois, les capteurs peuvent présenter des cibles de choix pour un attaquant.
@@ -198,15 +201,6 @@ Il a fallu adapter ces mécanismes aux capteurs.
 D'autres attaques peuvent être menées, non plus pour intercepter des données, mais dans le but de perturber le bon fonctionnement du réseau.
 Ce sont les attaques dites de \textit{\dds}.
 Un attaquant, par le biais d'un nœud compromis par exemple, peut ainsi chercher à détourner des flux de données au sein du réseau, à empêcher des paquets de parvenir à destination (en les supprimant), à maximiser le débit du nœud compromis au détriment de celui des autres nœuds, à saturer le canal de transmission pour empêcher les nœuds légitimes de l'utiliser, ou encore à pousser les autres capteurs à l'épuisement de leurs réserves en énergie, \etc.
-Les problématiques de sécurité dans les \rcs sont développées plus en détail dans le \chapref{ea}.
+Pour rappel, l'objectif des travaux présentés dans cet ouvrage consiste à proposer, modéliser et tester une solution permettant de détecter, puis de réagir aux attaques de ce type, tout en assurant une consommation minimale en ressources pour les capteurs du réseau.
 
-\todo{Corriger ici}
-Notre but est ici de proposer, modéliser et tester une solution permettant de détecter, puis de réagir à une attaque de ce type, tout en assurant une consommation minimale en ressources pour les capteurs du réseau.
-
-        \subsection{Déploiement autonome, \idx{mobilité}}
-    scalabilité
-
-    MANET, VANET
-    \cite{DYK12}
-\nomenclature{MANET}{\textit{Mobile Ad hoc Networks}}
-\nomenclature{VANET}{\textit{Vehicular Ad hoc Networks}}
+Les problématiques de sécurité dans les \rcs et notamment les attaques de \dds ainsi que les contre-mesures appropriées sont développées plus en détail dans le chapitre qui suit.
