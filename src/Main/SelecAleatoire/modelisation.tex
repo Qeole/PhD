@@ -9,7 +9,7 @@ Nous avons détaillé la solution proposée. À présent, nous allons présenter
 
         \subsubsection{Présentation et hypothèses de travail}
 Nous avons modélisé notre solution sous la forme d'un processus de \textsc{Markov} à temps continu (\cmtc, pour chaine de \textsc{Markov} à temps continu).
-\nomenclature{CMTC}{Chaîne de \textsc{Markov} à temps continu}
+\nomenclature{CMTC}{Chaîne de \textsc{Markov} à Temps Continu}
 
 Notre modèle représente un cluster d'un \rcsf qui vérifie les hypothèses suivantes:
 \begin{itemize}
@@ -89,7 +89,7 @@ Nous allons nous tourner par exemple vers des processus non-markoviens, qui ne p
 Une autre représentation possible de notre système passe ainsi par l'utilisation de processus stochastiques à évènements discrets (PSED, en anglais \textit{Discrete-Event Stochastic Processes}, ou encore \textit{Generalized Semi-\textsc{Markov} Processes} pour « processus semi-markoviens généralisés »).
 Leur avantage principal sur les processus de \textsc{Markov} est leur capacité à représenter des événements dont la distribution n'est pas nécessairement exponentielle.
 Plus particulièrement, nous allons utiliser des réseaux de \textsc{Petri} stochastiques généralisés étendus.
-\nomenclature{PSED}{Processus stochastiques à événements discrets}
+\nomenclature{PSED}{Processus Stochastiques à Événements Discrets}
 
         \subsubsection{Présentation des réseaux de \textsc{Petri} stochastiques généralisés étendus}
 \label{sa:subsubsec:presRPSGe}
@@ -104,8 +104,8 @@ Elles sont de plus caractérisées par les éléments suivants:
     \item une priorité qui établit de façon déterministe la transition à franchir en premier, en cas d'égalité;
     \item un poids qui est utilisé pour tirer de façon aléatoire la transition à franchir en premier, en cas de conflits sur le délai écoulé et sur les priorités.
 \end{enumerate}
-\nomenclature{RPSG}{Réseaux de \textsc{Petri} stochastiques généralisés}
-\nomenclature{RPSGe}{Réseaux de \textsc{Petri} stochastiques généralisés étendus}
+\nomenclature{RPSG}{Réseaux de \textsc{Petri} Stochastiques Généralisés}
+\nomenclature{RPSGe}{Réseaux de \textsc{Petri} Stochastiques Généralisés étendus}
 
 Nous utilisons deux types de transitions minutées:
 \begin{itemize}
@@ -234,7 +234,7 @@ Ceux-ci sont envoyés dans les places \textsf{cNode} des nœuds élus pour la p�
 La logique stochastique avec automates hybrides (\lsah; \textit{Hybrid Automata Stochastic Logic} en anglais) est un langage récent, qui introduit une architecture regroupant des études de \textit{model checking} et d'évaluation des performances ainsi que de fiabilité sur des processus stochastiques à événements discrets (PSED) exprimés sous forme de réseaux de \textsc{Petri} stochastiques généralisés (\rpsg)~\cite{BDDHP11hasl}.
 Plus concrètement, à partir d'un modèle \rpsg, les mesures de performances sont exprimées à l'aide de formules \lsah avant que leur soit appliquées des fonctions de \textit{model checking} statique permettant de vérifier automatiquement ces formules.
 %en place de vérifications, en termes d'études statistiques, de modèles stochastiques~\cite{BDDHP11hasl}.
-\nomenclature{LSAH}{Logique stochastique avec automates hybrides}
+\nomenclature{LSAH}{Logique Stochastique avec Automates Hybrides}
 
 Pour bien comprendre le fonctionnement de \lsah, voici quelques rappels sur le \textit{model checking}: il s'agit d'une procédure de vérification formelle utilisant:
 \begin{itemize}
@@ -246,7 +246,7 @@ Dans le cas d'un modèle stochastique, des probabilités sont associées aux for
 Vérifier que $M\models\phi$ revient alors à déterminer la probabilité de la formule $\phi$ dans le contexte du modèle $M$.
 \lsah étend ce concept dans le sens où l'évaluation d'une formule peut donner n'importe quel nombre réel, et représenter ainsi une probabilité aussi bien que toute autre mesure de performance.
 À cette fin, \lsah fait appel à des automates linéaires hybrides (\alh).
-\nomenclature{ALH}{Automate linéaire hybride}
+\nomenclature{ALH}{Automate Linéaire Hybride}
 Un \alh résulte, de manière résumée, de la généralisation des automates temporels dont les variables «~horloges~» sont remplacées par des variables de données réellement évaluées.
 Basée sur ce modèle une formule \lsah comprend ainsi deux sous-éléments:
 \begin{itemize}

@@ -25,14 +25,22 @@ Il est rare que tous les capteurs d'un \WSN soit directement connectés les uns 
 À la topologie d'un réseau donné est donc très souvent associé le graphe de connectivité du réseau.
 Pour cette raison, il est souvent fait référence aux capteurs sous le terme de \textit{nœuds} (ou de \textit{nodes} en anglais).
 
+\newpage
 Un capteur seul peut être vu comme l'assemblage de quatre modules principaux, représentés en \figref{st:fig:sensor}.
-\begin{figure}[!ht]
+Il s'agit:
+\begin{itemize}
+    \item d'une unité de captage, chargée de réaliser des mesures physiques (analogiques) sur l'environnement, puis de les convertir en un signal numérique;
+    \item d'un module de traitement, composé principalement d'un processeur et de mémoire (mémoire vive et mémoire non volatile), qui assure le fonctionnement du système d'exploitation, gère les interactions entre les différents modules, et surtout traite les données récoltées;
+    \item d'une unité de transmission/réception utilisée pour les communications hertziennes;
+    \item d'une batterie, accompagnée d'une unité de contrôle de l'énergie elle-même chargée d'alimenter de façon efficace les autres modules du capteur.
+\end{itemize}
+\begin{figure}[H]
     \centering
     \begin{tikzpicture}[%
         scale=.85,
         sensor/.style={%
             circle,%
-            minimum size=21em,%
+            minimum size=18em,%
             very thick,%
             draw=black!50, %
             fill=black!20%
@@ -49,21 +57,14 @@ Un capteur seul peut être vu comme l'assemblage de quatre modules principaux, r
         }%
     ]
     \node (sensor) at (   0, 0) [sensor]{\large Capteur};
-    \draw [rounded corners=7pt,top color=black!20,draw=black!50,very thick] (-3,3)--(-3,5)--(-3.5,5)--(-3.5,3)--cycle ;
+    \draw [rounded corners=7pt,top color=black!20,draw=black!50,very thick] (-2,3)--(-2,5)--(-2.5,5)--(-2.5,3)--cycle ;
     \node (mesure) at ( 2.2, 2) [module]{Unit\'e de captage\\(mesures physiques)};
     \node (mesure) at (-2.2, 2) [module]{Unit\'e de\\communication sans fil};
     \node (mesure) at ( 2.2,-2) [module]{Unit\'e de traitement\\(processeur, m\'emoire)};
     \node (mesure) at (-2.2,-2) [module]{Batterie\\et contr\^ole de l'\'energie};
     \end{tikzpicture}
-\caption{Schéma représentant les principaux modules d'un capteur standard}\label{st:fig:sensor}
+    \caption{Schéma représentant les principaux modules d'un capteur standard}\label{st:fig:sensor}
 \end{figure}
-Il s'agit:
-\begin{itemize}
-    \item d'une unité de captage, chargée de réaliser des mesures physiques (analogiques) sur l'environnement, puis de les convertir en un signal numérique;
-    \item d'un module de traitement, composé principalement d'un processeur et de mémoire (mémoire vive et mémoire non volatile), qui assure le fonctionnement du système d'exploitation, gère les interactions entre les différents modules, et surtout traite les données récoltées;
-    \item d'une unité de transmission/réception utilisée pour les communications hertziennes;
-    \item d'une batterie, accompagnée d'une unité de contrôle de l'énergie elle-même chargée d'alimenter de façon efficace les autres modules du capteur.
-\end{itemize}
 %2}}}
 %1}}}
 
@@ -94,6 +95,19 @@ Il est à noter que certaines de ces applications touchent à des domaines criti
 Les \rcsfs sont aussi employés pour des mesures de sureté ou de sécurité, par exemple pour surveiller l'intégrité structurelle de certaines architectures (ferroviaires, aérospatiales, maritimes, ou plus simplement dans le bâtiment: gros œuvre, ouvrages d'art) et peuvent permettre une prévention efficace des pannes matérielles~\cite{SCOA13}.
 Mis à part la détection de pannes, les capteurs peuvent être utilisés dans des systèmes de surveillance de sites sensibles afin de prévenir les intrusions humaines, ou bien pour détecter des incidents ou encore établir le suivi de certaines entités; la gestion du trafic routier, ou même seulement des autobus, en sont des exemples.
 Le CEREMA (Centre d'études et d'expertise sur les risques, l'environnement, la mobilité et l'aménagement) a mis en ligne un site Internet particulièrement riche en exemples d'application des capteurs, et détaillant notamment les différentes technologies utilisées pour réaliser les mesures~\cite{sti}.
+Pour exemple la seule détection de véhicules sur les voies de circulation peut reposer sur:
+\begin{itemize}
+    \item la détection d'une modification du champ magnétique environnant;
+    \item la pression exercée par le véhicule sur la voie;
+    \item la variation de la pression dans un tube pneumatique;
+    \item les déformations de la structure d'un pont sous le poids des véhicules;
+    \item les variations d'intensité lumineuse ou sonore;
+    \item le renvoi d'ondes radar, ou lumineuses (laser), ou infrarouges, ou ultrasons;
+    \item l'analyse d'image vidéo visibles ou infrarouges, par reconnaissance de forme, ou bien par détection du mouvement des groupes de pixels…
+\end{itemize}
+\nomenclature{laser}{\textit{Light Amplification by Stimulated Emission of Radiation}}
+\nomenclature{radar}{\textit{RAdio Detection And Ranging}}
+
 Également en milieu urbain, les applications de vidéosurveillance font de plus en plus appel à des capteurs en réseau.
 %2}}}
 
@@ -130,7 +144,7 @@ En voici quelques exemples:
 \end{itemize}
 Des puces RFID (de l'anglais \textit{Radio Frequency Identification}, « identification sur fréquences radio ») se retrouvent par ailleurs de plus en plus utilisées, entre autres raisons pour faciliter de telles interactions dans le monde « connecté ».
 Au fur et à mesure que ces objets intègrent la vie quotidienne des utilisateurs, ils auront probablement tendance à communiquer de plus en plus entre eux, entre objets, en ne centralisant les données que sur une seule interface présentée à l'utilisateur final.
-\nomenclature{RFID}{\textit{Radio Frequency Identification}}
+\nomenclature{RFID}{\textit{Radio Frequency IDentification}}
 %2}}}
 %1}}}
 
@@ -167,15 +181,15 @@ Comme dans la plupart des réseaux informatiques, l'empilement des protocoles re
     \begin{tabular}{c |c| l}
         \multicolumn{2}{c}{} & Exemples:\\
         \cline{2-2}
-        5           & Application & HTTP, FTP, SSH\\
+        5 & Application & HTTP, FTP, SSH\\
         \cline{2-2}
-        4           & Transport   & TCP, UDP\\
+        4 & Transport   & TCP, UDP\\
         \cline{2-2}
-        3           & Réseau      & IP\\
+        3 & Réseau      & IP\\
         \cline{2-2}
-        2           & Liaison     & \ieeee (\csmaca)\\
+        2 & Liaison     & \ieeee (\csmaca)\\
         \cline{2-2}
-        1           & Physique    & ondes électromagnétiques\\
+        1 & Physique    & ondes électromagnétiques\\
         \cline{2-2}
      \end{tabular}
     \medskip
@@ -184,9 +198,9 @@ Comme dans la plupart des réseaux informatiques, l'empilement des protocoles re
 \nomenclature{TCP}{\textit{Transmission Control Protocol}}
 \nomenclature{IP}{\textit{Internet Protocol}}
 \nomenclature{UDP}{\textit{User Datagram Protocol}}
-\nomenclature{HTTP}{\textit{Hypertext Transfer Protocol}}
+\nomenclature{HTTP}{\textit{HyperText Transfer Protocol}}
 \nomenclature{FTP}{\textit{File Transfer Protocol}}
-\nomenclature{SSH}{\textit{Secure Shell}}
+\nomenclature{SSH}{\textit{Secure SHell}}
 
 Certains standards normalisés définissent l'usage de protocoles spécifiques sur les trois premières couches.
 Les principaux standards qui sont employés dans les \rcs sont les piles \ieeee (correspondant à la marque \wifi) et \ieeeff (sur laquelle sont basée la marque \zigbee et le standard \ietf \slowpan), et dans une moindre mesure la pile \ieeefo (correspondant à la marque \bluetooth).
@@ -197,13 +211,18 @@ Les principaux standards qui sont employés dans les \rcs sont les piles \ieeee 
 
             \paragraph{La couche physique}
 %{{{2
-Cette couche concerne l'émission et la réception en soi des ondes électromagnétiques, et l'encodage utilisé pour leur faire porter des valeurs numériques (par opposition à un signal analogique).
-Nous n'aurons pas besoin de l'étudier en détail ici.
+Cette couche concerne l'émission et la réception en soi des ondes électromagnétiques, et l'encodage utilisé pour leur faire porter des valeurs numériques (par opposition à un signal analogique)~\cite{TW10}
+Les réseaux sans fil ont la particularité de ne pas pouvoir restreindre l'envoi d'un paquet vers son seul destinataire: un paquet émis par transmission électromagnétique est reçu par tout nœud voisin (\cad à distance suffisamment faible pour être couvert par la portée d'émission de l'émetteur) qui écoute le canal (donc les plages de fréquences concernées) au moment de la transmission.
+Il est parfois possible de se servir d'une \idx{antenne directionnelle} pour réduire sensiblement les directions dans laquelle est réalisée la diffusion et pour augmenter le ratio de la puissance du signal émis sur l'énergie consommée par l'envoi; mais cet équipement couteux n'est que très rarement utilisé dans les réseaux de capteurs.
+
+Une propriété fréquemment employée en revanche est la capacité à moduler la puissance du signal en fonction des besoins.
+Plus le signal est fort, plus il portera loin (et permettra d'atteindre des nœuds distants).
+Naturellement, l'émission consommera également plus d'énergie
 %2}}}
 
             \paragraph{La couche de liaison de données}\label{st:ssec:mac}
 %{{{2
-La deuxième couche du modèle fournit les moyens fonctionnels et procéduraux pour le transfert des données entre deux entités du réseau.
+La deuxième couche du modèle fournit les moyens fonctionnels et procéduraux pour le transfert des données entre deux entités du réseau~\cite{TW10}.
 Elle permet aussi, le plus souvent, de détecter et éventuellement corriger certaines erreurs survenues sur la couche physique (en cas de perturbation ou dégradation du signal électromagnétique).
 Elle se décompose en deux sous-couches: la couche de contrôle de la liaison logique (\llc, pour \textit{Logical Link Control} en anglais, « contrôle de la liaison logique ») et la couche du contrôle d'accès au support (\mac, pour \textit{Media Access Control}, « contrôle d'accès au support »).
 \llc est la sous-couche haute, utilisée pour fiabiliser la sous-couche \mac, intervient peu dans les \rcs.
@@ -257,30 +276,30 @@ Les capteurs sont associés dans des groupes (qui ne correspondent pas tout à f
 
             \paragraph{La couche réseau}
 %{{{2
-Cette couche, pour les capteurs sans fil, repose le plus souvent sur le protocole \ip (\textit{Internet Protocol} an anglais), que ce soit en version 4 ou 6 (la version 6 est notamment utilisée avec la pile \slowpan), pour l'adressage, et sur un protocole de routage qui détermine comment les paquets sont retransmis saut après saut dans le réseau.
+Cette couche, pour les capteurs sans fil, repose le plus souvent sur le protocole \ip (\textit{Internet Protocol} an anglais), que ce soit en version 4 ou 6 (la version 6 est notamment utilisée avec la pile \slowpan), pour l'adressage, et sur un protocole de routage qui détermine comment les paquets sont retransmis saut après saut dans le réseau~\cite{TW10}.
 
 Les \rcsfs composent en quelque sorte une sous-famille des réseaux sans fil \adhoc (ou \idx{WANET}, de l'anglais \textit{wireless Ad hoc Network}), et une grande partie des protocoles et algorithmes utilisés proviennent du monde des WANET.
 Des exemples classiques de ces algorithmes de routage incluent \aodv (\textit{Ad hoc On-Demand Distance Vector Routing})~\cite{aodv} ou son évolution \dsr~\cite{dsr} (\textit{Dynamic Source Routing}), \olsr~\cite{olsr} (\textit{Optimized Link State Routing Protocol}) ou ses évolutions \dsdv (\textit{Destination-Sequenced Distance Vector routing}) et \batman (\textit{Better Approach To Mobile Adhoc Networking}), \etc.
 Ces protocoles se répartissent le plus souvent en deux grandes classes: les protocoles « proactifs » reposant sur une table de \idx{routage} établie \apriori, en amont des requêtes (\aodv par exemple); et les protocoles de routage « à la demande » (dont \olsr), qui établissent les routes à la volée lorsqu'une requête de retransmission parvient au nœud relais.
-\nomenclature{AODV}{\textit{Ad hoc On-Demand Distance Vector Routing}}
+\nomenclature{AODV}{\textit{Ad hoc On-demand Distance Vector routing}}
 \nomenclature{DSR}{\textit{Dynamic Source Routing}}
-\nomenclature{OLSR}{\textit{Optimized Link State Routing Protocol}}
+\nomenclature{OLSR}{\textit{Optimized Link State Routing protocol}}
 \nomenclature{DSDV}{\textit{Destination-Sequenced Distance Vector routing}}
 \nomenclature{B.A.T.M.A.N.}{\textit{Better Approach To Mobile Adhoc Networking}}
-\nomenclature{WANET}{\textit{Wireless Ad hoc Network}}
+\nomenclature{WANET}{\textit{Wireless Ad hoc NETwork}}
 %2}}}
 
             \paragraph{La couche transport}
 %{{{2
 Cette couche gère les communications de bout en bout entre processus.
-Les protocoles les plus fréquemment utilisés, \tcp (\textit{Transmission Control Protocol}) et \udp (\textit{User Datagram Protocol}) assurent l'ordonnancement des paquets et permettent d'éviter les pertes, les doublons et la corruption des paquets.
+Les protocoles les plus fréquemment utilisés, \tcp (\textit{Transmission Control Protocol}) et \udp (\textit{User Datagram Protocol}) assurent l'ordonnancement des paquets et permettent d'éviter les pertes, les doublons et la corruption des paquets~\cite{TW10}.
 Le protocole \tcp permet en plus à deux entités de communiquer en mode connecté en établissant une session (début, fin et validation des échanges).
 En raison des données de contrôle que ces protocoles impliquent, ils ne sont pas systématiquement implémentés dans les \rcs (ils le sont parfois dans des versions allégées).
 %2}}}
 
             \paragraph{La couche application}
 %{{{2
-La dernière couche gère les échanges applicatifs entre les différents agents du réseau, et encapsule les données utiles au format désiré pour leur traitement final.
+La dernière couche gère les échanges applicatifs entre les différents agents du réseau, et encapsule les données utiles au format désiré pour leur traitement final~\cite{TW10}.
 Il s'agit de la couche la plus haut niveau  du modèle.
 Elle assure un service propre à l'application déployée, et les protocoles déployés à ce niveau dépendent donc totalement de l'objectif final du réseau, il n'y a donc pas de standard propre aux \rcs.
 %2}}}

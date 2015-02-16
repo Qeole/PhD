@@ -114,8 +114,8 @@ Le danger de cette proposition repose sur la capacité du réseau à détecter l
 En cas d'écoute passive de la part de l'attaquant notamment, aucune mesure n'est appliquée pour protéger la \idx{confidentialité} des données échangées.
 
 Plusieurs propositions concernent la mise en place de solutions classiques, mais « allégées »~\cite{HWMRKP06}, comme avec la mise en place d'une autorité de certification spécifique permettant l'\idx{authentification} réciproque des nœuds deux à deux~\cite{GWZCK13}, ou bien basé sur des clés pré-distribuées~\cite{BSK13}.
-Le protocole MSPQS (\textit{Modified Secured Query Processing Scheme})~\cite{GD14} a été proposé pour sécurisé le transfert des données dans un réseau clusterisé à travers un découpage des échanges sous formes de requêtes et de réponses authentifiées qui contiennent des marqueurs temporels, et ne peuvent être réinjectés dans le réseau, ce qui le rend efficace pour protéger les nœuds des attaques par \idx{rejeu}.
-\nomenclature{MSPQS}{\textit{Modified Secured Query Processing Scheme}}
+Le protocole MSQPS (\textit{Modified Secured Query Processing Scheme})~\cite{GD14} a été proposé pour sécurisé le transfert des données dans un réseau clusterisé à travers un découpage des échanges sous formes de requêtes et de réponses authentifiées qui contiennent des marqueurs temporels, et ne peuvent être réinjectés dans le réseau, ce qui le rend efficace pour protéger les nœuds des attaques par \idx{rejeu}.
+\nomenclature{MSQPS}{\textit{Modified Secured Query Processing Scheme}}
 
 De manière générale, les problèmes d'\idx{authentification}, et dans une moindre mesure les autres problématiques soulevées dans cette sous-section, ont mené à la proposition de nombreuses architectures dédiées.
 
@@ -144,8 +144,8 @@ Les algorithmes possibles de \idx{chiffrement}, leurs différents modes, leurs v
 Au mode CBC (\textit{Cipher Block Chaining mode}, mode par enchainement des blocs), cette architecture proposée en 2007 préfère l'utilisation du mode de \idx{chiffrement} OCB (\textit{Offset CodeBook mode}, « dictionnaire avec décalage »), qui réalise à la fois le \idx{chiffrement} et la \idx{signature} des données et ne nécessite donc pas de code d'authentification\index{MAC (code)} distinct.
 Elle adopte une approche particulière du vecteur d'initialisation pour le \idx{chiffrement}, qui lui permet de minimiser le volume des données d'en-tête.
 Enfin elle fait une distinction entre les diffusions nœud à nœud et les diffusions générales, pour lesquelles un filtre de \textsc{Bloom} est utilisé, avec pour objectif final de réduire sensiblement l'énergie consommée lors des envois.
-\nomenclature{CBC}{\textit{Cipher Block Chaining Mode}}
-\nomenclature{OCB}{\textit{Offset Codebook Mode}}
+\nomenclature{CBC}{\textit{Cipher Block Chaining mode}}
+\nomenclature{OCB}{\textit{Offset CodeBook mode}}
 
 \idx{TinyKey}~\cite{CRS11} est une autre architecture basée sur \idx{TinySec}, mais date de 2011.
 Elle reprend l'architecture de \idx{TinySec}, mais rajoute un numéro de séquence aux paquets pour éviter les attaques par \idx{rejeu}.
@@ -170,8 +170,8 @@ Des capteurs se trouvent dans les cellules, tandis que des « puits » de donn
 Mais le \idx{chiffrement} est fait de telles sorte qu'un puits illégitime ne soit pas en mesure de remonter au capteur qui a initialement détecté un événement donné.
 Un filtre de \textsc{Bloom} est là encore utilisé pour minimiser le volume de données de contrôle produites.
 pDCS a été amélioré en 2013 par ERP-DCS (\textit{Efficient Rekeying Protocol for DCS sensor networks}, « protocole efficace de régénération de clés pour les réseaux DCS »)~\cite{HYD13}, qui se concentre sur l'amélioration du mécanisme de \idx{gestion des clés} qui intervient dans le cas où un agent a été compromis et identifié comme tel, en utilisant à cette fin un système d'exclusion appelé EBS (\textit{Exclusion Basis System}).
-\nomenclature{DCS}{\textit{Data Centric Sensor Networks}}
-\nomenclature{pDCS}{\textit{Privacy-enhanced DCS}}
+\nomenclature{DCS}{\textit{Data Centric Sensor networks}}
+\nomenclature{pDCS}{\textit{privacy-enhanced DCS}}
 \nomenclature{ERP-DCS}{\textit{Efficient Rekeying Protocol for DCS sensor networks}}
 \nomenclature{EBS}{\textit{Exclusion Basis System}}
 
@@ -208,8 +208,8 @@ La \tabref{ea:tab:proto} compare brièvement les fonctionnalités apportées par
     \index{SPINS}\index{TinySec}\index{TinyKey}\index{MiniSec}\index{LEAP}\index{LEAP+}\index{pDCS}\index{ERP-DCS}\index{architecture de sécurité}\index{chiffrement}
 \end{table}
 %}}}
-\nomenclature{CTR}{\textit{Counter Mode}}
-\nomenclature{CCM}{\textit{Counter Mode CBC-MAC}}
+\nomenclature{CTR}{\textit{CounTeR mode}}
+\nomenclature{CCM}{\textit{Counter mode CBC-MAC}}
 \nomenclature{CBC-MAC}{\textit{Cipher Block Chaining Message Authentication Code}}
 \nomenclature{RC5}{\textit{\textsc{Rivest} Cipher version 5}}
 
