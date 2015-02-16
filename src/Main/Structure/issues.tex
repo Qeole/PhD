@@ -173,25 +173,37 @@ Certains protocoles ont des buts plus précis, comme \ffuca~\cite{FL11,FMMMI12} 
 \nomenclature{MANET}{\textit{Mobile Ad hoc Networks}}
 \nomenclature{VANET}{\textit{Vehicular Ad hoc Networks}}
 
-        \subsection{Sécurité, \idx{sureté} et \resilience}
+    \subsection{Sécurité, \idx{sureté} et \resilience}
 
+        \subsubsection{Sureté, \resilience}
 Une fois déployés, les \rcs doivent s'organiser et fonctionner seuls, sans intervention humaine.
 Pour autant, ils ne sont pas à l'abri des erreurs ni des pannes.
-L'idéal est donc de pouvoir assurer un certain degré de \idx{sureté} et de 
+L'idéal est donc de pouvoir assurer un certain degré de \idx{sureté} et de \resilience au réseau.
 
-Beside being energy-efficient, it is important for an algorithm to \emph{just work}, and thus for researchers to provide guaranties of its functioning.
-Formal method may help in this, and one of the most interesting techniques is model-checking.
-It is a formal method based technique for verifying finite-state-concurrent systems, and can automatically extract performance or safety properties from a model and to ensure they are asserted at all time in the network.
-Additionally, were a system not to work properly, model-checking tools provide a trace to help finding the source of the error.
-Contrary to testing or simulation, results obtained \via model-checking do not vary between distinct running instances; more important, formal specification enables one to verify the system against every single execution trace, where testing would only raise some encountered errors (maybe not all existing errors).
-Model-checking is used in a wide area of applications, from the validation of network protocols to the verification of safety properties in regard with the non-collision between platoon vehicles\cite{E-ZCGGK12}, for example.
+La \idx{sureté} d'un système est sa capacité à fonctionner sans erreurs, c'est à dire sans dysfonctionnement dus à une mauvaise conception ou à une mauvaise implémentation des architectures matérielle et logicielle.
+Elle est en principe apportée soit par des tests en amont du déploiement, soit par une modélisation formelle (ou semi-formelle) du système, qui permet d'en évaluer certaines propriétés et de déduire, en fin de compte, si le système mis en place respecte ou non les spécifications établies.
 
-Other works include model-checking of WSN-addressed systems, though we found few of them concerning protection against \DoS attacks.
-In~\cite{TCCDC09} for example, three security protocols are analyzed through model-checking, nominally TinySec, allowing authentication and encryption, and LEAP and TinyPK, both used for key management. 
-The authors used the AVISTA model-checker, designed for verifying security protocols.
+Les tests et simulations sont récurrentes dans la quasi-totalité des travaux de la littérature.
+Ils consistent à implémenter le dispositif étudié, physiquement ou virtuellement, pour étudier son évolution au cours d'une exécution « classique » ou bien soumise à des conditions d'expérimentation particulières.
+Certains travaux ont même pour objet des tests comparatifs sur différentes architectures matérielles de capteurs~\cite{PLP06}, ou encore recensent les différents systèmes de simulation permettant d'expérimenter sur les réseaux de capteurs~\cite{AAAHN12}.
 
+Pour la vérification basée sur des méthodes formelles, des outils tels que le \idx{\textit{model checking}} peuvent par exemple être appliqués sur le modèle établi.
+Le \textit{model checking} est une technique pouvant être utilisée sur des systèmes concurrents à états finis, et qui permet d'extraire automatiquement certaines propriétés sur les performances ou la sureté du modèle puis de s'assurer qu'elles sont respectées dans le réseau à tout instant.
+Si le système ne fonctionne pas comme prévu, l'outil permet parfois d'obtenir une trace qui vient faciliter la localisation de la source de l'erreur.
+Contrairement aux tests et aux simulations, les résultats obtenus à l'aide du \idx{\textit{model checking}} ne varient pas entre deux instances.
+Encore mieux: la spécification formelle du système permet de vérifier les propriétés sur tous les cas possibles d'exécution déterminés par les spécifications du modèle, tandis que des simulations ne permettent de remonter que certaines erreurs détectées (sans assurance de les avoir trouvées toutes).
+Le \textit{\idx{model checking}} est utilisé régulièrement dans les réseaux sans fils, que ce soit pour valider la conception de protocoles de routage comme pour la vérification de propriétés de sureté concernant les risques de collisions au sein d'un groupe de véhicules~\cite{E-ZCGGK12}.
 
-La sureté et la résilience des réseaux ne sont pas des problématiques de sécurité (car aucune attaque volontaire ne rentre en compte), mais il s'agit de problématiques assez proches de la disponibilité des réseaux définie au \chapref{ea}, \ssref{ea:def:dispo}.
+        \subsubsection{Résilience}
+La \textbf{\resilience} d'un système est la capacité de ce système à outrepasser et éventuellement à corriger les erreurs susceptibles de survenir.
+Autrement dit, un système résilient est capable de poursuivre son fonctionnement avec toujours autant d'efficacité ou presque, même si des pannes matérielles, des erreurs logicielles ou d'autres types d'incidents viennent perturber le système.
+Assurer la \resilience revient donc à anticiper, à prévoir des « plans de secours », des mécanismes de correction et de réparation automatiques.
+
+Concrètement, dans un \rcsfs, elle met en jeu des principes comme la redondance des données stockées et envoyées, des routes de retransmission~\cite{SP10}; elle s'établit sur l'usage de protocoles capables de se mettre à jour lorsque des nœuds disparaissent (épuisement supposé) ou apparaissent (nouveaux arrivants) dans le réseau, de mécanismes de correction d'erreurs…
+La résilience matérielle passe le plus souvent par la redondance des composants, mais n'est que rarement mise en place, pour des raisons de couts, dans les \rcs.
+On préféra en général utiliser quelques capteurs en plus par rapport à la quantité strictement nécessaire pour assurer le service, sans avoir à augmenter le prix de \emph{tous} les capteurs.
+
+La sureté et la résilience des réseaux ne sont pas des problématiques de sécurité (car aucune attaque volontaire ne rentre en compte), mais il s'agit de problématiques assez proches de la disponibilité des réseaux (définie au \chapref{ea}, \ssref{ea:def:dispo}).
 
         \subsubsection{Sécurité}
 En raison de leurs faibles capacités, conjuguées aux domaines critiques dans lesquels ils interviennent parfois, les capteurs peuvent présenter des cibles de choix pour un attaquant.
