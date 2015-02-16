@@ -85,9 +85,10 @@ Des méthodes cryptographiques\index{cryptographique} peuvent être employées p
 L'\idx{authentification} sert à prouver la validité de l'expéditeur des messages.
 Il n'est pas suffisant, pour assurer la \secu d'un réseau, de s'assurer que le contenu des messages est chiffré: il faut également s'assurer que l'entité avec laquelle on communique est bien qui elle prétend être.
 Cette précaution permet notamment de se prémunir de l'attaque de \textit{l'homme du milieu}\index{attaque de l'homme du milieu}.
-L'\idx{authentification} regroupe en réalité à la fois l'\idx{authentification} de deux parties l'une envers l'autre, et l'\idx{authentification} d'un agent aux yeux de tous les autres membres du réseau, dans le cas d'une diffusion générale (\textit{broadcast}) des messages.
-Selon le cas, les \rcs peuvent également avoir besoin qu'un nœud s'identifie de façon spécifique auprès de la \sdb, ou bien encore, pour certains réseaux clusterisés\index{clusterisation!réseau clusterisé}, qu'il puisse s'authentifier auprès des autres membres du cluster (et prouver son appartenance à ce dernier).
 La \idx{signature} des messages est le plus souvent réalisée à l'aide de mécanismes cryptographiques asymétriques\index{cryptographie!cryptographie asymétrique} (\idx{condensat} signé à l'aide d'une clé privée).
+L'\idx{authentification}, dans les \rcsfs, regroupe en réalité à la fois l'\idx{authentification} de deux parties l'une envers l'autre, et l'\idx{authentification} d'un agent aux yeux de tous les autres membres du réseau, dans le cas d'une diffusion générale (\textit{broadcast}) des messages.
+Selon le cas, les \rcs peuvent également avoir besoin qu'un nœud s'identifie de façon spécifique auprès de la \sdb, ou bien encore, pour certains réseaux clusterisés\index{clusterisation!réseau clusterisé}, qu'il puisse s'authentifier auprès des autres membres du cluster (et prouver son appartenance à ce dernier).
+Un système d'\idx{authentification} efficace doit par ailleurs répondre à de nombreuses sous-problématiques~\cite{KKA15}.
 
 La \idx{non-répudiation} consiste à assurer qu'un agent du réseau ne peut plus nier avoir émis un paquet une fois celui-ci reçu par son destinataire.
 Concrètement, si un agent est le seul à posséder une clé privée utilisée pour la \idx{signature} d'un paquet, il ne fait nul doute, une fois ce paquet reçu, que cet agent en question est bien à l'origine de la création du paquet, puisque nul autre agent du réseau n'est en mesure de le signer à sa place.
