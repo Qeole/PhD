@@ -5,10 +5,12 @@ De par leurs ressources faibles, leur dispersion dans un environnement parfois h
 Nous introduisons ici celles qui sont indispensables à la compréhension des travaux de cette thèse.
 
     \subsection{Gestion des ressources et performances}
+%{{{1
 Les évolutions technologiques des dernières décennies n'ont de cesse de rendre les ordinateurs plus performants, plus compacts, plus rapides dans le traitement des données.
 Elles ont rendu possible, à force de miniaturisation et de réduction des couts, la création et le déploiement des \rcsfs, mais ceux-ci restent soumis à des contraintes en ressources très fortes par rapport aux stations de travail « classiques » tel que les ordinateurs personnels (y compris portables).
 
         \subsubsection{Des algorithmes à adapter}
+%{{{2
 Les algorithmes et protocoles déployés dans les \rcs doivent être peu exigeants en terme de calculs.
 Il est même possible de réduire les calculs en amont, en sélectionnant judicieusement les échantillons de donner à mesurer puis à analyser, pour éviter des calculs superflus; les algorithmes de traitement, d'\idx{agrégation} de données, doivent également être pensés pour les capteurs~\cite{ACFP09},
 
@@ -19,8 +21,10 @@ Sur un autre niveau, il existe plusieurs études portant sur la mise en place de
 
 L'évolution constante des technologies joue aussi son rôle dans ce domaine, et il y a fort à parier que, comme partout ailleurs en informatique, des composants de plus en plus performants seront disponibles au fil du temps pour les capteurs.
 Les récentes avancées sur le traitement du silicène pour la fabrication de transistors pourraient ouvrir d'ici quelques années des opportunités nouvelles~\cite{TCCGFDMA15}.
+%2}}}
 
         \subsubsection{Une gestion fine de l'énergie}
+%{{{2
 L'usage d'algorithmes mal adaptés au \rcs ne fait pas que diminuer les performances du réseau au niveau de la vitesse de traitement des données: si le processeur est sollicité davantage, il va drainer plus d'énergie.
 Hors il est essentiel de se montrer économe sur l'usage de la batterie des capteurs, qui ne peut généralement pas être rechargée ni remplacée à moindre frais.
 
@@ -29,7 +33,7 @@ Cette thèse s'inscrit d'ailleurs dans cette lignée, pour le domaine spécifiqu
 Mais à un niveau plus général déjà, les performances de chaque opération, qu'il s'agisse de la collecte des données, de leur traitement, de leur occupation en mémoire, et de toutes les étapes relatives à leur transmission, peuvent être optimisées dans le but d'économiser de l'énergie.
 Les protocoles utilisés, le cycle de travail des capteurs, et jusqu'à la topologie même du réseau peuvent avoir un impact sur la consommation énergétique des nœuds~\cite{ACFP09}.
 
-Par exemple, les \rcs reprennent des protocoles de \idx{routage} initialement développés pour les \idx{WANET}, qui n'ont pas systématiquement les mêmes contraintes en énergie; ont donc été proposés de nombreux algorithmes de \idx{routage} destinés spécifiquement aux \rcs.
+Par exemple, les \rcs reprennent des protocoles de \idx{routage} initialement développés pour les \wanet, qui n'ont pas systématiquement les mêmes contraintes en énergie; ont donc été proposés de nombreux algorithmes de \idx{routage} destinés spécifiquement aux \rcs.
 Ainsi ERAPL (\textit{Energy-Efficient Routing Algorithm to Prolong Lifetime}, « algorithme de routage économe en énergie permettant de prolonger la durée de vie »)~\cite{ZWPT10} repose sur l'usage d'algorithmes génétiques ainsi que d'une « séquence de collecte de données » permettant d'éviter les boucles et les doublons de transmission.
 
 On trouve aussi des solutions qui proposent d'économiser l'énergie en établissant un classement des paquets à transmettre selon leur priorité, \cad selon leur importance pour l'exploitant~\cite{SAS14}.
@@ -44,11 +48,13 @@ Il se pourrait même que dans un futur plus ou moins proche, les capteurs puisse
 
 Mais cette technologie est encore limitée, et elle est loin d'être généralisée.
 En attendant, l'une des possibilités essentielles permettant de réduire la consommation en énergie est l'utilisation d'une architecture \index{clusterisation!clusterisation hiérarchique} hiérarchiquement clusterisée dans le réseau.
+%2}}}
+%1}}}
 
-    \subsection{Partition hiérarchique des nœuds du réseau}%
-    \label{st:subsec:partition}
-
+    \subsection{Partition hiérarchique des nœuds du réseau}\label{st:subsec:partition}
+%{{{1
         \subsubsection{Partition du réseau}
+%{{{2
 «~Clusteriser~» un ensemble d'éléments revient à le diviser en sous-ensembles appelés \textit{clusters}.
 Dans le cas des \rcsfs, cette partition permet d'obtenir un routage efficace des paquets, en adoptant la configuration suivante:
 \begin{enumerate}
@@ -60,11 +66,12 @@ Dans le cas des \rcsfs, cette partition permet d'obtenir un routage efficace des
     \item le \ch retransmet alors les paquets, soit directement à la cible s'il s'agit de la \sdb et qu'il peut l'atteindre, soit « en plusieurs sauts » en passant par d'autres \chs (\textit{multi-hop transmission}), jusqu'à atteindre le destinataire.
 \end{enumerate}
 Le schéma d'un réseau clusterisé est présenté en \figref{st:fig:wsn}.
-\begin{figure}
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=0.8\linewidth]{\chapterfig/WSN.eps}
     \caption{Schéma d'un \rc clusterisé}\label{st:fig:wsn}
 \end{figure}
+
 L'appel à un algorithme de « \idx{clusterisation} » a pour effet de limiter les émissions à «~longue portée~» (relativement aux communications intra-clusters) aux \chs seulement.
 Or les communications sur de plus grandes distances se traduisent par une plus grande consommation en énergie (puisqu'une plus grande puissance d'émission est nécessaire).
 Les capteurs normaux (non \chs) n'ont pas à atteindre directement des nœuds situés en dehors de leur cluster; ils économisent d'autant en énergie.
@@ -73,10 +80,12 @@ De plus, les \chs sont idéalement placés pour réaliser des opérations d'\idx
 À part les économies substantielles en énergie, la clusterisation d'un réseau présente plusieurs autres avantages:
 \begin{itemize}
     \item elle permet de déployer une gestion « centralisée » d'un cluster, puisque le \ch est à même d'appliquer un algorithme tenant compte de tous les capteurs de son groupe. Pour autant, la topologie décentralisée de l'ensemble du réseau n'est pas sacrifiée, car les clusters sont indépendants de la \sdb, qui n'intervient pas dans leur fonctionnement interne;
-    \item elle permet de gagner en extensibilité, puisqu'il est aisé de rajouter des clusters au réseau, voire peu contraignant de rajouter des nœuds dans un cluster donné. L'évolution du réseau est ainsi plus simple à assurer que s'il fallait modifier un algorithme distribué pour prendre en compte l'intégration de nouveaux capteurs.
+    \item elle permet de gagner en \idx{extensibilité}, puisqu'il est aisé de rajouter des clusters au réseau, voire peu contraignant de rajouter des nœuds dans un cluster donné. L'évolution du réseau est ainsi plus simple à assurer que s'il fallait modifier un algorithme distribué pour prendre en compte l'intégration de nouveaux capteurs.
 \end{itemize}
+%2}}}
 
         \subsubsection{Clusterisation hiérarchique\index{clusterisation!clusterisation hiérarchique}}
+%{{{2
 Une fois le \rc divisé en clusters, rien n'empêche de considérer les clusters un à un et de leur appliquer à nouveau un algorithme de \idx{clusterisation}, de façon à établir des sous-ensembles dans chaque cluster.
 Et ainsi de suite, de façon récursive, jusqu'à atteindre le degré de hiérarchie désiré.
 L'intérêt de cette méthode est de créer une partition hiérarchique dans le réseau, permettant un meilleur contrôle des sous-ensembles de capteurs.
@@ -90,10 +99,11 @@ Lorsque nous parlons simplement de \textit{clusters}, il faudra comprendre \text
 De même, on désignera par \textit{$k$-\ch} (ou bien par \textit{$k$-CH}) les \chs de chacun des $k$-clusters du réseau.
 Le rôle de $0$-cluster pourra alors être attribué à la \sdb.
 Chaque \textit{$k$-CH} reçoit des données (provenant soit de nœuds normaux si $k$ est le dernier degré de la hiérarchie constituée, soit de \textit{$k+1$-CH}), les agrège et les transmet au \textit{$k-1$-CH} auquel il est rattaché.
+%2}}}
 
-        \subsubsection{Un exemple: fonctionnement de l'algorithme \leach}%
-        \label{st:subsubsec:leach}
-        L'un des algorithmes de \idx{clusterisation} les plus simples et les plus couramment employés dans les \rcsfs est l'algorithme \leach (\textit{Low Energy Adaptive Clustering Hierarchy}, \cad « hiérarchie de clusterisation adaptative à faible énergie » en anglais)~\cite{HCB00}.
+        \subsubsection{Un exemple: fonctionnement de l'algorithme \leach}\label{st:subsubsec:leach}
+%{{{2
+L'un des algorithmes de \idx{clusterisation} les plus simples et les plus couramment employés dans les \rcsfs est l'algorithme \leach (\textit{Low Energy Adaptive Clustering Hierarchy}, \cad « hiérarchie de clusterisation adaptative à faible énergie » en anglais)~\cite{HCB00}.
 Il s'agit d'un algorithme dynamique (il effectue de nouvelles clusterisations\index{clusterisation} du réseau régulièrement dans le temps) qui, par la formation de clusters, met en place une solution de routage simple mais efficace des paquets dans le réseau.
 
 Voici le fonctionnement détaillé de cet algorithme.
@@ -144,9 +154,10 @@ Par ailleurs, la répartition géographique (au regard de la puissance de transm
 Au contraire, il est même probable d'obtenir, pour certaines rondes, une concentration importante de \chs dans une zone restreinte du réseau, tandis que d'autres régions seront mal couvertes.
 Il n'y a pas grand-chose à faire dans ce cas, sinon espérer que la prochaine ronde produira une distribution des \CHs plus favorable.
 Si toutefois un nœud ne parvient à capter les messages d'aucun \ch, il se déclare généralement lui-même \CH.
+%2}}}
 
         \subsubsection{De nombreux algorithmes de \idx{clusterisation}}
-
+%{{{2
 De nombreux algorithmes de \idx{clusterisation} de données existent.
 Plusieurs d'entre eux sont même spécifiquement adaptés aux \rcsfs.
 C'est le cas de \leach qui prend place, comme évoqué plus haut, parmi les plus fréquemment utilisés, à tel point qu'il en existe de nombreuses variantes.
@@ -164,19 +175,40 @@ Certains protocoles ont des buts plus précis, comme \ffuca~\cite{FL11,FMMMI12} 
 \nomenclature{FFUCA}{\textit{Fast and Flexible Unsupervised Clustering Algorithm }}
 \nomenclature{MPC}{\textit{Multiple Parameter based Clustering}}
 \nomenclature{VSR}{\textit{Virtual Struture Routing protocol}}
+%2}}}
+%1}}}
 
-        \subsection{Déploiement autonome, \idx{mobilité}}
-    scalabilité
+    \subsection{Déploiement autonome, \idx{mobilité}}
+%{{{1
+%{{{2
+Les capteurs doivent être à même d'établir seuls une organisation autonome du réseau: ils comptent sur les protocoles inscrits dans leur mémoire, mais non sur une intervention externe (de l'administrateur par exemple).
+L'organisation présente un défi en soi~\cite{TV08}, auquel les nombreux protocoles de découvertes des voisins et les algorithmes de \idx{routage} proposés au fil des ans apportent autant de réponses~\cite{DQWH13}.
+Par ailleurs, ces protocoles sont tenus de gérer le départ ou l'arrivée de nouveaux nœuds dans le réseau.
+C'est ce que l'on appelle l'\idx{extensibilité} du réseau (ou bien son évolutivité, ou encore sa scalabilité; \textit{scalability} est le terme anglais dénotant ce concept).
 
-    MANET, VANET
-    \cite{DYK12}
+Qui plus est, il n'y a pas que le routage, mais l'intégralité de la chaine des opérations à réaliser qui doit être mise en place de façon autonome: la collecte de données en fait ainsi partie~\cite{ZWPT10}.
+Un autre paramètre à gérer parfois est la \idx{mobilité} des nœuds.
+Cette mobilité est une capacité propre aux \manet (\textit{Mobile Ad hoc Networks}, « réseaux ad hoc mobiles »).
+Comme leur nom l'indique, il s'agit de \wanet dont les nœuds sont mobiles.
+Lorsque ces nœuds sont (portés par) des véhicules, on parle même de \vanet (\textit{Vehicular Ad hoc Networks}, « réseaux ad hoc véhiculaires »).
+Ces réseaux ont leurs propres problématiques~\cite{DYK12}, qui sont souvent assez proches de celles des \rcsfs.
+Certaines solutions développées pour les \manet, des mécanismes de sécurité par exemple, peuvent tout à fait être réutilisés dans les \rcs~\cite{BMS13}.
+
+Mais revenons à la \idx{mobilité} en elle-même: elle n'est pas systématique dans les \rcsfs, sont les nœuds sont la plupart du temps statiques ou quasiment statiques.
+Il arrive néanmoins que des réseaux soit constitués, en intégralité ou bien en partie, par des capteurs mobiles.
+Le fait de se retrouver dans un environnement où les distances et les vitesses évoluent continuellement rend accessibles de nouvelles applications, mais vient bien sûr compliquer le \idx{routage}, la collecte des données, et même la gestion de la \idx{mobilité} des nœuds (s'ils n'ont pas de pilotes humains par exemple, il faut éviter les collisions~\cite{E-ZCGGK12}).
+Dans le cas de \rcs comportant des nœuds mobiles, le modèle du réseau se verra en général rattaché aux \manet et, bien que ne bénéficiant pas forcément des mêmes ressources, ce sont les mêmes algorithmes de \idx{routage} qui vont être utilisés pour assurer l'acheminement des paquets de bout en bout.
+Nous reviendrons plus loin sur des solutions reposant sur un nombre restreint de nœuds mobiles se déplaçant au sein d'un réseau de capteurs fixes pour réaliser différentes opérations sur les appareils (collecte de données, diffusion d'information, réinitialisation de la configuration d'origine, \etc)~\cite{HR13}.
 \nomenclature{MANET}{\textit{Mobile Ad hoc NETworks}}
 \nomenclature{VANET}{\textit{Vehicular Ad hoc NETworks}}
+%2}}}
+%1}}}
 
     \subsection{Sécurité, \idx{sureté} et \resilience}
-
+%{{{1
         \subsubsection{Sureté, \resilience}
-Une fois déployés, les \rcs doivent s'organiser et fonctionner seuls, sans intervention humaine.
+%{{{2
+Comme évoqué précédemment, une fois déployés, les \rcs doivent s'organiser et fonctionner seuls, sans intervention humaine.
 Pour autant, ils ne sont pas à l'abri des erreurs ni des pannes.
 L'idéal est donc de pouvoir assurer un certain degré de \idx{sureté} et de \resilience au réseau.
 
@@ -193,9 +225,11 @@ Si le système ne fonctionne pas comme prévu, l'outil permet parfois d'obtenir 
 Contrairement aux tests et aux simulations, les résultats obtenus à l'aide du \idx{\textit{model checking}} ne varient pas entre deux instances.
 Encore mieux: la spécification formelle du système permet de vérifier les propriétés sur tous les cas possibles d'exécution déterminés par les spécifications du modèle, tandis que des simulations ne permettent de remonter que certaines erreurs détectées (sans assurance de les avoir trouvées toutes).
 Le \textit{\idx{model checking}} est utilisé régulièrement dans les réseaux sans fils, que ce soit pour valider la conception de protocoles de routage comme pour la vérification de propriétés de sureté concernant les risques de collisions au sein d'un groupe de véhicules~\cite{E-ZCGGK12}.
+%2}}}
 
         \subsubsection{Résilience}
-La \textbf{\resilience} d'un système est la capacité de ce système à outrepasser et éventuellement à corriger les erreurs susceptibles de survenir.
+%{{{2
+La \resilience d'un système est la capacité de ce système à outrepasser et éventuellement à corriger les erreurs susceptibles de survenir.
 Autrement dit, un système résilient est capable de poursuivre son fonctionnement avec toujours autant d'efficacité ou presque, même si des pannes matérielles, des erreurs logicielles ou d'autres types d'incidents viennent perturber le système.
 Assurer la \resilience revient donc à anticiper, à prévoir des « plans de secours », des mécanismes de correction et de réparation automatiques.
 
@@ -204,8 +238,10 @@ La résilience matérielle passe le plus souvent par la redondance des composant
 On préféra en général utiliser quelques capteurs en plus par rapport à la quantité strictement nécessaire pour assurer le service, sans avoir à augmenter le prix de \emph{tous} les capteurs.
 
 La sureté et la résilience des réseaux ne sont pas des problématiques de sécurité (car aucune attaque volontaire ne rentre en compte), mais il s'agit de problématiques assez proches de la disponibilité des réseaux (définie au \chapref{ea}, \ssref{ea:def:dispo}).
+%2}}}
 
         \subsubsection{Sécurité}
+%{{{2
 En raison de leurs faibles capacités, conjuguées aux domaines critiques dans lesquels ils interviennent parfois, les capteurs peuvent présenter des cibles de choix pour un attaquant.
 Les algorithmes et mécanismes classiques utilisés en \idx{cryptographie} afin d'assurer la confidentialité ou l'authentification des données sont souvent très exigeants en ressources (en termes de calculs notamment, et donc de consommation énergétique).
 Il a fallu adapter ces mécanismes aux capteurs.
@@ -216,3 +252,5 @@ Un attaquant, par le biais d'un nœud compromis par exemple, peut ainsi chercher
 Pour rappel, l'objectif des travaux présentés dans cet ouvrage consiste à proposer, modéliser et tester une solution permettant de détecter, puis de réagir aux attaques de ce type, tout en assurant une consommation minimale en ressources pour les capteurs du réseau.
 
 Les problématiques de sécurité dans les \rcs et notamment les attaques de \dds ainsi que les contre-mesures appropriées sont développées plus en détail dans le chapitre qui suit.
+%2}}}
+%1}}}

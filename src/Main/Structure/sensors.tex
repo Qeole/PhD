@@ -5,6 +5,11 @@
     \subsection{De quoi s'agit-il?}
 %{{{1
 %{{{2
+\begin{figure}[!b]
+    \centering
+    \includegraphics[width=.8\textwidth]{\chapterpath/Figures/WSN_archi.eps}
+    \caption{Schéma simple d'un \rcsf}\label{st:fig:wsnintro}
+\end{figure}
 Les \rcsfs, ou \textit{\WSN} (pour \wsns en anglais), sont des réseaux constitués de petits appareils, les capteurs, ainsi que d'une \sdb.
 \nomenclature{WSN}{\wsns}
 Les capteurs échangent par communications hertziennes, en utilisant des protocoles tels ceux définis dans la pile \ieeee.
@@ -15,25 +20,10 @@ Une fois les capteurs déployés, l'administrateur n'interagit plus avec le rés
 Un schéma basique de \rcsf est présenté en \figref{st:fig:wsnintro}
 \nomenclature{BS}{\bs}
 
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=.8\textwidth]{\chapterpath/Figures/WSN_archi.eps}
-    \caption{Schéma simple d'un \rcsf}\label{st:fig:wsnintro}
-\end{figure}
-
 Il est rare que tous les capteurs d'un \WSN soit directement connectés les uns aux autres.
 À la topologie d'un réseau donné est donc très souvent associé le graphe de connectivité du réseau.
 Pour cette raison, il est souvent fait référence aux capteurs sous le terme de \textit{nœuds} (ou de \textit{nodes} en anglais).
 
-\newpage
-Un capteur seul peut être vu comme l'assemblage de quatre modules principaux, représentés en \figref{st:fig:sensor}.
-Il s'agit:
-\begin{itemize}
-    \item d'une unité de captage, chargée de réaliser des mesures physiques (analogiques) sur l'environnement, puis de les convertir en un signal numérique;
-    \item d'un module de traitement, composé principalement d'un processeur et de mémoire (mémoire vive et mémoire non volatile), qui assure le fonctionnement du système d'exploitation, gère les interactions entre les différents modules, et surtout traite les données récoltées;
-    \item d'une unité de transmission/réception utilisée pour les communications hertziennes;
-    \item d'une batterie, accompagnée d'une unité de contrôle de l'énergie elle-même chargée d'alimenter de façon efficace les autres modules du capteur.
-\end{itemize}
 \begin{figure}[H]
     \centering
     \begin{tikzpicture}[%
@@ -65,6 +55,14 @@ Il s'agit:
     \end{tikzpicture}
     \caption{Schéma représentant les principaux modules d'un capteur standard}\label{st:fig:sensor}
 \end{figure}
+Un capteur seul peut être vu comme l'assemblage de quatre modules principaux, représentés en \figref{st:fig:sensor}.
+Il s'agit:
+\begin{itemize}
+    \item d'une unité de captage, chargée de réaliser des mesures physiques (analogiques) sur l'environnement, puis de les convertir en un signal numérique;
+    \item d'un module de traitement, composé principalement d'un processeur et de mémoire (mémoire vive et mémoire non volatile), qui assure le fonctionnement du système d'exploitation, gère les interactions entre les différents modules, et surtout traite les données récoltées;
+    \item d'une unité de transmission/réception utilisée pour les communications hertziennes;
+    \item d'une batterie, accompagnée d'une unité de contrôle de l'énergie elle-même chargée d'alimenter de façon efficace les autres modules du capteur.
+\end{itemize}
 %2}}}
 %1}}}
 
@@ -78,7 +76,7 @@ Toutes ne font pas l'objet de publications scientifiques, mais certaines sont r�
 La gestion de l'environnement par l'Homme a de plus en plus recours à des mesures distribuées reposant sur l'usage de capteurs.
 Les prévisions météorologiques (reposant sur des mesures d'hygrométrie, de pression de l'air, \etc) ont été l'un des premiers champs d'application des capteurs.
 Les mesures de qualité de l'air et de taux de pollution, en ville comme en campagne, se généralisent peu à peu.
-Les réseaux de capteurs permettent même de pousser la mesure de ce taux vers de nouveaux milieux, comme les glaciers ou bien les océans.
+Les réseaux de capteurs permettent même de pousser la mesure de ce taux vers de nouveaux milieux, comme les glaciers~\cite{MPROH05} ou bien les océans.
 
 L'agriculture est également susceptible d'avoir recours aux capteurs: des essais sont menés sur la réalisation de mesures faites par des microcapteurs semés en même temps que les cultures, permettant de surveiller au mieux les conditions de développement de ces dernières.
 Placés judicieusement dans l'habitat naturel de certaines espèces, les capteurs peuvent être utilisés pour suivre et analyser le comportement de la faune d'un milieu~\cite{KDA14}.
@@ -108,13 +106,13 @@ Pour exemple la seule détection de véhicules sur les voies de circulation peut
 \nomenclature{laser}{\textit{Light Amplification by Stimulated Emission of Radiation}}
 \nomenclature{radar}{\textit{RAdio Detection And Ranging}}
 
-Également en milieu urbain, les applications de vidéosurveillance font de plus en plus appel à des capteurs en réseau.
+Également en milieu urbain, les applications de vidéosurveillance font de plus en plus appel à des capteurs en réseau~\cite{SZFDXC14}.
 %2}}}
 
         \paragraph{Domaine militaire}
 %{{{2
 La surveillance et la détection sont aussi très utilisés dans le domaine militaire.
-Qu'il s'agisse de mener des opérations de renseignement ou bien de suivre l'évolution d'un combat sur le champ de bataille, pour analyser les cibles, relier entre eux fantassins et véhicules de tous types, pour détecter les agents radioactifs, chimiques ou biologiques répandus par un ennemi, toutes les informations sont bonnes à prendre.
+Qu'il s'agisse de mener des opérations de renseignement ou bien de suivre l'évolution d'un combat sur le champ de bataille, pour analyser les cibles, relier entre eux fantassins et véhicules de tous types, pour détecter les agents radioactifs, chimiques ou biologiques répandus par un ennemi, toutes les informations sont bonnes à prendre~\cite{ASSC02}.
 Un maximum d'entre elles doivent être remontées au centre de commandement, afin de permettre une supervision optimale des forces en mouvement.
 
 Plus encore que les exemples précédents, l'usage des capteurs en contexte militaire implique de fortes contraintes en termes de \secu du réseau déployé.
@@ -122,7 +120,7 @@ Plus encore que les exemples précédents, l'usage des capteurs en contexte mili
 
         \paragraph{Médecine}
 %{{{2
-Certains usages des capteurs tiennent du domaine médical.
+Certains usages des capteurs tiennent du domaine médical~\cite{SZFDXC14}.
 Il peut s'agir par exemple de faire communiquer un ou plusieurs implants avec un contrôleur externe.
 Il peut également être question d'employer des microcapteurs pour analyser avec précisions des variables corporelles (taux de glycémie, surveillance des organes vitaux) ou bien, sur une plus courte durée, pour traiter avec précision une pathologie locale (des cellules cancéreuses par exemple).
 %2}}}
@@ -130,7 +128,7 @@ Il peut également être question d'employer des microcapteurs pour analyser ave
         \paragraph{Grand public}
 %{{{2
 Le public a lui aussi de plus en plus accès à des applications reposant sur les capteurs.
-En domotique par exemple, la température des différentes pièces d'un lieu d'habitation peut être rendue accessible à tout instant, tandis que des fonctions comme l'activation de volets électriques, l'ouverture de portes, l'activation de sources lumineuses ou de dispositifs de chauffage peuvent être effectuées à distance par l'habitant (par exemple par le biais d'une application logicielle sur téléphone portable) ou bien de façon automatique en fonction des besoins identifiés à partir des données récoltées.
+En domotique par exemple, la température des différentes pièces d'un lieu d'habitation peut être rendue accessible à tout instant, tandis que des fonctions comme l'activation de volets électriques, l'ouverture de portes, l'activation de sources lumineuses ou de dispositifs de chauffage peuvent être effectuées à distance par l'habitant (par exemple par le biais d'une application logicielle sur téléphone portable) ou bien de façon automatique en fonction des besoins identifiés à partir des données récoltées~\cite{ASSC02}.
 
 Un autre domaine d'application en voie de développement est ce que l'on appelle l'\textit{\idx{Internet des objets}} (\textit{the Internet of things} en anglais), et qui consiste en quelque sorte à étendre \idx{Internet} au monde réel, par le biais d'une interconnexion réseau entre les objets de la vie courante: de plus en plus d'objets du quotidien tendent à devenir « connectés ».
 Ils se voient alors équipés de capteurs, d'un module de communication sans fil, et offrent de nouvelles possibilités en termes d'usages.
@@ -142,16 +140,19 @@ En voici quelques exemples:
     \item les réfrigérateurs (gestion des réserves alimentaires, création de listes d'achat);
     \item les véhicules autonomes, tels que les voitures sans conducteurs ou les drones (pilotage de l'engin, relevé de mesures tactiques pour les drones militaires).
 \end{itemize}
-Des puces RFID (de l'anglais \textit{Radio Frequency Identification}, « identification sur fréquences radio ») se retrouvent par ailleurs de plus en plus utilisées, entre autres raisons pour faciliter de telles interactions dans le monde « connecté ».
+Des puces RFID (de l'anglais \textit{Radio Frequency Identification}, « identification sur fréquences radio ») se retrouvent par ailleurs de plus en plus utilisées, entre autres raisons pour faciliter de telles interactions dans le monde « connecté »~\cite{TW10}.
 Au fur et à mesure que ces objets intègrent la vie quotidienne des utilisateurs, ils auront probablement tendance à communiquer de plus en plus entre eux, entre objets, en ne centralisant les données que sur une seule interface présentée à l'utilisateur final.
 \nomenclature{RFID}{\textit{Radio Frequency IDentification}}
 %2}}}
+
+        \paragraph{}
+Les applications présentées ici ne représentent bien sûr que quelques exemples parmi les nombreux usages existants des capteurs~\cite{ASSC02}, dont la quantité ne cesse par ailleurs de croitre au fil du temps.
 %1}}}
 
     \subsection{Contraintes en ressources}
 %{{{1
 De par leur petite taille, et à cause de leurs déploiement dans des zones souvent difficiles d'accès, les capteurs n'embarquent qu'une quantité limitée de matériel, qui ne peut pas toujours être remplacé.
-Les capteurs se retrouvent donc avec des capacités limitées, notamment en ce qui concerne:
+Les capteurs se retrouvent donc avec des capacités limitées~\cite{BMS13}, notamment en ce qui concerne:
 \begin{itemize}
     \item les \textbf{capacités de calcul}: les processeurs embarqués sont relativement peu puissants, principalement pour des raisons de cout.
         Les algorithmes exécutés par les capteurs doivent donc être de complexité relativement basse;
@@ -165,6 +166,7 @@ Les capteurs se retrouvent donc avec des capacités limitées, notamment en ce q
 Il est à noter qu'au regard de ces contraintes qui affectent les capteurs, la \sdb est considérée comme disposant de capacités « illimitées ».
 %1}}}
 
+\pagebreak %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \subsection{Communications sans fil}
 %{{{1
 %{{{2
@@ -174,7 +176,7 @@ La plupart du temps ces modules sont capables de changer de fréquence de commun
 
 Les protocoles de communication déployés sur cette architecture sont multiples (on parle d'\textit{encapsulation} des données).
 Il faut pouvoir communiquer de pair à pair entre nœuds voisins, tout comme il faut être capable de faire parvenir un message à un nœud éloigner en faisant retransmettre les paquets par des nœuds relais successifs, d'assurer certains services comme le maintien de session, ou de gérer des applications.
-Comme dans la plupart des réseaux informatiques, l'empilement des protocoles reprend donc le modèle \tcpip (schéma concret lui-même issu du modèle théorique \idx{OSI}, de l'anglais \textit{Open Systems Interconnection}), présenté en \figref{st:fig:tcpip}.
+Comme dans la plupart des réseaux informatiques, l'empilement des protocoles reprend donc le modèle \tcpip~\cite{TW10} (schéma concret lui-même issu du modèle théorique \idx{OSI}, de l'anglais \textit{Open Systems Interconnection}), présenté en \figref{st:fig:tcpip}.
 \nomenclature{OSI}{\textit{Open Systems Interconnection}}
 \begin{figure}[H]
     \centering
@@ -278,7 +280,7 @@ Les capteurs sont associés dans des groupes (qui ne correspondent pas tout à f
 %{{{2
 Cette couche, pour les capteurs sans fil, repose le plus souvent sur le protocole \ip (\textit{Internet Protocol} an anglais), que ce soit en version 4 ou 6 (la version 6 est notamment utilisée avec la pile \slowpan), pour l'adressage, et sur un protocole de routage qui détermine comment les paquets sont retransmis saut après saut dans le réseau~\cite{TW10}.
 
-Les \rcsfs composent en quelque sorte une sous-famille des réseaux sans fil \adhoc (ou \idx{WANET}, de l'anglais \textit{wireless Ad hoc Network}), et une grande partie des protocoles et algorithmes utilisés proviennent du monde des WANET.
+Les \rcsfs composent en quelque sorte une sous-famille des réseaux sans fil \adhoc (ou \wanet, de l'anglais \textit{wireless Ad hoc Network}), et une grande partie des protocoles et algorithmes utilisés proviennent du monde des \wanet.
 Des exemples classiques de ces algorithmes de routage incluent \aodv (\textit{Ad hoc On-Demand Distance Vector Routing})~\cite{aodv} ou son évolution \dsr~\cite{dsr} (\textit{Dynamic Source Routing}), \olsr~\cite{olsr} (\textit{Optimized Link State Routing Protocol}) ou ses évolutions \dsdv (\textit{Destination-Sequenced Distance Vector routing}) et \batman (\textit{Better Approach To Mobile Adhoc Networking}), \etc.
 Ces protocoles se répartissent le plus souvent en deux grandes classes: les protocoles « proactifs » reposant sur une table de \idx{routage} établie \apriori, en amont des requêtes (\aodv par exemple); et les protocoles de routage « à la demande » (dont \olsr), qui établissent les routes à la volée lorsqu'une requête de retransmission parvient au nœud relais.
 \nomenclature{AODV}{\textit{Ad hoc On-demand Distance Vector routing}}
