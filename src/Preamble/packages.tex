@@ -5,7 +5,7 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{array}
-\usepackage[backend=biber,language=french]{biblatex}
+\usepackage[backend=biber,language=french,backref=true,defernumbers=true,maxnames=12]{biblatex}
 \usepackage{booktabs}
 \usepackage{color}
 %\usepackage{comment}
@@ -114,6 +114,14 @@
 \addbibresource{Back/thjeux.bib}
 % \chapter instead of \chapter*
 \defbibheading{bibliography}[\bibname]{\chapter{#1}}%\markboth{#1}{#1}}
+%\DeclareSourcemap{%
+    %\maps[datatype=bibtex]{%
+        %\map{%
+            %\step[fieldsource=author, match={Quentin Monnet}, final]%
+            %\step[fieldset=keywords, fieldvalue=qmo]%
+        %}%
+    %}%
+%}
 
 % INDEX
 \usepackage{makeidx}
