@@ -1,2 +1,16 @@
 % vim: set spelllang=fr foldmethod=marker:
 \section{Contributions apportées au domaine}
+
+Les contributions de cette thèse sont naturellement orientées vers la lutte contre le déni de service, et peuvent être résumées de la manière suivante:
+\begin{enumerate}
+    \item Le mécanisme initial proposé consiste à rendre dynamique le renouvellement des \cnst dans l'optique de la détection de nœuds compromis.
+        Ce renouvellement périodique permet une meilleure répartition de la charge énergétique du réseau, améliorant sa longévité globale.
+        Des simulations, ainsi que des outils de modélisation viennent compléter l'étude d'un processus de sélection aléatoire, très simple à mettre en place.
+
+    \item Ce processus de sélection aléatoire peut néanmoins être remplacé par un mécanisme plus élaboré, qui prend en compte certains paramètres du réseau.
+        La deuxième contribution consiste donc à proposer un système de sélection des \cnst basés non plus sur des nombres aléatoires mais sur l'énergie résiduelle des nœuds, tout en s'attachant à ne pas créer par la même occasion de failles exploitables par un capteur compromis qui souhaiterait s'attribuer le rôle en continu.
+
+    \item La troisième méthode de sélection proposée repose sur la confiance mutuelle que s'accordent les capteurs, afin de privilégier non plus l'énergie résiduelle, mais la sécurité du réseau, en désignant pour surveillants les capteurs dont le comportement est irréprochable.
+
+    \item Enfin la modélisation sous forme de jeux quantitatifs des interactions entre surveillants et capteurs compromis permet d'analyser les stratégies et les conditions de victoire de chacun, dans l'espoir de faire émerger dans le futur des solutions plus efficaces encore.
+\end{enumerate}
