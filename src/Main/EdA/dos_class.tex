@@ -15,7 +15,7 @@ Les buts principaux de ces attaques sont:
 
     \subsubsection{Selon la situation de l'attaquant}
 %{{{2
-On distingue également les attaques selon la provenance de l'attaquant, à savoir s'il fait partie du réseau, et mène par exemple une attaque sur le protocole de \idx{routage} employé, ou bien s'il agit depuis l'extérieur du réseau, depuis une machine qui n'est pas reconnue comme faisant partie du \rc.
+    Les attaques peuvent également être différenciées selon la provenance de l'attaquant, à savoir s'il fait partie du réseau, et mène par exemple une attaque sur le protocole de \idx{routage} employé, ou bien s'il agit depuis l'extérieur du réseau, depuis une machine qui n'est pas reconnue comme faisant partie du \rc~\cite{SZFDXC14}.
 Ce deuxième cas peut être illustré par un attaquant qui chercherait à brouiller de manière globale toutes les fréquences radio utilisées par les capteurs pour communiquer.
 
 Un attaquant extérieur n'a pas forcément connaissance de la façon dont fonctionne le réseau (architecture, protocoles employés, mesure de détection mises en place).
@@ -28,7 +28,7 @@ Les attaques menées depuis l'intérieur jouent souvent sur les paramètres des 
 
     \subsubsection{Selon les capacités de l'attaquant}
 %{{{2
-On peut encore distinguer les attaques selon la puissance dont dispose l'attaquant, que ce soit en terme de calcul, d'émission électromagnétiques, ou bien d'alimentation en énergie.
+La puissance dont dispose l'attaquant, que ce soit en terme de calcul, d'émission électromagnétiques, ou bien d'alimentation en énergie, est un autre moyen de classifier les attaques~\cite{AD14}.
 Un attaquant peut n'avoir à disposition qu'un capteur normal (\textit{mote-class attacks} en anglais), qu'il lui appartienne ou bien qu'il ait été compromis parmi les capteurs déployés à l'origine.
 Il se retrouve dans ce cas avec des machines similaires aux appareils attaqués, mais n'a pas besoin de rester sur place et peut mener des attaques sur la durée.
 Il peut également être équipé d'un ordinateur plus puissant (\textit{laptop-class attacks}), voir de matériel militaire spécialisé.
@@ -39,12 +39,13 @@ Il faut néanmoins que le matériel utilisé reste déployé le temps de mener l
     \subsubsection{Attaques actives, passives}
 %{{{2
 Cette méthode de classement ne s'applique pas ici.
-Les attaques dites « passives » n'interfèrent pas avec le fonctionnement normal du réseau: il peut s'agir par exemple d'écoute clandestine en vue de collecter des données (atteinte à la \idx{confidentialité} des communications), mais par définition les attaques de \dds sont des attaques dites « actives », au cours desquelles l'attaquant introduit de nouveaux comportement dans le réseau.
+Les attaques dites « passives » n'interfèrent pas avec le fonctionnement normal du réseau: il peut s'agir par exemple d'écoute clandestine en vue de collecter des données (atteinte à la \idx{confidentialité} des communications), mais par définition les attaques de \dds sont des attaques dites « actives », au cours desquelles l'attaquant introduit de nouveaux comportement dans le réseau~\cite{SZFDXC14}.
 %2}}}
 
     \subsubsection{Selon le paradigme considéré}\label{ea:sss:paradigm}
 %{{{2
-Nous abordons à présent des méthodes effectives de classement, qui permettent de catégoriser plus précisément les attaques (plutôt que d'établir une simple dissociation des catégories sur un nombre restreint de critères).
+Les méthodes de classification présentées jusqu'à maintenant restent limitées: elles consistent le plus souvent à d'établir une simple dissociation des catégories sur un nombre très restreint de critères.
+Les méthodes abordées à présent sont plus générales, et permettent des catégorisations plus représentatives, plus précises des attaques.
 
 Certaines études se penchent sur une classe d'opérations réalisées par les \rcs, et répertorient les attaques et les contre-mesures qui s'appliquent à cette classe~\cite{JPD06,OX09}.
 Les paradigmes suivants peuvent être considérés:
@@ -66,7 +67,7 @@ La \tabref{ea:tab:paradigm} située plus bas présente un classement selon les p
 
     \subsubsection{Selon les couches de protocoles concernées}
 %{{{2
-Une seconde méthode efficace de classement consiste à procéder par couches de protocoles, en se basant sur le modèle \tcpip.
+Une seconde méthode efficace de classement consiste à procéder par couches de protocoles, en se basant sur le modèle \tcpip~\cite{SZFDXC14}.
 Ce modèle est rappelé en \figref{ea:fig:tcpip}.
 \begin{figure}[!ht]
     \centering

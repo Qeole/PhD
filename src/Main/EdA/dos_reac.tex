@@ -6,18 +6,18 @@ Savoir qu'une attaque est en cours dans le réseau est une information de grande
     \subsubsection{Alertes et exclusion du coupable}
 %{{{2
     \paragraph{Exclure l'attaquant\index{exclusion}}
-Lorsque l'auteur d'une attaque a été clairement identifié, la réponse la plus souvent employée consiste à exclure virtuellement du réseau, c'est à dire à ne plus lui envoyer de paquets, et à ignorer totalement les trames provenant de ce nœud.
+Lorsque l'auteur d'une attaque a été clairement identifié, la réponse la plus souvent employée consiste à exclure virtuellement du réseau, c'est à dire à ne plus lui envoyer de paquets, et à ignorer totalement les trames provenant de ce nœud~\cite{LC08}.
 Cette exclusion peut permettre d'empêcher le nœud corrompu de procéder à ses attaques, du moment que ses paquets peuvent effectivement être ignorés.
 Pour tout ce qui concerne les comportements cupides, la falsification d'accusés de réception, puis de manière générale l'ensemble des attaques portant sur les couche réseau ou supérieures de la pile \tcpip, ignorer les paquets émis par le capteur s'avère efficace: puisque les informations qu'il envoie ne sont plus traitées, il n'y a plus de danger.
 Elle sera sans effet en revanche sur des attaques de type \idx{brouillage}, ou de création de collisions\index{collision}: non seulement l'attaquant est difficile à identifier, car il ne renseigne pas son identité dans les trames malicieuses, mais en plus le fait de l'« exclure » ne permet en aucun cas de supprimer les collisions produites sur des paquets légitimes par ses émissions.
 
         \paragraph{Identifier l'attaquant}
 Suivant le modèle utilisé, et notamment lorsque la détection est basée sur le relevé d'anomalies\index{anomalie}, détecter une attaque ne revient pas nécessairement à identifier son auteur.
-Pour pouvoir exclure l'attaquant, il est pourtant nécessaire de connaitre son identité: la détection d'une \idx{anomalie} peut donc parfois être suivie de l'activation d'un processus de surveillance des nœuds voisins, afin de repérer quelle entité est à l'origine de l'attaque.
+Pour pouvoir exclure l'attaquant, il est pourtant nécessaire de connaitre son identité: la détection d'une \idx{anomalie} peut donc parfois être suivie de l'activation d'un processus de surveillance des nœuds voisins, afin de repérer quelle entité est à l'origine de l'attaque~\cite{BMS13}.
 
         \paragraph{Diffuser un message d'alerte}
 Si le \ids mis en place fonctionne de manière indépendante sur chaque capteur, il est possible que les nœuds ne diffusent pas d'information lorsqu'ils identifient un nœud corrompu.
-Mais dans la majorité des cas, il est utile de le faire savoir au voisinage ainsi qu'à la \sdb.
+Mais dans la majorité des cas, il est utile de le faire savoir au voisinage ainsi qu'à la \sdb~\cite{BMS13}.
 Différents niveaux de diffusion de l'alerte sont donc proposés selon les systèmes.
 Certains ne déclenchent une alerte qu'à destination de la \sdb, d'autres préviennent l'ensemble des agents du réseau.
 Dans les réseaux clusterisés\index{clusterisation!réseau clusterisé}, la constante est de remonter une alerte au \ch, qui la transmet à la \sdb et la rediffuse au sein de son cluster.
@@ -40,15 +40,18 @@ Il n'est pas toujours possible d'annuler les effets d'un attaque en excluant\ind
 Il faut dans ce cas trouver des méthodes alternatives pour composer avec l'attaque en cours.
 
 Ainsi, l'impact du \idx{brouillage} de certaines fréquences peut être limité, par exemple en changeant la fréquence utilisée pour le canal de transmission.
-Si l'attaquant parvient à s'adapter, un changement de fréquences très rapide ou « sauts de fréquence »\index{sauts de fréquence}, utilisé par les protocoles de \idx{couche de liaison de données} de type \cdma (\textit{Code Division Multiple Access}, consistant à étendre le spectre d'émission et à convenir, entre pairs, d'une séquence pseudo-aléatoire guidant les sauts rapides de fréquences), peut permettre d'échapper au collisions\index{collision}.
-Des antennes directionnelles\index{antenne directionnelle} peuvent permettre une meilleure qualité de signal, et rendent parfois possibles les communications au travers d'une tentative de \idx{brouillage}.
-Enfin, si les nœuds sont mobiles\index{mobilité}, ils peuvent tenter de sortir de la zone affectée par les émissions de l'attaquant.
+Si l'attaquant parvient à s'adapter, un changement de fréquences très rapide ou « sauts de fréquence »\index{sauts de fréquence}, utilisé par les protocoles de \idx{couche de liaison de données} à étalement de spectre\index{etalement@étalement de spectre} avec \cdma (\textit{Code Division Multiple Access} par exemple, et consistant à étendre le spectre d'émission et à convenir, entre pairs, d'une séquence pseudo-aléatoire guidant les sauts rapides de fréquences), peut permettre d'échapper au collisions\index{collision}.
+L'acronyme FHSS est utilisé pour cette technique et provient de l'anglais \textit{Frequency-Hopping Spread Spectrum}, en français « étalement de spectre par saut de fréquence »\index{etalement@étalement de spectre!étalement de spectre par saut de fréquence}, à opposer à DSSS, \textit{Direct-sequence spread spectrum}, \cad « étalement de spectre à séquence directe »\index{etalement@étalement de spectre!étalement de spectre à séquence directe}.
+\nomenclature{FHSS}{\textit{Frequency-Hopping Spread Spectrum}}
+\nomenclature{DSSS}{\textit{Direct-sequence Spread Spectrum}}
+Des antennes directionnelles\index{antenne directionnelle} peuvent permettre une meilleure qualité de signal, et rendent parfois possibles les communications au travers d'une tentative de \idx{brouillage}~\cite{PI11}.
+Enfin, si les nœuds sont mobiles\index{mobilité}, ils peuvent tenter de sortir de la zone affectée par les émissions de l'attaquant~\cite{PI11}.
 
 Lorsque toute une zone du réseau est sous l'effet d'une attaque de \idx{brouillage} et se retrouve coupé de la \sdb, une possibilité intéressante est d'établir un « trou de ver »\index{trou!trou de ver}, légitime cette fois-ci, entre un relais de la zone atteinte et un nœud extérieur, qui sert alors de passerelle vers le reste du réseau~\cite{CCH07}.
 Ce tunnel permet de n'équiper qu'un sous-ensemble réduit de capteurs en matériel nécessaire pour contrer les attaques de brouillage radio, et de compter sur eux pour établir la passerelle salvatrice.
 
 En dehors de ce tunnel, les dispositions évoquées jusque là pour échapper au \idx{brouillage} sont très couteuses pour des \rcs, car elles demandent un équipement ou bien une capacité de calculs conséquents.
-Une technique plus simple pour réagir à du brouillage « intelligent », dans le cas où l'attaquant n'émet que quelques bits de données pour corrompre un paquet, il est possible d'ajouter des codes de \idx{correction d'erreur} aux messages.
+Une technique plus simple pour réagir à du brouillage « intelligent », dans le cas où l'attaquant n'émet que quelques bits de données pour corrompre un paquet, il est possible d'ajouter des codes de \idx{correction d'erreur} aux messages~\cite{PI11}.
 Ces codes demandent un peu plus de calculs que les sommes de contrôle; mais tandis que celles-ci ne font que déceler les erreurs, les codes correcteurs permettent parfois de les corriger (et d'éviter ainsi la suppression pure et simple du paquet corrompu, qui mènerait à une demande de retransmission des données).
 
 Laissons à présent de côté les tentatives de \idx{brouillage} pour nous intéresser au \idx{routage}: les attaques sur les protocoles sont stoppées par l'exclusion de l'attaquant du réseau, mais les dégâts causés ne se réparent pas seuls.
@@ -62,7 +65,7 @@ Certains mécanismes proposent même l'intervention d'un opérateur humain pour 
 Si l'intervention d'un opérateur humain n'est pas forcément souhaitable dans les \rcs, ce mécanisme a pour avantage de désarmer l'attaque sans mettre au courant l'attaquant de son échec (tandis qu'une exclusion\index{exclusion} directe du réseau serait plus facile à remarquer).
 %2}}}
 
-\subsubsection{Notion de \idx{confiance}}
+    \subsubsection{Notion de \idx{confiance}}
 %{{{2
 Il existe, liée aux \IDS, une notion intéressante de « \idx{confiance} » qui peut être mise en place dans un \rc.
 Plutôt que de considérer les capteurs « tout blanc » ou « tout noir », beaucoup de systèmes de détection leur attribuent un score de « \reput », qui évolue dans le temps, et reflète la « \idx{confiance} » (en anglais: \textit{trust}) que l'on peut avoir en tel nœud.

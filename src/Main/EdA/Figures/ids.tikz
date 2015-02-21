@@ -1,7 +1,5 @@
 % vim:se ft=tex:
 \begin{figure}[!ht]
-    \caption{Critères de classification pour les systèmes de détection d'intrusion}\label{ea:fig:idsmap}
-    \medskip
     \centering
     \begin{tikzpicture}[%
             small mindmap, every node/.style=concept, concept color=chapterLACL!50,
@@ -49,4 +47,6 @@
             child { node {Agents mobiles} }
         };
     \end{tikzpicture}
+    \medskip
+    \caption{Critères de classification pour les systèmes de détection d'intrusion}\label{ea:fig:idsmap}
 \end{figure}

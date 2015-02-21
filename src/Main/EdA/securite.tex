@@ -36,12 +36,12 @@ Les méthodes conventionnelles pour assurer la \idx{confidentialité} des commun
 Certaines études se sont penchées sur les vitesses d'exécution relatives de différents algorithmes utilisés pour le \idx{chiffrement} et l'\idx{authentification} des données~\cite{SOBMCN11}.
 \nomenclature{AES}{\textit{Advanced Encryption Standard}}
 
-Idéalement, pour des \rcs, ces algorithmes doivent être implémentés de telle façon que soit respectées deux sous-problématiques liéés au \idx{chiffrement}:
+Idéalement, pour des \rcs, ces algorithmes doivent être implémentés de telle façon que soit respectées deux sous-problématiques liées au \idx{chiffrement}~\cite{LG08}:
 \begin{itemize}
     \item la confidentialité persistante\index{confidentialité!confidentialité persistante} (\textit{forward secrecy} en anglais, littéralement « confidentialité vers l'avant »), qui permet d'empêcher un nœud de déchiffrer les messages une fois qu'il a quitté le réseau;
     \item la confidentialité « vers l'arrière »\index{confidentialité!confidentialité vers l'arrière} (\textit{backward secrecy}), chargée d'assurer qu'un nouveau nœud entrant sur le réseau n'est pas en mesure de déchiffrer un message émis avant son arrivée.
 \end{itemize}
-Nous n'entrerons pas plus en détail dans les mécanismes cryptographiques\index{cryptographie} impliqués.
+Les mécanismes impliqués tiennent généralement bien sûr du domaine de la \idx{cryptographie}, et doivent être intégrés aux protocoles de sécurité utilisés~\cite{DSK10}.
 
 Les algorithmes de \idx{chiffrement} nécessitent en général de nombreux calculs, voire beaucoup de mémoire tampon, pour être mis en œuvre, surtout lorsque l'appareil ne dispose pas de matériel dédié~\cite{PLP06}, ce qui les rend parfois peu adaptés aux \rcs.
 Qui plus est, ils requièrent la plupart du temps la mise en place d'une architecture d'échange et de gestion du matériel cryptographique\index{cryptographie}, notamment en ce qui concerne les échanges de clés: cette architecture peut considérablement alourdir la structure du réseau ainsi que les échanges en termes de volume de données de contrôle.
@@ -120,11 +120,11 @@ Le protocole MSQPS (\textit{Modified Secured Query Processing Scheme})~\cite{GD1
 De manière générale, les problèmes d'\idx{authentification}, et dans une moindre mesure les autres problématiques soulevées dans cette sous-section, ont mené à la proposition de nombreuses architectures dédiées.
 
     \subsubsection{Architectures de sécurité}\label{ea:sss:archi}
-On entend par « \idx{architecture de sécurité} » un ensemble de protocoles et de mécanismes déployés dans le réseau en vue d'apporter certaines garanties en termes de \secu.
+Dans cet ouvrage, une « \idx{architecture de sécurité} » désigne un ensemble de protocoles et de mécanismes déployés dans le réseau en vue d'apporter certaines garanties en termes de \secu.
 L'équivalent anglais serait \textit{security framework}.
 Les solutions proposées sont multiples~\cite{HI12,GWZC13,SS14-rev}; nous allons présenter ici les plus connues.
 
-Ainsi \idx{SPINS} (\textit{Security Protocols for Sensor Networks}), élaboré en 2002~\cite{PSWCT02}, est l'une des premières solutions proposées dans la littérature pour sécuriser les échanges dans les \rcs, et sert de base pour de nombreuses solutions plus récentes.
+Ainsi \idx{SPINS} (\textit{Security Protocols for Sensor Networks})~\cite{PSWCT02} est l'une des premières solutions proposées dans la littérature pour sécuriser les échanges dans les \rcs, et sert de base pour de nombreuses solutions plus récentes.
 Il s'agit d'un système reposant sur deux blocs: \idx{SNEP} (\textit{Secure Network Encryption Protocol}) fournit la \idx{confidentialité}, l'\idx{authentification} entre deux parties, l'\integrite et la protection contre le \idx{rejeu}, le tout en préservant un faible volume de données de contrôle en en-tête des paquets.
 Des codes d'\idx{authentification} des messages associés à un compteur partagé entre les interlocuteurs, et utilisé pour le bloc de chiffrement\index{chiffrement!bloc de chiffrement} (le compteur est incrémenté après chaque bloc), sont employés à cette fin.
 Le second bloc est appelé \idx{$\mu$TESLA} (version « micro » du \textit{Timed, Efficient, Streaming, Loss-tolerant Authentication Protocol}), il fournit des diffusions générales (\textit{broadcast}) authentifiées à l'aide de chaines de clés: ces chaines à sens uniques fournissent des clés associées à chaque intervalle de temps pour la \idx{signature} des messages.
@@ -135,26 +135,26 @@ Le module SNEP a fait l'objet d'études comparatives sur les performances que lu
 \nomenclature{SPINS}{\textit{Security Protocols for Sensor Networks}}
 \nomenclature{SNEP}{\textit{Secure Network Encryption Protocol}}
 
-\idx{TinySec}~\cite{KSW04}, proposé en 2004, se réfère à \idx{SNEP}, mais lui reproche une spécification incomplète.
+\idx{TinySec}~\cite{KSW04} se réfère à \idx{SNEP}, mais lui reproche une spécification incomplète.
 Cette architecture\index{architecture de sécurité} propose l'\idx{authentification} seule, ou bien accompagnée de \idx{chiffrement}, des paquets.
 Elle écarte volontairement la protection contre le \idx{rejeu}, mais se penche très sérieusement sur l'implémentation d'une solution classique basée sur un algorithme de \idx{chiffrement} en conjonction avec un code d'\idx{authentification} des messages (\macc).
 Les algorithmes possibles de \idx{chiffrement}, leurs différents modes, leurs vecteurs d'initialisation, les codes d'\idx{authentification}, les mécanismes d'échange de clés\index{gestion des clés} possibles sont tous analysés en détail, afin de déterminer les avantages et les inconvénients de chacun pour un \rc.
 
 \idx{MiniSec}~\cite{LMPG07} est basé sur \idx{TinySec}.
-Au mode CBC (\textit{Cipher Block Chaining mode}, mode par enchainement des blocs), cette architecture proposée en 2007 préfère l'utilisation du mode de \idx{chiffrement} OCB (\textit{Offset CodeBook mode}, « dictionnaire avec décalage »), qui réalise à la fois le \idx{chiffrement} et la \idx{signature} des données et ne nécessite donc pas de code d'authentification\index{MAC (code)} distinct.
+Au mode CBC (\textit{Cipher Block Chaining mode}, mode par enchainement des blocs), cette architecture préfère l'utilisation du mode de \idx{chiffrement} OCB (\textit{Offset CodeBook mode}, « dictionnaire avec décalage »), qui réalise à la fois le \idx{chiffrement} et la \idx{signature} des données et ne nécessite donc pas de code d'authentification\index{MAC (code)} distinct.
 Elle adopte une approche particulière du vecteur d'initialisation pour le \idx{chiffrement}, qui lui permet de minimiser le volume des données d'en-tête.
 Enfin elle fait une distinction entre les diffusions nœud à nœud et les diffusions générales, pour lesquelles un filtre de \textsc{Bloom} est utilisé, avec pour objectif final de réduire sensiblement l'énergie consommée lors des envois.
 \nomenclature{CBC}{\textit{Cipher Block Chaining mode}}
 \nomenclature{OCB}{\textit{Offset CodeBook mode}}
 
-\idx{TinyKey}~\cite{CRS11} est une autre architecture basée sur \idx{TinySec}, mais date de 2011.
+\idx{TinyKey}~\cite{CRS11} est une autre architecture basée sur \idx{TinySec}, mais plus récente.
 Elle reprend l'architecture de \idx{TinySec}, mais rajoute un numéro de séquence aux paquets pour éviter les attaques par \idx{rejeu}.
 Surtout, là où les auteurs de \idx{TinySec} se contentent de passer en revue les mécanismes de \idx{gestion des clés} qui peuvent être utilisés, les auteurs de \idx{TinyKey} proposent une implémentation concrète de cette gestion, qui est assurée par deux modules centralisés sur la \sdb: KMS (\textit{Key Management Submodule}, « sous-module de gestion de clé » en anglais) et KDM (\textit{Key Distribution Manager}, « gestionnaire de distribution des clés»).
 \nomenclature{KMS}{\textit{Key Management Submodule}}
 \nomenclature{KDM}{\textit{Key Distribution Manager}}
 
 D'autres architectures encore se concentrent sur la \idx{gestion des clés} dans le réseau.
-Avec \idx{LEAP} (\textit{Localized Encryption and Authentication Protocol}, « protocole de \idx{chiffrement} et d'\idx{authentification} localisés »), proposé en 2003~\cite{ZSJ03}, la gestion est décentralisée, et porte sur quatre types de clés:
+Avec \idx{LEAP} (\textit{Localized Encryption and Authentication Protocol}, « protocole de \idx{chiffrement} et d'\idx{authentification} localisés »)~\cite{ZSJ03}, la gestion est décentralisée, et porte sur quatre types de clés:
 \begin{itemize}
     \item des clés individuelles permettant de communiquer de façon sécurisée avec la \sdb;
     \item une clé de groupe, utilisée par l'ensemble du réseau, pour protéger des diffusions générales d'un attaquant extérieur;
@@ -162,14 +162,14 @@ Avec \idx{LEAP} (\textit{Localized Encryption and Authentication Protocol}, « 
     \item des clés pour les communications pair à pair.
 \end{itemize}
 Les mécanismes déployés ont pour but, encore une fois, de minimiser l'énergie consommée.
-Ils ont été améliorés dans une seconde version du protocole, baptisée \idx{LEAP+}, et publiée en 2006~\cite{ZSJ06}.
+Ils ont été améliorés dans une seconde version du protocole, baptisée \idx{LEAP+}~\cite{ZSJ06}.
 \nomenclature{LEAP}{\textit{Localized Encryption and Authentication Protocol}}
 
-L'architecture \idx{pDCS}, proposée en 2009~\cite{SZZCY09} (\textit{privacy-enhanced Data-Centric Sensor networks}, « \rcs centrés sur les données, de \idx{confidentialité} améliorée ») divise le réseau en cellules rectangulaires à l'aide d'arbres euclidiens de \textsc{Steiner}, et introduit des clés de cellules et de rangées.
+L'architecture \idx{pDCS} (\textit{privacy-enhanced Data-Centric Sensor networks}, « \rcs centrés sur les données, de \idx{confidentialité} améliorée »)~\cite{SZZCY09} divise le réseau en cellules rectangulaires à l'aide d'arbres euclidiens de \textsc{Steiner}, et introduit des clés de cellules et de rangées.
 Des capteurs se trouvent dans les cellules, tandis que des « puits » de données mobiles\index{mobilité} se déplacent et récoltent les informations.
 Mais le \idx{chiffrement} est fait de telles sorte qu'un puits illégitime ne soit pas en mesure de remonter au capteur qui a initialement détecté un événement donné.
 Un filtre de \textsc{Bloom} est là encore utilisé pour minimiser le volume de données de contrôle produites.
-pDCS a été amélioré en 2013 par ERP-DCS (\textit{Efficient Rekeying Protocol for DCS sensor networks}, « protocole efficace de régénération de clés pour les réseaux DCS »)~\cite{HYD13}, qui se concentre sur l'amélioration du mécanisme de \idx{gestion des clés} qui intervient dans le cas où un agent a été compromis et identifié comme tel, en utilisant à cette fin un système d'exclusion appelé EBS (\textit{Exclusion Basis System}).
+pDCS a été améliorée avec ERP-DCS (\textit{Efficient Rekeying Protocol for DCS sensor networks}, « protocole efficace de régénération de clés pour les réseaux DCS »)~\cite{HYD13}, qui se concentre sur l'amélioration du mécanisme de \idx{gestion des clés} qui intervient dans le cas où un agent a été compromis et identifié comme tel, en utilisant à cette fin un système d'exclusion appelé EBS (\textit{Exclusion Basis System}).
 \nomenclature{DCS}{\textit{Data Centric Sensor networks}}
 \nomenclature{pDCS}{\textit{privacy-enhanced DCS}}
 \nomenclature{ERP-DCS}{\textit{Efficient Rekeying Protocol for DCS sensor networks}}
@@ -189,19 +189,19 @@ La \tabref{ea:tab:proto} compare brièvement les fonctionnalités apportées par
     \centering
     %\newcolumntype{X}{>{\centering\arraybackslash}m}
     \begin{footnotesize}
-        \begin{tabular}{@{}m{.1\textwidth} m{.12\textwidth} m{.12\textwidth} m{.2\textwidth} m{.2\textwidth} m{.08\textwidth}@{}}
+        \begin{tabular}{@{}m{.1\textwidth} m{.12\textwidth} m{.12\textwidth} m{.25\textwidth} m{.25\textwidth}@{}}
             \toprule
-            \textsc{Archi\-tecture} & \textsc{Mode de chiffrement} & \textsc{Algorithme de chiffrement} & \textsc{Clés utilisées}                                                        & \textsc{Sécurité apportée}                                                            & \textsc{Année}\\
+            \textsc{Archi\-tecture} & \textsc{Mode de chiffrement} & \textsc{Algorithme de chiffrement} & \textsc{Clés utilisées}                                                        & \textsc{Sécurité apportée}\\
             \midrule
-            SPINS                   & CTR                          & RC5                                & Clé maitresse, chaine de clés symétriques                                      & *: Chiffrement, authentification et intégrité des données, protection contre le rejeu & 2002\\
-            TinySec                 & CBC                          & Au choix                           & Au choix                                                                       & (*) moins protection contre le rejeu                                                  & 2004\\
-            TinyKey                 & CBC-MAC                      & SkipJack                           & Clés pré-installées sur les nœuds                                              & (*)                                                                                   & 2011\\
-            MiniSec                 & OCB ou CBC-MAC               & SkipJack ou RC5                    & Clés pré-installées sur les nœuds                                              & (*)                                                                                   & 2007\\
-            LEAP                    & RC5                          & RC5                                & Clé individuelle, clé globale, clé de cluster, clés pair à pair                & (*)                                                                                   & 2003\\
-            LEAP+                   & RC5                          & RC5                                & Clé individuelle, clé globale, clé de cluster, clés pair à pair                & (*)                                                                                   & 2006\\
-            pDCS                    & RC5                          & RC5                                & Clé maitresse, clés pair à pairs, clés de cellule, clés de rangée, clé globale & (*) plus dissimulation de la provenance des données                                   & 2009\\
-            ERP-DCS                 & RC5                          & RC5                                & Clés pair à pair, clé de cellule, clé EBS                                      & (*) plus dissimulation de la provenance des données                                   & 2013\\
-            \zigbee                 & CBC-MAC                      & AES, modes CTR ou CCM              & Clé maitresse, clés pair à pair, clé globale                                   & (*)                                                                                   & 2005\\
+            SPINS                   & CTR                          & RC5                                & Clé maitresse, chaine de clés symétriques                                      & *: Chiffrement, authentification et intégrité des données, protection contre le rejeu\\
+            TinySec                 & CBC                          & Au choix                           & Au choix                                                                       & (*) moins protection contre le rejeu\\
+            TinyKey                 & CBC-MAC                      & SkipJack                           & Clés pré-installées sur les nœuds                                              & (*)\\
+            MiniSec                 & OCB ou CBC-MAC               & SkipJack ou RC5                    & Clés pré-installées sur les nœuds                                              & (*)\\
+            LEAP                    & RC5                          & RC5                                & Clé individuelle, clé globale, clé de cluster, clés pair à pair                & (*)\\
+            LEAP+                   & RC5                          & RC5                                & Clé individuelle, clé globale, clé de cluster, clés pair à pair                & (*)\\
+            pDCS                    & RC5                          & RC5                                & Clé maitresse, clés pair à pairs, clés de cellule, clés de rangée, clé globale & (*) plus dissimulation de la provenance des données\\
+            ERP-DCS                 & RC5                          & RC5                                & Clés pair à pair, clé de cellule, clé EBS                                      & (*) plus dissimulation de la provenance des données\\
+            \zigbee                 & CBC-MAC                      & AES, modes CTR ou CCM              & Clé maitresse, clés pair à pair, clé globale                                   & (*)\\
             \bottomrule
         \end{tabular}
     \end{footnotesize}
@@ -213,11 +213,11 @@ La \tabref{ea:tab:proto} compare brièvement les fonctionnalités apportées par
 \nomenclature{CBC-MAC}{\textit{Cipher Block Chaining Message Authentication Code}}
 \nomenclature{RC5}{\textit{\textsc{Rivest} Cipher version 5}}
 
-On constate que la gestion des clés occupe une place essentielle dans la plupart des systèmes proposés: il est en effet essentiel de disposer d'un moyen d'échanger, et au besoin de renouveler les clés nécessaires à ces architectures, sans compromettre leur \secu mais sans pour autant consommer trop de ressources.
-De nombreux mécanismes ont été proposés et continuent de l'être~\cite{DSK10,BSK13}, et ont même fait l'objet de travaux de synthèse~\cite{HWMRKP06,XRSDHG07}.
-Nous ne les détaillerons pas ici.
+Une première observation à réaliser concerne l'importance de la gestion des clés, qui occupe une place essentielle dans la plupart des systèmes proposés: il est en effet indispensable de disposer d'un moyen d'échanger, et au besoin de renouveler les clés nécessaires à ces architectures, sans compromettre leur \secu mais sans pour autant consommer trop de ressources.
+De nombreux mécanismes ont été proposés et continuent de l'être~\cite{DSK10,BSK13}.
+Nous ne les détaillerons pas ici; mais il reste possible, pour en savoir davantage, de se tourner vers des travaux de synthèse qui catégorisent et décrivent les principales approches~\cite{HWMRKP06,XRSDHG07}.
 
-On peut également observer dans la littérature que des mécanismes introduits dans les architectures complexes présentées ci-dessus ont été repris dans des solutions ultérieures.
+Seconde remarque: dans la littérature, plusieurs des mécanismes introduits dans les architectures complexes présentées ci-dessus ont été repris pour des solutions ultérieures~\cite{SS14-rev}.
 Par exemple, il existe une proposition concernant la combinaison de signatures\index{signature} numériques (cryptographie asymétrique)\index{cryptographie!cryptographie asymétrique}, du bloc \idx{$\mu$TESLA} (asymétrie temporelle) introduit avec \idx{SPINS} mais sans reprendre \idx{SNEP}, et d'un filtre de \textsc{Bloom} pour créer un mécanisme d'\textit{Information Asymmetry}, qui assure des diffusions générales (\textit{broadcast}) authentifiées~\cite{SLS10}.
 Le filtre de \textsc{Bloom} est utilisé pour condenser plusieurs codes d'authentification de messages (\macc), qui sont ajoutés aux paquets pour l'\idx{authentification} des transmissions par les nœuds.
 Plusieurs codes sont vérifiés par chaque nœud, qui possède son propre sous-ensemble de clés, de sorte que si certaines clés ont été compromises, il en reste d'autres à vérifier.

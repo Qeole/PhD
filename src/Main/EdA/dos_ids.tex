@@ -29,10 +29,10 @@ Les opérations menées à cette fin peuvent comprendre:
     \item la détection d'une activité inhabituelle au niveau de l'activité du processeur, des allocations mémoires, ou des entrées sorties, qui risqueraient de pénaliser le système d'exploitation en termes de performance et de consommation énergétiques. Cette surveillance peut être menée en temps réel, ou via la journalisation des évènements système.
 \end{itemize}
 On parle en anglais de NIDS\index{système de détection d'intrusion!NIDS} (\textit{Network Intrusion Detection System}) ou de HIDS\index{système de détection d'intrusion!HIDS} (\textit{Host based Intrusion Detection System}) pour les \IDS orientés réseau ou machine, respectivement.
-De nombreux \IDS cumulent à la fois des mécanismes de surveillance du réseau et du comportement de leurs voisins, et une surveillance des évènements système survenant sur leur hôte.
+De nombreux \IDS cumulent à la fois des mécanismes de surveillance du réseau et du comportement de leurs voisins, et une surveillance des évènements système survenant sur leur hôte~\cite{BMS13}.
 
         \paragraph{Selon le type d'intrusion à détecter}
-Les \IDS sont utilisés pour lutter contre tous types d'« intrusions » (ou d'attaques dans le sens plus général), pas seulement contre le \dds, bien que ce soit le point qui nous préoccupe le plus dans cette thèse.
+Les \IDS sont utilisés pour lutter contre tous types d'« intrusions » (ou d'attaques dans le sens plus général), pas seulement contre le \dds, bien que ce soit le point qui nous préoccupe le plus dans cette thèse~\cite{BMS13}.
 Ainsi ils peuvent être utilisés afin de détecter:
 \begin{itemize}
     \item des \textbf{tentatives d'accès au réseau} de la part d'un attaquant externe (qui chercherait à passer par exemple par la compromission d'un nœud ou par l'obtention de matériel cryptographique\index{cryptographie}); cette étape n'est souvent qu'un prélude à d'autres attaques (de \dds notamment);
@@ -43,7 +43,7 @@ Ainsi ils peuvent être utilisés afin de détecter:
 \end{itemize}
 
         \paragraph{Selon les méthodes employées pour la détection}
-Les méthodes utilisées pour déterminer l'existence et l'identité d'un attaquant sont nombreuses, et se divisent en trois catégories: la détection \textbf{basée sur les anomalies}\index{anomalie}, la détection \textbf{basée sur des signatures d'attaques}\index{signature d'attaque}, et la détection reposant \textbf{sur la vérification du respect des spécifications}.
+Les méthodes utilisées pour déterminer l'existence et l'identité d'un attaquant sont nombreuses, et se divisent en trois catégories: la détection \textbf{basée sur les anomalies}\index{anomalie}, la détection \textbf{basée sur des signatures d'attaques}\index{signature d'attaque}, et la détection reposant \textbf{sur la vérification du respect des spécifications}~\cite{BMS13}.
 Ces catégories, et les principales méthodes qu'elles regroupent, sont détaillées plus bas en \sssref{ea:sss:detect}.
 
         \paragraph{Selon l'infrastructure du réseau}
@@ -54,7 +54,7 @@ Il est également intéressant de noter que la clusterisation\index{clusterisati
 Une exception concerne toutefois les attaques qui sont menées avec succès contre les \ch (notamment lorsque celui-ci se voit compromis), puisque ce peut être alors le cluster entier qui se retrouve hors service.
 
         \paragraph{Selon la \idx{distribution} des calculs}
-La détection passe par la collecte puis le traitement d'indices sur le fonctionnement des nœuds ou du réseau global.
+La détection passe par la collecte puis le traitement d'indices sur le fonctionnement des nœuds ou du réseau global~\cite{BMS13}.
 Collecte comme traitement peuvent être réalisés par différenties entités ou associations d'entités, à savoir:
 \begin{itemize}
     \item le traitement, les calculs peuvent être \textbf{centralisés} et réalisés seulement par la \sdb, à laquelle les capteurs font remonter les informations brutes relevées sur le fonctionnement du réseau. Dans certains cas extrêmes, même la collecte d'indices n'est réalisée que par la \sdb;
@@ -67,13 +67,13 @@ Collecte comme traitement peuvent être réalisés par différenties entités ou
 La gestion de la collecte et des calculs vont bien évidemment influencer l'opérateur du réseau sur le choix du type de méthode de détection (voir plus haut) à mettre en place.
 
         \paragraph{Selon la fréquence d'usage du système}
-La plupart des \IDS sont prévus pour fonctionner \textbf{de manière continue} sur leur hôte, mais certaines solutions adoptent des comportement différents: le système de détection n'est exécuté que \textbf{de façon périodique}, ou bien se voit activé à la réception d'alerte (émanant de la \sdb par exemple, qui dispose pour sa part des ressources nécessaires au maintien en continu d'un \IDS).
+La plupart des \IDS sont prévus pour fonctionner \textbf{de manière continue} sur leur hôte, mais certaines solutions adoptent des comportement différents: le système de détection n'est exécuté que \textbf{de façon périodique}, ou bien se voit activé à la réception d'alerte (émanant de la \sdb par exemple, qui dispose pour sa part des ressources nécessaires au maintien en continu d'un \IDS)~\cite{BMS13}.
 
         \paragraph{Systèmes hybrides}
 En pratique, pour un critère donné, la plupart des \IDS proposés se retrouvent dans plusieurs catégories à la fois: on retrouve ainsi beaucoup de systèmes hybrides surveillant tout à la fois l'hôte sur lequel ils tournent, et le trafic intercepté par le nœud.
 De même, le type d'attaques recherchées par les systèmes sont généralement multiples, et portent souvent sur plusieurs couches protocolaires (en référence au modèle \tcpip).
 Et pour en détecter un maximum, il n'est pas rare qu'un \IDS combine plusieurs méthodes de détection.
-On voit ainsi souvent apparaître en anglais le terme \textit{cross-layer IDS}\index{système de détection d'intrusion!\textit{cross-layer} IDS}, littéralement « IDS sur plusieurs couches ».
+On voit ainsi souvent apparaitre en anglais le terme \textit{cross-layer IDS}\index{système de détection d'intrusion!\textit{cross-layer} IDS}, littéralement « IDS sur plusieurs couches »~\cite{BMS13}.
 %2}}}
 
     \subsubsection{Les méthodes de détection}\label{ea:sss:detect}
@@ -83,7 +83,7 @@ Ces déductions résultent de l'application d'algorithmes précis sur les donné
 Ces algorithmes sont de plusieurs sortes, que l'on regroupe dans les méthodes de détection basées sur des anomalies\index{anomalie}, sur des signatures d'attaques\index{signature d'attaque}, ou sur le non-respect de spécifications prédéfinies.
 
         \paragraph{Détection basée sur les anomalies\index{anomalie}}
-Détecter les attaques selon les anomalies\index{anomalie} qui surviennent dans le réseau revient à établir, dans un premier temps, un modèle du fonctionnement normal du réseau.
+Détecter les attaques selon les anomalies\index{anomalie} qui surviennent dans le réseau revient à établir, dans un premier temps, un modèle du fonctionnement normal du réseau~\cite{BMS13}.
 Dans un second temps, la surveillance en elle-même est déclenchée, et si les variables observées dérogent sensiblement au modèle généré, une alerte est levée.
 Ces méthodes permettent donc d'intervenir lorsqu'un problème survient effectivement dans le réseau, sans que son origine n'ait nécessairement été identifiée.
 Elles ont pour avantage de s'adapter à de nouveaux types d'attaques, pour lesquelles elles n'avaient pas été imaginées au départ.
@@ -94,12 +94,12 @@ La détection basée sur les anomalies\index{anomalie} regroupe trois sous-caté
 \begin{itemize}
     \item La première est celle des \textbf{modèles statistiques}, qui enregistrent dans un premier temps des séries de valeurs pour des variables liées au bon fonctionnement du réseau, et cherchent par la suite à repérer les écarts importants à ces valeurs de référence. Les variables observées, directement liées au trafic, peuvent être considérées comme des variables indépendantes suivant des lois de \textsc{Gauss}, comme des variables corrélées, ou encore comme des séries temporelles.
     \item Une deuxième regroupe les modèles basés sur les \textbf{connaissances} modélisées du fonctionnement normal du réseau, et utilise un modèle généré en fonction des données et à l'aide d'outils tels que des langages de description ou des automates finis.
-    \item Enfin, la détection peut être basée sur des \textbf{méthodes d'apprentissage}, où des modèles sont créés et actualisés \via des outils formels comme les processus de \textsc{Markov}, les réseaux bayésiens, la logique floue, les algorithmes génétiques, les réseaux de neurones, ou encore les modèles d'intelligence en essaim.
+    \item Enfin, la détection peut être basée sur des \textbf{méthodes d'apprentissage}, où des modèles sont créés et actualisés \via des outils formels comme les processus de \textsc{Markov}, les réseaux bayésiens, la logique floue, les algorithmes génétiques, les réseaux de neurones, ou encore les modèles d'intelligence en essaim~\cite{BMS13}.
 \end{itemize}
 
         \paragraph{Règles et signatures des attaques\index{signature d'attaque}}
 Plutôt que d'attendre que des anomalies\index{anomalie} de fonctionnement, de performances, soient détectés, d'autres \IDS prennent les devants et mettent en place un système de surveillance du voisinage en établissant un ensemble de règles à ne pas transgresser.
-Ces règles sont construites à partir de la « signature » des attaques connues\index{signature d'attaque} \cad, pour une attaque donnée, à partir du comportement type adopté par un nœud qui tenterait de mener cette attaque.
+Ces règles sont construites à partir de la « signature » des attaques connues\index{signature d'attaque} \cad, pour une attaque donnée, à partir du comportement type adopté par un nœud qui tenterait de mener cette attaque~\cite{BMS13}.
 
 Les règles peuvent être nombreuses et variées, en voici quelques exemples représentatifs.\index{signature d'attaque}
 \begin{itemize}
@@ -118,7 +118,7 @@ Suivant le modèle de l'\IDS, cette alarme peut n'être qu'une notification inte
 Les mesures à prendre en guise de réactions seront traitées plus bas.
 
 Les nœuds qui observent le comportement de leurs voisins et veillent à l'application des règles choisies pour le réseau sont désignés de plusieurs façons: on parle de nœuds de contrôle, de nœuds de surveillance, éventuellement de sentinelles; en anglais, ce seront le plus souvent des \textit{monitoring nodes} (nœuds moniteurs).
-L'expression \textit{watch dogs}, pour « chiens de garde », est aussi régulièrement employée.
+L'expression \textit{watch dogs}, pour « chiens de garde », est aussi régulièrement employée~\cite{RKKK13}.
 Dans nos travaux, les nœuds chargés de cette surveillance sont appelés \cns.
 
 La détection basée sur la signature des attaques\index{signature d'attaque} est relativement simple à appréhender et à mettre en œuvre.
@@ -130,7 +130,7 @@ En revanche, elle souffre d'une mauvaise adaptation aux attaques nouvelles, dont
         \paragraph{Respect des spécifications}
 Une troisième classe de méthodes de détection regroupe les méthodes, moins fréquentes, basées sur le respect de spécifications réalisées en amont du déploiement du réseau.
 La détection basée sur les anomalies\index{anomalie} détecte les écarts de performance, celle basée sur les signatures\index{signature d'attaque} relève les comportements suspects; cette troisième catégorie cherche à combiner les avantages de chacune, en se reposant sur des spécifications élaborées par l'opérateur ainsi que sur des contraintes qui caractérisent le bon fonctionnement du réseau.
-Les écarts au profil normal spécifié permettent de détecter les attaques en identifiant leur effet, tandis que les contraintes fixées par ces spécifications entraînent la détection de comportement individuels malicieux.
+Les écarts au profil normal spécifié permettent de détecter les attaques en identifiant leur effet, tandis que les contraintes fixées par ces spécifications entrainent la détection de comportement individuels malicieux~\cite{BMS13}.
 
 Comme les spécifications sont réalisées par un opérateur humain (il ne s'agit pas d'un modèle généré par un algorithme), le taux de faux positifs est relativement faible.
 En revanche, l'élaboration de ces spécifications peut s'avérer très complexe, et prendre beaucoup de temps.
@@ -163,7 +163,7 @@ Nous nous attachons, dans le choix des nœuds de surveillance, à répartir au m
         \paragraph{Lutter contre les pertes de paquets}
 À travers l'usage plus ou moins direct de systèmes de détection d'intrusion, plusieurs architectures déjà établies ont été adaptées dans le but de faciliter la détection de nœuds corrompus au sein du réseau.
 
-\olsr (\textit{Optimized Link State Routing protocol}) est l'un des protocoles de routages souvent déployés dans les \rcs.
+\olsr (\textit{Optimized Link State Routing protocol}) est l'un des protocoles de \idx{routage} les plus souvent mis en place dans les \rcs.
 Une nouvelle version de ce protocole, appelée DLSR (\textit{DDoS-preventing \olsr})~\cite{MKASF10}, a été proposée en vue de reprendre ses fonctionnalités tout en ajoutant des mécanismes de détection contre les attaques de \dds distribuées.
 Lorsque la \sdb reçoit un trafic trop important, qui menace de saturer sa capacité de traitement ou bien qui crée de trop fortes congestions sur ses liens, elle envoie un signal dans tout le réseau en vue de prévenir les nœuds; le trafic est alors analysé, par chaque nœud relais, par un automate d'apprentissage afin de détecter et supprimer les paquets malveillants.
 DLSR fait signaler par la \sdb la fin de l'attaque, afin que les nœuds cessent les opérations nécessaires au filtrage des paquets.
