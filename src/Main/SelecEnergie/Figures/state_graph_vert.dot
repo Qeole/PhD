@@ -1,0 +1,32 @@
+digraph state_machine {
+
+	el_cnode [label="Sélection\ndes cNodes", shape="diamond", color="red"];
+	sensing [label="Capteur\n(mesures)", color="blue"];
+	cnode [label="cNode", color="blue"];
+	vnode [label="vNode et\nmesures", color="blue"];
+	el_vnode [label="Sélection\ndes vNodes", shape="diamond"];
+	el_vnode_bis [label="Sélection\ndes vNodes,\nà nouveau", shape="diamond"];
+	has_1hop [label="Reste-t-il des\nvoisins directs\nà traiter ?", shape="diamond"];
+	vn_has_1hop [label="vNode;\nReste-t-il des\nvoisins directs ?", shape="diamond"];
+	is_1hop_cnode [label="Ce voisin\ndirect est-il\nun cNode ?", shape="diamond"];
+	add_cnode [label="Ajouter\nce cNode à\nla liste", shape="box"];
+
+	el_cnode->cnode [label="sélectionné"];
+	cnode->el_cnode [label="fin du cycle"];
+	el_cnode->has_1hop [label="non sélectionné"];
+	has_1hop->sensing [label="non"];
+	has_1hop->is_1hop_cnode [label="oui"];
+	is_1hop_cnode->has_1hop [label="non"];
+	is_1hop_cnode->el_vnode [label="oui"];
+	sensing->el_cnode [label="fin du cycle"];
+	el_vnode->add_cnode [label="sélectionné"];
+	el_vnode->has_1hop [label="non sélectionné"];
+	vnode->el_cnode [label="fin du cycle"];
+	vn_has_1hop->el_vnode_bis [label="oui"];
+	el_vnode_bis->add_cnode [label="sélectionné"];
+	add_cnode->vn_has_1hop [label=""];
+	el_vnode_bis->vn_has_1hop [label="non sélectionné\npour ce cNode"];
+	vn_has_1hop->vnode [label="non"];
+}
+	
+
