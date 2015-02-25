@@ -25,7 +25,7 @@ Notre modèle représente un cluster d'un \rcsf qui vérifie les hypothèses sui
         \subsubsection{Modélisation}
 Sous les hypothèses précédentes, notre modèle peut être représenté par une \cmtc multi-dimensionnelle de taille $m$.
 Il est alors exprimé sous la forme d'un $m$-uplet $x\!=\!(x_1,x_2,\dots,x_m)$ de macro-états $x_k\!=\!(x_{k_1},x_{k_2},\dots,x_{k_s},x_{k_d})$.
-Chaque macro-état $x_k$    garde en mémoire le nombre de paquets détectés par le \cn $k$ ($1\leq k\leq m$).
+Chaque macro-état $x_k$ représente le nombre de paquets détectés par le \cn $k$ ($1\leq k\leq m$).
 Plus exactement, chaque $x_{k_i}$ ($1\leq i\leq s$) est un compteur, initialisé à $0$, qui est incrémenté à chaque fois que le \cn $k$ détecte un paquet en provenance du capteur $i$.
 $x_{k_d}$ est une variable de type booléen, initialisée à $0$, et passée à $1$ lorsque le \cn $k$ détecte un trafic anormalement élevé.
 La fonction de seuil $f:s^s\rightarrow\{0;1\}$ est utilisée par les \cns pour déterminer la nature normale ou non du trafic (elle indique si un paquet a dépassé ou non le seuil des communications dites «~normales~»).

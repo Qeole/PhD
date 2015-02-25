@@ -1,11 +1,14 @@
 % vim: set spelllang=fr foldmethod=marker:
+\lettrineh{P}{uisque} les travaux présentés dans cette thèse portent sur les \rcsfs, il semble indispensable d'introduire tout d'abord les caractéristiques de ces capteurs et des réseaux qu'ils peuvent former.
+Le présent chapitre décrit donc le fonctionnement basique des capteurs, des réseaux, et fournit des exemples d'applications.
+Dans un second temps, ce sont certains des principaux problèmes soulevés par le déploiement des capteurs qui seront brièvement introduits, notamment la nécessité d'adapter les protocoles employés aux capacités des capteurs, les besoins éventuels de partition du réseau pour en obtenir une gestion plus efficace, ou encore des problèmes de mobilité, de sureté, de sécurité, de résilience.
+
 \section{Réseaux de capteurs sans fil}
-\label{st:sec:contexte}
 
     \subsection{De quoi s'agit-il?}
 %{{{1
 %{{{2
-\begin{figure}[!b]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=.8\textwidth]{\chapterpath/Figures/WSN_archi.pdf}
     \caption{Schéma simple d'un \rcsf}\label{st:fig:wsnintro}
@@ -91,7 +94,7 @@ Il est à noter que certaines de ces applications touchent à des domaines criti
         \paragraph{Surveillance et détection}
 %{{{2
 Les \rcsfs sont aussi employés pour des mesures de sureté ou de sécurité, par exemple pour surveiller l'intégrité structurelle de certaines architectures (ferroviaires, aérospatiales, maritimes, ou plus simplement dans le bâtiment: gros œuvre, ouvrages d'art) et peuvent permettre une prévention efficace des pannes matérielles~\cite{SCOA13}.
-Mis à part la détection de pannes, les capteurs peuvent être utilisés dans des systèmes de surveillance de sites sensibles afin de prévenir les intrusions humaines, ou bien pour détecter des incidents ou encore établir le suivi de certaines entités; la gestion du trafic routier, ou même seulement des autobus, en sont des exemples.
+Mis à part la détection de pannes, les capteurs peuvent être utilisés dans des systèmes de vidéosurveillance en milieu urbain, ou sur des sites sensibles afin de prévenir les intrusions humaines, ou bien pour détecter des incidents ou encore établir le suivi de certaines entités; la gestion du trafic routier, ou même seulement des autobus, en sont des exemples.
 Le CEREMA (Centre d'études et d'expertise sur les risques, l'environnement, la mobilité et l'aménagement) a mis en ligne un site Internet particulièrement riche en exemples d'application des capteurs, et détaillant notamment les différentes technologies utilisées pour réaliser les mesures~\cite{sti}.
 Pour exemple la seule détection de véhicules sur les voies de circulation peut reposer sur:
 \begin{itemize}
@@ -105,8 +108,6 @@ Pour exemple la seule détection de véhicules sur les voies de circulation peut
 \end{itemize}
 \nomenclature{laser}{\textit{Light Amplification by Stimulated Emission of Radiation}}
 \nomenclature{radar}{\textit{RAdio Detection And Ranging}}
-
-Également en milieu urbain, les applications de vidéosurveillance font de plus en plus appel à des capteurs en réseau~\cite{SZFDXC14}.
 %2}}}
 
         \paragraph{Domaine militaire}
@@ -114,8 +115,7 @@ Pour exemple la seule détection de véhicules sur les voies de circulation peut
 La surveillance et la détection sont aussi très utilisés dans le domaine militaire.
 Qu'il s'agisse de mener des opérations de renseignement ou bien de suivre l'évolution d'un combat sur le champ de bataille, pour analyser les cibles, relier entre eux fantassins et véhicules de tous types, pour détecter les agents radioactifs, chimiques ou biologiques répandus par un ennemi, toutes les informations sont bonnes à prendre~\cite{ASSC02}.
 Un maximum d'entre elles doivent être remontées au centre de commandement, afin de permettre une supervision optimale des forces en mouvement.
-
-Plus encore que les exemples précédents, l'usage des capteurs en contexte militaire implique de fortes contraintes en termes de \secu du réseau déployé.
+Plus encore que les exemples précédents, l'usage des capteurs en contexte militaire implique de fortes contraintes en termes de \secu pour le réseau déployé.
 %2}}}
 
         \paragraph{Médecine}
@@ -132,7 +132,7 @@ En domotique par exemple, la température des différentes pièces d'un lieu d'h
 
 Un autre domaine d'application en voie de développement est ce que l'on appelle l'\textit{\idx{Internet des objets}} (\textit{the Internet of things} en anglais), et qui consiste en quelque sorte à étendre \idx{Internet} au monde réel, par le biais d'une interconnexion réseau entre les objets de la vie courante: de plus en plus d'objets du quotidien tendent à devenir « connectés ».
 Ils se voient alors équipés de capteurs, d'un module de communication sans fil, et offrent de nouvelles possibilités en termes d'usages.
-En voici quelques exemples:
+Quelques exemples:
 \begin{itemize}
     \item les montres (interfacées avec les téléphones « intelligents » pour afficher des notifications diverses);
     \item les ampoules d'éclairage (gestion de la luminosité, de la couleur de l'éclairage, parfois dynamiques);
@@ -166,7 +166,6 @@ Les capteurs se retrouvent donc avec des capacités limitées~\cite{BMS13}, nota
 Il est à noter qu'au regard de ces contraintes qui affectent les capteurs, la \sdb est considérée comme disposant de capacités « illimitées ».
 %1}}}
 
-\pagebreak %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \subsection{Communications sans fil}
 %{{{1
 %{{{2
@@ -229,10 +228,6 @@ Elle permet aussi, le plus souvent, de détecter et éventuellement corriger cer
 Elle se décompose en deux sous-couches: la couche de contrôle de la liaison logique (\llc, pour \textit{Logical Link Control} en anglais, « contrôle de la liaison logique ») et la couche du contrôle d'accès au support (\mac, pour \textit{Media Access Control}, « contrôle d'accès au support »).
 \llc est la sous-couche haute, utilisée pour fiabiliser la sous-couche \mac, intervient peu dans les \rcs.
 Le protocole de couche \mac définit la manière dont les différents agents du réseau accèdent au médium de transmission de façon à limiter les collisions, et à garantir un accès le plus souvent équivalent au médium pour tous les nœuds.
-Les différents modes d'accès au médium existants sont résumés dans la \tabref{st:tab:mac}; certains consistent à créer des canaux de transmission distincts, tandis que d'autres déterminent l'accès à une même bande de fréquence en instaurant des règles.
-\nomenclature{MAC}{\textit{Media Access Control}}
-\nomenclature{LLC}{\textit{Logical Link Control}}
-
 \begin{table}[!ht]
     \caption{Méthodes d'accès au médium de transmission}\label{st:tab:mac}
     \centering
@@ -263,6 +258,10 @@ Les différents modes d'accès au médium existants sont résumés dans la \tabr
          \end{tabular}
      \end{small}
 \end{table}
+Les différents modes d'accès au médium existants sont résumés dans la \tabref{st:tab:mac}.
+Certains d'entre eux consistent à créer des canaux de transmission distincts, tandis que d'autres déterminent l'accès à une même bande de fréquence en instaurant des règles.
+\nomenclature{MAC}{\textit{Media Access Control}}
+\nomenclature{LLC}{\textit{Logical Link Control}}
 \nomenclature{FDMA}{\textit{Frequency Division Multiple Access}}
 \nomenclature{CDMA}{\textit{Code Division Multiple Access}}
 \nomenclature{SDMA}{\textit{Space Division Multiple Access}}

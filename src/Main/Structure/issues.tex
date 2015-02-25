@@ -153,7 +153,7 @@ En conséquence, le pourcentage $P$ de \chs désirés dans le réseau n'est qu'u
 Par ailleurs, la répartition géographique (au regard de la puissance de transmission nécessaire) idéale des \chs n'est en rien assurée.
 Au contraire, il est même probable d'obtenir, pour certaines rondes, une concentration importante de \chs dans une zone restreinte du réseau, tandis que d'autres régions seront mal couvertes.
 Il n'y a pas grand-chose à faire dans ce cas, sinon espérer que la prochaine ronde produira une distribution des \CHs plus favorable.
-Si toutefois un nœud ne parvient à capter les messages d'aucun \ch, il se déclare généralement lui-même \CH.
+Si toutefois un nœud ne parvient à capter les messages d'aucun \CH, il se déclare généralement lui-même \ch.
 %2}}}
 
         \subsubsection{De nombreux algorithmes de \idx{clusterisation}}
@@ -166,7 +166,7 @@ Cette énergie résiduelle intervient alors en temps que paramètre supplémenta
 D'autres travaux sont basés sur \leach, que ce soit pour améliorer ses performances~\cite{RR13,CJ14} ou bien sa sécurité~\cite{OFVWBDL07}.
 
 Mais on trouve également de nombreux autres protocoles~\cite{AY07,DQWH13}.
-Certains prennent en compte deux à trois paramètres, comme l'énergie résiduelle des nœuds, leur distance aux \chs potentiels et/ou le nombre de voisins de ces derniers: c'est le cas du protocole \heed~\cite{YF04}, assez souvent utilisé, ou du protocole MPC~\cite{KTAA12}, plus récent et moins répandu, se basant sur les k-moyennes.
+Certains d'entre eux prennent en compte deux à trois paramètres, comme l'énergie résiduelle des nœuds, leur distance aux \chs potentiels et/ou le nombre de voisins de ces derniers: c'est le cas du protocole \heed~\cite{YF04}, assez souvent utilisé, ou du protocole MPC~\cite{KTAA12}, plus récent et moins répandu, se basant sur les k-moyennes.
 Un quatrième élément, la confiance portée au nœud, est même utilisé parfois pour réaliser une sélection plus sure des \CH~\cite{KMSL09}.
 
 Certains protocoles ont des buts plus précis, comme \ffuca~\cite{FL11,FMMMI12} qui repose sur l'exploitation de propriétés ultramétriques dans le réseau afin de créer une répartition « idéale » des nœuds dans les clusters en fonction de leur distance aux \CH; ou bien comme VSR~\cite{TV08}, créé à l'intention des \idx{MANET}, qui à l'aide d'une structure virtuelle détermine un routage proactif pour l'intérieur des clusters (ou les nœuds émettent au \ch en plusieurs sauts) et à la demande sur l'épine dorsale du réseau qui relie entre eux les \CH\,\footnote{Pour conserver la lisibilité du paragraphe, le développement des acronymes HEED, FFUCA, MPC et VSR n'est pas donné ici. Il est néanmoins disponible \hyperref[acronymes]{en fin d'ouvrage}.}.
@@ -251,6 +251,7 @@ Ce sont les attaques dites de \textit{\dds}.
 Un attaquant, par le biais d'un nœud compromis par exemple, peut ainsi chercher à détourner des flux de données au sein du réseau, à empêcher des paquets de parvenir à destination (en les supprimant), à maximiser le débit du nœud compromis au détriment de celui des autres nœuds, à saturer le canal de transmission pour empêcher les nœuds légitimes de l'utiliser, ou encore à pousser les autres capteurs à l'épuisement de leurs réserves en énergie, \etc.
 Pour rappel, l'objectif des travaux présentés dans cet ouvrage consiste à proposer, modéliser et tester une solution permettant de détecter, puis de réagir aux attaques de ce type, tout en assurant une consommation minimale en ressources pour les capteurs du réseau.
 
-Les problématiques de sécurité dans les \rcs et notamment les attaques de \dds ainsi que les contre-mesures appropriées sont développées plus en détail dans le chapitre qui suit.
+Bien que le thème de la \secu des \rcsfs, notamment sur le sujet des attaques de type « \dds » ainsi que des contre-mesures appropriées, ait tout à fait sa place dans ce chapitre, il s'agit d'un élément central pour les travaux de cet ouvrage, et il est développé avec beaucoup plus de précisions que les problématiques précédentes.
+Aussi a-t-il été choisi de lui attribuer un chapitre spécifique: les pages qui suivent abordent la question de la \secu avec bien plus de détails qu'ici.
 %2}}}
 %1}}}
