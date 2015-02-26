@@ -94,11 +94,11 @@ Les communications intra-clusters seront donc peu consommatrices en énergie.
 
 Pour pouvoir distinguer plus facilement le niveau de hiérarchie auquel nous nous plaçons, nous désignerons par la suite sous le terme \textit{$k$-cluster} ($0 \leq k \leq$~nombre de capteurs) un sous-ensemble obtenu après $k$ applications de l'algorithme de \idx{clusterisation}.
 En suivant cette convention, l'unique $0$-cluster est alors le réseau tout entier.
-Lorsque nous parlons simplement de \textit{clusters}, il faudra comprendre \textit{$1$-clusters}; autrement dit, des clusters issus d'une partition simple, sans degré supplémentaire de hiérarchie.
+Lorsque nous parlons simplement de \textit{clusters}, il faudra comprendre $1$-clusters; autrement dit, des clusters issus d'une partition simple, sans degré supplémentaire de hiérarchie.
 
-De même, on désignera par \textit{$k$-\ch} (ou bien par \textit{$k$-CH}) les \chs de chacun des $k$-clusters du réseau.
+De même, on désignera par $k$-\ch (ou bien par $k$-\CH) les \chs de chacun des $k$-clusters du réseau.
 Le rôle de $0$-cluster pourra alors être attribué à la \sdb.
-Chaque \textit{$k$-CH} reçoit des données (provenant soit de nœuds normaux si $k$ est le dernier degré de la hiérarchie constituée, soit de \textit{$k+1$-CH}), les agrège et les transmet au \textit{$k-1$-CH} auquel il est rattaché.
+Chaque $k$-\CH reçoit des données (provenant soit de nœuds normaux si $k$ est le dernier degré de la hiérarchie constituée, soit de ($k+1$)-\CH), les agrège et les transmet au ($k-1$)-\CH auquel il est rattaché.
 %2}}}
 
         \subsubsection{Un exemple: fonctionnement de l'algorithme \leach}\label{st:subsubsec:leach}
@@ -251,7 +251,8 @@ Ce sont les attaques dites de \textit{\dds}.
 Un attaquant, par le biais d'un nœud compromis par exemple, peut ainsi chercher à détourner des flux de données au sein du réseau, à empêcher des paquets de parvenir à destination (en les supprimant), à maximiser le débit du nœud compromis au détriment de celui des autres nœuds, à saturer le canal de transmission pour empêcher les nœuds légitimes de l'utiliser, ou encore à pousser les autres capteurs à l'épuisement de leurs réserves en énergie, \etc.
 Pour rappel, l'objectif des travaux présentés dans cet ouvrage consiste à proposer, modéliser et tester une solution permettant de détecter, puis de réagir aux attaques de ce type, tout en assurant une consommation minimale en ressources pour les capteurs du réseau.
 
+\paragraph{}
 Bien que le thème de la \secu des \rcsfs, notamment sur le sujet des attaques de type « \dds » ainsi que des contre-mesures appropriées, ait tout à fait sa place dans ce chapitre, il s'agit d'un élément central pour les travaux de cet ouvrage, et il est développé avec beaucoup plus de précisions que les problématiques précédentes.
-Aussi a-t-il été choisi de lui attribuer un chapitre spécifique: les pages qui suivent abordent la question de la \secu avec bien plus de détails qu'ici.
+Aussi a-t-il été choisi de lui attribuer un chapitre spécifique: les pages qui suivent abordent la question de la \secu avec bien plus de détails que jusqu'à présent.
 %2}}}
 %1}}}

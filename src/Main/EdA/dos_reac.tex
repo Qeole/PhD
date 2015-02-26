@@ -68,7 +68,7 @@ Si l'intervention d'un opérateur humain n'est pas forcément souhaitable dans l
     \subsubsection{Notion de \idx{confiance}}
 %{{{2
 Il existe, liée aux \IDS, une notion intéressante de « \idx{confiance} » qui peut être mise en place dans un \rc.
-Plutôt que de considérer les capteurs « tout blanc » ou « tout noir », beaucoup de systèmes de détection leur attribuent un score de « \reput », qui évolue dans le temps, et reflète la « \idx{confiance} » (en anglais: \textit{trust}) que l'on peut avoir en tel nœud.
+Plutôt que de considérer les capteurs comme « tout blanc » ou « tout noir », beaucoup de systèmes de détection leur attribuent un score de « \reput », qui évolue dans le temps, et reflète la « \idx{confiance} » (en anglais: \textit{trust}) que l'on peut avoir en tel nœud.
 
 Cette notion de \idx{confiance} intervient en plusieurs endroits.
 Elle fait parfois partie intégrante du système de détection.
@@ -92,4 +92,23 @@ Pour prendre ces décisions de manière efficace, il est nécessaire d'adapter e
 Ils se prêtent bien à la détection basée sur les signatures d'attaques, puisqu'il suffit de mettre à jour les scores lorsque des infractions sont constatées (ou de les remonter au bout d'une période donnée sans faute observée).
 Ils peuvent aussi être utilisés en conjonction avec des approches plus formelles utilisées notamment dans les modèles de détection par apprentissage~\cite{F-GRL07,MC10}: la logique floue, les réseaux bayésiens, ou même des éléments de la \idx{théorie des jeux} sont utilisés dans de nombreux systèmes pour établir des scores de \idx{confiance} efficaces.
 %2}}}
+%1}}}
+
+\subsection{Une vision d'ensemble}
+%{{{1
+La prévention et le couple détection / réaction sont les deux axes de lutte contre les attaques de \dds, et viennent clore la section.
+Ces mesures doivent être menées conjointement avec des mécanismes de protection des autres propriétés: l'\idx{authentification}, mais aussi l'\idx{intégrité} des messages échangés par exemple, doivent être assurées pour parer à plusieurs types d'attaques.
+Le \chapref{ea} se termine également ici: après avoir présenté ces différentes problématiques de sécurité, puis en particulier les attaques et les principales contre-mesures concernant le \dds, c'est un aperçu global de la \secu dans les \rcs qui a été établi.
+Il vient se joindre aux éléments du \chapref{st}, qui introduit le fonctionnement générique des capteurs et les problèmes qu'ils apportent.
+
+En résumé, ce sont les points suivants qui ont été présentés dans ces deux chapitres.
+\begin{itemize}
+    \item Les \rcsfs comportent des capteurs de petite taille, faibles en capacité de calcul, en mémoire et en batterie, qui communiquent entre eux par voie hertzienne.
+    \item Les limites en ressources de ces capteurs, par ailleurs utilisés dans de nombreuses applications, imposent dès le déploiement du réseau d'utiliser des algorithmes et des protocoles adaptés à leurs capacités.
+    \item La partition en clusters est une opération couramment utilisée pour faciliter et rendre plus efficace la gestion de ces réseaux.
+    \item Ces réseaux sont par ailleurs soumis à des problématiques de sureté, de résilience, et surtout de sécurité: confidentialité, authentification, intégrité, protection contre le rejeu et disponibilité des communications et des services en sont les principaux exemples.
+    \item Il existe de nombreuses solutions pour garantir ces propriétés, toutes avec leur avantages et leurs inconvénients. La sécurité, en informatique, est toujours un compromis entre les performances attendues et le cout supplémentaire impliqué par les mécanismes mis en place.
+\end{itemize}
+Appliquées aux \rcs, ces solutions se doivent naturellement d'être économes en ressources, et particulièrement en énergie nécessaire.
+Armés de cette vision d'ensemble des capteurs, des contraintes en ressources et des exigences soulevées par les questions de sécurité, nous sommes maintenant à même d'introduire de nouveaux mécanismes pour préserver encore davantage la batterie des capteurs.
 %1}}}
