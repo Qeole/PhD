@@ -97,7 +97,7 @@ La détection basée sur les anomalies\index{anomalie} regroupe trois sous-caté
     \item Enfin, la détection peut être basée sur des \textbf{méthodes d'apprentissage}, où des modèles sont créés et actualisés \via des outils formels comme les processus de \textsc{Markov}, les réseaux bayésiens, la logique floue, les algorithmes génétiques, les réseaux de neurones, ou encore les modèles d'intelligence en essaim~\cite{BMS13}.
 \end{itemize}
 
-        \paragraph{Règles et signatures des attaques\index{signature d'attaque}}
+\paragraph{Règles et signatures des attaques\index{signature d'attaque}}\label{ea:par:rules}
 Plutôt que d'attendre que des anomalies\index{anomalie} de fonctionnement, de performances, soient détectés, d'autres \IDS prennent les devants et mettent en place un système de surveillance du voisinage en établissant un ensemble de règles à ne pas transgresser.
 Ces règles sont construites à partir de la « signature » des attaques connues\index{signature d'attaque} \cad, pour une attaque donnée, à partir du comportement type adopté par un nœud qui tenterait de mener cette attaque~\cite{BMS13}.
 
@@ -153,11 +153,11 @@ Ce module se base sur un ensemble assez complexe de règles permettant de vérif
 Le système dans son ensemble est finalement proche des mécanismes que nous utilisons, sauf que tous les capteurs réalisent une activité de surveillance.
 
 Notre système en question repose sur les travaux de \textsc{Lai} et \textsc{Chen}, qui ont proposé en 2008 une solution proche mais dont seuls certains capteurs effectuent des opérations de surveillance~\cite{LC08}.
-Ces nœuds de contrôle, appelés \textit{gNodes}\index{gNode@\textit{gNode}} (pour \textit{guarding nodes}) par leurs auteurs, sont sélectionnés au sein du cluster pour effectuer les opérations de surveillance, permettant ainsi aux autres nœuds d'économiser d'autant en énergie.
-Lorsque le \ch reçoit plusieurs rapports de la part de \textit{gNodes} distincts (ceci afin de limiter les cas de faux positifs), le \CH en vient à considérer le capteur dénoncé comme étant corrompu et prend des mesures en conséquences.
+Ces nœuds de contrôle, appelés \textit{gNodes}\index{gNodes@\textit{gNodes}} (pour \textit{guarding nodes}) par leurs auteurs, sont sélectionnés au sein du cluster pour effectuer les opérations de surveillance, permettant ainsi aux autres nœuds d'économiser d'autant en énergie.
+Lorsque le \ch reçoit plusieurs rapports de la part de \textit{gNodes}\index{gNodes@\textit{gNodes}} distincts (ceci afin de limiter les cas de faux positifs), le \CH en vient à considérer le capteur dénoncé comme étant corrompu et prend des mesures en conséquences.
 Bien que les simulations menées fournissent de bons résultats en termes de préservation des ressources, l'étude ne se penche pas sur le processus utilisé pour la désignation des nœuds de contrôle, et ne traite pas de leur \idx{renouvellement} dans le temps, ce qui fait que les même capteurs supportent la tâche de surveillance sur de longues durées.
 
-C'est sur ces points que se concentrent la majeure partie des travaux présentés dans cette thèse: les \cns que nous utilisons ne sont qu'une version renommée des \textit{gNodes}, pour lesquels a été proposé dans un premier temps un \idx{renouvellement} périodique~\cite{GMT12}.
+C'est sur ces points que se concentrent la majeure partie des travaux présentés dans cette thèse: les \cns que nous utilisons ne sont qu'une version renommée des \textit{gNodes}\index{gNodes@\textit{gNodes}}, pour lesquels a été proposé dans un premier temps un \idx{renouvellement} périodique~\cite{GMT12}.
 Nous nous attachons, dans le choix des nœuds de surveillance, à répartir au mieux la consommation énergétique dans le cluster; d'autres études cherchent à désigner ces nœuds de manière à obtenir la meilleure couverture possible, et à maximiser les chances de détection des nœuds compromis à l'aide d'heuristiques pour le placement de l'\IDS~\cite{INK09}.
 
         \paragraph{Lutter contre les pertes de paquets}

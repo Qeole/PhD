@@ -2,22 +2,23 @@
 \section{Modélisation}
 \label{sa:sec:modelisation}
 
-Nous avons détaillé la solution proposée. À présent, nous allons présenter plusieurs modèles possibles permettant de représenter cette solution, et d'en évaluer les performances selon divers critères.
+Nous venons d'établir un processus de sélection aléatoire, périodiquement renouvelé, des \cns assurant la détection des nœuds compromis dans le réseau.
+Voici à présent plusieurs modèles possibles permettant de représenter cette solution, et d'en évaluer les performances selon divers critères.
 
 %===============================================================================
     \subsection{Chaines de \textsc{Markov}}
 
-        \subsubsection{Présentation et hypothèses de travail}
+        \subsubsection{Présentation et hypothèses du modèle}
 Nous avons modélisé notre solution sous la forme d'un processus de \textsc{Markov} à temps continu (\cmtc, pour chaine de \textsc{Markov} à temps continu).
 \nomenclature{CMTC}{Chaine de \textsc{Markov} à Temps Continu}
 
 Notre modèle représente un cluster d'un \rcsf qui vérifie les hypothèses suivantes:
 \begin{itemize}
     \item seul le cluster est modélisé;
-    \item le cluster contient exactement un \CH, $s$ capteurs chargés d'effectuer des mesures, et $m$ nœuds jouant le rôle de \cns\,\footnote{$s$ pour \textit{sensing node}, $m$ pour \textit{monitoring node}.};
+    \item le cluster contient exactement un \CH; $s$ capteurs chargés d'effectuer des mesures; et $m$ nœuds jouant le rôle de \cns\,\footnote{$s$ pour \textit{sensing node}, $m$ pour \textit{monitoring node}.};
     \item il existe exactement un nœud compromis parmi les $s$ capteurs;
     \item le capteur $i$ ($1 \leq i \leq s$) génère du trafic selon un processus de \textsc{Poisson} de paramètre $\lambda_i$;
-    \item le nœud compromis $c$ génère du trafic selon un processus de \textsc{Poisson} de paramètre $\lambda_i$ (tel que $\forall i\in[\![1;s]\!]\backslash\{c\},\; \lambda_c\gg\lambda_i$);
+    \item le nœud compromis $c$ génère du trafic selon un processus de \textsc{Poisson} de paramètre $\lambda_c$ (tel que $\forall i\in[\![1;s]\!]\backslash\{c\},\; \lambda_c\gg\lambda_i$);
     \item chaque \cn effectue une détection du trafic environnant de façon périodique, selon une distribution exponentielle de paramètre $\mu$; si un trafic anormal est observé, le \cn transmet un rapport d'anomalie au \CH;
     \item la topologie du cluster correspond à un graphe connexe: chaque nœud peut atteindre directement chacun des autres nœuds du cluster.
 \end{itemize}
@@ -64,7 +65,7 @@ L'équation est donnée en figure~\ref{sa:fig:eqtrans}
 \end{figure}
 
 \bigskip
-Formulé autrement: le \cn $k$, dans l'état $x_k$, reçoit périodiquement les messages de chaque capteur $i$ ($1\leq i\leq s, i\!\neq\!s$): ce sont des transmissions dites «~normales~», qui surviennent avec une fréquence moyenne $\lambda_i$.
+Formulé autrement: le \cn $k$, dans l'état $x_k$, reçoit périodiquement les messages de chaque capteur $i$ (pour tout $i$ tel que $1\leq i\leq s, i\!\neq\!k$): ce sont des transmissions dites «~normales~», qui surviennent avec une fréquence moyenne $\lambda_i$.
 Chaque message reçu laisse le \cn $k$ dans un état presque identique, à la seule différence que le compteur $x_{k_i}$ est incrémenté de $1$.
 La même chose se produit avec une fréquence $\lambda_c$ pour les messages envoyés par le nœud compromis, qui provoque à chaque fois l'incrémentation du compteur $x_{k_c}$.
 Enfin, la vérification du trafic enregistré par le \cn $k$ survient avec une fréquence $\mu$.
@@ -76,24 +77,25 @@ Dans les deux cas, tous les compteurs $x_{k_i}$ sont réinitialisés à $0$, afi
 
 La probabilité de détection du nœud compromis par le \cn $k$, notée $\Delta_k$, est la suivante:
 \[\Delta_k=\sum_{x_{k_1},\dots,x_{k_s}}^\infty\pi(x_{k_1},\dots,x_{k_s},x_{k_d}=1)\]
-où $\pi(x_{k_1},x_{k_2},\dots,x_{k_{s}},x_{k_d})$ représente la distribution stationnaire du macro-état $x_k\!=\!(x_{k_1},x_{k_2},\dots,x_{k_{s}},x_{k_d})$.
+où la valeur \quad$\pi(x_{k_1},x_{k_2},\dots,x_{k_{s}},x_{k_d})$\quad représente la distribution stationnaire du macro-état $x_k\!=\!(x_{k_1},x_{k_2},\dots,x_{k_{s}},x_{k_d})$.
 
         \subsubsection{Limites du modèle}
 Représenté sous la forme d'un processus de \textsc{Markov} à temps continu, le modèle suppose que la période séparant deux vérifications consécutives du trafic par un \cn est une variable aléatoire qui suit une distribution exponentielle.
 Il s'agit là d'une approximation grossière; en réalité, la vérification intervient à intervalles réguliers (de longueur fixe), voire même en continu.
 Il est donc nécessaire de choisir d'autres systèmes que les processus de \textsc{Markov} pour modéliser notre solution avec plus de précision.
-Nous allons nous tourner par exemple vers des processus non-markoviens, qui ne présentent pas cette contrainte.
+Nous allons ainsi nous orienter vers des processus non-markoviens, qui ne présentent pas cette contrainte.
 
 %===============================================================================
     \subsection{Réseaux de \textsc{Petri}}
-Une autre représentation possible de notre système passe ainsi par l'utilisation de processus stochastiques à évènements discrets (PSED, en anglais \textit{Discrete-Event Stochastic Processes}, ou encore \textit{Generalized Semi-\textsc{Markov} Processes} pour « processus semi-markoviens généralisés »).
+
+Une autre représentation possible système passe ainsi par l'utilisation de processus stochastiques à évènements discrets (PSED, en anglais \textit{Discrete-Event Stochastic Processes}, ou encore \textit{Generalized Semi-\textsc{Markov} Processes} pour « processus semi-markoviens généralisés »).
 Leur avantage principal sur les processus de \textsc{Markov} est leur capacité à représenter des événements dont la distribution n'est pas nécessairement exponentielle.
 Plus particulièrement, nous allons utiliser des réseaux de \textsc{Petri} stochastiques généralisés étendus.
 \nomenclature{PSED}{Processus Stochastiques à Événements Discrets}
 
-        \subsubsection{Présentation des réseaux de \textsc{Petri} stochastiques généralisés étendus}
+        \subsubsection{Réseaux de \textsc{Petri} stochastiques généralisés étendus}
 \label{sa:subsubsec:presRPSGe}
-Les réseaux de \textsc{Petri} stochastiques généralisés (\rpsg) sont une classe de réseaux de \textsc{Petri} destinée à modéliser des processus stochastiques.
+Les réseaux de \textsc{Petri} stochastiques généralisés (\rpsg) forment une classe de réseaux de \textsc{Petri} destinée à modéliser des processus stochastiques.
 Leur version étendue (\rpsge) permet de représenter des transitions dont les délais sont distribués de façon quelconque~\cite{ABCDF95}.
 Il s'agit d'un langage de haut niveau permettant de représenter des processus stochastiques à événements discrets, qui au contraire des processus markoviens «~classiques~» ne sont pas limités à la représentation d'événements à distribution exponentielle.
 \rpsge reprend, à quelques différences près, les définitions, la syntaxe et la représentation graphique des réseaux de \textsc{Petri} classiques, enrichis par des propriétés supplémentaires portant sur les transitions.
@@ -119,7 +121,7 @@ Les règles de franchissement des transitions sont légèrement différentes ave
 Par exemple, sur la partie droite de la figure~\ref{sa:fig:gspnex1}, la transition \textsf{T2} peut être franchie, car \textsf{P1} ne contient que deux jetons (on a bien $2<3$).
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.8\linewidth]{\chapterfig/GSPNex1.pdf}
+    \includegraphics[width=.8\linewidth]{\chapterfig/RPSGe_example.pdf}
     \caption{Exemples simples de \rpsge: transitions immédiates, transition minutée et arcs inhibiteurs}\label{sa:fig:gspnex1}
 \end{figure}
 
@@ -132,17 +134,17 @@ Nous allons procéder par étapes en modélisant:
 \end{enumerate}
 
             \paragraph{Modélisation des capteurs simples}
-Le comportement des capteurs basiques est simple: chaque capteur $i$ envoie des paquets selon un processus de \textsc{Poisson} de paramètre $\lambda_i$.
+Le comportement des capteurs basiques (qui poursuivent simplement leur mission de récolte de données) est simple: chaque capteur $i$ envoie des paquets selon un processus de \textsc{Poisson} de paramètre $\lambda_i$.
 Ce comportement est modélisé par le \rpsg présenté en figure~\ref{sa:fig:snodegspn}.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.5\linewidth]{\chapterfig/sNode_GSPN.pdf}
+    \includegraphics[width=.5\linewidth]{\chapterfig/RPSGe_sensing.pdf}
     \caption{Modèle \rpsg d'un nœud capteur simple}\label{sa:fig:snodegspn}
 \end{figure}
-Le nœud est symbolisé par les pointillés bleus.
+\noindent Le nœud est symbolisé par les pointillés bleus.
 Dans ce nœud $i$ se trouve une unique transition \textsf{TX}, sans place en entrée, autrement dit: toujours active.
 Elle est minutée, avec une distribution exponentielle de paramètre $\lambda_i$: chaque événement correspond à l'envoi de jetons sur tous ses arcs sortants.
-Ces arcs sont rattachés à la place \textsf{InBuff$_{i_j}$} de chacun des nœuds voisins du nœud $i$ (on trouve donc autant d'arcs sortants que de nœuds voisins).
+Ces arcs sont rattachés à la place \textsf{InBuff$_{i_j}$}\,\footnote{Pour \textit{in buffer}.} de chacun des nœuds voisins du nœud $i$ (on trouve donc autant d'arcs sortants que de nœuds voisins).
 L'intégralité de la fonction de mesure et d'envoi des données utiles du \rc peut être modélisée par plusieurs éléments représentés par ce «~modèle de nœud~».
 Un nœud compromis $c$ sera également représenté selon le même modèle, avec un paramètre $\lambda_c$ plus élevé que les autres $\lambda_i$.
 
@@ -151,21 +153,21 @@ Un \cn élu de façon statique joue uniquement son rôle de \cn: il monitore le 
 Le modèle \rpsge associé à ce type de nœud est présenté en figure~\ref{sa:fig:cnodegspn1}.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.6\linewidth]{\chapterfig/cNode_GSPN.pdf}
+    \includegraphics[width=.6\linewidth]{\chapterfig/RPSGe_cNode.pdf}
     \caption{Modèle \rpsge d'un \cn élu de manière \emph{statique}}\label{sa:fig:cnodegspn1}
 \end{figure}
-La place \textsf{In\_buff} représente le tampon contenant les messages reçu par le nœud.
-Un jeton arrivant dans cette place (depuis un nœud «~normal~») représente un message capté par le \cn\,\footnote{En réalité, il devrait y avoir une place \textsf{In\_buff$_i$} distincte pour les jetons provenant de chaque nœud voisin $i$ du \cn. Pour simplifier la représentation, tous les jetons arrivant au modèle du nœud sont rassemblés dans une place unique.}.
+La place \textsf{InBuff} représente le tampon contenant les messages reçu par le nœud.
+Un jeton arrivant dans cette place (depuis un nœud «~normal~») représente un message capté par le \cn\,\footnote{En réalité, il devrait y avoir une place \textsf{InBuff$_i$} distincte pour les jetons provenant de chaque nœud voisin $i$ du \cn. Pour simplifier la représentation, tous les jetons arrivant au modèle du nœud sont rassemblés dans une place unique.}.
 La vérification du respect de la valeur seuil $K$ pour le trafic est réalisée à intervalles de temps constants.
-Les transitions \textsf{check\_YES} et \textsf{check\_NO} sont «~activées~» au bout de chaque période, et servent à assurer la vérification.
-S'il y a au moins $K$ jetons dans la place, la transition \textsf{check\_YES} est franchie.
+Les transitions \textsf{vérif\_OUI} et \textsf{vérif\_NON} sont «~activées~» au bout de chaque période, et servent à assurer la vérification.
+S'il y a au moins $K$ jetons dans la place, la transition \textsf{vérif\_OUI} est franchie.
 Un jeton est alors placé dans la place \textsf{det}, et fait en quelque sorte office de drapeau levé pour indiquer la détection d'un trafic anormal.
 L'arrivée d'un jeton dans la place \textsf{det} déclenche l'envoi d'un message d'alerte au \ch.
-Si, en revanche, il y a moins de $K$ jetons dans la place \textsf{In\_buff}, aucun jeton n'est produit dans la place \textsf{det}.
-Dans un cas comme dans l'autre, la place \textsf{emptying~buff} reçoit un jeton (soit par \textsf{check\_YES}, soit pat \textsf{check\_NO}).
-Un jeton dans cette place permet de vider le tampon \textsf{In\_buff}: la transition \textsf{e-on} consomme le jeton de la place \textsf{emptying~buff}, et un jeton de \textsf{In\_buff}.
-Un nouveau jeton est créé dans \textsf{emptying~buff}.
-Le processus est répété jusqu'à ce que la place \textsf{In\_buff} soit vide; dans ce cas, la transition \textsf{e-end} est franchie et ne produit rien, mais met fin à la consommation des jetons.
+Si, en revanche, il y a moins de $K$ jetons dans la place \textsf{InBuff}, aucun jeton n'est produit dans la place \textsf{det}.
+Dans un cas comme dans l'autre, la place \textsf{vider~tampon} reçoit un jeton (soit par \textsf{vérif\_OUI}, soit par \textsf{vérif\_NON}).
+Un jeton dans cette place permet de vider le tampon \textsf{InBuff}: la transition \textsf{e-déb} consomme le jeton de la place \textsf{vider~tampon}, et un jeton de \textsf{InBuff}.
+Un nouveau jeton est créé dans \textsf{vider~tampon}.
+Le processus est répété jusqu'à ce que la place \textsf{InBuff} soit vide; dans ce cas, la transition \textsf{e-fin} est franchie et ne produit rien, mais met fin à la consommation des jetons.
 Les étapes permettant de vider le tampon ne consomment pas de temps, et permettent de repartir avec un compteur neutre pour la période qui mènera à la vérifiation suivante.
 
             \paragraph{Modélisation des \cns élus de façon statique}
@@ -195,7 +197,7 @@ La représentation du cluster est donnée en figure~\ref{sa:fig:petricluster}.
     \includegraphics[width=\linewidth]{\chapterfig/PetriNet_DoS_9x9_fixedGnodes.pdf}
     \caption{Modèle \rpsge d'un cluster (topologie: grille $3\times3$) comprenant un nœud compromis et deux \cns statiques}\label{sa:fig:petricluster}
 \end{figure}
-Également dans l'optique de simplifier la représentation graphique, les transitions \textsf{e-on} et \textsf{e-end}, ainsi que la place \textsf{emptying buff}, ont été remplacées par une boite blanche associée à la fonction de vidage de la place \textsf{In\_buff} des nœuds.
+Également dans l'optique de simplifier la représentation graphique, les transitions \textsf{e-déb} et \textsf{e-fin}, ainsi que la place \textsf{vider~tampon}, ont été remplacées par une boite blanche associée à la fonction de vidage de la place \textsf{InBuff} des nœuds.
 
             \paragraph{\cns élus de façon dynamique}
 L'élection dynamique des \cns vient compliquer un peu la modélisation de notre cluster.
