@@ -45,9 +45,9 @@
      inkscape:window-height="849"
      id="namedview251"
      showgrid="false"
-     inkscape:zoom="1.103125"
-     inkscape:cx="224.06165"
-     inkscape:cy="991.6592"
+     inkscape:zoom="1.0481615"
+     inkscape:cx="-54.716069"
+     inkscape:cy="957.50097"
      inkscape:window-x="-2"
      inkscape:window-y="-3"
      inkscape:window-maximized="1"
@@ -91,7 +91,7 @@
      sodipodi:cy="-756"
      sodipodi:rx="33.5952"
      sodipodi:ry="18"
-     style="fill:none;stroke:#0000ff"
+     style="fill:none;stroke:#0065bd;stroke-opacity:1"
      transform="translate(0.17467762,936.5)" />
   <text
      x="59.712978"
@@ -169,7 +169,7 @@
      sodipodi:cy="-599"
      sodipodi:rx="50.41"
      sodipodi:ry="26.7407"
-     style="fill:none;stroke:#0000ff"
+     style="fill:none;stroke:#0065bd;stroke-opacity:1"
      transform="translate(0.17467762,936.5)" />
   <text
      x="337.71265"
@@ -230,7 +230,7 @@
      sodipodi:cy="-53"
      sodipodi:rx="46.838699"
      sodipodi:ry="26.7407"
-     style="fill:none;stroke:#0000ff"
+     style="fill:none;stroke:#0065bd;stroke-opacity:1"
      transform="translate(0.17467762,936.5)" />
   <text
      x="398.71265"
@@ -240,6 +240,7 @@
      style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-anchor:middle;font-family:Linux Biolinum O;-inkscape-font-specification:Linux Biolinum O"><tspan
    style="font-style:italic"
    id="tspan3564">vNode</tspan>
+
  et</text>
   <text
      x="398.71265"
@@ -284,10 +285,11 @@
    id="tspan3556">vNodes</tspan>
 </text>
   <path
-     d="M 107.83368,462.615 C 76.384078,448.849 36.705978,425.553 17.712978,390.5 c -22.4439704,-41.421 -24.0561104,-65.494 0,-106 3.8217,-6.435 76.9004,-45.165 131.042702,-73.242"
+     d="M 107.83368,462.615 C 76.384078,448.849 36.705978,425.553 17.712978,390.5 c -22.4439704,-41.421 -20.8080754,-71.08088 0,-106 C 38.521053,249.58088 135.8284,216.43777 148.75568,211.258"
      id="path111"
      inkscape:connector-curvature="0"
-     style="fill:none;stroke:#000000" />
+     style="fill:none;stroke:#000000"
+     sodipodi:nodetypes="cszc" />
   <polygon
      points="150.499,-722.294 147.281,-728.51 147.281,-728.51 157.771,-730 "
      id="polygon113"
@@ -295,7 +297,7 @@
      transform="translate(0.17467762,936.5)" />
   <text
      x="55.13649"
-     y="309.29065"
+     y="315.39658"
      font-size="14.00"
      id="text115"
      style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-anchor:middle;font-family:Linux Biolinum O;-inkscape-font-specification:Linux Biolinum O">non sélectionné</text>
@@ -318,6 +320,7 @@
      style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-anchor:middle;font-family:Linux Biolinum O;-inkscape-font-specification:Linux Biolinum O">ce <tspan
    style="font-style:italic"
    id="tspan3558">cNode</tspan>
+
  à</text>
   <text
      x="152.71268"
@@ -360,6 +363,7 @@
      style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-anchor:middle;font-family:Linux Biolinum O;-inkscape-font-specification:Linux Biolinum O">des <tspan
    style="font-style:italic"
    id="tspan3566">vNodes</tspan>
+
 ,</text>
   <text
      x="190.71268"
@@ -380,6 +384,7 @@
      style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-anchor:middle;font-family:Linux Biolinum O;-inkscape-font-specification:Linux Biolinum O"><tspan
    style="font-style:italic"
    id="tspan3560">vNode</tspan>
+
  ;</text>
   <text
      x="298.71265"
@@ -475,6 +480,7 @@
      style="font-size:14px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-anchor:middle;font-family:Linux Biolinum O;-inkscape-font-specification:Linux Biolinum O">un <tspan
    style="font-style:italic"
    id="tspan3554">cNode</tspan>
+
  ?</text>
   <path
      d="m 187.15668,222.913 c -3.5,9.214 -6.612,19.076 -8.444,28.587 -1.902,9.878 -1.967,20.457 -1.031,30.679"
