@@ -14,7 +14,7 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="RSPGe_network3x3_static.svg">
+   sodipodi:docname="RPSGe_network3x3_static.svg">
   <defs
      id="defs4">
     <marker
@@ -181,9 +181,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="281.73813"
-     inkscape:cy="481.33525"
+     inkscape:zoom="2"
+     inkscape:cx="374.02234"
+     inkscape:cy="523.87329"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -203,7 +203,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -282,7 +282,7 @@
          y="369.41687"
          style="font-size:10px;fill:#ff0000">TX1</tspan></text>
     <path
-       style="fill:none;stroke:#0000ff;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:6, 6;stroke-dashoffset:0"
+       style="fill:none;stroke:#0065bd;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:6, 6;stroke-dashoffset:0"
        d="m 191.36221,476.06499 95.2759,0 c 6.46608,0 8.98339,6.87099 11.67163,11.67162 5.83621,10.42227 8.36287,34.84577 8.36287,34.84577 0,0 -2.52666,24.42348 -8.36287,34.84574 -2.68824,4.80063 -5.20555,11.67164 -11.67163,11.67164 l -95.2759,0 c -6.46607,0 -8.98337,-6.87103 -11.67162,-11.67164 -5.83627,-10.42226 -8.3632,-34.84574 -8.3632,-34.84574 0,0 2.52691,-24.4235 8.3632,-34.84577 2.68825,-4.80061 5.20555,-11.67162 11.67162,-11.67162 z"
        id="rect2985"
        inkscape:connector-curvature="0"
@@ -358,7 +358,7 @@
        transform="translate(-34.391305,17.275442)" />
     <text
        xml:space="preserve"
-       style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:3.93000007px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Biolinum O;-inkscape-font-specification:Linux Biolinum O"
+       style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:3.93000007000000018px;text-anchor:start;fill:#0065bd;fill-opacity:1;stroke:none;font-family:Linux Biolinum O;-inkscape-font-specification:Linux Biolinum O"
        x="235.63715"
        y="564.71265"
        id="text3926"
@@ -367,7 +367,7 @@
          id="tspan3928"
          x="235.63715"
          y="564.71265"
-         style="font-size:12px;font-style:italic;fill:#0000ff;fill-opacity:1">cNode</tspan></text>
+         style="font-size:12px;font-style:italic;fill:#0065bd;fill-opacity:1">cNode</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend)"
        d="m 218.58394,504.83411 -12.73312,-1e-5"
@@ -586,7 +586,7 @@
        inkscape:connection-start="#rect3828-5"
        inkscape:connection-start-point="d4" />
     <path
-       style="fill:none;stroke:#0000ff;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:6, 6;stroke-dashoffset:0"
+       style="fill:none;stroke:#0065bd;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:6, 6;stroke-dashoffset:0"
        d="m 578.13779,337.42274 -95.2759,0 c -6.46608,0 -8.98339,6.87099 -11.67163,11.67162 -5.83621,10.42227 -8.36287,34.84577 -8.36287,34.84577 0,0 2.52666,24.42348 8.36287,34.84574 2.68824,4.80063 5.20555,11.67164 11.67163,11.67164 l 95.2759,0 c 6.46607,0 8.98337,-6.87103 11.67162,-11.67164 5.83627,-10.42226 8.3632,-34.84574 8.3632,-34.84574 0,0 -2.52691,-24.4235 -8.3632,-34.84577 -2.68825,-4.80061 -5.20555,-11.67162 -11.67162,-11.67162 z"
        id="rect2985-8"
        inkscape:connector-curvature="0"
@@ -664,7 +664,7 @@
        transform="matrix(-1,0,0,1,803.89131,-121.3668)" />
     <text
        xml:space="preserve"
-       style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:3.93000007px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Biolinum O;-inkscape-font-specification:Linux Biolinum O"
+       style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:3.93000007000000018px;text-anchor:start;fill:#0065bd;fill-opacity:1;stroke:none;font-family:Linux Biolinum O;-inkscape-font-specification:Linux Biolinum O"
        x="477.87939"
        y="353.52786"
        id="text3926-3"
@@ -673,7 +673,7 @@
          id="tspan3928-8"
          x="477.87939"
          y="353.52786"
-         style="font-size:12px;font-style:italic;fill:#0000ff;fill-opacity:1">cNode</tspan></text>
+         style="font-size:12px;font-style:italic;fill:#0065bd;fill-opacity:1">cNode</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Mend)"
        d="m 550.91602,366.19186 12.73316,-1e-5"
@@ -983,7 +983,7 @@
            height="36.25"
            x="206"
            y="382.61218" /></flowRegion><flowPara
-         id="flowPara11560"></flowPara></flowRoot>    <path
+         id="flowPara11560" /></flowRoot>    <path
        style="fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:6, 6;stroke-dashoffset:0"
        d="m 337.11221,337.42275 95.2759,0 c 6.46608,0 8.98339,6.87099 11.67163,11.67162 5.83621,10.42227 8.36287,34.84577 8.36287,34.84577 0,0 -2.52666,24.42348 -8.36287,34.84574 -2.68824,4.80063 -5.20555,11.67164 -11.67163,11.67164 l -95.2759,0 c -6.46607,0 -8.98337,-6.87103 -11.67162,-11.67164 -5.83627,-10.42226 -8.3632,-34.84574 -8.3632,-34.84574 0,0 2.52691,-24.4235 8.3632,-34.84577 2.68825,-4.80061 5.20555,-11.67162 11.67162,-11.67162 z"
        id="rect2985-84"

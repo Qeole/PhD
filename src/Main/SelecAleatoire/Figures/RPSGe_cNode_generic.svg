@@ -14,7 +14,7 @@
    id="svg3135"
    version="1.1"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="RPSGe_cNode_static.svg">
+   sodipodi:docname="RPSGe_cNode_generic.svg">
   <defs
      id="defs3137">
     <marker
@@ -71,9 +71,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.531875"
-     inkscape:cx="286.51709"
-     inkscape:cy="236.57442"
+     inkscape:zoom="2.058457"
+     inkscape:cx="354.35062"
+     inkscape:cy="223.61757"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -84,7 +84,7 @@
      inkscape:window-maximized="1"
      inkscape:snap-bbox="true"
      inkscape:bbox-paths="true"
-     inkscape:snap-global="false"
+     inkscape:snap-global="true"
      inkscape:snap-bbox-edge-midpoints="true"
      inkscape:object-paths="true"
      inkscape:snap-intersection-paths="true"
@@ -94,7 +94,8 @@
      inkscape:object-nodes="true"
      inkscape:snap-smooth-nodes="true"
      inkscape:snap-object-midpoints="true"
-     inkscape:snap-center="true" />
+     inkscape:snap-center="true"
+     inkscape:snap-nodes="false" />
   <metadata
      id="metadata3140">
     <rdf:RDF>
@@ -103,7 +104,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -141,7 +142,7 @@
        x="256.57895"
        y="891.39728" />
     <path
-       style="fill:none;stroke:#0000ff;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-opacity:1;stroke-dasharray:12, 12;stroke-dashoffset:0"
+       style="fill:none;stroke:#0065bd;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-opacity:1;stroke-dasharray:12, 12;stroke-dashoffset:0"
        d="m 157.01755,671.66043 279.04934,0 c 24.29825,0 30.95127,19.08894 43.85965,43.85965 12.90838,24.77071 18.42105,68.41021 18.42105,103.94735 0,35.53714 -5.51267,79.17665 -18.42105,103.94736 -12.90838,24.77071 -19.5614,43.85965 -43.85965,43.85965 l -279.04934,0 c -24.29825,0 -31.06429,-19.05841 -43.85965,-43.85965 -12.79536,-24.80124 -17.54386,-67.90023 -17.543859,-103.94736 0,-36.04713 4.748499,-79.14611 17.543859,-103.94735 12.79536,-24.80124 19.5614,-43.85965 43.85965,-43.85965 z"
        id="rect3147"
        inkscape:connector-curvature="0"
@@ -154,7 +155,7 @@
        sodipodi:cy="314.0351"
        sodipodi:rx="15.789474"
        sodipodi:ry="15.789474"
-       d="m 168.42105,314.0351 a 15.789474,15.789474 0 1 1 -31.57895,0 15.789474,15.789474 0 1 1 31.57895,0 z"
+       d="m 168.42105,314.0351 c 0,8.72028 -7.06919,15.78947 -15.78947,15.78947 -8.72029,0 -15.78948,-7.06919 -15.78948,-15.78947 0,-8.72029 7.06919,-15.78948 15.78948,-15.78948 8.72028,0 15.78947,7.06919 15.78947,15.78948 z"
        transform="translate(0,534.37974)" />
     <path
        transform="translate(0,412.44987)"
@@ -165,7 +166,7 @@
        sodipodi:cy="314.0351"
        sodipodi:rx="15.789474"
        sodipodi:ry="15.789474"
-       d="m 168.42105,314.0351 a 15.789474,15.789474 0 1 1 -31.57895,0 15.789474,15.789474 0 1 1 31.57895,0 z" />
+       d="m 168.42105,314.0351 c 0,8.72028 -7.06919,15.78947 -15.78947,15.78947 -8.72029,0 -15.78948,-7.06919 -15.78948,-15.78947 0,-8.72029 7.06919,-15.78948 15.78948,-15.78948 8.72028,0 15.78947,7.06919 15.78947,15.78948 z" />
     <path
        transform="translate(217.54386,473.41477)"
        sodipodi:type="arc"
@@ -175,7 +176,7 @@
        sodipodi:cy="314.0351"
        sodipodi:rx="15.789474"
        sodipodi:ry="15.789474"
-       d="m 168.42105,314.0351 a 15.789474,15.789474 0 1 1 -31.57895,0 15.789474,15.789474 0 1 1 31.57895,0 z" />
+       d="m 168.42105,314.0351 c 0,8.72028 -7.06919,15.78947 -15.78947,15.78947 -8.72029,0 -15.78948,-7.06919 -15.78948,-15.78947 0,-8.72029 7.06919,-15.78948 15.78948,-15.78948 8.72028,0 15.78947,7.06919 15.78947,15.78948 z" />
     <path
        sodipodi:type="arc"
        style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
@@ -184,18 +185,18 @@
        sodipodi:cy="314.0351"
        sodipodi:rx="15.789474"
        sodipodi:ry="15.789474"
-       d="m 168.42105,314.0351 a 15.789474,15.789474 0 1 1 -31.57895,0 15.789474,15.789474 0 1 1 31.57895,0 z"
+       d="m 168.42105,314.0351 c 0,8.72028 -7.06919,15.78947 -15.78947,15.78947 -8.72029,0 -15.78948,-7.06919 -15.78948,-15.78947 0,-8.72029 7.06919,-15.78948 15.78948,-15.78948 8.72028,0 15.78947,7.06919 15.78947,15.78948 z"
        transform="translate(217.54386,412.44987)" />
     <path
-       inkscape:connection-end-point="d4"
-       inkscape:connection-end="#path5258-4"
        inkscape:connection-start-point="d4"
        inkscape:connection-start="#path3955-83"
        inkscape:connector-curvature="0"
        inkscape:connector-type="polyline"
        id="path4094"
        d="m 385.96491,726.48496 35.60501,0"
-       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;display:inline"
+       inkscape:connection-end="#path5258-4"
+       inkscape:connection-end-point="d4" />
     <text
        xml:space="preserve"
        style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:3.93000007px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Biolinum O;-inkscape-font-specification:Linux Biolinum O"
@@ -223,13 +224,13 @@
     <text
        xml:space="preserve"
        style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:3.93000007px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Biolinum O;-inkscape-font-specification:Linux Biolinum O"
-       x="351.43732"
-       y="828.50763"
+       x="358.23853"
+       y="834.33722"
        id="text4004"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="351.43732"
-         y="828.50763"
+         x="358.23853"
+         y="834.33722"
          id="tspan4008">InBuff</tspan></text>
     <text
        xml:space="preserve"
@@ -444,7 +445,7 @@
        sodipodi:cy="344.31244"
        sodipodi:rx="4.3418837"
        sodipodi:ry="4.3418837"
-       d="m 329.05276,344.31244 a 4.3418837,4.3418837 0 1 1 -8.68377,0 4.3418837,4.3418837 0 1 1 8.68377,0 z"
+       d="m 329.05276,344.31244 c 0,2.39796 -1.94393,4.34188 -4.34188,4.34188 -2.39796,0 -4.34189,-1.94392 -4.34189,-4.34188 0,-2.39796 1.94393,-4.34188 4.34189,-4.34188 2.39795,0 4.34188,1.94392 4.34188,4.34188 z"
        transform="translate(101.20093,382.17252)" />
     <rect
        style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:0;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
@@ -551,7 +552,7 @@
        y="736.41064" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
-       d="M 527.43695,208.47937 385.7461,232.45316"
+       d="m 527.43695,208.479 -70.84542,0 -70.84543,23.97416"
        id="path5724"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="0"
@@ -559,10 +560,11 @@
        inkscape:connection-start-point="d4"
        inkscape:connection-end="#path3955-87"
        inkscape:connection-end-point="d4"
-       transform="translate(0,552.36218)" />
+       transform="translate(0,552.36218)"
+       sodipodi:nodetypes="ccc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
-       d="M 527.43695,221.78358 385.9096,233.7566"
+       d="m 527.43695,221.784 -70.76368,0 -70.76367,11.9726"
        id="path5726"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="0"
@@ -570,7 +572,8 @@
        inkscape:connection-start-point="d4"
        inkscape:connection-end="#path3955-87"
        inkscape:connection-end-point="d4"
-       transform="translate(0,552.36218)" />
+       transform="translate(0,552.36218)"
+       sodipodi:nodetypes="ccc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
        d="m 527.43695,235.08766 -141.47204,2e-5"
@@ -584,7 +587,7 @@
        transform="translate(0,552.36218)" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
-       d="M 527.43695,248.39187 385.9096,236.41878"
+       d="m 527.43695,248.392 -70.76368,0 -70.76367,-11.97322"
        id="path5730"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="0"
@@ -592,10 +595,11 @@
        inkscape:connection-start-point="d4"
        inkscape:connection-end="#path3955-87"
        inkscape:connection-end-point="d4"
-       transform="translate(0,552.36218)" />
+       transform="translate(0,552.36218)"
+       sodipodi:nodetypes="ccc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
-       d="M 527.43695,261.69602 385.7461,237.72221"
+       d="m 527.43695,261.696 -70.84542,0 -70.84543,-23.97379"
        id="path5732"
        inkscape:connector-type="polyline"
        inkscape:connector-curvature="0"
@@ -603,7 +607,8 @@
        inkscape:connection-start-point="d4"
        inkscape:connection-end="#path3955-87"
        inkscape:connection-end-point="d4"
-       transform="translate(0,552.36218)" />
+       transform="translate(0,552.36218)"
+       sodipodi:nodetypes="ccc" />
     <path
        style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow2Lend)"
        d="m 440.90282,173.42289 86.53413,-12.55341"
