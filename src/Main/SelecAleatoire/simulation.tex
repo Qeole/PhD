@@ -45,7 +45,7 @@ La \tabref{sa:table:parametres1} indique les valeurs (ou les fourchettes de vale
 Pour cette simulation les nœuds sont élus de façon dynamique sur dix périodes consécutives.
 Nous avons supposé que la génération de trafic suit une loi de \textsc{Poisson} (la génération est aléatoire, mais l'on connait sa valeur moyenne).
 On nomme $\lambda$ le paramètre de cette loi appliquée au nœud compromis ($\lambda$ est donc le nombre moyen de messages envoyé par seconde par le nœud compromis).
-La figure~\ref{sa:fig:graphe1} présente le taux de détection du nœud compromis pour différentes quantités de \cns dans le réseau, par période.
+La figure~\ref{sa:fig:detec-nbcn} présente le taux de détection du nœud compromis pour différentes quantités de \cns dans le réseau, par période.
 Au cours de la seconde période de la simulation impliquant dix \cns, nous avons constaté qu'aucun \cn n'avait détecté le nœud compromis.
 Les \cns n'étaient donc pas répartis efficacement dans le cluster.
 Lorsque leur nombre monte à quinze, il y a, en moyenne sur les instances, trois \cns qui détectent les nœuds compromis.
@@ -55,17 +55,17 @@ En revanche, on peut très bien descendre à dix \cns si l'on envisage un proces
 On note par ailleurs que jusqu'à quarante pour cent (soit quatre nœuds sur dix) ont pu détecter simultanément le nœud compromis sur les périodes~7,~8~et~9.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=7cm]{\chapterfig/graphe1.pdf}
-    \caption{Taux de détection en fonction du groupe}\label{sa:fig:graphe1}
+    \includegraphics{\chapterfig/plot_detection-nbCNodes.pdf}
+    \caption{Taux de détection pour différents nombres de \cns}\label{sa:fig:detec-nbcn}
 \end{figure}
 
 La valeur de $\lambda$ a elle aussi un rôle à jouer dans la détection: plus le nœud compromis émet, plus il est probable que les \cns mesureront efficacement un dépassement par rapport au seuil théorique d'un nœud honnête.
 Mais ici encore, le renouvellement rapide des \cns apporte une meilleure détection, puisque statistiquement, davantage de voisins proches du nœud compromis se retrouveront \cn à un moment ou l'autre au cours de la simulation.
-La courbe présentée en figure~\ref{sa:fig:graphe4} illustre cet état de fait.
+La courbe présentée en figure~\ref{sa:fig:detection-txRate} illustre cet état de fait.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=7cm]{\chapterfig/graphe4.pdf}
-    \caption{Taux de détection en fonction de $\lambda$}\label{sa:fig:graphe4}
+    \includegraphics{\chapterfig/plot_detection-txRate.pdf}
+    \caption{Taux de détection en fonction de $\lambda$}\label{sa:fig:detection-txRate}
 \end{figure}
 
 %===============================================================================
@@ -90,7 +90,7 @@ Par «~consommation en énergie~», on entend ici la consommation moyenne en fin
 Pour rappel, les nœuds normaux (non \cns) ne reçoivent pas les messages de leurs voisins et donc ne consomment pas d'énergie en dehors de leur période d'émission (voir le fonctionnement détaillé de \leach au \chapref{st}, \sssref{st:subsubsec:leach}).
 \begin{figure}[H]
     \centering
-    \includegraphics[width=7cm]{\chapterfig/mean.pdf}
+    \includegraphics{\chapterfig/plot_mean.pdf}
     \caption{Consommation moyenne en énergie}\label{sa:fig:conso-moyenne}
 \end{figure}
 La consommation moyenne en fin de simulation est identique pour les deux méthodes: le résultat était attendu, puisque les deux méthodes mettent en œuvre, à tout instant $t$, autant de nœuds normaux et de \cns l'une que l'autre.
@@ -100,7 +100,7 @@ Elles sont manifestes sur l'histogramme présenté en figure~\ref{sa:fig:conso-e
 Ici encore, \ch et nœud compromis ont été laissés de côté.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=7cm]{\chapterfig/stddev.pdf}
+    \includegraphics{\chapterfig/plot_stddev.pdf}
     \caption{Écart type à la moyenne de la consommation en énergie}\label{sa:fig:conso-ecart-type}
 \end{figure}
 Nous observons des écarts types bien plus forts pour la méthode statique: seuls les \cns initiaux (non soumis à réélection par la suite) ont connu une consommation importante --- ils sont restés sur écoute, ont analysé le trafic, éventuellement averti le \ch d'une attaque.
@@ -110,7 +110,7 @@ Nous observons ainsi une meilleure répartition de la charge.
 L'histogramme de la figure~\ref{sa:fig:premier-deces} présente l'instant de décès du premier nœud à épuiser sa batterie au sein du cluster simulé.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=7cm]{\chapterfig/fstdth.pdf}
+    \includegraphics{\chapterfig/plot_fstdth.pdf}
     \caption{Instant de premier décès dans le réseau}\label{sa:fig:premier-deces}
 \end{figure}
 
@@ -161,7 +161,7 @@ Ces données, et les autres paramètres utilisés, sont présentés en \tabref{s
 La courbe de la figure~\ref{sa:fig:capteurs-en-vie} montre l'évolution dans le temps du nombre de capteurs en vie.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=7cm]{\chapterfig/plot_nogrid.pdf}
+    \includegraphics{\chapterfig/plot_lifetime.pdf}
     \caption{Nombre de capteurs toujours en vie}\label{sa:fig:capteurs-en-vie}
 \end{figure}
 Comme précédemment, les capteurs normaux consomment très peu par rapport aux \cns, qui vident leur batterie bien plus rapidement.
@@ -177,7 +177,7 @@ Les résultats sont exposés par la courbe donnée en figure~\ref{sa:fig:detecti
 Le nombre de \cns ayant détecté l'attaque est indiqué sur chaque période de soixante secondes.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=7cm]{\chapterfig/plot_rate_nogrid.pdf}
+    \includegraphics{\chapterfig/plot_dos-over-time.pdf}
     \caption{Détection des attaques de \dds}\label{sa:fig:detection-dos}
 \end{figure}
 Après la quatrième minute de simulation, tous les \cns élus par la méthode statique ont stoppé leur activité par manque d'énergie, et les attaques ne peuvent plus être détéctées.

@@ -1,0 +1,13 @@
+set term pdfcairo enhanced size 4.77,2.95 font "Linux Libertine O,14" # \textwidth, \textwidth * nb_or
+set out "./plot_stddev.pdf"
+set key inside top left
+set grid
+set xrange [0:35]
+set xlabel 'Nombre de {/:Italic cNodes} '
+set ylabel 'Écart-type de l’énergie consommée à t = 500 s (J)'
+
+set style fill solid border -1
+set boxwidth 2
+
+plot 'plot_stddev_sta_x_501_536.dat' title 'méthode statique'  with boxes lt -1 lc rgb "red",\
+     'plot_stddev_dyn_x_501_536.dat' title 'méthode dynamique' with boxes lt -1 lc rgb "#0065bd"

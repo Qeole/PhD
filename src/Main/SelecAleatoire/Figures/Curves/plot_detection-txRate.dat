@@ -1,0 +1,11 @@
+#==========
+#Comparaison de taux detection entre les Deux méthodes (stat, Dyn) (en donction de lambda, pour 10 noeuds compromis)
+#packet size 800,  rate_ varie entre 10 et 35
+#===============================================================
+#Stat				dyn		Lambda
+0				0		1.5625 
+2				2,25		2.34375
+20.75				27		3.125
+51.75				69,25		3.90625 
+70				94,25		4.6875
+70				92,5		5.46875

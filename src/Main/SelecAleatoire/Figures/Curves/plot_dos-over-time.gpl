@@ -1,0 +1,11 @@
+set term pdfcairo enhanced size 4.77,2.95 font "Linux Libertine O,14" # \textwidth, \textwidth * nb_or
+set out "./plot_dos-over-time.pdf"
+set key inside top right
+set nogrid
+set xrange [0:2700]
+set yrange [0:8.5]
+set xlabel 'Temps (secondes)'
+set ylabel 'Nombre moyen de {/:Italic cNodes } détectant l’attaque'
+
+plot 'plot_dos-over-time_sta_10_3601_10.rate2'      title 'méthode statique'  with steps lc 7,\
+     'plot_dos-over-time_dyn_10_3601_10.rate.time4' title 'méthode dynamique' with steps lc rgb "#0065bd"

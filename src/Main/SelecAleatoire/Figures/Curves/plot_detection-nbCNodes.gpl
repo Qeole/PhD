@@ -1,0 +1,14 @@
+set term pdfcairo enhanced size 4.77,2.95 font "Linux Libertine O,14" # \textwidth, \textwidth * nb_or
+set out "./plot_detection-nbCNodes.pdf"
+set key inside top right
+set nogrid
+set pointsize .8
+set xrange [1:10]
+set yrange [0:100]
+set xlabel 'Période'
+set ylabel 'Pourcentage de {/:Italic cNodes } détectant l’attaque'
+
+plot 'plot_detection-nbCNodes.dat' using 1:2 title '10 {/:Italic cNodes}' with linespoints ls 1,\
+     'plot_detection-nbCNodes.dat' using 1:3 title '15 {/:Italic cNodes}' with linespoints ls 2,\
+     'plot_detection-nbCNodes.dat' using 1:4 title '20 {/:Italic cNodes}' with linespoints ls 3 lc rgb "#0065bd",\
+     'plot_detection-nbCNodes.dat' using 1:5 title '25 {/:Italic cNodes}' with linespoints ls 4

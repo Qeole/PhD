@@ -1,0 +1,12 @@
+set term pdfcairo enhanced size 4.77,2.95 font "Linux Libertine O,14" # \textwidth, \textwidth * nb_or
+set out "./plot_lifetime.pdf"
+set key inside center center
+set nogrid
+set pointsize .8
+set xrange [0:800]
+set yrange [89:100]
+set xlabel 'Temps (secondes)'
+set ylabel 'Nombre de nœuds touojours en état de marche'
+
+plot 'plot_lifetime_sta_10_3601_10.dat2' title 'méthode statique'  with linespoints lt 4 lc "red",\
+     'plot_lifetime_dyn_10_3601_10.dat2' title 'méthode dynamique' with linespoints lt 2 lc rgb "#0065bd"

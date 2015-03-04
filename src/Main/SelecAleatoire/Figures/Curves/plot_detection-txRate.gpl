@@ -1,0 +1,12 @@
+set term pdfcairo enhanced size 4.77,2.95 font "Linux Libertine O,14" # \textwidth, \textwidth * nb_or
+set out "./plot_detection-txRate.pdf"
+set key inside top left
+set nogrid
+set pointsize .8
+set xrange [1.5:5.5]
+set yrange [0:100]
+set xlabel 'Taux d’émission moyen du nœud compromis'
+set ylabel 'Pourcentage de {/:Italic cNodes } détectant l’attaque'
+
+plot 'plot_detection-txRate.dat' using 3:1 title 'méthode statique'  with linespoints lt 4 lc "red",\
+     'plot_detection-txRate.dat' using 3:2 title 'méthode dynamique' with linespoints lt 2 lc rgb "#0065bd"
