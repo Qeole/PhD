@@ -5,11 +5,10 @@ Les chapitres qui viennent, à commencer par celui-ci, présentent les différen
 Ces contributions sont principalement centrées sur le renouvellement et l'établissement d'un processus efficace de sélection pour les nœuds de surveillance d'un \rcs.
 
 La première d'entre elles détaille l'architecture ainsi que les mécanismes employés, met en place le renouvellement de la sélection, et propose un processus aléatoire pour la désignation des nœuds de surveillance.
-Elle est évaluée par des simulations, puis à l'aide d'outils de modélisation.
-Concrètement:
+Elle est évaluée par des simulations à événements discrets, puis à l'aide d'outils plus formels, le tout organisé de la façon suivante:
 \begin{itemize}
-    \item dans un premier temps est présenté un jeu de résultats numériques obtenu par des simulations réalisées avec le logiciel \nsii sur une grille de capteurs, avec et sans renouvellement des nœuds de surveillance, afin d'éprouver la méthode proposée;
-    \item le système est ensuite l'objet d'une première représentation, sous forme de chaines de \textsc{Markov}. Des mesures analytiques sont obtenues à partir des états stationnaires, pour obtenir la probabilité de la détection des attaques dans le cadre de ce modèle;
-    \item une seconde modélisation du mécanisme de détection est exprimée à l'aide de réseaux de \textsc{Petri} stochastiques généralisés, et accompagnée de propriétés établies à l'aide de logique stochastique avec automates hybrides.
+    \item dans un premier temps est présenté un jeu de résultats numériques obtenus par des simulations réalisées avec le logiciel \nsii, avec et sans renouvellement des nœuds de surveillance, afin d'éprouver la méthode proposée;
+    \item dans un second temps intervient la modélisation. Le système est d'abors l'objet d'une première représentation sous forme de chaines de \textsc{Markov}: des mesures analytiques sont obtenues à partir des états stationnaires, pour obtenir la probabilité de la détection des attaques dans le cadre de ce modèle;
+    \item face aux limites de ce premier outil formel, une seconde représentation du mécanisme de détection est exprimée à l'aide de réseaux de \textsc{Petri} stochastiques généralisés, et accompagnée de propriétés établies à l'aide de logique stochastique avec automates hybrides.
 \end{itemize}
 \vfil
