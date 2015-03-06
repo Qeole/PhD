@@ -35,7 +35,7 @@ Elle prend pour argument les valeurs des $s$ compteurs $x_{k_1},x_{k_2},\dots,x_
 Voici un exemple d'équation de transition pour un macro-état générique $x_k$, $1\leq k\leq m$.
 Le macro-état $x$, représentant l'intégralité du système, est directement obtenu en agrégeant les différents $x_k$.
 Le compteur $x_{k_c}$ représente dans la suite le nombre de messages émis par le nœud compromis et captés par le \cn $k$.
-L'équation est donnée en figure~\ref{sa:fig:eqtrans}
+L'équation est donnée en \figref{sa:fig:eqtrans}
 
 \newlength{\fboxlinelen}
 \setlength{\fboxlinelen}{\linewidth}
@@ -111,14 +111,14 @@ Elles sont de plus caractérisées par les éléments suivants:
 
 Nous utilisons deux types de transitions minutées:
 \begin{itemize}
-    \item les distributions minutées exponentiellement distribuées (marquées dans les figures qui suivent par des rectangles vides, voir par exemple la transition \textsf{T1} sur l'exemple de gauche de la figure~\ref{sa:fig:gspnex1});
-    \item les distributions minutées distribuées de façon déterministe (marquées dans les figures qui suivent par des rectangles bleus, voir par exemple la transition \textsf{T1} sur l'exemple de droite de la figure~\ref{sa:fig:gspnex1}).
+    \item les distributions minutées exponentiellement distribuées (marquées dans les figures qui suivent par des rectangles vides, voir par exemple la transition \textsf{T1} sur l'exemple de gauche de la \figref{sa:fig:gspnex1});
+    \item les distributions minutées distribuées de façon déterministe (marquées dans les figures qui suivent par des rectangles bleus, voir par exemple la transition \textsf{T1} sur l'exemple de droite de la \figref{sa:fig:gspnex1}).
 \end{itemize}
-Les transitions immédiates sont marquées par des rectangles pleins et noirs (voir par exemple la transition \textsf{T2} dans les exemples de la figure~\ref{sa:fig:gspnex1}).
+Les transitions immédiates sont marquées par des rectangles pleins et noirs (voir par exemple la transition \textsf{T2} dans les exemples de la \figref{sa:fig:gspnex1}).
 Nous avons aussi recours à des arcs inhibiteurs.
-Il s'agit d'arêtes dont la flèche sur les représentations graphiques est remplacée par un cercle (par exemple, l'arc reliant la place \textsf{P1} à la transition \textsf{T2} dans l'exemple de droite de la figure~\ref{sa:fig:gspnex1}), et accompagnées d'un chiffre.
+Il s'agit d'arêtes dont la flèche sur les représentations graphiques est remplacée par un cercle (par exemple, l'arc reliant la place \textsf{P1} à la transition \textsf{T2} dans l'exemple de droite de la \figref{sa:fig:gspnex1}), et accompagnées d'un chiffre.
 Les règles de franchissement des transitions sont légèrement différentes avec ces arcs, puisque ces franchissement ne peuvent être effectués que si le nombre de jetons en amont de la transition est strictement inférieur au nombre indiqué sur l'arc.
-Par exemple, sur la partie droite de la figure~\ref{sa:fig:gspnex1}, la transition \textsf{T2} peut être franchie, car \textsf{P1} ne contient que deux jetons (on a bien $2<3$).
+Par exemple, sur la partie droite de la \figref{sa:fig:gspnex1}, la transition \textsf{T2} peut être franchie, car \textsf{P1} ne contient que deux jetons (on a bien $2<3$).
 \begin{figure}[H]
     \centering
     \includegraphics[width=.8\linewidth]{\chapterfig/RPSGe_example.pdf}
@@ -135,7 +135,7 @@ Nous allons procéder par étapes en modélisant:
 
             \paragraph{Modélisation des capteurs simples}
 Le comportement des capteurs basiques (qui poursuivent simplement leur mission de récolte de données) est simple: chaque capteur $i$ envoie des paquets selon un processus de \textsc{Poisson} de paramètre $\lambda_i$.
-Ce comportement est modélisé par le \rpsg présenté en figure~\ref{sa:fig:snodegspn}.
+Ce comportement est modélisé par le \rpsg présenté en \figref{sa:fig:snodegspn}.
 Le nœud y est symbolisé par les pointillés bleus.
 \begin{figure}[!ht]
     \centering
@@ -150,7 +150,7 @@ Un nœud compromis $c$ sera également représenté selon le même modèle, avec
 
             \paragraph{Modélisation des \cns élus de façon statique}
 Un \cn élu de façon statique joue uniquement son rôle de \cn: il monitore le trafic, mais n'effectue pas de mesure sur son environnement.
-Le modèle \rpsge associé à ce type de nœud est présenté en figure~\ref{sa:fig:cnodegspn1}.
+Le modèle \rpsge associé à ce type de nœud est présenté en \figref{sa:fig:cnodegspn1}.
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=.54\linewidth]{\chapterfig/RPSGe_cNode_static.pdf}
@@ -175,8 +175,8 @@ Le modèle \rpsge représentant le \cn élu de façon dynamique ressemble à son
 Cependant, en raison de l'élection dynamique, tous les nœuds vont assumer périodiquement le rôle de \cn et le rôle de capteur simple.
 Il est donc nécessaire d'ajouter, aux places et transitions des précédents \cns, une place \textsf{cNode} ainsi qu'une transition toujours autorisée, associée à une distribution exponentielle.
 La première permet d'indiquer à chaque instant si le nœud joue le rôle de \cn (si la place contient un jeton) ou bien de capteur simple (cas contraire).
-La seconde permet de produire des jetons selon un processus de \textsc{Poisson} lorsque le nœud fait office de capteur simple (dans ce cas la place \textsf{cNode} est vide et l'arc inhibiteur autorise le franchissement de la transition \textsf{TX}; le nœud se comporte exactement comme avec le modèle de la figure~\ref{sa:fig:snodegspn}).
-Le modèle est représenté sur la figure~\ref{sa:fig:cnodegspn2}.
+La seconde permet de produire des jetons selon un processus de \textsc{Poisson} lorsque le nœud fait office de capteur simple (dans ce cas la place \textsf{cNode} est vide et l'arc inhibiteur autorise le franchissement de la transition \textsf{TX}; le nœud se comporte exactement comme avec le modèle de la \figref{sa:fig:snodegspn}).
+Le modèle est représenté sur la \figref{sa:fig:cnodegspn2}.
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=.6\linewidth]{\chapterfig/RPSGe_cNode_generic.pdf}
@@ -190,7 +190,7 @@ Maintenant que la représentation des nœuds individuels a été donnée, nous s
 Pour simplifier la représentation graphique, nous choisissons de représenter un cluster comportant un total de neuf nœuds placés sur une grille de dimensions $3\times3$.
 Parmi ces nœuds, deux exactement jouent le rôle de \cn (les nœuds \textsf{3} et \textsf{4} dans notre cas), et un exactement (le nœud \textsf{1}) est un capteur compromis (distinct des \cns).
 Le nœud \textsf{5} quant à lui tient le rôle du \ch.
-La représentation du cluster est donnée en figure~\ref{sa:fig:petricluster}.
+La représentation du cluster est donnée en \figref{sa:fig:petricluster}.
 Également dans l'optique de simplifier la représentation graphique, les transitions \textsf{e-déb} et \textsf{e-fin}, ainsi que la place \textsf{vider~tampon}, ont été remplacées par une boite blanche associée à la fonction de vidage de la place \textsf{InBuff} des nœuds.
 Cette représentation peut être facilement étendue pour modéliser le réseau tout entier.
 On observera, par rapport au modèle précédent basé sur les chaines de \textsc{Markov} que le graphe du cluster n'est plus connexe: les nœuds ne peuvent atteindre que leurs voisins directs (sur le côté ou en diagonale sur la représentation).
@@ -203,12 +203,12 @@ Là encore, il s'agit d'un choix permettant de simplifier le graphique, et la co
 
             \paragraph{\cns élus de façon dynamique}
 L'élection dynamique des \cns vient compliquer légèrement la modélisation de notre cluster.
-Bien évidemment, tous les nœuds seront représentés selon le modèle ambivalent illustré par la figure~\ref{sa:fig:cnodegspn2}.
+Bien évidemment, tous les nœuds seront représentés selon le modèle ambivalent illustré par la \figref{sa:fig:cnodegspn2}.
 Mais il est aussi nécessaire de rajouter un module qui permettra l'élection des \cns pour chaque période.
 Pour une meilleure clarté, le cluster sera représenté en deux temps.
 
-Tout d'abord, la figure~\ref{sa:fig:petridyn} représente le cluster comme nous l'avons vu jusqu'ici, sous formes de nœud distincts et de transitions représentant le trafic émis.
-Les sept nœuds non compromis peuvent endosser alternativement les rôles de capteur simple et de \cn (leur représentation a été simplifiée par rapport à la figure~\ref{sa:fig:cnodegspn2}).
+Tout d'abord, la \figref{sa:fig:petridyn} représente le cluster comme nous l'avons vu jusqu'ici, sous formes de nœud distincts et de transitions représentant le trafic émis.
+Les sept nœuds non compromis peuvent endosser alternativement les rôles de capteur simple et de \cn (leur représentation a été simplifiée par rapport à la \figref{sa:fig:cnodegspn2}).
 Le \ch n'est considéré que comme un simple puits, uniquement équipé d'un tampon mémoire d'entrée pour recevoir les données.
 \begin{figure}[ht]
     \centering
@@ -220,8 +220,8 @@ Un second réseau de \textsc{Petri} est utilisé pour modélisé le processus de
 En considérant $n$ comme le nombre de résultats possibles à l'élection, le module représentant l'élection dynamique des \cns comprend:
 \begin{itemize}
     \item une unique place centrale;
-    \item $n$ transitions minutées, suivant une distribution déterministe, et mutuellement exclusives, menant à cette place (en bleu sur la figure~\ref{sa:fig:petrielec});
-    \item $n$ transitions immédiates et mutuellement exclusives, franchissables depuis cette place (en noir sur la figure~\ref{sa:fig:petrielec}).
+    \item $n$ transitions minutées, suivant une distribution déterministe, et mutuellement exclusives, menant à cette place (en bleu sur la \figref{sa:fig:petrielec});
+    \item $n$ transitions immédiates et mutuellement exclusives, franchissables depuis cette place (en noir sur la \figref{sa:fig:petrielec}).
 \end{itemize}
 Dans notre cas, pour élire deux \cns au sein du cluster, et en supposant que le nœud compromis ne peut être élu, nous avons $n=\binom{7}{2}=21$~issues possible pour l'élection.
 À la fin d'une période d'activité des \cns, une nouvelle élection est déclenchée.
@@ -284,7 +284,7 @@ Au final, \lsah fonctionne de la façon suivante:
 \end{enumerate}
 
         \subsubsection{Automate linéaire hybride et formule \lsah associés au modèle utilisé}
-Nous présentons ici quelques exemples de formules \lsah, constitués des expressions \lsah et d'un automate hybride linéaire hybride (\alh) associé au modèle \rpsge présenté plus haut (en figure~\ref{sa:fig:petridyn}).
+Nous présentons ici quelques exemples de formules \lsah, constitués des expressions \lsah et d'un automate hybride linéaire hybride (\alh) associé au modèle \rpsge présenté plus haut (en \figref{sa:fig:petridyn}).
 Ces exemples présentent une manière de mesurer des données sur un nœud du \rc à partir de la version modélisée sous forme de réseaux de \textsc{Petri}, à fin d'étude, ou bien de comparaison de notre solution avec d'autres systèmes de détection des attaques de \dds.
 Ces exemples peuvent en outre être modélisés facilement avec l'outil de \textit{model checking} \textsf{COSMOS}~\cite{BDDHP11cosmos}.
 
@@ -296,7 +296,7 @@ L'automate linéaire hybride que nous utilisons fait appel aux variables suivant
     \item $x_{\mathit{TX}_i}$: nombre de paquets envoyés par le nœud $i$;
     \item $x_{\mathit{bf}_i}$: nombre de paquets reçus et placés dans le tampon en entrée du nœud $i$.
 \end{itemize}
-L'automate linéaire hybride est présenté en figure~\ref{sa:fig:lha}.
+L'automate linéaire hybride est présenté en \figref{sa:fig:lha}.
 \begin{figure}[!ht]
     \centering
     \begin{tikzpicture}[auto, thick, >=stealth]
@@ -337,7 +337,7 @@ $e_1$ comporte également trois transitions, exprimées sous la forme suivante: 
 Il s'agit des transitions suivantes:
 \begin{itemize}
     \item la première transition qui boucle sur $e_1$: $e_1\xrightarrow{\mathit{true},\{\mathsf{chkYES_i}\},(x_{d_i}:=x_{d_i}+1)}{e_1}$.
-        Elle correspond à l'évènement associé au passage de la transition \textsf{check\_YES} du nœud $i$ sur le modèle \rpsge du cluster (présenté en figure~\ref{sa:fig:petridyn}).
+        Elle correspond à l'évènement associé au passage de la transition \textsf{check\_YES} du nœud $i$ sur le modèle \rpsge du cluster (présenté en \figref{sa:fig:petridyn}).
         Lorsque la transition est franchie sur le réseau de \textsc{Petri}, quelle que soit la valeur de l'«~horloge~» $x_t$ (condition $\mathit{true}$), la transition correspondante sur l'automate linéaire hybride est elle-aussi franchie\,\footnote{Attention: les transitions du réseau de \textsc{Petri}, représentées par des rectangles et reliées aux places par des arcs, ne doivent pas être confondues avec les transitions des automates, représentées par des arcs, et reliant les états.}.
         Comme la transition du réseau de \textsc{Petri} correspond à une nouvelle détection de trafic anormal par le nœud $i$, la transition de l'automate a pour effet de mettre à jour la valeur de $x_{d_i}$, en l'incrémentant de $1$;
     \item une deuxième transition qui boucle elle aussi sur $e_1$: $e_1\xrightarrow{\mathit{true},\{\mathsf{TX_i}\},(x_{\mathit{TX}_i}:=x_{\mathit{TX}_i}+1)}{e_1}$.
