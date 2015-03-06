@@ -2,16 +2,18 @@
 \section{Modélisation}
 \label{sa:sec:modelisation}
 
-Nous venons d'établir un processus de sélection aléatoire, périodiquement renouvelé, des \cns assurant la détection des nœuds compromis dans le réseau.
-Voici à présent plusieurs modèles possibles permettant de représenter cette solution, et d'en évaluer les performances selon divers critères.
+Nous avons établi un processus de sélection aléatoire, périodiquement renouvelé, des \cns assurant la détection des nœuds compromis dans le réseau.
+Les simulations réalisées ont fourni des valeurs numériques permettant de valider le modèle proposé; mais elle n'ont pas la rigueur des méthodes formelles et n'offrent pas, comme ces dernières, la possibilité de vérifier de façon sure des propriétés sur l'état du système.
+
+Dans cette section sont introduits plusieurs modèles pouvant permettre de représenter notre système, et d'en évaluer les performances selon divers critères.
+Ils peuvent par ailleurs être repris pour modéliser tout système approchant.
 
 %===============================================================================
     \subsection{Chaines de \textsc{Markov}}
 
         \subsubsection{Présentation et hypothèses du modèle}
-Nous avons modélisé notre solution sous la forme d'un processus de \textsc{Markov} à temps continu (\cmtc, pour chaine de \textsc{Markov} à temps continu).
+En premier lieu, nous avons modélisé notre solution sous la forme d'un processus de \textsc{Markov} à temps continu (\cmtc, pour chaine de \textsc{Markov} à temps continu).
 \nomenclature{CMTC}{Chaine de \textsc{Markov} à Temps Continu}
-
 Notre modèle représente un cluster d'un \rcsf qui vérifie les hypothèses suivantes:
 \begin{itemize}
     \item seul le cluster est modélisé;
@@ -24,7 +26,7 @@ Notre modèle représente un cluster d'un \rcsf qui vérifie les hypothèses sui
 \end{itemize}
 
         \subsubsection{Modélisation}
-Sous les hypothèses précédentes, notre modèle peut être représenté par une \cmtc multi-dimensionnelle de taille $m$.
+Sous les hypothèses précédentes, notre modèle peut être représenté par une \cmtc multidimensionnelle de taille $m$.
 Il est alors exprimé sous la forme d'un $m$-uplet $x\!=\!(x_1,x_2,\dots,x_m)$ de macro-états $x_k\!=\!(x_{k_1},x_{k_2},\dots,x_{k_s},x_{k_d})$.
 Chaque macro-état $x_k$ représente le nombre de paquets détectés par le \cn $k$ ($1\leq k\leq m$).
 Plus exactement, chaque $x_{k_i}$ ($1\leq i\leq s$) est un compteur, initialisé à $0$, qui est incrémenté à chaque fois que le \cn $k$ détecte un paquet en provenance du capteur $i$.
@@ -32,17 +34,11 @@ $x_{k_d}$ est une variable de type booléen, initialisée à $0$, et passée à 
 La fonction de seuil $f:s^s\rightarrow\{0;1\}$ est utilisée par les \cns pour déterminer la nature normale ou non du trafic (elle indique si un paquet a dépassé ou non le seuil des communications dites «~normales~»).
 Elle prend pour argument les valeurs des $s$ compteurs $x_{k_1},x_{k_2},\dots,x_{k_s}$ d'un macro-état $x_k$ associé à un \cn $k$, et la valeur retournée est stockée dans $x_{k_d}$.
 
-Voici un exemple d'équation de transition pour un macro-état générique $x_k$, $1\leq k\leq m$.
-Le macro-état $x$, représentant l'intégralité du système, est directement obtenu en agrégeant les différents $x_k$.
-Le compteur $x_{k_c}$ représente dans la suite le nombre de messages émis par le nœud compromis et captés par le \cn $k$.
-L'équation est donnée en \figref{sa:fig:eqtrans}
-
 \newlength{\fboxlinelen}
 \setlength{\fboxlinelen}{\linewidth}
 \addtolength{\fboxlinelen}{-4\fboxsep}
 \addtolength{\fboxlinelen}{-2\fboxrule}
-
-\begin{figure}[H]
+\begin{figure}[ht]
     \fbox{
         \begin{minipage}{\fboxlinelen}
             \begin{eqnarray*}
@@ -61,10 +57,14 @@ L'équation est donnée en \figref{sa:fig:eqtrans}
             \end{eqnarray*}
         \end{minipage}
     }
-    \caption{Équation de transition du processus de \textsc{Markov} à temps continu modélisant le cluster}\label{sa:fig:eqtrans}
+    \caption{Exemple d'équation de transition du processus de \textsc{Markov} à temps continu modélisant le cluster}\label{sa:fig:eqtrans}
 \end{figure}
 
-\bigskip
+Nous donnons un exemple d'équation de transition pour un macro-état générique $x_k$, $1\leq k\leq m$.
+Le macro-état $x$, représentant l'intégralité du système, est directement obtenu en agrégeant les différents $x_k$.
+Le compteur $x_{k_c}$ représente dans la suite le nombre de messages émis par le nœud compromis et captés par le \cn $k$.
+L'équation est donnée en \figref{sa:fig:eqtrans}.
+
 Formulé autrement: le \cn $k$, dans l'état $x_k$, reçoit périodiquement les messages de chaque capteur $i$ (pour tout $i$ tel que $1\leq i\leq s, i\!\neq\!k$): ce sont des transmissions dites «~normales~», qui surviennent avec une fréquence moyenne $\lambda_i$.
 Chaque message reçu laisse le \cn $k$ dans un état presque identique, à la seule différence que le compteur $x_{k_i}$ est incrémenté de $1$.
 La même chose se produit avec une fréquence $\lambda_c$ pour les messages envoyés par le nœud compromis, qui provoque à chaque fois l'incrémentation du compteur $x_{k_c}$.
@@ -88,7 +88,7 @@ Nous allons ainsi nous orienter vers des processus non-markoviens, qui ne prése
 %===============================================================================
     \subsection{Réseaux de \textsc{Petri}}
 
-Une autre représentation possible système passe ainsi par l'utilisation de processus stochastiques à évènements discrets (PSED, en anglais \textit{Discrete-Event Stochastic Processes}, ou encore \textit{Generalized Semi-\textsc{Markov} Processes} pour « processus semi-markoviens généralisés »).
+Une autre représentation possible du système passe ainsi par l'utilisation de processus stochastiques à évènements discrets (PSED, en anglais \textit{Discrete-Event Stochastic Processes}, ou encore \textit{Generalized Semi-\textsc{Markov} Processes} pour « processus semi-markoviens généralisés »).
 Leur avantage principal sur les processus de \textsc{Markov} est leur capacité à représenter des événements dont la distribution n'est pas nécessairement exponentielle.
 Plus particulièrement, nous allons utiliser des réseaux de \textsc{Petri} stochastiques généralisés étendus.
 \nomenclature{PSED}{Processus Stochastiques à Événements Discrets}
@@ -117,9 +117,9 @@ Nous utilisons deux types de transitions minutées:
 Les transitions immédiates sont marquées par des rectangles pleins et noirs (voir par exemple la transition \textsf{T2} dans les exemples de la \figref{sa:fig:gspnex1}).
 Nous avons aussi recours à des arcs inhibiteurs.
 Il s'agit d'arêtes dont la flèche sur les représentations graphiques est remplacée par un cercle (par exemple, l'arc reliant la place \textsf{P1} à la transition \textsf{T2} dans l'exemple de droite de la \figref{sa:fig:gspnex1}), et accompagnées d'un chiffre.
-Les règles de franchissement des transitions sont légèrement différentes avec ces arcs, puisque ces franchissement ne peuvent être effectués que si le nombre de jetons en amont de la transition est strictement inférieur au nombre indiqué sur l'arc.
+Les règles de franchissement des transitions sont légèrement différentes avec ces arcs, puisque ces franchissements ne peuvent être effectués que si le nombre de jetons en amont de la transition est strictement inférieur au nombre indiqué sur l'arc.
 Par exemple, sur la partie droite de la \figref{sa:fig:gspnex1}, la transition \textsf{T2} peut être franchie, car \textsf{P1} ne contient que deux jetons (on a bien $2<3$).
-\begin{figure}[H]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=.8\linewidth]{\chapterfig/RPSGe_example.pdf}
     \caption{Exemples simples de \rpsge: transitions immédiates, transition minutée et arcs inhibiteurs}\label{sa:fig:gspnex1}
@@ -144,20 +144,31 @@ Le nœud y est symbolisé par les pointillés bleus.
 \end{figure}
 Dans ce nœud $i$ se trouve une unique transition \textsf{TX}, sans place en entrée, autrement dit: toujours active.
 Elle est minutée, avec une distribution exponentielle de paramètre $\lambda_i$: chaque événement correspond à l'envoi de jetons sur tous ses arcs sortants.
-Ces arcs sont rattachés à la place \textsf{InBuff$_{i_j}$}\,\footnote{Pour \textit{in buffer}.} de chacun des nœuds voisins du nœud $i$ (on trouve donc autant d'arcs sortants que de nœuds voisins).
+Ces arcs sont rattachés à la place \textsf{InBuff$_{j}$}\,\footnote{Pour \textit{in buffer}.} de chacun des nœuds voisins du nœud $i$ (on trouve donc autant d'arcs sortants que de nœuds voisins).
 L'intégralité de la fonction de mesure et d'envoi des données utiles du \rc peut être modélisée par plusieurs éléments représentés par ce «~modèle de nœud~».
 Un nœud compromis $c$ sera également représenté selon le même modèle, avec un paramètre $\lambda_c$ plus élevé que les autres $\lambda_i$.
 
+            \paragraph{Modélisation du \ch}
+Nous travaillons de l'intérieur du cluster, et le \ch est vu comme un simple puits qui reçoit les paquets émis par les autres nœuds.
+Son activité de retransmission à destination de la \sdb n'est donc pas représentée.
+Représenté en\figref{sa:fig:chgspn}, le \CH ne contient donc qu'une place \textsf{InBuff$_\textsf{CH}$} qui représente le tampon contenant les messages reçus, et reliée aux transitions \textsf{TX$_i$} de tous les autres nœuds.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.45\linewidth]{\chapterfig/RPSGe_CH.pdf}
+    \caption{Modèle \rpsg du \ch}\label{sa:fig:chgspn}
+\end{figure}
+En réalité, il devrait y avoir une place \textsf{InBuff$_i$} distincte pour les jetons provenant de chaque nœud voisin $i$ du \ch. Pour simplifier la représentation, tous les jetons arrivant au modèle du nœud sont rassemblés dans une place unique.
+
             \paragraph{Modélisation des \cns élus de façon statique}
-Un \cn élu de façon statique joue uniquement son rôle de \cn: il monitore le trafic, mais n'effectue pas de mesure sur son environnement.
+Un \cn élu de façon statique joue uniquement son rôle de \cn: il écoute le trafic, mais n'effectue pas de mesure sur son environnement.
 Le modèle \rpsge associé à ce type de nœud est présenté en \figref{sa:fig:cnodegspn1}.
-\begin{figure}[!ht]
+\begin{figure}[ht]
     \centering
     \includegraphics[width=.54\linewidth]{\chapterfig/RPSGe_cNode_static.pdf}
     \caption{Modèle \rpsge d'un \cn élu de manière \emph{statique}}\label{sa:fig:cnodegspn1}
 \end{figure}
 La place \textsf{InBuff} représente le tampon contenant les messages reçu par le nœud.
-Un jeton arrivant dans cette place (depuis un nœud «~normal~») représente un message capté par le \cn\,\footnote{En réalité, il devrait y avoir une place \textsf{InBuff$_i$} distincte pour les jetons provenant de chaque nœud voisin $i$ du \cn. Pour simplifier la représentation, tous les jetons arrivant au modèle du nœud sont rassemblés dans une place unique.}.
+Un jeton arrivant dans cette place (depuis un nœud «~normal~») représente un message capté par le \cn.
 La vérification du respect de la valeur seuil $K$ pour le trafic est réalisée à intervalles de temps constants.
 Les transitions \textsf{vérif\_OUI} et \textsf{vérif\_NON} sont «~activées~» au bout de chaque période, et servent à assurer la vérification.
 S'il y a au moins $K$ jetons dans la place, la transition \textsf{vérif\_OUI} est franchie.
@@ -193,7 +204,7 @@ Le nœud \textsf{5} quant à lui tient le rôle du \ch.
 La représentation du cluster est donnée en \figref{sa:fig:petricluster}.
 Également dans l'optique de simplifier la représentation graphique, les transitions \textsf{e-déb} et \textsf{e-fin}, ainsi que la place \textsf{vider~tampon}, ont été remplacées par une boite blanche associée à la fonction de vidage de la place \textsf{InBuff} des nœuds.
 Cette représentation peut être facilement étendue pour modéliser le réseau tout entier.
-On observera, par rapport au modèle précédent basé sur les chaines de \textsc{Markov} que le graphe du cluster n'est plus connexe: les nœuds ne peuvent atteindre que leurs voisins directs (sur le côté ou en diagonale sur la représentation).
+On observera, par rapport au modèle précédent basé sur les chaines de \textsc{Markov}, que le graphe du cluster n'est plus connexe: les nœuds ne peuvent atteindre que leurs voisins directs (sur le côté ou en diagonale sur la représentation).
 Là encore, il s'agit d'un choix permettant de simplifier le graphique, et la connexité du réseau peut être complétée par le simple ajout des arêtes manquantes.
 \begin{figure}[!ht]
     \centering
@@ -209,7 +220,7 @@ Pour une meilleure clarté, le cluster sera représenté en deux temps.
 
 Tout d'abord, la \figref{sa:fig:petridyn} représente le cluster comme nous l'avons vu jusqu'ici, sous formes de nœud distincts et de transitions représentant le trafic émis.
 Les sept nœuds non compromis peuvent endosser alternativement les rôles de capteur simple et de \cn (leur représentation a été simplifiée par rapport à la \figref{sa:fig:cnodegspn2}).
-Le \ch n'est considéré que comme un simple puits, uniquement équipé d'un tampon mémoire d'entrée pour recevoir les données.
+Le \ch n'est toujours considéré que comme un simple puits, uniquement équipé d'un tampon mémoire d'entrée pour recevoir les données.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{\chapterfig/RPSGe_network3x3_dynamic.pdf}
@@ -227,7 +238,7 @@ Dans notre cas, pour élire deux \cns au sein du cluster, et en supposant que le
 À la fin d'une période d'activité des \cns, une nouvelle élection est déclenchée.
 La transition minutée correspondant aux \cns élus pour la période qui s'achève est déclenchée; les jetons présents dans les places \textsf{cNode} de ces \cns sont consommés, et produisent ainsi un jeton dans l'unique place centrale du module.
 Chaque transition immédiate tente alors de produire un jeton.
-Comme elles sont mutuellement exclusives, mais ont la même priorité et le même poids (voir \sssref{sa:subsubsec:presRPSGe}), un tirage aléatoire a lieu pour déterminer l'unique transition qui est franchie et produit ses jetons.
+Comme elles sont mutuellement exclusives, mais ont la même priorité et le même poids (voir \sssref{sa:subsubsec:presRPSGe}), un tirage aléatoire a lieu pour déterminer l'unique transition qui est franchie et qui produit ses jetons.
 Ceux-ci sont envoyés dans les places \textsf{cNode} des nœuds élus pour la période qui débute, activant ainsi leurs fonctionnalités de \cns.
 \begin{figure}[!ht]
     \centering
@@ -243,7 +254,8 @@ Plus concrètement, à partir d'un modèle \rpsg, les mesures de performances so
 %en place de vérifications, en termes d'études statistiques, de modèles stochastiques~\cite{BDDHP11hasl}.
 \nomenclature{LSAH}{Logique Stochastique avec Automates Hybrides}
 
-Pour bien comprendre le fonctionnement de \lsah, voici quelques rappels sur le \textit{model checking}: il s'agit d'une procédure de vérification formelle utilisant:
+Pour bien comprendre le fonctionnement de \lsah, voici quelques rappels sur le \textit{model checking}.
+Il s'agit d'une procédure de vérification formelle utilisant:
 \begin{itemize}
     \item un modèle $M$ à états discrets;
     \item une propriété formelle exprimée par une formule de logique temporelle $\phi$.
@@ -261,10 +273,10 @@ Basée sur ce modèle une formule \lsah comprend ainsi deux sous-éléments:
     \item une expression $Z$, représentant la mesure à évaluer, construite à l'aide des variables de l'\alh selon la syntaxe suivante:
     \[
         \begin{split}
-            Z ::= & \ E(Y)\ |\ Z+Z\ |\ Z \times Z\\
-            Y ::= & \ c\ |\ Y+Y\ |\ Y \times Y\ |\ Y/Y\ |\ \mbox{last}(y)\ |\ \mbox{min}(y)\\
-                  & \ \  |\ \mbox{max}(y)\ |\ \mbox{int}(y)\ |\ \mbox{avg}(y)\\
-            y ::= & \ c\ |\ x\ |\ y+y\ |\ y \times y\ |\ y/y
+            Z ::=  & \ E(Y)\ | \ Z+Z\           | \ Z \times Z\\
+            Y ::=  & \ c\    | \ Y+Y\           | \ Y \times Y\    | \ Y/Y\            | \ \mbox{dern}(y)\ | \ \mbox{min}(y)\\
+                   & \ \     | \ \mbox{max}(y)\ | \ \mbox{int}(y)\ | \ \mbox{moy}(y)\\
+            y ::=  & \ c\    | \ x\             | \ y+y\           | \ y \times y\     | \ y/y
         \end{split}
     \]
     Cette expression peut être interprétée comme suit:
@@ -272,7 +284,7 @@ Basée sur ce modèle une formule \lsah comprend ainsi deux sous-éléments:
         \item $x$ est une variable de données de l'automate:
         \item $y$ est une expression arithmétique à partir de ces variables de données;
         \item $Y$ est une variable de chemin aléatoire, \cad une variable évaluée à l'aide d'un chemin de synchronisation, lui-même créé par la synchronisation entre une trajectoire du modèle \rpsg et l'\alh;
-        \item $\mbox{last}(y)$ est la dernière des valeurs endossées par l'expression $y$ le long d'un chemin synchronisé; $\mbox{min}(y)$ et $\mbox{max}(y)$ sont les valeurs optimales obtenues le long de ce chemin. $\mbox{int}(y)$ est l'intégrale d'$y$, et $\mbox{avg}(y)$ la moyenne des valeurs obtenues le long du chemin.
+        \item $\mbox{dern}(y)$ est la dernière des valeurs endossées par l'expression $y$ le long d'un chemin synchronisé; $\mbox{min}(y)$ et $\mbox{max}(y)$ sont les valeurs optimales obtenues le long de ce chemin. $\mbox{int}(y)$ est l'intégrale d'$y$, et $\mbox{moy}(y)$ la moyenne des valeurs obtenues le long du chemin.
     \end{itemize}
 \end{itemize}
 
@@ -293,7 +305,7 @@ L'automate linéaire hybride que nous utilisons fait appel aux variables suivant
 \begin{itemize}
     \item $x_t$: temps global;
     \item $x_{d_i}$: nombre d'attaques détectées par le \cn $i$;
-    \item $x_{\mathit{TX}_i}$: nombre de paquets envoyés par le nœud $i$;
+    \item $x_{\mathsf{TX}_i}$: nombre de paquets envoyés par le nœud $i$;
     \item $x_{\mathit{bf}_i}$: nombre de paquets reçus et placés dans le tampon en entrée du nœud $i$.
 \end{itemize}
 L'automate linéaire hybride est présenté en \figref{sa:fig:lha}.
@@ -315,11 +327,11 @@ L'automate linéaire hybride est présenté en \figref{sa:fig:lha}.
         \node[state, minimum width=7.5em, accepting] (b) at (6,0) {};
 
         \draw[->] (a) edge[loop above, looseness=6] %
-        node[] {$\textit{vrai}, \{\textsf{vérif\_OUI}_i\}, x_{d_i}:=x_{d_i}+1$} (a);
+        node[] {$\textit{vrai}, \{\textsf{vérif\_OUI}_i\}, (x_{d_i}:=x_{d_i}+1)$} (a);
         \draw[->] (a) edge[loop below, looseness=6] %
-            node[] {$\textit{vrai}, \{\textsf{TX}_i\}, x_{\textsf{TX}_i}:=x_{\textsf{TX}_i}+1$} (a);
+        node[] {$\textit{vrai}, \{\textsf{TX}_i\}, (x_{\textsf{TX}_i}:=x_{\textsf{TX}_i}+1$)} (a);
         \draw[->] (a) edge[above] %
-            node[] {$x_t == T,\{\textit{tous}\},\emptyset$} (b);
+        node[] {$(x_t == T), \{\textit{tous}\}, \emptyset$} (b);
     \end{tikzpicture}
     \caption{Exemple d'\alh associé au modèle \rpsge}\label{sa:fig:lha}
 \end{figure}
@@ -328,35 +340,38 @@ Ses transitions sont franchies lorsqu'un élément survient (par exemple: égali
 L'état de gauche, que l'on nommera $e_1$, contient le taux de variation (autrement dit, la dérivée première) de chacune des quatre variables décrites:
 \begin{itemize}
     \item À chaque unité de temps passée, le temps global (la variable $x_t$) est incrémenté de $\dot{x}_t=1$;
-    \item $x_{d_i}$ et $x_{\mathit{TX}_i}$ sont inchangées tant qu'aucune transition du modèle \rpsge n'est franchie.
-        Leurs taux de variation $\dot{x}_{d_i}$ et $\dot{x}_{\mathit{TX}_i}$ sont nuls;
+    \item $x_{d_i}$ et $x_{\mathsf{TX}_i}$ sont inchangées tant qu'aucune transition du modèle \rpsge n'est franchie.
+        Leurs taux de variation $\dot{x}_{d_i}$ et $\dot{x}_{\mathsf{TX}_i}$ sont nuls;
     \item $x_{\mathit{bf}_i}$ est incrémentée avec un taux proportionnel au nombre de jetons présents dans le tampon d'entrée de $i$ (lorsque $i$ joue le rôle de \cn).
-        On notera ce taux $\dot{x}_{\mathit{bf}_i}$.
+        On notera ce taux~$\dot{x}_{\mathit{bf}_i}$.
 \end{itemize}
 $e_1$ comporte également trois transitions, exprimées sous la forme suivante: $<$\textit{condition temporelle (sur x\_t)}$>, <$\textit{ensemble des transitions franchies sur le réseau de \textsc{Petri} pour déclencher l'évènement}$>, <$\textit{action associée sur les variables de l'automate}$>$.
 Il s'agit des transitions suivantes:
 \begin{itemize}
-    \item la première transition qui boucle sur $e_1$: $e_1\xrightarrow{\mathit{true},\{\mathsf{chkYES_i}\},(x_{d_i}:=x_{d_i}+1)}{e_1}$.
-        Elle correspond à l'évènement associé au passage de la transition \textsf{check\_YES} du nœud $i$ sur le modèle \rpsge du cluster (présenté en \figref{sa:fig:petridyn}).
-        Lorsque la transition est franchie sur le réseau de \textsc{Petri}, quelle que soit la valeur de l'«~horloge~» $x_t$ (condition $\mathit{true}$), la transition correspondante sur l'automate linéaire hybride est elle-aussi franchie\,\footnote{Attention: les transitions du réseau de \textsc{Petri}, représentées par des rectangles et reliées aux places par des arcs, ne doivent pas être confondues avec les transitions des automates, représentées par des arcs, et reliant les états.}.
+    \item la première transition qui boucle sur $e_1$:
+        \[e_1\xrightarrow{\mathit{vrai},\{\mathsf{vérif\_OUI_i}\},(x_{d_i}:=x_{d_i}+1)}{e_1}\]
+        Elle correspond à l'évènement associé au passage de la transition \textsf{vérif\_OUI} du nœud $i$ sur le modèle \rpsge du cluster (présenté en \figref{sa:fig:petridyn}).
+        Lorsque la transition est franchie sur le réseau de \textsc{Petri}, quelle que soit la valeur de l'«~horloge~» $x_t$ (condition $\mathit{vrai}$), la transition correspondante sur l'automate linéaire hybride est elle aussi franchie\,\footnote{Attention: les transitions du réseau de \textsc{Petri}, représentées par des rectangles et reliées aux places par des arcs, ne doivent pas être confondues avec les transitions des automates, représentées par des arcs, et reliant les états.}.
         Comme la transition du réseau de \textsc{Petri} correspond à une nouvelle détection de trafic anormal par le nœud $i$, la transition de l'automate a pour effet de mettre à jour la valeur de $x_{d_i}$, en l'incrémentant de $1$;
-    \item une deuxième transition qui boucle elle aussi sur $e_1$: $e_1\xrightarrow{\mathit{true},\{\mathsf{TX_i}\},(x_{\mathit{TX}_i}:=x_{\mathit{TX}_i}+1)}{e_1}$.
-        Cette transition fonctionne de façon identique à la précédente, à la différence près que la transition du réseau de \textsc{Petri} concernée n'est plus \textsf{check\_YES} mais \textsf{TX}, et la variable de l'automate est $x_{\mathit{TX}_i}$: lorsque le nœud $i$ envoie un message (et que \textsf{TX} est franchie sur le modèle \rpsge), la variable $x_{\mathit{TX}_i}$ est incrémentée de $1$;
+    \item une deuxième transition qui boucle elle aussi sur $e_1$:
+        \[e_1\xrightarrow{\mathit{vrai},\{\mathsf{TX_i}\},(x_{\mathsf{TX}_i}:=x_{\mathsf{TX}_i}+1)}{e_1}\]
+        Cette transition fonctionne de façon identique à la précédente, à la différence près que la transition du réseau de \textsc{Petri} concernée n'est plus \textsf{vérif\_OUI} mais \textsf{TX}, et la variable de l'automate est $x_{\mathsf{TX}_i}$: lorsque le nœud $i$ envoie un message (et que \textsf{TX} est franchie sur le modèle \rpsge), la variable $x_{\mathsf{TX}_i}$ est incrémentée de $1$;
     \item une dernière transition qui mène de $e_1$ à $e_2$.
-        Cette transition conduit à l'état final de l'automate, qui accepte et valide le chemin des transitions parcourues pour l'étudier à l'aide des formules \lsah: $e_1\xrightarrow{(x_t==T),\{\mathit{ALL}\},\emptyset}{e_2}$.
+        Cette transition conduit à l'état final de l'automate, qui accepte et valide le chemin des transitions parcourues pour l'étudier à l'aide des formules \lsah:
+        \[e_1\xrightarrow{(x_t==T),\{\mathit{tous}\},\emptyset}{e_2}\]
         La transition est autorisée lorsque $x_t$ vaut $T$, autrement dit: elle est déclenchée toutes les $T$ unités de temps.
         Elle accepte donc n'importe quel chemin dans l'automate, dont la durée est de $T$ unités de temps.
-        Elle ne dépend pas d'une transition particulière du modèle \rpsge (puisqu'elle les acceptes toutes, $\{\mathit{ALL}\}$).
+        Elle ne dépend pas d'une transition particulière du modèle \rpsge (puisqu'elle les acceptes toutes, $\{\mathit{tous}\}$).
         Aucune action sur les variables n'est effectuée lorsque la transition est franchie.
 \end{itemize}
 
 Une fois un chemin validé par l'automate, il peut être analysé à l'aide de formules \lsah.
 Voici quelques exemples de formules \lsah permettant d'obtenir plusieurs valeurs sur le cluster considéré à partir des variables définies plus haut pour l'automate:
 \begin{itemize}
-    \item $Z_1\equiv E(\mbox{last}(x_{d_i}))$: le nombre attendu d'attaques détectées par le \cn $i$ après $T$ unités de temps;
-    \item $Z_2\equiv E(\mbox{last}(x_{d_i}+x_{d_{i'}}))$: la somme attendue des attaques détectées par les nœuds $i$ et $i'$ après $T$ unités de temps;
-    \item $Z_3\equiv E(\mbox{last}(x_{\mathit{TX}_i}))$: le nombre attendu de paquets envoyés par le nœud $i$ après $T$ unités de temps;
-    \item $Z_4\equiv E(\mbox{int}(x_{\mathit{bf}_i}))$: le cumul attendu du nombre de paquets reçus par le nœud $i$ après $T$ unités de temps.
+    \item $Z_1\equiv E(\mbox{dern}(x_{d_i}))$: le nombre attendu d'attaques détectées par le \cn~$i$ après $T$ unités de temps;
+    \item $Z_2\equiv E(\mbox{dern}(x_{d_i}+x_{d_{i'}}))$: la somme attendue des attaques détectées par les nœuds~$i$ et~$i'$ après $T$ unités de temps;
+    \item $Z_3\equiv E(\mbox{dern}(x_{\mathsf{TX}_i}))$: le nombre attendu de paquets envoyés par le nœud~$i$ après $T$ unités de temps;
+    \item $Z_4\equiv E(\mbox{int}(x_{\mathit{bf}_i}))$: le cumul attendu du nombre de paquets reçus par le nœud~$i$ après $T$ unités de temps.
 \end{itemize}
 
 %===============================================================================

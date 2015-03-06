@@ -42,14 +42,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.20375"
-     inkscape:cx="220.60803"
-     inkscape:cy="309.01673"
+     inkscape:zoom="2.188297"
+     inkscape:cx="273.56679"
+     inkscape:cy="296.75661"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1600"
-     inkscape:window-height="849"
+     inkscape:window-height="880"
      inkscape:window-x="-2"
      inkscape:window-y="-3"
      inkscape:window-maximized="1" />
@@ -186,9 +186,8 @@
          x="311.68469"
          y="817.57904"
          style="font-size:26px">InBuff<tspan
-   style="font-size:65.00091553%;font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;baseline-shift:sub;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman"
-   id="tspan4402">i<tspan
-   id="tspan4406">j</tspan></tspan></tspan></text>
+   style="font-style:italic;-inkscape-font-specification:Latin Modern Roman Unslanted Italic;font-size:65%;baseline-shift:sub;font-family:Latin Modern Roman Unslanted;font-weight:normal;font-stretch:normal;font-variant:normal"
+   id="tspan3010">j</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-size:22px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:3.93000007px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Linux Biolinum O;-inkscape-font-specification:Linux Biolinum O"
@@ -201,9 +200,7 @@
          x="311.16922"
          y="727.56738"
          style="font-size:26px">InBuff<tspan
-   style="font-size:65.00091553%;font-style:oblique;font-variant:normal;font-weight:normal;font-stretch:normal;baseline-shift:sub;font-family:Latin Modern Roman;-inkscape-font-specification:Latin Modern Roman"
-   id="tspan4402-6">i<tspan
-   style="font-style:normal;font-size:14px"
-   id="tspan4435">1</tspan></tspan></tspan></text>
+   style="font-size:65%;baseline-shift:sub;-inkscape-font-specification:Latin Modern Roman Unslanted;font-family:Latin Modern Roman Unslanted;font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal"
+   id="tspan3008">1</tspan></tspan></text>
   </g>
 </svg>
