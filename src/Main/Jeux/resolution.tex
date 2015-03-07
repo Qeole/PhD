@@ -63,8 +63,8 @@ Si l'affirmation a été rejetée à raison, alors le gain est nul.
 \begin{figure}[ht]
 \centering
 \begin{tikzpicture}[auto,thick,>=stealth,xscale=1.05]
-\tikzstyle{stateComp}=[state, shape=rectangle]
-\tikzstyle{stateNorm}=[state,inner sep=0pt]
+\tikzstyle{stateComp}=[state,shape=rectangle,draw=none,fill,SecTab,text=black,drop shadow,minimum size=1.15cm]
+\tikzstyle{stateNorm}=[state,shape=circle,draw=none,fill,blueLACL,text=white,circular drop shadow]
 \tikzstyle{mini}=[font=\small]
 
 \node[stateComp] (l0) at (0,0) {$\ell$};
@@ -77,7 +77,7 @@ Si l'affirmation a été rejetée à raison, alors le gain est nul.
 
 \draw[->] (l0) edge (c0);
 \draw[->] (c0) edge (l1);
-\draw[->] (c0) edge[bend right] node[mini] {$(0,-1,0,0,0)$} (stop1);
+\draw[->] (c0) edge[bend right] node[pos=0.4,mini] {$(0,-1,0,0,0)$} (stop1);
 
 \draw[->] (l0) edge node[mini] {$(-1,-1,0,0,0)$} (cpos);
 \draw[->] (cpos) edge (l2);
@@ -106,21 +106,21 @@ Ce module est représenté sur la \figref{tj:fig:halt}.
 \begin{figure}[ht]
 \centering
 \begin{tikzpicture}[auto, thick,>=stealth]
-\tikzstyle{stateComp}=[state, shape=rectangle]
-\tikzstyle{stateNorm}=[state,inner sep=0pt]
+\tikzstyle{stateComp}=[state,shape=rectangle,draw=none,fill,SecTab,text=black,drop shadow,minimum size=1cm]
+\tikzstyle{stateNorm}=[state,shape=circle,draw=none,fill,blueLACL,text=white,circular drop shadow]
 \tikzstyle{mini}=[font=\small]
 
 \node[stateComp] (h) at (0,0) {\emph{halt}};
 \node[stateNorm] (z) at (3,0) {\emph{check}};
-\node[stateComp] (stop) at (3,-1.5) {\emph{stop}};
+\node[stateComp] (stop) at (3,-3) {\emph{stop}};
 \node[stateComp] (l0) at (6,0) {$\ell_0$};
 
-\draw[->] (h) edge[loop above] node[mini] {$(-1,-1,0,0,0)$} (h);
-\draw[->] (h) edge[loop below] node[mini] {$(0,0,-1,-1,0)$} (h);
+\draw[->] (h) edge[loop above] node[mini,inner sep=7pt] {$(-1,-1,0,0,0)$} (h);
+\draw[->] (h) edge[loop below] node[mini,inner sep=7pt] {$(0,0,-1,-1,0)$} (h);
 \draw[->] (h) edge (z);
 
-\draw[->] (z) edge[bend right] node[mini,swap,pos=0.55] {$(0,-1,0,0,0)$} (stop);
-\draw[->] (z) edge[bend left] node[mini,pos=0.55] {$(0,0,0,-1,0)$} (stop);
+\draw[->] (z) edge[bend right] node[mini,swap,pos=0.75] {$(0,-1,0,0,0)$} (stop);
+\draw[->] (z) edge[bend left] node[mini,pos=0.5] {$(0,0,0,-1,0)$} (stop);
 \draw[->] (z) edge node[mini] {$(0,0,0,0,1)$} (l0);
 
 \draw[->] (stop) edge [loop right] (stop);
@@ -269,7 +269,7 @@ Cependant, il n'est pas possible de conserver un gain moyen de $1$ tout en maint
 \begin{figure}[ht]
 \centering
 \begin{tikzpicture}[auto, thick,>=stealth]
-\tikzstyle{stateComp}=[state, shape=rectangle]
+\tikzstyle{stateComp}=[state,shape=rectangle,draw=none,fill,SecTab,text=black,drop shadow]
 
 \node[stateComp] (q0) at (0,0) {$q_0$};
 \node[stateComp] (q1) at (3,0) {$q_1$};
@@ -298,8 +298,9 @@ La machine doit être complète au niveau des entrées possibles, aussi faut-il 
 
 \begin{figure}[ht]
 \centering
-\begin{tikzpicture}[auto, thick,>=stealth]
-\useasboundingbox (-1.25,1.45) rectangle (7.8,-3.15);
+\begin{tikzpicture}[auto, thick,>=stealth,scale=1.44]
+\tikzstyle{state}=[shape=circle,draw=none,fill,blueLACL,text=white,circular drop shadow,minimum size=1cm]
+\useasboundingbox (-0.81,1.2) rectangle (7.74,-3.3);
 \node[state, initial,initial text=] (m0) at (0,0) {$m_0$};
 \node[state] (m1) at (2,0) {$m_1$};
 \node (dots) at (3.5,0) {\dots};
@@ -308,19 +309,20 @@ La machine doit être complète au niveau des entrées possibles, aussi faut-il 
 \node[state] (m44) at (7,-2) {$m_{44}$};
 \node[state] (m45) at (5,-2) {$m_{45}$};
 
-\draw[->] (m0) edge[loop above] node {$q_1 | q_0$} (m0);
-\draw[->] (m0) edge node {$q_0 | q_0$} (m1);
-\draw[->] (m1) edge node {$q_0 | q_0$} (dots);
-\draw[->] (m42) edge node {$q_0 | q_0$} (m43);
-\draw[->] (m43) edge node {$q_0 | q_1$} (m44);
-\draw[->] (m44) edge node {$q_1 | q_1$} (m45);
-\draw[->] (m45) edge[bend left] node[swap,pos=0.15] {$q_1 | q_0$} (m0);
+\draw[->] (m0)   edge[loop above] node {$q_1 | q_0$} (m0);
+\draw[->] (m0)   edge node {$q_0 | q_0$} (m1);
+\draw[->] (m1)   edge node {$q_0 | q_0$} (dots);
+\draw[->] (dots) edge node {$q_0 | q_0$} (m42);
+\draw[->] (m42)  edge node {$q_0 | q_0$} (m43);
+\draw[->] (m43)  edge node {$q_0 | q_1$} (m44);
+\draw[->] (m44)  edge node {$q_1 | q_1$} (m45);
+\draw[->] (m45)  edge[bend left] node[swap,pos=0.15,inner sep=1pt] {$q_1 | q_0$} (m0);
 
-\draw[->] (m1) edge[bend left=15] node[pos=0.15] {$q_1 | q_0$} (m0);
-\draw[->] (m42) edge[bend left=25] node[,pos=0.15] {$q_1 | q_0$} (m0);
-\draw[->] (m43) edge[bend left=45] node[swap,pos=0.33] {$q_1 | q_0$} (m0);
-\draw[->] (m44) edge[bend left=60, in =60] node[pos=0.75] {$q_0 | q_0$} (m0);
-\draw[->] (m45) edge[bend left=60] node[pos=0.1] {$q_0 | q_0$} (m0);
+\draw[->] (m1)  edge[bend left=15] node[pos=0.4,inner sep=0.4pt] {$q_1 | q_0$} (m0);
+\draw[->] (m42) edge[bend left=25] node[pos=0.5] {$q_1 | q_0$} (m0);
+\draw[->] (m43) edge[bend left=45] node[swap,pos=0.5] {$q_1 | q_0$} (m0);
+\draw[->] (m44) edge[bend left=60,in=60] node[pos=0.6] {$q_0 | q_0$} (m0);
+\draw[->] (m45) edge[bend left=60] node[swap,pos=0.5,inner sep=1pt] {$q_0 | q_0$} (m0);
 \end{tikzpicture}
 \caption[Une machine de Mealy représentant une stratégie à mémoire finie.]{Une machine de Mealy représentant une stratégie à mémoire finie (46~états). L'extrémité sortante d'une arête représente l'état actuel du jeu, l'extrémité sortante est l'état suivant retenu.}%
 \label{tj:fig:memory42}
