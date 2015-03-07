@@ -130,17 +130,17 @@ Il peut également être question d'employer des microcapteurs pour analyser ave
 Le public a lui aussi de plus en plus accès à des applications reposant sur les capteurs.
 En domotique par exemple, la température des différentes pièces d'un lieu d'habitation peut être rendue accessible à tout instant, tandis que des fonctions comme l'activation de volets électriques, l'ouverture de portes, l'activation de sources lumineuses ou de dispositifs de chauffage peuvent être effectuées à distance par l'habitant (par exemple par le biais d'une application logicielle sur téléphone portable) ou bien de façon automatique en fonction des besoins identifiés à partir des données récoltées~\cite{ASSC02}.
 
-Un autre domaine d'application en voie de développement est ce que l'on appelle l'\textit{\idx{Internet des objets}} (\textit{the Internet of things} en anglais), et qui consiste en quelque sorte à étendre \idx{Internet} au monde réel, par le biais d'une interconnexion réseau entre les objets de la vie courante: de plus en plus d'objets du quotidien tendent à devenir « connectés ».
+Un autre domaine d'application en voie de développement est ce que l'on appelle l'\textit{\idx{Internet des objets}} (\textit{the Internet of things} en anglais), et qui consiste en quelque sorte à étendre \idx{Internet} au monde réel, par le biais d'une interconnexion réseau entre les objets de la vie courante: de plus en plus d'objets du quotidien tendent à devenir «connectés».
 Ils se voient alors équipés de capteurs, d'un module de communication sans fil, et offrent de nouvelles possibilités en termes d'usages.
 Quelques exemples:
 \begin{itemize}
-    \item les montres (interfacées avec les téléphones « intelligents » pour afficher des notifications diverses);
+    \item les montres (interfacées avec les téléphones «intelligents» pour afficher des notifications diverses);
     \item les ampoules d'éclairage (gestion de la luminosité, de la couleur de l'éclairage, parfois dynamiques);
     \item les ceintures (accessoires vestimentaires: réajustement automatique du réglage, collecte de données sur le tour de taille pour le contrôle du poids);
     \item les réfrigérateurs (gestion des réserves alimentaires, création de listes d'achat);
     \item les véhicules autonomes, tels que les voitures sans conducteurs ou les drones (pilotage de l'engin, relevé de mesures tactiques pour les drones militaires).
 \end{itemize}
-Des puces RFID (de l'anglais \textit{Radio Frequency Identification}, « identification sur fréquences radio ») se retrouvent par ailleurs de plus en plus utilisées, entre autres raisons pour faciliter de telles interactions dans le monde « connecté »~\cite{TW10}.
+Des puces RFID (de l'anglais \textit{Radio Frequency Identification}, «identification sur fréquences radio») se retrouvent par ailleurs de plus en plus utilisées, entre autres raisons pour faciliter de telles interactions dans le monde «connecté»~\cite{TW10}.
 Au fur et à mesure que ces objets intègrent la vie quotidienne des utilisateurs, ils auront probablement tendance à communiquer de plus en plus entre eux, entre objets, en ne centralisant les données que sur une seule interface présentée à l'utilisateur final.
 \nomenclature{RFID}{\textit{Radio Frequency IDentification}}
 %2}}}
@@ -156,14 +156,14 @@ Les capteurs se retrouvent donc avec des capacités limitées~\cite{BMS13}, nota
 \begin{itemize}
     \item les \textbf{capacités de calcul}: les processeurs embarqués sont relativement peu puissants, principalement pour des raisons de cout.
         Les algorithmes exécutés par les capteurs doivent donc être de complexité relativement basse;
-    \item les \textbf{capacités de mémoire}: les capteurs disposent de mémoire vive (RAM, \textit{Random Access Memory}, « mémoire à accès non séquentiel » en anglais) et d'un peu d'espace de stockage, mais ils ne sont pas du tout conçus pour sauvegarder de grandes bases de données.\nomenclature{RAM}{\textit{Random Access Memory}}
+    \item les \textbf{capacités de mémoire}: les capteurs disposent de mémoire vive (RAM, \textit{Random Access Memory}, «mémoire à accès non séquentiel» en anglais) et d'un peu d'espace de stockage, mais ils ne sont pas du tout conçus pour sauvegarder de grandes bases de données.\nomenclature{RAM}{\textit{Random Access Memory}}
         Les informations récoltées doivent être acheminées à la \sdb, et non stockées sur le long terme par les capteurs eux-mêmes;
     \item l'\textbf{énergie disponible}: les capteurs disposent d'une batterie qui leur fournit une quantité d'énergie finie, et (la plupart du temps) non rechargeable.
         Il est donc essentiel de conserver à l'esprit une gestion parcimonieuse de l'énergie pour tout programme implémenté sur les capteurs.
         Des calculs importants, ainsi que des émissions/réceptions d'ondes électromagnétiques nombreuses ou mal gérées, sont les principaux facteurs d'un épuisement prématuré de la batterie.
 \end{itemize}
 
-Il est à noter qu'au regard de ces contraintes qui affectent les capteurs, la \sdb est considérée comme disposant de capacités « illimitées ».
+Il est à noter qu'au regard de ces contraintes qui affectent les capteurs, la \sdb est considérée comme disposant de capacités «illimitées».
 %1}}}
 
     \subsection{Communications sans fil}
@@ -225,7 +225,7 @@ Naturellement, l'émission consommera également plus d'énergie
 %{{{2
 La deuxième couche du modèle fournit les moyens fonctionnels et procéduraux pour le transfert des données entre deux entités du réseau~\cite{TW10}.
 Elle permet aussi, le plus souvent, de détecter et éventuellement corriger certaines erreurs survenues sur la couche physique (en cas de perturbation ou dégradation du signal électromagnétique).
-Elle se décompose en deux sous-couches: la couche de contrôle de la liaison logique (\llc, pour \textit{Logical Link Control} en anglais, « contrôle de la liaison logique ») et la couche du contrôle d'accès au support (\mac, pour \textit{Media Access Control}, « contrôle d'accès au support »).
+Elle se décompose en deux sous-couches: la couche de contrôle de la liaison logique (\llc, pour \textit{Logical Link Control} en anglais, «contrôle de la liaison logique») et la couche du contrôle d'accès au support (\mac, pour \textit{Media Access Control}, «contrôle d'accès au support»).
 \llc est la sous-couche haute, utilisée pour fiabiliser la sous-couche \mac, intervient peu dans les \rcs.
 Le protocole de couche \mac définit la manière dont les différents agents du réseau accèdent au médium de transmission de façon à limiter les collisions, et à garantir un accès le plus souvent équivalent au médium pour tous les nœuds.
 \begin{table}[!ht]
@@ -270,7 +270,7 @@ Certains d'entre eux consistent à créer des canaux de transmission distincts, 
 \nomenclature{CSMA/CA}{\textit{Carrier Sense Multiple Access with Collision Avoidance}}
 
 De ces modes d'accès sont dérivés de très nombreux protocoles de couche \mac, dont plusieurs ont été conçus spécifiquement pour les \rcs~\cite{YB09}.
-Par exemple, en dehors des standards \ieee, le protocole \smac~\cite{YHE02} fait alterner périodes « actives » et périodes de sommeil aux capteurs afin de préserver leur batterie.
+Par exemple, en dehors des standards \ieee, le protocole \smac~\cite{YHE02} fait alterner périodes «actives» et périodes de sommeil aux capteurs afin de préserver leur batterie.
 Les capteurs sont associés dans des groupes (qui ne correspondent pas tout à fait à des clusters) dont tous les membres sont en éveil de manière simultanée, afin de pouvoir communiquer à l'aide d'une version modifiée de \csmaca tel que défini dans le standard \ieeee.
 \nomenclature{S-MAC}{\textit{Sensor-MAC}}
 %2}}}
@@ -281,7 +281,7 @@ Cette couche, pour les capteurs sans fil, repose le plus souvent sur le protocol
 
 Les \rcsfs composent en quelque sorte une sous-famille des réseaux sans fil \adhoc (ou \wanet, de l'anglais \textit{wireless Ad hoc Network}), et une grande partie des protocoles et algorithmes utilisés proviennent du monde des \wanet.
 Des exemples classiques de ces algorithmes de routage incluent \aodv (\textit{Ad hoc On-Demand Distance Vector Routing})~\cite{aodv} ou son évolution \dsr~\cite{dsr} (\textit{Dynamic Source Routing}), \olsr~\cite{olsr} (\textit{Optimized Link State Routing Protocol}) ou ses évolutions \dsdv (\textit{Destination-Sequenced Distance Vector routing}) et \batman (\textit{Better Approach To Mobile Adhoc Networking}), \etc.
-Ces protocoles se répartissent le plus souvent en deux grandes classes: les protocoles « proactifs » reposant sur une table de \idx{routage} établie \apriori, en amont des requêtes (\aodv par exemple); et les protocoles de routage « à la demande » (dont \olsr), qui établissent les routes à la volée lorsqu'une requête de retransmission parvient au nœud relais.
+Ces protocoles se répartissent le plus souvent en deux grandes classes: les protocoles «proactifs» reposant sur une table de \idx{routage} établie \apriori, en amont des requêtes (\aodv par exemple); et les protocoles de routage «à la demande» (dont \olsr), qui établissent les routes à la volée lorsqu'une requête de retransmission parvient au nœud relais.
 \nomenclature{AODV}{\textit{Ad hoc On-demand Distance Vector routing}}
 \nomenclature{DSR}{\textit{Dynamic Source Routing}}
 \nomenclature{OLSR}{\textit{Optimized Link State Routing protocol}}
@@ -311,30 +311,30 @@ Elle assure un service propre à l'application déployée, et les protocoles dé
             \paragraph{Capteurs et nœuds}
 %{{{2
 Un \rcsf est souvent représenté sous forme de graphe.
-En conséquence, il est souvent fait références aux capteurs eux-mêmes sous le terme de « nœuds ».
-Nous parlerons plutôt de capteurs lorsque nous évoquerons les « \rcs » eux-mêmes, ainsi que les mesures physiques qu'ils réalisent sur leur environnement, et plutôt de nœuds lorsque nous sommes amenés à travailler sur des graphes.
+En conséquence, il est souvent fait références aux capteurs eux-mêmes sous le terme de «nœuds».
+Nous parlerons plutôt de capteurs lorsque nous évoquerons les «\rcs» eux-mêmes, ainsi que les mesures physiques qu'ils réalisent sur leur environnement, et plutôt de nœuds lorsque nous sommes amenés à travailler sur des graphes.
 Mais la plupart du temps, ces deux termes peuvent être employés dans cette thèse de manière complètement interchangeable.
 Leur alternance n'a le plus souvent que pour but de limiter les répétitions au sein d'une phrase.
 %2}}}
 
             \paragraph{Nœuds normaux}
 %{{{2
-Les « nœuds normaux » ont deux significations possibles selon le contexte.
+Les «nœuds normaux» ont deux significations possibles selon le contexte.
 \begin{enumerate}
-    \item Lorsqu'il est question de partition, de « clusterisation » du réseau, un nœud \textit{normal} est un nœud qui n'a pas été sélectionné pour assurer la fonction de « chef » du cluster, de \ch. De même lorsque des nœuds de contrôle (\cns ou \vns) ont été sélectionné, les nœuds \textit{normaux} sont les nœuds qui n'ont pas été sélectionnés (ni comme nœud de contrôle, ni comme \ch): ils poursuivent donc simplement leur rôle de collecte et de transmission des données mesurées.
-    \item Lorsqu'il est question de \secu et d'attaques menées depuis l'intérieur du réseau, un nœud \textit{normal} désigne un nœud non compromis. Les termes « nœud légitime », « nœud sain » ont le même sens dans cette thèse. Ils sont à opposer au nœud « attaquant », « compromis », « corrompu » ou occasionnellement « cupide ».
+    \item Lorsqu'il est question de partition, de «clusterisation» du réseau, un nœud \textit{normal} est un nœud qui n'a pas été sélectionné pour assurer la fonction de «chef» du cluster, de \ch. De même lorsque des nœuds de contrôle (\cns ou \vns) ont été sélectionné, les nœuds \textit{normaux} sont les nœuds qui n'ont pas été sélectionnés (ni comme nœud de contrôle, ni comme \ch): ils poursuivent donc simplement leur rôle de collecte et de transmission des données mesurées.
+    \item Lorsqu'il est question de \secu et d'attaques menées depuis l'intérieur du réseau, un nœud \textit{normal} désigne un nœud non compromis. Les termes «nœud légitime», «nœud sain» ont le même sens dans cette thèse. Ils sont à opposer au nœud «attaquant», «compromis», «corrompu» ou occasionnellement «cupide».
 \end{enumerate}
 %2}}}
 
             \paragraph{Attaquant}
 %{{{2
-Le terme d'« attaquant » fait par principe référence à l'entité consciente qui se trouve à l'origine d'une attaque, qu'il s'agisse d'une personne seule ou d'une organisation.
-Il arrive toutefois que par abus de langage, l'« attaquant » soit utilisé en tant que raccourci pour « le nœud attaquant », c'est à dire le nœud corrompu par l'\textit{attaquant} réel, depuis lequel l'attaque est menée au sein du réseau.
+Le terme d'«attaquant» fait par principe référence à l'entité consciente qui se trouve à l'origine d'une attaque, qu'il s'agisse d'une personne seule ou d'une organisation.
+Il arrive toutefois que par abus de langage, l'«attaquant» soit utilisé en tant que raccourci pour «le nœud attaquant», c'est à dire le nœud corrompu par l'\textit{attaquant} réel, depuis lequel l'attaque est menée au sein du réseau.
 %2}}}
 
             \paragraph{Exploitant}
 %{{{2
-L'\textit{exploitant} du réseau désigne l'entité (entité humaine ou organisation) qui exploite le \rcsfs: l'entité qui interagit avec la \sdb, de l'« autre côté » du réseau, pour récupérer et analyser les données collectées par les capteurs et remontées jusqu'à elle.
+L'\textit{exploitant} du réseau désigne l'entité (entité humaine ou organisation) qui exploite le \rcsfs: l'entité qui interagit avec la \sdb, de l'«autre côté» du réseau, pour récupérer et analyser les données collectées par les capteurs et remontées jusqu'à elle.
 Sauf précision contraire, on fait généralement l'amalgame avec l'\textit{administrateur} du réseau, qui procède directement à sa mise en place et éventuellement à son maintien en fonction.
 %2}}}
 
@@ -342,8 +342,8 @@ Sauf précision contraire, on fait généralement l'amalgame avec l'\textit{admi
 %{{{2
 Il va de soi qu'un capteur est un appareil dépourvu de vie et de conscience.
 Par abus de langage, des raccourcis sont parfois empruntés dans cette thèse et leur prêtent des intentions ainsi qu'une durée de vie.
-Ainsi il arrive que les capteurs « cherchent à », « essayent de », « veulent » réaliser des actions; ou bien qu'ils « prétendent » être de meilleurs candidats au poste de \ch.
-De même, ils sont susceptibles de « mourir » lorsque leur batterie est épuisée.
+Ainsi il arrive que les capteurs «cherchent à», «essayent de», «veulent» réaliser des actions; ou bien qu'ils «prétendent» être de meilleurs candidats au poste de \ch.
+De même, ils sont susceptibles de «mourir» lorsque leur batterie est épuisée.
 Ces tournures, bien qu'abusives en termes d'exactitude du langage, permettent lorsqu'elles sont employées de simplifier les explications.
 %2}}}
 %1}}}

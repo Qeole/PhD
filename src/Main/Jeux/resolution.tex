@@ -36,10 +36,10 @@ On définit plus précisément une machine à deux compteurs comme une liste d'i
 \end{itemize}
 Au départ, les deux compteurs sont initialisés à $0$.
 
-À présent, étant donné une machine $\machine$, nous construisons une arène $\G_\machine$ basée sur des modules « élémentaires » pour chaque type d'instructions (celui du compteur $c$ sera symétrique à celui du compteur $d$).
+À présent, étant donné une machine $\machine$, nous construisons une arène $\G_\machine$ basée sur des modules «élémentaires» pour chaque type d'instructions (celui du compteur $c$ sera symétrique à celui du compteur $d$).
 L'arène comporte donc 5 composantes $c$,$c'$,$d$,$d'$,$p$, où seule $p$ concerne le gain, les autres étant attachées à des valeurs énergétiques.
 Les composantes $c$ et $c'$ (respectivement $d$ et $d'$) sont supposées toujours conserver la même valeur, excepté pour l'instruction $0$-test.
-Au lancement du jeu toutes les composantes ont pour valeur\,\footnote{Pour obtenir une simulation plus réaliste, il est possible d'assigner aux composantes la valeur initiale $1$, et de considérer $0$ comme valeur de défaite. Nous choisissons ici d'autoriser un niveau d'énergie nul et considérons le jeu comme « perdu » pour des valeurs strictement négative, et ce afin de rendre plus clair le lien entre les valeurs des compteurs et les niveaux d'énergie.} $0$.
+Au lancement du jeu toutes les composantes ont pour valeur\,\footnote{Pour obtenir une simulation plus réaliste, il est possible d'assigner aux composantes la valeur initiale $1$, et de considérer $0$ comme valeur de défaite. Nous choisissons ici d'autoriser un niveau d'énergie nul et considérons le jeu comme «perdu» pour des valeurs strictement négative, et ce afin de rendre plus clair le lien entre les valeurs des compteurs et les niveaux d'énergie.} $0$.
 
 Le but du \jo est d'obtenir un gain strictement positif, tout en simulant fidèlement la machine.
 Il faut entendre par cette expression que les valeurs des composantes $c$ et $d$ doivent demeurer positives.
@@ -49,11 +49,11 @@ Si le cas devait se produire, les valeurs de ces composantes seraient strictemen
 \[(c\geq0 \wedge d\geq0 \wedge p>0) \vee (c'<0 \wedge c\geq0) \vee (d'<0 \wedge d\geq0)\]
 
 Chaque instruction étiquetée a un état dans l'arène appartenant au \jo, avec la même étiquette (d'autres états seront rajoutés par la suite).
-Le cas de l'incrément est trivial: si l'instruction $\ell$ est « incrémenter $c$ puis aller à l'étiquette~$\ell'$ », alors il y a une arête partant de $\ell$ et joignant $\ell'$ avec les poids $(1,1,0,0,0)$.
+Le cas de l'incrément est trivial: si l'instruction $\ell$ est «incrémenter $c$ puis aller à l'étiquette~$\ell'$», alors il y a une arête partant de $\ell$ et joignant $\ell'$ avec les poids $(1,1,0,0,0)$.
 Il n'y a pas d'autre arête partant de $\ell$, le joueur n'a donc pas d'autre choix.
 
 L'instruction $0$-test est plus délicate, car le \jo est susceptible de tricher en empruntant la mauvaise branche de l'instruction conditionnelle.
-De manière formelle, on suppose que $\ell$ est « si $c=0$ alors aller à l'étiquette~$\ell_1$, sinon décrémenter $c$ et aller à l'étiquette~$\ell_2$ ».
+De manière formelle, on suppose que $\ell$ est «si $c=0$ alors aller à l'étiquette~$\ell_1$, sinon décrémenter $c$ et aller à l'étiquette~$\ell_2$».
 Il y a alors deux arêtes sortant de l'état $\ell$: l'une correspondant à l'annonce $c=0$, l'autre à l'annonce $c>0$, comme indiqué sur la \figref{tj:fig:zerotest}.
 L'arête portant l'affirmation $c=0$ atteint un état possédé par le \ji, qui peut soit accepter l'affirmation (et aller dans ce cas à $\ell_1$), soit la rejeter.
 Le rejet de cette affirmation implique de décrémenter $c'$ (mais non $c$) et de se rendre sur un état \emph{stop}: cet état possède une unique arête sortante, qui boucle sur lui-même avec les poids $(0,0,0,0,0)$, signifiant que la simulation s'est arrêtée.
@@ -87,7 +87,7 @@ Si l'affirmation a été rejetée à raison, alors le gain est nul.
 \draw[->] (stop2) edge [loop right] node [mini] {$(0,0,0,0,1)$} (stop2);
 
 \end{tikzpicture}
-\caption[Module d'encodage de l'instruction $0$-test sous forme de jeu.]{Module d'encodage de l'instruction $0$-test sous forme de jeu: « si $c=0$ alors aller à l'étiquette~$\ell_1$, sinon décrémenter $c$ et aller à l'étiquette~$\ell_2$ ». Les états sous forme de carrés appartiennent au \jo, les cercles représentent les états du \ji. Il est convenu qu'en l'absence d'indication de poids, les arêtes comportent les poids~$(0,0,0,0,0)$.}%
+\caption[Module d'encodage de l'instruction $0$-test sous forme de jeu.]{Module d'encodage de l'instruction $0$-test sous forme de jeu: «si $c=0$ alors aller à l'étiquette~$\ell_1$, sinon décrémenter $c$ et aller à l'étiquette~$\ell_2$». Les états sous forme de carrés appartiennent au \jo, les cercles représentent les états du \ji. Il est convenu qu'en l'absence d'indication de poids, les arêtes comportent les poids~$(0,0,0,0,0)$.}%
 \label{tj:fig:zerotest}
 \end{figure}
 
@@ -139,25 +139,25 @@ En conséquence la valeur minimale du gain moyen est de $\frac1{2k+c_k+d_k+2}>0$
 
 Si le \ji a rejeté l'une des affirmations du \jo:
 \begin{itemize}
-\item si $c=c'=0$, mais que le \ji a décrémenté $c'$ pour contester l'annonce, alors le jeu « s'arrête », mais la condition~$c'<0 \wedge c\geq0$ est satisfaite
-\item si $c=c'\geq0$ après le décrément mais que le jeu a été « arrêté », le gain vaut $1$ tandis que les deux composantes $c$ et $d$ sont supérieures à $0$. Dans ce cas la condition~$c\geq0 \wedge d\geq0 \wedge p>0$ est satisfaite.
+\item si $c=c'=0$, mais que le \ji a décrémenté $c'$ pour contester l'annonce, alors le jeu «s'arrête», mais la condition~$c'<0 \wedge c\geq0$ est satisfaite
+\item si $c=c'\geq0$ après le décrément mais que le jeu a été «arrêté», le gain vaut $1$ tandis que les deux composantes $c$ et $d$ sont supérieures à $0$. Dans ce cas la condition~$c\geq0 \wedge d\geq0 \wedge p>0$ est satisfaite.
 \end{itemize}
 
-Au final, on retient que la stratégie de simulation « loyale » est gagnante.
+Au final, on retient que la stratégie de simulation «loyale» est gagnante.
 
 \bigskip
 
-Supposons maintenant que \machine ne s'arrête pas: la simulation « loyale » retourne une valeur de gain de $0$ si le \ji ne porte aucune accusation à tort (l'état d'arrêt \emph{halt} n'est jamais atteint, et si le \ji ne réfute aucune annonce, l'état \emph{stop$'$} n'est pas non plus atteint.)
-Dans le cas où le \jo « ment » lors de ses annonces, il suffit au \ji de détecter cette erreur pour que l'on obtienne soit $c<0$, soit une valeur de gain définitivement nulle.
+Supposons maintenant que \machine ne s'arrête pas: la simulation «loyale» retourne une valeur de gain de $0$ si le \ji ne porte aucune accusation à tort (l'état d'arrêt \emph{halt} n'est jamais atteint, et si le \ji ne réfute aucune annonce, l'état \emph{stop$'$} n'est pas non plus atteint.)
+Dans le cas où le \jo «ment» lors de ses annonces, il suffit au \ji de détecter cette erreur pour que l'on obtienne soit $c<0$, soit une valeur de gain définitivement nulle.
 
 \bigskip
 
 Cette construction peut être adaptée au problème du crédit initial: il suffit seulement de rajouter, en amont de l'état initial, un module similaire au module \emph{halt} dans le sens où il doit permettre à tous les niveaux d'énergie d'atteindre $0$.
-Une fois l'état « initial » (à l'origine) atteint, le crédit initial devient caduque, et le \jo gagne si et seulement si \machine s'arrête.
+Une fois l'état «initial» (à l'origine) atteint, le crédit initial devient caduque, et le \jo gagne si et seulement si \machine s'arrête.
 
 \subsection{Le fragment positif}
 
-Revenons à présent sur le problème du crédit initial, dont le jeu est plus « simple » à remporter pour le nœud compromis que le jeu du problème de victoire correspondant.
+Revenons à présent sur le problème du crédit initial, dont le jeu est plus «simple» à remporter pour le nœud compromis que le jeu du problème de victoire correspondant.
 De plus il est courant, lorsque l'on combine des stratégies, qu'un crédit initial nécessaire à la victoire soit augmenté; en d'autres termes, les stratégies concernant le problème de victoire ne sont souvent pas assez robustes.
 Du point de vue du modèle employé, résoudre le problème du crédit initial permet d'obtenir plus d'informations: si une stratégie et un crédit sont découverts, ils fournissent une valeur concrète à laquelle l'énergie doit être initialisée.
 
@@ -228,7 +228,7 @@ Par définition d'un attracteur, on a alors $q \in \attractor{j}(Q)$, et $q \not
 
 Dans ce premier exemple simple, nous étudions les objectifs, pour le \jo, de la forme $p_e \geq c_e \wedge p_v \geq c_v$, où $p_e$ et $p_v$ sont le niveau d'énergie et la valeur du gain moyen accumulé par le \jo, et avec $c_e,c_v \in \N$.
 De tels objectifs se traduisent par le besoin d'atteindre une certaine valeur de gain tandis que le niveau d'énergie demeure supérieur à une limite donnée.
-Un comportement cupide est une illustration simple d'un objectif de ce type: le nœud compromis cherche à rester « en vie » ($p_e \geq 1$) tout en émettant au moins un message toutes les $6$ étapes ($p_v \geq \frac1{6}$, mais comme nous l'avons remarqué plus haut, il est possible d'obtenir un seuil à valeur entière en multipliant tous les poids de la composante par $6$).
+Un comportement cupide est une illustration simple d'un objectif de ce type: le nœud compromis cherche à rester «en vie» ($p_e \geq 1$) tout en émettant au moins un message toutes les $6$ étapes ($p_v \geq \frac1{6}$, mais comme nous l'avons remarqué plus haut, il est possible d'obtenir un seuil à valeur entière en multipliant tous les poids de la composante par $6$).
 
 Tout d'abord, nous pouvons clairement établir que depuis un état à partir duquel au moins un des objectifs ne peut être rempli, le \jo ne peut pas gagner.
 De plus, si le \ji peut forcer le \jo à atteindre l'un de ces états, alors l'objectif du \jo ne sera pas rempli.
@@ -260,7 +260,7 @@ Si la condition suffisante que nous venons de présenter n'est pas remplie, nous
 Des stratégies gagnantes pour chaque composante pourraient en effet se révéler incompatibles entre elles.
 Prenons, pour illustrer, l'exemple du jeu à un seul joueur présenté en \figref{tj:fig:infmemoryneeded}.
 Dans cet exemple, $q_0$ agit comme un état de recharge (en énergie) tandis que $q_1$ est un état actif qui produit un effet utile récompensé par une valeur de gain.
-On constate que recharger la batterie est bien plus lent que de consommer l'énergie, puisqu'il faut 42 « unités d'énergie\,\footnote{Ce peut être, par exemple, une joule, ce qui signifierait que l'étape active consommerait avec une puissance de 42~W, tandis que la puissance de la recharge serait de 1~W. La valeur 42 a été choisie arbitrairement pour cet exemple.} » par étape active.
+On constate que recharger la batterie est bien plus lent que de consommer l'énergie, puisqu'il faut 42 «unités d'énergie\,\footnote{Ce peut être, par exemple, une joule, ce qui signifierait que l'étape active consommerait avec une puissance de 42~W, tandis que la puissance de la recharge serait de 1~W. La valeur 42 a été choisie arbitrairement pour cet exemple.}» par étape active.
 
 Il est possible de maintenir un niveau d'énergie constamment positif (pour la première composante) en restant dans $q_0$ (où en y allant si l'on commence en $q_1$).
 Il est aussi possible d'atteindre un gain moyen de $1$ en demeurant sur $q_1$ (ou en s'y rendant si l'on démarre sur $q_0$, car le poids de l'unique arête empruntée est négligeable sur une longue exécution).
@@ -346,6 +346,6 @@ La machine est alors synchronisée avec le jeu, et retourne un second jeu à un 
 Dans ce second jeu, seules les stratégies sans mémoires doivent êtres prises en compte.
 
 En effet, tout chemin infini qui ne satisferait pas $p_e \geq c_e \wedge p_v \geq c_v$ vérifierait, à un moment ou l'autre, soit $p_e < c_e$, soit $p_v < c_v$ (en considérant la limite pour le gain moyen de $p_v$).
-Dans les deux cas cela revient à trouver un chemin en « lasso » dans le graphe, ce qui peut être deviné.
+Dans les deux cas cela revient à trouver un chemin en «lasso» dans le graphe, ce qui peut être deviné.
 
 En ce qui concerne la complexité, la procédure que nous venons de décrire est dans $\NEXPSPACE$ (qui est équivalent à $\EXPSPACE$~\cite[Chap.~20]{papadimitriou94}), même si la borne n'est pas atteinte.

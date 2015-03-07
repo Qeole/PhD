@@ -9,7 +9,7 @@ Dans le cas de réseaux sans fil, le signal est propagé sous forme d'ondes éle
 Sauf s'il est fait usage d'une \idx{antenne directionnelle} pour l'émission, ces ondes sont envoyées dans toutes les directions, et tout appareil à portée équipé d'un récepteur se retrouve donc en mesure de recevoir les paquets émis.
 
         \paragraph{Brouillage de fréquences}
-        Le \idx{brouillage} de fréquences (\textit{frequency jamming} en anglais) consiste pour l'attaquant à émettre un signal parasite, un « bruit » électromagnétique, sur les fréquences concernées, de façon à ce que la cible visée ne puisse plus recevoir de façon correcte les paquets qui lui sont envoyés par les nœuds légitimes~\cite{PI11}.
+        Le \idx{brouillage} de fréquences (\textit{frequency jamming} en anglais) consiste pour l'attaquant à émettre un signal parasite, un «bruit» électromagnétique, sur les fréquences concernées, de façon à ce que la cible visée ne puisse plus recevoir de façon correcte les paquets qui lui sont envoyés par les nœuds légitimes~\cite{PI11}.
 Le \idx{brouillage} peut être réalisé à l'aide d'une \idx{antenne directionnelle} pour viser une cible en particulier; mais dans le cas d'un \rc, l'attaquant cherche en général à émettre un bruit dans toutes les directions afin d'affecter le plus grand nombre de nœuds possible.
 L'attaque peut être menée de façon sporadique, de manière à produire un \dds partiel, ou bien en continu.
 Si la ou les machine(s) émettant le signal parasite possède(nt) une portée suffisante pour couvrir toute l'étendue géographique du réseau, l'intégralité des capteurs peuvent se retrouver dans l'impossibilité d'utiliser les fréquences brouillées.
@@ -27,21 +27,21 @@ Des deux sous-couches \llc et \mac, c'est principalement la seconde qui nous int
 Les différents modes d'accès au médium existants ont été résumés au \chapref{st}, \ssref{st:ssec:mac}: certains consistent à créer des canaux de transmission distincts, tandis que d'autres déterminent l'accès à une même bande de fréquences en instaurant des règles.
 Ces règles peuvent être contournées, et la couche \mac va donc se retrouver associée à plusieurs types d'attaques.
 
-\paragraph{Création de collisions\index{collision} et \idx{brouillage} « intelligent »}
+\paragraph{Création de collisions\index{collision} et \idx{brouillage} «intelligent»}
 Lorsque plusieurs nœuds dont les portées se chevauchent émettent de façon simultanée en utilisant la même fréquence (donc sur un même canal), il se produit des collisions\index{collision}.
 La plupart des protocoles \mac employés avec les \rcs introduisent dans les trames un champ contenant une \idx{somme de contrôle}, qui permet de vérifier l'\integrite de la trame.
 Mais cette \idx{somme de contrôle} ne permet pas, la plupart du temps, de corriger d'éventuelles erreurs (aucun des standards \ieeee (\wifi), \ieeefo (\bluetooth) ou \ieeeff (\zigbee, \slowpan) n'inclue de code de correction des erreurs\index{correction d'erreur}).
 Si un seul bit de la trame est altéré, celle-ci est donc rejetée par le destinataire.
 Un attaquant peut donc chercher à produire des collisions\index{collision} en émettant un signal en même temps qu'un nœud légitime, afin que le destinataire ne puisse pas recevoir correctement la trame qui lui est destinée.
-Ce principe de \idx{collision} est identique au \idx{brouillage} mené sur la \idx{couche physique}; mais lorsque l'attaquant a connaissance du protocole de couche \mac\index{couche de liaison de données} employé, il lui est possible d'affiner son attaque, et de remplacer un \idx{brouillage} « brut », continu et onéreux, par un \idx{brouillage} « intelligent ».
+Ce principe de \idx{collision} est identique au \idx{brouillage} mené sur la \idx{couche physique}; mais lorsque l'attaquant a connaissance du protocole de couche \mac\index{couche de liaison de données} employé, il lui est possible d'affiner son attaque, et de remplacer un \idx{brouillage} «brut», continu et onéreux, par un \idx{brouillage} «intelligent».
 Il existe plusieurs façons de procéder~\cite{PI11}:
 \begin{itemize}
-    \item la méthode de base portant sur la \idx{couche physique}, comme vu plus haut, n'est pas « intelligente » et consiste à brouiller de façon continue les fréquences radio, en produisant un bruit aléatoire~\cite{PI11};
-    \item une variante consiste à brouiller les fréquences sur des intervalles de temps distincts (et aléatoires), toujours à l'aide d'un bruit aléatoire (\textit{random jamming}, « brouillage aléatoire »\index{brouillage!brouillage aléatoire} en anglais): la réduction de la durée d'émission permet à l'attaquant d'économiser de l'énergie;
-    \item une technique plus difficile à détecter consiste à envoyer des paquets normaux mais de façon continue, de façon à occuper le canal sans interruption~\cite{PI11}. Elle empêche les nœuds légitimes de transmettre dans le cas ou le protocole de couche \mac\index{couche de liaison de données} est \csmaca par exemple (on parle en anglais de \textit{deceptive jamming}, « brouillage trompeur »);\index{brouillage!brouillage trompeur}
+    \item la méthode de base portant sur la \idx{couche physique}, comme vu plus haut, n'est pas «intelligente» et consiste à brouiller de façon continue les fréquences radio, en produisant un bruit aléatoire~\cite{PI11};
+    \item une variante consiste à brouiller les fréquences sur des intervalles de temps distincts (et aléatoires), toujours à l'aide d'un bruit aléatoire (\textit{random jamming}, «brouillage aléatoire»\index{brouillage!brouillage aléatoire} en anglais): la réduction de la durée d'émission permet à l'attaquant d'économiser de l'énergie;
+    \item une technique plus difficile à détecter consiste à envoyer des paquets normaux mais de façon continue, de façon à occuper le canal sans interruption~\cite{PI11}. Elle empêche les nœuds légitimes de transmettre dans le cas ou le protocole de couche \mac\index{couche de liaison de données} est \csmaca par exemple (on parle en anglais de \textit{deceptive jamming}, «brouillage trompeur»);\index{brouillage!brouillage trompeur}
     \item une technique plus économe consiste à envoyer des bits à intervalles distincts (réguliers ou non), des \textit{cybermines} en anglais, dans l'espoir de créer des collisions\index{collision}~\cite{PI11}. Il n'est alors plus nécessaire d'émettre en continu, et l'attaque est moins facile à détecter. Elle est bien sûr moins efficace, car l'attaquant n'a plus la garantie de brouiller tous les paquets émis;\index{brouillage!cybermine}
-    \item la méthode dite \textit{reactive jamming} (« brouillage réactif») consiste à ne pas transmettre de façon aléatoire, mais uniquement lorsqu'une émission émanant d'un autre nœud est détectée\cite{PI11}. Elle permet une meilleure conservation de l'énergie, mais ne joue plus sur les mécanismes d'esquive de \idx{collision}, qui font régulièrement reporter, avec les techniques précédentes, leurs transmissions aux nœuds légitimes dans l'attente de la libération du canal.\index{brouillage!brouillage réactif}
-    \item les attaques « intelligentes » à proprement parler reposent sur la connaissance des spécifications du protocole \mac employé, et consistent à jouer sur la nature des paquets de contrôle et les délais d'attente~\cite{PI11}. Ainsi, pour le protocole \csmaca employé avec la suite \ieeee~\cite{ieee802.11}, une trame spécifique dite RTS (\textit{Request To Send} en anglais) de demande de réservation du canal est suivie d'une trame CTS (\textit{Clear To Send}) après une durée SIFS (\textit{Short InterFrame Space}) si le destinataire est prêt à recevoir des données. En créant une collision sur la seule trame CTS, l'attaquant prévient entièrement l'échange de données utiles entre les nœuds. D'autres trames peuvent être utilisées dans le même but, leurs acronymes sont dans la \tabref{ea:tab:smartjam}.\index{brouillage!brouillage intelligent}
+    \item la méthode dite \textit{reactive jamming} («brouillage réactif») consiste à ne pas transmettre de façon aléatoire, mais uniquement lorsqu'une émission émanant d'un autre nœud est détectée\cite{PI11}. Elle permet une meilleure conservation de l'énergie, mais ne joue plus sur les mécanismes d'esquive de \idx{collision}, qui font régulièrement reporter, avec les techniques précédentes, leurs transmissions aux nœuds légitimes dans l'attente de la libération du canal.\index{brouillage!brouillage réactif}
+    \item les attaques «intelligentes» à proprement parler reposent sur la connaissance des spécifications du protocole \mac employé, et consistent à jouer sur la nature des paquets de contrôle et les délais d'attente~\cite{PI11}. Ainsi, pour le protocole \csmaca employé avec la suite \ieeee~\cite{ieee802.11}, une trame spécifique dite RTS (\textit{Request To Send} en anglais) de demande de réservation du canal est suivie d'une trame CTS (\textit{Clear To Send}) après une durée SIFS (\textit{Short InterFrame Space}) si le destinataire est prêt à recevoir des données. En créant une collision sur la seule trame CTS, l'attaquant prévient entièrement l'échange de données utiles entre les nœuds. D'autres trames peuvent être utilisées dans le même but, leurs acronymes sont dans la \tabref{ea:tab:smartjam}.\index{brouillage!brouillage intelligent}
 \end{itemize}
 \nomenclature{RTS}{\textit{Request To Send}}
 \nomenclature{CTS}{\textit{Clear To Send}}
@@ -50,7 +50,7 @@ Il existe plusieurs façons de procéder~\cite{PI11}:
 \nomenclature{DCF}{\textit{Distributed Coordination Function}}
 
 \begin{table}[!ht]
-    \caption{Brouillage « intelligent »: corruption des trames de contrôle\index{brouillage!brouillage intelligent}}\label{ea:tab:smartjam}
+    \caption{Brouillage «intelligent»: corruption des trames de contrôle\index{brouillage!brouillage intelligent}}\label{ea:tab:smartjam}
     \centering
     \medskip
     \begin{tabular}{c c c}
@@ -77,10 +77,10 @@ Si l'attaquant se sert d'un capteur corrompu ou d'un appareil équivalent pour m
 Un appareil compromis introduit dans le réseau peut chercher à s'octroyer un accès plus important que les agents légitimes au canal de transmission.
 Ce comportement cupide\index{comportement cupide} (ou \textit{greedy} en anglais) peut être atteint par exemple en jouant sur les paramètres du protocole de couche \mac~\cite{PI11}: non respect des durées minimales DIFS entre deux envois (pour \ieeee par exemple), non respect des valeurs employées pour la taille des fenêtres de \idx{congestion}, non respect de la réservation des ressources par d'autres nœuds, \etc.
 Le but final de telles attaques peut être d'envoyer plus de données à la \sdb, dans le but par exemple de fausser une moyenne, ou bien de transmettre les données écoutées (attaque sur la confidentialité) dans le voisinage à une autre machine corrompue du réseau, en vue de l'exfiltration de ces données utiles capturées.
-On parle aussi parfois en anglais d'\textit{unfairness} (« injustice ») lorsque les spécifications des protocoles mis en place sont délibérément ignorées par un nœud corrompu.
+On parle aussi parfois en anglais d'\textit{unfairness} («injustice») lorsque les spécifications des protocoles mis en place sont délibérément ignorées par un nœud corrompu.
 
         \paragraph{Falsification d'accusés de réception (\textit{ACK spoofing})}
-La \idx{falsification} d'un accusé de réception (d'un paquet ACK, pour \textit{acknowledgement}, « accusé de réception » en anglais), à destination d'un nœud venant d'émettre des données, permet à un attaquant d'empêcher ce nœud de réaliser d'autres tentatives de transmission de la trame~\cite{AD14}.
+La \idx{falsification} d'un accusé de réception (d'un paquet ACK, pour \textit{acknowledgement}, «accusé de réception» en anglais), à destination d'un nœud venant d'émettre des données, permet à un attaquant d'empêcher ce nœud de réaliser d'autres tentatives de transmission de la trame~\cite{AD14}.
 Elle n'est utile, bien entendu, que dans le cas où l'attaquant pense que l'émission de la trame d'origine a échoué, par exemple parce qu'il a créé une \idx{collision} sur le canal lors de cette première émission.
 C'est une attaque qui vient compléter les techniques de \idx{brouillage} de façon à empêcher la transmission de l'information dans le réseau.
 %2}}}
@@ -95,16 +95,16 @@ Un protocole de routage efficace doit minimiser les pertes de paquets ainsi que 
 À l'inverse, un attaquant peut tenter de mener une attaque par \dds en gênant le plus possible l'acheminement de ces paquets.
 
         \paragraph{Trou noir (\textit{blackhole})}
-Une attaque de type « trou noir » (ou \textit{blackhole} en anglais)\index{trou!trou noir} consiste pour un nœud compromis à n'effectuer aucune retransmission des paquets qui lui sont envoyés.
+Une attaque de type «trou noir» (ou \textit{blackhole} en anglais)\index{trou!trou noir} consiste pour un nœud compromis à n'effectuer aucune retransmission des paquets qui lui sont envoyés.
 Le nœud accuse réception du paquet auprès de l'émetteur, mais ne transmet jamais le paquet pour le prochain saut prévu pour ce paquet par le protocole de \idx{routage}.
 Toutes les routes qui passent par ce nœud compromis mènent donc à la suppression pure et simples des paquets en cours de transit~\cite{Kar05}.
 
-        \paragraph{Retransmission sélective de paquets (trous gris (\textit{grey holes}), attaques « on/off » (\textit{on/off holes}))}
-Là où une attaque de type « trou noir » \index{trou!trou noir}\index{trou!trou gris} supprime tous les paquets au lieu de les retransmettre, il est possible de ne retransmettre à la place qu'un sous-ensemble de paquets.
+        \paragraph{Retransmission sélective de paquets (trous gris (\textit{grey holes}), attaques «on/off» (\textit{on/off holes}))}
+Là où une attaque de type «trou noir» \index{trou!trou noir}\index{trou!trou gris} supprime tous les paquets au lieu de les retransmettre, il est possible de ne retransmettre à la place qu'un sous-ensemble de paquets.
 L'attaque devient plus difficile à détecter, puisque le nœud compromis retransmet tout de même des paquets de temps à autre.
 
-Les attaques basées sur ce mécanisme sont dites à retransmission « on/off »\index{trou!trou on/off} (\textit{on/off holes} en anglais) lorsque la retransmission de tous les paquets est soit complètement assurée, soit complètement suspendue en alternant entre ces deux phases au fil du temps.
-On parlera plutôt d'attaques de type « trou gris »\index{trou!trou gris} (\textit{grey holes} en anglais) lorsque la retransmission est partielle mais constante dans le temps, qu'elle soit basée sur un mécanisme aléatoire (paquets supprimés au hasard plutôt que d'être retransmis) ou selon des règles (selon le contenu utile, ou selon l'expéditeur ou le destinataire par exemple)~\cite{ZTLMK13}.
+Les attaques basées sur ce mécanisme sont dites à retransmission «on/off»\index{trou!trou on/off} (\textit{on/off holes} en anglais) lorsque la retransmission de tous les paquets est soit complètement assurée, soit complètement suspendue en alternant entre ces deux phases au fil du temps.
+On parlera plutôt d'attaques de type «trou gris»\index{trou!trou gris} (\textit{grey holes} en anglais) lorsque la retransmission est partielle mais constante dans le temps, qu'elle soit basée sur un mécanisme aléatoire (paquets supprimés au hasard plutôt que d'être retransmis) ou selon des règles (selon le contenu utile, ou selon l'expéditeur ou le destinataire par exemple)~\cite{ZTLMK13}.
 
         \paragraph{Falsification\index{falsification} des informations de \idx{routage} (\index{comportement cupide!accaparement} du canal de transmission, création de boucles\index{routage!boucle}, \etc)}
 Une attaque peut être menée dès le déploiement du réseau en transmettant de fausses informations lors de la mise en place des règles de routages\index{routage}~\cite{AD14}.
@@ -115,7 +115,7 @@ De telles attaques peuvent aussi être menées lorsqu'un protocole de clusterisa
 Plusieurs autres attaques présentées ci-dessous reposent sur la \idx{falsification} des informations de \idx{routage}.
 
         \paragraph{Puits (\textit{sinkhole})}
-Une attaque \textit{sinkhole}\index{trou!puits} en anglais est la combinaison d'une attaque de type « trou noir »\index{trou!trou noir} avec la diffusion de fausses informations de routage, en vue d'attirer le maximum de paquets possible vers le nœud attaquant~\cite{CT04}.
+Une attaque \textit{sinkhole}\index{trou!puits} en anglais est la combinaison d'une attaque de type «trou noir»\index{trou!trou noir} avec la diffusion de fausses informations de routage, en vue d'attirer le maximum de paquets possible vers le nœud attaquant~\cite{CT04}.
 Concrètement, un nœud corrompu peut se déclarer voisin direct de la \sdb et annoncer une route de cout nul vers cette dernière.
 Ses voisins vont estimer qu'il s'agit du plus court chemin pour acheminer les paquets jusqu'à la \sdb, et vont transmettre l'information à leur tour.
 Au final une part importante des routes créées, et en conséquence du trafic routé, va passer par ce nœud compromis, ce qui peut mener à des congestions\index{congestion} dans le réseau.
@@ -127,28 +127,28 @@ Il est à noter que la littérature inverse parfois, et même confond de temps e
 Les définitions présentées ici sont celles qui semblent revenir le plus couramment%
 \,\footnote{%
     NdA: Cette terminologie est donc contraire à l'image que l'on pourrait se faire d'un trou noir qui attire à lui la matière environnante sous l'effet de la gravité, tandis qu'un simple puits n'attire rien.
-    En l'état actuel je suppose, sans avoir réussi à le vérifier, que le nom de l'attaque \textit{sinkhole} provient de la \sdb, souvent appelée « puits » ou \textit{sink}, dont le nœud compromis se fait passer pour un voisin immédiat lors de l'attaque, et qu'il « remplace » en quelque sorte.%
+    En l'état actuel je suppose, sans avoir réussi à le vérifier, que le nom de l'attaque \textit{sinkhole} provient de la \sdb, souvent appelée «puits» ou \textit{sink}, dont le nœud compromis se fait passer pour un voisin immédiat lors de l'attaque, et qu'il «remplace» en quelque sorte.%
 }.
-Par ailleurs, tous les « trous » ne font pas nécessairement référence à des pertes de paquets: des trous physiques, logiques ou sémantiques peuvent se former dès le déploiement du réseau~\cite{AKJ05,JSM13}, mais il s'agit d'un problème qui tient davantage de la \idx{sureté} et de la \resilience que de la \secu.
+Par ailleurs, tous les «trous» ne font pas nécessairement référence à des pertes de paquets: des trous physiques, logiques ou sémantiques peuvent se former dès le déploiement du réseau~\cite{AKJ05,JSM13}, mais il s'agit d'un problème qui tient davantage de la \idx{sureté} et de la \resilience que de la \secu.
 
         \paragraph{Trou de ver (\textit{wormhole})}
-Lorsque deux agents ou plus du réseau sont compromis par un attaquant, il leur est possible de mener une attaque de type « trou de ver »\index{trou!trou de ver} (\textit{wormhole attack} en anglais).
+Lorsque deux agents ou plus du réseau sont compromis par un attaquant, il leur est possible de mener une attaque de type «trou de ver»\index{trou!trou de ver} (\textit{wormhole attack} en anglais).
 Cette attaque consiste à capturer du trafic en un point donner du réseau pour le réinjecter\index{injection} en un autre point.
-Il faut donc au moins deux agents complices\index{coopération!complices}, l'un qui capture et l'autre qui injecte\index{injection} le trafic, et qui communiquent l'un avec l'autre par le biais d'un \idx{canal auxiliaire} généralement distinct des canaux légitimes utilisés sur le réseau (un tunnel, ou « trou de ver », qui donne son nom à l'attaque)~\cite{FZM14}.
+Il faut donc au moins deux agents complices\index{coopération!complices}, l'un qui capture et l'autre qui injecte\index{injection} le trafic, et qui communiquent l'un avec l'autre par le biais d'un \idx{canal auxiliaire} généralement distinct des canaux légitimes utilisés sur le réseau (un tunnel, ou «trou de ver», qui donne son nom à l'attaque)~\cite{FZM14}.
 Il est intéressant, pour les nœuds menant l'attaque, de retransmettre par exemple les informations (de \idx{routage}, notamment) provenant du voisinage de la \sdb en un point éloigné du réseau, de façon à faire passer le tunnel pour une route de bonne qualité vers la \sdb, puis de mener des attaques de retransmission sélective.
 Ou plus simplement, l'\idx{injection} en un autre point des paquets utilisés pour la découverte de routes lors de la mise en place de la structure de \idx{routage} peut nuire grandement à l'organisation du réseau, et conduire un nœud légitime à imaginer des voisins virtuels qui sont en réalité absolument hors de sa portée d'émission.
 
-        \paragraph{Déluge de paquets\index{deluge@déluge de paquets} « hello » (\textit{“hello” flooding})}
-Un mécanisme souvent mis en place dans les \rcs est l'envoi de paquets de type « hello » pour découvrir quels sont les nœuds dans leur voisinage.
-À la réception d'un tel paquet, les nœuds voisins émettent en réponse un paquet « hello-reply » indiquant au premier capteur qu'ils ont reçu le message.
-Un attaquant, s'il dispose d'une machine plus puissante que la moyenne des capteurs, peut forger et envoyer des paquets « hello-reply » avec une portée supérieure à celle des capteurs, pour leur faire enregistrer des voisins qui sont en réalité bien au-delà de leur portée d'émission, et désorganiser complètement le routage de paquets dans le réseau~\cite{AD14}.
+        \paragraph{Déluge de paquets\index{deluge@déluge de paquets} «hello» (\textit{“hello” flooding})}
+Un mécanisme souvent mis en place dans les \rcs est l'envoi de paquets de type «hello» pour découvrir quels sont les nœuds dans leur voisinage.
+À la réception d'un tel paquet, les nœuds voisins émettent en réponse un paquet «hello-reply» indiquant au premier capteur qu'ils ont reçu le message.
+Un attaquant, s'il dispose d'une machine plus puissante que la moyenne des capteurs, peut forger et envoyer des paquets «hello-reply» avec une portée supérieure à celle des capteurs, pour leur faire enregistrer des voisins qui sont en réalité bien au-delà de leur portée d'émission, et désorganiser complètement le routage de paquets dans le réseau~\cite{AD14}.
 
         \paragraph{Altération\index{altération} des données}
 Lorsqu'aucune vérification de l'\integrite des données n'est réalisée, un nœud relais corrompu peut, s'il a accès au contenu (en clair ou parce qu'il possède la clé pour déchiffrer), modifier ou retrancher des données du paquet à retransmettre~\cite{SZFDXC14}.
 Les données qui parviennent à l'exploitant du réseau sont alors erronées ou incomplètes.
 
         \paragraph{Attaque \idx{attaque Sybil}}
-Le nom de l'attaque « Sybil » provient du titre du roman éponyme écrit par Flora Rheta \textsc{Schreiber}, publié en 1973 et racontant le traitement d'une patiente souffrant de multiples dédoublements de la personnalité.
+Le nom de l'attaque «Sybil» provient du titre du roman éponyme écrit par Flora Rheta \textsc{Schreiber}, publié en 1973 et racontant le traitement d'une patiente souffrant de multiples dédoublements de la personnalité.
 L'attaque en elle-même consiste justement pour un agent corrompu à endosser l'identité de plusieurs nœuds dans le réseau\index{usurpation d'identité}.
 Ce peut être l'identité:
 \begin{itemize}
@@ -156,7 +156,7 @@ Ce peut être l'identité:
     \item de nœuds existants, mais distants du nœud corrompu;
     \item de nœuds détruits et virtuellement remplacés par le nœud corrompu.
 \end{itemize}
-Cette mascarade permet au nœud compromis de faire échouer d'éventuels schémas de \resilience, par exemple lorsque le protocole de routage prévoit des routes « de secours » si les routes principales venaient à être coupées.
+Cette mascarade permet au nœud compromis de faire échouer d'éventuels schémas de \resilience, par exemple lorsque le protocole de routage prévoit des routes «de secours» si les routes principales venaient à être coupées.
 Des schémas de partition, de réplication\index{replication@réplication}, de \idx{distribution} du stockage de l'information se retrouvent également affectés si des nœuds qui sont considérés comme distincts par les agents légitimes sont en fait simulés par un unique capteur compromis.
 Le mécanisme peut également être utilisé dans le but d'intensifier d'autres attaques~\cite{NSSP04}, notamment:
 \begin{itemize}
@@ -238,18 +238,18 @@ Toutes les attaques exposées dans cette sous-section ont été décrites à mai
                 & \num{Brouillage de fréquences}\\
             \midrule
             \multirow{4}{*}{\parbox{.2\textwidth}{Couche liaison de données}}%
-                & \num{Création de collisions, brouillage « intelligent »}\\
+                & \num{Création de collisions, brouillage «intelligent»}\\
                 & \num{Épuisement de la batterie}\\
                 & \num{Accaparement du canal de transmission}\\
                 & \num{Falsification d'accusés de réception}\\
             \midrule
             \multirow{8}{*}{Couche réseau}%
                 & \num{Trou noir}\\
-                & \num{Retransmission sélective de paquets (trous gris, attaques « on/off »)}\\
+                & \num{Retransmission sélective de paquets (trous gris, attaques «on/off»)}\\
                 & \num{Falsification des informations de routage (accaparement du canal, création de boucles, \etc)}\\
                 & \num{Puits}\\
                 & \num{Trou de ver}\\
-                & \num{Déluge de paquets « hello »}\\
+                & \num{Déluge de paquets «hello»}\\
                 & \num{Altération des données}\\
                 & \num{Attaque Sybil}\\
             \midrule
@@ -281,7 +281,7 @@ Toutes les attaques exposées dans cette sous-section ont été décrites à mai
             \midrule
             Réception et traitement de commandes & attaques précédentes, usurpation d'identité (et attaque Sybil) utilisée pour émettre de fausses commandes\\
             \midrule
-            Organisation autonome du réseau & attaques précédentes, fausses informations de routage (boucles\dots), puits, trous de ver, déluge de paquets « hello »\\
+            Organisation autonome du réseau & attaques précédentes, fausses informations de routage (boucles\dots), puits, trous de ver, déluge de paquets «hello»\\
             \midrule
             Agrégation de données & attaques précédentes, en particulier celles basées sur le rejeu de paquets émis ou capturés\\
             \midrule
@@ -300,7 +300,7 @@ Les attaques que nous avons présentées regroupent néanmoins les principales m
     \subsubsection{Discussion: plausibilité des attaques}
 %{{{2
 Toutes les attaques que nous avons présentées dans cette sous-section sont abondamment décrites dans la littérature.
-Mais parmi elles, toutes ne rencontreront pas forcément le même « succès » dans le monde réel, et l'on peut s'interroger: quelles sont les attaques les plus plausibles, \cad celles qui ont le plus de chances d'être implémentées par un attaquant réel?
+Mais parmi elles, toutes ne rencontreront pas forcément le même «succès» dans le monde réel, et l'on peut s'interroger: quelles sont les attaques les plus plausibles, \cad celles qui ont le plus de chances d'être implémentées par un attaquant réel?
 
 Il est bien sûr très difficile de se procurer des données à ce sujet, puisque lorsqu'une véritable attaque est menée, ses conséquences, et surtout son mode opératoire, ne sont pour ainsi dire jamais rendus publics.
 L'organisme qui gère le \rc attaqué, surtout s'il fait partie du domaine militaire, n'a pas d'intérêt à communiquer sur les spécifications de son système, et encore moins sur ses vulnérabilités.
@@ -308,14 +308,14 @@ L'organisme qui gère le \rc attaqué, surtout s'il fait partie du domaine milit
 Cela ne nous empêche pas néanmoins de nous livrer à quelques conjectures.
 
         \paragraph{Critères logiques}
-Pour ne conserver que des attaques plausibles, nous pouvons tout d'abord éliminer celles qui se basent sur les failles de protocoles « obscurs », peu utilisés: si l'on trouve très peu d'implémentations de ces protocoles, très peu d'attaques qui lui sont associées seront déclenchées.
+Pour ne conserver que des attaques plausibles, nous pouvons tout d'abord éliminer celles qui se basent sur les failles de protocoles «obscurs», peu utilisés: si l'on trouve très peu d'implémentations de ces protocoles, très peu d'attaques qui lui sont associées seront déclenchées.
 
-Nous pouvons également éliminer les attaques qui nécessitent de gros efforts de rétroingénierie pour analyser le fonctionnement précis de protocoles ou de systèmes « maison », car cette analyse détaillée coute cher à l'attaquant.
+Nous pouvons également éliminer les attaques qui nécessitent de gros efforts de rétroingénierie pour analyser le fonctionnement précis de protocoles ou de systèmes «maison», car cette analyse détaillée coute cher à l'attaquant.
 
 De même, si l'attaque requiert un équipement matériel onéreux, il faudra que l'attaquant soit prêt à investir.
 Ce n'est pas toujours un problème, surtout dans le domaine militaire; mais s'il existe d'autres types d'attaques moins couteuses permettant d'arriver à un résultat similaire, autant limiter les dépenses.
 
-Enfin, les attaques les moins « efficaces », celles qui n'ont que peu de chances d'aboutir, sont également à écarter.
+Enfin, les attaques les moins «efficaces», celles qui n'ont que peu de chances d'aboutir, sont également à écarter.
 
         \paragraph{Motivations de l'attaquant}
 Nous avons présenté plus haut les conséquences directes sur le réseau que pouvait rechercher un attaquant, analysons maintenant l'objectif final qui le pousse à mener son attaque.
@@ -335,8 +335,8 @@ Menées de l'extérieur du réseau, elle ne requiert aucune connaissance sur le 
 L'attaquant n'a besoin de connaitre que la plage de fréquences à neutraliser, et à calculer la puissance d'émission nécessaire.
 Pour ces raisons, il s'agit donc de l'une des méthodes les plus utilisées dans le domaine militaire.
 
-Les attaques de brouillage « intelligent »\index{brouillage!brouillage intelligent} au niveau de la couche de liaison de données nécessitent d'écouter les trames émises dans le réseau, pour savoir à quel moment déclencher des collisions\index{collision}.
-Ces attaques peuvent être menées sur des protocoles simples et largement répandus, mais il serait long en revanche de les adapter à des protocoles moins « standards ».
+Les attaques de brouillage «intelligent»\index{brouillage!brouillage intelligent} au niveau de la couche de liaison de données nécessitent d'écouter les trames émises dans le réseau, pour savoir à quel moment déclencher des collisions\index{collision}.
+Ces attaques peuvent être menées sur des protocoles simples et largement répandus, mais il serait long en revanche de les adapter à des protocoles moins «standards».
 Elles peuvent également être menées depuis l'extérieur du réseau, ce qui évite d'avoir à compromette un agent.
 Cet avantage est important, car détourner un capteur de son but d'origine peut être très couteux en temps.
 
@@ -374,7 +374,7 @@ Les attaques qui nous semblent les plus plausibles sont donc au final les suivan
     \item la corruption\index{altération} des données remontées à l'opérateur, pour lui fournir des résultats erronés et influencer sa prise de décisions.
 \end{itemize}
 
-Du point de vue de l'attaquant les techniques de brouillage « intelligentes »\index{brouillage!brouillage intelligent} peuvent nécessiter des ajustements en fonction du protocole \mac employé dans le réseau, et mieux vaut mener des tests pour s'assurer que les attaques fonctionnent correctement.
+Du point de vue de l'attaquant les techniques de brouillage «intelligentes»\index{brouillage!brouillage intelligent} peuvent nécessiter des ajustements en fonction du protocole \mac employé dans le réseau, et mieux vaut mener des tests pour s'assurer que les attaques fonctionnent correctement.
 Les autres attaques servant à neutraliser les communications sont beaucoup plus complexes à mettre en place, et requièrent des connaissances sur les mécanismes internes du réseau.
 Il n'est pas évident de trouver un intérêt concret aux comportements cupides\index{comportement cupide} dans les \rcs en dehors de la collecte parasite d'informations.
 

@@ -6,7 +6,7 @@
 
 Sauf indication contraire, les travaux exposés dans le présent chapitre, ainsi par ailleurs que dans les \chapref{se} et~\ref{chap:sd}, reposent sur les hypothèses suivantes:
 \begin{itemize}
-    \item Le contexte est celui d'un \rcsf constitué de nœuds possédant tous les mêmes caractéristiques physiques et techniques et limités en ressources disponibles, ainsi que d'une \sdb « non limitée » en ressources.
+    \item Le contexte est celui d'un \rcsf constitué de nœuds possédant tous les mêmes caractéristiques physiques et techniques et limités en ressources disponibles, ainsi que d'une \sdb «non limitée» en ressources.
     \item Pour en faciliter la gestion, ce réseau est partitionné en clusters. Les mécanismes déployés au sein de chaque cluster sont identiques, si bien qu'il est possible, pour les décrire, de ne traiter que le cas d'un seul cluster.
     \item Au sein des clusters toujours, tous les capteurs peuvent atteindre le \ch en un seul saut: ils n'ont donc pas besoin de moduler la puissance de leurs transmissions. Les \chs sont les seuls à recourir à cette possibilité pour atteindre directement la \sdb, si aucun protocole de \idx{routage} inter-clusters n'a été mis en place.
     \item La \idx{mobilité} des nœuds est faible, voir nulle; elle est en tout cas négligeable par rapport à l'échelle temporelle utilisée dans les protocoles mis en place, et les nœuds sont donc considérés comme statiques.
@@ -16,7 +16,7 @@ Sauf indication contraire, les travaux exposés dans le présent chapitre, ainsi
 %===============================================================================
     \subsection{Objectifs à atteindre}
 
-Le but de la solution proposée est de fournir un moyen efficace de détecter un nœud compromis dans le réseau, qui tenterait par exemple de saturer les capacités de communication du réseau, en envoyant un flux de données plus important que les nœuds «~honnêtes~».
+Le but de la solution proposée est de fournir un moyen efficace de détecter un nœud compromis dans le réseau, qui tenterait par exemple de saturer les capacités de communication du réseau, en envoyant un flux de données plus important que les nœuds «honnêtes».
 Plusieurs attaques peuvent être détectées par l'application de règles sur le trafic qui transite au sein du réseau (voir le paragraphe correspondant au \chapref{ea}, \ssref{ea:par:rules}).
 Le modèle qui vient d'être donné sera celui repris à titre d'exemple tout au long de la description de la méthode.
 
@@ -39,7 +39,7 @@ Aussi la durée de vie du réseau est-elle souvent définie comme la durée éco
 C'est cette deuxième définition qui sera utilisée par la suite.
 Elle implique que pour obtenir une grande durée de vie, la consommation en énergie du réseau doit être équitablement répartie entre un aussi grand nombre de nœuds que possible.
 
-Pour obtenir une méthode efficace sur les deux points évoqués, nous proposons dès lors d'accompagner la mise en place des nœuds de surveillance par deux mécanismes: une partition hiérarchique récursive des nœuds du réseau d'une part, et une élection dynamique des « sentinelles » d'autre part.
+Pour obtenir une méthode efficace sur les deux points évoqués, nous proposons dès lors d'accompagner la mise en place des nœuds de surveillance par deux mécanismes: une partition hiérarchique récursive des nœuds du réseau d'une part, et une élection dynamique des «sentinelles» d'autre part.
 
 %===============================================================================
     \subsection{Partition hiérarchique du réseau}
@@ -63,9 +63,9 @@ Des expériences ayant recours au matériel considéré sont indispensables pour
 %===============================================================================
     \subsection{Des \cns pour surveiller le trafic}
 
-La partition hiérarchique d'un réseau en clusters établit déjà une distinction entre deux rôles que peuvent assumer les capteurs: celui de nœud « normal », qui poursuit ses opérations de captage et de retransmission des données de façon classique, et celui de \ch, qui se retrouve chargé d'assurer la liaison entre les membres de son cluster et le restant du réseau.
-À côté des nœuds «~normaux~» et des \chs, un troisième rôle va être attribué à certains capteurs, afin d'assurer la détection des attaques de type «~\dds~».
-Certains capteurs se voient ainsi confier le rôle de «~nœuds de contrôle~», ici nommés \cns (introduits sous le nom de \textit{gNodes}\index{gNodes@\textit{gNodes}} dans~\cite{LC08}), et sont chargés de surveiller le trafic entrant et sortant des \chs.
+La partition hiérarchique d'un réseau en clusters établit déjà une distinction entre deux rôles que peuvent assumer les capteurs: celui de nœud «normal», qui poursuit ses opérations de captage et de retransmission des données de façon classique, et celui de \ch, qui se retrouve chargé d'assurer la liaison entre les membres de son cluster et le restant du réseau.
+À côté des nœuds «normaux» et des \chs, un troisième rôle va être attribué à certains capteurs, afin d'assurer la détection des attaques de type «\dds».
+Certains capteurs se voient ainsi confier le rôle de «nœuds de contrôle», ici nommés \cns (introduits sous le nom de \textit{gNodes}\index{gNodes@\textit{gNodes}} dans~\cite{LC08}), et sont chargés de surveiller le trafic entrant et sortant des \chs.
 
 Si un \cn constate qu'un capteur envoie, au cours d'une unité de temps, plus de données à leur \CH qu'une valeur de seuil déterminée $S_{\textrm{débit}}$, il retient que le nœud a eu un comportement anormal (il y a eu un écart important à la moyenne de la quantité de données envoyées par unité de temps).
 Lorsque ce nœud réalise un certains nombres d'écarts, \cad lorsque le nombre de comportement anormaux détectés par un \cn dépasse une valeur de seuil $S_{\textrm{écarts}}$, le ou les nœuds de contrôle qui ont repéré ces écarts considèrent alors le capteur comme compromis.
@@ -86,7 +86,7 @@ Dans ce cas, l'élection d'un nouveau \CH dans le cluster est déclenchée.
         \subsubsection{Motivations}
 La partition du réseau permet de limiter aux seuls \chs les efforts énergétiques dus aux transmissions longues.
 L'inconvénient est que, justement, ces \CH vont épuiser leur batterie beaucoup plus rapidement que s'ils étaient restés des nœuds ordinaires, tirant ainsi le réseau vers une fin de vie précoce.
-Les nœuds ne sont pas toujours désignés \CH «~à vie~»: ainsi \leach renouvelle périodiquement la partition du réseau, choisissant à chaque itération de nouveaux \chs et entrainant la sélection d'un nouveau lot de \cns.
+Les nœuds ne sont pas toujours désignés \CH «à vie»: ainsi \leach renouvelle périodiquement la partition du réseau, choisissant à chaque itération de nouveaux \chs et entrainant la sélection d'un nouveau lot de \cns.
 
 Mais tous les protocoles de \idx{clusterisation} ne prévoient pas nécessairement de renouvellement régulier de la partition.
 De plus, s'ils n'émettent pas sur de longues distances, les \cns se retrouvent eux aussi à consommer plus d'énergie que les nœuds normaux, puisqu'il doivent sans cesse rester en écoute des transmissions qui les entourent, et analyser le débit de chacun de leurs voisins.
@@ -96,7 +96,7 @@ Il est vrai que le renouvellement périodique des \cns rajoute des contraintes e
 Pour certaines applications des capteurs, ceci peut représenter un inconvénient que la répartition de la charge ne vient pas contrebalancer; mais de manière générale la préservation des réserves énergétiques est primordiale dans les \rcs, et un meilleur équilibre de la charge obtenu pour un prix relativement modeste ne semble pas superflu.
 Autre remarque: en matière de détection d'intrusion, les \IDS les plus récents se vantent souvent de n'engendrer qu'un faible surplus de consommation dans le réseau~\cite{LZYP08}, et la question se pose donc de savoir si la répartition de la charge par un renouvellement dynamique reste pertinente; nous verrons en section suivante qu'avec un système aussi simple que nos \cns, les simulations annoncent un gain important sur la répartition de la charge.
 Il faut également garder à l'esprit que les mécanismes de renouvellement périodique et de sélection des nœuds de surveillance ne sont pas dépendants du mécanisme de détection utilisé (\cad des \cns qui appliquent des règles sur le trafic analysé).
-Ainsi, si un \IDS « concurrent »
+Ainsi, si un \IDS «concurrent»
 \begin{itemize}
     \item présente une bonne capacité à économiser l'énergie du réseau,
     \item s'exécute seulement sur un sous-ensemble des nœuds du réseau,
@@ -110,7 +110,7 @@ Cette solution de renouvellement périodique améliore aussi la sécurité du r�
         \subsubsection{Le choix par le hasard}
 Le renouvellement périodique des capteurs de surveillance peut être réalisé de plusieurs façons.
 Dans ce chapitre, une façon de faire très simple est employée: la sélection des \cns, pour chaque période, est ---~théoriquement~--- \idx{aléatoire}.
-L'aléatoire est une notion délicate en informatique; nous nous contenterons plutôt d'un algorithme capable de générer des nombres dits «~pseudo-aléatoires~».
+L'aléatoire est une notion délicate en informatique; nous nous contenterons plutôt d'un algorithme capable de générer des nombres dits «pseudo-aléatoires».
 Une façon de procéder, par exemple, est de recourir à un algorithme capable de générer une suite de nombre d'apparence aléatoire, utilisés pour déterminer quels seront les \cns pour la période à venir~\cite{GMT12}.
 Cet algorithme se doit de respecter les points suivants:
 \begin{itemize}
@@ -125,7 +125,7 @@ Plus précisément, le générateur retenu est de type $x_n = a\cdot x_{n-1}\bmo
     \item le nombre pseudo-aléatoire $x_n$ est généré en fonction de son prédécesseur $x_{n-1}$;
     \item $m$ est de la forme $2^k$, ce qui facilite le calcul de $\bmod\ m$ (troncature à droite du résultat sur $k$ bits);
     \item $a$ doit être de la forme $8\cdot i\pm3$ (avec $i$ un entier positif) pour que le générateur ait la période maximale, égale à $2^{k-2}$;
-    \item $x_0$ (la «~graine~», ou \textit{seed} en anglais) doit être un entier impair (toujours pour avoir la meilleure période).
+    \item $x_0$ (la «graine», ou \textit{seed} en anglais) doit être un entier impair (toujours pour avoir la meilleure période).
 \end{itemize}
 La méthode de \textsc{Schrage}\index{methode de schrage@méthode de \textsc{Schrage}} permet de reformuler le générateur sous une forme qui prévient tout problème de débordement\,\footnote{Un débordement désigne le dépassement, au cours des calculs, de la valeur d'entier maximale gérée par le système, et se traduit par des erreurs de calcul.} lors de l'implémentation~\cite{RJ91}.
 Le générateur est alors écrit sous la forme suivante: $a\cdot x\bmod m=g(x)+m\cdot h(x)$, avec:
@@ -193,7 +193,7 @@ Cette méthode est néanmoins celle qui est implémentée dans les travaux de la
         \subsubsection{Élection centralisée au niveau de la \sdb}
 L'élection centralisée peut également être effectuée au niveau de la \sdb, comme représenté sur la \figref{sa:fig:elecbs}.
 Les $2$-\CH du réseau font alors remonter à la \sdb la liste des nœuds de leurs $2$-clusters respectifs, et celle-ci retourne une liste de \cns pour chacun d'entre eux.
-Les capacités (en mémoire, calcul, énergie) de la \sdb étant considérées comme illimitées, cette méthode a pour avantage de déporter toutes les tâches couteuses dans un environnement «~sans contraintes~».
+Les capacités (en mémoire, calcul, énergie) de la \sdb étant considérées comme illimitées, cette méthode a pour avantage de déporter toutes les tâches couteuses dans un environnement «sans contraintes».
 Le calcul des nombres pseudo-aléatoires par la \sdb ne lui coute, pour ainsi dire, rien.
 \begin{figure}[ht]
     \centering

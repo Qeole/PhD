@@ -5,7 +5,7 @@
     \subsubsection{Différents systèmes de détection d'intrusion}
 %{{{2
 La détection des attaques de \dds passe par la mise en place d'un système spécifique, apte à collecter des indices permettant de déterminer si une attaque a lieu et, si possible, quelle en est l'origine.
-On parle de « \idss », ou \IDS pour \textit{Intrusion Detection System}.
+On parle de «\idss», ou \IDS pour \textit{Intrusion Detection System}.
 Pour être précis, il convient de relever que ces systèmes sont utilisés pour la détection de tous types d'attaques, y compris lorsqu'il ne s'agit pas de \dds.
 Les usages et les spécifications des \IDS sont donc multiples: la \figref{ea:fig:idsmap} résume les différentes catégories existantes, que nous allons brièvement décrire.
 Il existe différentes façon de les distinguer.
@@ -32,7 +32,7 @@ On parle en anglais de NIDS\index{système de détection d'intrusion!NIDS} (\tex
 De nombreux \IDS cumulent à la fois des mécanismes de surveillance du réseau et du comportement de leurs voisins, et une surveillance des évènements système survenant sur leur hôte~\cite{BMS13}.
 
         \paragraph{Selon le type d'intrusion à détecter}
-Les \IDS sont utilisés pour lutter contre tous types d'« intrusions » (ou d'attaques dans le sens plus général), pas seulement contre le \dds, bien que ce soit le point qui nous préoccupe le plus dans cette thèse~\cite{BMS13}.
+Les \IDS sont utilisés pour lutter contre tous types d'«intrusions» (ou d'attaques dans le sens plus général), pas seulement contre le \dds, bien que ce soit le point qui nous préoccupe le plus dans cette thèse~\cite{BMS13}.
 Ainsi ils peuvent être utilisés afin de détecter:
 \begin{itemize}
     \item des \textbf{tentatives d'accès au réseau} de la part d'un attaquant externe (qui chercherait à passer par exemple par la compromission d'un nœud ou par l'obtention de matériel cryptographique\index{cryptographie}); cette étape n'est souvent qu'un prélude à d'autres attaques (de \dds notamment);
@@ -47,7 +47,7 @@ Les méthodes utilisées pour déterminer l'existence et l'identité d'un attaqu
 Ces catégories, et les principales méthodes qu'elles regroupent, sont détaillées plus bas en \sssref{ea:sss:detect}.
 
         \paragraph{Selon l'infrastructure du réseau}
-Si de nombreux \IDS ne se préoccupent pas de savoir quelle est la configuration exacte du réseau, et sont élaborés sur des architectures « plates », \textbf{sur un seul niveau}, d'autres en revanche sont spécifiquement construits avec l'idée de tirer profit d'une \textbf{architecture clusterisée}\index{clusterisation!architecture clusterisée}.
+Si de nombreux \IDS ne se préoccupent pas de savoir quelle est la configuration exacte du réseau, et sont élaborés sur des architectures «plates», \textbf{sur un seul niveau}, d'autres en revanche sont spécifiquement construits avec l'idée de tirer profit d'une \textbf{architecture clusterisée}\index{clusterisation!architecture clusterisée}.
 La partition du réseau en clusters va de fait permettre la mise en place d'algorithmes différents, le plus souvent distribués au sein des clusters~\cite{SJ11}.
 
 Il est également intéressant de noter que la clusterisation\index{clusterisation} en soi d'un réseau est un mécanisme efficace pour limiter la portée de la plupart des attaques de \dds, dont les dommages seront en principe circonscrit au cluster dans lequel elles sont menées.
@@ -58,9 +58,9 @@ La détection passe par la collecte puis le traitement d'indices sur le fonction
 Collecte comme traitement peuvent être réalisés par différenties entités ou associations d'entités, à savoir:
 \begin{itemize}
     \item le traitement, les calculs peuvent être \textbf{centralisés} et réalisés seulement par la \sdb, à laquelle les capteurs font remonter les informations brutes relevées sur le fonctionnement du réseau. Dans certains cas extrêmes, même la collecte d'indices n'est réalisée que par la \sdb;
-    \item chaque capteur peut implémenter son propre \ids: « \textbf{chacun pour soi} », quitte à garder pour lui ses conclusions sur le statut des autres nœuds. À l'inverse de la solution précédente, chaque capteur réalise alors de bout en bout les opérations de surveillance;
+    \item chaque capteur peut implémenter son propre \ids: «\textbf{chacun pour soi}», quitte à garder pour lui ses conclusions sur le statut des autres nœuds. À l'inverse de la solution précédente, chaque capteur réalise alors de bout en bout les opérations de surveillance;
     \item la détection peut être menée par des \textbf{agents mobiles}\index{mobilité}, qui se déplacent de nœuds en nœuds dans un \rc autrement statiques (ou peu mobiles en comparaison avec les agents de surveillance). Ces agents mobiles\index{mobilité} disposent en principe de ressources plus importantes que les capteurs ordinaires. Cette configuration ne peut bien sûr pas être déployée pour tous les usages des \rcs;
-    \item la collecte d'informations peut être \textbf{distribuée entre les nœuds}\index{distribution} situés sur un même niveau d'horizontalité dans l'architecture du réseau: cette configuration leur permet d'échanger des informations entre eux, notamment des indices de \idx{confiance}, et de déclencher des observations coordonnées lorsqu'un nœud « suspecte » un pair d'être compromis, sans en avoir la « certitude ». Lorsqu'un capteur est jugé définitivement compromis, l'information est partagée entre les nœuds. Dans certains systèmes, les calculs eux-mêmes peuvent être distribués;
+    \item la collecte d'informations peut être \textbf{distribuée entre les nœuds}\index{distribution} situés sur un même niveau d'horizontalité dans l'architecture du réseau: cette configuration leur permet d'échanger des informations entre eux, notamment des indices de \idx{confiance}, et de déclencher des observations coordonnées lorsqu'un nœud «suspecte» un pair d'être compromis, sans en avoir la «certitude». Lorsqu'un capteur est jugé définitivement compromis, l'information est partagée entre les nœuds. Dans certains systèmes, les calculs eux-mêmes peuvent être distribués;
     \item enfin, la distribution peut également être réalisée de façon \textbf{hiérarchique}, sur un plan vertical, dans les réseaux clusterisés\index{clusterisation!réseau clusterisé}. Il y a alors interaction entre les membres d'un cluster et leur \ch, qui se charge au minimum de la propagation des alertes, et parfois également des calculs à mener.
 \end{itemize}
 
@@ -73,7 +73,7 @@ La plupart des \IDS sont prévus pour fonctionner \textbf{de manière continue} 
 En pratique, pour un critère donné, la plupart des \IDS proposés se retrouvent dans plusieurs catégories à la fois: on retrouve ainsi beaucoup de systèmes hybrides surveillant tout à la fois l'hôte sur lequel ils tournent, et le trafic intercepté par le nœud.
 De même, le type d'attaques recherchées par les systèmes sont généralement multiples, et portent souvent sur plusieurs couches protocolaires (en référence au modèle \tcpip).
 Et pour en détecter un maximum, il n'est pas rare qu'un \IDS combine plusieurs méthodes de détection.
-On voit ainsi souvent apparaitre en anglais le terme \textit{cross-layer IDS}\index{système de détection d'intrusion!\textit{cross-layer} IDS}, littéralement « IDS sur plusieurs couches »~\cite{BMS13}.
+On voit ainsi souvent apparaitre en anglais le terme \textit{cross-layer IDS}\index{système de détection d'intrusion!\textit{cross-layer} IDS}, littéralement «IDS sur plusieurs couches»~\cite{BMS13}.
 %2}}}
 
     \subsubsection{Les méthodes de détection}\label{ea:sss:detect}
@@ -99,7 +99,7 @@ La détection basée sur les anomalies\index{anomalie} regroupe trois sous-caté
 
 \paragraph{Règles et signatures des attaques\index{signature d'attaque}}\label{ea:par:rules}
 Plutôt que d'attendre que des anomalies\index{anomalie} de fonctionnement, de performances, soient détectés, d'autres \IDS prennent les devants et mettent en place un système de surveillance du voisinage en établissant un ensemble de règles à ne pas transgresser.
-Ces règles sont construites à partir de la « signature » des attaques connues\index{signature d'attaque} \cad, pour une attaque donnée, à partir du comportement type adopté par un nœud qui tenterait de mener cette attaque~\cite{BMS13}.
+Ces règles sont construites à partir de la «signature» des attaques connues\index{signature d'attaque} \cad, pour une attaque donnée, à partir du comportement type adopté par un nœud qui tenterait de mener cette attaque~\cite{BMS13}.
 
 Les règles peuvent être nombreuses et variées, en voici quelques exemples représentatifs.\index{signature d'attaque}
 \begin{itemize}
@@ -108,17 +108,17 @@ Les règles peuvent être nombreuses et variées, en voici quelques exemples rep
     \item \textbf{Règle sur le délai de retransmission}: la retransmission en question par le relais ne doit pas être effectuée après un certain délai, afin d'éviter des ralentissements importants dans le réseau (cette règle est très proche de la précédente, qui est bien obligée de se baser sur un délai limite pour considérer que le paquet ne sera pas retransmis).
     \item \textbf{Règle sur l'\integrite}: Le contenu du message retransmis par le relais ne doit pas être altérée. Cette règle est bien entendu inapplicable lorsque le relais est censé effectuer un traitement (agrégation, traitement sémantique\dots) sur ce contenu avant de le retransmettre. Les attaques visées sont principalement celles visant l'\integrite des paquets.
     \item \textbf{Règle sur la répétition}: un message ne peut être transmis par un nœud donné au plus qu'un certain nombre de fois. Si ce seuil est dépassé, le nœud peut être suspecté de vouloir influencer les résultats collectés par la \sdb. Si la répétition est espacée dans le temps, il peut aussi s'agir d'une tentative d'attaque par \idx{rejeu} de paquets.
-    \item \textbf{Règle sur la portée de transmission}: les paquets « entendus » par les nœuds de surveillance ne devraient provenir que de nœuds voisins dans le réseau, et non de nœuds que l'on sait éloignés. Réciproquement, les nœuds voisins ne sont pas censés émettre avec une puissance dépassant un certain seuil. Cette règle peut permettre de détecter des nœuds qui tenteraient de produire une fuite de données vers l'extérieur du réseau, ou bien de mener des attaques dans des zones plus éloignées du réseau (notamment des attaques sur le \idx{routage}, en prétendant être voisin de nœuds distants, ou bien des attaques par trou de ver\index{trou!trou de ver}).
+    \item \textbf{Règle sur la portée de transmission}: les paquets «entendus» par les nœuds de surveillance ne devraient provenir que de nœuds voisins dans le réseau, et non de nœuds que l'on sait éloignés. Réciproquement, les nœuds voisins ne sont pas censés émettre avec une puissance dépassant un certain seuil. Cette règle peut permettre de détecter des nœuds qui tenteraient de produire une fuite de données vers l'extérieur du réseau, ou bien de mener des attaques dans des zones plus éloignées du réseau (notamment des attaques sur le \idx{routage}, en prétendant être voisin de nœuds distants, ou bien des attaques par trou de ver\index{trou!trou de ver}).
     \item \textbf{Règle sur les collisions}: pour lutter contre les tentatives de \idx{brouillage}, un seuil peut être instauré pour le nombre maximum d'échecs de transmission dû à des collisions\index{collision}. Si ces collisions sont trop fréquentes et que le capteur qui en est à l'origine peut être identifié, il est considéré comme compromis.
     \item \textbf{Règles sur les accès}: si le nombre de tentatives d'un nœud pour s'enregistrer et obtenir un accès à certaines ressources dépasse un certain seuil, une alarme est déclenchée. Cette règle peut notamment s'appliquer à la détection des intrusions au niveau machine, lorsqu'une entité tente et échoue plusieurs fois de se connecter sur le système.
 \end{itemize}
 
-Lorsque les règles sont transgressées, une « alarme » est déclenchée.
+Lorsque les règles sont transgressées, une «alarme» est déclenchée.
 Suivant le modèle de l'\IDS, cette alarme peut n'être qu'une notification interne au capteur qui héberge le système, ou bien il peut partager l'information avec son entourage ainsi que, généralement, la \sdb.
 Les mesures à prendre en guise de réactions seront traitées plus bas.
 
 Les nœuds qui observent le comportement de leurs voisins et veillent à l'application des règles choisies pour le réseau sont désignés de plusieurs façons: on parle de nœuds de contrôle, de nœuds de surveillance, éventuellement de sentinelles; en anglais, ce seront le plus souvent des \textit{monitoring nodes} (nœuds moniteurs).
-L'expression \textit{watch dogs}, pour « chiens de garde », est aussi régulièrement employée~\cite{RKKK13}.
+L'expression \textit{watch dogs}, pour «chiens de garde», est aussi régulièrement employée~\cite{RKKK13}.
 Dans nos travaux, les nœuds chargés de cette surveillance sont appelés \cns.
 
 La détection basée sur la signature des attaques\index{signature d'attaque} est relativement simple à appréhender et à mettre en œuvre.
@@ -143,7 +143,7 @@ Nous allons donner ici quelques exemples de propositions concrètes de systèmes
 La plupart d'entre elles se basent sur l'emploi d'architectures (\idx{clusterisation}, architectures de sécurité\index{architecture de sécurité}) ou de protocoles (\idx{routage}) déjà existants, auxquelles elles rajoutent des systèmes dédiés à la détection des attaques.
 
 \paragraph{Quelques \IDS pour réseaux clusterisés\index{clusterisation!réseau clusterisé}}
-Le système SecCBSN (\textit{Secure Communications of Cluster-Based Sensor Network}, « communications sécurisées des \rcs clusterisés ») introduit une architecture de sécurité à laquelle est adjointe un \ids pour sécuriser au mieux possible les réseaux clusterisés~\cite{HHC07}.
+Le système SecCBSN (\textit{Secure Communications of Cluster-Based Sensor Network}, «communications sécurisées des \rcs clusterisés») introduit une architecture de sécurité à laquelle est adjointe un \ids pour sécuriser au mieux possible les réseaux clusterisés~\cite{HHC07}.
 Chaque nœud implémente trois modules: l'un intervient pour l'\election du \ch, réalisée sur le modèle de \leach.
 Le deuxième module est chargé d'apporter \idx{authentification} et \idx{chiffrement} pour les communications entre les capteurs au sein du réseau, et utilise notamment une version retouchée du certificat TESLA.
 \nomenclature{SecCBSN}{\textit{Secure Communications of Cluster-Based Sensor Network}}
@@ -172,11 +172,11 @@ DLSR fait signaler par la \sdb la fin de l'attaque, afin que les nœuds cessent 
 
 Basé sur des mécanismes simples, REWARD reprend la règle de retransmission pour assurer qu'aucun nœud ne commet d'attaque de type \textit{blackhole}\index{trou!trou noir}~\cite{Kar05}.
 À chaque émission de paquet, le nœud émetteur (qu'il soit émetteur d'origine ou relais, sauf s'il est le dernier relais de la route empruntée) vérifie que le destinataire retransmet le paquet sur le saut suivant.
-Cette procédure ne permet pas de détecter deux attaquants « alignés » sur la route des paquets, qui agiraient de concert, le premier transmettant le paquet au second, sans lever d'alerte lorsque celui-ci se contenterait de supprimer le paquet.
+Cette procédure ne permet pas de détecter deux attaquants «alignés» sur la route des paquets, qui agiraient de concert, le premier transmettant le paquet au second, sans lever d'alerte lorsque celui-ci se contenterait de supprimer le paquet.
 Aussi lorsque l'on suspecte que des attaquants coopèrent\index{coopération}, REWARD ne se contente plus de ne faire surveiller que ses voisins directs par un capteur, mais propose d'augmenter la puissance de transmission lors du transit du paquet, de sorte que la règle puisse être vérifiée par chaque nœud sur les deux sauts suivant son émission.
 
 Une conséquence des attaques de type \textit{sinkhole}\index{trou!puits}, outre la perte des paquets, est la consommation supplémentaire en énergie que l'attaquant impose à ses voisins.
-Une étude se base sur ce constat pour établir une méthode « géostatistique » de détection pour ces attaques~\cite{SKDM14}.
+Une étude se base sur ce constat pour établir une méthode «géostatistique» de détection pour ces attaques~\cite{SKDM14}.
 Le principe consiste à échantillonner périodiquement des zones du réseau, en demandant aux nœuds leur énergie résiduelle.
 Un traitement sur ces données permet de déterminer les zones ou l'énergie des nœuds est plus faible qu'elle ne le devrait, et donc où une attaque de type \textit{sinkhole}\index{trou!puits} est peut-être en cours.
 Ce traitement consiste en l'application d'un modèle de survie, plus précisément une régression de \textsc{Cox} (modèle à risque proportionnel), qui est réalisé soit par la \sdb, soit, dans une version adaptée, par des nœuds de \idx{confiance} au sein du réseau.

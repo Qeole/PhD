@@ -14,7 +14,7 @@ La protection de l'\integrite des données assure de son côté l'échec de tout
 
 Les mécanismes dédiés à la protection de l'\idx{authentification}, de l'\integrite, ou contre le \idx{rejeu}, présentés en \sref{ea:sec:secu}, sont donc également utiles pour protéger un \rc de certaines attaques de \dds.
 On parle de mesures de prévention, dans le sens où il s'agit de méthodes mises en place pour empêcher une attaque de survenir.
-De nombreuses architectures de sécurité\index{architecture de sécurité}, qui apportent \idx{authentification}, chiffrement, \integrite et protection contre le \idx{rejeu} aux échanges, et parmi lesquelles une bonne partie des solutions présentées en \sssref{ea:sss:archi}, se « vantent » ainsi d'atténuer, voire de prévenir totalement plusieurs types d'attaques de \dds.
+De nombreuses architectures de sécurité\index{architecture de sécurité}, qui apportent \idx{authentification}, chiffrement, \integrite et protection contre le \idx{rejeu} aux échanges, et parmi lesquelles une bonne partie des solutions présentées en \sssref{ea:sss:archi}, se «vantent» ainsi d'atténuer, voire de prévenir totalement plusieurs types d'attaques de \dds.
 %2}}}
 
     \subsubsection{Des protocoles de \idx{routage} spécifiques}
@@ -38,13 +38,13 @@ L'usage d'antennes directionnelles\index{antenne directionnelle} peut également
 Au final, un attaquant correctement équipé pourra toujours trouver un capteur en procédant par triangulation du signal électromagnétique.
 
 Il peut alors devenir intéressant de cacher à l'attaquant quels sont les nœuds qui représenteraient le plus d'intérêt pour lui.
-Un exemple traité est le jeu des « chasseurs de panda »: des capteurs dispersés dans l'habitat naturel d'un panda suivent les déplacements de l'animal et les rapportent à une \sdb.
+Un exemple traité est le jeu des «chasseurs de panda»: des capteurs dispersés dans l'habitat naturel d'un panda suivent les déplacements de l'animal et les rapportent à une \sdb.
 Mais des braconniers recherchent l'animal et tentent d'utiliser les données du réseau en vue de le localiser plus facilement.
 S'il est impossible de cacher le signal des capteurs et d'empêcher les attaquants d'accéder directement aux machines, il est en revanche possible de déployer des mécanismes pour empêcher les chasseurs de savoir quel est le capteur qui renvoie à un instant donné les informations sur la présence du panda dans son secteur.
 Un mécanisme pour disséminer l'information, basé sur le modèle des épidémies, a ainsi été proposé dans cet exemple~\cite{KDA14}.
 Si l'on se concentre uniquement sur le \dds, il est tout à fait possible d'imaginer l'utilisation de techniques similaires afin de dissimuler à l'attaquant quels sont les nœuds à compromettre pour infliger un maximum de dégâts au bon fonctionnement du réseau.
 
-Une autre approche possible~\cite{Ho10} est de considérer que tout capteur ayant cessé de donner des « signes de vie » pendant une période prolongée est devenu hors-service, et qu'à ce titre il n'est plus censé réintégrer le réseau à l'avenir.
+Une autre approche possible~\cite{Ho10} est de considérer que tout capteur ayant cessé de donner des «signes de vie» pendant une période prolongée est devenu hors-service, et qu'à ce titre il n'est plus censé réintégrer le réseau à l'avenir.
 Cette période est par exemple déterminée à l'aide d'un algorithme SPRT (\textit{Sequential Probability Radio Test}) qui calcule la durée au-delà de laquelle l'absence de signal devient anormal.
 Si le nœud tentait malgré tout de reprendre son activité au-delà de la période, alors supposition est faite que le capteur a été retiré du réseau par un attaquant le temps de procéder à une modification de son code, et ce nœud se retrouve alors volontairement exclu\index{exclusion} du réseau par mesure de précaution.
 \nomenclature{SPRT}{\textit{Sequential Probability Radio Test}}

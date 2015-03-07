@@ -44,7 +44,7 @@ Nous considérons pour cet exercice un réseau contenant trois capteurs sans fil
 L'un d'entre eux exactement a été compromis par un attaquant.
 Nous nommerons les nœuds $g1$, $g2$ et $b3$, $b3$ étant le nœud compromis.
 Pour représenter le comportement asynchrone des nœuds sur le graphe, nous choisissons de découper le temps en intervalles.
-Nous considérons alors que pour chaque intervalle, chaque capteur a le temps d'exécuter exactement une action\,\footnote{À noter qu'une « action » correspond ici à un état, et peut entre autres consister à « rester au repos ».}.
+Nous considérons alors que pour chaque intervalle, chaque capteur a le temps d'exécuter exactement une action\,\footnote{À noter qu'une «action» correspond ici à un état, et peut entre autres consister à «rester au repos».}.
 Sur chaque intervalle, les participants jouent de manière séquentielle (les uns après les autres) en se déplaçant sur le graphe.
 Nous choisissons un ordre arbitraire pour cette séquence: $g1$ joue en premier, puis vient le tour de $g2$, et enfin $g3$ passe en dernier.
 Comme les nœuds sont supposés jouer de façon \emph{simultanée}, cet ordre utilisé pour la modélisation n'a aucune importance.
@@ -52,7 +52,7 @@ Comme les nœuds sont supposés jouer de façon \emph{simultanée}, cet ordre ut
 Le graphe qui représente le jeu possède un ensemble d'états symbolisant les différents états du réseau.
 Étant donné que chacun des trois joueurs dispose de quatre états (\emph{idle}, \emph{send}, \emph{listen}, \emph{treat\_msg}), le réseau dans son ensemble peut en théorie adopter jusqu'à $4^3=64$ états différents.
 En pratique, certains de ces états ne seront jamais atteints: par exemple, un état où tous les joueurs sont simultanément en train de traiter les paquets reçus n'aurait pas de sens, puisqu'il faudrait qu'au moins l'un d'entre eux ait émis ces paquets au tour précédent, et devrait désormais se retrouver au repos.
-La forme donnée aux états du graphe de jeu indique quelle « équipe » est en train de jouer: les cercles sont utilisés pour les coups des capteurs légitimes, les rectangles serviront pour les actions du nœud compromis.
+La forme donnée aux états du graphe de jeu indique quelle «équipe» est en train de jouer: les cercles sont utilisés pour les coups des capteurs légitimes, les rectangles serviront pour les actions du nœud compromis.
 
 Chaque arête du graphe représente l'action réalisée par le joueur qui a la main.
 Elles correspondent aux arêtes empruntées par les joueurs sur leurs propres machines à états, auxquelles seraient ajoutées des valeur nulles en gain et en énergie pour les deux autres joueurs qui attendent leur tour.
@@ -77,8 +77,8 @@ Un capteur agissant de manière \emph{cupide} cherche à envoyer le plus de mess
 La formule de gain peut alors s'exprimer comme suit: $e_3 > 0 \wedge p_3 \geq \frac16$, ce qui signifie dans cet exemple que pour gagner la partie le nœud compromis doit envoyer un message toutes les $6$ étapes.
 Comme une action du nœud compromis n'intervient que toutes les $3$ étapes seulement (les deux autres correspondant aux coups des autres joueurs), le nœud compromis doit en fait passer une fois sur deux par l'état \emph{start\_send}.
 
-Dans ce cas il lui est en fait impossible de gagner, car l'envoi d'un message consomme ici $2$ unités d'énergie, et la recharge de la batterie nécessite trop de « temps » pour permettre un envoi toutes les deux actions.
-L'objectif pourrait bien sûr être adapté à une autre définition d'un comportement « cupide »: nous pourrions considérer, par exemple, que l'envoi d'un message toutes les $15$ étapes peut remplir l'objectif d'un nœud cupide.
+Dans ce cas il lui est en fait impossible de gagner, car l'envoi d'un message consomme ici $2$ unités d'énergie, et la recharge de la batterie nécessite trop de «temps» pour permettre un envoi toutes les deux actions.
+L'objectif pourrait bien sûr être adapté à une autre définition d'un comportement «cupide»: nous pourrions considérer, par exemple, que l'envoi d'un message toutes les $15$ étapes peut remplir l'objectif d'un nœud cupide.
 
         \subsubsection{Comportement destructeur}
 Un capteur se comportant de façon \emph{destructrice} cherche à rendre le réseau inutilisable, par exemple en agissant de telle façon que tous les nœuds épuisent leur batterie: son but est alos de demeurer le dernier nœud en état de marche dans le réseau.

@@ -30,7 +30,7 @@ Mais l'aspect entièrement déterministe du processus peut aussi représenter un
 Un attaquant a effectivement intérêt à faire attribuer le rôle de \cn aux nœuds qu'il a compromis, car cela lui permet:
 \begin{itemize}
     \item de réduire le nombre de \cns légitimes dans le réseau capables de détecter les capteurs compromis;
-    \item de signaler au \ch des capteurs « innocents » comme étant compromis, dans le but de les faire exclure du réseau.
+    \item de signaler au \ch des capteurs «innocents» comme étant compromis, dans le but de les faire exclure du réseau.
 \end{itemize}
 Quand un algorithme de sélection (pseudo-)aléatoire est applique, un nœud compromis peut très bien être désigné pour un cycle, mais il perdra rapidement son rôle de surveillance, pour les cycles suivants.
 Même avec un processus d'auto-désignation (basé sur le modèle de \leach~\cite{HHT02} par exemple), les nœuds compromis pourraient tenter de conserver leur rôle de \cn sur plusieurs cycles, mais cela n'empêcherait pas des capteurs légitimes de s'auto-désigner également.
@@ -39,7 +39,7 @@ Tout ce qu'ils ont à faire, pour en arriver là, consiste à annoncer un niveau
 Ils sont alors assurés d'être désignés \cns; et s'il se trouve y avoir au moins $n$ nœuds compromis au sein du cluster, ils peuvent de cette manière accaparer les $n$ rôles de \cn et désactiver du même coup le mécanisme de détection dans son intégralité.
 L'attaque devient alors impossible à détecter et à contrer.
 
-Pour empêcher les capteurs de « mentir » lorsqu'ils annoncent leur valeur d'énergie résiduelle, l'assignation d'un nouveau rôle à certains des voisins de chaque \cn est proposée.
+Pour empêcher les capteurs de «mentir» lorsqu'ils annoncent leur valeur d'énergie résiduelle, l'assignation d'un nouveau rôle à certains des voisins de chaque \cn est proposée.
 Ces nœuds, que nous appelleront désormais \vns (comme pour \textit{nœuds de vérification}), seront responsables de vérifier la consommation en énergie des nœuds de surveillance.
 Une fois que la sélection des \cns est réalisée, chaque voisin d'un \cn nouvellement désigné choisi à partir d'un seuil de probabilité prédéfini s'il sera ou non \vn pour ce \cn.
 Un capteur peut assumer le rôle de \vn pour plusieurs \cn différents, du moment qu'il s'agit de nœuds voisins.
@@ -71,7 +71,7 @@ Nous proposons ici d'utiliser le modèle de diffusion de \textsc{Rakhmatov} et \
 Ce choix repose sur plusieurs observations:
 \begin{itemize}
     \item ce modèle fournit une approximation assez précise de la consommation réelle d'une batterie, et tient compte des processus chimiques internes à la batterie tels que les effets de récupération (\textit{recovery effect}) ou de perte de capacité selon la tension de décharge (\textit{rate capacity effect});
-    \item il s'agit de l'un des modèles implémentés dans \nsiii, ce qui permet, pour les simulations basées sur ce logiciel, de bénéficier d'une implémentation déjà existante, et surtout d'un modèle théorique parfait. Il ne faut pas craindre cependant que ce modèle ne soit « trop parfait » pour être utilisé par les \vns, étant donné que ces derniers estimeront l'énergie consommée par les \cns à partir de messages émis par ces derniers, sans connaissance des mécanismes internes au nœud (calcul, écoute) comme le fait le cœur du simulateur. Les valeurs calculées par les \vns demeurent donc approximatives par rapport à la consommation des \cns réellement calculée par \nsiii.
+    \item il s'agit de l'un des modèles implémentés dans \nsiii, ce qui permet, pour les simulations basées sur ce logiciel, de bénéficier d'une implémentation déjà existante, et surtout d'un modèle théorique parfait. Il ne faut pas craindre cependant que ce modèle ne soit «trop parfait» pour être utilisé par les \vns, étant donné que ces derniers estimeront l'énergie consommée par les \cns à partir de messages émis par ces derniers, sans connaissance des mécanismes internes au nœud (calcul, écoute) comme le fait le cœur du simulateur. Les valeurs calculées par les \vns demeurent donc approximatives par rapport à la consommation des \cns réellement calculée par \nsiii.
 \end{itemize}
 Le modèle de diffusion de \textsc{Rakhmatov} et \textsc{Vrudhula} se réfère aux réactions chimiques qui se produisent à l'intérieur de l'électrolyte de la batterie, et elle est résumée par l'\equaref{se:eqn:rvdm}
 \begin{equation}
@@ -81,8 +81,8 @@ Le modèle de diffusion de \textsc{Rakhmatov} et \textsc{Vrudhula} se réfère a
 où:
 \begin{itemize}
     \item $\sigma(t)$ est la charge apparente perdue par la batterie à l'instant $t$;
-    \item $l(t)$ est la charge « utile »;
-    \item $u(t)$ est la charge inutilisable (« perdue dans la batterie »);
+    \item $l(t)$ est la charge «utile»;
+    \item $u(t)$ est la charge inutilisable («perdue dans la batterie»);
     \item $i(t)$ est l'intensité du courant électrique à l'instant $t$;
     \item $\beta = \dfrac{\pi\sqrt{D}}{w}$, où $D$ est une constante de diffusion et $w$ la largeur de l'électrolyte.
 \end{itemize}
@@ -117,7 +117,7 @@ Aussi l'algorithme de sélection présenté plus haut doit-il être modifié, po
 \begin{enumerate}
     \item Au cours d'une première phase, chaque nœud évalue la valeur de son énergie résiduelle et la transmet au \ch;
     \item Le \ch écoute toutes les valeurs. Les autres nœuds enregistrent également les valeurs de leurs voisins;
-    \item Tous les nœuds envoient au \CH la liste de leurs voisins directs (\textit{1-hop})\,\footnote{Nous supposons ici que les capteurs ne trichent pas durant cette étape. Ils pourraient en effet annoncer des voisins « virtuels » supplémentaires, pour faire croire qu'ils seront à portée d'un \cn, et ainsi éviter d'être détecté si ce n'est pas le cas.};
+    \item Tous les nœuds envoient au \CH la liste de leurs voisins directs (\textit{1-hop})\,\footnote{Nous supposons ici que les capteurs ne trichent pas durant cette étape. Ils pourraient en effet annoncer des voisins «virtuels» supplémentaires, pour faire croire qu'ils seront à portée d'un \cn, et ainsi éviter d'être détecté si ce n'est pas le cas.};
     \item Le \CH sélectionne les $n$ \cns parmi les nœuds ayant le plus d'énergie résiduelle, de telle façon que ces $n$ nœuds couvrent tous les autres nœuds en terme de portée\,\footnote{Les détails de l'algorithme utilisé pour cette phase ne sont pas précisés dans cette étude.};
     \item Au besoin (si $n$ est trop bas), le \CH sélectionne des \cns supplémentaires de façon à ce qu'ils couvrent l'intégralité du cluster;
     \item Le \CH envoie un message aux nœuds sélectionnés pour leur notifier leur rôle de \cn.

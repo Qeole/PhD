@@ -31,7 +31,7 @@ Il est alors exprimé sous la forme d'un $m$-uplet $x\!=\!(x_1,x_2,\dots,x_m)$ d
 Chaque macro-état $x_k$ représente le nombre de paquets détectés par le \cn $k$ ($1\leq k\leq m$).
 Plus exactement, chaque $x_{k_i}$ ($1\leq i\leq s$) est un compteur, initialisé à $0$, qui est incrémenté à chaque fois que le \cn $k$ détecte un paquet en provenance du capteur $i$.
 $x_{k_d}$ est une variable de type booléen, initialisée à $0$, et passée à $1$ lorsque le \cn $k$ détecte un trafic anormalement élevé.
-La fonction de seuil $f:s^s\rightarrow\{0;1\}$ est utilisée par les \cns pour déterminer la nature normale ou non du trafic (elle indique si un paquet a dépassé ou non le seuil des communications dites «~normales~»).
+La fonction de seuil $f:s^s\rightarrow\{0;1\}$ est utilisée par les \cns pour déterminer la nature normale ou non du trafic (elle indique si un paquet a dépassé ou non le seuil des communications dites «normales»).
 Elle prend pour argument les valeurs des $s$ compteurs $x_{k_1},x_{k_2},\dots,x_{k_s}$ d'un macro-état $x_k$ associé à un \cn $k$, et la valeur retournée est stockée dans $x_{k_d}$.
 
 \newlength\fboxlinelen
@@ -69,7 +69,7 @@ Le macro-état $x$, représentant l'intégralité du système, est directement o
 Le compteur $x_{k_c}$ représente dans la suite le nombre de messages émis par le nœud compromis et captés par le \cn $k$.
 L'équation est donnée en \figref{sa:fig:eqtrans}.
 
-Formulé autrement: le \cn $k$, dans l'état $x_k$, reçoit périodiquement les messages de chaque capteur $i$ (pour tout $i$ tel que $1\leq i\leq s, i\!\neq\!k$): ce sont des transmissions dites «~normales~», qui surviennent avec une fréquence moyenne $\lambda_i$.
+Formulé autrement: le \cn $k$, dans l'état $x_k$, reçoit périodiquement les messages de chaque capteur $i$ (pour tout $i$ tel que $1\leq i\leq s, i\!\neq\!k$): ce sont des transmissions dites «normales», qui surviennent avec une fréquence moyenne $\lambda_i$.
 Chaque message reçu laisse le \cn $k$ dans un état presque identique, à la seule différence que le compteur $x_{k_i}$ est incrémenté de $1$.
 La même chose se produit avec une fréquence $\lambda_c$ pour les messages envoyés par le nœud compromis, qui provoque à chaque fois l'incrémentation du compteur $x_{k_c}$.
 Enfin, la vérification du trafic enregistré par le \cn $k$ survient avec une fréquence $\mu$.
@@ -77,7 +77,7 @@ La fonction $f$ est appliquée sur l'ensemble des $x_{k_i}$, $i$ allant de $1$ �
 Si l'un des capteurs a envoyé un nombre de paquets supérieur à la valeur de seuil (\cad si l'on a $f(x_k)\geq \mathit{seuil}$), le drapeau $x_{k_d}$ est levé.
 Un message d'alerte est alors envoyé du \cn $k$ au \ch.
 Si, en revanche, aucune anomalie n'est à rapporter, le drapeau $x_{k_i}$ est laissé à $0$, et rien n'est envoyé.
-Dans les deux cas, tous les compteurs $x_{k_i}$ sont réinitialisés à $0$, afin que la prochaine vérification soit effectuée sur des données «~fraiches~» (et pour ne pas déclencher par erreur une fausse détection par cumul des nombres de paquets envoyés d'une période sur l'autre).
+Dans les deux cas, tous les compteurs $x_{k_i}$ sont réinitialisés à $0$, afin que la prochaine vérification soit effectuée sur des données «fraiches» (et pour ne pas déclencher par erreur une fausse détection par cumul des nombres de paquets envoyés d'une période sur l'autre).
 
 La probabilité de détection du nœud compromis par le \cn $k$, notée $\Delta_k$, est la suivante:
 \[\Delta_k=\sum_{x_{k_1},\dots,x_{k_s}}^\infty\pi(x_{k_1},\dots,x_{k_s},x_{k_d}=1)\]
@@ -92,7 +92,7 @@ Nous allons ainsi nous orienter vers des processus non-markoviens, qui ne prése
 %===============================================================================
     \subsection{Réseaux de \textsc{Petri}}
 
-Une autre représentation possible du système passe ainsi par l'utilisation de processus stochastiques à évènements discrets (PSED, en anglais \textit{Discrete-Event Stochastic Processes}, ou encore \textit{Generalized Semi-\textsc{Markov} Processes} pour « processus semi-markoviens généralisés »).
+Une autre représentation possible du système passe ainsi par l'utilisation de processus stochastiques à évènements discrets (PSED, en anglais \textit{Discrete-Event Stochastic Processes}, ou encore \textit{Generalized Semi-\textsc{Markov} Processes} pour «processus semi-markoviens généralisés»).
 Leur avantage principal sur les processus de \textsc{Markov} est leur capacité à représenter des événements dont la distribution n'est pas nécessairement exponentielle.
 Plus particulièrement, nous allons utiliser des réseaux de \textsc{Petri} stochastiques généralisés étendus.
 \nomenclature{PSED}{Processus Stochastiques à Événements Discrets}
@@ -101,7 +101,7 @@ Plus particulièrement, nous allons utiliser des réseaux de \textsc{Petri} stoc
 \label{sa:subsubsec:presRPSGe}
 Les réseaux de \textsc{Petri} stochastiques généralisés (\rpsg) forment une classe de réseaux de \textsc{Petri} destinée à modéliser des processus stochastiques.
 Leur version étendue (\rpsge) permet de représenter des transitions dont les délais sont distribués de façon quelconque~\cite{ABCDF95}.
-Il s'agit d'un langage de haut niveau permettant de représenter des processus stochastiques à événements discrets, qui au contraire des processus markoviens «~classiques~» ne sont pas limités à la représentation d'événements à distribution exponentielle.
+Il s'agit d'un langage de haut niveau permettant de représenter des processus stochastiques à événements discrets, qui au contraire des processus markoviens «classiques» ne sont pas limités à la représentation d'événements à distribution exponentielle.
 \rpsge reprend, à quelques différences près, les définitions, la syntaxe et la représentation graphique des réseaux de \textsc{Petri} classiques, enrichis par des propriétés supplémentaires portant sur les transitions.
 Ces dernières sont dites soit \textit{immédiates}, soit \textit{minutées}.
 Elles sont de plus caractérisées par les éléments suivants:
@@ -132,7 +132,7 @@ Par exemple, sur la partie droite de la \figref{sa:fig:gspnex1}, la transition \
         \subsubsection{Modélisation des nœuds}
 Nous allons procéder par étapes en modélisant:
 \begin{enumerate}
-    \item les nœuds capteurs «~simples~»;
+    \item les nœuds capteurs «simples»;
     \item les \cns élus de manière statique;
     \item les \cns élus de manière dynamique (dont la modélisation diffère légèrement).
 \end{enumerate}
@@ -149,7 +149,7 @@ Le nœud y est symbolisé par les pointillés bleus.
 Dans ce nœud $i$ se trouve une unique transition \textsf{TX}, sans place en entrée, autrement dit: toujours active.
 Elle est minutée, avec une distribution exponentielle de paramètre $\lambda_i$: chaque événement correspond à l'envoi de jetons sur tous ses arcs sortants.
 Ces arcs sont rattachés à la place \textsf{InBuff$_{j}$}\,\footnote{Pour \textit{in buffer}.} de chacun des nœuds voisins du nœud $i$ (on trouve donc autant d'arcs sortants que de nœuds voisins).
-L'intégralité de la fonction de mesure et d'envoi des données utiles du \rc peut être modélisée par plusieurs éléments représentés par ce «~modèle de nœud~».
+L'intégralité de la fonction de mesure et d'envoi des données utiles du \rc peut être modélisée par plusieurs éléments représentés par ce «modèle de nœud».
 Un nœud compromis $c$ sera également représenté selon le même modèle, avec un paramètre $\lambda_c$ plus élevé que les autres $\lambda_i$.
 
             \paragraph{Modélisation du \ch}
@@ -172,9 +172,9 @@ Le modèle \rpsge associé à ce type de nœud est présenté en \figref{sa:fig:
     \caption{Modèle \rpsge d'un \cn élu de manière \emph{statique}}\label{sa:fig:cnodegspn1}
 \end{figure}
 La place \textsf{InBuff} représente le tampon contenant les messages reçu par le nœud.
-Un jeton arrivant dans cette place (depuis un nœud «~normal~») représente un message capté par le \cn.
+Un jeton arrivant dans cette place (depuis un nœud «normal») représente un message capté par le \cn.
 La vérification du respect de la valeur seuil $K$ pour le trafic est réalisée à intervalles de temps constants.
-Les transitions \textsf{vérif\_OUI} et \textsf{vérif\_NON} sont «~activées~» au bout de chaque période, et servent à assurer la vérification.
+Les transitions \textsf{vérif\_OUI} et \textsf{vérif\_NON} sont «activées» au bout de chaque période, et servent à assurer la vérification.
 S'il y a au moins $K$ jetons dans la place, la transition \textsf{vérif\_OUI} est franchie.
 Un jeton est alors placé dans la place \textsf{det}, et fait en quelque sorte office de drapeau levé pour indiquer la détection d'un trafic anormal.
 L'arrivée d'un jeton dans la place \textsf{det} déclenche l'envoi d'un message d'alerte au \ch.
@@ -270,7 +270,7 @@ Vérifier que $M\models\phi$ revient alors à déterminer la probabilité de la 
 \lsah étend ce concept dans le sens où l'évaluation d'une formule peut donner n'importe quel nombre réel, et représenter ainsi une probabilité aussi bien que toute autre mesure de performance.
 À cette fin, \lsah fait appel à des automates linéaires hybrides (\alh).
 \nomenclature{ALH}{Automate Linéaire Hybride}
-Un \alh résulte, de manière résumée, de la généralisation des automates temporels dont les variables «~horloges~» sont remplacées par des variables de données réellement évaluées.
+Un \alh résulte, de manière résumée, de la généralisation des automates temporels dont les variables «horloges» sont remplacées par des variables de données réellement évaluées.
 Basée sur ce modèle une formule \lsah comprend ainsi deux sous-éléments:
 \begin{itemize}
     \item un \alh permettant la sélection des exécutions temporelles à retenir à partir du modèle \rpsg considéré, cette sélection étant le fruit de la synchronisation entre une exécution générée par le modèle \rpsg et l'\alh;
@@ -359,7 +359,7 @@ Il s'agit des transitions suivantes:
     \item la première transition qui boucle sur $e_1$:
         \[e_1\xrightarrow{\mathit{vrai},\{\mathsf{vérif\_OUI_i}\},(x_{d_i}:=x_{d_i}+1)}{e_1}\]
         Elle correspond à l'évènement associé au passage de la transition \textsf{vérif\_OUI} du nœud $i$ sur le modèle \rpsge du cluster (présenté en \figref{sa:fig:petridyn}).
-        Lorsque la transition est franchie sur le réseau de \textsc{Petri}, quelle que soit la valeur de l'«~horloge~» $x_t$ (condition $\mathit{vrai}$), la transition correspondante sur l'automate linéaire hybride est elle aussi franchie\,\footnote{Attention: les transitions du réseau de \textsc{Petri}, représentées par des rectangles et reliées aux places par des arcs, ne doivent pas être confondues avec les transitions des automates, représentées par des arcs, et reliant les états.}.
+        Lorsque la transition est franchie sur le réseau de \textsc{Petri}, quelle que soit la valeur de l'«horloge» $x_t$ (condition $\mathit{vrai}$), la transition correspondante sur l'automate linéaire hybride est elle aussi franchie\,\footnote{Attention: les transitions du réseau de \textsc{Petri}, représentées par des rectangles et reliées aux places par des arcs, ne doivent pas être confondues avec les transitions des automates, représentées par des arcs, et reliant les états.}.
         Comme la transition du réseau de \textsc{Petri} correspond à une nouvelle détection de trafic anormal par le nœud $i$, la transition de l'automate a pour effet de mettre à jour la valeur de $x_{d_i}$, en l'incrémentant de $1$;
     \item une deuxième transition qui boucle elle aussi sur $e_1$:
         \[e_1\xrightarrow{\mathit{vrai},\{\mathsf{TX_i}\},(x_{\mathsf{TX}_i}:=x_{\mathsf{TX}_i}+1)}{e_1}\]

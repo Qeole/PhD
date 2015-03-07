@@ -7,7 +7,7 @@ Nous introduisons ici celles qui sont indispensables à la compréhension des tr
     \subsection{Gestion des ressources et performances}
 %{{{1
 Les évolutions technologiques des dernières décennies n'ont de cesse de rendre les ordinateurs plus performants, plus compacts, plus rapides dans le traitement des données.
-Elles ont rendu possible, à force de miniaturisation et de réduction des couts, la création et le déploiement des \rcsfs, mais ceux-ci restent soumis à des contraintes en ressources très fortes par rapport aux stations de travail « classiques » tel que les ordinateurs personnels (y compris portables).
+Elles ont rendu possible, à force de miniaturisation et de réduction des couts, la création et le déploiement des \rcsfs, mais ceux-ci restent soumis à des contraintes en ressources très fortes par rapport aux stations de travail «classiques» tel que les ordinateurs personnels (y compris portables).
 
         \subsubsection{Des algorithmes à adapter}
 %{{{2
@@ -34,7 +34,7 @@ Mais à un niveau plus général déjà, les performances de chaque opération, 
 Les protocoles utilisés, le cycle de travail des capteurs, et jusqu'à la topologie même du réseau peuvent avoir un impact sur la consommation énergétique des nœuds~\cite{ACFP09}.
 
 Par exemple, les \rcs reprennent des protocoles de \idx{routage} initialement développés pour les \wanet, qui n'ont pas systématiquement les mêmes contraintes en énergie; ont donc été proposés de nombreux algorithmes de \idx{routage} destinés spécifiquement aux \rcs.
-Ainsi ERAPL (\textit{Energy-Efficient Routing Algorithm to Prolong Lifetime}, « algorithme de routage économe en énergie permettant de prolonger la durée de vie »)~\cite{ZWPT10} repose sur l'usage d'algorithmes génétiques ainsi que d'une « séquence de collecte de données » permettant d'éviter les boucles et les doublons de transmission.
+Ainsi ERAPL (\textit{Energy-Efficient Routing Algorithm to Prolong Lifetime}, «algorithme de routage économe en énergie permettant de prolonger la durée de vie»)~\cite{ZWPT10} repose sur l'usage d'algorithmes génétiques ainsi que d'une «séquence de collecte de données» permettant d'éviter les boucles et les doublons de transmission.
 
 On trouve aussi des solutions qui proposent d'économiser l'énergie en établissant un classement des paquets à transmettre selon leur priorité, \cad selon leur importance pour l'exploitant~\cite{SAS14}.
 Ainsi les paquets prioritaires sont retransmis plus rapidement, tandis que ceux d'importance moindre peuvent attendre que le trafic soit dans des conditions telles que la transmission ne devrait consommer qu'un minimum d'énergie; la phase d'attente peut également permettre l'arrivée en mémoire tampon d'autres paquets et de procéder à leur \idx{agrégation}.
@@ -44,7 +44,7 @@ Certaines solutions permettent parfois de recharger la batterie à moindre cout.
 Ce peut être le cas avec l'usage de cellules photovoltaïques intégrés aux capteurs.
 C'est aussi une solution qui commence à être utilisée pour recharger certains capteurs piézo-électriques placés sous la surface de voies de circulation automobile, qui peuvent générer une tension électrique au passage des véhicules grâce à la pression mécanique exercée par ces derniers sur les voies~\cite{sti}.
 
-Il se pourrait même que dans un futur plus ou moins proche, les capteurs puissent se dispenser totalement de batterie: des propositions récentes, reposant sur un mécanisme appelé \textit{ambient backscatter} (qui se traduit littéralement par « rétrodiffusion ambiante »), permet de convertir, au niveau d'un capteur, un signal électromagnétique reçu (de la \sdb par exemple) en un courant électrique suffisant pour alimenter l'appareil le temps de traiter le message et de retransmettre une réponse~\cite{LPTGWS13}.
+Il se pourrait même que dans un futur plus ou moins proche, les capteurs puissent se dispenser totalement de batterie: des propositions récentes, reposant sur un mécanisme appelé \textit{ambient backscatter} (qui se traduit littéralement par «rétrodiffusion ambiante»), permet de convertir, au niveau d'un capteur, un signal électromagnétique reçu (de la \sdb par exemple) en un courant électrique suffisant pour alimenter l'appareil le temps de traiter le message et de retransmettre une réponse~\cite{LPTGWS13}.
 
 Mais cette technologie est encore limitée, et elle est loin d'être généralisée.
 En attendant, l'une des possibilités essentielles permettant de réduire la consommation en énergie est l'utilisation d'une architecture \index{clusterisation!clusterisation hiérarchique} hiérarchiquement clusterisée dans le réseau.
@@ -55,15 +55,15 @@ En attendant, l'une des possibilités essentielles permettant de réduire la con
 %{{{1
         \subsubsection{Partition du réseau}
 %{{{2
-«~Clusteriser~» un ensemble d'éléments revient à le diviser en sous-ensembles appelés \textit{clusters}.
+«Clusteriser» un ensemble d'éléments revient à le diviser en sous-ensembles appelés \textit{clusters}.
 Dans le cas des \rcsfs, cette partition permet d'obtenir un routage efficace des paquets, en adoptant la configuration suivante:
 \begin{enumerate}
-    \item tous les nœuds réunis au sein d'un même cluster sont capables de communiquer directement entre eux « en un saut » (\textit{one-hop transmission});
-    \item lors de la partition, un unique nœud par cluster est désigné «~chef~» du cluster.
-        Il est choisi, de façon déterministe ou bien aléatoire selon l'algorithme employé, parmi les nœuds «~normaux~» du cluster.
-        Ce «~chef~» est appelé \textit{\ch} (\CH), littéralement « tête de cluster » en anglais;\nomenclature{CH}{\textit{Cluster Head}}
-    \item lorsqu'un capteur quelconque d'un cluster souhaite faire parvenir des données à un nœud d'un autre cluster\,\footnote{Pour une grande partie des applications, les communications entre nœuds de différents clusters, hors \chs, ne se produisent pas. La totalité du trafic «~utile~», acheminant des données, est généralement à destination de la \sdb.}, ou bien à la \sdb, il envoie ses paquets au \ch de son cluster ;
-    \item le \ch retransmet alors les paquets, soit directement à la cible s'il s'agit de la \sdb et qu'il peut l'atteindre, soit « en plusieurs sauts » en passant par d'autres \chs (\textit{multi-hop transmission}), jusqu'à atteindre le destinataire.
+    \item tous les nœuds réunis au sein d'un même cluster sont capables de communiquer directement entre eux «en un saut» (\textit{one-hop transmission});
+    \item lors de la partition, un unique nœud par cluster est désigné «chef» du cluster.
+        Il est choisi, de façon déterministe ou bien aléatoire selon l'algorithme employé, parmi les nœuds «normaux» du cluster.
+        Ce «chef» est appelé \textit{\ch} (\CH), littéralement «tête de cluster» en anglais;\nomenclature{CH}{\textit{Cluster Head}}
+    \item lorsqu'un capteur quelconque d'un cluster souhaite faire parvenir des données à un nœud d'un autre cluster\,\footnote{Pour une grande partie des applications, les communications entre nœuds de différents clusters, hors \chs, ne se produisent pas. La totalité du trafic «utile», acheminant des données, est généralement à destination de la \sdb.}, ou bien à la \sdb, il envoie ses paquets au \ch de son cluster ;
+    \item le \ch retransmet alors les paquets, soit directement à la cible s'il s'agit de la \sdb et qu'il peut l'atteindre, soit «en plusieurs sauts» en passant par d'autres \chs (\textit{multi-hop transmission}), jusqu'à atteindre le destinataire.
 \end{enumerate}
 Le schéma d'un réseau clusterisé est présenté en \figref{st:fig:wsn}.
 \begin{figure}[!ht]
@@ -72,14 +72,14 @@ Le schéma d'un réseau clusterisé est présenté en \figref{st:fig:wsn}.
     \caption{Schéma d'un \rc clusterisé}\label{st:fig:wsn}
 \end{figure}
 
-L'appel à un algorithme de « \idx{clusterisation} » a pour effet de limiter les émissions à «~longue portée~» (relativement aux communications intra-clusters) aux \chs seulement.
+L'appel à un algorithme de «\idx{clusterisation}» a pour effet de limiter les émissions à «longue portée» (relativement aux communications intra-clusters) aux \chs seulement.
 Or les communications sur de plus grandes distances se traduisent par une plus grande consommation en énergie (puisqu'une plus grande puissance d'émission est nécessaire).
 Les capteurs normaux (non \chs) n'ont pas à atteindre directement des nœuds situés en dehors de leur cluster; ils économisent d'autant en énergie.
 De plus, les \chs sont idéalement placés pour réaliser des opérations d'\idx{agrégation} voire de \idx{compression} sur les paquets qu'ils reçoivent, afin de limiter encore le volume des retransmissions couteuses en énergie.
 
 À part les économies substantielles en énergie, la clusterisation d'un réseau présente plusieurs autres avantages:
 \begin{itemize}
-    \item elle permet de déployer une gestion « centralisée » d'un cluster, puisque le \ch est à même d'appliquer un algorithme tenant compte de tous les capteurs de son groupe. Pour autant, la topologie décentralisée de l'ensemble du réseau n'est pas sacrifiée, car les clusters sont indépendants de la \sdb, qui n'intervient pas dans leur fonctionnement interne;
+    \item elle permet de déployer une gestion «centralisée» d'un cluster, puisque le \ch est à même d'appliquer un algorithme tenant compte de tous les capteurs de son groupe. Pour autant, la topologie décentralisée de l'ensemble du réseau n'est pas sacrifiée, car les clusters sont indépendants de la \sdb, qui n'intervient pas dans leur fonctionnement interne;
     \item elle permet de gagner en \idx{extensibilité}, puisqu'il est aisé de rajouter des clusters au réseau, voire peu contraignant de rajouter des nœuds dans un cluster donné. L'évolution du réseau est ainsi plus simple à assurer que s'il fallait modifier un algorithme distribué pour prendre en compte l'intégration de nouveaux capteurs.
 \end{itemize}
 %2}}}
@@ -103,7 +103,7 @@ Chaque $k$-\CH reçoit des données (provenant soit de nœuds normaux si $k$ est
 
         \subsubsection{Un exemple: fonctionnement de l'algorithme \leach}\label{st:subsubsec:leach}
 %{{{2
-L'un des algorithmes de \idx{clusterisation} les plus simples et les plus couramment employés dans les \rcsfs est l'algorithme \leach (\textit{Low Energy Adaptive Clustering Hierarchy}, \cad « hiérarchie de clusterisation adaptative à faible énergie » en anglais)~\cite{HCB00}.
+L'un des algorithmes de \idx{clusterisation} les plus simples et les plus couramment employés dans les \rcsfs est l'algorithme \leach (\textit{Low Energy Adaptive Clustering Hierarchy}, \cad «hiérarchie de clusterisation adaptative à faible énergie» en anglais)~\cite{HCB00}.
 Il s'agit d'un algorithme dynamique (il effectue de nouvelles clusterisations\index{clusterisation} du réseau régulièrement dans le temps) qui, par la formation de clusters, met en place une solution de routage simple mais efficace des paquets dans le réseau.
 
 Voici le fonctionnement détaillé de cet algorithme.
@@ -129,12 +129,12 @@ Chaque ronde $r$ est organisée de la façon suivante:
     \item Les autres nœuds, qui ne se sont pas désignés en tant que \chs pour la ronde en cours, choisissent de se joindre au cluster du \CH dont ils perçoivent le signal avec l'intensité la plus élevée, \cad le \CH le plus proche en termes de puissance du signal électromagnétique.
         Chaque nœud prévient le \ch qu'il décide de rejoindre en lui envoyant un message.
         La méthode \csma est là encore appliquée.
-    \item Au vu des réponses reçues, chaque \ch calcule un «~ordre de transmission~» pour les nœuds qui l'ont rejoint.
+    \item Au vu des réponses reçues, chaque \ch calcule un «ordre de transmission» pour les nœuds qui l'ont rejoint.
         Il annonce alors à chacun de ces nœuds l'instant auquel le nœud doit lui transmettre ses données.
         Dans chaque cluster, les nœuds s'adresseront donc à leur \ch à tour de rôle, selon l'ordre déterminé par le \CH, ce qui revient à utiliser la méthode appelée \textit{Time Division Multiple Access} (\tdma).
     \item La phase de collecte des données peut débuter.
         Les \chs restent en écoute et reçoivent les données des autres capteurs de leur cluster.
-        Les capteurs «~normaux~» effectuent leur mission (ils réalisent des mesures sur leur environnement), et envoient leurs résultats au \ch lorsque c'est à leur tour de le faire.
+        Les capteurs «normaux» effectuent leur mission (ils réalisent des mesures sur leur environnement), et envoient leurs résultats au \ch lorsque c'est à leur tour de le faire.
         Quand ce n'est pas à leur tour de communiquer, ces nœuds mettent leur équipement radio en veille afin d'économiser leur énergie.
         Les collisions entre les transmissions des nœuds de différents clusters sont évitées grâce à la méthode appelée \textit{Code Division Multiple Access} (\cdma).
     \item Au fur et à mesure qu'ils reçoivent les données, les \chs agrègent\idx{agrégation}, et éventuellement compressent\idx{compression} ces dernières.
@@ -169,7 +169,7 @@ Mais on trouve également de nombreux autres protocoles~\cite{AY07,DQWH13}.
 Certains d'entre eux prennent en compte deux à trois paramètres, comme l'énergie résiduelle des nœuds, leur distance aux \chs potentiels et/ou le nombre de voisins de ces derniers: c'est le cas du protocole \heed~\cite{YF04}, assez souvent utilisé, ou du protocole MPC~\cite{KTAA12}, plus récent et moins répandu, se basant sur les k-moyennes.
 Un quatrième élément, la confiance portée au nœud, est même utilisé parfois pour réaliser une sélection plus sure des \CH~\cite{KMSL09}.
 
-Certains protocoles ont des buts plus précis, comme \ffuca~\cite{FL11,FMMMI12} qui repose sur l'exploitation de propriétés ultramétriques dans le réseau afin de créer une répartition « idéale » des nœuds dans les clusters en fonction de leur distance aux \CH; ou bien comme VSR~\cite{TV08}, créé à l'intention des \idx{MANET}, qui à l'aide d'une structure virtuelle détermine un routage proactif pour l'intérieur des clusters (ou les nœuds émettent au \ch en plusieurs sauts) et à la demande sur l'épine dorsale du réseau qui relie entre eux les \CH\,\footnote{Pour conserver la lisibilité du paragraphe, le développement des acronymes HEED, FFUCA, MPC et VSR n'est pas donné ici. Il est néanmoins disponible \hyperref[acronymes]{en fin d'ouvrage}.}.
+Certains protocoles ont des buts plus précis, comme \ffuca~\cite{FL11,FMMMI12} qui repose sur l'exploitation de propriétés ultramétriques dans le réseau afin de créer une répartition «idéale» des nœuds dans les clusters en fonction de leur distance aux \CH; ou bien comme VSR~\cite{TV08}, créé à l'intention des \idx{MANET}, qui à l'aide d'une structure virtuelle détermine un routage proactif pour l'intérieur des clusters (ou les nœuds émettent au \ch en plusieurs sauts) et à la demande sur l'épine dorsale du réseau qui relie entre eux les \CH\,\footnote{Pour conserver la lisibilité du paragraphe, le développement des acronymes HEED, FFUCA, MPC et VSR n'est pas donné ici. Il est néanmoins disponible \hyperref[acronymes]{en fin d'ouvrage}.}.
 \nomenclature{LEACH}{\textit{Low-Energy Adaptive Clustering Hierarchy}}
 \nomenclature{HEED}{\textit{Hybrid, Energy-Efficient Distributed clustering}}
 \nomenclature{FFUCA}{\textit{Fast and Flexible Unsupervised Clustering Algorithm }}
@@ -188,9 +188,9 @@ C'est ce que l'on appelle l'\idx{extensibilité} du réseau (ou bien son évolut
 
 Qui plus est, il n'y a pas que le routage, mais l'intégralité de la chaine des opérations à réaliser qui doit être mise en place de façon autonome: la collecte de données en fait ainsi partie~\cite{ZWPT10}.
 Un autre paramètre à gérer parfois est la \idx{mobilité} des nœuds.
-Cette mobilité est une capacité propre aux \manet (\textit{Mobile Ad hoc Networks}, « réseaux ad hoc mobiles »).
+Cette mobilité est une capacité propre aux \manet (\textit{Mobile Ad hoc Networks}, «réseaux ad hoc mobiles»).
 Comme leur nom l'indique, il s'agit de \wanet dont les nœuds sont mobiles.
-Lorsque ces nœuds sont (portés par) des véhicules, on parle même de \vanet (\textit{Vehicular Ad hoc Networks}, « réseaux ad hoc véhiculaires »).
+Lorsque ces nœuds sont (portés par) des véhicules, on parle même de \vanet (\textit{Vehicular Ad hoc Networks}, «réseaux ad hoc véhiculaires»).
 Ces réseaux ont leurs propres problématiques~\cite{DYK12}, qui sont souvent assez proches de celles des \rcsfs.
 Certaines solutions développées pour les \manet, des mécanismes de sécurité par exemple, peuvent tout à fait être réutilisés dans les \rcs~\cite{BMS13}.
 
@@ -216,7 +216,7 @@ La \idx{sureté} d'un système est sa capacité à fonctionner sans erreurs, c'e
 Elle est en principe apportée soit par des tests en amont du déploiement, soit par une modélisation formelle (ou semi-formelle) du système, qui permet d'en évaluer certaines propriétés et de déduire, en fin de compte, si le système mis en place respecte ou non les spécifications établies.
 
 Les tests et simulations sont récurrentes dans la quasi-totalité des travaux de la littérature.
-Ils consistent à implémenter le dispositif étudié, physiquement ou virtuellement, pour étudier son évolution au cours d'une exécution « classique » ou bien soumise à des conditions d'expérimentation particulières.
+Ils consistent à implémenter le dispositif étudié, physiquement ou virtuellement, pour étudier son évolution au cours d'une exécution «classique» ou bien soumise à des conditions d'expérimentation particulières.
 Certains travaux ont même pour objet des tests comparatifs sur différentes architectures matérielles de capteurs~\cite{PLP06}, ou encore recensent les différents systèmes de simulation permettant d'expérimenter sur les réseaux de capteurs~\cite{AAAHN12}.
 
 Pour la vérification basée sur des méthodes formelles, des outils tels que le \idx{\textit{model checking}} peuvent par exemple être appliqués sur le modèle établi.
@@ -231,7 +231,7 @@ Le \textit{\idx{model checking}} est utilisé régulièrement dans les réseaux 
 %{{{2
 La \resilience d'un système est la capacité de ce système à outrepasser et éventuellement à corriger les erreurs susceptibles de survenir.
 Autrement dit, un système résilient est capable de poursuivre son fonctionnement avec toujours autant d'efficacité ou presque, même si des pannes matérielles, des erreurs logicielles ou d'autres types d'incidents viennent perturber le système.
-Assurer la \resilience revient donc à anticiper, à prévoir des « plans de secours », des mécanismes de correction et de réparation automatiques.
+Assurer la \resilience revient donc à anticiper, à prévoir des «plans de secours», des mécanismes de correction et de réparation automatiques.
 
 Concrètement, dans un \rcsfs, elle met en jeu des principes comme la redondance des données stockées et envoyées, des routes de retransmission~\cite{SP10}; elle s'établit sur l'usage de protocoles capables de se mettre à jour lorsque des nœuds disparaissent (épuisement supposé) ou apparaissent (nouveaux arrivants) dans le réseau, de mécanismes de correction d'erreurs…
 La résilience matérielle passe le plus souvent par la redondance des composants, mais n'est que rarement mise en place, pour des raisons de couts, dans les \rcs.
@@ -252,7 +252,7 @@ Un attaquant, par le biais d'un nœud compromis par exemple, peut ainsi chercher
 Pour rappel, l'objectif des travaux présentés dans cet ouvrage consiste à proposer, modéliser et tester une solution permettant de détecter, puis de réagir aux attaques de ce type, tout en assurant une consommation minimale en ressources pour les capteurs du réseau.
 
 \paragraph{}
-Bien que le thème de la \secu des \rcsfs, notamment sur le sujet des attaques de type « \dds » ainsi que des contre-mesures appropriées, ait tout à fait sa place dans ce chapitre, il s'agit d'un élément central pour les travaux de cet ouvrage, et il est développé avec beaucoup plus de précisions que les problématiques précédentes.
+Bien que le thème de la \secu des \rcsfs, notamment sur le sujet des attaques de type «\dds» ainsi que des contre-mesures appropriées, ait tout à fait sa place dans ce chapitre, il s'agit d'un élément central pour les travaux de cet ouvrage, et il est développé avec beaucoup plus de précisions que les problématiques précédentes.
 Aussi a-t-il été choisi de lui attribuer un chapitre spécifique: les pages qui suivent abordent la question de la \secu avec bien plus de détails que jusqu'à présent.
 %2}}}
 %1}}}

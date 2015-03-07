@@ -29,13 +29,13 @@ Les étapes suivantes sont réalisées une fois le cluster formé:
 
 Chaque itération~$k$ se décompose en étapes, qui sont détaillées ici:
 \begin{enumerate}
-    \item la phase « active » de collecte de données a lieu. Les capteurs non sélectionnés amassent puis communiquent leurs données, sous la surveillance des \cns. Ces derniers journalisent le nombre, la taille et la date des paquets envoyés par chacun de leur voisins, et signalent les éventuels comportements suspects au \ch;
+    \item la phase «active» de collecte de données a lieu. Les capteurs non sélectionnés amassent puis communiquent leurs données, sous la surveillance des \cns. Ces derniers journalisent le nombre, la taille et la date des paquets envoyés par chacun de leur voisins, et signalent les éventuels comportements suspects au \ch;
     \item à la fin de l'itération~$k$, chaque nœud~$i$ envoie son énergie résiduelle (dénotée~$RE_k[i]$); chaque \cn~$j$ envoie en plus un tableau~$Obs_k[j]$ contenant les observations effectuées sur le débit d'émission de ses voisins au cours de l'itération;
     \item pour chaque nœud~$i$, le \ch réalise l'analyse suivante:
         \begin{itemize}
-            \item en se basant sur un modèle mathématique adapté, le \CH calcule la consommation énergétique « effective » $ECe$ relative au débit moyen\,\footnote{ou maximum? Mais attaques possibles. Ou maximum pondéré?} $\{Obs_k[j][i]\}|_{j\in \mathcal{CN}}$ observé par les \cns~$j$ voisins de~$i$ au cours de l'itération,
-            \item le \CH calcule alors la consommation « annoncée » pour la période~$k$, en prenant la différence des dernières valeurs annoncées par~$i$: $ECd=RE_{k-1}[i] - RE_k[i]$,
-            \item si $|ECa-ECe|\leq\epsilon$ (où $\epsilon$ est la marge d'erreur tolérée), alors le nœud~$i$ est déclaré « sain », et il est ajouté à l'ensemble~$SEN$ des nœuds éligibles pour la prochaine sélection des \cns,
+            \item en se basant sur un modèle mathématique adapté, le \CH calcule la consommation énergétique «effective» $ECe$ relative au débit moyen\,\footnote{ou maximum? Mais attaques possibles. Ou maximum pondéré?} $\{Obs_k[j][i]\}|_{j\in \mathcal{CN}}$ observé par les \cns~$j$ voisins de~$i$ au cours de l'itération,
+            \item le \CH calcule alors la consommation «annoncée» pour la période~$k$, en prenant la différence des dernières valeurs annoncées par~$i$: $ECd=RE_{k-1}[i] - RE_k[i]$,
+            \item si $|ECa-ECe|\leq\epsilon$ (où $\epsilon$ est la marge d'erreur tolérée), alors le nœud~$i$ est déclaré «sain», et il est ajouté à l'ensemble~$SEN$ des nœuds éligibles pour la prochaine sélection des \cns,
             \item sinon, le nœud est placé dans la liste~$SSN$ des nœuds suspects,
             \item soit $SSN[i]$ le nombre de fois où le nœud~$i$ a été déclaré suspect depuis le déploiement du réseau. Si $SSN[i] \ge \mathrm{seuil}$, alors le capteur est déclaré compromis et devient virtuellement exclu du cluster; si à l'inverse le capteur avait systématiquement adopté un comportement honnête, il peut s'agir d'un faux positif, et le nœud n'est pas définitivement exclu. Il conserve la possibilité de rejoindre l'ensemble~$SEN$ au terme de prochaines itérations;
         \end{itemize}
