@@ -34,13 +34,16 @@ $x_{k_d}$ est une variable de type booléen, initialisée à $0$, et passée à 
 La fonction de seuil $f:s^s\rightarrow\{0;1\}$ est utilisée par les \cns pour déterminer la nature normale ou non du trafic (elle indique si un paquet a dépassé ou non le seuil des communications dites «~normales~»).
 Elle prend pour argument les valeurs des $s$ compteurs $x_{k_1},x_{k_2},\dots,x_{k_s}$ d'un macro-état $x_k$ associé à un \cn $k$, et la valeur retournée est stockée dans $x_{k_d}$.
 
-\newlength{\fboxlinelen}
-\setlength{\fboxlinelen}{\linewidth}
-\addtolength{\fboxlinelen}{-4\fboxsep}
-\addtolength{\fboxlinelen}{-2\fboxrule}
+\newlength\fboxlinelen
+\setlength\fboxlinelen\linewidth
+\addtolength\fboxlinelen{-2\fboxsep}
+\addtolength\fboxlinelen{-2\fboxrule}
 \begin{figure}[ht]
-    \fbox{
+    \fbox{%
         \begin{minipage}{\fboxlinelen}
+            \newlength\backupads
+            \setlength\backupads\abovedisplayskip
+            \setlength\abovedisplayskip{0pt}
             \begin{eqnarray*}
                 x_k    & \rightarrow & \mbox{Transmission d'un capteur normal} \\
                     & \rightarrow & (x_{k_1},\dots,x_{k_i}+1,\dots,x_{k_c},  \dots,x_{k_s},0) \\
@@ -55,7 +58,8 @@ Elle prend pour argument les valeurs des $s$ compteurs $x_{k_1},x_{k_2},\dots,x_
                     & \rightarrow & (0,\dots,0,\dots,0,\dots,0,0)  \\
                     &             & \qquad\mbox{avec la fréquence }\mu \cdot 1_{f(x_k)<\mathit{seuil}}
             \end{eqnarray*}
-        \end{minipage}
+            \setlength\abovedisplayskip\backupads
+        \end{minipage}%
     }
     \caption{Exemple d'équation de transition du processus de \textsc{Markov} à temps continu modélisant le cluster}\label{sa:fig:eqtrans}
 \end{figure}
@@ -310,29 +314,33 @@ L'automate linéaire hybride que nous utilisons fait appel aux variables suivant
 \end{itemize}
 L'automate linéaire hybride est présenté en \figref{sa:fig:lha}.
 \begin{figure}[!ht]
-    \centering
-    \begin{tikzpicture}[auto, thick, >=stealth]
-        \node[state, minimum width=7.5em, inner sep=-5em] (a) at (0,0) {%
-            \hspace{.5em}
-            \mbox{%
-                \begin{tabular}{l @{}c @{ }l}
-                    $\dot{x}_t$               & : & $1$\\
-                    $\dot{x}_{d_i}$           & : & $0$\\
-                    $\dot{x}_{\textit{bf}_i}$ & : & $M(\textit{bf}_i)$\\
-                    $\dot{x}_{\textsf{TX}_i}$ & : & $0$\\
-                \end{tabular}%
-            }
-        };
+    \fbox{%
+        \begin{minipage}{\fboxlinelen}
+            \centering
+            \begin{tikzpicture}[auto, thick, >=stealth]
+                \node[state, minimum width=7.5em, inner sep=-5em] (a) at (0,0) {%
+                    \hspace{.5em}
+                    \mbox{%
+                        \begin{tabular}{l @{}c @{ }l}
+                            $\dot{x}_t$               & : & $1$\\
+                            $\dot{x}_{d_i}$           & : & $0$\\
+                            $\dot{x}_{\textit{bf}_i}$ & : & $M(\textit{bf}_i)$\\
+                            $\dot{x}_{\textsf{TX}_i}$ & : & $0$\\
+                        \end{tabular}%
+                    }
+                };
 
-        \node[state, minimum width=7.5em, accepting] (b) at (6,0) {};
+                \node[state, minimum width=7.5em, accepting] (b) at (6,0) {};
 
-        \draw[->] (a) edge[loop above, looseness=6] %
-        node[] {$\textit{vrai}, \{\textsf{vérif\_OUI}_i\}, (x_{d_i}:=x_{d_i}+1)$} (a);
-        \draw[->] (a) edge[loop below, looseness=6] %
-        node[] {$\textit{vrai}, \{\textsf{TX}_i\}, (x_{\textsf{TX}_i}:=x_{\textsf{TX}_i}+1$)} (a);
-        \draw[->] (a) edge[above] %
-        node[] {$(x_t == T), \{\textit{tous}\}, \emptyset$} (b);
-    \end{tikzpicture}
+                \draw[->] (a) edge[loop above, looseness=6] %
+                node[] {$\textit{vrai}, \{\textsf{vérif\_OUI}_i\}, (x_{d_i}:=x_{d_i}+1)$} (a);
+                \draw[->] (a) edge[loop below, looseness=6] %
+                node[] {$\textit{vrai}, \{\textsf{TX}_i\}, (x_{\textsf{TX}_i}:=x_{\textsf{TX}_i}+1$)} (a);
+                \draw[->] (a) edge[above] %
+                node[] {$(x_t == T), \{\textit{tous}\}, \emptyset$} (b);
+            \end{tikzpicture}
+        \end{minipage}%
+    }
     \caption{Exemple d'\alh associé au modèle \rpsge}\label{sa:fig:lha}
 \end{figure}
 Il comprend deux états.
