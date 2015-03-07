@@ -1,8 +1,13 @@
+% vim: se ft=tex:
 \fontsize{6pt}{8pt}
-\begin{tikzpicture}[scale=.85]
-\tikzset{good/.style={draw,circle,thick,minimum width=1.1cm,align=center}};
-\tikzset{bad/.style={draw,rectangle,thick,minimum width=1.1cm,align=center}};
-\tikzset{edge/.style={thick,->,>=stealth}};
+\begin{tikzpicture}[%
+    scale=.85, %
+    good/.style={draw=none,circle,   fill,blueLACL,text=white,circular drop shadow,minimum width=1.1cm,align=center}, %
+     bad/.style={draw=none,rectangle,fill,  SecTab,text=black,         drop shadow,minimum width=1.1cm,align=center}, %
+    edge/.style={thick,->,>=stealth} %
+]
+%\tikzset{good/.style={draw,circle,thick,minimum width=1.1cm,align=center}};
+%\tikzset{bad/.style={draw,rectangle,thick,minimum width=1.1cm,align=center}};
 
 % Init edge/vertex
 \node[good,double] (init) at (0,0) {g1: idle\\g2: idle\\b3: idle};
