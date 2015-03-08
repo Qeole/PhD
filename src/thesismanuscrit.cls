@@ -111,8 +111,8 @@
 \if@twoside
   \def\ps@headings{%
       \let\@oddfoot\@empty\let\@evenfoot\@empty
-      \def\@evenhead{\color[RGB]{\@blueLACL}\sffamily\thepage\hfil\slshape\leftmark}%
-      \def\@oddhead{\color[RGB]{\@blueLACL}{\sffamily\slshape\rightmark}\hfil\thepage}%
+      \def\@evenhead{\color[RGB]{\@blueLACL}\sffamily\thepage\hfil\itshape\leftmark}%
+      \def\@oddhead{\color[RGB]{\@blueLACL}{\sffamily\itshape\rightmark}\hfil\thepage}%
       \let\@mkboth\markboth
     \def\chaptermark##1{%
       \markboth {\MakeUppercase{%
@@ -131,7 +131,7 @@
 \else
   \def\ps@headings{%
     \let\@oddfoot\@empty
-    \def\@oddhead{{\sffamily\slshape\rightmark}\hfil\thepage}%
+    \def\@oddhead{{\sffamily\itshape\rightmark}\hfil\thepage}%
     \let\@mkboth\markboth
     \def\chaptermark##1{%
       \markright {\MakeUppercase{%
@@ -144,8 +144,8 @@
 \fi
 \def\ps@myheadings{%
     \let\@oddfoot\@empty\let\@evenfoot\@empty
-    \def\@evenhead{\sffamily\thepage\hfil\slshape\leftmark}%
-    \def\@oddhead{{\sffamily\slshape\rightmark}\hfil\thepage}%
+    \def\@evenhead{\sffamily\thepage\hfil\itshape\leftmark}%
+    \def\@oddhead{{\sffamily\itshape\rightmark}\hfil\thepage}%
     \let\@mkboth\@gobbletwo
     \let\chaptermark\@gobble
     \let\sectionmark\@gobble

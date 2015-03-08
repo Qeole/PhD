@@ -94,8 +94,12 @@ Ce rôle n'empêche pas, par ailleurs, le nœud qui l'endosse de poursuivre ses 
 La machine à états des capteurs est présentée en \figref{se:fig:states}.
 \begin{figure}[p]
     \centering
-    \includegraphics[height=\textheight]{\chapterfig/state_graph_vert.pdf}
-    \caption{Machine à états des capteurs (non-\cn)}\label{se:fig:states}
+    \newlength\figuretotextheight
+    \setlength\figuretotextheight\textheight
+    \addtolength\figuretotextheight{-\abovecaptionskip}
+    \addtolength\figuretotextheight{-\baselineskip}
+    \includegraphics[height=\figuretotextheight]{\chapterfig/state_graph_vert.pdf}%
+    \caption{Machine à états des capteurs (non-\cn)}\label{se:fig:states}%
 \end{figure}
 
     \subsection{Couverture du cluster en cas d'activité hétérogène}
@@ -141,7 +145,7 @@ Le processus de sélection lui-même est alourdi par les messages des nœuds à 
 Il est évident que la complexité de l'algorithme de sélection, et par suite logique celle de l'implémentation du système, s'en retrouvent rehaussées par rapport au mécanisme de sélection pseudo-aléatoire des \cns.
 
 \paragraph{Allègement possible}
-Les \vns servent à empêcher les nœuds compromis de conserver un rôle de \cn sur plusieurs cycles sans être détectés.
+Les \vns sont utilisés pour empêcher les nœuds compromis de conserver un rôle de \cn sur plusieurs cycles sans être détectés.
 Lors du premier cycle où un nœud donné occupe le rôle de \cn, il n'y a donc guère d'intérêt à le surveiller: il est statistiquement plus probable qu'il s'agisse d'un nœud légitime plutôt que compromis, et il a de bonnes chances d'abandonner le rôle au cycle suivant.
 Le rôle de \vn pour un \cn donné peut donc attendre, pour être assigné, le deuxième cycle consécutif pendant lequel le \cn occupe son rôle.
 

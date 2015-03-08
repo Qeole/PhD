@@ -20,7 +20,7 @@ Lorsqu'un paquet est reçu, il est d'abord placé en mémoire tampon, avant de s
 Un nœud accumule du gain lorsqu'il envoie ses propres paquets.
 Il n'en accumule pas, en revanche, lorsqu'il ne fait que retransmettre des paquets (opération de routage) envoyés par un autre nœud.
 
-Nous supposons qu'un capteur est capable de recharger sa batterie lorsqu'il reste au repos (\cad lorsqu'il boucle sur l'état \emph{idle}).
+Nous supposons ici qu'un capteur est capable de recharger sa batterie lorsqu'il reste au repos (\cad lorsqu'il boucle sur l'état \emph{idle}).
 Ce pourrait être le cas, par exemple, de capteurs équipés de panneaux solaires.
 En pratique, la plupart des capteurs sont incapables de recharger leurs batteries, mais cette supposition nous permet ici de considérer des exécutions de durée infinie sur le jeu, ce qui serait impossible si l'énergie était strictement décroissante.
 \begin{figure}[H]
@@ -30,7 +30,7 @@ En pratique, la plupart des capteurs sont incapables de recharger leurs batterie
 \end{figure}
 
         \subsubsection{Nœud compromis}
-La machine à états pour un nœud compromis est présentée sur la \figref{tj:fig:autBadNode}.
+Pour un nœud compromis, la machine à états est celle présentée en \figref{tj:fig:autBadNode}.
 Contrairement aux capteurs légitimes, un capteur compromis ne cherche pas nécessairement à retransmettre les paquets aux nœuds auxquels ils sont destinés.
 Aussi peuvent-ils revenir sur l'état \emph{idle} sans retransmettre les paquets enregistrés en mémoire tampon.
 \begin{figure}[H]
@@ -77,7 +77,7 @@ Un capteur agissant de manière \emph{cupide} cherche à envoyer le plus de mess
 La formule de gain peut alors s'exprimer comme suit: $e_3 > 0 \wedge p_3 \geq \frac16$, ce qui signifie dans cet exemple que pour gagner la partie le nœud compromis doit envoyer un message toutes les $6$ étapes.
 Comme une action du nœud compromis n'intervient que toutes les $3$ étapes seulement (les deux autres correspondant aux coups des autres joueurs), le nœud compromis doit en fait passer une fois sur deux par l'état \emph{start\_send}.
 
-Dans ce cas il lui est en fait impossible de gagner, car l'envoi d'un message consomme ici $2$ unités d'énergie, et la recharge de la batterie nécessite trop de «temps» pour permettre un envoi toutes les deux actions.
+Dans ce cas il lui est en fait impossible de gagner, car l'envoi d'un message consom\-me ici $2$ unités d'énergie, et la recharge de la batterie nécessite trop de «temps» pour permettre un envoi toutes les deux actions.
 L'objectif pourrait bien sûr être adapté à une autre définition d'un comportement «cupide»: nous pourrions considérer, par exemple, que l'envoi d'un message toutes les $15$ étapes peut remplir l'objectif d'un nœud cupide.
 
         \subsubsection{Comportement destructeur}
@@ -85,6 +85,6 @@ Un capteur se comportant de façon \emph{destructrice} cherche à rendre le rés
 La formule de gain s'écrit dans ce cas $e_3 >0 \wedge e_1 \leq 0 \wedge e_2 \leq 0$.
 
         \subsubsection{Comportement perturbateur}
-Un capteur adoptant un comportement \emph{perturbateur} cherche à empêcher les nœuds légitimes de transmettre leurs messages, tout en cherchant encore une fois à rester en état de marche.
+Un capteur adoptant un comportement \emph{perturbateur} cherche à empêcher ses voisins de transmettre leurs messages, tout en cherchant encore une fois à rester en état de marche.
 Son objectif n'est donc plus de vider la batterie des nœuds, mais seulement de rendre ceux-ci inutiles, de les empêcher d'accumuler du gain.
 La formule de gain devient alors $e_3 >0 \wedge (e_1 \leq 0 \vee p_1\leq0) \wedge (e_2 \leq 0 \vee p_2\leq0)$.

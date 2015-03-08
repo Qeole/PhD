@@ -170,7 +170,7 @@ Avec \idx{LEAP} (\textit{Localized Encryption and Authentication Protocol}, «pr
     \item des clés de cluster, à utiliser, le cas échéant, au sein d'un cluster du réseau;
     \item des clés pour les communications pair à pair.
 \end{itemize}
-Les mécanismes déployés ont pour but, encore une fois, de minimiser l'énergie consommée.
+Les mécanismes déployés ont pour but, là encore, de minimiser l'énergie consommée.
 Ils ont été améliorés dans une seconde version du protocole, baptisée \idx{LEAP+}~\cite{ZSJ06}.
 \nomenclature{LEAP}{\textit{Localized Encryption and Authentication Protocol}}
 
@@ -198,9 +198,9 @@ La \tabref{ea:tab:proto} compare brièvement les fonctionnalités apportées par
     \centering
     %\newcolumntype{X}{>{\centering\arraybackslash}m}
     \begin{footnotesize}
-        \begin{tabular}{@{}m{.1\textwidth} m{.12\textwidth} m{.12\textwidth} m{.25\textwidth} m{.25\textwidth}@{}}
+        \begin{tabular}{@{}m{.1\textwidth} >{\raggedright}m{.12\textwidth} >{\raggedright}m{.12\textwidth} m{.26\textwidth} m{.26\textwidth}@{}}
             \toprule
-            \textsc{Archi\-tecture} & \textsc{Mode de chiffrement} & \textsc{Algorithme de chiffrement} & \textsc{Clés utilisées}                                                        & \textsc{Sécurité apportée}\\
+            \textsc{Archi\-tecture} & \textsc{Mode de chiffr.}       & \textsc{Algor. de chiffr.}            & \textsc{Clés utilisées}                                                        & \textsc{Sécurité apportée}\\
             \midrule
             SPINS                   & CTR                          & RC5                                & Clé maitresse, chaine de clés symétriques                                      & *: Chiffrement, authentification et intégrité des données, protection contre le rejeu\\
             TinySec                 & CBC                          & Au choix                           & Au choix                                                                       & (*) moins protection contre le rejeu\\

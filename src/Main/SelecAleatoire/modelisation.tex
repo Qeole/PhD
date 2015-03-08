@@ -236,7 +236,7 @@ En considérant $n$ comme le nombre de résultats possibles à l'élection, le m
 \begin{itemize}
     \item une unique place centrale;
     \item $n$ transitions minutées, suivant une distribution déterministe, et mutuellement exclusives, menant à cette place (en bleu sur la \figref{sa:fig:petrielec});
-    \item $n$ transitions immédiates et mutuellement exclusives, franchissables depuis cette place (en noir sur la \figref{sa:fig:petrielec}).
+    \item $n$ transitions immédiates et mutuellement exclusives, franchissables depuis la place centrale (en noir sur la \figref{sa:fig:petrielec}).
 \end{itemize}
 Dans notre cas, pour élire deux \cns au sein du cluster, et en supposant que le nœud compromis ne peut être élu, nous avons $n=\binom{7}{2}=21$~issues possible pour l'élection.
 À la fin d'une période d'activité des \cns, une nouvelle élection est déclenchée.
@@ -353,7 +353,7 @@ L'état de gauche, que l'on nommera $e_1$, contient le taux de variation (autrem
     \item $x_{\mathit{bf}_i}$ est incrémentée avec un taux proportionnel au nombre de jetons présents dans le tampon d'entrée de $i$ (lorsque $i$ joue le rôle de \cn).
         On notera ce taux~$\dot{x}_{\mathit{bf}_i}$.
 \end{itemize}
-$e_1$ comporte également trois transitions, exprimées sous la forme suivante: $<$\textit{condition temporelle (sur x\_t)}$>, <$\textit{ensemble des transitions franchies sur le réseau de \textsc{Petri} pour déclencher l'évènement}$>, <$\textit{action associée sur les variables de l'automate}$>$.
+$e_1$ comporte également trois transitions, qui sont exprimées sous la forme suivante:\ $<$\textit{condition temporelle (sur x\_t)}$>, <$\textit{ensemble des transitions franchies sur le réseau de \textsc{Petri} pour déclencher l'évènement}$>, <$\textit{action associée sur les variables de l'automate}$>$.
 Il s'agit des transitions suivantes:
 \begin{itemize}
     \item la première transition qui boucle sur $e_1$:

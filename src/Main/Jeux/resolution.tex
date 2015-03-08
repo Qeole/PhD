@@ -300,7 +300,7 @@ La machine doit être complète au niveau des entrées possibles, aussi faut-il 
 \centering
 \begin{tikzpicture}[auto, thick,>=stealth,scale=1.44]
 \tikzstyle{state}=[shape=circle,draw=none,fill,blueLACL,text=white,circular drop shadow,minimum size=1cm]
-\useasboundingbox (-0.81,1.2) rectangle (7.74,-3.3);
+\useasboundingbox (-0.81,1.2) rectangle (7.5,-3.3);
 \node[state, initial,initial text=] (m0) at (0,0) {$m_0$};
 \node[state] (m1) at (2,0) {$m_1$};
 \node (dots) at (3.5,0) {\dots};
@@ -314,7 +314,7 @@ La machine doit être complète au niveau des entrées possibles, aussi faut-il 
 \draw[->] (m1)   edge node {$q_0 | q_0$} (dots);
 \draw[->] (dots) edge node {$q_0 | q_0$} (m42);
 \draw[->] (m42)  edge node {$q_0 | q_0$} (m43);
-\draw[->] (m43)  edge node {$q_0 | q_1$} (m44);
+\draw[->] (m43)  edge node[swap] {$q_0 | q_1$} (m44);
 \draw[->] (m44)  edge node {$q_1 | q_1$} (m45);
 \draw[->] (m45)  edge[bend left] node[swap,pos=0.15,inner sep=1pt] {$q_1 | q_0$} (m0);
 

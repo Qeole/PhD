@@ -4,7 +4,7 @@
 
     \subsubsection{Authentification et problématiques similaires}
 %{{{2
-La \secu est transversale à l'ensemble des domaines d'études en informatique, et la protection contre le \dds\dots\ est elle-même liée aux autres problématiques de \secu.
+    La \secu est transversale à l'ensemble des domaines d'études en informatique, et la protection contre le déni de service\index{deni@déni de service}… est elle-même liée aux autres problématiques de \secu.
 Il faut entendre par là que si des failles du système compromettant l'\idx{authentification} des agents ou l'\integrite des données peuvent également être exploitées d'une façon ou d'une autre pour nuire au bon fonctionnement du réseau, alors l'attaque en question vient également se classer parmi les attaques de \dds.
 
 De manière plus concrète, assurer correctement l'\idx{authentification} des nœuds du réseau empêchera un attaquant de mener des attaques basées sur l'usurpation de l'identité d'un autre nœud.
@@ -12,7 +12,7 @@ Les attaques par \desync, ou la \idx{falsification} d'accusés de réception par
 Si des mécanismes permettant de limiter le \idx{rejeu} de paquets capturés sont rajoutés, l'ampleur des attaques Sybil\index{attaque Sybil} ainsi que des attaques par trou de ver\index{trou!trou de ver} se verront fortement réduites.
 La protection de l'\integrite des données assure de son côté l'échec de toute tentative d'\idx{altération} des valeurs transmises lors des opérations de \idx{routage}.
 
-Les mécanismes dédiés à la protection de l'\idx{authentification}, de l'\integrite, ou contre le \idx{rejeu}, présentés en \sref{ea:sec:secu}, sont donc également utiles pour protéger un \rc de certaines attaques de \dds.
+Les mécanismes dédiés à la garantie de ces différentes propriétés, présentés en \sref{ea:sec:secu}, sont donc également utiles pour protéger un \rc de certaines attaques de \dds.
 On parle de mesures de prévention, dans le sens où il s'agit de méthodes mises en place pour empêcher une attaque de survenir.
 De nombreuses architectures de sécurité\index{architecture de sécurité}, qui apportent \idx{authentification}, chiffrement, \integrite et protection contre le \idx{rejeu} aux échanges, et parmi lesquelles une bonne partie des solutions présentées en \sssref{ea:sss:archi}, se «vantent» ainsi d'atténuer, voire de prévenir totalement plusieurs types d'attaques de \dds.
 %2}}}

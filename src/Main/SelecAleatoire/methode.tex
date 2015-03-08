@@ -122,7 +122,7 @@ Nous nous sommes tournés vers un type connu de générateurs, les \textit{Multi
 \nomenclature{MLCG}{\textit{Multiplicative Linear-Congruential Generators}}
 Plus précisément, le générateur retenu est de type $x_n = a\cdot x_{n-1}\bmod\ m$, où:
 \begin{itemize}
-    \item le nombre pseudo-aléatoire $x_n$ est généré en fonction de son prédécesseur $x_{n-1}$;
+    \item le nombre pseudo-aléatoire $x_n$ est généré à partir de son prédécesseur $x_{n-1}$;
     \item $m$ est de la forme $2^k$, ce qui facilite le calcul de $\bmod\ m$ (troncature à droite du résultat sur $k$ bits);
     \item $a$ doit être de la forme $8\cdot i\pm3$ (avec $i$ un entier positif) pour que le générateur ait la période maximale, égale à $2^{k-2}$;
     \item $x_0$ (la «graine», ou \textit{seed} en anglais) doit être un entier impair (toujours pour avoir la meilleure période).
@@ -172,7 +172,7 @@ Dans un premier temps les nœuds choisissent d'endosser, ou non, le rôle de \cn
 Au cours de la seconde étape, les $2$-\CH nomment des \cns supplémentaires dans leurs $2$-clusters respectifs si le nombre de signalements reçus au regard du nombre de nœuds dans les $2$-clusters est en-dessous d'un pourcentage minimal.
 
         \subsubsection{Élection centralisée au niveau des \chs}
-La seconde méthode proposée consiste à décharger les nœuds du processus d'auto-désignation, pour le remplacer par une nomination autoritaire réalisée par les $2$-\chs (voir \figref{sa:fig:elecch}).
+La seconde méthode proposée consiste à décharger les nœuds classiques du processus d'auto-désignation, pour le remplacer par une nomination autoritaire réalisée par les $2$-\chs (voir \figref{sa:fig:elecch}).
 Chaque \CH désigne alors un nombre de \cns correspondant au pourcentage indiqué par l'utilisateur.
 Par exemple, si l'on souhaite obtenir dix pour cent de \cns, et qu'un $2$-cluster comporte cent capteurs, le \CH de ce cluster va produire dix nombres pseudo-aléatoires distincts qui seront associés aux identifiants de dix nœuds du cluster.
 Le \CH envoie alors un message à chacun de ces dix nœuds pour leur ordonner de remplir le rôle de \cn sur la période en cours.
@@ -216,7 +216,7 @@ Les avantages et inconvénients de chacune de ces trois méthodes présentées s
     \caption{Avantages et inconvénients de chaque méthode}\label{sa:table:elec}
     \medskip
     \begin{small}
-        \begin{tabular}{m{.2\textwidth} m{.35\textwidth} m{.35\textwidth}}
+        \begin{tabular}{m{.19\textwidth} m{.35\textwidth} m{.35\textwidth}}
             \toprule
             \centering \textsc{Méthode} & \centering \textsc{Avantages} & \centering \textsc{Inconvénients} \tabularnewline
             \midrule

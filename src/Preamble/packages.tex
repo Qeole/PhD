@@ -153,7 +153,7 @@
 %\colorlet{SSText}{white}
 \newlength\sectionnode
 \setlength\sectionnode{\textwidth}
-\addtolength\sectionnode{-16pt}
+\addtolength\sectionnode{-16.4pt} % 2 * (inner sep + border)
 \newcommand{\sectionheader}[1]{%
   \begin{tikzpicture}
   \node[draw,color=SecHead,fill=SecHead,inner sep=8pt] (sectiontitle) {\begin{minipage}{\sectionnode}\color{white}\color{SecText}\thesection \quad #1\end{minipage}};
