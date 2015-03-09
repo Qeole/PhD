@@ -383,12 +383,15 @@ Voici quelques exemples de formules \lsah permettant d'obtenir plusieurs valeurs
 \end{itemize}
 
 %===============================================================================
-    \subsection{Conclusion}
+    \subsection{Amélioration de la solution}
 
-Ici se termine la section sur la modélisation.
-Après avoir étudié les limites des processus markoviens, qui sont orientés vers la modélisation d'événements à distribution exponentielle, nous avons présenté deux autres évaluations formelles possibles pour notre solution.
-L'une d'elles a fait intervenir une version étendue des réseaux de \textsc{Petri}, dédiée à la représentation de toutes sortes de distributions événementielles, et permet la visualisation de la solution sous l'aspect classique des réseaux de \textsc{Petri}.
-La dernière est basée sur un langage récent, la logique stochastique avec automates hybrides, et permet l'évaluation formelle des performances de notre solution.
-Toutes ont bien sûr pour objectif de modéliser notre solution afin d'en souligner les avantages et inconvénients, mais aussi de présenter aux lecteurs différents moyens existants d'employer les méthodes formelles en vue de modéliser des \rcs, et ce de façon plus générale que dans le seul contexte de notre solution.
+Le renouvellement périodique des nœuds de surveillance permet d'améliorer tout à la fois la détection des attaques et la répartition de la charge en énergie dans le cluster, comme le démontrent les valeurs obtenues par simulation.
+Suite aux résultats numériques, le système a été modélisé de plusieurs façons différentes: après avoir étudié les limites des processus markoviens, orientés vers la modélisation d'événements à distribution exponentielle, nous avons présenté une autre évaluation formelle possible.
+Elle fait intervenir une version étendue des réseaux de \textsc{Petri}, dédiée à la représentation de toutes sortes de distributions événementielles, et permet la visualisation du modèle sous l'aspect classique des réseaux de \textsc{Petri}.
+Elle est accompagnée d'une troisième méthode basée sur un langage récent, la logique stochastique avec automates hybrides, qui réutilise le modèle précédent pour permettre l'évaluation formelle des performances du système par le biais d'outils de \textit{model checking}.
+Toutes ont pour objectifs, d'une part, de modéliser notre solution afin d'en souligner les avantages et inconvénients; mais aussi, d'autre part, de présenter différents moyens existants d'employer les méthodes formelles en vue de modéliser des \rcs, et ce de façon plus générale que dans le seul contexte de la solution proposée.
 
-Évidemment, malgré tous ses attraits la modélisation ne peut se substituer à une évaluation numérique de la solution, comme nous allons le présenter, dans la section suivante, par le biais des résultats obtenus à l'aide d'une simulation.
+Cette solution, d'ailleurs, a reposé jusqu'à présent sur un processus de sélection aléatoire des \cns, qu'il soit mené au niveau du \ch, de la \sdb, ou des capteurs eux-mêmes.
+Mais n'y aurait-il pas un moyen plus efficace d'assigner les rôles au nœuds du cluster?
+Il devrait être possible d'utiliser d'autres paramètres, comme l'énergie des capteurs, ou la réputation qu'ils ont su entretenir auprès de leurs voisins respectifs, pour établir un processus plus efficace.
+Pour tenter de répondre correctement à la question, ce changement du mode de sélection fait l'objet des deux chapitres qui suivent.
