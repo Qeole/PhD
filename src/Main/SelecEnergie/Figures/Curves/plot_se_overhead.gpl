@@ -1,0 +1,12 @@
+set term pdfcairo enhanced size 4.77,2.95 font "Linux Libertine O,14" # \textwidth, \textwidth * nb_or
+set out "./plot_se_overhead.pdf"
+set key inside top right
+set nogrid
+set pointsize .8
+set xrange [0:30]
+set yrange [0:36000]
+set xlabel 'Temps (minutes)'
+set ylabel 'Quantité estimée de paquets générés'
+
+plot 61*int(x)+840*x title 'sélection selon l’énergie résiduelle' with lines lc 4,\
+     4*int(x)+600*x  title 'sélection pseudo-aléatoire'           with lines lc rgb "#0065bd"

@@ -1,0 +1,12 @@
+set term pdfcairo enhanced size 4.77,2.95 font "Linux Libertine O,14" # \textwidth, \textwidth * nb_or
+set out "./plot_se_mean.pdf"
+set key inside top right
+set nogrid
+set pointsize .8
+set xrange [0:30]
+set yrange [124900:125100]
+set xlabel 'Temps (minutes)'
+set ylabel 'Énergie résiduelles moyenne des capteurs (Joules) '
+
+plot 'mean-n30-t31-e_1_0-r1.dat' using 1:2 title 'sélection selon l’énergie résiduelle' with linespoints lt 4,\
+     'mean-n30-t31-e_1_0-r1.dat' using 1:3 title 'sélection pseudo-aléatoire'           with linespoints lt 2 lc rgb "#0065bd"

@@ -43,7 +43,7 @@ Ces simulations ont permis d'obtenir l'énergie résiduelle de chaque capteur à
 L'énergie résiduelle du \ch a été volontairement ignorée.
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=.96\linewidth]{\chapterfig/mean.eps}
+    \includegraphics[width=.96\linewidth]{\chapterfig/plot_se_mean.pdf}
     \caption{Valeur moyenne de l'énergie des nœuds (à l'exception du \ch) en fonction du temps}\label{se:fig:mean}
 \end{figure}
 La valeur moyenne est présentée sur la \figref{se:fig:mean}.
@@ -54,7 +54,7 @@ Ces résultats sont conformes aux attentes: le processus de sélection par l'én
 Le volume de données de contrôle pour les deux méthodes proposées apparait sur la \figref{se:fig:overhead}.
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=.96\linewidth]{\chapterfig/overhead.eps}
+    \includegraphics[width=.96\linewidth]{\chapterfig/plot_se_overhead.pdf}
     \caption{Estimation du nombre total de paquets générés au cours de la simulation au cours du temps}\label{se:fig:overhead}
 \end{figure}
 Ici encore, l'usage des \vns entraine une augmentation des ressources consommées; il faut également tenir compte des messages (moins nombreux) envoyés par chaque capteur au moment du renouvellement de la sélection.
@@ -62,7 +62,7 @@ Ici encore, l'usage des \vns entraine une augmentation des ressources consommée
 L'écart-type de la distribution en énergie résiduelle des nœuds est présenté sur la \figref{se:fig:stddev}.
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=.96\linewidth]{\chapterfig/stddev.eps}
+    \includegraphics[width=.96\linewidth]{\chapterfig/plot_se_stddev.pdf}
     \caption{Écart-type pour l'énergie résiduelle des nœuds (à l'exception du \ch) au cours du temps}\label{se:fig:stddev}
 \end{figure}
 Durant les premières minutes de la simulation, la sélection par l'énergie crée une dispersion plus affirmée de la charge en énergie du réseau, à cause des \vns (il y a davantage de capteurs qui endossent des rôles consommant plus d'énergie).
