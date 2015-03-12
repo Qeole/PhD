@@ -250,11 +250,17 @@
       {\fontsize{12}{14}\selectfont\slshape soutenue le \@date\ devant le jury composé de:}\\%
       \vskip1em%
       {\fontsize{12}{14}\selectfont\sffamily \@jury}\\%
-      \vskip4em%
-      \raggedright%
-      \includegraphics[height=1.4cm]{Preamble/upe.png}%
+      %\vskip4em%
+      %\raggedright%
+      %\includegraphics[height=1.4cm]{Preamble/upe.png}%
+      %\hfill%
+      %\includegraphics[height=1.4cm]{Preamble/lacl.png}\\%
+      %\vspace*{\titlep@getopmargin}%
+      \includegraphics[height=2.8cm]{Preamble/lacl_new.png}%
       \hfill%
-      \includegraphics[height=1.4cm]{Preamble/lacl.png}\\%
+      %%\raisebox{.7cm}{%
+      \includegraphics[height=1.4cm]{Preamble/upe.png}%
+      %%}%
       \vspace*{\titlep@getopmargin}%
     \end{minipage}%
     %
