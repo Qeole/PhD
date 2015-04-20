@@ -20,14 +20,15 @@ La résistance aux attaques par déni de service est également un aspect import
 Il est donc abordé en plusieurs temps: après la catégorisation puis la description des attaques majeures connues, les méthodes de prévention, de détection puis de réaction sont développées.
 
 \chappar{sa}
-Une méthode existante de détection des attaques par déni de service consiste à assigner à certains capteurs (appelés \cnst) un rôle de surveillance au sein du réseau.
+Une méthode de détection des attaques par déni de service consiste à assigner à certains capteurs (appelés \cnst) un rôle de surveillance au sein du réseau.
 Combinée à une partition en clusters du réseau, elle permet d'observer efficacement le trafic pour repérer les comportements anormaux.
 Se pose alors la question du renouvellement du rôle de surveillance: changer de \cnst au cours du temps permet de répartir la consommation engendrée par cette tâche de surveillance, et par là de prolonger la durée de vie du réseau dans son ensemble.
 
-Le processus de sélection peut être effectué simplement en choisissant un nombre aléatoire et en le comparant à un seuil de probabilité: c'est la méthode utilisée dans ce chapitre.
-Les simulations réalisées permettent d'observer l'impact de sa reconduction périodique permet d'évaluer les performances obtenues sur la répartition de la charge énergétique.
-Le renouvellement des \cnst y est également modélisé sous forme de chaines de \textsc{Markov} à temps continu, mais cet outil a ses limites; pour les contourner, une seconde méthode formelle est employée: il s'agit des réseaux de \textsc{Petri} stochastiques généralisés étendus, qui permettent une représentation efficace du modèle.
-De plus, il est possible d'en dériver des formules de logique stochastique avec automates hybrides, et des exemples de ces formules sont fournis; ils permettent à leur tour de réutiliser le modèle obtenu par le biais de techniques de \textit{model checking} pour vérifier diverses propriétés sur le système.
+Le processus de sélection peut être effectué simplement en choisissant un nombre aléatoire et en le comparant à un seuil de probabilité: c'est la méthode, simple à mettre en œuvre, utilisée dans ce chapitre.
+Les simulations, réalisées avec et sans réitérations périodiques du processus, permettent d'observer l'amélioration importante obtenue sur la répartition de la charge énergétique et valident l'emploi d'un renouvellement dynamique des \cnst.
+
+Afin de pouvoir l'analyser de façon plus formelle, ce renouvellement est également modélisé sous forme de chaines de \textsc{Markov} à temps continu, mais cet outil a ses limites; pour les contourner, une seconde méthode formelle est employée: il s'agit des réseaux de \textsc{Petri} stochastiques généralisés étendus, qui permettent une représentation efficace du modèle.
+De plus, il est possible d'en dériver des formules de logique stochastique avec automates hybrides, et des exemples de ces formules sont fournis. Ils permettent à leur tour de réutiliser le modèle obtenu par le biais de techniques de \textit{model checking} pour vérifier diverses propriétés sur le système.
 
 \chappar{se}
 Une deuxième façon de renouveler les \cnst consiste à considérer leur énergie résiduelle à l'instant où le processus de sélection est exécuté, de sorte que les capteurs possédant les plus grandes réserves d'énergies se voient attribuer la tâche la plus couteuse.
@@ -40,12 +41,14 @@ Des simulations sont une nouvelle fois utilisées pour mettre en avant le gain s
 \chappar{sd}
 Plutôt que de se concentrer uniquement sur la répartition de la charge énergétique, il est possible d'envisager une approche cherchant à maximiser la sécurité du réseau.
 La troisième méthode proposée pour la sélection des \cnst consiste à les faire élire par les capteurs voisins, en fonction d'un score de réputation établi au fil du temps, c'est à dire en fonction de la confiance accumulée par chaque capteur pour ses «bonnes» actions (ou du moins l'absence de «mauvaises» actions).
+Les nœuds «élus» sont placés dans une liste de candidats de confiance.
+Le score final peut être ajusté en fonction d'autres critères, en reprenant par exemple l'énergie résiduelle, de sorte que les candidats «idéaux» au regard de la somme des critères retenus se voient attribuer le rôle de \cnt.
 Cette troisième méthode est à son tour évaluée, puis comparée à celles des deux chapitres précédents, à travers de nouvelles simulations.
 Cette comparaison permet d'établir, en fonction des performances recherchées (ou du critère à favoriser), quelles sont les meilleures solutions à déployer pour la sélection des \cnst dans un réseau de capteurs sans fil.
 
 \chappar{tj}
 Le dernier chapitre revient sur des aspects de modélisation, cette fois-ci en se basant sur la théorie des jeux.
 La représentation ne porte plus sur le processus de sélection pour la surveillance, mais sur les interactions entre \cnst et capteurs compromis.
-Le système est modélisé sous forme de jeux quantitatifs, qui tiennent compte à la fois de l'énergie des capteurs et d'une valeur de gain incrémentée à chaque transmission réussie; les graphes correspondants sont fournis, et un exemple est développé sur le premier tour de jeu.
+Le système est modélisé sous forme de jeux quantitatifs, qui tiennent compte à la fois de l'énergie des capteurs et d'une valeur de gain incrémentée à chaque transmission réussie; les graphes correspondants, les conditions de victoire sont fournis, et un exemple est développé sur le premier tour de jeu.
 La résolution générale des jeux produits est indécidable, mais elle est fournie pour un sous-ensemble d'objectifs constitués de conjonctions de littéraux.
 Cette modélisation peut être vue comme une ouverture sur des travaux futurs, qui permettraient d'établir une méthode de détection plus efficace des capteurs compromis en évaluant leurs performances selon un ensemble de stratégies logiques.
