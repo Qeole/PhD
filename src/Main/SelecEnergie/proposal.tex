@@ -162,3 +162,7 @@ Si le \CH ne désigne aucun autre \cn pour surveiller ces zones, d'autres nœuds
 Une seconde hypothèse à prendre en compte établit que le \ch n'est pas et ne peut pas être compromis.
 Une troisième condition à l'application du modèle est d'être en mesure de contenir les tentatives d'usurpation d'identité (voir le \chapref{ea}, \ssref{ea:ssec:auth}), sans quoi un nœud compromis n'a qu'à simuler une identité différente à chaque tour, possédant une batterie (soit disant) pleinement chargée, pour obtenir systématiquement le rôle convoité.
 Mais une nouvelle fois, la sécurité d'un système est avant tout une affaire de compromis: plus on cherche à bloquer d'attaques, plus la complexité augmente.
+
+\paragraph{Outils de modélisation}
+Si ce chapitre ne présente aucune modélisation formelle du processus introduit, le système n'en a pas moins fait l'objet d'une modélisation, dans une autre étude~\cite{HMMBA14}, sous forme d'automates temporels, dont des propriétés ont été exprimées à l'aide d'un sous-ensemble de CTL (\textit{Computation Tree Logic}, «logique d'arbre de calcul» en anglais) pour être vérifiées à l'aide de l'outil de \textit{model checking} \textsc{Uppaal}\,\footnote{Il ne s'agit cette fois pas d'un sigle, mais d'un nom composé à partir des deux principaux établissements qui ont contribué à l'élaboration de l'outil: le département d'informatique de l'université d'Uppsala (UPP) en Suède, et le département d'informatique de l'université d'Aalborg (AAL) au Danemark.}~\cite{BDL04, uppaal}.
+\nomenclature{CTL}{\textit{Computation Tree Logic}}
