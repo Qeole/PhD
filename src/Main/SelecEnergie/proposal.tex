@@ -1,18 +1,27 @@
 % vim: set spelllang=fr foldmethod=marker:
-\section{Mécanisme de sélection des \cns}\label{se:sec:proposal}
 
-Le \chapref{sa} expose un algorithme de sélection pseudo-aléatoire des nœuds de surveillance.
+\lettrineh{L}{e \chapref{sa}} expose un algorithme de sélection pseudo-aléatoire des nœuds de surveillance.
 L'un des inconvénients de cet algorithme est que l'énergie résiduelle des capteurs, \cad le niveau d'énergie restant dans leur batterie, n'est pas mesurée, et surtout n'est pas prise en compte lors du processus de renouvellement des \cns.
 Pourtant, la surveillance que ces derniers mènent dans leur cluster entraine une consommation énergétique accrue, puisqu'ils doivent demeurer en écoute sur le médium de façon continue.
 
 Dans ce chapitre, une deuxième méthode de sélection des \cns est introduite.
 Le concept initial de l'algorithme est extrêmement simple: à chaque renouvellement du processus, l'énergie résiduelle des capteurs est évaluée, et ceux possédant le plus de réserves deviennent \cns.
 Le but de cette méthode est évidemment d'atteindre une meilleure répartition de la consommation d'énergie dans le cluster: les capteurs possédant le plus haut niveau de charge de leur batterie se verront attribuer le rôle qui consomme le plus d'énergie.
+
 Néanmoins, la perte de l'aspect aléatoire au profit d'une méthode purement déterministe va entrainer un certain nombre de contraintes en termes de sécurité et de couverture spatiale.
+Il faut donc mettre en place des parades face aux nœuds compromis qui tenteraient de conserver \textit{ad~vitam~æternam} le rôle de \cn en falsifiant leur niveau d'énergie.
+Un nouveau type de nœuds, les \vns, viennent ici prévenir les tentatives de fraudes, tandis que le \ch veille à la couverture correcte du réseau par les \cns.
+Les performances obtenues à l'aide de ce second mécanisme de sélection sont elles aussi étudiées à travers un jeu de simulations.
+
+\section{Mécanisme de sélection des \cns}\label{se:sec:proposal}
 
     \subsection{Utilisation des \vns pour sécuriser le processus de sélection}\label{se:subsubsec:elec1}
 
-L'usage de la valeur d'énergie résiduelle comme critère de sélection présente un inconvénient notable: il n'y a aucun agent, dans le réseau, capable de mesurer de façon fiable le niveau d'énergie présent dans la batterie d'un nœud donné, si ce n'est ce nœud lui-même.
+Les hypothèses présentées en début de \chapref{sa} (\ssref{sa:ssec:hypotheses}) demeurent valables ici.
+Le processus de sélection dans ce chapitre repose sur l'énergie restante pour chaque nœud au moment du renouvellement.
+Cette énergie disponible dans la batterie est dite «énergie résiduelle».
+Afin de répartir au mieux la charge, les nœud possédant le plus d'énergie en réserve sont sélectionnés pour assurer la tâche qui consomme le plus.
+Mais l'usage de la valeur d'énergie résiduelle comme critère de sélection présente un inconvénient notable: il n'y a aucun agent, dans le réseau, capable de mesurer de façon fiable le niveau d'énergie présent dans la batterie d'un nœud donné, si ce n'est ce nœud lui-même.
 Les nœuds voisins d'un nœud $N$ peuvent tout au plus enregistrer les messages envoyés par $N$, et en inférer une valeur approximative de l'énergie consommée.
 Mais ils ne connaissent ni le niveau d'énergie initial de $N$ (au moment du déploiement du réseau) ni l'énergie dépensée par $N$ lors de l'écoute du médium de transmission, la consommation approximative calculée ne permet pas de déduire le niveau d'énergie résiduelle avec une précision suffisante pour classer les nœuds de façon fiable sur ce critère.
 
@@ -33,15 +42,15 @@ Un attaquant a effectivement intérêt à faire attribuer le rôle de \cn aux n�
     \item de signaler au \ch des capteurs «innocents» comme étant compromis, dans le but de les faire exclure du réseau.
 \end{itemize}
 Quand un algorithme de sélection (pseudo-)aléatoire est appliqué, un nœud compromis peut très bien être désigné pour un cycle, mais il perdra rapidement son rôle de surveillance, pour les cycles suivants.
-Même avec un processus d'auto-désignation (basé sur le modèle de \leach~\cite{HHT02} par exemple), les nœuds compromis pourraient tenter de conserver leur rôle de \cn sur plusieurs cycles, mais cela n'empêcherait pas des capteurs légitimes de s'auto-désigner également.
-Avec un processus déterminister, les nœuds compromis peuvent en revanche monopoliser la plupart des rôles de \cns.
+Même avec un processus d'auto-désignation (basé sur le modèle de \leach par exemple), les nœuds compromis pourraient tenter de conserver leur rôle de \cn sur plusieurs cycles, mais cela n'empêcherait pas des capteurs légitimes de s'auto-désigner également.
+Avec un processus déterministe, les nœuds compromis peuvent en revanche monopoliser la plupart des rôles de \cns.
 Tout ce qu'ils ont à faire, pour en arriver là, consiste à annoncer un niveau de charge batterie plus élevé que celui des capteurs légitimes lors de la première phase de l'algorithme de sélection.
 Ils sont alors assurés d'être désignés \cns; et s'il se trouve y avoir au moins $n$ nœuds compromis au sein du cluster, ils peuvent de cette manière accaparer les $n$ rôles de \cn et désactiver du même coup le mécanisme de détection dans son intégralité.
 L'attaque devient alors impossible à détecter et à contrer.
 
 Pour empêcher les capteurs de «mentir» lorsqu'ils annoncent leur valeur d'énergie résiduelle, l'assignation d'un nouveau rôle à certains des voisins de chaque \cn est proposée.
 Ces nœuds, que nous appelleront désormais \vns (comme pour \textit{nœuds de vérification}), seront responsables de vérifier la consommation en énergie des nœuds de surveillance.
-Une fois que la sélection des \cns est réalisée, chaque voisin d'un \cn nouvellement désigné choisi à partir d'un seuil de probabilité prédéfini s'il sera ou non \vn pour ce \cn.
+Une fois que la sélection des \cns est réalisée, chaque voisin d'un \cn nouvellement désigné choisit à partir d'un seuil de probabilité prédéfini s'il sera ou non \vn pour ce \cn.
 Un capteur peut assumer le rôle de \vn pour plusieurs \cn différents, du moment qu'il s'agit de nœuds voisins.
 
 Si le rôle de \vn s'avère trop gourmand en énergie, il devient inutile: autant déployer dès le départ, dans ce cas, un mécanisme de sélection pseudo-aléatoire des \cns.
@@ -58,8 +67,7 @@ Quatre cas sont alors susceptibles de se produire:
     \item La consommation annoncée correspond grossièrement au modèle théorique, et évolue dans le sens de la consommation locale observée par les \vns. Que le nœud soit compromis ou non, il adopte ici un comportement normal, et est autorisé à endosser le rôle de \cn.
 \end{enumerate}
 Si un \vn est compromis, il peut tenter de faire exclure le \cn légitime qu'il observe.
-Le \ch doit donc recevoir les rapports de plusieurs \vns distincts avant de considérer un \cn comme étant réellement compromis.
-Ce nombre minimum de rapports est fixé par un seuil prédéterminé.
+Le \ch doit donc recevoir les rapports de plusieurs \vns distincts (selon un seuil prédéterminé) avant de considérer un \cn comme étant réellement compromis.
 Dans une certaine mesure, cette précaution permet aussi de protéger un \cn légitime des erreurs (faux positifs) de ses \vns.
 
 Le recours au rôle de \vn assure ainsi que seuls les nœuds annonçant un niveau d'énergie résiduelle plausible seront autorisés à agir en temps que \cns.
@@ -70,8 +78,8 @@ Le modèle énergétique implémenté par les \vns pour vérifier les affirmatio
 Nous proposons ici d'utiliser le modèle de diffusion de \textsc{Rakhmatov} et \textsc{Vrudhula}~\cite{RV01}.\label{se:rakvru-formula}
 Ce choix repose sur plusieurs observations:
 \begin{itemize}
-    \item ce modèle fournit une approximation assez précise de la consommation réelle d'une batterie, et tient compte des processus chimiques internes à la batterie tels que les effets de récupération (\textit{recovery effect}) ou de perte de capacité selon la tension de décharge (\textit{rate capacity effect});
-    \item il s'agit de l'un des modèles implémentés dans \nsiii, ce qui permet, pour les simulations basées sur ce logiciel, de bénéficier d'une implémentation déjà existante, et surtout d'un modèle théorique parfait. Il ne faut pas craindre cependant que ce modèle ne soit «trop parfait» pour être utilisé par les \vns, étant donné que ces derniers estimeront l'énergie consommée par les \cns à partir de messages émis par ces derniers, sans connaissance des mécanismes internes au nœud (calcul, écoute) comme le fait le cœur du simulateur. Les valeurs calculées par les \vns demeurent donc approximatives par rapport à la consommation des \cns réellement calculée par \nsiii.
+    \item Ce modèle fournit une approximation assez précise de la consommation réelle d'une batterie, et tient compte des processus chimiques internes à la batterie tels que les effets de récupération (\textit{recovery effect} en anglais) ou de perte de capacité selon la tension de décharge (\textit{rate capacity effect});
+    \item Il s'agit de l'un des modèles implémentés dans \nsiii, ce qui permet, pour les simulations basées sur ce logiciel, de bénéficier d'une implémentation déjà existante, et surtout d'un modèle théorique parfait. Il ne faut pas craindre cependant que ce modèle ne soit «trop parfait» pour être utilisé par les \vns, étant donné que ces derniers estimeront l'énergie consommée par les \cns à partir de messages émis par ces derniers, sans connaissance des mécanismes internes au nœud (calcul, écoute) comme le fait le cœur du simulateur. Les valeurs calculées par les \vns demeurent donc approximatives par rapport à la consommation des \cns réellement calculée par \nsiii.
 \end{itemize}
 Le modèle de diffusion de \textsc{Rakhmatov} et \textsc{Vrudhula} se réfère aux réactions chimiques qui se produisent à l'intérieur de l'électrolyte de la batterie, et elle est résumée par l'\equaref{se:eqn:rvdm}
 \begin{equation}
@@ -121,23 +129,21 @@ Aussi l'algorithme de sélection présenté plus haut doit-il être modifié, po
 \begin{enumerate}
     \item Au cours d'une première phase, chaque nœud évalue la valeur de son énergie résiduelle et la transmet au \ch;
     \item Le \ch écoute toutes les valeurs. Les autres nœuds enregistrent également les valeurs de leurs voisins;
-    \item Tous les nœuds envoient au \CH la liste de leurs voisins directs (\textit{1-hop})\,\footnote{Nous supposons ici que les capteurs ne trichent pas durant cette étape. Ils pourraient en effet annoncer des voisins «virtuels» supplémentaires, pour faire croire qu'ils seront à portée d'un \cn, et ainsi éviter d'être détecté si ce n'est pas le cas.};
+    \item Tous les nœuds envoient au \CH la liste de leurs voisins directs (\textit{1-hop})\,\footnote{Nous supposons ici que les capteurs ne trichent pas durant cette étape. Ils pourraient en effet annoncer des voisins «virtuels» supplémentaires, pour faire croire qu'ils seront à portée d'un \cn, et ainsi éviter d'être détecté si ce n'est pas le cas. Le \chapref{ea} présente des mécanismes de protection permettant de détecter ce type d'attaques.};
     \item Le \CH sélectionne les $n$ \cns parmi les nœuds ayant le plus d'énergie résiduelle, de telle façon que ces $n$ nœuds couvrent tous les autres nœuds en terme de portée\,\footnote{Les détails de l'algorithme utilisé pour cette phase ne sont pas précisés dans cette étude.};
     \item Au besoin (si $n$ est trop bas), le \CH sélectionne des \cns supplémentaires de façon à ce qu'ils couvrent l'intégralité du cluster;
     \item Le \CH envoie un message aux nœuds sélectionnés pour leur notifier leur rôle de \cn.
 \end{enumerate}
 
-Il est intéressant de noter que certains algorithmes de clusterisation (\heed~\cite{YF04} par exemple) utilisent d'autres mécanismes de sélection basés sur l'énergie résiduelle ---~pour choisir des \chs, mais qui pourraient être transposer à la sélection des \cns.
-Nous ne souhaitons pas utiliser de telles solutions qui n'utilisent l'énergie que comme l'un des paramètres pris en compte, et repose donc sur la confiance vis à vis des nœuds qui calculent leur score propre.
+Il est intéressant de noter que certains algorithmes de clusterisation (\heed~\cite{YF04} par exemple) utilisent d'autres mécanismes de sélection basés sur l'énergie résiduelle des nœuds ---~pour choisir des \chs, mais qui pourraient être transposer à la sélection des \cns.
+Nous ne souhaitons pas utiliser dans ce chapitre de telles solutions qui n'utilisent l'énergie que comme l'un des paramètres pris en compte, et reposent donc sur la confiance vis à vis des nœuds qui calculent leur score propre.
 Au contraire, nous préférons obtenir l'énergie annoncée par les nœuds pour la comparer au modèle théorique, et permettre ainsi aux \vns de veiller à la sécurité du processus.
 
     \subsection{Observations}
 
-\paragraph{Mécanismes de détection}
-Les \cns appliquent un mécanisme très simple de surveillance par la confiance dans le cluster: lorsqu'un capteur enfreint une règle, par exemple lorsque le débit des paquets qu'il envoie excède un seuil prédéterminé, il est considéré comme indigne de confiance (compromis).
-Il existe de nombreux autres mécanismes de confiance dans la littérature, et la plupart sont plus élaborés que le modèle présenté ici \todo{set ref to related work}.
-Les \cns pourraient en réalité implémenter de nombreux autres mécanismes, par exemple en décrémentant un score de réputation pour chaque comportement suspect observé chez un nœud.
-Mais comme des systèmes plus complexes entraineraient une augmentation des messages de contrôle (\textit{overhead}), il a semblé naturel de se limiter à cette méthode plus simple dans la présente étude.
+\paragraph{Mécanisme de détection}
+La détection des attaques par \dds est inchangée par rapport au chapitre précédent.
+Les \cns appliquent un ensemble de règles sur le trafic collecté dans le cluster: lorsqu'un capteur enfreint une règle un certain nombre de fois, par exemple lorsque le débit des paquets qu'il envoie excède un seuil prédéterminé, il est considéré comme malveillant (voir le paragraphe à ce sujet au \chapref{ea}, \ssref{ea:par:rules}).
 
 \paragraph{Alourdissement du modèle}
 La solution introduite de par le recours aux \vns consiste littéralement à choisir des nœuds chargés de surveiller les surveillants: le concept de surveillance devient récursif.
@@ -153,5 +159,6 @@ Le rôle de \vn pour un \cn donné peut donc attendre, pour être assigné, le d
 Il est intéressant de se pencher sur un autre point: l'usage des \cns combinés aux \vns n'apporte pas de garantie totale sur la sécurité du réseau.
 Le système repose sur plusieurs hypothèses, comme le fait que des nœuds compromis ne collaborent pas ensemble: un capteur compromis sélectionné comme \cn pourrait annoncer au \ch, par exemple, qu'il peut entendre et surveiller une portion plus large du cluster que ce qu'il en est réellement, dans le but de faire croire au \CH que tout le cluster est surveillé~--- alors qu'en réalité ce ne sera pas le cas.
 Si le \CH ne désigne aucun autre \cn pour surveiller ces zones, d'autres nœuds compromis pourraient y porter des attaques sans risque d'être détectés.
-Une seconde hypothèse à prendre en compte établit que le \ch n'est pas et ne peut pas être compromis. \todo{IP spoofing}
-Mais la sécurité d'un système est avant tout une affaire de compromis: plus on cherche à bloquer d'attaques, plus la complexité augmente.
+Une seconde hypothèse à prendre en compte établit que le \ch n'est pas et ne peut pas être compromis.
+Une troisième condition à l'application du modèle est d'être en mesure de contenir les tentatives d'usurpation d'identité (voir le \chapref{ea}, \ssref{ea:ssec:auth}), sans quoi un nœud compromis n'a qu'à simuler une identité différente à chaque tour, possédant une batterie (soit disant) pleinement chargée, pour obtenir systématiquement le rôle convoité.
+Mais une nouvelle fois, la sécurité d'un système est avant tout une affaire de compromis: plus on cherche à bloquer d'attaques, plus la complexité augmente.
