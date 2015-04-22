@@ -1,16 +1,29 @@
 % vim: set spelllang=fr foldmethod=marker:
+\vfill
+\lettrineh{A}{près avoir proposé} un processus de sélection aléatoire, une première amélioration a été proposée pour mieux répartir la consommation en énergie dans le réseau.
+Cette méthode basée sur le niveau d'énergie restante des nœuds introduit de nouvelles considérations sur la sécurité du système, qui est résolue par l'usage des \vns.
+Mais ces derniers demandent un protocole de mise en place un peu plus complexe, et consomment de l'énergie; dans ce chapitre, c'est une autre méthode encore qui est proposée.
+\vfill
+Le processus de sélection reste basé sur l'énergie résiduelle des nœuds, mais toutes les mesures de vérifications sont affectées au \cns ---~puisqu'ils se chargent déjà de vérifier le trafic!
+Il en résulte une méthode «démocratique», dans le sens où ce sont désormais les capteurs eux-mêmes qui «votent» auprès du \ch pour déterminer les prochains \cns.
+Encore une fois, des résultats numériques obtenus par simulation viennent éclairer les performances obtenues par ce mécanisme.
+Mis en perspective avec des instances basées sur les deux mécanismes précédents, ces résultats nous permettent d'établir une évaluation comparée des modèles, et de déterminer quel est le processus optimal à employer en fonction d'une situation donnée.
+\vfill
+
+\pagebreak %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Processus d'élection démocratique des \cns}\label{sd:sec:proposal}
 
-Ce troisième processus de sélection se base lui aussi sur un renouvellement dynamique.
-Chaque renouvellement sera appelé une \emph{itération} du processus.
-
-Pour efficacement celui-ci, nous allons adopter les notations suivantes:
+Ce troisième processus de sélection est lui aussi proposé dans le contexte d'un renouvellement périodique des \cns, et reprend les hypothèses présentées au \chapref{sa}, \ssref{sa:ssec:hypotheses}.
+Chaque renouvellement sera ici appelé une \emph{itération} du processus.
+Pour exposer efficacement celui-ci, les notations suivantes sont adoptées:
 \begin{itemize}
     \item $\mathcal{N}$ désigne l'ensemble des capteurs du cluster (à l'exception du \ch);
     \item $\mathcal{CN}$ désigne l'ensemble des \cns du cluster à l'instant considéré;
     \item $i$ est un index utilisé pour parcourir $\mathcal{N}$;
-    \item soit $RE_k$ un tableau contenant l'énergie résiduelle des nœuds annoncée par les \cns au \ch à la $k$\textsuperscript{e} itération.
-    \item soit $Obs_k$ un tableau contenant les observations réalisées par le \cn~$j$ sur les communications de ses voisins.
+    \item $\mathit{ÉR}_k$ est un tableau contenant l'\underline{é}nergie \underline{r}ésiduelle des nœuds annoncée par les \cns au \ch à la $k$\textsuperscript{e} itération.
+    \item $\mathit{Obs}_k$ est un tableau contenant les \underline{obs}ervations réalisées par le \cn~$j$ sur les communications de ses voisins.
+    \item $\mathit{LNÉ}$ est une \underline{l}iste dans laquelle seront placés les \underline{n}œuds \underline{é}ligibles; au contraire, $\mathit{LNS}$ sera utilisée pour les nœuds \underline{s}uspects.
+    \item $\mathit{ÉCe}$ et $\mathit{ÉCa}$ sont des variables contenant les valeurs d'\underline{é}nergie \underline{c}onsommée \underline{e}ffective et \underline{a}nnoncée (respectivement); plus de détails sont fournis un peu plus bas.
 \end{itemize}
 
 Le processus d'élection débute, avant sa première itération, par une phase d'initialisation.
@@ -20,27 +33,27 @@ Viennent ensuite les itérations elle-même qui marquent le renouvellement de l'
 
 Les étapes suivantes sont réalisées une fois le cluster formé:
 \begin{itemize}
-    \item chaque nœud~$i$ du cluster envoie au \ch la valeur de son énergie résiduelle; le \CH l'enregistre dans un tableau spécifique, dénoté~$RE_0[i]$;
-    \item chaque nœud agit temporairement comme un \cn, et commence à surveiller le trafic de ses voisins. Il conserve en parallèle le fonctionnement d'un nœud normal (en termes de mesure physiques et de collecte de données), sans quoi il n'y aurait aucun trafic à observer. Cette étape a pour but d'essayer de repérer, dès le départ, d'éventuels nœuds compromis, pour les écarter de la liste des candidats au rôle de \cn;
-    \item une fois la durée de cette première étape d'observation écoulée, le processus d'élection démocratique peut commencer. La valeur du compteur d'itérations~$k$ est passée à $1$.
+    \item Chaque nœud~$i$ du cluster envoie au \ch la valeur de son énergie résiduelle; le \CH l'enregistre dans un tableau spécifique, dénoté~$\mathit{ÉR}_0[i]$.
+    \item Chaque nœud agit temporairement comme un \cn, et commence à surveiller le trafic de ses voisins. Il conserve en parallèle le fonctionnement d'un nœud normal (en termes de mesure physiques et de collecte de données), sans quoi il n'y aurait aucun trafic à observer. Cette étape a pour but d'essayer de repérer, dès le départ, d'éventuels nœuds compromis, pour les écarter de la liste des candidats au rôle de \cn.
+    \item Une fois la durée de cette première étape d'observation écoulée, le processus d'élection démocratique peut commencer. La valeur du compteur d'itérations~$k$ est passée à $1$.
 \end{itemize}
 
     \subsection{Sélection des \cns}
 
 Chaque itération~$k$ se décompose en étapes, qui sont détaillées ici:
 \begin{enumerate}
-    \item la phase «active» de collecte de données a lieu. Les capteurs non sélectionnés amassent puis communiquent leurs données, sous la surveillance des \cns. Ces derniers journalisent le nombre, la taille et la date des paquets envoyés par chacun de leur voisins, et signalent les éventuels comportements suspects au \ch;
-    \item à la fin de l'itération~$k$, chaque nœud~$i$ envoie son énergie résiduelle (dénotée~$RE_k[i]$); chaque \cn~$j$ envoie en plus un tableau~$Obs_k[j]$ contenant les observations effectuées sur le débit d'émission de ses voisins au cours de l'itération;
-    \item pour chaque nœud~$i$, le \ch réalise l'analyse suivante:
+    \item La phase «active» de collecte de données a lieu. Les capteurs non sélectionnés amassent puis communiquent leurs données, sous la surveillance des \cns. Ces derniers journalisent le nombre, la taille et la date des paquets envoyés par chacun de leur voisins, et signalent les éventuels comportements suspects au \ch.
+    \item À la fin de l'itération~$k$, chaque nœud~$i$ envoie son énergie résiduelle (dénotée~$\mathit{ÉR}_k[i]$); chaque \cn~$j$ envoie en plus un tableau~$\mathit{Obs}_k[j]$ contenant les observations effectuées sur le débit d'émission de ses voisins au cours de l'itération.
+    \item Pour chaque nœud~$i$, le \ch réalise l'analyse suivante:
         \begin{itemize}
-            \item en se basant sur un modèle mathématique adapté, le \CH calcule la consommation énergétique «effective» $ECe$ relative au débit moyen\,\todo{ou maximum? Mais attaques possibles. Ou maximum pondéré? à voir…} $\{Obs_k[j][i]\}|_{j\in \mathcal{CN}}$ observé par les \cns~$j$ voisins de~$i$ au cours de l'itération,
-            \item le \CH calcule alors la consommation «annoncée» pour la période~$k$, en prenant la différence des dernières valeurs annoncées par~$i$: $ECd=RE_{k-1}[i] - RE_k[i]$,
-            \item si $|ECa-ECe|\leq\epsilon$ (où $\epsilon$ est la marge d'erreur tolérée), alors le nœud~$i$ est déclaré «sain», et il est ajouté à l'ensemble~$SEN$ des nœuds éligibles pour la prochaine sélection des \cns,
-            \item sinon, le nœud est placé dans la liste~$SSN$ des nœuds suspects,
-            \item soit $SSN[i]$ le nombre de fois où le nœud~$i$ a été déclaré suspect depuis le déploiement du réseau. Si $SSN[i] \ge \mathrm{seuil}$, alors le capteur est déclaré compromis et devient virtuellement exclu du cluster; si à l'inverse le capteur avait systématiquement adopté un comportement honnête, il peut s'agir d'un faux positif, et le nœud n'est pas définitivement exclu. Il conserve la possibilité de rejoindre l'ensemble~$SEN$ au terme de prochaines itérations;
+            \item en se basant sur un modèle mathématique adapté, le \CH calcule l'énergie consommée «effective» $\mathit{ÉCe}$ relative à la moyenne des débits pour~$i$ $\{\mathit{Obs}_k[j][i]\}|_{j\in \mathcal{CN}}$ observés par les $j$~\cns voisins de~$i$ pendant le déroulement de l'itération\,\footnote{La méthode proposée consiste ici à calculer la moyenne des valeurs relevées par les différents \cns pour le trafic émis par le nœud $i$. Une autre solution serait de prendre la valeur maximale. Dans les deux cas, si malgré tout un capteur compromis est parvenu à accéder au rôle de \cn, il pourrait tenter de fournir des valeurs anormalement élevées pour fausser le calcul de $\mathit{ÉCe}$ et empêcher l'élection du nœud~$i$. Une solution idéale serait en fait de calculer une moyenne pondérée, en utilisant comme coefficients les degrés de confiance associés à chaque \cn.};
+            \item le \CH calcule alors la consommation «annoncée» $\mathit{ÉCa}$ pour la période~$k$, en prenant la différence entre les valeurs tout juste annoncées par~$i$ et celles de la période précédente: $\mathit{ÉCa}=\mathit{ÉR}_{k-1}[i] - \mathit{ÉR}_k[i]$;
+            \item si $|\mathit{ÉCa}-\mathit{ÉCe}|\leq\epsilon$ (où $\epsilon$ est la marge d'erreur tolérée), alors le nœud~$i$ est déclaré «sain», et il est ajouté à la liste~$\mathit{LNÉ}$ des nœuds éligibles pour la prochaine sélection des \cns;
+            \item sinon, le nœud est placé dans la liste~$\mathit{LNS}$ des nœuds suspects;
+            \item soit $\mathit{LNS}[i]$ le nombre de fois où le nœud~$i$ a été déclaré suspect depuis le déploiement du réseau. Si $\mathit{LNS}[i] \ge \mathrm{seuil}$, alors le capteur est déclaré compromis et devient virtuellement exclu du cluster; si à l'inverse le capteur avait systématiquement adopté un comportement honnête, il peut s'agir d'un faux positif, et le nœud n'est pas définitivement exclu. Il conserve la possibilité de rejoindre l'ensemble~$\mathit{LNÉ}$ au terme de prochaines itérations.
         \end{itemize}
-    \item une fois l'étape~3 terminée, le \CH sélectionne les \cns parmi l'ensemble~$SEN$ des nœuds éligibles. Le choix est réalisé de telle manière que chaque capteur, \cns compris, soit contrôlé par au moins deux \cns distincts. Ainsi, un nœud compromis qui aurait néanmoins réussi à se faire élire en tant que \cn (avant de démarrer son attaque, par exemple), mais se comportant de façon malicieuse sur l'envoi de données, sera détecté;
-    \item enfin l'itération suivante démarre: le compteur~$k$ est incrémenté, et l'on retourne à l'étape~1.
+    \item Une fois l'étape~3 terminée, le \CH sélectionne les \cns parmi l'ensemble~$\mathit{LNÉ}$ des nœuds éligibles. Le choix est réalisé de telle manière que chaque capteur, \cns compris, soit contrôlé par au moins deux \cns distincts. Ainsi, un nœud compromis qui aurait néanmoins réussi à se faire élire en tant que \cn (avant de démarrer son attaque, par exemple), mais se comportant de façon malicieuse sur l'envoi de données, sera détecté.
+    \item Enfin l'itération suivante démarre: le compteur~$k$ est incrémenté, et l'on retourne à l'étape~1.
 \end{enumerate}
 
 \todo{Qui peut être élu? les \cns le peuvent-ils au tour d'après? Si non: bonne rotation. Aussi, nœuds «sans voisins» -> moins élus -> tant mieux?}
@@ -50,11 +63,11 @@ Chaque itération~$k$ se décompose en étapes, qui sont détaillées ici:
 Tout comme dans le chapitre précédent, la solution présentée ici implique des estimations sur la consommation en énergie des capteurs du cluster.
 Nous proposons à nouveau pour ces calculs d'utiliser le modèle de diffusion de \textsc{Rakhmatov} et \textsc{Vrudhula}, détaillé au \chapref{se}, \ssref{se:rakvru-formula}.
 
-    \subsection{Sélection des \cns parmi l'ensemble $SEN$}
+    \subsection{Sélection des \cns parmi l'ensemble $\mathit{LNÉ}$}
 
-À l'étape~3 du processus d'élection, les \chs choisissent les \cns pour l'itération à venir parmi tous les nœuds placés dans la liste~$SEN$.
+À l'étape~3 du processus d'élection, les \chs choisissent les \cns pour l'itération à venir parmi tous les nœuds placés dans la liste~$\mathit{LNÉ}$.
 Les critères retenus pour effectuer ce choix peuvent être très variés.
-Par exemple, il est possible de tirer aléatoirement des \cns parmi les nœuds de~$SEN$, jusqu'à ce que:
+Par exemple, il est possible de tirer aléatoirement des \cns parmi les nœuds de~$\mathit{LNÉ}$, jusqu'à ce que:
 \begin{itemize}
     \item l'on ait assez de \cns (selon le seuil déterminé par l'utilisateur du réseau);
     \item et que tous les nœuds du cluster soient couverts par au moins deux \cns, comme expliqué plus haut.
@@ -69,18 +82,18 @@ D'autres façons d'effectuer ce choix reviendraient par exemple à prendre en co
 Plusieurs de ces critères peuvent être pondérés et combinés de façon à obtenir une note pour chaque nœud, comme par exemple dans l'\equaref{se:eqn:score}.
 \begin{equation}
     \label{se:eqn:score}
-    s_k[i] = (\alpha \times RE_k[i]) + (\gamma \times ci_k[i]) + (\delta \times sp_k[i]) + (\zeta \times nsl_k[i])
+    s_k[i] = (\alpha \times \mathit{ÉR}_k[i]) + (\gamma \times ci_k[i]) + (\delta \times sp_k[i]) + (\zeta \times nsl_k[i])
 \end{equation}
 où:
 \begin{itemize}
     \item $s_k[i]$ représente la note du nœud~$i$ pour l'itération~$k$;
-    \item $RE_k[i]$ reste l'énergie résiduelle pour le même nœud et la même itération;
+    \item $\mathit{ÉR}_k[i]$ reste l'énergie résiduelle pour le même nœud et la même itération;
     \item $ci_k[i]$ est l'index de connectivité de~$i$;
     \item $sp_k[i]$ est la puissance moyenne du signal enregistrée par les voisins du nœud~$i$;
     \item $nsl_k[i]$ est la valeur maximale entre un seuil prédéterminé et le nombre d'itérations antérieures à~$k$ depuis que le nœud a été désigné \cn pour la dernière fois;
     \item $\alpha$, $\gamma$, $\delta$ et $\zeta$ sont des constantes définies par l'utilisateur.
 \end{itemize}
-Cette formule pourrait être utilisée pour classer les nœuds de la liste~$SEN$ de telle manière que le \ch puisse choisir les meilleurs \cns possibles par rapport aux critères pris en compte.
+Cette formule pourrait être utilisée pour classer les nœuds de la liste~$\mathit{LNÉ}$ de telle manière que le \ch puisse choisir les meilleurs \cns possibles par rapport aux critères pris en compte.
 
 La détermination des critères à retenir et des poids à appliquer revient à l'utilisateur du réseau; en pratique, il faudrait les adapter par rapport à l'application qui sera faite du \rc, tout en tenant compte des conditions particulières de l'environnement dans lequel celui-ci sera déployé.
 Dans un réseau constitué de nœuds statiques, par exemple, l'index de connectivité des capteurs, de même que la puissance de leur signal, ne sont pas censés subir de modifications sensibles entre deux itérations consécutives.
