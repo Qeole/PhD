@@ -56,8 +56,6 @@ Chaque itération~$k$ se décompose en étapes, qui sont détaillées ici:
     \item Enfin l'itération suivante démarre: le compteur~$k$ est incrémenté, et l'on retourne à l'étape~1.
 \end{enumerate}
 
-\todo{Qui peut être élu? les \cns le peuvent-ils au tour d'après? Si non: bonne rotation. Aussi, nœuds «sans voisins» -> moins élus -> tant mieux?}
-
     \subsection{Modèle mathématique pour la consommation en énergie}
 
 Tout comme dans le chapitre précédent, la solution présentée ici implique des estimations sur la consommation en énergie des capteurs du cluster.
@@ -72,26 +70,28 @@ Par exemple, il est possible de tirer aléatoirement des \cns parmi les nœuds d
     \item l'on ait assez de \cns (selon le seuil déterminé par l'utilisateur du réseau);
     \item et que tous les nœuds du cluster soient couverts par au moins deux \cns, comme expliqué plus haut.
 \end{itemize}
-D'autres façons d'effectuer ce choix reviendraient par exemple à prendre en compte un ou plusieurs critères parmi la liste suivante:
+D'autres façons d'effectuer ce choix pourraient consister par exemple à prendre en compte un ou plusieurs critères parmi la liste suivante:
 \begin{itemize}
     \item l'énergie résiduelle des nœuds;
+    \item la confiance attribuée à ce nœud (sous la forme d'un score de réputation);
     \item l'index de connectivité (le nombre de voisins directs des nœuds);
     \item la puissance du signal;
-    \item \etc
+    \item \etc.
 \end{itemize}
-Plusieurs de ces critères peuvent être pondérés et combinés de façon à obtenir une note pour chaque nœud, comme par exemple dans l'\equaref{se:eqn:score}.
-\begin{equation}
+Plusieurs de ces critères peuvent être pondérés et combinés de façon à obtenir une note pour chaque nœud, comme par exemple dans l'équation qui suit:%\equaref{se:eqn:score}
+\begin{equation*}
     \label{se:eqn:score}
-    s_k[i] = (\alpha \times \mathit{ÉR}_k[i]) + (\gamma \times ci_k[i]) + (\delta \times sp_k[i]) + (\zeta \times nsl_k[i])
-\end{equation}
+    \mathit{note}_k[i] = (\alpha \times \mathit{ÉR}_k[i]) + (\beta \times \mathit{rép}_k[i]) + (\gamma \times \mathit{ic}_k[i]) + (\delta \times \mathit{ps}_k[i]) + (\zeta \times \mathit{ndd}_k[i])
+\end{equation*}
 où:
 \begin{itemize}
-    \item $s_k[i]$ représente la note du nœud~$i$ pour l'itération~$k$;
-    \item $\mathit{ÉR}_k[i]$ reste l'énergie résiduelle pour le même nœud et la même itération;
-    \item $ci_k[i]$ est l'index de connectivité de~$i$;
-    \item $sp_k[i]$ est la puissance moyenne du signal enregistrée par les voisins du nœud~$i$;
-    \item $nsl_k[i]$ est la valeur maximale entre un seuil prédéterminé et le nombre d'itérations antérieures à~$k$ depuis que le nœud a été désigné \cn pour la dernière fois;
-    \item $\alpha$, $\gamma$, $\delta$ et $\zeta$ sont des constantes définies par l'utilisateur.
+    \item $\mathit{note}_k[i]$ représente la note du nœud~$i$ pour l'itération~$k$;
+    \item $\mathit{ÉR}_k[i]$ reste l'\underline{é}nergie \underline{r}ésiduelle pour le même nœud et la même itération;
+    \item $\mathit{rép}_k[i]$ est le score de \underline{rép}utation du nœud~$i$ (mis à jour au fur et à mesure, selon les signalements ou les scores envoyés par les \cns à propos de~$i$);
+    \item $\mathit{ic}_k[i]$ est l'\underline{i}ndex de \underline{c}onnectivité de~$i$;
+    \item $ps_k[i]$ est la \underline{p}uissance moyenne du \underline{s}ignal enregistrée par les voisins du nœud~$i$;
+    \item $nsl_k[i]$ est la valeur maximale entre un seuil prédéterminé et le \underline{n}ombre d'itérations antérieures à~$k$ \underline{d}epuis que le nœud a été désigné \cn pour la \underline{d}ernière fois;
+    \item $\alpha$, $\beta$, $\gamma$, $\delta$ et $\zeta$ sont des constantes définies par l'utilisateur.
 \end{itemize}
 Cette formule pourrait être utilisée pour classer les nœuds de la liste~$\mathit{LNÉ}$ de telle manière que le \ch puisse choisir les meilleurs \cns possibles par rapport aux critères pris en compte.
 
@@ -102,6 +102,16 @@ Dans un réseau clusterisé, où tous les nœuds peuvent atteindre leur \CH en u
 Mais même si nous travaillons principalement dans des réseaux clusterisés dans cet ouvrage, il est bon de se rappeler que tous les \rcs ne font pas nécessairement appel à de tels mécanismes.
 Et que nombre d'entre eux comportent également des nœuds mobiles.
 Dans de tels environnements, l'évaluation de la densité des nœuds ou de la qualité des liens dans les zones où sont situés les \cns candidats devient plus intéressante, car il s'agit souvent d'indicateurs précieux sur les performances du réseau.
+
 Toujours sur le même propos, la contrainte fixée consistant à faire en sorte que chaque nœud soit surveillé par au moins deux \cns peut éventuellement être aménagée.
-S'il s'agit en principe d'une bonne assurance pour détecter les nœuds compromis dans des clusters où tous les nœuds sont réunis à portée d'émission de leur \ch, cette contrainte pourrait s'avérer beaucoup plus lourde pour d'autres topologies.
+S'il s'agit en principe d'une bonne assurance pour détecter les nœuds compromis dans des clusters où tous les nœuds sont réunis à portée d'émission de leur \ch, cette contrainte pourrait s'avérer trop lourde pour certaines topologies.
 Ainsi dans un réseau en étoile, par exemple, où tous les capteurs se retrouveraient sur des branches et n'auraient que deux voisins (l'un plus près, l'autre plus loin de la \sdb), la mise en application de la contrainte pourrait avoir pour effet de désigner tous les nœuds du réseau comme \cns.
+
+Quelques remarques sur le processus dans son ensemble: par rapport au mécanisme proposée dans le chapitre précédent (sélection selon l'énergie résiduelle: chaque nœud annonce son énergie, et «vote pour lui-même» en quelque sorte), le processus présenté ici confie la vérification de la consommation en énergie aux \cns et non plus à des \vns expressément nommés dans ce but.
+Les \cns vont donc envoyer au \ch, au moment du renouvellement de la sélection, un compte-rendu des observations réalisées pour chaque nœud: estimation de l'énergie consommée, mais aussi, suivant les détails du modèle implémenté: score de réputation (basé sur le respect ou non des règles), puissance du signal reçu, et autres critères comme évoqué plus haut.
+C'est ce vote «pour les autres» qui fait de la méthode un processus «démocratique»: en envoyant leur compte-rendu au \CH les \cns votent en quelque sorte pour déterminer leurs successeurs.
+Et par «successeurs», nous touchons d'ailleurs un aspect important: si la sélection est basée sur d'autres critères que l'énergie résiduelle\,\footnote{Dans le cas où seule l'énergie résiduelle est prise en compte, le surcroît de consommation induit par la surveillance devrait suffire à faire baisser le niveau d'énergie du nœud en dessous de celui des autres capteurs, et à assurer ainsi la rotation.}, il est recommandé de faire en sorte que les \cns ne puissent pas «voter» pour eux-mêmes.
+De cette manière, si un nœud compromis accède au rôle, il ne sera pas en mesure de le conserver; à moins de s'être comporté de façon irréprochable et d'être sollicité par des \cns voisins (ce qui signifierait qu'il ne met pas à mal le bon fonctionnement du réseau).
+
+Une autre conséquence de ce vote démocratique, suivant l'implémentation réalisée pour le choix des \cns, est que les nœuds possédant peu de voisins peuvent être amenés à devenir moins souvent \cns (s'ils ont moins de \cns voisins qui votent pour eux, et que les votes ne sont pas pondérés par le \ch en fonction du nombre reçu).
+Mais d'un autre côté, s'ils ont peu de voisins, il n'est sans doute pas très utile de les sélectionner (à la fois parce qu'ils n'auraient que peu de voisins à surveiller, et parce que si la zone géographique où ils sont situés est peu couverte par les capteurs, mieux vaut qu'ils continuent à réaliser leur opération de captage).

@@ -152,7 +152,7 @@ Trois méthodes différentes sont ici proposées: une auto-élection distribuée
         \subsubsection{Auto-élection distribuée}
 Une première solution consiste à réutiliser l'algorithme d'auto-désignation mis en œuvre par \leach, comme présenté sur la \figref{sa:fig:elecself}.
 Chaque nœud non \CH choisit un nombre pseudo-aléatoire compris entre 0 et 1.
-Si ce nombre est en-dessous du pourcentage de \cns désirés dans le réseau (et fixé au moment de l'implémentation par l'utilisateur), ce nœud devient un \cn.
+Si ce nombre est en dessous du pourcentage de \cns désirés dans le réseau (et fixé au moment de l'implémentation par l'utilisateur), ce nœud devient un \cn.
 Autrement, il reste un capteur normal.
 \begin{figure}[ht]
     \centering
@@ -169,7 +169,7 @@ Il est même possible que certains $2$-clusters se retrouvent totalement dépour
 
 Ce second point peut être contourné en menant une élection en deux étapes.
 Dans un premier temps les nœuds choisissent d'endosser, ou non, le rôle de \cn; les \cns élus signalent alors leur statut au $2$-\CH auquel ils sont associés.
-Au cours de la seconde étape, les $2$-\CH nomment des \cns supplémentaires dans leurs $2$-clusters respectifs si le nombre de signalements reçus au regard du nombre de nœuds dans les $2$-clusters est en-dessous d'un pourcentage minimal.
+Au cours de la seconde étape, les $2$-\CH nomment des \cns supplémentaires dans leurs $2$-clusters respectifs si le nombre de signalements reçus au regard du nombre de nœuds dans les $2$-clusters est en dessous d'un pourcentage minimal.
 
         \subsubsection{Élection centralisée au niveau des \chs}
 La seconde méthode proposée consiste à décharger les nœuds classiques du processus d'auto-désignation, pour le remplacer par une nomination autoritaire réalisée par les $2$-\chs (voir \figref{sa:fig:elecch}).
