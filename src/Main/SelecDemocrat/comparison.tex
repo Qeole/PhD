@@ -1,2 +1,59 @@
 % vim: set spelllang=fr foldmethod=marker:
 \section{Comparaison des trois méthodes de sélection}
+
+    \subsection{Mise en place des simulations}
+
+        \subsubsection{Modèle utilisé}
+
+Le modèle utilisé dans cette section est similaire à celui employé au \chapref{sa} (défini en \ssref{sa:ssec:modelsim}).
+Tout comme alors, le logiciel \nsii a été mis en œuvre.
+Le cluster est composé d'une grille carrée de cent capteurs, avec le \ch en son centre (soit cent-un capteurs au total; voir \figref{sa:fig:grille}).
+
+La \tabref{sd:table:param} récapitule les principaux paramètres impliqués dans l'exécution des instances.
+\begin{table}[ht]
+    \centering
+    \caption{Paramètres de simulation}\label{sd:table:param}
+    \medskip
+    \begin{tabular*}{\textwidth}{l@{\hspace{.5em}}c}
+        \toprule
+        \textsc{Paramètre}                                          & \textsc{Valeur}        \\
+        \midrule
+        Durée de la simulation                                      & 3\,600~secondes        \\
+        Nombre de capteurs                                          & 100 (+~\ch)            \\
+        Nombre de \cns                                              & 7--10 (selon scénario) \\
+        Nombre de nœuds compromis                                   & 1                      \\
+        Fréquence de renouvellement des \cns                        & toutes les 30~secondes \\
+        Durée de la période initiale pour la sélection démocratique & 60~secondes            \\
+        Mobilité des nœuds                                          & nulle                  \\
+    \end{tabular*}
+    \begin{tabular*}{\textwidth}{m{.4\textwidth}c@{\hspace{3em}}c}
+        \midrule
+        \multirow{2}{*}{\textsc{Paramètre}} & \textsc{Valeur}                                   & \textsc{Valeur}           \\
+                                            & \textsc{(nœuds normaux)}                          & \textsc{(nœud compromis)} \\
+        \midrule
+        Taux d'émission                     & 1~ko/s                                            & 35~ko/s                   \\
+        Taille des paquets                  & 500~octets                                        & 100~octets                \\
+        Intervalle                          & aléatoire (\textsc{Poisson})                      & constant                  \\
+        Cons. énergétique en émission       & 0,660~W                                           & 0,660~W                   \\
+        Cons. énergétique en réception      & 0,395~W                                           & non pris en compte        \\
+        Quantité initiale d'énergie         & \multicolumn{2}{c}{10--$\infty$ (selon scénario)}                             \\
+        \bottomrule
+    \end{tabular*}
+\end{table}
+
+Sauf indication contraire, tous les résultats numériques présentés dans cette section sont des moyennes calculées à partir des valeurs de dix instances distinctes (pour chaque scénario).
+Ces instances sont différenciées par les valeurs utilisées pour initialiser le générateur de nombres pseudo-aléatoires de \nsii, et (le cas échéant) celui utilisé par les nœuds pour la sélection des \cns.
+
+        \subsubsection{Choix du simulateur}
+
+ns2 VS ns3
+
+    \subsection{Résultats numériques}
+
+        \subsubsection{Taux de détection}
+
+        \subsubsection{Consommation énergétique}
+
+        \subsubsection{Durée de vie du réseau}
+
+    \subsection{Choisir un processus de sélection}
