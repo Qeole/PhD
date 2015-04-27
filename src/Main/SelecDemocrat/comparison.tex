@@ -46,7 +46,22 @@ Ces instances sont différenciées par les valeurs utilisées pour initialiser l
 
         \subsubsection{Choix du simulateur}
 
-ns2 VS ns3
+Le simulateur utilisé au \chapref{sa} est \nsii~\cite{ns2}; celui employé au \chapref{se} est \nsiii~\cite{ns3}.
+\nsiii est une version plus récente de \nsii.
+Basé sur les mêmes mécanismes, le logiciel a été complètement réécrit, et les langages utilisés pour définir les scénarios de simulation ne sont plus les mêmes (Tcl pour \nsii, \cpp (éventuellement Python) pour \nsiii).
+Ce changement radical a pour conséquence l'absence de compatibilité descendante avec \nsii.
+
+Il semble nécessaire d'expliquer ici en quelques mots le choix des logiciels utilisés.
+Nous avons commencé à travailler sur \nsii, sans vraiment étudier d'alternative dans un premier temps.
+Cependant les travaux de simulation présentés aux chapitres~\ref{chap:sa} et~\ref{chap:se} n'ont pas été réalisé d'une seule traite, mais avec plusieurs mois d'écart.
+Durant cette période, nous avons pensé abandonner \nsii pour nous tourner vers \nsiii, plus récent, mieux conçu, mieux documenté (bien que moins complet à ce jour, mais cela ne nous a pas porté préjudice pour les simulations réalisées).
+
+Malheureusement, nous nous sommes heurtés à des problèmes de performances: une instance d'une durée (virtuelle) d'une demi-heure, sous \nsiii, nous a pris une semaine entière à exécuter, sur un ordinateur récent.
+Malgré nos requêtes sur la liste ainsi que sur le canal de discussion associés au simulateur, nous n'avons pas réussi à contourner cet écueil.
+Nous ne savons toujours pas, à la publication de cet ouvrage, si le problème vient d'une erreur introduite dans notre code, ou bien s'il s'avère simplement que \nsiii se prête mal à ce type de scénarios.
+Certaines sources semblent affirmer qu'avec \nsiii, «le passage à l'échelle n'est pas efficace pour les WSN» («\textit{[\nsiiinxs] does not scale well for WSNs}»)~\cite{AAAHN12}, ce qui tendrait à conforter la seconde hypothèse.
+
+Devant la durée très (trop) importante de l'exécution des simulations désirées, nous sommes revenus vers \nsii pour comparer dans ce chapitre l'ensemble des processus de sélection proposés.
 
     \subsection{Résultats numériques}
 
