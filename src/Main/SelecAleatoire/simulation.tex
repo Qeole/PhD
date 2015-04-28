@@ -114,10 +114,10 @@ Nous observons ainsi une meilleure répartition de la charge.
 \end{figure}
 
 L'histogramme de la \figref{sa:fig:premier-deces} présente l'instant de décès du premier nœud à épuiser sa batterie au sein du cluster simulé.
-Pour obtenir ce résultat, nous avons alloué une énergie initiale de 4~J à chacun des nœuds (excepté le nœud compromis et le \ch, qui ont reçu davantage d'énergie, car nous ne voulions pas qu'ils cessent de fonctionner durant la simulation).
-À noter: la valeur de 4~J initialement allouée aux nœuds est une valeur très faible.
+Pour obtenir ce résultat, nous avons alloué une énergie initiale de 4~\joule à chacun des nœuds (excepté le nœud compromis et le \ch, qui ont reçu davantage d'énergie, car nous ne voulions pas qu'ils cessent de fonctionner durant la simulation).
+À noter: la valeur de 4~\joule initialement allouée aux nœuds est une valeur très faible.
 Mais de même, cinq-cents secondes de simulation sont très courtes au regard de la durée de vie réelle d'un capteur.
-Une pile au lithium (de modèle CR~1225 par exemple) offre environ 540~J; une pile~AA (ou~LR06) fournit quant à elle environ 15\,400~J, et une pile~AAA (ou~LR03) environ 6\,800~J.
+Une pile au lithium (de modèle CR~1225 par exemple) offre environ 540~\joule; une pile~AA (ou~LR06) fournit quant à elle environ 15\,400~\joule, et une pile~AAA (ou~LR03) environ 6\,800~\joule.
 À titre d'exemple, plusieurs modèles de capteurs utilisent un couple de piles AAA.
 \begin{figure}[ht]
     \centering
@@ -130,7 +130,7 @@ Une pile au lithium (de modèle CR~1225 par exemple) offre environ 540~J; une pi
 % LR03: 1250 mAh, 1,5 V --> 3600 * 1,5 * 1,250 = 6750 J ~ 6800 J
 % CR1225: 50 mAh, 3 V --> 3600 * 3 * 0,050 = 540 J
 
-C'est donc avec 4~J en réserve qu'ont démarré les capteurs, de sorte que l'on puisse effectivement observer les pannes.
+C'est donc avec 4~\joule en réserve qu'ont démarré les capteurs, de sorte que l'on puisse effectivement observer les pannes.
 Nous avons démarré la simulation, et relevé l'instant de «décès» du premier nœud vidé de ses réserves d'énergie.
 En raison du changement périodique de \cns, la méthode dynamique permet de mieux répartir la consommation en énergie, là où la méthode statique sollicite toujours les mêmes \cns.
 Le premier nœud à épuiser sa batterie a donc une espérance de vie bien plus longue avec la méthode dynamique (jusqu'à cinq fois plus longue lorsque le pourcentage de \cns est faible), comme le reflète l'histogramme.
@@ -139,7 +139,7 @@ Le premier nœud à épuiser sa batterie a donc une espérance de vie bien plus 
     \subsection{Nœuds restants et détection au fil du temps}
 
 Au cours de cette dernière simulation, nous avons observé le nombre de nœuds toujours «en vie», ainsi que le nombre de nœuds détectant le nœud compromis au cours du temps.
-La durée de la simulation a été étendue à une heure, et les nœuds se sont vus allouer une réserve initiale d'énergie égale à 10~J.
+La durée de la simulation a été étendue à une heure, et les nœuds se sont vus allouer une réserve initiale d'énergie égale à 10~\joule.
 Dix pour cent d'entre eux, soit dix à la fois, ont été désignés en tant que \cns.
 Ces données, et les autres paramètres utilisés, sont présentés en \tabref{sa:table:parametres3}.
 \begin{table}[ht]
@@ -155,7 +155,7 @@ Ces données, et les autres paramètres utilisés, sont présentés en \tabref{s
         Pourcentage de \cns                   & 10~\%\\
         Consommation énergétique en réception & 0,394~W\\
         Consommation énergétique en émission  & 0,660~W\\
-        Quantité initiale d'énergie           & 10~J\\
+        Quantité initiale d'énergie           & 10~\joule\\
         \bottomrule
     \end{tabular}
 \end{table}

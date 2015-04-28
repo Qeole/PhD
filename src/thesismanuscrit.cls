@@ -241,7 +241,7 @@
       \vskip3em%
       {\fontsize{24}{29}\selectfont\sffamily\slshape\@title}\\%
       \vskip3em%
-      {\fontsize{16}{19}\selectfont\sffamily Directrice de thèse: \@director}\\%
+      {\fontsize{16}{19}\selectfont\sffamily {\addfontfeature{Style=Alternate}Directrice de thèse:} \@director}\\%
       \vskip3em%
       {\fontsize{12}{14}\selectfont\slshape préparée au}\\%
       \vskip.2em%
