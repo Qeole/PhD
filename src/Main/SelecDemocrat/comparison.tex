@@ -73,10 +73,109 @@ Devant la durée très (trop) importante de l'exécution des simulations désir�
 
     \subsection{Résultats numériques}
 
-        \subsubsection{Taux de détection}
 
         \subsubsection{Consommation énergétique}
+\begin{figure}[H]
+    \centering
+    \includegraphics{\chapterfig/plot_sd_consumptionXtime.pdf}
+    \caption{Moyenne de l'énergie consommée par les capteurs au cours du temps (énergie initiale: $\infty$)}\label{sd:fig:cons-inf}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics{\chapterfig/plot_sd_consumptionXtime_zoom10.pdf}
+    \caption{Moyenne de l'énergie consommée par les capteurs au cours du temps: agrandissement de la vue près de l'origine du repère (énergie initiale: $\infty$)}\label{sd:fig:cons-inf-zoom}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics{\chapterfig/plot_sd_stddevXtime.pdf}
+    \caption{Écart-type moyen pour l'énergie consommée par les capteurs au cours du temps (énergie initiale: $\infty$)}\label{sd:fig:stddev-inf}
+\end{figure}
+
+        \subsubsection{Taux de détection}
+\begin{figure}[H]
+    \centering
+    \includegraphics{\chapterfig/plot_sd_detectionXtime-single_10J.pdf}
+    \caption{Taux de détection, pour chaque processus de sélection, au cours du temps (énergie initiale: 10~\joule; valeurs sur une seule instance)}\label{sd:fig:detec-one-10J}
+\end{figure}
+
+%CALCUL : probabilité que n cNodes parmi les 10 soient piochés parmi les NON voisins du nœud 12 compromis (code JavaScript)
+%function f(n) {
+  %if (n<=1)
+    %return 1;
+  %else
+    %return f(n-1)*n;
+%}
+
+%function p(k) {
+  %m=61;
+  %N=100;
+  %n=10;
+  %Nm=N-m;
+  %nk=n-k;
+
+  %ckm = f(m)/(f(k)*f(m-k));
+  %cnkNm = f(Nm)/(f(nk)*f(Nm-nk));
+  %cnN = f(N)/(f(n)*f(N-n));
+
+  %return ckm*cnkNm/cnN;
+%}
+
+%var sum=0;
+%for (var i=0;i<=10;i++) {
+  %sum+=p(i);
+  %console.log(i, p(i)*100);
+%}
+
+%Résultats (%) :
+%0 0.0036726402702378143 ~ 1/27228
+%1 0.07467701882816889
+%2 0.6504127446324387
+%3 3.19786266110949
+%4 9.835850306139795
+%5 19.78741649823418
+%6 26.383221997645574
+%7 23.032971585246138
+%8 12.605883097330656
+%9 3.907086574026461
+%10 0.5209448765368615
+La répartition des \cns, lors du processus de sélection aléatoire, suit une loi de probabilité hypergéométrique.
+Il est possible de calculer la probabilité pour que $k$ \cns sur les $n=10$ soient choisis parmi les $m=61$ voisins directs du nœud compromis, sur un total de $N=100$ candidats, à l'aide de la formule suivante:
+$$P(k) = \frac{{m\choose k}{N-m\choose n-k}}{{N\choose n}}=
+\frac{m!}{k!\,(m-k)!}\times\frac{(N-m)!}{(n-k)!\,((N-m)-(n-k))!}\times\frac{n!\,(N-n)!}{N!}$$
+La probabilité que le nœud compromis ne soit surveillé par aucun \cn est donc de:
+\begin{align*}
+    P(0)&=\frac{61!}{0!\,(61-0)!}\times\frac{(100-61)!}{(10-0)!\,((100-61)-(10-0))!}\times\frac{10!\,(100-10)!}{100!}\\
+        &\approx3,6\times10^{-5}\approx1/27228
+\end{align*}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=6.5cm]{\chapterfig/WSN_neighbors.pdf}
+    \caption{Schéma du cluster représentant la position des soixante-et-un voisins directs (en bleu) du nœud compromis (en jaune) tels que définis dans les simulations réalisées}\label{sd:fig:neighbors}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics{\chapterfig/plot_sd_detectionXtime-minute_10J.pdf}
+    \caption{Taux de détection, pour chaque processus de sélection, au cours du temps (énergie initiale: 10~\joule; valeurs lissées sur une durée d'une minute)}\label{sd:fig:detec-min-10J}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics{\chapterfig/plot_sd_detectionXtime-minute_20J.pdf}
+    \caption{Taux de détection, pour chaque processus de sélection, au cours du temps (énergie initiale: 20~\joule; valeurs lissées sur une durée d'une minute)}\label{sd:fig:detec-min-20J}
+\end{figure}
+
 
         \subsubsection{Durée de vie du réseau}
+\begin{figure}[H]
+    \centering
+    \includegraphics{\chapterfig/plot_sd_nbnodesXtime_10J.pdf}
+    \caption{Nombre de nœuds en activité au cours du temps pour un montant d'énergie initiale de 10~\joule}\label{sd:fig:nbnodes-10J}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics{\chapterfig/plot_sd_nbnodesXtime_20J.pdf}
+    \caption{Nombre de nœuds en activité au cours du temps pour un montant d'énergie initiale de 20~\joule}\label{sd:fig:nbnodes-20J}
+\end{figure}
 
     \subsection{Choisir un processus de sélection}
