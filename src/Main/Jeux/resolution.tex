@@ -288,8 +288,8 @@ Cependant, il n'est pas possible de conserver un gain moyen de $1$ tout en maint
 Nous considérons que les \rcsfs sont fortement limités en ressources disponibles, et ne peuvent donc implémenter que des stratégies à mémoire finie.
 Dans ce cas, limiter \apriori la quantité de mémoire qui peut être utilisée par le joueur fournit une solution pour résoudre le problème du crédit initial pour des jeux ayant une condition de victoire sur le fragment positif.
 
-Une stratégie à mémoire finie est une stratégie qui peut être implémentée par une machine de Mealy finie et déterministe: état donné l'état actuel de la machine et du jeu, la machine fournit l'arête à emprunter et de là l'état suivant de la machine.
-La taille de machine de Mealy est la taille de la mémoire disponible.
+Une stratégie à mémoire finie est une stratégie qui peut être implémentée par une machine de \textsc{Mealy} finie et déterministe: état donné l'état actuel de la machine et du jeu, la machine fournit l'arête à emprunter et de là l'état suivant de la machine.
+La taille de machine de \textsc{Mealy} est la taille de la mémoire disponible.
 
 Par exemple, une stratégie à mémoire finie pour le jeu de la \figref{tj:fig:infmemoryneeded}, qui boucle 42~fois sur $q_0$ puis se rend sur $q_1$, boucle une fois et enfin retourne sur $q_0$ pour recommencer le cycle, est représentée sur la machine de la \figref{tj:fig:memory42}.
 Cette machine possède 46~états, puisqu'elle nécessite de compter (et donc garder en mémoire) le nombre de fois où l'on a bouclé sur $q_0$ pour accumuler de l'énergie.
@@ -324,7 +324,7 @@ La machine doit être complète au niveau des entrées possibles, aussi faut-il 
 \draw[->] (m44) edge[bend left=60,in=60] node[pos=0.6] {$q_0 | q_0$} (m0);
 \draw[->] (m45) edge[bend left=60] node[swap,pos=0.5,inner sep=1pt] {$q_0 | q_0$} (m0);
 \end{tikzpicture}
-\caption[Une machine de Mealy représentant une stratégie à mémoire finie.]{Une machine de Mealy représentant une stratégie à mémoire finie (46~états). L'extrémité sortante d'une arête représente l'état actuel du jeu, l'extrémité sortante est l'état suivant retenu.}%
+\caption[Une machine de \textsc{Mealy} représentant une stratégie à mémoire finie.]{Une machine de \textsc{Mealy} représentant une stratégie à mémoire finie (46~états). L'extrémité sortante d'une arête représente l'état actuel du jeu, l'extrémité sortante est l'état suivant retenu.}%
 \label{tj:fig:memory42}
 \end{figure}
 
@@ -341,7 +341,7 @@ En revanche, si seulement $m$ états de mémoire sont autorisés, la meilleure v
 Ainsi, avec une mémoire finie, non seulement le gain moyen optimal ne peut pas être atteint, mais on constate de plus que l'allocation de davantage de mémoire permet d'atteindre une meilleure valeur de gain moyen.
 \end{remark}
 
-Résoudre le jeu en supposant que le \jo a une mémoire finie limitée à un nombre $k$ d'unités fourni en entrée revient à deviner sa stratégie sous forme de machine de Mealy, ce qui constitue un objet de taille exponentielle si $k$ est fournie sous forme binaire.
+Résoudre le jeu en supposant que le \jo a une mémoire finie limitée à un nombre $k$ d'unités fourni en entrée revient à deviner sa stratégie sous forme de machine de \textsc{Mealy}, ce qui constitue un objet de taille exponentielle si $k$ est fournie sous forme binaire.
 La machine est alors synchronisée avec le jeu, et retourne un second jeu à un seul joueur, à faire jouer par le \ji.
 Dans ce second jeu, seules les stratégies sans mémoires doivent êtres prises en compte.
 

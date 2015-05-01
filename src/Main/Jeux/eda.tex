@@ -1,8 +1,21 @@
 % vim: set spelllang=fr foldmethod=marker:
-\section{Théorie des jeux}
+\vfill
+\lettrineh{T}{rois processus différents} ont été présentés, dans les chapitres précédents, pour le renouvellement de \cns afin d'assurer la détection des attaques dans un \rcsfs.
+En quelque sorte, ils ont été conçus de façon «incrémentale»: simple sélection aléatoire tout d'abord, qui pour améliorer l'équilibre de la consommation dans le réseau laisse place à la sélection selon l'énergie résiduelle; à son tour celle-ci présente des défauts, que nous avons voulu corriger avec le processus d'élection démocratique.
+Lorsque nous en avons eu l'occasion, nous avons utilisé des outils de modélisation pour mettre en forme ces systèmes sous un aspect plus formel, et pour pouvoir et extraire certaines propriétés.
 
-Nous avons évoqué, dans la section précédente, certains outils de \idx{modélisation} utilisés pour implémenter les méthodes de détection d'intrusion.
-Nous n'allons pas les détailler ici; mais puisque le \chapref{tj} a recours à des éléments de la \idx{théorie des jeux}, il nous semble utile d'aborder ici les liens qui rattachent ces éléments à la \secu.
+Dans ce chapitre, c'est la démarche inverse qui est mise en œuvre.
+Sans aller jusqu'à proposer un nouveau processus de sélection, nous avons souhaité modéliser le système en amont, afin de pouvoir, dans de futurs travaux, construire des protocoles efficaces à partir de l'architecture formelle obtenue.
+Pour ce faire, nous avons choisi de représenter le cluster sous la forme de jeux quantitatifs opposant plusieurs agents, qui cherchent à maximiser leur valeur de gain (correspondant à leur objectifs en termes d'envois de messages) et à conserver une énergie strictement positive.
+
+Après une brève introduction à l'application de la \idx{théorie des jeux} dans le contexte de la \secu des \rcs, nous définiront les jeux quantitatifs étudiés puis fourniront un exemple sur un premier tour de jeu; enfin sera abordée leur résolution.
+\pagebreak %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Théorie des jeux et \rcs}
+
+    \subsection{Application au domaine de la \secu}
+Nous avons évoqué la \idx{théorie des jeux} au \chapref{ea}, en nommant certains outils de \idx{modélisation} utilisés pour implémenter les méthodes de détection d'intrusion.
+Il semble utile à ce stade de fournir davantage d'éléments sur les liens qui rattachent cet outil à la \secu des \rcsfs.
 
 La \idx{théorie des jeux} est un ensemble d'outils permettant l'analyse de situations donnés, les «jeux»\index{jeu}, où les décisions prises par chaque entité (ou «joueur»)\index{joueur} se basent sur l'anticipation des décisions des autres joueurs.
 Ces outils servent dans un premier temps à modéliser le jeu étudié, et consistent ensuite à résoudre des problèmes tels que la recherche d'équilibres ou de solutions optimales dans le \idx{jeu}.
@@ -10,16 +23,16 @@ La \idx{théorie des jeux} est très fréquemment utilisée en économie.
 Elle intervient aussi régulièrement en politique, en biologie ou même en philosophie.
 Lui font appel, de manière plus ponctuelle, de nombreux autres domaines, dont l'informatique.
 
-Appliquée au \rcsfs, une étude classe la théorie des jeux selon trois approches: les performances énergétiques, la \secu, et les jeux\index{jeu} de poursuite-évasion~\cite{MT08}.
-Les jeux de poursuite-évasion impliquent un ensemble de joueurs\index{joueur} mobiles\index{mobilité} qui tentent de «capturer» un second ensemble de nœuds, d'en optimiser le suivi; les agents du second groupe, pour leur part, cherche à éviter de se faire détecter.
+Appliquée aux \rcs, une étude classe la théorie des jeux selon trois approches: les performances énergétiques, la \secu, et les jeux\index{jeu} de poursuite-évasion~\cite{MT08}.
+Les jeux de poursuite-évasion impliquent un ensemble de joueurs\index{joueur} mobiles\index{mobilité} qui tentent de «capturer» un second ensemble de nœuds, d'en optimiser le suivi; les agents du second groupe, pour leur part, cherchent à éviter de se faire détecter.
 Les deux autres catégories parlent d'elles-mêmes: les jeux appliqués aux performances énergétiques recherchent des solutions optimales permettant de minimiser la consommation, que ce soit en agissant sur la topologie du réseau ou bien sur le comportement des nœuds~\cite{CPF09}.
 En \secu, bien entendu, les jeux opposent les capteurs «normaux» aux agents attaquant de l'extérieur ou bien (dans le cas de nœuds corrompus) de l'intérieur du réseau.
 
-Une seconde étude plus récente, les jeux\index{jeu} de poursuite-évasion ne constituent qu'un élément d'une catégorie plus large regroupant les «applications» des capteurs (et comprenant aussi la collecte de données, par exemple).
+Dans une seconde étude plus récente, les jeux\index{jeu} de poursuite-évasion ne constituent qu'un élément d'une catégorie plus large regroupant les «applications» des capteurs (et comprenant aussi la collecte de données, par exemple).
 De même, les performances énergétiques ont été divisées en deux catégories, à savoir la gestion du réseau (ressources, énergie) et des communications (qualité de service, topologie, structure de \idx{routage})~\cite{SWKC12}.
 
 Mais revenons sur le domaine de la \secu des réseaux, pour nous intéresser à quelques exemples d'applications.
-Le protocole \leach a été sujet à de nombreuses propositions d'améliorations, comme nous l'avons déjà signalé, et l'une d'entre elles a recours à la \idx{théorie des jeux}~\cite{MMZ09}.
+Le protocole \leach a été sujet à de nombreuses propositions d'améliorations, comme nous l'avons déjà signalé au \chapref{ea}, et l'une d'entre elles a recours à la \idx{théorie des jeux}~\cite{MMZ09}.
 Avec le protocole S-\leach, la \sdb utilise un \ids centralisé tandis que les \chs utilisent des versions locales allégées, pour détecter les nœuds responsables de pertes de paquets dans le réseau.
 \nomenclature{S-LEACH}{\textit{Secure LEACH} (distinct de SecLEACH)}
 Les interactions entre les capteurs et l'\IDS sont modélisées sous la forme d'un jeu bayésien\index{jeu!jeu bayésien} (\cad avec information partielle: l'\IDS ne sait pas, en débutant la partie, si un nœud donné est compromis ou non).
@@ -32,14 +45,18 @@ Les jeux répétés\index{jeu!jeu répété} sont des modèles basés sur des s�
 Ils peuvent facilement être rattachés à des mécanismes produisant des scores de \reput.
 Ces jeux\index{jeu} sont donc employés pour créer des systèmes de détection d'intrusion génériques basés sur des mécanismes de confiance~\cite{AD07}, ou bien sur des solutions plus particulières qui se concentrent sur l'usage d'accusés de réception dans le but de détecter un nœud compromis situé sur la route de retransmission des données~\cite{Red09}.
 
-\bigskip
-Notre approche est différente, dans le sens où l'arrêt potentiel (dû à l'épuisement de la batterie) est inclue dans les contraintes du \idx{jeu}, en parallèle aux valeurs de \idx{gain}.
+    \subsection{Jeux quantitatifs, tours de jeux}
+
+Notre approche est différente, dans le sens où l'arrêt potentiel (dû à l'épuisement de la batterie) est inclus dans les contraintes du \idx{jeu}, en parallèle aux valeurs de \idx{gain}.
 Pour autant que nous sachions, les travaux portant sur des configurations similaires considèrent toutes les dimensions comme étant soit liées à l'énergie, soit au \idx{gain}, et traitent uniquement des \idx{conjonctions} d'atomes~\cite{chatterjee12,velner12a}.
 Dans de tels cas, les algorithmes sont établis sur une même structure: l'objectif du jeu est décomposé selon les dimensions établies, et l'on cherche pour chacune de ces dimensions une stratégie gagnante\index{stratégie!stratégie gagnante} à mémoire finie\index{stratégie!stratégie à mémoire finie}.
 Ces stratégies sont ensuite combinées pour obtenir une stratégie globale pour le problème, qui elle peut éventuellement nécessiter une mémoire infinie\index{stratégie!stratégie à mémoire infinie}.
 
-D'autres travaux~\cite{velner12b} traitent d'objectifs plus complexes basés sur la combinaison d'objectifs portant sur le gain moyen\index{gain!gain moyen}, en utilisant les opérateurs somme, $\max$, et $\min$.
+D'autres analyses~\cite{velner12b} traitent d'objectifs plus complexes basés sur la combinaison d'objectifs portant sur le gain moyen\index{gain!gain moyen}, en utilisant les opérateurs \textit{somme}, \textit{max} et \textit{min}.
 Dépassant le cadre de nos travaux, on trouve aussi l'étude de jeux comportant à la fois des conditions sur le \idx{gain} et un \idx{objectif de parité} (où pour remporter la victoire, un joueur a besoin d'accéder au \idx{gain} maximum qui sera récolté à l'infini sur le chemin, infini lui aussi, qui représente le déroulement de la partie\index{jeu!partie})~\cite{chatterjee05}.
 Dans ce cas l'\idx{objectif de parité} assure que le système se comporte de façon cohérente, tandis que le \idx{gain} représente un but\index{jeu!but} quantitatif plus concret.
 Les stratégies gagnantes\index{stratégie!stratégie gagnante} pour ces jeux peuvent nécessiter une mémoire infinie\index{stratégie!stratégie à mémoire finie}, mais il est possible d'en obtenir une approximation exécutable avec une mémoire finie\index{stratégie!stratégie à mémoire infinie}.
-Ce type de jeux\index{jeu} ne convient néanmoins pas parfaitement pour modéliser les \rcs, car ils laissent de côté l'énergie qui est un paramètre essentiel de notre contexte de travail.
+Ce type de jeux\index{jeu} ne convient néanmoins pas parfaitement pour modéliser les \rcs, car ils laissent de côté l'énergie, qui est un paramètre essentiel de notre contexte de travail.
+
+Nous cherchons donc à combiner plusieurs objectifs, qui portent à la fois sur une valeur de gain et sur l'énergie restante dans la batterie des capteurs.
+Traditionnellement, un jeu se déroule tour par tour: chaque joueur joue sur son tour, puis laisse jouer ses concurrents (ou ses alliés selon le cas); il nous faut également composer avec cette contrainte, par exemple en définissant des intervalles de temps au cours desquels chaque joueur possède une action à réaliser.
