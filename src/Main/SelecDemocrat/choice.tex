@@ -102,13 +102,32 @@ La \tabref{sd:table:apps}, quant à elle, synthétise les cas d'utilisation de c
     \end{tabu}
 \end{table}
 
-    \subsection{Discussion: impact de la topologie du réseau}
+    \subsection{Adapter le processus au réseau}
 
         \subsubsection{Nombre des \cns}
+Les résultats numériques de la section précédente, et notamment les différences de performances sur l'usage du processus d'élection démocratique pour désigner sept~ou dix~nœuds mettent en évidence l'importance du nombre de \cns dans le cluster sur la préservation de l'énergie.
+Comme les \cns consomment davantage, plus ils sont nombreux, plus les réserves se vident rapidement; mais plus les chances de détecter l'attaque sont élevées.
+Il est donc intéressant, lors du déploiement du réseau, d'observer quel est le nombre idéal de \cns à sélectionner pour assurer une couverture correcte sans gaspiller trop d'énergie.
+Dans notre cas, descendre à sept~\cns semble raisonnable, surtout avec des méthodes qui assurent une couverture minimale.
+En dessous de cette valeur, le risque de laisser des zones non couvertes devient important.
+
+Le nombre de \cns à utiliser est très dépendant de la topologie du réseau.
+Pour rappel, nous avons travaillé jusqu'à maintenant dans un cluster dont tous les nœuds sont des voisins directs du \ch.
+Si les \cns sont appelés à être déployés sur une autre architecture, sans cluster par exemple, les problèmes de couverture seront différents.
 
         \subsubsection{Contraintes sur la couverture du cluster}
+Un exemple déjà abordé dans le chapitre précédent est celui d'un réseau en étoile, comme présenté en \figref{sd:fig:star}: dans une telle configuration, il est indispensable d'adapter (ou de supprimer) la règle selon laquelle chaque capteur doit être surveillé par au moins deux~\cns (pour les méthodes d'élection démocratique et de sélection selon l'énergie résiduelle), sans quoi tous les nœuds ou presque devront être sélectionnés en tant que \cns.
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=7cm]{\chapterfig/WSN_star.pdf}
     \caption{Schéma de réseau de capteurs en forme d'étoile. Le cercle en pointillés bleus représente la portée d'un nœud}\label{sd:fig:star}
 \end{figure}
+Pour autant, cette règle n'est pas à rejeter systématiquement: elle est très utile dans la configuration avec cluster que nous avons étudié, et permet d'y limiter le nombre de \cns à désigner.
+
+        \subsubsection{Interactions entre \cns et nœuds compromis}
+La mise en place d'un système de détection efficace passe également par une implémentation rigoureuse de l'algorithme utilisé par les \cns pour détecter les attaques.
+Aucune recommandation particulière n'est fournie, si ce n'est de définir en amont du déploiement un cahier des charges précis couvrant les cas d'utilisation et de fonctionnement normaux du réseau, de manière à pouvoir mettre en œuvre les règles de détection de la façon la plus efficace possible.
+
+Conjugué à un renouvellement périodique selon une méthode de détection aléatoire ou d'élection démocratique, l'usage des \cns permet une surveillance efficace du réseau.
+Il serait tout de même appréciable de pouvoir construire un modèle plus formel de cette surveillance.
+Puisque nous avons plusieurs acteurs avec des buts différents, les capteurs «sains» et les nœuds compromis, c'est vers des éléments de la théorie des jeux que nous allons nous tourner.

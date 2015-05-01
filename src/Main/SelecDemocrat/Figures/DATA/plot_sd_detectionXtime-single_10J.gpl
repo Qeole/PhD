@@ -1,0 +1,18 @@
+#!/usr/bin/gnuplot
+# vim: se syntax=gnuplot:
+set term pdfcairo enhanced size 4.77,2.95 font "Linux Libertine O,14" # \textwidth, \textwidth * nb_or
+set out "GRAPHS/plot_sd_detectionXtime-single_10J.pdf"
+set key inside top right
+set nogrid
+set pointsize .4
+set xrange [0:60]
+set yrange [0:10]
+set xlabel 'Temps (minutes)'
+set ylabel 'Nombre de {/:Italic cNodes} ayant détecté l’attaque'
+
+plot \
+    'SRC_10J/DetectionXTime_OneInstance.dat' using 9:10 title 'sans renouvellement'                           with linespoints lt 4 lc rgb "red",\
+    'SRC_10J/DetectionXTime_OneInstance.dat' using 1:8  title 'sélection pseudo-aléatoire'                    with linespoints lt 2 lc rgb "#0065bd",\
+    'SRC_10J/DetectionXTime_OneInstance.dat' using 1:6  title 'sélection selon l’énergie résiduelle'          with linespoints lt 3 lc 4,\
+    'SRC_10J/DetectionXTime_OneInstance.dat' using 1:2  title 'sélection démocratique (10 {/:Italic cNodes})' with linespoints lt 1 lc rgb "#318E31",\
+    'SRC_10J/DetectionXTime_OneInstance.dat' using 1:4  title 'sélection démocratique (7 {/:Italic cNodes})'  with linespoints lt 6 lc rgb "#0F6F68"
