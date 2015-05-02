@@ -21,24 +21,29 @@ Le théorème établi est le suivant:
 Le problème de victoire, ainsi que le problème de crédit initial, sont indécidables pour des objectifs définis par une formule de gain comportant quatre~composantes relatives à l'énergie et une composante relative au gain.
 \end{theorem}
 
+\newcommand\tjztest{\textit{0-test}\xspace}
+\newcommand\tjhalt {\textsf{halte}\xspace}
+\newcommand\tjstop {\textsf{arrêt}\xspace}
+\newcommand\tjstopq{\textsf{arrêt$'$}\xspace}
+\newcommand\tjcheck{\textsf{vérif}\xspace}
 La preuve de ce théorème consiste à encoder, à l'aide d'un jeu du type étudié, le problème de terminaison à l'aide d'une machine à deux compteurs: le problème équivalent ainsi obtenu est connu comme étant indécidable~\cite{minsky67}.
 Chaque compteur est représenté par deux~composantes d'énergie (une pour chacun des deux joueurs), qui contiennent chacune une copie de la valeur du compteur en question.
-Pour l'instruction $0$-test (présentée ci-dessous), le \jo peut prétendre que son compteur est nul, ou bien qu'il ne l'est pas; le second joueur peut vérifier si cette affirmation est valide ou non.
-Si la machine atteint son état d'arrêt, une composante de gain est incrémentée, et tous les autres composantes sont réinitialisées à $0$.
+Pour l'instruction \tjztest (présentée ci-dessous), le \jo peut prétendre que son compteur est nul, ou bien qu'il ne l'est pas; le second joueur peut vérifier si cette affirmation est valide ou non.
+Si la machine atteint son état d'\textit{arrêt}, une composante de gain est incrémentée, et tous les autres composantes sont réinitialisées à $0$.
 De cette manière, si la machine s'arrête, le \jo a une stratégie gagnante lui permettant d'obtenir un gain strictement positif.
 Autrement, le gain demeure nul.
 
 On définit plus précisément une machine à deux compteurs comme une liste d'instructions étiquetées, qui peuvent être:
 \begin{itemize}
-    \item \textbf{incrément:} incrémenter le compteur $c$ (respectivement $d$) et aller à l'étiquette~$\ell$
-    \item \textbf{0-test:} si $c=0$ (respectivement $d=0$) alors aller à l'étiquette~$\ell_1$, sinon décrémenter $c$ (respectivement $d$) et aller à l'étiquette~$\ell_2$
-    \item \textbf{halting:} \emph{halt}
+    \item \textit{incrément:} incrémenter le compteur $c$ (respectivement $d$) et aller à l'étiquette~$\ell$;
+    \item \textit{\tjztest:} si $c=0$ (respectivement $d=0$) alors aller à l'étiquette~$\ell_1$, sinon décrémenter $c$ (respectivement $d$) et aller à l'étiquette~$\ell_2$;
+    \item \textit{arrêt:} arrêt de la machine, associé à l'état \tjhalt du jeu.
 \end{itemize}
 Au départ, les deux compteurs sont initialisés à $0$.
 
 À présent, étant donné une machine $\machine$, nous construisons une arène $\G_\machine$ basée sur des modules «élémentaires» pour chaque type d'instructions (celui du compteur $c$ sera symétrique à celui du compteur $d$).
 L'arène comporte donc cinq~composantes $c$, $c'$, $d$, $d'$, $p$, où seule $p$ concerne le gain, les autres étant attachées à des valeurs énergétiques.
-Les composantes $c$ et $c'$ (respectivement $d$ et $d'$) sont supposées toujours conserver la même valeur, excepté pour l'instruction $0$-test.
+Les composantes $c$ et $c'$ (respectivement $d$ et $d'$) sont supposées toujours conserver la même valeur, excepté pour l'instruction \tjztest.
 Au lancement du jeu toutes les composantes ont pour valeur\,\footnote{Pour obtenir une simulation plus réaliste, il est possible d'assigner aux composantes la valeur initiale $1$, et de considérer $0$ comme valeur de défaite. Nous choisissons ici d'autoriser un niveau d'énergie nul et considérons le jeu comme «perdu» pour des valeurs strictement négative, et ce afin de rendre plus clair le lien entre les valeurs des compteurs et les niveaux d'énergie.} $0$.
 
 Le but du \jo est d'obtenir un gain strictement positif, tout en simulant fidèlement la machine.
@@ -49,14 +54,14 @@ Si le cas devait se produire, les valeurs de ces composantes seraient strictemen
 \[(c\geq0 \wedge d\geq0 \wedge p>0) \vee (c'<0 \wedge c\geq0) \vee (d'<0 \wedge d\geq0)\]
 
 Chaque instruction étiquetée a un état dans l'arène appartenant au \jo, avec la même étiquette (d'autres états seront rajoutés par la suite).
-Le cas de l'incrément est trivial: si l'instruction $\ell$ est «incrémenter $c$ puis aller à l'étiquette~$\ell'$», alors il y a une arête partant de $\ell$ et joignant $\ell'$ avec les poids $(1,1,0,0,0)$.
+Le cas de l'\textit{incrément} est trivial: si l'instruction $\ell$ est «incrémenter $c$ puis aller à l'étiquette~$\ell'$», alors il y a une arête partant de $\ell$ et joignant $\ell'$ avec les poids $(1,1,0,0,0)$.
 Il n'y a pas d'autre arête partant de $\ell$, le joueur n'a donc pas d'autre choix.
 
-L'instruction $0$-test est plus délicate, car le \jo est susceptible de tricher en empruntant la mauvaise branche de l'instruction conditionnelle.
+L'instruction \tjztest est plus délicate, car le \jo est susceptible de tricher en empruntant la mauvaise branche de l'instruction conditionnelle.
 De manière formelle, on suppose que $\ell$ est «si $c=0$ alors aller à l'étiquette~$\ell_1$, sinon décrémenter $c$ et aller à l'étiquette~$\ell_2$».
 Il y a alors deux arêtes sortant de l'état $\ell$: l'une correspondant à l'annonce $c=0$, l'autre à l'annonce $c>0$, comme indiqué sur la \figref{tj:fig:zerotest}.
 L'arête portant l'affirmation $c=0$ atteint un état possédé par le \ji, qui peut soit accepter l'affirmation (et aller dans ce cas à $\ell_1$), soit la rejeter.
-Le rejet de cette affirmation implique de décrémenter $c'$ (mais non $c$) et de se rendre sur un état \emph{stop}: cet état possède une unique arête sortante, qui boucle sur lui-même avec les poids $(0,0,0,0,0)$, signifiant que la simulation s'est arrêtée.
+Le rejet de cette affirmation implique de décrémenter $c'$ (mais non $c$) et de se rendre sur un état \tjstop: cet état possède une unique arête sortante, qui boucle sur lui-même avec les poids $(0,0,0,0,0)$, signifiant que la simulation s'est arrêtée.
 Si l'affirmation est rejetée à tort, on obtient $c'<0$ tandis que $c=0$, puisque les valeurs de $c$ et $c'$ étaient égales.
 Si l'affirmation a été rejetée à raison, alors le gain est nul.
 
@@ -70,10 +75,10 @@ Si l'affirmation a été rejetée à raison, alors le gain est nul.
 \node[stateComp] (l0) at (0,0) {$\ell$};
 \node[stateNorm] (c0) at (3,0) {`$c=0$'};
 \node[stateComp] (l1) at (6,0) {$\ell_1$};
-\node[stateComp] (stop1) at (6,-2) {\emph{stop}};
+\node[stateComp] (stop1) at (6,-2) {\tjstop};
 \node[stateNorm] (cpos) at (0,-2) {`$c>0$'};
 \node[stateComp] (l2) at (0,-4) {$\ell_2$};
-\node[stateComp] (stop2) at (3,-4) {\emph{stop$'$}};
+\node[stateComp] (stop2) at (3,-4) {\tjstopq};
 
 \draw[->] (l0) edge (c0);
 \draw[->] (c0) edge (l1);
@@ -87,20 +92,20 @@ Si l'affirmation a été rejetée à raison, alors le gain est nul.
 \draw[->] (stop2) edge [loop right] node [mini] {$(0,0,0,0,1)$} (stop2);
 
 \end{tikzpicture}
-\caption[Module d'encodage de l'instruction $0$-test sous forme de jeu.]{Module d'encodage de l'instruction $0$-test sous forme de jeu: «si $c=0$ alors aller à l'étiquette~$\ell_1$, sinon décrémenter $c$ et aller à l'étiquette~$\ell_2$». Les états sous forme de carrés appartiennent au \jo, les cercles représentent les états du \ji. Il est convenu qu'en l'absence d'indication de poids, les arêtes comportent les poids~$(0,0,0,0,0)$.}%
+\caption[Module d'encodage de l'instruction \tjztest sous forme de jeu.]{Module d'encodage de l'instruction \tjztest sous forme de jeu: «si $c=0$ alors aller à l'étiquette~$\ell_1$, sinon décrémenter $c$ et aller à l'étiquette~$\ell_2$». Les états sous forme de carrés appartiennent au \jo, les cercles représentent les états du \ji. Il est convenu qu'en l'absence d'indication de poids, les arêtes comportent les poids~$(0,0,0,0,0)$.}%
 \label{tj:fig:zerotest}
 \end{figure}
 
 De même, l'affirmation $c>0$ est représentée par une arête qui décrémente à la fois $c$ et $c'$ (donc de poids $(-1,-1,0,0,0)$), et atteint l'état du \ji.
-Ce dernier peut soit poursuivre la simulation, soit se rendre sur un état \emph{stop$'$}.
+Ce dernier peut soit poursuivre la simulation, soit se rendre sur un état \tjstopq.
 Cet état possède une unique arête qui boucle sur lui-même avec les poids $(0,0,0,0,1)$, ce qui signifie que la simulations est arrêtée mais que le gain vaut $1$.
 Si le \jo a triché, alors $c<0$ et la simulation n'a pas besoin d'être menée plus avant.
 S'il s'est comporté de façon loyale, alors $c>0$ et $c'>0$, et $p>1$.
 
-Enfin, lorsqu'il atteint l'état \emph{stop}, le \jo décrémente à la fois $c$ et $c'$ autant de fois qu'il le souhaite, puis se rend sur un état de vérification (\emph{check}).
-L'état \emph{check} appartient au \ji, et agit de la même façon que pour le $0$-test dans le cas où le \jo affirme que $c=0$.
+Enfin, lorsqu'il atteint l'état \tjhalt, le \jo décrémente à la fois $c$ et $c'$ autant de fois qu'il le souhaite, puis se rend sur un état de vérification (\tjcheck).
+L'état \tjcheck appartient au \ji, et agit de la même façon que pour le \tjztest dans le cas où le \jo affirme que $c=0$.
 On procède de façon identique pour $d$.
-Enfin, une arête retourne depuis l'état \emph{check} jusqu'à l'état initial et rapporte une récompense à la composante de gain~$p$: son poids est $(0,0,0,0,1)$.
+Enfin, une arête retourne depuis l'état \tjcheck jusqu'à l'état initial et rapporte une récompense à la composante de gain~$p$: son poids est $(0,0,0,0,1)$.
 Ce module est représenté sur la \figref{tj:fig:halt}.
 
 \begin{figure}[ht]
@@ -110,9 +115,9 @@ Ce module est représenté sur la \figref{tj:fig:halt}.
 \tikzstyle{stateNorm}=[state,shape=circle,draw=none,fill,blueLACL,text=white,circular drop shadow]
 \tikzstyle{mini}=[font=\small]
 
-\node[stateComp] (h) at (0,0) {\emph{halt}};
-\node[stateNorm] (z) at (3,0) {\emph{check}};
-\node[stateComp] (stop) at (3,-3) {\emph{stop}};
+\node[stateComp] (h) at (0,0) {\tjhalt};
+\node[stateNorm] (z) at (3,0) {\tjcheck};
+\node[stateComp] (stop) at (3,-3) {\tjstop};
 \node[stateComp] (l0) at (6,0) {$\ell_0$};
 
 \draw[->] (h) edge[loop above] node[mini,inner sep=7pt] {$(-1,-1,0,0,0)$} (h);
@@ -126,7 +131,7 @@ Ce module est représenté sur la \figref{tj:fig:halt}.
 \draw[->] (stop) edge [loop right] (stop);
 
 \end{tikzpicture}
-\caption[Module d'encodage des instructions d'arrêt sous forme de jeu.]{Module d'encodage des instructions d'arrêt sous forme de jeu. Les états sous forme de carrés appartiennent au \jo, les cercles représentent les états du \ji.}%
+\caption[Module d'encodage de l'instruction d'\textit{arrêt} sous forme de jeu.]{Module d'encodage de l'instruction d'\textit{arrêt} sous forme de jeu. Les états sous forme de carrés appartiennent au \jo, les cercles représentent les états du \ji.}%
 \label{tj:fig:halt}
 \end{figure}
 
@@ -134,12 +139,12 @@ Supposons à présent que \machine s'arrête.
 Considérons la stratégie du \jo qui consiste à jouer honnêtement, \cad à annoncer les valeurs correctes du compteur (et à décrémenter les composantes d'énergie, de sorte qu'elles atteignent exactement $0$).
 Alors si le \ji ne lance aucune accusation de tricherie, les compteurs $c$ et $d$ restent tous deux positifs, comme pour \machine.
 Supposons de plus que \machine a terminé son exécution en $k$ étape, et dénotons par $c_k$ et $d_k$ les valeurs respectives de $c$ et $d$ lorsque l'on atteint les instructions d'arrêt.
-Dans ce cas l'exécution de la simulation sur la machine correspond au plus à $2k$ étapes du jeu (à cause des affirmations qui doivent être acceptées), et le jeu nécessite $c_k+d_k+2$ étapes depuis l'état \emph{halt} pour atteindre à nouveau l'état initial: il s'agit du nombre d'étapes requises pour décrémenter chaque compteur et pour traverser le module de la \figref{tj:fig:halt}.
+Dans ce cas l'exécution de la simulation sur la machine correspond au plus à $2k$ étapes du jeu (à cause des affirmations qui doivent être acceptées), et le jeu nécessite $c_k+d_k+2$ étapes depuis l'état \tjhalt pour atteindre à nouveau l'état initial: il s'agit du nombre d'étapes requises pour décrémenter chaque compteur et pour traverser le module de la \figref{tj:fig:halt}.
 En conséquence la valeur minimale du gain moyen est de $\frac1{2k+c_k+d_k+2}>0$.
 
 Si le \ji a rejeté l'une des affirmations du \jo:
 \begin{itemize}
-\item si $c=c'=0$, mais que le \ji a décrémenté $c'$ pour contester l'annonce, alors le jeu «s'arrête», mais la condition~$c'<0 \wedge c\geq0$ est satisfaite
+\item si $c=c'=0$, mais que le \ji a depuis décrémenté $c'$ pour contester l'annonce, alors le jeu «s'arrête», mais la condition~$c'<0 \wedge c\geq0$ est satisfaite;
 \item si $c=c'\geq0$ après le décrément mais que le jeu a été «arrêté», le gain vaut $1$ tandis que les deux composantes $c$ et $d$ sont supérieures à $0$. Dans ce cas la condition~$c\geq0 \wedge d\geq0 \wedge p>0$ est satisfaite.
 \end{itemize}
 
@@ -147,12 +152,12 @@ Au final, on retient que la stratégie de simulation «loyale» est gagnante.
 
 \bigskip
 
-Supposons maintenant que \machine ne s'arrête pas: la simulation «loyale» retourne une valeur de gain de $0$ si le \ji ne porte aucune accusation à tort (l'état d'arrêt \emph{halt} n'est jamais atteint, et si le \ji ne réfute aucune annonce, l'état \emph{stop$'$} n'est pas non plus atteint.)
+Supposons maintenant que \machine ne s'arrête pas: la simulation «loyale» retourne une valeur de gain de $0$ si le \ji ne porte aucune accusation à tort (l'état d'arrêt \tjhalt n'est jamais atteint, et si le \ji ne réfute aucune annonce, l'état \tjstopq n'est pas non plus atteint.)
 Dans le cas où le \jo «ment» lors de ses annonces, il suffit au \ji de détecter cette erreur pour que l'on obtienne soit $c<0$, soit une valeur de gain définitivement nulle.
 
 \bigskip
 
-Cette construction peut être adaptée au problème du crédit initial: il suffit seulement de rajouter, en amont de l'état initial, un module similaire au module \emph{halt} dans le sens où il doit permettre à tous les niveaux d'énergie d'atteindre $0$.
+Cette construction peut être adaptée au problème du crédit initial: il suffit seulement de rajouter, en amont de l'état initial, un module similaire au module \tjhalt dans le sens où il doit permettre à tous les niveaux d'énergie d'atteindre $0$.
 Une fois l'état «initial» (à l'origine) atteint, le crédit initial devient caduque, et le \jo gagne si et seulement si \machine s'arrête.
 
 \subsection{Le fragment positif}
@@ -184,64 +189,64 @@ Nous allons fournir des conditions suffisantes pour obtenir une telle stratégie
 
 \subsubsection{Attracteurs}
 
-Dans les jeux à deux joueurs, il est courant de faire appel à la notion d'\emph{attracteurs} d'un ensemble $Q$ pour désigner les états depuis lesquels un joueur peut forcer le jeu à se déplacer dans $Q$.
+Dans les jeux à deux joueurs, il est courant de faire appel à la notion d'\emph{attracteurs} d'un ensemble $\Q$ pour désigner les états depuis lesquels un joueur peut forcer le jeu à se déplacer dans $\Q$.
 
 \begin{definition}
-Les \emph{attracteurs en une-étape} d'un ensemble d'états $Q$ pour les joueurs~0 et~1 sont définis ainsi:
+Les \emph{attracteurs en une-étape} d'un ensemble d'états $\Q$ pour les joueurs~0 et~1 sont définis ainsi:
 \begin{eqnarray*}
-1\!\attractor{0}(Q) & = & \left\{q \in V_0 \mmid \exists (q,q') \in E \textrm{ tel que } q' \in Q \right\}              \\
-                    &   & \quad\cup \;\left\{q \in V_1 \mmid \forall (q,q') \in E, q' \in Q \right\}                 \\
-                    &   &                                                                                            \\
-1\!\attractor{1}(Q) & = & \left\{q \in V_0 \mmid \forall (q,q') \in E, q' \in Q \right\}                             \\
-                    &   & \quad \cup \;\left\{q \in V_1 \mmid \exists (q,q') \in E \textrm{ tel que } q' \in Q \right\}
+1\!\attractor{0}(\Q) & = & \left\{q \in \S_0 \mmid \exists (q,q') \in \A \textrm{ tel que } q' \in \Q \right\}             \\
+                    &   & \quad\cup \;\left\{q \in \S_1 \mmid \forall (q,q') \in \A, q' \in \Q \right\}                    \\
+                    &   &                                                                                                  \\
+1\!\attractor{1}(\Q) & = & \left\{q \in \S_0 \mmid \forall (q,q') \in \A, q' \in \Q \right\}                               \\
+                    &   & \quad \cup \;\left\{q \in \S_1 \mmid \exists (q,q') \in \A \textrm{ tel que } q' \in \Q \right\}
 \end{eqnarray*}
-Les \emph{attracteurs} pour le \jo (respectivement pour le \ji) d'un ensemble $Q$ d'états sont les points fixes des attracteurs en une-étape, en partant de $Q$: pour $i \in \{0,1\}$, \[\attractor{i}(Q) = \bigcup_{j \in \N} \left(1\!\attractor{i}\right)^j(Q)\]
+Les \emph{attracteurs} pour le \jo (respectivement pour le \ji) d'un ensemble $\Q$ d'états sont les points fixes des attracteurs en une-étape, en partant de $\Q$: on a ainsi, pour $i \in \{0,1\}$, \[\attractor{i}(\Q) = \bigcup_{j \in \N} \left(1\!\attractor{i}\right)^j(\Q)\]
 \end{definition}
-L'attracteur pour le joueur~$i$ est donc l'ensemble des états depuis lesquels ce joueur est en mesure de s'assurer que le jeu atteindra $Q$.
-On notera que pour tout état de $(1\!\attractor{i})^j(Q)$, le joueur~$i$ a une stratégie sans mémoire lui permettant d'atteindre $Q$ en au plus $j$ étapes.
-Puisque le point fixe est atteint en $|V|$ itérations au plus, $Q$ peut être atteint avec un maximum de $|V|$ étapes depuis n'importe quel état de $\attractor{i}(Q)$.
+L'attracteur pour le joueur~$i$ est donc l'ensemble des états depuis lesquels ce joueur est en mesure de s'assurer que le jeu atteindra $\Q$.
+On notera que pour tout état de $(1\!\attractor{i})^j(\Q)$, le joueur~$i$ a une stratégie sans mémoire lui permettant d'atteindre $\Q$ en au plus $j$ étapes.
+Puisque le point fixe est atteint en $|\S|$ itérations au plus, $\Q$ peut être atteint avec un maximum de $|\S|$ étapes depuis n'importe quel état de $\attractor{i}(\Q)$.
 On notera aussi que cette borne entraine la possibilité de calculer les attracteurs en un temps polynomial.
 
 \begin{lemma}
-Depuis n'importe quel état de $\attractor{i}(Q)$, le joueur~$i$ possède une stratégie sans mémoire qui l'assure d'atteindre $Q$ en un maximum de $|V|$ étapes.
+Depuis n'importe quel état de $\attractor{i}(\Q)$, le joueur~$i$ possède une stratégie sans mémoire qui l'assure d'atteindre $\Q$ en un maximum de $|\S|$ étapes.
 \end{lemma}
 
 Une propriété des attracteurs dans les jeux est qu'ils peuvent être retirés sans danger du jeu, tout en laissant la structure du graphe restant toujours associée à un jeu (\cad sans état final):
 \begin{lemma}\label{tj:lem:removeattr}
-Soit $\G = \langle V_0, V_1, E\rangle$ le graphe d'un jeu (\cad tel que tout état de $V$ a une arête sortante allant dans $E$).
+Soit $\G = \langle \S_0, \S_1, \A\rangle$ le graphe d'un jeu (\cad tel que tout état de $\S$ a une arête sortante appartenant à $\A$).
 Soit un joueur $j \in \{0,1\}$.
-Soit $Q \subseteq V$.
-Considérons le graphe $\G' = (V_0', V_1', E \cap (V' \times V'))$ with $V_i' = V_i \setminus \attractor{j}(Q)$ pour $i \in \{0,1\}$.
-Alors tout état de $V'$ a une arête sortante allant dans $E \cap (V' \times V')$, autrement dit $\G'$ est aussi un graphe de jeu.
+Soit $\Q \subseteq \S$.
+Considérons le graphe $\G' = (\S_0', \S_1', \A \cap (\S' \times \S'))$ avec $\S_i' = \S_i \setminus \attractor{j}(\Q)$ pour $i \in \{0,1\}$.
+Alors tout état de $\S'$ a une arête sortante allant dans $\A \cap (\S' \times \S')$, autrement dit $\G'$ est aussi un graphe de jeu.
 \end{lemma}
 
 \begin{proof}
-Supposons par contradiction que ce ne soit pas le cas, \cad qu'il existe $q \in V'$ tel que $q$ n'a aucune arête sortante.
-Comme $q$ avait une arête sortante dans le graphe de jeu $E$, cela signifie que tous les états successeurs de $q$ appartiennent à $\attractor{j}(Q)$.
-Par définition d'un attracteur, on a alors $q \in \attractor{j}(Q)$, et $q \notin V'$.
+Supposons par contradiction que ce ne soit pas le cas, \cad qu'il existe $q \in \S'$ tel que $q$ n'a aucune arête sortante.
+Comme $q$ avait une arête sortante appartenant à $\A$ dans le graphe de jeu $\G$, cela signifie que tous les états successeurs de $q$ appartiennent à $\attractor{j}(\Q)$.
+Par définition d'un attracteur, on a alors $q \in \attractor{j}(\Q)$, et on en déduit ainsi que $q \notin \S'$.
 \end{proof}
 
 \subsubsection{Conjonction d'un objectif de gain et d'un objectif d'énergie}
 
-Dans ce premier exemple simple, nous étudions les objectifs, pour le \jo, de la forme $p_e \geq c_e \wedge p_v \geq c_v$, où $p_e$ et $p_v$ sont le niveau d'énergie et la valeur du gain moyen accumulé par le \jo, et avec $c_e,c_v \in \N$.
+Dans ce premier exemple simple, nous étudions les objectifs, pour le \jo, de la forme $p_e \geq c_e \wedge p_v \geq c_v$, où $p_e$ et $p_v$ sont le niveau d'énergie et la valeur du gain moyen accumulé par le \jo, et avec $c_e, c_v \in \N$.
 De tels objectifs se traduisent par le besoin d'atteindre une certaine valeur de gain tandis que le niveau d'énergie demeure supérieur à une limite donnée.
-Un comportement cupide est une illustration simple d'un objectif de ce type: le nœud compromis cherche à rester «en vie» ($p_e \geq 1$) tout en émettant au moins un message toutes les 6~étapes ($p_v \geq \frac1{6}$, mais comme nous l'avons remarqué plus haut, il est possible d'obtenir un seuil à valeur entière en multipliant tous les poids de la composante par~6).
+Un comportement cupide est une illustration simple d'un objectif de ce type: le nœud compromis cherche à rester «en vie» (donc à vérifier à tout instant $p_e \geq 1$) tout en émettant au moins un message toutes les 6~étapes ($p_v \geq \frac1{6}$, mais comme nous l'avons remarqué plus haut, il est possible d'obtenir un seuil à valeur entière en multipliant tous les poids de la composante par~6).
 
 Tout d'abord, nous pouvons clairement établir que depuis un état à partir duquel au moins un des objectifs ne peut être rempli, le \jo ne peut pas gagner.
 De plus, si le \ji peut forcer le \jo à atteindre l'un de ces états, alors l'objectif du \jo ne sera pas rempli.
 De là nous pouvons utiliser la notion classique d'\emph{attracteurs} dont nous avons rappelé la définition.
-Nous notons $L_e$ les états où le \jo perd pour $p_e \geq c_e$ (\cad où le \ji possède une stratégie pour l'empêcher de gagner), et $L_v$ les états pour lesquels le \jo perd pour $p_v \geq c_v$.
-Le \ji peut évidemment empêcher le \jo d'atteindre son objectif $p_e \geq c_e \wedge p_v \geq c_v$ depuis tout état de $\attractor{g}(L_e \cup L_v)$.
-Par conséquent toute stratégie gagnante pour le \jo doit rester dans l'ensemble $\G \setminus\attractor{1}(L_e \cup L_v)$.
-Par ailleurs, une stratégie gagnante qui reste dans $\G \setminus\attractor{1}(L_e \cup L_v)$ est aussi une stratégie gagnante dans $\G$ puisque le \ji ne peut pas forcer le jeu à se déplacer dans $\attractor{1}(L_e \cup L_v)$ (par définition des attracteurs).
+Nous notons $\P_e$ les états où le \jo perd pour $p_e \geq c_e$ (\cad où le \ji possède une stratégie pour l'empêcher de gagner), et $\P_v$ les états pour lesquels le \jo perd pour $p_v \geq c_v$.
+Le \ji peut évidemment empêcher le \jo d'atteindre son objectif $p_e \geq c_e \wedge p_v \geq c_v$ depuis tout état de $\attractor{1}(\P_e \cup \P_v)$.
+Par conséquent toute stratégie gagnante pour le \jo doit rester dans l'ensemble $\G \setminus\attractor{1}(\P_e \cup \P_v)$.
+Par ailleurs, une stratégie gagnante qui reste dans $\G \setminus\attractor{1}(\P_e \cup \P_v)$ est aussi une stratégie gagnante dans $\G$ puisque le \ji ne peut pas forcer le jeu à se déplacer dans $\attractor{1}(\P_e \cup \P_v)$ (par définition des attracteurs).
 
 Ainsi il devient possible de retirer, de manière récursive, des états de $\G$ jusqu'à ce que le \jo gagne pour chacun de ses objectifs depuis tous les états restants.
 Si, en revanche, le graphe de jeu devient vide à un moment donné, cela signifie que le \jo ne peut pas gagner pour les deux objectifs depuis quelque état que ce soit du graphe d'origine.
 
 Supposons à présent que le \jo dispose des stratégies gagnantes $\lambda_e$, $\lambda_v$ pour les objectifs respectifs $p_e \geq 1$ et $p_v \geq \frac1{15}$, et que ces stratégies sont gagnantes depuis tous les états.
-Ces stratégies sont supposées être sans mémoire, ce sont donc des fonctions de $V_c$ dans $V$.
+Ces stratégies sont supposées être sans mémoire, ce sont donc des fonctions de $\S_c$ dans $\S$.
 
-Considérons le jeu à un joueur $\G_e$, obtenu quand le \jo joue $\lambda_e$: chaque arête entrante dans un état $v \in V_c$ va à la place à $\lambda_e(v)$, et les poids sont cumulés: $v_0 \xrightarrow{w_1} v \xrightarrow{w_2} \lambda_e(v)$ est remplacé par $v_0 \xrightarrow{w_1+w_2} \lambda_e(v)$.
+Considérons le jeu à un joueur $\G_e$, obtenu quand le \jo joue $\lambda_e$: chaque arête entrante dans un état $v \in \S_c$ va à la place à $\lambda_e(v)$, et les poids sont cumulés: $v_0 \xrightarrow{w_1} v \xrightarrow{w_2} \lambda_e(v)$ est remplacé par $v_0 \xrightarrow{w_1+w_2} \lambda_e(v)$.
 De façon similaire, soit $\G_v$ le jeu à un joueur obtenu en jouant $\lambda_v$.
 
 Soit $\alpha$ la valeur la plus basse pouvant être obtenue pour la composante $k_v$ sur un cycle simple sur $\G_e$, et soit de même $\beta$ la valeur la plus basse pouvant être obtenue pour $k_e$ lors d'un cycle sur $\G_v$.

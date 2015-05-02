@@ -11,21 +11,21 @@ Tous les capteurs doivent faire face aux même contraintes énergétiques.
 L'envoi de données est plus couteux pour un capteur, en termes d'énergie, que de rester inactif: envoyer trop de données peut naturellement conduire à l'épuisement des réserves des nœuds.
 
 \subsection{Graphe du jeu}
-L'\emph{arène} du jeu est un graphe~$\G = (V,E)$ où $V = V_c \uplus V_g$ est l'ensemble des états, partitionné entre l'ensemble~$V_g$ des états des capteurs non compromis et les états~$V_c$ des capteurs compromis.
-L'ensemble~$E$ des arêtes est un sous-ensemble de~$V \times V$ tel que pour tout~$q \in V, \exists q' \in V, (q,q')\in E$, autrement dit: il n'existe pas d'état final.
-Le graphe est \emph{pondéré} sur $k$ dimensions, ce qui signifie que l'on fait appel à une fonction~$w: E \rightarrow \Z^k$ qui assigne des poids pour chaque dimension considérée, à chaque arête du graphe.
+L'\emph{arène} du jeu est un graphe~$\G = (\S,\A)$ où $\S = \S_\bn \uplus \S_\gn$ est l'ensemble des états, partitionné entre l'ensemble~$\S_\gn$ des états des capteurs non compromis et les états~$\S_\bn$ des capteurs compromis.
+L'ensemble~$\A$ des arêtes est un sous-ensemble de~$\S \times \S$ tel que pour tout~$q \in \S, \exists q' \in \S, (q,q')\in \A$, autrement dit: il n'existe pas d'état final.
+Le graphe est \emph{pondéré} sur $k$ dimensions, ce qui signifie que l'on fait appel à une fonction~$w: \A \rightarrow \Z^k$ qui assigne des poids pour chaque dimension considérée, à chaque arête du graphe.
 
 \subsection{La sémantique}
-Une \emph{configuration} du jeu est un tuple~$(q,p) \in V \times \Z^k$: $q$ est l'état actuel tandis que $p$ est le gain accumulé.
+Une \emph{configuration} du jeu est un tuple~$(q,p) \in \S \times \Z^k$: $q$ est l'état actuel tandis que $p$ est le gain accumulé.
 Depuis une configuration donnée~$(q,p)$, si l'on emprunte une arête~$e=(q,q')$, alors la configuration suivante est $(q',p+w(e))$.
 
 Une \emph{exécution} est une séquence infinie de telles configurations.
 Un préfixe fini d'une exécution est appelé un \emph{historique}.
+La partition de~$\S$ détermine le joueur qui, depuis un état, choisira l'arête suivante.
 
-La partition de~$V$ détermine le joueur qui, depuis un état, choisira l'arête suivante.
-Une \emph{stratégie}, pour un joueur donné, est une fonction qui détermine le prochain état qui sera atteint (autrement dit, l'arête qui sera empruntée): $\sigma_c: V^* V_c \rightarrow V$, $\sigma_g: V^* V_g \rightarrow V$.
+Une \emph{stratégie}, pour un joueur donné, est une fonction qui détermine le prochain état qui sera atteint (autrement dit, l'arête qui sera empruntée): ainsi $\sigma_\bn: \S^* \S_\bn \rightarrow \S$ et $\sigma_\gn: \S^* \S_\gn \rightarrow \S$.
 
-Si l'on considère une paire de ces stratégies ainsi qu'une configuration initiale donnée, le jeu produit une unique exécution appelée \emph{résultat} des stratégies, et notée: $\issue(\sigma_c,\sigma_g)$.
+Si l'on considère une paire de ces stratégies ainsi qu'une configuration initiale donnée, le jeu produit une unique exécution appelée \emph{résultat} des stratégies, et notée: $\issue(\sigma_\bn,\sigma_\gn)$.
 
 \begin{remark}
 Toutes les notions définies ci-dessus s'étendent naturellement au cas des jeux impliquant plus de deux joueurs.
@@ -79,6 +79,6 @@ Les gains des joueurs débuteront avec la valeur $0$, tandis que les niveaux en 
 Les problèmes de décisions qui sont étudiés dans ce contexte sont les suivants:
 
 \begin{itemize}
-    \item \textbf{Problème de victoire:} étant données une configuration initiale ainsi qu'une formule de gain $\varphi$, existe-t-il une stratégie $\sigma_c$ pour le capteur compromis telle que pour toute stratégie $\sigma_g$ des capteurs «sains», $\issue(\sigma_c,\sigma_g) \vDash \varphi$?
+    \item \textbf{Problème de victoire:} étant données une configuration initiale ainsi qu'une formule de gain $\varphi$, existe-t-il une stratégie $\sigma_\bn$ pour le capteur compromis telle que pour toute stratégie $\sigma_\gn$ des capteurs «sains», $\issue(\sigma_\bn,\sigma_\gn) \vDash \varphi$?
     \item \textbf{Problème du crédit initial:} étant donnés un état initial $q$ ainsi qu'une formule de gain, existe-t-il une valeur $\chi \in \N$ telle que le problème de victoire basé sur la configuration $(q,0^{k_p},\chi^{k_e})$ ait une réponse positive?
 \end{itemize}

@@ -121,36 +121,39 @@
 
 % Définitions Mathieu
 \makeatletter
-\newcommand{\m@ken@medcal}[2][\@error]{\expandafter\def\csname #1\endcsname{\ensuremath{\mathcal{#2}}\xspace}}
-\newcommand{\m@kecal}{\@dblarg\m@ken@medcal}
-\newcommand{\m@ken@medbb}[2][\@error]{\expandafter\def\csname #1\endcsname{{\ensuremath{\mathbb{#2}}}\xspace}}
-\newcommand{\m@kebb}{\@dblarg\m@ken@medbb}
-\newcommand{\m@ken@medsf}[2][\@error]{\expandafter\def\csname #1\endcsname{{\ensuremath{\mathsf{#2}}}\xspace}}
-\newcommand{\m@kesf}{\@dblarg\m@ken@medsf}
-\newcommand{\m@ken@medmathtxt}[2][\@error]{\expandafter\def\csname #1\endcsname{{\ensuremath{\textit{#2}}}\xspace}}
-\newcommand{\m@kemathtxt}{\@dblarg\m@ken@medmathtxt}
-% CALligraphie
-\m@kecal{A}
-\m@kecal{B}
-\m@kecal{G}
-\m@kecal{T}
-\m@kecal[Lang]{L}
-\m@kecal[machine]{M}
+\newcommand{\m@ken@medbb}     [2][\@error]{\expandafter\def\csname #1\endcsname{{\ensuremath{\mathbb  {#2}}}\xspace}}
+\newcommand{\m@kebb}                      {\@dblarg\m@ken@medbb}
+\newcommand{\m@ken@medcal}    [2][\@error]{\expandafter\def\csname #1\endcsname{{\ensuremath{\mathcal {#2}}}\xspace}}
+\newcommand{\m@kecal}                     {\@dblarg\m@ken@medcal}
+\newcommand{\m@ken@medfrak}   [2][\@error]{\expandafter\def\csname #1\endcsname{{\ensuremath{\mathfrak{#2}}}\xspace}}
+\newcommand{\m@kefrak}                    {\@dblarg\m@ken@medfrak}
+\newcommand{\m@ken@medmathtxt}[2][\@error]{\expandafter\def\csname #1\endcsname{{\ensuremath{\textit  {#2}}}\xspace}}
+\newcommand{\m@kemathtxt}                 {\@dblarg\m@ken@medmathtxt}
+\newcommand{\m@ken@medsf}     [2][\@error]{\expandafter\def\csname #1\endcsname{{\ensuremath{\mathsf  {#2}}}\xspace}}
+\newcommand{\m@kesf}                      {\@dblarg\m@ken@medsf}
 % Black-Board
 \m@kebb{N}
 \m@kebb{Z}
-\m@kebb{Q}
+% CALligraphie
+\m@kecal{A}
+\m@kecal{G}
+\m@kecal{P}
+\m@kecal{Q}
+\m@kecal{S}
+\m@kecal[machine]{M}
+% FRAKtur
+\m@kefrak[bn]{c}
+\m@kefrak[gn]{s}
+% Texte (italic) dans des math
+%\m@kemathtxt{payoff}
+\m@kemathtxt{val}
+\m@kemathtxt[energ]{énerg}
+\m@kemathtxt{issue}
 % Sans-sériF
-%\m@kesf[propp]{p}
 \m@kesf{NP}
 \m@kesf{coNP}
 \m@kesf{NEXPSPACE}
 \m@kesf{EXPSPACE}
-% Texte (italic) dans des math
-\m@kemathtxt{payoff}
-\m@kemathtxt{val}
-\m@kemathtxt{energ}
-\m@kemathtxt{issue}
 % Autres
 \newcommand{\mmid}{\:\middle|\:}
 \newcommand{\attractor}[1]{\ensuremath{\textit{Attr}_{#1}}}

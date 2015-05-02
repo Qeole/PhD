@@ -1,8 +1,8 @@
 % vim: se ft=tex:
 \fontsize{6pt}{8pt}
 \begin{tikzpicture}[%
-    scale=.85, %
-    good/.style={draw=none,circle,   fill,blueLACL,text=white,circular drop shadow,minimum width=1.1cm,align=center}, %
+    scale=.74, %
+    good/.style={draw=none,circle,   fill,blueLACL,text=white,circular drop shadow,minimum width=1.3cm,align=center,inner sep=0pt}, %
      bad/.style={draw=none,rectangle,fill,  SecTab,text=black,         drop shadow,minimum width=1.1cm,align=center}, %
     edge/.style={thick,->,>=stealth} %
 ]
@@ -10,94 +10,94 @@
 %\tikzset{bad/.style={draw,rectangle,thick,minimum width=1.1cm,align=center}};
 
 % Init edge/vertex
-\node[good,double] (init) at (0,0) {g1: idle\\g2: idle\\b3: idle};
+\node[good,double] (init) at (0,0) {$\gn$1: \idle\\$\gn$2: \idle\\$\bn$3: \idle};
 \draw[edge] (-2,0) to (init);
 
 % g1 plays
-\node[good] (g1lg2ib3i) at (3,0) {g1: listen\\g2: idle\\b3: idle};
-\node[good] (g1sg2ib3i) at (3,-9) {g1: send\\g2: idle\\b3: idle};
+\node[good] (g1lg2ib3i) at (4,0)  {$\gn$1: \listen\\$\gn$2: \idle\\$\bn$3: \idle};
+\node[good] (g1sg2ib3i) at (4,-9) {$\gn$1: \send\\$\gn$2: \idle\\$\bn$3: \idle};
 % Loop on init
-\draw[edge] (init) edge[loop,out=90,in=135,looseness=5] node[above,align=center] {(+1,0,0,0,0,0)\\g1: remain\_idle} (init);
+\draw[edge] (init) edge[overlay,loop,out=90,in=135,looseness=5] node[above,align=center] {(+1,0,0,0,0,0)\\$\gn$1: \remainidle} (init);
 % Other edges
-\draw[edge] (init) to node[above]{(-1,0,0,0,0,0)} node[below]{g1: sr\_listen} (g1lg2ib3i);
-\draw[edge] (init) to node[above,rotate=-71]{(-2,+1,0,0,0,0)} node[below,rotate=-71]{g1: start\_send} (g1sg2ib3i);
+\draw[edge] (init) to node[above]           {(-1,0,0,0,0,0)}  node[below]           {$\gn$1: \srlisten}  (g1lg2ib3i);
+\draw[edge] (init) to node[above,rotate=-66]{(-2,+1,0,0,0,0)} node[below,rotate=-66]{$\gn$1: \startsend} (g1sg2ib3i);
 
 
 % Now, g2
-\node[good] (g1ig2lb3i) at (6,9) {g1: idle\\g2: listen\\b3: idle};
-\node[good] (g1ig2sb3i) at (6,6) {g1: idle\\g2: send\\b3: idle};
-\node[good] (g1lg2lb3i) at (6,0) {g1: listen\\g2: listen\\b3: idle};
-\node[good] (g1lg2sb3i) at (6,-3) {g1: listen\\g2: send\\b3: idle};
-\node[good] (g1sg2lb3i) at (6,-9) {g1: send\\g2: listen\\b3: idle};
-\node[good] (g1sg2sb3i) at (6,-12) {g1: send\\g2: send\\b3: idle};
+\node[good] (g1ig2lb3i) at (8,9)   {$\gn$1: \idle\\$\gn$2: \listen\\$\bn$3: \idle};
+\node[good] (g1ig2sb3i) at (8,6)   {$\gn$1: \idle\\$\gn$2: \send\\$\bn$3: \idle};
+\node[good] (g1lg2lb3i) at (8,0)   {$\gn$1: \listen\\$\gn$2: \listen\\$\bn$3: \idle};
+\node[good] (g1lg2sb3i) at (8,-3)  {$\gn$1: \listen\\$\gn$2: \send\\$\bn$3: \idle};
+\node[good] (g1sg2lb3i) at (8,-9)  {$\gn$1: \send\\$\gn$2: \listen\\$\bn$3: \idle};
+\node[good] (g1sg2sb3i) at (8,-12) {$\gn$1: \send\\$\gn$2: \send\\$\bn$3: \idle};
 % Loop on init
-\draw[edge] (init) edge[loop,out=225,in=270,looseness=10] node[below,align=center] {(0,0,+1,0,0,0)\\g2: remain\_idle} (init);
+\draw[edge] (init) edge[overlay,loop,out=225,in=270,looseness=10] node[below,align=center] {(0,0,+1,0,0,0)\\$\gn$2: \remainidle} (init);
 % Other loops for g2 idle
-\draw[edge] (g1lg2ib3i) edge[loop,out=90,in=135,looseness=5] node[above,align=center] {(0,0,+1,0,0,0)\\g2: remain\_idle} (g1lg2ib3i);
-\draw[edge] (g1sg2ib3i) edge[loop,out=135,in=180,looseness=5] node[left,align=center] {(0,0,+1,0,0,0)\\g2: remain\_idle} (g1sg2ib3i);
+\draw[edge] (g1lg2ib3i) edge[loop,out=90,in=135,looseness=5]  node[above,align=center]{(0,0,+1,0,0,0)\\$\gn$2: \remainidle} (g1lg2ib3i);
+\draw[edge] (g1sg2ib3i) edge[loop,out=135,in=180,looseness=5] node[left,align=center] {(0,0,+1,0,0,0)\\$\gn$2: \remainidle} (g1sg2ib3i);
 % Other edges
-\draw[edge] (init) -- (3,9) to node[above]{(0,0,-1,0,0,0)} node[below]{g2: start\_listen} (g1ig2lb3i);
-\draw[edge] (init) -- (3,6) to node[above]{(0,0,-2,+1,0,0)} node[below]{g2: start\_send} (g1ig2sb3i);
-\draw[edge] (g1lg2ib3i) to node[above]{(0,0,-1,0,0,0)} node[below]{g2: sr\_listen} (g1lg2lb3i);
-\draw[edge] (g1lg2ib3i) to node[above,rotate=-45]{(0,0,-2,+1,0,0)} node[below,rotate=-45]{g2: start\_send} (g1lg2sb3i);
-\draw[edge] (g1sg2ib3i) to node[above]{(0,0,-1,0,0,0)} node[below]{g2: sr\_listen} (g1sg2lb3i);
-\draw[edge] (g1sg2ib3i) to node[above,rotate=-45]{(0,0,-2,+1,0,0)} node[below,rotate=-45]{g2: start\_send} (g1sg2sb3i);
+\draw[edge] (init) -- (3,9) to node[above]           {(0,0,-1,0,0,0)}  node[below]           {$\gn$2: \startlisten} (g1ig2lb3i);
+\draw[edge] (init) -- (3,6) to node[above]           {(0,0,-2,+1,0,0)} node[below]           {$\gn$2: \startsend}   (g1ig2sb3i);
+\draw[edge] (g1lg2ib3i)     to node[above]           {(0,0,-1,0,0,0)}  node[below]           {$\gn$2: \srlisten}    (g1lg2lb3i);
+\draw[edge] (g1lg2ib3i)     to node[above,rotate=-37]{(0,0,-2,+1,0,0)} node[below,rotate=-37]{$\gn$2: \startsend}   (g1lg2sb3i);
+\draw[edge] (g1sg2ib3i)     to node[above]           {(0,0,-1,0,0,0)}  node[below]           {$\gn$2: \srlisten}    (g1sg2lb3i);
+\draw[edge] (g1sg2ib3i)     to node[above,rotate=-37]{(0,0,-2,+1,0,0)} node[below,rotate=-37]{$\gn$2: \startsend}   (g1sg2sb3i);
 
 
 % Then b3
-\node[bad] (g1ig2ib3l) at (9,13) {g1: idle\\g2: idle\\b3: listen};
-\node[bad] (g1ig2ib3s) at (10,11.5) {g1: idle\\g2: idle\\b3: send};
-\node[bad] (g1ig2lb3l) at (9,10) {g1: idle\\g2: listen\\b3: listen};
-\node[bad] (g1ig2lb3s) at (10,8.5) {g1: idle\\g2: listen\\b3: send};
-\node[bad] (g1ig2sb3l) at (9,7) {g1: idle\\g2: send\\b3: listen};
-\node[bad] (g1ig2sb3s) at (10,5.5) {g1: idle\\g2: send\\b3: send};
-\node[bad] (g1lg2ib3l) at (9,4) {g1: listen\\g2: idle\\b3: listen};
-\node[bad] (g1lg2ib3s) at (10,2.5) {g1: listen\\g2: idle\\b3: send};
-\node[bad] (g1lg2lb3l) at (9,1) {g1: listen\\g2: listen\\b3: listen};
-\node[bad] (g1lg2lb3s) at (10,-.5) {g1: listen\\g2: listen\\b3: send};
-\node[bad] (g1lg2sb3l) at (9,-2) {g1: listen\\g2: send\\b3: listen};
-\node[bad] (g1lg2sb3s) at (10,-3.5) {g1: listen\\g2: send\\b3: send};
-\node[bad] (g1sg2ib3l) at (9,-5) {g1: send\\g2: idle\\b3: listen};
-\node[bad] (g1sg2ib3s) at (10,-6.5) {g1: send\\g2: idle\\b3: send};
-\node[bad] (g1sg2lb3l) at (9,-8) {g1: send\\g2: listen\\b3: listen};
-\node[bad] (g1sg2lb3s) at (10,-9.5) {g1: send\\g2: listen\\b3: send};
-\node[bad] (g1sg2sb3l) at (9,-11) {g1: send\\g2: send\\b3: listen};
-\node[bad] (g1sg2sb3s) at (10,-12.5) {g1: send\\g2: send\\b3: send};
+\node[bad] (g1ig2ib3l) at (12,13)    {$\gn$1: \idle\\$\gn$2: \idle\\$\bn$3: \listen};
+\node[bad] (g1ig2ib3s) at (13,11.5)  {$\gn$1: \idle\\$\gn$2: \idle\\$\bn$3: \send};
+\node[bad] (g1ig2lb3l) at (12,10)    {$\gn$1: \idle\\$\gn$2: \listen\\$\bn$3: \listen};
+\node[bad] (g1ig2lb3s) at (13,8.5)   {$\gn$1: \idle\\$\gn$2: \listen\\$\bn$3: \send};
+\node[bad] (g1ig2sb3l) at (12,7)     {$\gn$1: \idle\\$\gn$2: \send\\$\bn$3: \listen};
+\node[bad] (g1ig2sb3s) at (13,5.5)   {$\gn$1: \idle\\$\gn$2: \send\\$\bn$3: \send};
+\node[bad] (g1lg2ib3l) at (12,4)     {$\gn$1: \listen\\$\gn$2: \idle\\$\bn$3: \listen};
+\node[bad] (g1lg2ib3s) at (13,2.5)   {$\gn$1: \listen\\$\gn$2: \idle\\$\bn$3: \send};
+\node[bad] (g1lg2lb3l) at (12,1)     {$\gn$1: \listen\\$\gn$2: \listen\\$\bn$3: \listen};
+\node[bad] (g1lg2lb3s) at (13,-.5)   {$\gn$1: \listen\\$\gn$2: \listen\\$\bn$3: \send};
+\node[bad] (g1lg2sb3l) at (12,-2)    {$\gn$1: \listen\\$\gn$2: \send\\$\bn$3: \listen};
+\node[bad] (g1lg2sb3s) at (13,-3.5)  {$\gn$1: \listen\\$\gn$2: \send\\$\bn$3: \send};
+\node[bad] (g1sg2ib3l) at (12,-5)    {$\gn$1: \send\\$\gn$2: \idle\\$\bn$3: \listen};
+\node[bad] (g1sg2ib3s) at (13,-6.5)  {$\gn$1: \send\\$\gn$2: \idle\\$\bn$3: \send};
+\node[bad] (g1sg2lb3l) at (12,-8)    {$\gn$1: \send\\$\gn$2: \listen\\$\bn$3: \listen};
+\node[bad] (g1sg2lb3s) at (13,-9.5)  {$\gn$1: \send\\$\gn$2: \listen\\$\bn$3: \send};
+\node[bad] (g1sg2sb3l) at (12,-11)   {$\gn$1: \send\\$\gn$2: \send\\$\bn$3: \listen};
+\node[bad] (g1sg2sb3s) at (13,-12.5) {$\gn$1: \send\\$\gn$2: \send\\$\bn$3: \send};
 % Loop on init
-\draw[edge] (init) edge[loop,out=90,in=135,looseness=15] node[above,align=center] {(0,0,0,0,+1,0)\\g3: remain\_idle} (init);
+\draw[edge] (init) edge[overlay,loop,out=90,in=135,looseness=15] node[above right,align=center]{(0,0,0,0,+1,0)\\$\bn$3: \remainidle} (init);
 % Other loops for g3 idle
-\draw[edge] (g1lg2ib3i) edge[loop,out=225,in=270,looseness=10] node[below,align=center] {(0,0,0,0,+1,0)\\g3: remain\_idle} (g1lg2ib3i);
-\draw[edge] (g1sg2ib3i) edge[loop,out=225,in=270,looseness=10] node[below,align=center] {(0,0,0,0,+1,0)\\g3: remain\_idle} (g1sg2ib3i);
-\draw[edge] (g1ig2lb3i) edge[loop,out=90,in=135,looseness=5] node[above,align=center] {(0,0,0,0,+1,0)\\g3: remain\_idle} (g1ig2lb3i);
-\draw[edge] (g1ig2sb3i) edge[loop,out=90,in=135,looseness=5] node[above,align=center] {(0,0,0,0,+1,0)\\g3: remain\_idle} (g1ig2sb3i);
-\draw[edge] (g1lg2lb3i) edge[loop,out=90,in=135,looseness=5] node[above,align=center] {(0,0,0,0,+1,0)\\g3: remain\_idle} (g1lg2lb3i);
-\draw[edge] (g1lg2sb3i) edge[loop,out=180,in=225,looseness=5] node[below=.3cm,align=center] {(0,0,0,0,+1,0)\\g3: remain\_idle} (g1lg2sb3i);
-\draw[edge] (g1sg2lb3i) edge[loop,out=90,in=135,looseness=5] node[above,align=center] {(0,0,0,0,+1,0)\\g3: remain\_idle} (g1sg2lb3i);
-\draw[edge] (g1sg2sb3i) edge[loop,out=180,in=225,looseness=5] node[left,align=center] {(0,0,0,0,+1,0)\\g3: remain\_idle} (g1sg2sb3i);
+\draw[edge] (g1lg2ib3i) edge[        loop,out=225,in=270,looseness=10] node[below,align=center]     {(0,0,0,0,+1,0)\\$\bn$3: \remainidle} (g1lg2ib3i);
+\draw[edge] (g1sg2ib3i) edge[        loop,out=225,in=270,looseness=10] node[below,align=center]     {(0,0,0,0,+1,0)\\$\bn$3: \remainidle} (g1sg2ib3i);
+\draw[edge] (g1ig2lb3i) edge[        loop,out=90, in=135,looseness=5]  node[left=.2cm,align=center] {(0,0,0,0,+1,0)\\$\bn$3: \remainidle} (g1ig2lb3i);
+\draw[edge] (g1ig2sb3i) edge[        loop,out=90, in=135,looseness=5]  node[left=.2cm,align=center] {(0,0,0,0,+1,0)\\$\bn$3: \remainidle} (g1ig2sb3i);
+\draw[edge] (g1lg2lb3i) edge[        loop,out=90, in=135,looseness=5]  node[left=.2cm,align=center] {(0,0,0,0,+1,0)\\$\bn$3: \remainidle} (g1lg2lb3i);
+\draw[edge] (g1lg2sb3i) edge[        loop,out=180,in=225,looseness=5]  node[below=.3cm,align=center]{(0,0,0,0,+1,0)\\$\bn$3: \remainidle} (g1lg2sb3i);
+\draw[edge] (g1sg2lb3i) edge[        loop,out=90, in=135,looseness=5]  node[left=.2cm,align=center] {(0,0,0,0,+1,0)\\$\bn$3: \remainidle} (g1sg2lb3i);
+\draw[edge] (g1sg2sb3i) edge[overlay,loop,out=180,in=225,looseness=5]  node[left,align=center]      {(0,0,0,0,+1,0)\\$\bn$3: \remainidle} (g1sg2sb3i);
 % Other edges
-\draw[edge] (init) -- (3,13) to node[above]{(0,0,0,0,-1,0)} node[below]{g3: start\_listen} (g1ig2ib3l);
-\draw[edge] (init) -- (3,11.5) to node[above]{(0,0,0,0,-2,+1)} node[below]{g3: start\_send} (g1ig2ib3s);
+\draw[edge] (init)      -- (3,13)   to node[above]{(0,0,0,0,-1,0)}  node[below]{$\bn$3: \startlisten} (g1ig2ib3l);
+\draw[edge] (init)      -- (3,11.5) to node[above]{(0,0,0,0,-2,+1)} node[below]{$\bn$3: \startsend}   (g1ig2ib3s);
 
-\draw[edge] (g1ig2lb3i) to node[above,rotate=18]{(0,0,0,0,-1,0)} node[below,rotate=18]{g3: sr\_listen} (g1ig2lb3l);
-\draw[edge] (g1ig2lb3i) to node[above,rotate=-7]{(0,0,0,0,-2,+1)} node[below,rotate=-7]{g3: start\_send} (g1ig2lb3s);
-\draw[edge] (g1ig2sb3i) to node[above,rotate=18]{(0,0,0,0,-1,0)} node[below,rotate=18]{g3: sr\_listen} (g1ig2sb3l);
-\draw[edge] (g1ig2sb3i) to node[above,rotate=-7]{(0,0,0,0,-2,+1)} node[below,rotate=-7]{g3: start\_send} (g1ig2sb3s);
+\draw[edge] (g1ig2lb3i) to node[above,rotate=14]         {(0,0,0,0,-1,0)}  node[below,rotate=14]  {$\bn$3: \srlisten}  (g1ig2lb3l);
+\draw[edge] (g1ig2lb3i) to node[above,rotate=-5.7,pos=.6]{(0,0,0,0,-2,+1)} node[below,rotate=-5.7,pos=.6]{$\bn$3: \startsend} (g1ig2lb3s);
+\draw[edge] (g1ig2sb3i) to node[above,rotate=14]         {(0,0,0,0,-1,0)}  node[below,rotate=14]  {$\bn$3: \srlisten}  (g1ig2sb3l);
+\draw[edge] (g1ig2sb3i) to node[above,rotate=-5.7,pos=.6]{(0,0,0,0,-2,+1)} node[below,rotate=-5.7,pos=.6]{$\bn$3: \startsend} (g1ig2sb3s);
 
-\draw[edge] (g1lg2ib3i) -- (5,4) to node[above]{(0,0,0,0,-1,0)} node[below]{g3: start\_listen} (g1lg2ib3l);
-\draw[edge] (g1lg2ib3i) -- (5,2.5) to node[above]{(0,0,0,0,-2,+1)} node[below]{g3: start\_send} (g1lg2ib3s);
+\draw[edge] (g1lg2ib3i) -- (5,4)    to node[above]{(0,0,0,0,-1,0)}  node[below]{$\bn$3: \startlisten} (g1lg2ib3l);
+\draw[edge] (g1lg2ib3i) -- (5,2.5)  to node[above]{(0,0,0,0,-2,+1)} node[below]{$\bn$3: \startsend}   (g1lg2ib3s);
 
-\draw[edge] (g1lg2lb3i) to node[above,rotate=18]{(0,0,0,0,-1,0)} node[below,rotate=18]{g3: sr\_listen} (g1lg2lb3l);
-\draw[edge] (g1lg2lb3i) to node[above,rotate=-7]{(0,0,0,0,-2,+1)} node[below,rotate=-7]{g3: start\_send} (g1lg2lb3s);
-\draw[edge] (g1lg2sb3i) to node[above,rotate=18]{(0,0,0,0,-1,0)} node[below,rotate=18]{g3: sr\_listen} (g1lg2sb3l);
-\draw[edge] (g1lg2sb3i) to node[above,rotate=-7]{(0,0,0,0,0,0)} node[below,rotate=-7]{g3: start\_send} (g1lg2sb3s);
+\draw[edge] (g1lg2lb3i) to node[above,rotate=14]         {(0,0,0,0,-1,0)}  node[below,rotate=14]  {$\bn$3: \srlisten}  (g1lg2lb3l);
+\draw[edge] (g1lg2lb3i) to node[above,rotate=-5.7,pos=.6]{(0,0,0,0,-2,+1)} node[below,rotate=-5.7,pos=.6]{$\bn$3: \startsend} (g1lg2lb3s);
+\draw[edge] (g1lg2sb3i) to node[above,rotate=14]         {(0,0,0,0,-1,0)}  node[below,rotate=14]  {$\bn$3: \srlisten}  (g1lg2sb3l);
+\draw[edge] (g1lg2sb3i) to node[above,rotate=-5.7,pos=.6]{(0,0,0,0,0,0)}   node[below,rotate=-5.7,pos=.6]{$\bn$3: \startsend} (g1lg2sb3s);
 
-\draw[edge] (g1sg2ib3i) -- (5,-5) to node[above]{(0,0,0,0,-1,0)} node[below]{g3: sr\_listen} (g1sg2ib3l);
-\draw[edge] (g1sg2ib3i) -- (5,-6.5) to node[above]{(0,0,0,0,-2,+1)} node[below]{g3: start\_send} (g1sg2ib3s);
+\draw[edge] (g1sg2ib3i) -- (5,-5)   to node[above]{(0,0,0,0,-1,0)}  node[below]{$\bn$3: \srlisten}    (g1sg2ib3l);
+\draw[edge] (g1sg2ib3i) -- (5,-6.5) to node[above]{(0,0,0,0,-2,+1)} node[below]{$\bn$3: \startsend}   (g1sg2ib3s);
 
-\draw[edge] (g1sg2lb3i) to node[above,rotate=18]{(0,0,0,0,-1,0)} node[below,rotate=18]{g3: sr\_listen} (g1sg2lb3l);
-\draw[edge] (g1sg2lb3i) to node[above,rotate=-7]{(0,0,0,0,-2,+1)} node[below,rotate=-7]{g3: start\_send} (g1sg2lb3s);
-\draw[edge] (g1sg2sb3i) to node[above,rotate=18]{(0,0,0,0,-1,0)} node[below,rotate=18]{g3: sr\_listen} (g1sg2sb3l);
-\draw[edge] (g1sg2sb3i) to node[above,rotate=-7]{(0,0,0,0,-2,+1)} node[below,rotate=-7]{g3: start\_send} (g1sg2sb3s);
+\draw[edge] (g1sg2lb3i) to node[above,rotate=14]         {(0,0,0,0,-1,0)}  node[below,rotate=14]  {$\bn$3: \srlisten}  (g1sg2lb3l);
+\draw[edge] (g1sg2lb3i) to node[above,rotate=-5.7,pos=.6]{(0,0,0,0,-2,+1)} node[below,rotate=-5.7,pos=.6]{$\bn$3: \startsend} (g1sg2lb3s);
+\draw[edge] (g1sg2sb3i) to node[above,rotate=14]         {(0,0,0,0,-1,0)}  node[below,rotate=14]  {$\bn$3: \srlisten}  (g1sg2sb3l);
+\draw[edge] (g1sg2sb3i) to node[above,rotate=-5.7,pos=.6]{(0,0,0,0,-2,+1)} node[below,rotate=-5.7,pos=.6]{$\bn$3: \startsend} (g1sg2sb3s);
 
 \end{tikzpicture}
 \normalsize
