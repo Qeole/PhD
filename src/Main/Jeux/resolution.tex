@@ -18,11 +18,11 @@ Le \ji quant à lui représente la coalition (l'ensemble) des autres nœuds, et 
 Nous allons démontrer ici que le problème de victoire pour les jeux étudiés ne présente pas de solution algorithmique si la condition de victoire ne peut pas être spécifiée par une formule de gain.
 Le théorème établi est le suivant:
 \begin{theorem}
-Le problème de victoire, ainsi que le problème de crédit initial, sont indécidables pour des objectifs définis par une formule de gain comportant quatre composantes relatives à l'énergie et une composante relative au gain.
+Le problème de victoire, ainsi que le problème de crédit initial, sont indécidables pour des objectifs définis par une formule de gain comportant quatre~composantes relatives à l'énergie et une composante relative au gain.
 \end{theorem}
 
 La preuve de ce théorème consiste à encoder, à l'aide d'un jeu du type étudié, le problème de terminaison à l'aide d'une machine à deux compteurs: le problème équivalent ainsi obtenu est connu comme étant indécidable~\cite{minsky67}.
-Chaque compteur est représenté par deux composantes d'énergie (une pour chacun des deux joueurs), qui contiennent chacune une copie de la valeur du compteur en question.
+Chaque compteur est représenté par deux~composantes d'énergie (une pour chacun des deux joueurs), qui contiennent chacune une copie de la valeur du compteur en question.
 Pour l'instruction $0$-test (présentée ci-dessous), le \jo peut prétendre que son compteur est nul, ou bien qu'il ne l'est pas; le second joueur peut vérifier si cette affirmation est valide ou non.
 Si la machine atteint son état d'arrêt, une composante de gain est incrémentée, et tous les autres composantes sont réinitialisées à $0$.
 De cette manière, si la machine s'arrête, le \jo a une stratégie gagnante lui permettant d'obtenir un gain strictement positif.
@@ -30,14 +30,14 @@ Autrement, le gain demeure nul.
 
 On définit plus précisément une machine à deux compteurs comme une liste d'instructions étiquetées, qui peuvent être:
 \begin{itemize}
-    \item \textbf{increment:} incrémenter le compteur $c$ (respectivement $d$) et aller à l'étiquette~$\ell$
+    \item \textbf{incrément:} incrémenter le compteur $c$ (respectivement $d$) et aller à l'étiquette~$\ell$
     \item \textbf{0-test:} si $c=0$ (respectivement $d=0$) alors aller à l'étiquette~$\ell_1$, sinon décrémenter $c$ (respectivement $d$) et aller à l'étiquette~$\ell_2$
     \item \textbf{halting:} \emph{halt}
 \end{itemize}
 Au départ, les deux compteurs sont initialisés à $0$.
 
 À présent, étant donné une machine $\machine$, nous construisons une arène $\G_\machine$ basée sur des modules «élémentaires» pour chaque type d'instructions (celui du compteur $c$ sera symétrique à celui du compteur $d$).
-L'arène comporte donc 5 composantes $c$,$c'$,$d$,$d'$,$p$, où seule $p$ concerne le gain, les autres étant attachées à des valeurs énergétiques.
+L'arène comporte donc cinq~composantes $c$, $c'$, $d$, $d'$, $p$, où seule $p$ concerne le gain, les autres étant attachées à des valeurs énergétiques.
 Les composantes $c$ et $c'$ (respectivement $d$ et $d'$) sont supposées toujours conserver la même valeur, excepté pour l'instruction $0$-test.
 Au lancement du jeu toutes les composantes ont pour valeur\,\footnote{Pour obtenir une simulation plus réaliste, il est possible d'assigner aux composantes la valeur initiale $1$, et de considérer $0$ comme valeur de défaite. Nous choisissons ici d'autoriser un niveau d'énergie nul et considérons le jeu comme «perdu» pour des valeurs strictement négative, et ce afin de rendre plus clair le lien entre les valeurs des compteurs et les niveaux d'énergie.} $0$.
 
@@ -189,14 +189,11 @@ Dans les jeux à deux joueurs, il est courant de faire appel à la notion d'\emp
 \begin{definition}
 Les \emph{attracteurs en une-étape} d'un ensemble d'états $Q$ pour les joueurs~0 et~1 sont définis ainsi:
 \begin{eqnarray*}
-1\!\attractor{0}(Q) &=& \left\{q \in V_0 \mmid \exists (q,q') \in E \textrm{ s.t. } q' \in Q \right\}
-\\&&\quad
-\cup \;\left\{q \in V_1 \mmid \forall (q,q') \in E, q' \in Q \right\}
-\end{eqnarray*}
-\begin{eqnarray*}
-1\!\attractor{1}(Q) &=& \left\{q \in V_0 \mmid \forall (q,q') \in E, q' \in Q \right\}
-\\&&\quad
-\cup \;\left\{q \in V_1 \mmid \exists (q,q') \in E \textrm{ s.t. } q' \in Q \right\}
+1\!\attractor{0}(Q) & = & \left\{q \in V_0 \mmid \exists (q,q') \in E \textrm{ tel que } q' \in Q \right\}              \\
+                    &   & \quad\cup \;\left\{q \in V_1 \mmid \forall (q,q') \in E, q' \in Q \right\}                 \\
+                    &   &                                                                                            \\
+1\!\attractor{1}(Q) & = & \left\{q \in V_0 \mmid \forall (q,q') \in E, q' \in Q \right\}                             \\
+                    &   & \quad \cup \;\left\{q \in V_1 \mmid \exists (q,q') \in E \textrm{ tel que } q' \in Q \right\}
 \end{eqnarray*}
 Les \emph{attracteurs} pour le \jo (respectivement pour le \ji) d'un ensemble $Q$ d'états sont les points fixes des attracteurs en une-étape, en partant de $Q$: pour $i \in \{0,1\}$, \[\attractor{i}(Q) = \bigcup_{j \in \N} \left(1\!\attractor{i}\right)^j(Q)\]
 \end{definition}
@@ -228,7 +225,7 @@ Par définition d'un attracteur, on a alors $q \in \attractor{j}(Q)$, et $q \not
 
 Dans ce premier exemple simple, nous étudions les objectifs, pour le \jo, de la forme $p_e \geq c_e \wedge p_v \geq c_v$, où $p_e$ et $p_v$ sont le niveau d'énergie et la valeur du gain moyen accumulé par le \jo, et avec $c_e,c_v \in \N$.
 De tels objectifs se traduisent par le besoin d'atteindre une certaine valeur de gain tandis que le niveau d'énergie demeure supérieur à une limite donnée.
-Un comportement cupide est une illustration simple d'un objectif de ce type: le nœud compromis cherche à rester «en vie» ($p_e \geq 1$) tout en émettant au moins un message toutes les $6$ étapes ($p_v \geq \frac1{6}$, mais comme nous l'avons remarqué plus haut, il est possible d'obtenir un seuil à valeur entière en multipliant tous les poids de la composante par $6$).
+Un comportement cupide est une illustration simple d'un objectif de ce type: le nœud compromis cherche à rester «en vie» ($p_e \geq 1$) tout en émettant au moins un message toutes les 6~étapes ($p_v \geq \frac1{6}$, mais comme nous l'avons remarqué plus haut, il est possible d'obtenir un seuil à valeur entière en multipliant tous les poids de la composante par~6).
 
 Tout d'abord, nous pouvons clairement établir que depuis un état à partir duquel au moins un des objectifs ne peut être rempli, le \jo ne peut pas gagner.
 De plus, si le \ji peut forcer le \jo à atteindre l'un de ces états, alors l'objectif du \jo ne sera pas rempli.

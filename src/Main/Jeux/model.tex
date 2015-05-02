@@ -25,7 +25,7 @@ Un préfixe fini d'une exécution est appelé un \emph{historique}.
 La partition de~$V$ détermine le joueur qui, depuis un état, choisira l'arête suivante.
 Une \emph{stratégie}, pour un joueur donné, est une fonction qui détermine le prochain état qui sera atteint (autrement dit, l'arête qui sera empruntée): $\sigma_c: V^* V_c \rightarrow V$, $\sigma_g: V^* V_g \rightarrow V$.
 
-Si l'on considère une paire de ces stratégies ainsi qu'une configuration initiale donnée, le jeu produit une unique exécution appelée \emph{résultat} des stratégies, et notée: $\outcome(\sigma_c,\sigma_g)$.
+Si l'on considère une paire de ces stratégies ainsi qu'une configuration initiale donnée, le jeu produit une unique exécution appelée \emph{résultat} des stratégies, et notée: $\issue(\sigma_c,\sigma_g)$.
 
 \begin{remark}
 Toutes les notions définies ci-dessus s'étendent naturellement au cas des jeux impliquant plus de deux joueurs.
@@ -51,7 +51,7 @@ L'ensemble des exécutions victorieuses pour un joueur est constituée des exéc
 où:
 \begin{itemize}
     \item $c \in \N$;
-    \item $\bowtie \in \{\geq,>\}$ est un opérateur de comparaison;
+    \item $\bowtie\ \in \{\geq,>\}$ est un opérateur de comparaison;
     \item $p_e$ est une composante relative à l'énergie;
     \item $p_v$ est une composante relative au gain.
 \end{itemize}
@@ -79,6 +79,6 @@ Les gains des joueurs débuteront avec la valeur $0$, tandis que les niveaux en 
 Les problèmes de décisions qui sont étudiés dans ce contexte sont les suivants:
 
 \begin{itemize}
-    \item \textbf{Problème de victoire:} étant données une configuration initiale ainsi qu'une formule de gain $\varphi$, existe-t-il une stratégie $\sigma_c$ pour le capteur compromis telle que pour toute stratégie $\sigma_g$ des capteurs «sains», $\outcome(\sigma_c,\sigma_g) \vDash \varphi$?
+    \item \textbf{Problème de victoire:} étant données une configuration initiale ainsi qu'une formule de gain $\varphi$, existe-t-il une stratégie $\sigma_c$ pour le capteur compromis telle que pour toute stratégie $\sigma_g$ des capteurs «sains», $\issue(\sigma_c,\sigma_g) \vDash \varphi$?
     \item \textbf{Problème du crédit initial:} étant donnés un état initial $q$ ainsi qu'une formule de gain, existe-t-il une valeur $\chi \in \N$ telle que le problème de victoire basé sur la configuration $(q,0^{k_p},\chi^{k_e})$ ait une réponse positive?
 \end{itemize}
