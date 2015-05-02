@@ -69,15 +69,13 @@ Comme les nœuds sont supposés jouer de façon \emph{simultanée}, cet ordre ut
 Le graphe qui représente le jeu possède un ensemble d'états symbolisant les différents états du réseau.
 Étant donné que chacun des trois joueurs dispose de quatre états (\idle, \send, \listen, \treatmsg), le réseau dans son ensemble peut en théorie adopter jusqu'à $4^3=64$ états différents.
 En pratique, certains de ces états ne seront jamais atteints: par exemple, un état où tous les joueurs sont simultanément en train de traiter les paquets reçus n'aurait pas de sens, puisqu'il faudrait qu'au moins l'un d'entre eux ait émis ces paquets au tour précédent, et devrait désormais se retrouver au repos.
-La forme donnée aux états du graphe de jeu indique quelle «équipe» est en train de jouer: les cercles sont utilisés pour les coups des capteurs légitimes, les rectangles serviront pour les actions du nœud compromis.
+La forme donnée aux états du graphe de jeu indique quelle «équipe» s'apprête à jouer: les cercles sont utilisés pour les coups des capteurs légitimes, les rectangles servent pour les actions du nœud compromis\,\footnote{Cette convention n'est en fait pas toujours respectée sur la \figref{tj:fig:autFirstTurn}, car pour simplifier le graphe nous avons fusionné les états identiques (d'où les états possédant des arêtes bouclant sur eux-mêmes), et dans certains cas le joueur $\bn$3 est ainsi amené à agir depuis un état circulaire. En revanche, le code de couleur indiqué sur la figure pour les arêtes est respecté.}.
 
 Chaque arête du graphe représente l'action réalisée par le joueur qui a la main.
 Elles correspondent aux arêtes empruntées par les joueurs sur leurs propres machines à états, auxquelles seraient ajoutées des valeur nulles en gain et en énergie pour les deux autres joueurs qui attendent leur tour.
 La \figref{tj:fig:autFirstTurn} présente le premier tour du jeu pour chacun des trois joueurs (autrement dit, le premier intervalle de temps).
 \begin{figure}[p]
-    %\vspace{-\headheight}
-    %\vspace{-\headsep}
-    %\centering
+    \centering
     \input{\chapterpath/Automata/FirstTurn.tikz}
     \caption{Un sous-ensemble du graphe associé au jeu, représentant le premier tour}\label{tj:fig:autFirstTurn}
 \end{figure}
