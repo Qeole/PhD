@@ -108,7 +108,7 @@ On parlera plutôt d'attaques de type «trou gris»\index{trou!trou gris} (\text
 
         \paragraph{Falsification\index{falsification} des informations de \idx{routage} (\index{comportement cupide!accaparement} du canal de transmission, création de boucles\index{routage!boucle}, \etc)}
 Une attaque peut être menée dès le déploiement du réseau en transmettant de fausses informations lors de la mise en place des règles de routages\index{routage}~\cite{AD14}.
-Ces informations vont alors chercher à nuire au \idx{routage} des paquets, en créant des boucles\index{routage!boucle} cycliques dans la structure de \idx{routage}, en partitionnant le réseau, en attirant à tord le trafic vers un nœud corrompu (par exemple pour exploiter les données et porter une attaque sur la confidentialité) ou vers un nœud légitime (pour surcharger ses capacités de traitement)\dots
+Ces informations vont alors chercher à nuire au \idx{routage} des paquets, en créant des boucles\index{routage!boucle} cycliques dans la structure de \idx{routage}, en partitionnant le réseau, en attirant à tort le trafic vers un nœud corrompu (par exemple pour exploiter les données et porter une attaque sur la confidentialité) ou vers un nœud légitime (pour surcharger ses capacités de traitement)\dots
 
 De telles attaques peuvent aussi être menées lorsqu'un protocole de clusterisation\index{clusterisation!protocole de clusterisation} est mis en application, dans le but de gêner l'organisation structurelle du réseau (puisque la mise en place des clusters définit le plus souvent la façon dont les paquets seront routés dans le réseau).
 
@@ -226,7 +226,8 @@ Toutes les attaques exposées dans cette sous-section ont été décrites à mai
     \centering
     \medskip
     \begin{small}
-        \begin{tabular}{m{.21\textwidth}|p{.71\textwidth}}
+        \tabulinesep=.3ex%
+        \begin{tabu}to \linewidth {X[2,c,m]|X[7,l,m]}
             \toprule
             \textsc{Couche} & \textsc{Attaques possibles}\\
             \midrule
@@ -234,10 +235,10 @@ Toutes les attaques exposées dans cette sous-section ont été décrites à mai
                 & \num{Destruction physique des capteurs}\\
                 & \num{Altération des mesures}\\
             \midrule
-            \multirow{1}{*}{Couche physique}%
+            Couche physique%
                 & \num{Brouillage de fréquences}\\
             \midrule
-            \multirow{4}{*}{\parbox{.2\textwidth}{Couche liaison de données}}%
+            \multirow{4}{*}{\parbox{.16\textwidth}{\centering Couche liaison de données}}%
                 & \num{Création de collisions, brouillage «intelligent»}\\
                 & \num{Épuisement de la batterie}\\
                 & \num{Accaparement du canal de transmission}\\
@@ -262,7 +263,7 @@ Toutes les attaques exposées dans cette sous-section ont été décrites à mai
                 & \num{Déluge de paquets}\\
                 & \num{Désynchronisation}\\
             \bottomrule
-        \end{tabular}
+        \end{tabu}
         \index{destruction physique}\index{altération}\index{brouillage}\index{collision}\index{brouillage!brouillage intelligent}\index{comportement cupide!accaparement}\index{falsification}\index{trou!trou noir}\index{trou!trou gris}\index{trou!trou on/off}\index{routage}\index{routage!boucle}\index{trou!puits}\index{trou!trou de ver}\index{attaque Sybil}\index{deluge@déluge de paquets}\index{desynchro@désynchronisation}\index{couche physique}\index{couche de liaison de données}\index{couche réseau}\index{couche transport}\index{couche application}
     \end{small}
 \end{table}
@@ -271,7 +272,7 @@ Toutes les attaques exposées dans cette sous-section ont été décrites à mai
     \centering
     \medskip
     \begin{small}
-        \begin{tabular}{m{.3\textwidth}|m{.62\textwidth}}
+        \begin{tabu}{X[1,l,m]|X[2,j,m]}
             \toprule
             \textsc{Paradigme} & \textsc{Attaques possibles}\\
             \midrule
@@ -279,15 +280,15 @@ Toutes les attaques exposées dans cette sous-section ont été décrites à mai
             \midrule
             Routage des données dans le réseau & Retransmission sélective, trous noirs, épuisement des ressources (batterie, congestion du réseau), altération des données (lors de la retransmission), accaparement du canal de transmission, attaques au niveau de la couche transport\\
             \midrule
-            Réception et traitement de commandes & attaques précédentes, usurpation d'identité (et attaque Sybil) utilisée pour émettre de fausses commandes\\
+            Réception et traitement de commandes & Attaques précédentes, usurpation d'identité (et attaque Sybil) utilisée pour émettre de fausses commandes\\
             \midrule
-            Organisation autonome du réseau & attaques précédentes, fausses informations de routage (boucles\dots), puits, trous de ver, déluge de paquets «hello»\\
+            Organisation autonome du réseau & Attaques précédentes, fausses informations de routage (boucles\dots), puits, trous de ver, déluge de paquets «hello»\\
             \midrule
-            Agrégation de données & attaques précédentes, en particulier celles basées sur le rejeu de paquets émis ou capturés\\
+            Agrégation de données & Attaques précédentes, en particulier celles basées sur le rejeu de paquets émis ou capturés\\
             \midrule
-            Optimisation des modèles & attaques précédentes\\
+            Optimisation des modèles & Attaques précédentes\\
             \bottomrule
-         \end{tabular}
+         \end{tabu}
          \index{destruction physique}\index{altération}\index{brouillage}\index{collision}\index{brouillage!brouillage intelligent}\index{comportement cupide!accaparement}\index{falsification}\index{trou!trou noir}\index{trou!trou gris}\index{trou!trou on/off}\index{routage}\index{routage!boucle}\index{trou!puits}\index{trou!trou de ver}\index{attaque Sybil}\index{deluge@déluge de paquets}\index{desynchro@désynchronisation}\index{congestion}
      \end{small}
 \end{table}

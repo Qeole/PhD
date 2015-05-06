@@ -5,7 +5,7 @@
 Le processus de sélection des \cns selon leur énergie résiduelle a, lui aussi, conduit à la réalisation de plusieurs simulations, afin de le comparer au modèle de sélection pseudo-aléatoire.
 Le logiciel \nsiii~\cite{ns3} a été utilisé pour l'occasion.
 
-Plusieurs instances de simulation ont été réalisées, avec l'accent porté sur la consommation en énergie ainsi que sur la répartition de la charge dans le cluster.
+Plusieurs instances de simulation ont été réalisées, avec l'accent porté sur les valeurs de l'énergie consommée ainsi que sur la répartition de la charge dans le cluster.
 Les mécanismes de détection des deux méthodes sont quasiment identiques, et fournissent donc des résultats similaires à ceux obtenus au chapitre précédent en \ssref{sa:ssec:detec} (sur la méthode avec renouvellement périodique) pour ce qui est du taux de détection des nœuds compromis.
 Les paramètres utilisés lors des simulations sont présentés en \tabref{se:table:parameters}.
 
@@ -71,7 +71,7 @@ Tandis que la sélection des \cns par l'énergie résiduelle permettrait de rét
 
     \subsection{Pousser plus loin l'amélioration}
 
-Par rapport au processus d'auto-désignation pseudo-aléatoire utilisé au chapitre précédent, le second mécanisme proposé prend en compte l'énergie résiduelle de chaque nœud au moment de renouveler les \cns, ce qui assure une meilleure répartition de la consommation en énergie dans le cluster.
+Par rapport au processus d'auto-désignation pseudo-aléatoire introduit dans le chapitre précédent, le second mécanisme proposé prend en compte l'énergie résiduelle de chaque nœud au moment de renouveler les \cns, ce qui assure une meilleure répartition de la consommation en énergie dans le cluster.
 Mais si elle est mieux répartie, l'énergie consommée l'est aussi en plus grande quantité, principalement à cause de l'usage nouveau des \vns.
 Les requêtes et les réponses aux \cns consomment de l'énergie, et viennent alourdir l'implémentation de la solution: il y a trois rôles différents assignés dans le cluster (sans compter le \ch), et deux d'entre eux nécessitent une étape spécifique pour leur attribution.
 

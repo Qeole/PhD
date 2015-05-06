@@ -5,8 +5,8 @@ Savoir qu'une attaque est en cours dans le réseau est une information de grande
 
     \subsubsection{Alertes et exclusion du coupable}
 %{{{2
-    \paragraph{Exclure l'attaquant\index{exclusion}}
-Lorsque l'auteur d'une attaque a été clairement identifié, la réponse la plus souvent employée consiste à exclure virtuellement du réseau, c'est à dire à ne plus lui envoyer de paquets, et à ignorer totalement les trames provenant de ce nœud~\cite{LC08}.
+        \paragraph{Exclure l'attaquant\index{exclusion}}
+Lorsque l'auteur d'une attaque a été clairement identifié, la réponse la plus souvent employée consiste à exclure virtuellement du réseau, \cad à ne plus lui envoyer de paquets, et à ignorer totalement les trames provenant de ce nœud~\cite{LC08}.
 Cette exclusion peut permettre d'empêcher le nœud corrompu de procéder à ses attaques, du moment que ses paquets peuvent effectivement être ignorés.
 Pour tout ce qui concerne les comportements cupides, la falsification d'accusés de réception, puis de manière générale l'ensemble des attaques portant sur les couche réseau ou supérieures de la pile \tcpip, ignorer les paquets émis par le capteur s'avère efficace: puisque les informations qu'il envoie ne sont plus traitées, il n'y a plus de danger.
 Elle sera sans effet en revanche sur des attaques de type \idx{brouillage}, ou de création de collisions\index{collision}: non seulement l'attaquant est difficile à identifier, car il ne renseigne pas son identité dans les trames malicieuses, mais en plus le fait de l'«exclure» ne permet en aucun cas de supprimer les collisions produites sur des paquets légitimes par ses émissions.

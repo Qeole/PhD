@@ -23,7 +23,7 @@ Pour exposer efficacement celui-ci, les notations suivantes sont adoptées:
     \item $\mathit{ÉR}_k$ est un tableau contenant l'\underline{é}nergie \underline{r}ésiduelle des nœuds annoncée par les \cns au \ch à la $k$\textsuperscript{e} itération.
     \item $\mathit{Obs}_k$ est un tableau contenant les \underline{obs}ervations réalisées par le \cn~$j$ sur les communications de ses voisins.
     \item $\mathit{LNÉ}$ est une \underline{l}iste dans laquelle seront placés les \underline{n}œuds \underline{é}ligibles; au contraire, $\mathit{LNS}$ sera utilisée pour les nœuds \underline{s}uspects.
-    \item $\mathit{ÉCe}$ et $\mathit{ÉCa}$ sont des variables contenant les valeurs d'\underline{é}nergie \underline{c}onsommée \underline{e}ffective et \underline{a}nnoncée (respectivement); plus de détails sont fournis un peu plus bas.
+    \item $\mathit{ÉCe}$ et $\mathit{ÉCa}$ sont des variables contenant les valeurs d'\underline{é}nergie \underline{c}onsommée \underline{e}ffec\-tive et \underline{a}nnoncée (respectivement); plus de détails sont fournis un peu plus bas.
 \end{itemize}
 
 Le processus d'élection débute, avant sa première itération, par une phase d'initialisation.
@@ -50,7 +50,7 @@ Chaque itération~$k$ se décompose en étapes, qui sont détaillées ici:
             \item le \CH calcule alors la consommation «annoncée» $\mathit{ÉCa}$ pour la période~$k$, en prenant la différence entre les valeurs tout juste annoncées par~$i$ et celles de la période précédente: $\mathit{ÉCa}=\mathit{ÉR}_{k-1}[i] - \mathit{ÉR}_k[i]$;
             \item si $|\mathit{ÉCa}-\mathit{ÉCe}|\leq\epsilon$ (où $\epsilon$ est la marge d'erreur tolérée), alors le nœud~$i$ est déclaré «sain», et il est ajouté à la liste~$\mathit{LNÉ}$ des nœuds éligibles pour la prochaine sélection des \cns;
             \item sinon, le nœud est placé dans la liste~$\mathit{LNS}$ des nœuds suspects;
-            \item soit $\mathit{LNS}[i]$ le nombre de fois où le nœud~$i$ a été déclaré suspect depuis le déploiement du réseau. Si $\mathit{LNS}[i] \ge \mathrm{seuil}$, alors le capteur est déclaré compromis et devient virtuellement exclu du cluster; si à l'inverse le capteur avait systématiquement adopté un comportement honnête, il peut s'agir d'un faux positif, et le nœud n'est pas définitivement exclu. Il conserve la possibilité de rejoindre l'ensemble~$\mathit{LNÉ}$ au terme de prochaines itérations.
+            \item soit $\mathit{LNS}[i]$ le nombre de fois où le nœud~$i$ a été déclaré suspect depuis le déploiement du réseau. Si $\mathit{LNS}[i] \ge \mathrm{seuil}$, alors le capteur est déclaré compro\-mis et devient virtuellement exclu du cluster; si à l'inverse le capteur avait systématiquement adopté un comportement honnête, il peut s'agir d'un faux positif, et le nœud n'est pas définitivement exclu. Il conserve la possibilité de rejoindre l'ensemble~$\mathit{LNÉ}$ au terme de prochaines itérations.
         \end{itemize}
     \item Une fois l'étape~3 terminée, le \CH sélectionne les \cns parmi l'ensemble~$\mathit{LNÉ}$ des nœuds éligibles. Le choix est réalisé de telle manière que chaque capteur, \cns compris, soit contrôlé par au moins deux \cns distincts. Ainsi, un nœud compromis qui aurait néanmoins réussi à se faire élire en tant que \cn (avant de démarrer son attaque, par exemple), mais se comportant de façon malicieuse sur l'envoi de données, sera détecté.
     \item Enfin l'itération suivante démarre: le compteur~$k$ est incrémenté, et l'on retourne à l'étape~1.

@@ -14,7 +14,7 @@ La \tabref{sd:table:param} récapitule les principaux paramètres impliqués dan
     \centering
     \caption{Paramètres de simulation}\label{sd:table:param}
     \medskip
-    \begin{tabular*}{\textwidth}{l@{\hspace{.5em}}c}
+    \begin{tabu}to \textwidth {l@{\hspace{.5em}}X[c]}
         \toprule
         \textsc{Paramètre}                                          & \textsc{Valeur}        \\
         \midrule
@@ -25,8 +25,8 @@ La \tabref{sd:table:param} récapitule les principaux paramètres impliqués dan
         Fréquence de renouvellement des \cns                        & toutes les 10~secondes \\
         Durée de la période initiale pour la sélection démocratique & 60~secondes            \\
         Mobilité des nœuds                                          & nulle                  \\
-    \end{tabular*}
-    \begin{tabular*}{\textwidth}{m{.4\textwidth}c@{\hspace{2.5em}}c}
+    \end{tabu}
+    \begin{tabu}to \textwidth {l X[c] X[c]}
         \midrule
         \multirow{2}{*}{\textsc{Paramètre}} & \textsc{Valeur}                    & \textsc{Valeur}           \\
                                             & \textsc{(nœuds normaux)}           & \textsc{(nœud compromis)} \\
@@ -35,10 +35,10 @@ La \tabref{sd:table:param} récapitule les principaux paramètres impliqués dan
         Taille des paquets                  & 500~octets                         & 100~octets                \\
         Intervalle                          & aléatoire (\textsc{Poisson})       & constant                  \\
         Cons. énergétique en émission       & 0,660~W                            & 0,660~W                   \\
-        Cons. énergétique en réception      & 0,395~W                            & non pris en compte        \\
+        Cons. énergétique en réception      & 0,395~W                            & non prise en compte       \\
         Quantité initiale d'énergie         & 10~\joule\ --- $\infty$ (sel. sc.) & $\infty$                  \\
         \bottomrule
-    \end{tabular*}
+    \end{tabu}
 \end{table}
 
 \newcommand\idstat{\textsf{\#Stat10}\xspace}

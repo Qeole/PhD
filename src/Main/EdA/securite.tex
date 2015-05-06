@@ -22,7 +22,7 @@ Les principales garanties que l'on cherche à apporter à un réseau sont les su
     \item la \idx{non-répudiation}, qui empêche un agent de nier l'envoi d'un message émis;
     \item la protection contre le \idx{rejeu} vise à prévenir les attaques basées sur l'\idx{injection} de paquets capturés au préalable par l'attaquant dans le but de générer du trafic supplémentaire;
     \item la sécurité physique\index{securité@sécurité!sécurité physique} des capteurs, nécessaire pour prévenir l'accès au contenu des communications ou au matériel cryptographique\index{cryptographie} par exemple;
-    \item la \idx{disponibilité}\label{ea:def:dispo}, c'est à dire la résistance aux attaques de \dds. Cette problématique est centrale pour les travaux présentés ici, et sera développée plus largement que les autres dans la \sref{ea:sec:dos};
+    \item la \idx{disponibilité}\label{ea:def:dispo}, \cad la résistance aux attaques de \dds. Cette problématique est centrale pour les travaux présentés ici, et sera développée plus largement que les autres dans la \sref{ea:sec:dos};
 \end{itemize}
 À noter qu'il existe de nombreuses études, voire même des travaux de synthèse, qui se sont déjà concentrés sur la \secu des \rcs~\cite{DYK12,AD14}.
 
@@ -198,7 +198,8 @@ La \tabref{ea:tab:proto} compare brièvement les fonctionnalités apportées par
     \centering
     %\newcolumntype{X}{>{\centering\arraybackslash}m}
     \begin{footnotesize}
-        \begin{tabular}{@{}m{.1\textwidth} >{\raggedright}m{.12\textwidth} >{\raggedright}m{.12\textwidth} m{.26\textwidth} m{.26\textwidth}@{}}
+            \tabulinesep=1ex
+        \begin{tabu}{@{}X[10,l,m] X[12,l,m] X[12,l,m] X[26,l,m] X[26,l,m]@{}}
             \toprule
             \textsc{Archi\-tecture} & \textsc{Mode de chiffr.}       & \textsc{Algor. de chiffr.}            & \textsc{Clés utilisées}                                                        & \textsc{Sécurité apportée}\\
             \midrule
@@ -212,7 +213,7 @@ La \tabref{ea:tab:proto} compare brièvement les fonctionnalités apportées par
             ERP-DCS                 & RC5                          & RC5                                & Clés pair à pair, clé de cellule, clé EBS                                      & (*) plus dissimulation de la provenance des données\\
             \zigbee                 & CBC-MAC                      & AES, modes CTR ou CCM              & Clé maitresse, clés pair à pair, clé globale                                   & (*)\\
             \bottomrule
-        \end{tabular}
+        \end{tabu}
     \end{footnotesize}
     \index{SPINS}\index{TinySec}\index{TinyKey}\index{MiniSec}\index{LEAP}\index{LEAP+}\index{pDCS}\index{ERP-DCS}\index{architecture de sécurité}\index{chiffrement}
 \end{table}
@@ -235,7 +236,7 @@ Le bloc \idx{$\mu$TESLA} en particulier est par ailleurs repris dans de nombreus
 
 À noter enfin que les architectures \idx{LEAP} et \idx{TinyKey} ont été analysées à l'aide d'un outil de \idx{\textit{model checking}} appelé AVISPA, spécifiquement conçu pour vérifier les protocoles de sécurité~\cite{TCCDC09}.
 
-\subsection{Sécurité physique\index{securité@sécurité!sécurité physique}}
+    \subsection{Sécurité physique\index{securité@sécurité!sécurité physique}}
 
 L'accès au réseau pour un attaquant peut passer par la compromission de l'un des nœud du réseau.
 Dans le pire des cas, tout le système peut être modifié et détourné de son but d'origine, pour mener d'autres attaques par la suite, tandis que la mémoire ---~et notamment le matériel cryptographique embarqué\index{cryptographie}~--- peut être entièrement analysée.

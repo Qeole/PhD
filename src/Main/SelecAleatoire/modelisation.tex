@@ -141,16 +141,16 @@ Nous allons procéder par étapes en modélisant:
 Le comportement des capteurs basiques (qui poursuivent simplement leur mission de récolte de données) est simple: chaque capteur $i$ envoie des paquets selon un processus de \textsc{Poisson} de paramètre $\lambda_i$.
 Ce comportement est modélisé par le \rpsg présenté en \figref{sa:fig:snodegspn}.
 Le nœud y est symbolisé par les pointillés bleus.
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=.5\linewidth]{\chapterfig/RPSGe_sensing.pdf}
-    \caption{Modèle \rpsg d'un nœud capteur simple}\label{sa:fig:snodegspn}
-\end{figure}
 Dans ce nœud $i$ se trouve une unique transition \textsf{TX}, sans place en entrée, autrement dit: toujours active.
 Elle est minutée, avec une distribution exponentielle de paramètre $\lambda_i$: chaque événement correspond à l'envoi de jetons sur tous ses arcs sortants.
 Ces arcs sont rattachés à la place \textsf{InBuff$_{j}$}\,\footnote{Pour \textit{in buffer}.} de chacun des nœuds voisins du nœud $i$ (on trouve donc autant d'arcs sortants que de nœuds voisins).
 L'intégralité de la fonction de mesure et d'envoi des données utiles du \rc peut être modélisée par plusieurs éléments représentés par ce «modèle de nœud».
 Un nœud compromis $c$ sera également représenté selon le même modèle, avec un paramètre $\lambda_c$ plus élevé que les autres $\lambda_i$.
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=.5\linewidth]{\chapterfig/RPSGe_sensing.pdf}
+    \caption{Modèle \rpsg d'un nœud capteur simple}\label{sa:fig:snodegspn}
+\end{figure}
 
             \paragraph{Modélisation du \ch}
 Nous travaillons de l'intérieur du cluster, et le \ch est vu comme un simple puits qui reçoit les paquets émis par les autres nœuds.
@@ -166,11 +166,6 @@ En réalité, il devrait y avoir une place \textsf{InBuff$_i$} distincte pour le
             \paragraph{Modélisation des \cns désignés de façon statique}
 Un \cn élu de façon statique joue uniquement son rôle de \cn: il écoute le trafic, mais n'effectue pas de mesure sur son environnement.
 Le modèle \rpsge associé à ce type de nœud est présenté en \figref{sa:fig:cnodegspn1}.
-\begin{figure}[ht]
-    \centering
-    \includegraphics[width=.54\linewidth]{\chapterfig/RPSGe_cNode_static.pdf}
-    \caption{Modèle \rpsge d'un \cn élu de manière \emph{statique}}\label{sa:fig:cnodegspn1}
-\end{figure}
 La place \textsf{InBuff} représente le tampon contenant les messages reçu par le nœud.
 Un jeton arrivant dans cette place (depuis un nœud «normal») représente un message capté par le \cn.
 La vérification du respect de la valeur seuil $K$ pour le trafic est réalisée à intervalles de temps constants.
@@ -184,6 +179,11 @@ Un jeton dans cette place permet de vider le tampon \textsf{InBuff}: la transiti
 Un nouveau jeton est créé dans \textsf{vider~tampon}.
 Le processus est répété jusqu'à ce que la place \textsf{InBuff} soit vide; dans ce cas, la transition \textsf{e-fin} est franchie et ne produit rien, mais met fin à la consommation des jetons.
 Les étapes permettant de vider le tampon ne consomment pas de temps, et permettent de repartir avec un compteur neutre pour la période qui mènera à la vérifiation suivante.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.54\linewidth]{\chapterfig/RPSGe_cNode_static.pdf}
+    \caption{Modèle \rpsge d'un \cn élu de manière \emph{statique}}\label{sa:fig:cnodegspn1}
+\end{figure}
 
             \paragraph{Modélisation des \cns désignés de façon statique}
 Le modèle \rpsge représentant le \cn élu de façon dynamique ressemble à son homologue élu de façon statique.

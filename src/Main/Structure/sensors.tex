@@ -233,7 +233,7 @@ Le protocole de couche \mac définit la manière dont les différents agents du 
     \centering
     \medskip
     \begin{small}
-        \begin{tabular}{m{.2\textwidth}|m{.2\textwidth}|m{.48\textwidth}}
+        \begin{tabu}to \textwidth {X[2,l,m]|X[2,l,m]|X[5,j,m]}
             \toprule
             \textsc{Nom anglais} & \textsc{Traduction} & \textsc{Description}\\
             \midrule
@@ -255,7 +255,7 @@ Le protocole de couche \mac définit la manière dont les différents agents du 
             \midrule
             \multicolumn{3}{p{.95\textwidth}}{D'autres modes d'accès par paquet (\textit{token passing, polling}) existent mais ne sont pas utilisés dans les \rcs}\\
             \bottomrule
-         \end{tabular}
+         \end{tabu}
      \end{small}
 \end{table}
 Les différents modes d'accès au médium existants sont résumés dans la \tabref{st:tab:mac}.
@@ -329,7 +329,7 @@ Les «nœuds normaux» ont deux significations possibles selon le contexte.
             \paragraph{Attaquant}
 %{{{2
 Le terme d'«attaquant» fait par principe référence à l'entité consciente qui se trouve à l'origine d'une attaque, qu'il s'agisse d'une personne seule ou d'une organisation.
-Il arrive toutefois que par abus de langage, l'«attaquant» soit utilisé en tant que raccourci pour «le nœud attaquant», c'est à dire le nœud corrompu par l'\textit{attaquant} réel, depuis lequel l'attaque est menée au sein du réseau.
+Il arrive toutefois que par abus de langage, l'«attaquant» soit utilisé en tant que raccourci pour «le nœud attaquant», \cad le nœud corrompu par l'\textit{attaquant} réel, depuis lequel l'attaque est menée au sein du réseau.
 %2}}}
 
             \paragraph{Exploitant}

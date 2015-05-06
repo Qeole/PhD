@@ -216,29 +216,30 @@ Les avantages et inconvénients de chacune de ces trois méthodes présentées s
     \caption{Avantages et inconvénients de chaque méthode}\label{sa:table:elec}
     \medskip
     \begin{small}
-        \begin{tabular}{m{.19\textwidth} m{.35\textwidth} m{.35\textwidth}}
+        \tabulinesep=.5ex%
+        \begin{tabu}{X[1,c,m] X[2,l,m] X[2,j,m]}
             \toprule
-            \centering \textsc{Méthode} & \centering \textsc{Avantages} & \centering \textsc{Inconvénients} \tabularnewline
+            \textsc{Méthode} & \textsc{Avantages} & \textsc{Inconvénients} \tabularnewline
             \midrule
-            \centering Auto-élection des \cns (selon le modèle de \leach)    & %
-                \textbullet~Très simple à mettre en œuvre\newline%
-                \textbullet~Pas d'envoi de paquets à travers le réseau pour désigner les \cns%
+            Auto-élection des \cns (selon le modèle de \leach)    & %
+                \textbullet\;Très simple à mettre en œuvre\newline%
+                \textbullet\;Pas d'envoi de paquets à travers le réseau pour désigner les \cns%
                 & %
-                \textbullet~Chaque nœud doit calculer un nombre pseudo-aléatoire\newline%
-                \textbullet~Ne tient pas compte de la topologie du réseau\tabularnewline
+                \textbullet\;Chaque nœud doit calculer un nombre pseudo-aléatoire\newline%
+                \textbullet\;Ne tient pas compte de la topologie du réseau\tabularnewline
             \midrule
-            \centering Élection des \cns par les \ch                        & %
-                \textbullet~Seuls les \CH calculent les nombres pseudo-aléatoires%
+            Élection des \cns par les \ch                        & %
+                \textbullet\;Seuls les \CH calculent les nombres pseudo-aléatoires%
                 & %
-                \textbullet~Si le \CH est compromis, il ne désigne aucun \cn (un nœud compromis peut se déclarer \CH à chaque ronde de \leach)\tabularnewline
+                \textbullet\;Si le \CH est compromis, il ne désigne aucun \cn (un nœud compromis peut se déclarer \CH à chaque ronde de \leach)\tabularnewline
             \midrule
-            \centering Élection des \cns par la \sdb                & %
-                \textbullet~Aucun calcul réalisé par les nœuds\newline%
-                \textbullet~Distribution spatiale idéale des \cns%
+            Élection des \cns par la \sdb                & %
+                \textbullet\;Aucun calcul réalisé par les nœuds\newline%
+                \textbullet\;Distribution spatiale idéale des \cns%
                 & %
-                \textbullet~Si le \CH est compromis, il déclare un cluster vide\newline%
-                \textbullet~Perte de l'aspect centralisé de l'algorithme\tabularnewline
+                \textbullet\;Si le \CH est compromis, il déclare un cluster vide\newline%
+                \textbullet\;Perte de l'aspect centralisé de l'algorithme\tabularnewline
             \bottomrule
-        \end{tabular}
+        \end{tabu}
     \end{small}
 \end{table}

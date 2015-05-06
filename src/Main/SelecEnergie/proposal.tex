@@ -48,7 +48,7 @@ Tout ce qu'ils ont à faire, pour en arriver là, consiste à annoncer un niveau
 Ils sont alors assurés d'être désignés \cns; et s'il se trouve y avoir au moins $n$ nœuds compromis au sein du cluster, ils peuvent de cette manière accaparer les $n$ rôles de \cn et désactiver du même coup le mécanisme de détection dans son intégralité.
 L'attaque devient alors impossible à détecter et à contrer.
 
-Pour empêcher les capteurs de «mentir» lorsqu'ils annoncent leur valeur d'énergie résiduelle, l'assignation d'un nouveau rôle à certains des voisins de chaque \cn est proposée.
+Pour empêcher les capteurs de «mentir» lorsqu'ils annoncent leur valeur d'énergie résiduelle, l'assignation d'un nouveau rôle à certains des voisins de chaque \cn est proposée~\cite{MMB14,MM15}.
 Ces nœuds, que nous appelleront désormais \vns (comme pour \textit{nœuds de vérification}), seront responsables de vérifier la consommation en énergie des nœuds de surveillance.
 Une fois que la sélection des \cns est réalisée, chaque voisin d'un \cn nouvellement désigné choisit à partir d'un seuil de probabilité prédéfini s'il sera ou non \vn pour ce \cn.
 Un capteur peut assumer le rôle de \vn pour plusieurs \cn différents, du moment qu'il s'agit de nœuds voisins.
@@ -107,6 +107,9 @@ La machine à états des capteurs est présentée en \figref{se:fig:states}.
     \addtolength\figuretotextheight{-\abovecaptionskip}
     \addtolength\figuretotextheight{-\baselineskip}
     \includegraphics[height=\figuretotextheight]{\chapterfig/state_graph_vert.pdf}%
+    \newbox\dpbox%
+    \setbox\dpbox\hbox{p}%
+    \vspace{-\dp\dpbox}%
     \caption{Machine à états des capteurs (non-\cn)}\label{se:fig:states}%
 \end{figure}
 
