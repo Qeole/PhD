@@ -1,10 +1,67 @@
 % vim: set spelllang=fr foldmethod=marker:
+\section{Rappel des enjeux}
+
+\lettrineh{A}{ussi bien} dans les domaines public, industriel, militaire que chez les particuliers, la volonté de collecter puis d'analyser des données sur l'environnement, sur des processus, sur des flux, n'a de cesse de croitre.
+Poussés par les progrès constants dans la miniaturisation des composants électroniques et par la conception de batteries toujours plus performantes, rendus accessibles par la standardisation des protocoles et par l'utilisation d'un matériel peu couteux dans leur fabrication, les réseaux de capteurs sans fil constituent la solution technique idéale pour répondre à ces besoins.
+Ils sont ainsi pleinement intégrés au processus de surveillance des sites sensibles, à la gestion du trafic urbain, ou encore à l'étude de l'environnement naturel.
+Les capteurs comptent aussi de plus en plus d'applications médicales, ou bien appartenant au domaine militaire.
+
+De tels usages ne peuvent être mis en œuvre sans garanties strictes en termes de sécurité.
+La confidentialité, l'authentification, l'intégrité des communications doivent être assurées.
+Ces propriétés constituent des enjeux essentiels et récurrents dans le domaine de l'informatique.
+Elles sont en général apportées par l'usage de protocoles cryptographiques: des mécanismes de chiffrement, de condensat et de signature des messages offrent des solutions efficaces.
+
+Mais ces algorithmes ne sont pas toujours adaptés aux réseaux de capteurs sans fil, qui disposent de ressources matérielles très limitées.
+Pouvoir déployer un réseau de plusieurs centaines de capteurs, dans un environnement parfois hostile, et sans forcément pouvoir les raccorder au réseau électrique implique en effet de réaliser certaines concessions: les capteurs disposent d'un matériel peu couteux, et leurs capacités de calcul, leur mémoire disponible, ainsi que la quantité d'énergie que peut leur fournir leur batterie sont relativement faibles.
+Ces contraintes n'ont cependant pas arrêté la conception de solutions adaptées pour garantir la confidentialité ou l'authentification des échanges dans ces réseaux.
+
+C'est encore une autre propriété, propre elle aussi à la sécurité des réseaux, que nous avons étudiée dans cet ouvrage: la disponibilité des réseaux de capteurs sans fil.
+Autrement dit, leur capacité à prévenir, ou bien à détecter puis contrecarrer les attaques dites par «déni de service».
+Ces attaques peuvent prendre de nombreuses formes, selon qu'elles viennent de l'intérieur ou de l'extérieur du réseau, selon qu'elles sont menées ou non à capacité matérielle égale; ou encore selon le mode opératoire employé, selon la couche réseau visée.
+Pour chacune de ces formes connues, des solutions ont été proposées dans la littérature: changements de fréquence pour échapper au brouillage du canal, utilisation de «tunnels» virtuels, systèmes de détection d'intrusion, \etc.
+Il est cependant essentiel de continuer à trouver de nouveaux mécanismes, ou d'améliorer ceux qui existent, afin de les rendre plus efficaces ou plus économes en ressources, tant pour obtenir des réseaux plus performants que pour rester à la hauteur face à de nouveaux types d'attaques.
+
+\section{Outils présentés}
+
+    \subsection{Des mécanismes\dots}
+Les travaux présentés dans cet ouvrage s'intéressent particulièrement à une solution simple permettant de détecter des capteurs compromis au sein du réseau.
+Cette méthode consiste à mettre en œuvre une surveillance du trafic échangé entre les nœuds d'un même cluster du réseau.
+Cette surveillance est réalisée par une sélection de capteurs du cluster, que l'on appelle «\cnst», et qui appliquent un ensemble de règles sur le trafic relevé dans leur voisinage.
+Si un capteur vient à enfreindre ces règles à de multiples reprises, par exemple en dépassant largement le seuil «autorisé» pour le débit d'envoi des paquets, alors le cluster head en est notifié, et peut être amené à exclure (virtuellement) le suspect du réseau.
+
+Sur cette méthode sont basés à la fois de nouveaux mécanismes et des modèles, tous destinés à améliorer le renouvellement du processus de sélection des \cnst (en particulier), et par là les capacités du réseau à contenir les attaques par déni de service (de façon plus générale).
+
+Les trois mécanismes sont basés sur une hypothèse simple: attribuer le rôle de \cnt à un nœud va automatiquement le pousser à consommer davantage d'énergie, et il est donc impératif de répartir le surplus engendré par cette charge entre les différents capteurs du cluster pour obtenir un équilibre correct, en termes de consommation d'énergie et donc de durée de vie du réseau.
+Le risque, dans le cas contraire, est de voir un sous-ensemble restreint des capteurs tomber hors service longtemps avant tous les autres, laissant du même coup le cluster sans surveillance.
+
+Peu de travaux existent à propos de la façon précise dont peuvent être désignées ces sentinelles.
+La première contribution consiste donc à introduire un mécanisme de renouvellement très simple à mettre en œuvre: une sélection aléatoire des \cnst qui peut être implémentée par la station de base du réseau (au détriment de l'aspect décentralisé du réseau), par les cluster heads, ou encore par les capteurs eux-mêmes, capables de s'auto-désigner aléatoirement.
+Cette méthode assure une bonne rotation des \cnst, et le processus aléatoire empêche un nœud compromis de l'utiliser à son avantage pour être désigné à chaque tour (et réduire ainsi les risques de détection de son attaque, ou bien pour «dénoncer» à tort des nœuds légitimes).
+Elle permet surtout de répartir le surplus de consommation en énergie que ne prendrait pas en compte une implémentation «statique» du système de surveillance, comme l'attestent les résultats numériques obtenus par simulation à l'aide du logiciel \textsf{ns-2}.
+
+Pourtant, il est possible de pousser encore plus loin la recherche d'un équilibre optimal, toujours dans le but de répartir la charge le plus équitablement possible.
+Pour ce faire, nous proposons dans un deuxième temps une méthode qui, justement, repose sur l'énergie résiduelle des nœuds au moment du renouvellement: les capteurs possédant le plus d'énergie en réserve seront désignés \cnst.
+Les résultats de simulation montreront un écart type très bas entre les nœuds sur la consommation énergétique, preuve que l'équilibre obtenu est très bon.
+Pourtant cette méthode a ses inconvénients: reposant sur un processus déterministe, elle introduit un risque quant à la couverture du cluster par les \cnst, menacée si le nœuds d'une certaine zone géographique sont amenés, par l'application qu'ils exécutent, à consommer davantage que leurs pairs.
+Le cluster head est donc responsable de contourner ce problème, en veillant à la bonne couverture du cluster par les sentinelles.
+Mais il reste un second problème: un capteur compromis peut cette fois-ci jouer sur le processus de sélection, et annoncer une réserve d'énergie très élevée (mais factice) dans le but d'être systématiquement sélectionné.
+Pour parer cette faille potentielle, chaque \cnt est entouré d'un ou de plusieurs «\vnst», chargés de l'interroger régulièrement sur son énergie résiduelle et de comparer ses réponses avec un modèle théorique de consommation, le tout afin de détecter les tentatives de fraude.
+Ce second rôle vient charger la méthode en complexité d'implémentation, ainsi qu'en volume de données de contrôle nécessaire: la consommation en énergie est mieux répartie en effet, cependant elle est aussi plus élevée.
+
+Aussi avons-nous été amené à proposer, dans une troisième contribution, une dernière méthode de renouvellement, toujours orientée à la fois vers l'équilibre de la consommation et vers la sécurité du processus.
+Ce troisième mécanisme est un processus d'élection démocratique, au cours duquel ce sont les nœuds du cluster qui votent auprès du cluster head afin de déterminer quels seront les \cnst.
+Tous les capteurs votent pour la première sélection, qui survient à la suite d'une période initiale où tous demeurent à l'écoute du trafic.
+Puis ce sont les \cnst d'une phase donnée qui votent pour leurs successeurs, au vu des conditions de trafic observées pendant leur «mandat».
+Cette méthode permet de réutiliser les observations réalisées par les \cnst (dans le but de détecter un nœud compromis) lors du renouvellement de la sélection, sans surcharger le processus avec un nouveau type de nœuds.
+Elle permet aussi aux votants de tenir compte d'autres critères (index de connectivité des nœuds, puissance du signal reçu, score de réputation acquis avec le temps par exemple), ce qui n'est pas nécessairement notre objectif lorsque nous nous concentrons sur l'équilibre de la charge, mais qui peut représenter un avantage pour d'autres situations.
+Les valeurs obtenues lors des simulations, en comparaison avec les deux méthodes précédentes, sont bonnes, malgré une consommation énergétique très intense lors de la période initiale.
+
+L'élection par les \cnst de cette dernière méthode implique un échange de données de contrôle légèrement plus important qu'une sélection aléatoire des nœuds, \cad une consommation globale très légèrement plus élevée (pour un meilleur équilibre).
+Le choix entre ces deux méthodes se fera donc suivant le réseau et l'application considérée, en fonction du besoin d'assurer en priorité la longévité maximale pour les «derniers capteurs» (méthode aléatoire) ou bien de conserver en service le plus longtemps possible un maximum de capteurs (méthode d'élection démocratique).
+La méthode de sélection selon l'énergie résiduelle ne viendra remplacer la méthode d'élection démocratique que dans de rares cas d'applications où les capteurs ne resteraient actifs que sur de courtes périodes, et où la réactivation du cluster entrainerait le besoin systématique de relancer une période initiale, avec la méthode d'élection démocratique, très couteuse en énergie.
+
+    \subsection{\dots\ et des modèles}
 
 
-Laudantium magni accusantium recusandae. Eligendi quisquam aspernatur omnis. Quis ut quibusdam quos nihil eaque nulla ab eaque.
 
-Dolore dicta animi sequi architecto amet velit voluptatem. Nisi magni tempora voluptas amet iusto porro nulla. Exercitationem autem saepe ullam animi quibusdam perferendis.
-
-Aut sed et recusandae qui saepe molestiae dolorem. Dignissimos eveniet exercitationem ut magnam voluptas eum minus. Occaecati placeat nemo consequatur autem quia consequatur. Qui aliquam aliquid adipisci. Exercitationem omnis tempore sunt molestiae quia. Error expedita velit necessitatibus optio rerum repellat ea quidem.
-
-Dolorem laudantium repudiandae sapiente quia recusandae tenetur asperiores officia. Praesentium quia minima cum soluta accusamus. Id quia et ipsa modi eligendi numquam molestiae magni.
+\section{Perspectives pour les travaux futurs}
