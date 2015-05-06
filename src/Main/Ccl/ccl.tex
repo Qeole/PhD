@@ -62,6 +62,27 @@ La méthode de sélection selon l'énergie résiduelle ne viendra remplacer la m
 
     \subsection{\dots\ et des modèles}
 
+En complément de ces mécanismes permettant de désigner les \cnst parmi les nœuds du cluster, différents modèles formels ont été établis.
+Le processus de sélection aléatoire des capteurs de surveillance a ainsi été représenté de trois façons différentes.
 
+Les chaines de \textsc{Markov} à temps continu ont d'abord été utilisées pour représenter les transitions entre les différents états du système, et pour calculer la probabilité qu'un nœud donné soit compromis en fonction des mesures réalisées.
+Mais ce modèle suppose que la vérification du trafic par les \cnst est réalisée de façon ponctuelle, à intervalles aléatoires.
+Il s'agit d'une approximation trop large pour pouvoir adapter proprement cet outil au système modélisé.
+
+Nous nous sommes donc tournés vers d'autres représentations, et avons modélisé chaque type de capteur, à la fois sous sa forme «statique» et dans un contexte de renouvellement dynamique, sous la forme de réseaux de \textsc{Petri} généralisés étendus (comportant des transitions minutées).
+Une fois les capteurs représentés, nous avons pu formaliser une représentation de l'intégralité du cluster ainsi que du processus de renouvellement des \cnst.
+
+Parmi les intérêts du modèle figure la possibilité de le réutiliser en combinaison avec un autre outil, la logique stochastique avec automates hybrides, dans le but d'en extraire par la suite des propriétés, d'en évaluer les performances ou la fiabilité, à l'aide d'outils de \textit{model checking}.
+L'automate linéaire hybride associé au réseau de \textsc{Petri}, ainsi que des exemples de formules dans cette logique stochastique, sont fournis, et permettent de calculer la valeur de plusieurs variables relatives au système.
+
+Pour information, le processus de sélection selon l'énergie résiduelle des capteurs a lui aussi fait l'objet d'une modélisation en vue d'appliquer des techniques de \textit{model checking}~\cite{HMMBA14}, mais celle-ci n'entre pas dans le champ des travaux présentés dans cet ouvrage.
+
+Tous ces modèles sont proposés dans le cadre de l'étude et de la validation des mécanismes introduits.
+Ils peuvent d'ailleurs être facilement adaptés à des configurations différentes de réseaux.
+Mais la validation \textit{a~posteriori} d'un processus n'est pas le seul apport que peuvent constituer les méthodes formelles: il est également intéressant de pouvoir bâtir une architecture, un protocole, sur un modèle établi au préalable.
+Dans cette optique, nous avons entrepris de modéliser les interactions entre un nœud compromis et les capteurs sains du réseau sous la forme de jeux quantitatifs.
+À la différence des travaux antérieurs, nous combinons des objectifs portant à la fois sur une valeur de gain (moyen) et sur une composante d'énergie.
+Ce modèle n'a pas encore permis d'apporter de nouveaux mécanismes de sécurité, mais il constitue une base intéressante d'étude, et permet de fournir de premiers résultats.
+Nous donnons ainsi les spécifications des graphes de jeu, notamment au travers d'exemples détaillés, avant de nous intéresser à leur résolution: si la résolution de ces jeux constitue un problème indécidable dans le cas général, nous démontrons qu'il est possible de résoudre les problèmes de victoire et de crédit initial lorsque l'objectif à atteindre est défini sous forme de conjonction de littéraux.
 
 \section{Perspectives pour les travaux futurs}
