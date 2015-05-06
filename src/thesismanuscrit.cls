@@ -249,7 +249,7 @@
       \vfill%
       {\fontsize{12}{14}\selectfont\slshape soutenue le \@date\ devant le jury composé de:}\\%
       \vskip1em%
-      {\fontsize{12}{14}\selectfont\sffamily \@jury}\\%
+      {\fontsize{12}{14}\selectfont\sffamily \@jury}%
       %%\vskip4em%
       %%\raggedright%
       %%\includegraphics[height=1.4cm]{Preamble/upe.png}%
