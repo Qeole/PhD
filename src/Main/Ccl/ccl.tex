@@ -86,3 +86,15 @@ Ce modèle n'a pas encore permis d'apporter de nouveaux mécanismes de sécurit�
 Nous donnons ainsi les spécifications des graphes de jeu, notamment au travers d'exemples détaillés, avant de nous intéresser à leur résolution: si la résolution de ces jeux constitue un problème indécidable dans le cas général, nous démontrons qu'il est possible de résoudre les problèmes de victoire et de crédit initial lorsque l'objectif à atteindre est défini sous forme de conjonction de littéraux.
 
 \section{Perspectives pour les travaux futurs}
+
+Ce modèle utilisant les jeux quantitatifs constitue une base de travail intéressante que nous aimerions affiner, dans le but d'améliorer le mécanisme de détection lui-même, par exemple en parvenant à exprimer des contraintes encore plus fortes qui forceraient les nœuds compromis à coopérer sous peine d'être immédiatement détectés.
+
+Nous avons déjà mené une étude poussée sur les processus de renouvellement des \cnst, mais il reste néanmoins beaucoup de pistes de réflexion à explorer.
+Concernant les mécanismes décris et implémentés sous forme de simulations, par exemple, il serait possible d'étendre les cas étudiés à d'autres topologies de réseaux, à d'autres architectures que des systèmes clusterisés où tous les capteurs sont voisins directs d'un cluster head.
+De même, la simulation d'applications spécifiques (et non plus d'un comportement général), voire encore mieux: leur implémentation sur un véritable réseau de capteurs, permettraient d'obtenir des valeurs numériques en meilleure adéquation avec une mise en place réelle du système.
+
+Il en va de même pour les modèles présentés, qui gagneraient d'une part à être mis en œuvre sur des configurations différentes, et d'une autre à être effectivement réutilisé avec les outils de \textit{model checking} que nous avons mentionné.
+Il serait particulièrement intéressant de mettre en place le renouvellement des \cnst sur un véritable cas d'application, sur un véritable réseau, et de modéliser celui-ci sous forme de réseaux de \textsc{Petri} pour vérifier si les variables formelles obtenues correspondent bien à la situation réelle.
+
+Enfin, de nombreuses autres approches peuvent être envisagées pour lutter contre les attaques par déni de service.
+Le travail sur les mécanismes de confiance, sur la résilience du routage, ou sur les propriétés des protocoles de la couche de liaison de données ne sont que quelques exemples de sujets brièvement étudiés au cours de cette thèse, mais qui mériteraient chacun d'être approfondis.
