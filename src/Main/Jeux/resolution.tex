@@ -92,7 +92,7 @@ Si l'affirmation a été rejetée à raison, alors le gain est nul.
 \draw[->] (stop2) edge [loop right] node [mini] {$(0,0,0,0,1)$} (stop2);
 
 \end{tikzpicture}
-\caption[Module d'encodage de l'instruction \tjztest sous forme de jeu.]{Module d'encodage de l'instruction \tjztest sous forme de jeu: «si $c=0$ alors aller à l'étiquette~$\ell_1$, sinon décrémenter $c$ et aller à l'étiquette~$\ell_2$». Les états sous forme de carrés appartiennent au \jo, les cercles représentent les états du \ji. Il est convenu qu'en l'absence d'indication de poids, les arêtes comportent les poids~$(0,0,0,0,0)$.}%
+\caption[Module d'encodage de l'instruction \tjztest sous forme de jeu]{Module d'encodage de l'instruction \tjztest sous forme de jeu: «si $c=0$ alors aller à l'étiquette~$\ell_1$, sinon décrémenter $c$ et aller à l'étiquette~$\ell_2$». Les états sous forme de carrés appartiennent au \jo, les cercles représentent les états du \ji. Il est convenu qu'en l'absence d'indication de poids, les arêtes comportent les poids~$(0,0,0,0,0)$.}%
 \label{tj:fig:zerotest}
 \end{figure}
 
@@ -131,7 +131,7 @@ Ce module est représenté sur la \figref{tj:fig:halt}.
 \draw[->] (stop) edge [loop right] (stop);
 
 \end{tikzpicture}
-\caption[Module d'encodage de l'instruction d'\textit{arrêt} sous forme de jeu.]{Module d'encodage de l'instruction d'\textit{arrêt} sous forme de jeu. Les états sous forme de carrés appartiennent au \jo, les cercles représentent les états du \ji.}%
+\caption[Module d'encodage de l'instruction d'\textit{arrêt} sous forme de jeu]{Module d'encodage de l'instruction d'\textit{arrêt} sous forme de jeu. Les états sous forme de carrés appartiennent au \jo, les cercles représentent les états du \ji.}%
 \label{tj:fig:halt}
 \end{figure}
 
@@ -281,7 +281,7 @@ Cependant, il n'est pas possible de conserver un gain moyen de $1$ tout en maint
 \path[->] (q1) edge[loop right] node {$-42,+1$} (q1);
 \path[->] (q1) edge[bend left=15] node {$0,0$} (q0);
 \end{tikzpicture}
-\caption[Un exemple de jeu simple nécessitant une mémoire infinie.]{Un exemple de jeu simple nécessitant une mémoire infinie. La première composante est un niveau d'énergie, la seconde est une valeur de gain.}%
+\caption[Un exemple de jeu simple nécessitant une mémoire infinie]{Un exemple de jeu simple nécessitant une mémoire infinie. La première composante est un niveau d'énergie, la seconde est une valeur de gain.}%
 \label{tj:fig:infmemoryneeded}
 \end{figure}
 
@@ -326,7 +326,7 @@ La machine doit être complète au niveau des entrées possibles, aussi faut-il 
 \draw[->] (m44) edge[bend left=60,in=60] node[pos=0.6] {$q_0 | q_0$} (m0);
 \draw[->] (m45) edge[bend left=60] node[swap,pos=0.5,inner sep=1pt] {$q_0 | q_0$} (m0);
 \end{tikzpicture}
-\caption[Une machine de \textsc{Mealy} représentant une stratégie à mémoire finie.]{Une machine de \textsc{Mealy} représentant une stratégie à mémoire finie (46~états). L'extrémité sortante d'une arête représente l'état actuel du jeu, l'extrémité sortante est l'état suivant retenu.}%
+\caption[Une machine de \textsc{Mealy} représentant une stratégie à mémoire finie]{Une machine de \textsc{Mealy} représentant une stratégie à mémoire finie (46~états). L'extrémité sortante d'une arête représente l'état actuel du jeu, l'extrémité sortante est l'état suivant retenu.}%
 \label{tj:fig:memory42}
 \end{figure}
 

@@ -99,7 +99,7 @@ La \figref{sd:fig:cons-inf} présente les valeurs obtenues.
 \begin{figure}[!ht]
     \centering
     \includegraphics{\chapterfig/plot_sd_consumptionXtime.pdf}
-    \caption{Moyenne de l'énergie consommée par les capteurs au cours du temps (énergie initiale: $\infty$)}\label{sd:fig:cons-inf}
+    \caption[Moyenne de l'énergie consommée par les capteurs au cours du temps]{Moyenne de l'énergie consommée par les capteurs au cours du temps (énergie initiale: $\infty$)}\label{sd:fig:cons-inf}
 \end{figure}
 On peut y observer une consommation quasiment identique entre les méthodes \idstat et \idrand, puisque le renouvellement en soi, à l'aide de la sélection pseudo-aléatoire des \cns, ne représente pratiquement aucun cout additionnel.
 Les méthodes \ideres et \iddemx consomment toutes deux davantage, à cause des mécanismes mis en place pour récolter les valeurs de l'énergie résiduels des nœuds, et pour assurer la sécurité du processus.
@@ -108,7 +108,7 @@ La méthode \iddemx est plus couteuse au départ, ce qui est parfaitement visibl
 \begin{figure}[!ht]
     \centering
     \includegraphics{\chapterfig/plot_sd_consumptionXtime_zoom10.pdf}
-    \caption{Moyenne de l'énergie consommée par les capteurs au cours du temps: agrandissement de la vue près de l'origine du repère (énergie initiale: $\infty$)}\label{sd:fig:cons-inf-zoom}
+    \caption[Moyenne de l'énergie consommée par les capteurs au cours du temps: agrandissement de la vue près de l'origine du repère]{Moyenne de l'énergie consommée par les capteurs au cours du temps: agrandissement de la vue près de l'origine du repère (énergie initiale: $\infty$)}\label{sd:fig:cons-inf-zoom}
 \end{figure}
 Les deux scénarios basés sur la sélection démocratique voient leur quantité d'énergie consommée augmenter très rapidement pendant la première minute de la simulation, qui correspond à la période initiale (où tous les nœuds agissent comme des \cns en plus de prendre des mesures, d'où la consommation accrue).
 En revanche, on observe une inversion entre \ideres et \iddemx peu avant 40~minutes, signe que sur le long terme, \iddemx consomme moins d'énergie que l'usage des \vns.
@@ -123,7 +123,7 @@ Mais cet écart demeure très important à côté de celui de \ideres, \iddemx e
 \begin{figure}[!ht]
     \centering
     \includegraphics{\chapterfig/plot_sd_stddevXtime.pdf}
-    \caption{Écart-type moyen pour l'énergie consommée par les capteurs au cours du temps (énergie initiale: $\infty$)}\label{sd:fig:stddev-inf}
+    \caption[Écart-type moyen pour l'énergie consommée par les capteurs au cours du temps]{Écart-type moyen pour l'énergie consommée par les capteurs au cours du temps (énergie initiale: $\infty$)}\label{sd:fig:stddev-inf}
 \end{figure}
 
         \subsubsection{Durée de vie du réseau}
@@ -175,14 +175,14 @@ Le nombre de nœuds en mesure de détecter l'attaque du nœud compromis est dire
 \begin{figure}[!ht]
     \centering
     \includegraphics{\chapterfig/plot_sd_detectionXtime-single_10J.pdf}
-    \caption{Taux de détection, pour chaque processus de sélection, au cours du temps (énergie initiale: 10~\joule; valeurs sur une seule instance)}\label{sd:fig:detec-one-10J}
+    \caption[Taux de détection au cours du temps (énergie initiale: 10~\joule; valeurs sur une seule instance)]{Taux de détection, pour chaque processus de sélection, au cours du temps (énergie initiale: 10~\joule; valeurs sur une seule instance)}\label{sd:fig:detec-one-10J}
 \end{figure}
 En dehors d'un intérêt artistique certain, ces courbes permettent d'observer les extremums atteints, mais sont très peu lisibles.
 La \figref{sd:fig:detec-min-10J} reprend donc ces valeurs, lissées une première fois en calculant la moyenne du nombre d'attaques détectées par les différentes instances (10~par scénario), puis une seconde fois sur une séquence d'une minutes (donc 6~phases de 10~secondes).
 \begin{figure}[!b]
     \centering
     \includegraphics{\chapterfig/plot_sd_detectionXtime-minute_10J.pdf}
-    \caption{Taux de détection, pour chaque processus de sélection, au cours du temps (énergie initiale: 10~\joule; valeurs lissées sur une durée d'une minute)}\label{sd:fig:detec-min-10J}
+    \caption[Taux de détection au cours du temps (énergie initiale: 10~\joule)]{Taux de détection, pour chaque processus de sélection, au cours du temps (énergie initiale: 10~\joule; valeurs lissées sur une durée d'une minute)}\label{sd:fig:detec-min-10J}
 \end{figure}
 On observe que pour la méthode \idstat, la détection chute très rapidement à zéro; en fait dès que les \cns d'origine, non renouvelés, ont consommé leurs réserves.
 Les méthodes \idrand, \ideres et \iddemx ont toutes les trois un bon niveau de détection, avec en moyenne 5~\cns parmi les 10~sélectionnés qui repèrent l'attaque tant que la plupart des nœuds sont en activité.
@@ -197,7 +197,7 @@ Toutefois, «surveillance» n'est pas systématiquement égale à «détection»
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=6.5cm]{\chapterfig/WSN_neighbors.pdf}
-    \caption{Schéma du cluster représentant la position des soixante-et-un voisins directs (en bleu) du nœud compromis (en jaune) tels que définis dans les simulations réalisées}\label{sd:fig:neighbors}
+    \caption[Schéma du cluster représentant la position des 61~voisins directs du nœud compromis]{Schéma du cluster représentant la position des soixante-et-un voisins directs (en bleu) du nœud compromis (en jaune) tels que définis dans les simulations réalisées}\label{sd:fig:neighbors}
 \end{figure}
 
 %CALCUL : probabilité que n cNodes parmi les 10 soient piochés parmi les NON voisins du nœud 12 compromis (code JavaScript)
@@ -257,5 +257,5 @@ Les résultats, de manière prévisible, montrent que la durée de surveillance 
 \begin{figure}[!b]
     \centering
     \includegraphics{\chapterfig/plot_sd_detectionXtime-minute_20J.pdf}
-    \caption{Taux de détection, pour chaque processus de sélection, au cours du temps (énergie initiale: 20~\joule; valeurs lissées sur une durée d'une minute)}\label{sd:fig:detec-min-20J}
+    \caption[Taux de détection au cours du temps (énergie initiale: 20~\joule)]{Taux de détection, pour chaque processus de sélection, au cours du temps (énergie initiale: 20~\joule; valeurs lissées sur une durée d'une minute)}\label{sd:fig:detec-min-20J}
 \end{figure}

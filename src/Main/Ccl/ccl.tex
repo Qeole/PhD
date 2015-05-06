@@ -41,7 +41,7 @@ Elle permet surtout de répartir le surplus de consommation en énergie que ne p
 
 Pourtant, il est possible de pousser encore plus loin la recherche d'un équilibre optimal, toujours dans le but de répartir la charge le plus équitablement possible.
 Pour ce faire, nous proposons dans un deuxième temps une méthode qui, justement, repose sur l'énergie résiduelle des nœuds au moment du renouvellement: les capteurs possédant le plus d'énergie en réserve seront désignés \cnst.
-Les résultats de simulation montreront un écart type très bas entre les nœuds sur la consommation énergétique, preuve que l'équilibre obtenu est très bon.
+Les résultats de simulation montreront un écart-type très bas entre les nœuds sur la consommation énergétique, preuve que l'équilibre obtenu est très bon.
 Pourtant cette méthode a ses inconvénients: reposant sur un processus déterministe, elle introduit un risque quant à la couverture du cluster par les \cnst, menacée si le nœuds d'une certaine zone géographique sont amenés, par l'application qu'ils exécutent, à consommer davantage que leurs pairs.
 Le cluster head est donc responsable de contourner ce problème, en veillant à la bonne couverture du cluster par les sentinelles.
 Mais il reste un second problème: un capteur compromis peut cette fois-ci jouer sur le processus de sélection, et annoncer une réserve d'énergie très élevée (mais factice) dans le but d'être systématiquement sélectionné.
