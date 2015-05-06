@@ -2,12 +2,12 @@
 \vfill
 \lettrineh{A}{près avoir proposé} un processus de sélection aléatoire, une première amélioration a été proposée pour mieux répartir la consommation en énergie dans le réseau.
 Cette méthode basée sur le niveau d'énergie restante des nœuds introduit de nouvelles considérations sur la sécurité du système, qui est résolue par l'usage des \vns.
-Mais ces derniers demandent un protocole de mise en place un peu plus complexe, et consomment de l'énergie; dans ce chapitre, c'est une autre méthode encore qui est proposée.
+Mais ces derniers demandent un protocole de mise en place un peu plus complexe, et consomment de l'énergie; dans ce chapitre, c'est une nouvelle méthode qui est proposée.
 \vfill
-Le processus de sélection reste basé sur l'énergie résiduelle des nœuds, mais toutes les mesures de vérifications sont affectées au \cns ---~puisqu'ils se chargent déjà de vérifier le trafic!
+Le processus de sélection reste basé sur l'énergie résiduelle des nœuds, mais toutes les mesures de vérifications sont affectées aux \cns ---~puisqu'ils se chargent déjà de vérifier le trafic!
 Il en résulte une méthode «démocratique», dans le sens où ce sont désormais les capteurs eux-mêmes qui «votent» auprès du \ch pour déterminer les prochains \cns.
 Encore une fois, des résultats numériques obtenus par simulation viennent éclairer les performances obtenues par ce mécanisme.
-Mis en perspective avec des instances basées sur les deux mécanismes précédents, ces résultats nous permettent d'établir une évaluation comparée des modèles, et de déterminer quel est le processus optimal à employer en fonction d'une situation donnée.
+Mis en perspective avec des instances basées sur les deux mécanismes précédents, ces résultats nous permettent d'établir une évaluation comparée des méthodes proposées, et de déterminer quel est le processus optimal à employer en fonction d'une situation donnée.
 \vfill
 
 \pagebreak %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -23,7 +23,7 @@ Pour exposer efficacement celui-ci, les notations suivantes sont adoptées:
     \item $\mathit{ÉR}_k$ est un tableau contenant l'\underline{é}nergie \underline{r}ésiduelle des nœuds annoncée par les \cns au \ch à la $k$\textsuperscript{e} itération.
     \item $\mathit{Obs}_k$ est un tableau contenant les \underline{obs}ervations réalisées par le \cn~$j$ sur les communications de ses voisins.
     \item $\mathit{LNÉ}$ est une \underline{l}iste dans laquelle seront placés les \underline{n}œuds \underline{é}ligibles; au contraire, $\mathit{LNS}$ sera utilisée pour les nœuds \underline{s}uspects.
-    \item $\mathit{ÉCe}$ et $\mathit{ÉCa}$ sont des variables contenant les valeurs d'\underline{é}nergie \underline{c}onsommée \underline{e}ffec\-tive et \underline{a}nnoncée (respectivement); plus de détails sont fournis un peu plus bas.
+    \item $\mathit{ÉCe}$ et $\mathit{ÉCa}$ sont des variables contenant les valeurs d'\underline{é}nergie \underline{c}onsommée \underline{e}ffec\-tive et \underline{a}nnoncée (respectivement); plus de détails sont fournis dans la suite.
 \end{itemize}
 
 Le processus d'élection débute, avant sa première itération, par une phase d'initialisation.
@@ -52,7 +52,7 @@ Chaque itération~$k$ se décompose en étapes, qui sont détaillées ici:
             \item sinon, le nœud est placé dans la liste~$\mathit{LNS}$ des nœuds suspects;
             \item soit $\mathit{LNS}[i]$ le nombre de fois où le nœud~$i$ a été déclaré suspect depuis le déploiement du réseau. Si $\mathit{LNS}[i] \ge \mathrm{seuil}$, alors le capteur est déclaré compro\-mis et devient virtuellement exclu du cluster; si à l'inverse le capteur avait systématiquement adopté un comportement honnête, il peut s'agir d'un faux positif, et le nœud n'est pas définitivement exclu. Il conserve la possibilité de rejoindre l'ensemble~$\mathit{LNÉ}$ au terme de prochaines itérations.
         \end{itemize}
-    \item Une fois l'étape~3 terminée, le \CH sélectionne les \cns parmi l'ensemble~$\mathit{LNÉ}$ des nœuds éligibles. Le choix est réalisé de telle manière que chaque capteur, \cns compris, soit contrôlé par au moins deux \cns distincts. Ainsi, un nœud compromis qui aurait néanmoins réussi à se faire élire en tant que \cn (avant de démarrer son attaque, par exemple), mais se comportant de façon malicieuse sur l'envoi de données, sera détecté.
+    \item Une fois l'étape~3 terminée, le \CH sélectionne les \cns parmi l'ensemble~$\mathit{LNÉ}$ des nœuds éligibles. Le choix est réalisé de telle manière que tous les capteurs, \cns compris, soient contrôlés par au moins deux \cns distincts. Ainsi, un nœud compromis qui aurait néanmoins réussi à se faire élire en tant que \cn (avant de démarrer son attaque, par exemple), mais se comportant de façon malicieuse sur l'envoi de données, sera détecté.
     \item Enfin l'itération suivante démarre: le compteur~$k$ est incrémenté, et l'on retourne à l'étape~1.
 \end{enumerate}
 
@@ -68,7 +68,7 @@ Les critères retenus pour effectuer ce choix peuvent être très variés.
 Par exemple, il est possible de tirer aléatoirement des \cns parmi les nœuds de~$\mathit{LNÉ}$, jusqu'à ce que:
 \begin{itemize}
     \item l'on ait assez de \cns (selon le seuil déterminé par l'utilisateur du réseau);
-    \item et que tous les nœuds du cluster soient couverts par au moins deux \cns, comme expliqué plus haut.
+    \item et que tous les nœuds du cluster soient couverts par au moins deux \cns, comme expliqué précédemment.
 \end{itemize}
 D'autres façons d'effectuer ce choix pourraient consister par exemple à prendre en compte un ou plusieurs critères parmi la liste suivante:
 \begin{itemize}
@@ -90,7 +90,7 @@ où:
     \item $\mathit{rép}_k[i]$ est le score de \underline{rép}utation du nœud~$i$ (mis à jour au fur et à mesure, selon les signalements ou les scores envoyés par les \cns à propos de~$i$);
     \item $\mathit{ic}_k[i]$ est l'\underline{i}ndex de \underline{c}onnectivité de~$i$;
     \item $ps_k[i]$ est la \underline{p}uissance moyenne du \underline{s}ignal enregistrée par les voisins du nœud~$i$;
-    \item $nsl_k[i]$ est la valeur maximale entre un seuil prédéterminé et le \underline{n}ombre d'itérations antérieures à~$k$ \underline{d}epuis que le nœud a été désigné \cn pour la \underline{d}ernière fois;
+    \item $ndd_k[i]$ est la valeur maximale entre un seuil prédéterminé et le \underline{n}ombre d'itérations antérieures à~$k$ \underline{d}epuis que le nœud a été désigné \cn pour la \underline{d}ernière fois;
     \item $\alpha$, $\beta$, $\gamma$, $\delta$ et $\zeta$ sont des constantes définies par l'utilisateur.
 \end{itemize}
 Cette formule pourrait être utilisée pour classer les nœuds de la liste~$\mathit{LNÉ}$ de telle manière que le \ch puisse choisir les meilleurs \cns possibles par rapport aux critères pris en compte.

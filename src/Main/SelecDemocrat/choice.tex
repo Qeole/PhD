@@ -2,7 +2,7 @@
 \section{Choisir un processus de sélection}
 
     \subsection{Choisir un processus adapté à la situation}
-Plusieurs méthodes de sélection des \cns ont été présentées, et leurs performances ont été mesurées à travers un jeu de simulations.
+Plusieurs méthodes de sélection des \cns ont été proposées, et leurs performances ont été mesurées à travers un jeu de simulations.
 Il est temps désormais d'en tirer des conclusions, et de déterminer quelle méthode est préférable pour un cas d'utilisation donné.
 Car il n'y a pas vraiment de «meilleure méthode» adaptable à toutes les applications, chacune possède ses avantages et ses inconvénients.
 
@@ -44,7 +44,7 @@ Les avantages et inconvénients de chaque méthode sont résumés en \tabref{sd:
         \midrule
         Aucun\newline renouvellement
             & \textbullet\;Préservation des nœuds non sélectionnés
-            & \textbullet\;Très mauvaise surveillance
+            & \textbullet\;Mauvaise surveillance
             \\
         \midrule
         Sélection aléatoire
@@ -83,7 +83,7 @@ La \tabref{sd:table:apps}, quant à elle, synthétise les cas d'utilisation de c
         \toprule
         \textsc{Méthode} & \textsc{Cas d'utilisation} \\
         \midrule
-        Aucun\newline renouvellement
+        Aucun renouvellement
             & Fortement déconseillé de manière générale (la sécurité apportée ne vaut pas de mettre en place le dispositif, sauf en cas d'usage de capteurs dédiés du point de vue matériel)
             \\
         \midrule
@@ -92,7 +92,7 @@ La \tabref{sd:table:apps}, quant à elle, synthétise les cas d'utilisation de c
             \\
         \midrule
         Sélection selon l'énergie résiduelle
-            & Déconseillée, mieux vaut utiliser l'élection démocratique; sauf en cas de courtes périodes d'activité du cluster.
+        & \textit{A~priori}, mieux vaut utiliser l'élection démocratique; sauf en cas de courtes périodes d'activité du cluster.
             \\
         \midrule
         Élection démocratique

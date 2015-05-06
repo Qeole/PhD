@@ -51,10 +51,10 @@ Ici, l'objectif consiste plutôt à comparer tous les scénarios que nous avons 
 Un «scénario» se caractérise donc avant tout par le choix d'un processus de renouvellement des \cns, mais aussi par le nombre de \cns sélectionnés à chaque tour, et par le montant d'énergie initialement attribué aux capteurs.
 Chaque graphe présente, pour un montant d'énergie initiale donné, les valeurs obtenues pour cinq scénarios distincts, auxquels nous attribuons des identifiants pour pouvoir nous y référer plus facilement par la suite:
 \begin{itemize}
-    \item l'un ne comporte aucun renouvellement des dix~\cns (\idstat);
-    \item l'un se base sur un processus de renouvellement aléatoire tel que présenté au \chapref{sa} (\idrand);
-    \item l'un se base sur un renouvellement selon l'énergie résiduelle (avec usage de \vns) tel que présenté au \chapref{se} (\ideres);
-    \item les deux derniers se basent sur le mécanisme d'élection démocratique abordé dans ce chapitre:
+    \item l'un ne comporte aucun renouvellement des dix~\cns (il s'agit de la méthode dite «\underline{stat}ique», que nous nommons dans cette section \idstat);
+    \item l'un se base sur un processus de renouvellement \underline{aléa}toire tel que présenté au \chapref{sa} (\idrand);
+    \item l'un se base sur un renouvellement selon l'\underline{é}nergie \underline{rés}iduelle (avec usage de \vns) tel que présenté au \chapref{se} (\ideres);
+    \item les deux derniers se basent sur le mécanisme d'élection \underline{dém}o\underline{c}ratique abordé dans ce chapitre:
         \begin{itemize}
             \item l'un avec dix~\cns (\iddemx),
             \item l'autre avec sept~\cns seulement, afin d'observer l'effet de la diminution du nombre de nœuds sélectionnés (\iddems).
@@ -117,7 +117,7 @@ Moins on utilise de \cns, moins l'énergie consommée est importante (comme indi
 
 Les méthodes qui prennent en compte l'énergie résiduelle (\ideres, \iddemx) sont donc, pour un nombre de \cns équivalent, plus gourmandes en énergie; mais il est aussi intéressant d'étudier la répartition de la charge qu'elles apportent au cluster.
 La \figref{sd:fig:stddev-inf} présente les écarts-types obtenus, au court des mêmes simulations, pour les cinq~scénarios.
-On peut y observer que pour \idstat se crée un déséquilibre qui monte en flèche (de façon linéaire): puisque les \cns sont toujours les mêmes, ce sont toujours les mêmes capteurs qui consomment l'énergie, creusent l'écart, et diminuent l'équilibre du réseau.
+On peut y observer que pour \idstat se crée un déséquilibre croissant (de façon linéaire): puisque les \cns sont toujours les mêmes, ce sont toujours les mêmes capteurs qui consomment l'énergie, creusent l'écart, et diminuent l'équilibre du réseau.
 Pour la méthode \idrand, l'écart monte rapidement, mais ralentit et se stabilise peu à peu (la valeur (toujours croissante) en fin de simulation, non apparente sur la figure, est à un peu plus de 6~\joule): la loi des grands nombres fait que (sous réserve de l'utilisation d'un générateur de nombres pseudo-aléatoires bien conçu), lorsque la durée de simulation s'allonge, tous les nœuds sont sélectionnés un nombre de fois approximativement identique.
 Mais cet écart demeure très important à côté de celui de \ideres, \iddemx et \iddems, très proche de zéro: ces méthodes assurent une très bonne répartition de la consommation en énergie dans le cluster, ce qui, pour rappel, constituait leur objectif initial.
 \begin{figure}[!ht]

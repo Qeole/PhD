@@ -4,8 +4,8 @@
 L'un des inconvénients de cet algorithme est que l'énergie résiduelle des capteurs, \cad le niveau d'énergie restant dans leur batterie, n'est pas mesurée, et surtout n'est pas prise en compte lors du processus de renouvellement des \cns.
 Pourtant, la surveillance que ces derniers mènent dans leur cluster entraine une consommation énergétique accrue, puisqu'ils doivent demeurer en écoute sur le médium de façon continue.
 
-Dans ce chapitre, une deuxième méthode de sélection des \cns est introduite.
-Le concept initial de l'algorithme est extrêmement simple: à chaque renouvellement du processus, l'énergie résiduelle des capteurs est évaluée, et ceux possédant le plus de réserves deviennent \cns.
+Dans ce chapitre, une deuxième méthode de sélection des \cns est proposée.
+Le concept initial de l'algorithme est simple: à chaque renouvellement du processus, l'énergie résiduelle des capteurs est évaluée, et ceux possédant le plus de réserves deviennent \cns.
 Le but de cette méthode est évidemment d'atteindre une meilleure répartition de la consommation d'énergie dans le cluster: les capteurs possédant le plus haut niveau de charge de leur batterie se verront attribuer le rôle qui consomme le plus d'énergie.
 
 Néanmoins, la perte de l'aspect aléatoire au profit d'une méthode purement déterministe va entrainer un certain nombre de contraintes en termes de sécurité et de couverture spatiale.
@@ -119,8 +119,8 @@ Le passage d'un algorithme pseudo-aléatoire à un processus de sélection déte
 Il soulève un second problème, indépendant du comportement des nœuds, qui pourrait gêner la détection de capteurs compromis.
 S'il advient qu'une certaine zone géographique du cluster produit un trafic plus important que le reste des nœuds, alors l'énergie des capteurs de cette zone diminuera plus rapidement.
 Il s'ensuit mécaniquement que les \cns ne seront pas ou peu sélectionnés parmi les capteurs de cette zone.
-Il y a même de forte chances que les $n$ \cns désirés soient sélectionnés en dehors de la zone en question, et que certains capteurs ne soient pas surveillés du tout tant que le trafic de la zone d'activité ne diminue pas ---~potentiellement pour tous les cycles.
-La figure \figref{se:fig:cover} illustre ce problème.
+Il y a même de forte chances que les $n$ \cns désirés soient sélectionnés en dehors de la zone en question, et que certains capteurs ne soient pas surveillés du tout tant que le trafic de la zone d'activité ne diminue pas, donc potentiellement pour tous les cycles.
+La \figref{se:fig:cover} illustre ce problème.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.8\linewidth]{\chapterfig/cover.pdf}
@@ -133,7 +133,7 @@ Aussi l'algorithme de sélection présenté plus haut doit-il être modifié, po
     \item Au cours d'une première phase, chaque nœud évalue la valeur de son énergie résiduelle et la transmet au \ch;
     \item Le \ch écoute toutes les valeurs. Les autres nœuds enregistrent également les valeurs de leurs voisins;
     \item Tous les nœuds envoient au \CH la liste de leurs voisins directs (\textit{1-hop})\,\footnote{Nous supposons ici que les capteurs ne trichent pas durant cette étape. Ils pourraient en effet annoncer des voisins «virtuels» supplémentaires, pour faire croire qu'ils seront à portée d'un \cn, et ainsi éviter d'être détecté si ce n'est pas le cas. Le \chapref{ea} présente des mécanismes de protection permettant de détecter ce type d'attaques.};
-    \item Le \CH sélectionne les $n$ \cns parmi les nœuds ayant le plus d'énergie résiduelle, de telle façon que ces $n$ nœuds couvrent tous les autres nœuds en terme de portée\,\footnote{Les détails de l'algorithme utilisé pour cette phase ne sont pas précisés dans cette étude.};
+    \item Le \CH sélectionne les $n$ \cns parmi les nœuds ayant le plus d'énergie résiduelle, de telle façon que ces $n$ nœuds couvrent tous les autres nœuds en terme de portée;
     \item Au besoin (si $n$ est trop bas), le \CH sélectionne des \cns supplémentaires de façon à ce qu'ils couvrent l'intégralité du cluster;
     \item Le \CH envoie un message aux nœuds sélectionnés pour leur notifier leur rôle de \cn.
 \end{enumerate}
