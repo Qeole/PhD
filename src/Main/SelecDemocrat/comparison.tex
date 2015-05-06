@@ -3,7 +3,7 @@
 
     \subsection{Mise en place des simulations}
 
-        \subsubsection{Modèle utilisé}
+        %\subsubsection{Modèle utilisé}
 
 Le modèle utilisé dans cette section est similaire à celui employé au \chapref{sa} (défini en \ssref{sa:ssec:modelsim}).
 Tout comme alors, le logiciel \nsii a été mis en œuvre.
@@ -70,42 +70,44 @@ Le \ch ainsi que le nœud compromis sont dotés d'une réserve d'énergie illimi
     \item le nœud compromis parce que nous ne souhaitons pas qu'il arrête d'émettre au cours du déroulement de notre scénario; et parce que les nombreux paquets qu'il émet lui font là aussi dépenser une énergie qui viendrait fausser les moyennes observées. Outre le contexte des simulations, il est à noter qu'un tel cas est plausible, par exemple, si l'attaquant substitue au nœud ciblé un appareil plus puissant (un ordinateur portable par exemple) sur une longue durée: le nœud compromis peut alors se retrouver affranchi des contraintes en énergie auxquelles sont soumis les autres capteurs.
 \end{itemize}
 
-        \subsubsection{Choix du simulateur}
+        %\subsubsection{Choix du simulateur}
 
-Le simulateur utilisé au \chapref{sa} est \nsii~\cite{ns2}; celui employé au \chapref{se} est \nsiii~\cite{ns3}.
-\nsiii est une version plus récente de \nsii.
-Basé sur les mêmes mécanismes, le logiciel a été complètement réécrit, et les langages utilisés pour définir les scénarios de simulation ne sont plus les mêmes (Tcl pour \nsii, \cpp (éventuellement Python) pour \nsiii).
-Ce changement radical a pour conséquence l'absence de compatibilité descendante avec \nsii.
+%Le simulateur utilisé au \chapref{sa} est \nsii~\cite{ns2}; celui employé au \chapref{se} est \nsiii~\cite{ns3}.
+%\nsiii est une version plus récente de \nsii.
+%Basé sur les mêmes mécanismes, le logiciel a été complètement réécrit, et les langages utilisés pour définir les scénarios de simulation ne sont plus les mêmes (Tcl pour \nsii, \cpp (éventuellement Python) pour \nsiii).
+%Ce changement radical a pour conséquence l'absence de compatibilité descendante avec \nsii.
 
-Il semble nécessaire d'expliquer ici en quelques mots le choix des logiciels utilisés.
-Nous avons commencé à travailler sur \nsii, sans vraiment étudier d'alternative dans un premier temps.
-Cependant les travaux de simulation présentés aux chapitres~\ref{chap:sa} et~\ref{chap:se} n'ont pas été réalisé d'une seule traite, mais avec plusieurs mois d'écart.
-Durant cette période, nous avons pensé abandonner \nsii pour nous tourner vers \nsiii, plus récent, mieux conçu, mieux documenté (bien que moins complet à ce jour, mais cela ne nous a pas porté préjudice pour les simulations réalisées).
+%Il semble nécessaire d'expliquer ici en quelques mots le choix des logiciels utilisés.
+%Nous avons commencé à travailler sur \nsii, sans vraiment étudier d'alternative dans un premier temps.
+%Cependant les travaux de simulation présentés aux chapitres~\ref{chap:sa} et~\ref{chap:se} n'ont pas été réalisé d'une seule traite, mais avec plusieurs mois d'écart.
+%Durant cette période, nous avons pensé abandonner \nsii pour nous tourner vers \nsiii, plus récent, mieux conçu, mieux documenté (bien que moins complet à ce jour, mais cela ne nous a pas porté préjudice pour les simulations réalisées).
 
-Malheureusement, nous nous sommes heurtés à des problèmes de performances: une instance d'une durée (virtuelle) d'une demi-heure, sous \nsiii, nous a pris une semaine entière à exécuter, sur un ordinateur récent.
-Malgré nos requêtes sur la liste ainsi que sur le canal de discussion associés au simulateur, nous n'avons pas réussi à contourner cet écueil.
-Nous ne savons toujours pas, à la publication de cet ouvrage, si le problème vient d'une erreur introduite avec notre code, ou bien s'il s'avère simplement que \nsiii se prête mal à ce type de scénarios.
-Certaines sources semblent affirmer qu'avec \nsiii, «le passage à l'échelle n'est pas efficace pour les WSN»\,\footnote{«\textit{[\nsiiinxs] does not scale well for WSNs}»~\cite{AAAHN12}}, ce qui tendrait à conforter la seconde hypothèse.
+%Malheureusement, nous nous sommes heurtés à des problèmes de performances: une instance d'une durée (virtuelle) d'une demi-heure, sous \nsiii, nous a pris une semaine entière à exécuter, sur un ordinateur récent.
+%Malgré nos requêtes sur la liste ainsi que sur le canal de discussion associés au simulateur, nous n'avons pas réussi à contourner cet écueil.
+%Nous ne savons toujours pas, à la publication de cet ouvrage, si le problème vient d'une erreur introduite avec notre code, ou bien s'il s'avère simplement que \nsiii se prête mal à ce type de scénarios.
+%Certaines sources semblent affirmer qu'avec \nsiii, «le passage à l'échelle n'est pas efficace pour les WSN»\,\footnote{«\textit{[\nsiiinxs] does not scale well for WSNs}»~\cite{AAAHN12}}, ce qui tendrait à conforter la seconde hypothèse.
 
-Devant la durée très (trop) importante de l'exécution des simulations désirées, nous sommes revenus vers \nsii pour comparer dans ce chapitre l'ensemble des processus de sélection proposés.
+%Devant la durée très (trop) importante de l'exécution des simulations désirées, nous sommes revenus vers \nsii pour comparer dans ce chapitre l'ensemble des processus de sélection proposés.
+
+\pagebreak %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     \subsection{Résultats numériques}
 
         \subsubsection{Consommation énergétique}
 
-Une première série d'instances a été réalisée en attribuant une quantité d'énergie «illimitée» aux capteurs au regard de la durée virtuelle de la simulation.
+Une première série d'instances a été exécutée en attribuant une quantité d'énergie «illimitée» aux capteurs au regard de la durée virtuelle de la simulation.
 Ceci permet d'observer la quantité d'énergie moyenne consommée par les nœuds lorsque chaque méthode de sélection des \cns est déployée dans le cluster.
 La \figref{sd:fig:cons-inf} présente les valeurs obtenues.
-\begin{figure}[!ht]
+On peut y observer une consommation quasiment identique entre les méthodes \idstat et \idrand, puisque le renouvellement en soi, à l'aide de la sélection pseudo-aléatoire des \cns, ne représente pratiquement aucun cout additionnel.
+Les méthodes \ideres et \iddemx consomment toutes deux davantage, à cause des mécanismes mis en place pour récolter les valeurs de l'énergie résiduels des nœuds, et pour assurer la sécurité du processus.
+\begin{figure}[!hb]
     \centering
     \includegraphics{\chapterfig/plot_sd_consumptionXtime.pdf}
     \caption[Moyenne de l'énergie consommée par les capteurs au cours du temps]{Moyenne de l'énergie consommée par les capteurs au cours du temps (énergie initiale: $\infty$)}\label{sd:fig:cons-inf}
 \end{figure}
-On peut y observer une consommation quasiment identique entre les méthodes \idstat et \idrand, puisque le renouvellement en soi, à l'aide de la sélection pseudo-aléatoire des \cns, ne représente pratiquement aucun cout additionnel.
-Les méthodes \ideres et \iddemx consomment toutes deux davantage, à cause des mécanismes mis en place pour récolter les valeurs de l'énergie résiduels des nœuds, et pour assurer la sécurité du processus.
 
 La méthode \iddemx est plus couteuse au départ, ce qui est parfaitement visible en agrandissant la vue sur l'origine du repère comme le fait la \figref{sd:fig:cons-inf-zoom}.
-\begin{figure}[!ht]
+\begin{figure}[p]
     \centering
     \includegraphics{\chapterfig/plot_sd_consumptionXtime_zoom10.pdf}
     \caption[Moyenne de l'énergie consommée par les capteurs au cours du temps: agrandissement de la vue près de l'origine du repère]{Moyenne de l'énergie consommée par les capteurs au cours du temps: agrandissement de la vue près de l'origine du repère (énergie initiale: $\infty$)}\label{sd:fig:cons-inf-zoom}
@@ -115,16 +117,17 @@ En revanche, on observe une inversion entre \ideres et \iddemx peu avant 40~minu
 \iddems, quant à elle, est à terme la méthode la plus économe en énergie: ceci met en avant le poids des \cns dans la consommation totale en énergie du cluster.
 Moins on utilise de \cns, moins l'énergie consommée est importante (comme indiqué déjà par les résultats du \chapref{sa}, en \sref{sa:sec:resultats}).
 
+\begin{figure}[p]
+    \centering
+    \includegraphics{\chapterfig/plot_sd_stddevXtime.pdf}
+    \caption[Écart-type moyen pour l'énergie consommée par les capteurs au cours du temps]{Écart-type moyen pour l'énergie consommée par les capteurs au cours du temps (énergie initiale: $\infty$)}\label{sd:fig:stddev-inf}
+\end{figure}
+\pagebreak %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Les méthodes qui prennent en compte l'énergie résiduelle (\ideres, \iddemx) sont donc, pour un nombre de \cns équivalent, plus gourmandes en énergie; mais il est aussi intéressant d'étudier la répartition de la charge qu'elles apportent au cluster.
 La \figref{sd:fig:stddev-inf} présente les écarts-types obtenus, au court des mêmes simulations, pour les cinq~scénarios.
 On peut y observer que pour \idstat se crée un déséquilibre croissant (de façon linéaire): puisque les \cns sont toujours les mêmes, ce sont toujours les mêmes capteurs qui consomment l'énergie, creusent l'écart, et diminuent l'équilibre du réseau.
 Pour la méthode \idrand, l'écart monte rapidement, mais ralentit et se stabilise peu à peu (la valeur (toujours croissante) en fin de simulation, non apparente sur la figure, est à un peu plus de 6~\joule): la loi des grands nombres fait que (sous réserve de l'utilisation d'un générateur de nombres pseudo-aléatoires bien conçu), lorsque la durée de simulation s'allonge, tous les nœuds sont sélectionnés un nombre de fois approximativement identique.
 Mais cet écart demeure très important à côté de celui de \ideres, \iddemx et \iddems, très proche de zéro: ces méthodes assurent une très bonne répartition de la consommation en énergie dans le cluster, ce qui, pour rappel, constituait leur objectif initial.
-\begin{figure}[!ht]
-    \centering
-    \includegraphics{\chapterfig/plot_sd_stddevXtime.pdf}
-    \caption[Écart-type moyen pour l'énergie consommée par les capteurs au cours du temps]{Écart-type moyen pour l'énergie consommée par les capteurs au cours du temps (énergie initiale: $\infty$)}\label{sd:fig:stddev-inf}
-\end{figure}
 
         \subsubsection{Durée de vie du réseau}
 Une deuxième et une troisième série d'instances ont été réalisées pour analyser la durée de vie du réseau ainsi que le taux de détection de l'attaque.
@@ -133,7 +136,7 @@ Son évolution a été observée au cours du temps, dans un cluster doté d'une 
 Ce montant d'énergie est suffisamment bas pour observer l'arrêt de la plupart des nœuds au cours de l'heure virtuelle simulée.
 
 La \figref{sd:fig:nbnodes-10J} présente ainsi le nombre de nœuds encore en activité en fonction du temps, lorsqu'une énergie de 10~\joule a initialement été affectée aux capteurs.
-\begin{figure}[!ht]
+\begin{figure}[!b]
     \centering
     \includegraphics{\chapterfig/plot_sd_nbnodesXtime_10J.pdf}
     \caption{Nombre de nœuds en activité au cours du temps pour un montant d'énergie initiale de 10~\joule}\label{sd:fig:nbnodes-10J}
@@ -158,28 +161,29 @@ Et surtout, ce premier arrêt est très rapidement suivi par celui des autres ca
 
 On peut observer que de ces méthodes basées sur l'énergie résiduelle, \iddems est la plus efficace ici (puisqu'elle met en jeu moins de \cns), tandis que \ideres se classe deuxième et \iddemx dernière, pénalisée par l'énergie consommée au cours de sa période initiale.
 Pourtant l'écart creusé par cette période initiale peut être rattrapé.
-C'est ce que montre la \figref{sd:fig:nbnodes-20J}, qui reprend les mêmes scénarios, mais développés sur la consommation des 20~\joule (au lieu de 10~\joule) initialement attribués au capteurs: \iddemx et \ideres sont quasiment a égalité dans ce cas.
-On retrouve un comportement à peu près identique pour \idstat et \idrand par rapport à la \figref{sd:fig:nbnodes-10J}, mais bien évidemment avec une durée d'épuisement des nœuds doublée.
-Tout comme \iddemx grignote du terrain sur \ideres, on observe que \iddems gagne en efficacité en comparaison de \idrand: avec 10~\joule d'énergie initiale, les nœuds s'épuisent d'un coup pour \iddems peu après 20~minutes, alors qu'il reste près de la moitié des nœuds pour la méthode \idrand au même instant.
-Tandis qu'avec 20~\joule d'énergie initiale, l'écart créé par la période initiale de \iddems a été en partie rattrapé, et lorsque le nombre de nœuds chute peu avant les 50~minutes de simulation, près de trois quarts des capteurs sont épuisés avec \idrand.
-Avec une quantité plus élevée d'énergie initiale, le nombre inférieur de \cns ferait rapidement la différence en faveur de la méthode \iddems.
-\begin{figure}[!ht]
+C'est ce que montre la \figref{sd:fig:nbnodes-20J},
+\begin{figure}[!t]
     \centering
     \includegraphics{\chapterfig/plot_sd_nbnodesXtime_20J.pdf}
     \caption{Nombre de nœuds en activité au cours du temps pour un montant d'énergie initiale de 20~\joule}\label{sd:fig:nbnodes-20J}
 \end{figure}
+qui reprend les mêmes scénarios, mais développés sur la consommation des 20~\joule (au lieu de 10~\joule) initialement attribués au capteurs: \iddemx et \ideres sont quasiment a égalité dans ce cas.
+On retrouve un comportement à peu près identique pour \idstat et \idrand par rapport à la \figref{sd:fig:nbnodes-10J}, mais bien évidemment avec une durée d'épuisement des nœuds doublée.
+Tout comme \iddemx grignote du terrain sur \ideres, on observe que \iddems gagne en efficacité en comparaison de \idrand: avec 10~\joule d'énergie initiale, les nœuds s'épuisent d'un coup pour \iddems peu après 20~minutes, alors qu'il reste près de la moitié des nœuds pour la méthode \idrand au même instant.
+Tandis qu'avec 20~\joule d'énergie initiale, l'écart créé par la période initiale de \iddems a été en partie rattrapé, et lorsque le nombre de nœuds chute peu avant les 50~minutes de simulation, près de trois quarts des capteurs sont épuisés avec \idrand.
+Avec une quantité plus élevée d'énergie initiale, le nombre inférieur de \cns ferait rapidement la différence en faveur de la méthode \iddems.
 
         \subsubsection{Taux de détection}
 Le nombre de nœuds en mesure de détecter l'attaque du nœud compromis est directement lié au nombre de nœuds encore en activité dans le réseau, puisque les capteurs ayant épuisé leur batterie n'ont plus aucune chance de mener à bien l'opération de surveillance.
 À titre indicatif, la \figref{sd:fig:detec-one-10J} représente le taux de détection à chaque phase (de 10~secondes), sur une seule instance (pas de moyenne, donc), pour chaque méthode de sélection, l'énergie initiale assignée aux capteurs étant de 10~\joule.
-\begin{figure}[!ht]
+\begin{figure}[p]
     \centering
     \includegraphics{\chapterfig/plot_sd_detectionXtime-single_10J.pdf}
     \caption[Taux de détection au cours du temps (énergie initiale: 10~\joule; valeurs sur une seule instance)]{Taux de détection, pour chaque processus de sélection, au cours du temps (énergie initiale: 10~\joule; valeurs sur une seule instance)}\label{sd:fig:detec-one-10J}
 \end{figure}
 En dehors d'un intérêt artistique certain, ces courbes permettent d'observer les extremums atteints, mais sont très peu lisibles.
 La \figref{sd:fig:detec-min-10J} reprend donc ces valeurs, lissées une première fois en calculant la moyenne du nombre d'attaques détectées par les différentes instances (10~par scénario), puis une seconde fois sur une séquence d'une minutes (donc 6~phases de 10~secondes).
-\begin{figure}[!b]
+\begin{figure}[p]
     \centering
     \includegraphics{\chapterfig/plot_sd_detectionXtime-minute_10J.pdf}
     \caption[Taux de détection au cours du temps (énergie initiale: 10~\joule)]{Taux de détection, pour chaque processus de sélection, au cours du temps (énergie initiale: 10~\joule; valeurs lissées sur une durée d'une minute)}\label{sd:fig:detec-min-10J}
@@ -194,7 +198,7 @@ Il est à noter que la position du nœud compromis a une influence directe sur l
 Suivant le nombre de voisins directs qu'il possède, ce nœud a plus ou moins de chances d'être détecté.
 Pour toutes les simulations réalisées dans cette partie, le nœud compromis occupe la position indiquée sur la \figref{sd:fig:neighbors}, et possède (en dehors du \ch) un total de 61~voisins directs, qui sont autant de \cns en puissance capables de détecter l'attaque\,\footnote{Le modèle de couche physique utilisé pour les simulations ne comporte pas de composante aléatoire: hors collisions, soit deux nœuds sont à portée et reçoivent tous leurs messages sans pertes dues à l'affaiblissement, soit l'échange est systématiquement impossible.}.
 Toutefois, «surveillance» n'est pas systématiquement égale à «détection», et un \cn à portée peut échouer à détecter l'attaque (s'il manque trop de paquets à cause des collisions, par exemple).
-\begin{figure}[!ht]
+\begin{figure}[p]
     \centering
     \includegraphics[width=6.5cm]{\chapterfig/WSN_neighbors.pdf}
     \caption[Schéma du cluster représentant la position des 61~voisins directs du nœud compromis]{Schéma du cluster représentant la position des soixante-et-un voisins directs (en bleu) du nœud compromis (en jaune) tels que définis dans les simulations réalisées}\label{sd:fig:neighbors}
@@ -254,8 +258,12 @@ Elle est très faible; mais il ne faut pas oublier que «surveillance» n'est pa
 
 La \figref{sd:fig:detec-min-20J} présente les mêmes résultats, pour une énergie initiale de 20~\joule assignée aux capteurs.
 Les résultats, de manière prévisible, montrent que la durée de surveillance a à peu près doublé pour chaque méthode, avec une augmentation des performances pour \iddemx et \iddems (par rapport à la figure précédente), qui ont eu l'occasion de «rattraper» davantage l'écart creusé sur la consommation en énergie lors de leur période initiale.
-\begin{figure}[!b]
+Avec encore un peu plus d'énergie allouée au début de la simulation, \iddemx permettrait au capteurs de maintenir la détection plus longtemps que \ideres, et à terme tendrait vers une efficacité presque équivalente à \idrand, sans la rattraper toutefois en raison d'un volume de données de contrôle légèrement supérieur.
+\begin{figure}[p]
     \centering
     \includegraphics{\chapterfig/plot_sd_detectionXtime-minute_20J.pdf}
     \caption[Taux de détection au cours du temps (énergie initiale: 20~\joule)]{Taux de détection, pour chaque processus de sélection, au cours du temps (énergie initiale: 20~\joule; valeurs lissées sur une durée d'une minute)}\label{sd:fig:detec-min-20J}
 \end{figure}
+
+Au vu des caractéristiques obtenues pour chaque méthode, nous pouvons à présent résumer leurs avantages et leurs inconvénients, et en déduire des recommandations d'usage selon la configuration du réseau déployé.
+\pagebreak %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
