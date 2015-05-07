@@ -21,21 +21,21 @@ Ces attaques peuvent prendre de nombreuses formes, selon qu'elles viennent de l'
 Pour chacune de ces formes connues, des solutions ont été proposées dans la littérature: changements de fréquence pour échapper au brouillage du canal, utilisation de «tunnels» virtuels, systèmes de détection d'intrusion, \etc.
 Il est cependant essentiel de continuer à trouver de nouveaux mécanismes, ou d'améliorer ceux qui existent, afin de les rendre plus efficaces ou plus économes en ressources, tant pour obtenir des réseaux plus performants que pour rester à la hauteur face à de nouveaux types d'attaques.
 
-\section{Outils présentés}
+\section{Méthodes proposées}
 
     \subsection{Des mécanismes\dots}
-Les travaux présentés dans cet ouvrage s'intéressent particulièrement à une solution simple permettant de détecter des capteurs compromis au sein du réseau.
-Cette méthode consiste à mettre en œuvre une surveillance du trafic échangé entre les nœuds d'un même cluster du réseau.
+Les travaux présentés dans cet ouvrage s'intéressent particulièrement à des solutions permettant de détecter des capteurs compromis au sein du réseau.
+Ces méthodes consistent à mettre en œuvre une surveillance du trafic échangé entre les nœuds d'un même cluster du réseau.
 Cette surveillance est réalisée par une sélection de capteurs du cluster, que l'on appelle «\cnst», et qui appliquent un ensemble de règles sur le trafic relevé dans leur voisinage.
 Si un capteur vient à enfreindre ces règles à de multiples reprises, par exemple en dépassant largement le seuil «autorisé» pour le débit d'envoi des paquets, alors le cluster head en est notifié, et peut être amené à exclure (virtuellement) le suspect du réseau.
 
-Sur cette méthode sont basés à la fois de nouveaux mécanismes et des modèles, tous destinés à améliorer le renouvellement du processus de sélection des \cnst (en particulier), et par là les capacités du réseau à contenir les attaques par déni de service (de façon plus générale).
+Sur ces méthodes sont basés à la fois de nouveaux mécanismes et des modèles, tous destinés à améliorer le renouvellement du processus de sélection des \cnst (en particulier), et par là les capacités du réseau à contenir les attaques par déni de service (de façon plus générale).
 
-Les trois mécanismes sont basés sur une hypothèse simple: attribuer le rôle de \cnt à un nœud va automatiquement le pousser à consommer davantage d'énergie, et il est donc impératif de répartir le surplus engendré par cette charge entre les différents capteurs du cluster pour obtenir un équilibre correct, en termes de consommation d'énergie et donc de durée de vie du réseau.
+Les trois mécanismes sont basés sur l'hypothèse suivante: attribuer le rôle de \cnt à un nœud va automatiquement le pousser à consommer davantage d'énergie, et il est donc impératif de répartir le surplus engendré par cette charge entre les différents capteurs du cluster pour obtenir un équilibre correct, en termes de consommation d'énergie et donc de durée de vie du réseau.
 Le risque, dans le cas contraire, est de voir un sous-ensemble restreint des capteurs tomber hors service longtemps avant tous les autres, laissant du même coup le cluster sans surveillance.
 
 Peu de travaux existent à propos de la façon précise dont peuvent être désignées ces sentinelles.
-La première contribution consiste donc à introduire un mécanisme de renouvellement très simple à mettre en œuvre: une sélection aléatoire des \cnst qui peut être implémentée par la station de base du réseau (au détriment de l'aspect décentralisé du réseau), par les cluster heads, ou encore par les capteurs eux-mêmes, capables de s'auto-désigner aléatoirement.
+La première contribution consiste donc à introduire un mécanisme de renouvellement simple à mettre en œuvre: une sélection aléatoire des \cnst qui peut être implémentée par la station de base du réseau (au détriment de l'aspect décentralisé du réseau), par les cluster heads, ou encore par les capteurs eux-mêmes, capables de s'auto-désigner aléatoirement.
 Cette méthode assure une bonne rotation des \cnst, et le processus aléatoire empêche un nœud compromis de l'utiliser à son avantage pour être désigné à chaque tour (et réduire ainsi les risques de détection de son attaque, ou bien pour «dénoncer» à tort des nœuds légitimes).
 Elle permet surtout de répartir le surplus de consommation en énergie que ne prendrait pas en compte une implémentation «statique» du système de surveillance, comme l'attestent les résultats numériques obtenus par simulation à l'aide du logiciel \textsf{ns-2}.
 
@@ -48,8 +48,8 @@ Mais il reste un second problème: un capteur compromis peut cette fois-ci jouer
 Pour parer cette faille potentielle, chaque \cnt est entouré d'un ou de plusieurs «\vnst», chargés de l'interroger régulièrement sur son énergie résiduelle et de comparer ses réponses avec un modèle théorique de consommation, le tout afin de détecter les tentatives de fraude.
 Ce second rôle vient charger la méthode en complexité d'implémentation, ainsi qu'en volume de données de contrôle nécessaire: la consommation en énergie est mieux répartie en effet, cependant elle est aussi plus élevée.
 
-Aussi avons-nous été amené à proposer, dans une troisième contribution, une dernière méthode de renouvellement, toujours orientée à la fois vers l'équilibre de la consommation et vers la sécurité du processus.
-Ce troisième mécanisme est un processus d'élection démocratique, au cours duquel ce sont les nœuds du cluster qui votent auprès du cluster head afin de déterminer quels seront les \cnst.
+Aussi avons-nous été amenés à apporter une troisième contribution, toujours orientée à la fois vers l'équilibre de la consommation et vers la sécurité du processus.
+Ce troisième mécanisme de renouvellement est un processus d'élection démocratique, au cours duquel ce sont les nœuds du cluster qui votent auprès de leur cluster head afin de déterminer quels seront les \cnst.
 Tous les capteurs votent pour la première sélection, qui survient à la suite d'une période initiale où tous demeurent à l'écoute du trafic.
 Puis ce sont les \cnst d'une phase donnée qui votent pour leurs successeurs, au vu des conditions de trafic observées pendant leur «mandat».
 Cette méthode permet de réutiliser les observations réalisées par les \cnst (dans le but de détecter un nœud compromis) lors du renouvellement de la sélection, sans surcharger le processus avec un nouveau type de nœuds.
