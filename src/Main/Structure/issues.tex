@@ -98,7 +98,7 @@ En suivant cette convention, l'unique $0$-cluster est alors le réseau tout enti
 Lorsque nous parlons simplement de \textit{clusters}, il faudra comprendre $1$-clusters; autrement dit, des clusters issus d'une partition simple, sans degré supplémentaire de hiérarchie.
 
 De même, on désignera par $k$-\ch (ou bien par $k$-\CH) les \chs de chacun des $k$-clusters du réseau.
-Le rôle de $0$-cluster pourra alors être attribué à la \sdb.
+Le rôle de $0$-\CH pourra alors être attribué à la \sdb.
 Chaque $k$-\CH reçoit des données (provenant soit de nœuds normaux si $k$ est le dernier degré de la hiérarchie constituée, soit de ($k+1$)-\CH), les agrège et les transmet au ($k-1$)-\CH auquel il est rattaché.
 %2}}}
 
@@ -108,7 +108,7 @@ L'un des algorithmes de \idx{clusterisation} les plus simples et les plus couram
 Il s'agit d'un algorithme dynamique (il effectue de nouvelles clusterisations\index{clusterisation} du réseau régulièrement dans le temps) qui, par la formation de clusters, met en place une solution de routage simple mais efficace des paquets dans le réseau.
 
 Voici le fonctionnement détaillé de cet algorithme.
-Soit $P$ le pourcentage moyen de clusters désirés pour le réseau à un instant quelconque $t$.
+Soit $P$ le pourcentage moyen de \CHs désirés parmi le total des nœuds dans le réseau à un instant quelconque $t$.
 \leach est découpé (dans la durée) en cycles, chacun constitué de $\frac{1}{P}$~rondes.
 Chaque ronde $r$ est organisée de la façon suivante:
 \begin{enumerate}
@@ -124,9 +124,9 @@ Chaque ronde $r$ est organisée de la façon suivante:
         Chaque nœud choisit un nombre pseudo-aléatoire $0 \le x_{i}\le 1$.
         Si $x_{i} \le S(i)$, alors $i$ s'auto-désigne comme \CH pour la ronde en cours.
         Il est à noter que le calcul de $S(i)$ est réalisé de telle façon que chaque nœud devienne \ch une fois et une fois seulement au cours de chaque cycle de $\frac{1}{P}$~rondes: le taux de probabilité d'auto-désignation $S(i)$ est égal à $1$ lorsque la fin du cycle est atteinte (autrement dit, lorsque $r = \frac{1}{P}-1$).
-    \item Les \chs auto-désignés informent leurs nœuds voisins de leur changement de statut à l'aide de messages en diffusion générale (\textit{broadcast}).
+    \item Les \CHs auto-désignés informent leurs nœuds voisins de leur changement de statut à l'aide de messages en diffusion générale (\textit{broadcast}).
         Tous ces messages sont envoyés en utilisant la même puissance de transmission (valeur fixe et prédéterminée lors de l'implémentation).
-        Pour limiter les collisions, il est fait usage de la méthode \textit{Carrier Sense Multiple Access} (\csma) au niveau de la couche MAC.
+        Pour limiter les collisions, il est fait usage sur la couche MAC de la méthode \textit{Carrier Sense Multiple Access} (\csma).
     \item Les autres nœuds, qui ne se sont pas désignés en tant que \chs pour la ronde en cours, choisissent de se joindre au cluster du \CH dont ils perçoivent le signal avec l'intensité la plus élevée, \cad le \CH le plus proche en termes de puissance du signal électromagnétique.
         Chaque nœud prévient le \ch qu'il décide de rejoindre en lui envoyant un message.
         La méthode \csma est là encore appliquée.
@@ -138,7 +138,7 @@ Chaque ronde $r$ est organisée de la façon suivante:
         Les capteurs «normaux» effectuent leur mission (ils réalisent des mesures sur leur environnement), et envoient leurs résultats au \ch lorsque c'est à leur tour de le faire.
         Quand ce n'est pas à leur tour de communiquer, ces nœuds mettent leur équipement radio en veille afin d'économiser leur énergie.
         Les collisions entre les transmissions des nœuds de différents clusters sont évitées grâce à la méthode appelée \textit{Code Division Multiple Access} (\cdma).
-    \item Au fur et à mesure qu'ils reçoivent les données, les \chs agrègent\idx{agrégation}, et éventuellement compressent\idx{compression} ces dernières.
+    \item Au fur et à mesure qu'ils reçoivent les données, les \chs agrègent\index{agrégation}, et éventuellement compressent\index{compression} ces dernières.
         Ils les envoient ensuite à la \sdb, soit au cours d'une unique transmission directe, soit en faisant relayer les paquets par d'autres \chs.
     \item Les étapes~5 et~6 sont répétées jusqu'à la fin de la ronde.
 \end{enumerate}
@@ -170,7 +170,7 @@ Mais on trouve également de nombreux autres protocoles~\cite{AY07,DQWH13}.
 Certains d'entre eux prennent en compte deux à trois paramètres, comme l'énergie résiduelle des nœuds, leur distance aux \chs potentiels et/ou le nombre de voisins de ces derniers: c'est le cas du protocole \heed~\cite{YF04}, assez souvent utilisé, ou du protocole MPC~\cite{KTAA12}, plus récent et moins répandu, se basant sur les k-moyennes.
 Un quatrième élément, la confiance portée au nœud, est même utilisé parfois pour réaliser une sélection plus sure des \CH~\cite{KMSL09}.
 
-Certains protocoles ont des buts plus précis, comme \ffuca~\cite{FL11,FMMMI12} qui repose sur l'exploitation de propriétés ultramétriques dans le réseau afin de créer une répartition «idéale» des nœuds dans les clusters en fonction de leur distance aux \CH; ou bien comme VSR~\cite{TV08}, créé à l'intention des \idx{MANET}, qui à l'aide d'une structure virtuelle détermine un routage proactif pour l'intérieur des clusters (ou les nœuds émettent au \ch en plusieurs sauts) et à la demande sur l'épine dorsale du réseau qui relie entre eux les \CH\,\footnote{Pour conserver la lisibilité du paragraphe, le développement des sigles HEED, FFUCA, MPC et VSR n'est pas donné ici. Il est néanmoins disponible \hyperref[sigles]{en fin d'ouvrage}.}.
+Certains protocoles ont des buts plus précis, comme \ffuca~\cite{FL11,FMMMI12} qui repose sur l'exploitation de propriétés ultramétriques dans le réseau afin de créer une répartition «idéale» des nœuds dans les clusters en fonction de leur distance aux \CH; ou bien comme VSR~\cite{TV08}, créé à l'intention des \idx{MANET}, qui à l'aide d'une structure virtuelle détermine un routage proactif pour l'intérieur des clusters (où les nœuds émettent au \ch en plusieurs sauts) et à la demande sur l'épine dorsale du réseau qui relie entre eux les \CH\,\footnote{Pour conserver la lisibilité du paragraphe, le développement des sigles HEED, FFUCA, MPC et VSR n'est pas donné ici. Il est néanmoins disponible \hyperref[sigles]{en fin d'ouvrage}.}.
 \nomenclature{LEACH}{\textit{Low-Energy Adaptive Clustering Hierarchy}}
 \nomenclature{HEED}{\textit{Hybrid, Energy-Efficient Distributed clustering}}
 \nomenclature{FFUCA}{\textit{Fast and Flexible Unsupervised Clustering Algorithm }}
@@ -195,7 +195,7 @@ Lorsque ces nœuds sont (portés par) des véhicules, on parle même de \vanet (
 Ces réseaux ont leurs propres problématiques~\cite{DYK12}, qui sont souvent assez proches de celles des \rcsfs.
 Certaines solutions développées pour les \manet, des mécanismes de sécurité par exemple, peuvent tout à fait être réutilisés dans les \rcs~\cite{BMS13}.
 
-Mais revenons à la \idx{mobilité} en elle-même: elle n'est pas systématique dans les \rcsfs, sont les nœuds sont la plupart du temps statiques ou quasiment statiques.
+Mais revenons à la \idx{mobilité} en elle-même: elle n'est pas systématique dans les \rcsfs, dont les nœuds sont la plupart du temps statiques ou quasiment statiques.
 Il arrive néanmoins que des réseaux soit constitués, en intégralité ou bien en partie, par des capteurs mobiles.
 Le fait de se retrouver dans un environnement où les distances et les vitesses évoluent continuellement rend accessibles de nouvelles applications, mais vient bien sûr compliquer le \idx{routage}, la collecte des données, et même la gestion de la \idx{mobilité} des nœuds (s'ils n'ont pas de pilotes humains par exemple, il faut éviter les collisions~\cite{E-ZCGGK12}).
 Dans le cas de \rcs comportant des nœuds mobiles, le modèle du réseau se verra en général rattaché aux \manet et, bien que ne bénéficiant pas forcément des mêmes ressources, ce sont les mêmes algorithmes de \idx{routage} qui vont être utilisés pour assurer l'acheminement des paquets de bout en bout.
@@ -216,7 +216,7 @@ L'idéal est donc de pouvoir assurer un certain degré de \idx{sureté} et de \r
 La \idx{sureté} d'un système est sa capacité à fonctionner sans erreurs, \cad sans dysfonctionnement dus à une mauvaise conception ou à une mauvaise implémentation des architectures matérielle et logicielle.
 Elle est en principe apportée soit par des tests en amont du déploiement, soit par une modélisation formelle (ou semi-formelle) du système, qui permet d'en évaluer certaines propriétés et de déduire, en fin de compte, si le système mis en place respecte ou non les spécifications établies.
 
-Les tests et simulations sont récurrentes dans la quasi-totalité des travaux de la littérature.
+Les tests et simulations sont récurrents dans la quasi-totalité des travaux de la littérature.
 Ils consistent à implémenter le dispositif étudié, physiquement ou virtuellement, pour étudier son évolution au cours d'une exécution «classique» ou bien soumise à des conditions d'expérimentation particulières.
 Certains travaux ont même pour objet des tests comparatifs sur différentes architectures matérielles de capteurs~\cite{PLP06}, ou encore recensent les différents systèmes de simulation permettant d'expérimenter sur les réseaux de capteurs~\cite{AAAHN12}.
 
@@ -234,7 +234,7 @@ La \resilience d'un système est la capacité de ce système à outrepasser et �
 Autrement dit, un système résilient est capable de poursuivre son fonctionnement avec toujours autant d'efficacité ou presque, même si des pannes matérielles, des erreurs logicielles ou d'autres types d'incidents viennent perturber le système.
 Assurer la \resilience revient donc à anticiper, à prévoir des «plans de secours», des mécanismes de correction et de réparation automatiques.
 
-Concrètement, dans un \rcsfs, elle met en jeu des principes comme la redondance des données stockées et envoyées, des routes de retransmission~\cite{SP10}; elle s'établit sur l'usage de protocoles capables de se mettre à jour lorsque des nœuds disparaissent (épuisement supposé) ou apparaissent (nouveaux arrivants) dans le réseau, de mécanismes de correction d'erreurs…
+Concrètement, dans un \rcsfs, elle met en jeu des principes comme la redondance des données stockées et envoyées, ou des routes de retransmission~\cite{SP10}; elle s'établit sur l'usage de protocoles capables de se mettre à jour lorsque des nœuds disparaissent (épuisement supposé) ou apparaissent (nouveaux arrivants) dans le réseau, de mécanismes de correction d'erreurs…
 La résilience matérielle passe le plus souvent par la redondance des composants, mais n'est que rarement mise en place, pour des raisons de couts, dans les \rcs.
 On préféra en général utiliser quelques capteurs en plus par rapport à la quantité strictement nécessaire pour assurer le service, sans avoir à augmenter le prix de \emph{tous} les capteurs.
 
@@ -248,7 +248,7 @@ Les algorithmes et mécanismes classiques utilisés en \idx{cryptographie} afin 
 Il a fallu adapter ces mécanismes aux capteurs.
 
 D'autres attaques peuvent être menées, non plus pour intercepter des données, mais dans le but de perturber le bon fonctionnement du réseau.
-Ce sont les attaques dites de \textit{\dds}.
+Ce sont les attaques dites par \textit{\dds}.
 Un attaquant, par le biais d'un nœud compromis par exemple, peut ainsi chercher à détourner des flux de données au sein du réseau, à empêcher des paquets de parvenir à destination (en les supprimant), à maximiser le débit du nœud compromis au détriment de celui des autres nœuds, à saturer le canal de transmission pour empêcher les nœuds légitimes de l'utiliser, ou encore à pousser les autres capteurs à l'épuisement de leurs réserves en énergie, \etc.
 Pour rappel, l'objectif des travaux présentés dans cet ouvrage consiste à proposer, modéliser et tester une solution permettant de détecter, puis de réagir aux attaques de ce type, tout en assurant une consommation minimale en ressources pour les capteurs du réseau.
 

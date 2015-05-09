@@ -1,7 +1,7 @@
 % vim: set spelllang=fr foldmethod=marker:
 \lettrineh{P}{uisque} les travaux présentés dans cette thèse portent sur les \rcsfs, il semble indispensable d'introduire tout d'abord les caractéristiques de ces capteurs et des réseaux qu'ils peuvent former.
 Le présent chapitre décrit donc le fonctionnement basique des capteurs, des réseaux, et fournit des exemples d'applications.
-Dans un second temps, ce sont certains des principaux problèmes soulevés par le déploiement des capteurs qui seront brièvement introduits, notamment la nécessité d'adapter les protocoles employés aux capacités des capteurs, les besoins éventuels de partition du réseau pour en obtenir une gestion plus efficace, ou encore des problèmes de mobilité, de sureté, de sécurité, de résilience.
+Dans un second temps, ce sont certains des principaux problèmes soulevés par le déploiement des capteurs qui sont brièvement introduits, notamment la nécessité d'adapter les protocoles employés aux capacités des capteurs, les besoins éventuels de partition du réseau pour en obtenir une gestion plus efficace, ou encore des problèmes de mobilité, de sureté, de sécurité, de résilience.
 
 \section{Réseaux de capteurs sans fil}
 
@@ -174,7 +174,7 @@ Chaque capteur est équipé d'un module radio utilisé alternativement pour éme
 La plupart du temps ces modules sont capables de changer de fréquence de communication, ainsi que de moduler la puissance d'émission utilisée pour les transmissions.
 
 Les protocoles de communication déployés sur cette architecture sont multiples (on parle d'\textit{encapsulation} des données).
-Il faut pouvoir communiquer de pair à pair entre nœuds voisins, tout comme il faut être capable de faire parvenir un message à un nœud éloigner en faisant retransmettre les paquets par des nœuds relais successifs, d'assurer certains services comme le maintien de session, ou de gérer des applications.
+Il faut pouvoir communiquer de pair à pair entre nœuds voisins, tout comme il faut être capable de faire parvenir un message à un nœud éloigné en faisant retransmettre les paquets par des nœuds relais successifs, d'assurer certains services comme le maintien de session, ou de gérer des applications.
 Comme dans la plupart des réseaux informatiques, l'empilement des protocoles reprend donc le modèle \tcpip~\cite{TW10} (schéma concret lui-même issu du modèle théorique \idx{OSI}, de l'anglais \textit{Open Systems Interconnection}), présenté en \figref{st:fig:tcpip}.
 \nomenclature{OSI}{\textit{Open Systems Interconnection}}
 \begin{figure}[H]
@@ -212,13 +212,13 @@ Les principaux standards qui sont employés dans les \rcs sont les piles \ieeee 
 
             \paragraph{La couche physique}
 %{{{2
-Cette couche concerne l'émission et la réception en soi des ondes électromagnétiques, et l'encodage utilisé pour leur faire porter des valeurs numériques (par opposition à un signal analogique)~\cite{TW10}
+Cette couche concerne l'émission et la réception en soi des ondes électromagnétiques, et l'encodage utilisé pour leur faire porter des valeurs numériques (par opposition à un signal analogique)~\cite{TW10}.
 Les réseaux sans fil ont la particularité de ne pas pouvoir restreindre l'envoi d'un paquet vers son seul destinataire: un paquet émis par transmission électromagnétique est reçu par tout nœud voisin (\cad à distance suffisamment faible pour être couvert par la portée d'émission de l'émetteur) qui écoute le canal (donc les plages de fréquences concernées) au moment de la transmission.
 Il est parfois possible de se servir d'une \idx{antenne directionnelle} pour réduire sensiblement les directions dans laquelle est réalisée la diffusion et pour augmenter le ratio de la puissance du signal émis sur l'énergie consommée par l'envoi; mais cet équipement couteux n'est que très rarement utilisé dans les réseaux de capteurs.
 
 Une propriété fréquemment employée en revanche est la capacité à moduler la puissance du signal en fonction des besoins.
 Plus le signal est fort, plus il portera loin (et permettra d'atteindre des nœuds distants).
-Naturellement, l'émission consommera également plus d'énergie
+Naturellement, l'émission consommera également plus d'énergie.
 %2}}}
 
             \paragraph{La couche de liaison de données}\label{st:ssec:mac}
@@ -226,7 +226,7 @@ Naturellement, l'émission consommera également plus d'énergie
 La deuxième couche du modèle fournit les moyens fonctionnels et procéduraux pour le transfert des données entre deux entités du réseau~\cite{TW10}.
 Elle permet aussi, le plus souvent, de détecter et éventuellement corriger certaines erreurs survenues sur la couche physique (en cas de perturbation ou dégradation du signal électromagnétique).
 Elle se décompose en deux sous-couches: la couche de contrôle de la liaison logique (\llc, pour \textit{Logical Link Control} en anglais, «contrôle de la liaison logique») et la couche du contrôle d'accès au support (\mac, pour \textit{Media Access Control}, «contrôle d'accès au support»).
-\llc est la sous-couche haute, utilisée pour fiabiliser la sous-couche \mac, intervient peu dans les \rcs.
+\llc est la sous-couche haute, utilisée pour fiabiliser la sous-couche \mac; elle intervient peu dans les \rcs.
 Le protocole de couche \mac définit la manière dont les différents agents du réseau accèdent au médium de transmission de façon à limiter les collisions, et à garantir un accès le plus souvent équivalent au médium pour tous les nœuds.
 \begin{table}[!ht]
     \caption{Méthodes d'accès au médium de transmission}\label{st:tab:mac}
@@ -241,13 +241,13 @@ Le protocole de couche \mac définit la manière dont les différents agents du 
             \midrule
             \textit{Frequency Division Multiple Access} (\fdma) & Accès multiple par répartition en fréquence & Plusieurs canaux basés sur des fréquences différentes\\
             \midrule
-            \textit{Code division multiple access} (\cdma) & Accès multiple par répartition en code & Étalement du spectre de fréquence\index{etalement@étalement de spectre} utilisé en conjonction avec techniques comme les sauts de fréquences ou la génération de bruit pseudo-aléatoires (avec la même séquence pseudo-aléatoire appliquée au signal côté émetteur comme côté destinataire)\\
+            \textit{Code division multiple access} (\cdma) & Accès multiple par répartition en code & Étalement du spectre de fréquence\index{etalement@étalement de spectre} utilisé en conjonction avec des techniques comme les sauts de fréquences ou la génération de bruit pseudo-aléatoires (avec la même séquence pseudo-aléatoire appliquée au signal côté émetteur comme côté destinataire)\\
             \midrule
             \textit{Time division multiple access} (\tdma) & Accès multiple à répartition dans le temps & Un seul canal dont l'accès est réparti par créneaux dans le temps\\
             \midrule
             \textit{Space division multiple access} (\sdma) & Accès multiple à répartition dans l'espace & Plusieurs canaux spatiaux obtenus à l'aide d'antennes directionnelles. À noter: les antennes directionnelles\index{antenne directionnelle} augmentent sensiblement le cout de production des capteurs.\\
             \midrule
-            \multicolumn{3}{c}{Mode d'accès par paquet}\\
+            \multicolumn{3}{c}{Modes d'accès par paquet}\\
             \midrule
             \textit{Contention based random multiple access methods} & Accès par contention & Contention par le nœud du paquet à envoyer jusqu'à ce que le protocole le lui autorise. Dans cette catégorie se trouve notamment le protocole \csmaca (\textit{Carrier Sense Multiple Access with Collision Avoidance}, accès multiple par écoute du canal avec esquive de collision), très utilisé dans les réseaux sans fil (\ieeee entre autres).\\
             \midrule
@@ -271,13 +271,13 @@ Certains d'entre eux consistent à créer des canaux de transmission distincts, 
 
 De ces modes d'accès sont dérivés de très nombreux protocoles de couche \mac, dont plusieurs ont été conçus spécifiquement pour les \rcs~\cite{YB09}.
 Par exemple, en dehors des standards \ieee, le protocole \smac~\cite{YHE02} fait alterner périodes «actives» et périodes de sommeil aux capteurs afin de préserver leur batterie.
-Les capteurs sont associés dans des groupes (qui ne correspondent pas tout à fait à des clusters) dont tous les membres sont en éveil de manière simultanée, afin de pouvoir communiquer à l'aide d'une version modifiée de \csmaca tel que défini dans le standard \ieeee.
+Les capteurs sont associés dans des groupes (qui ne correspondent pas tout à fait à des clusters) dont tous les membres sont en éveil de manière simultanée, afin de pouvoir communiquer à l'aide d'une version modifiée de \csmaca (par rapport à la version définie dans le standard \ieeee).
 \nomenclature{S-MAC}{\textit{Sensor-MAC}}
 %2}}}
 
             \paragraph{La couche réseau}
 %{{{2
-Cette couche, pour les capteurs sans fil, repose le plus souvent sur le protocole \ip (\textit{Internet Protocol} an anglais), que ce soit en version 4 ou 6 (la version 6 est notamment utilisée avec la pile \slowpan), pour l'adressage, et sur un protocole de routage qui détermine comment les paquets sont retransmis saut après saut dans le réseau~\cite{TW10}.
+Cette couche, pour les capteurs sans fil, repose le plus souvent sur le protocole \ip (\textit{Internet Protocol} en anglais), que ce soit en version 4 ou 6 (la version 6 est notamment utilisée avec la pile \slowpan), pour l'adressage, et sur un protocole de routage qui détermine comment les paquets sont retransmis saut après saut dans le réseau~\cite{TW10}.
 
 Les \rcsfs composent en quelque sorte une sous-famille des réseaux sans fil \adhoc (ou \wanet, de l'anglais \textit{Wireless Ad hoc Network}), et une grande partie des protocoles et algorithmes utilisés proviennent du monde des \wanet.
 Des exemples classiques de ces algorithmes de routage incluent \aodv (\textit{Ad hoc On-Demand Distance Vector Routing})~\cite{aodv} ou son évolution \dsr~\cite{dsr} (\textit{Dynamic Source Routing}), \olsr~\cite{olsr} (\textit{Optimized Link State Routing Protocol}) ou ses évolutions \dsdv (\textit{Destination-Sequenced Distance Vector routing}) et \batman (\textit{Better Approach To Mobile Adhoc Networking}), \etc.
@@ -302,7 +302,7 @@ En raison des données de contrôle que ces protocoles impliquent, ils ne sont p
 %{{{2
 La dernière couche gère les échanges applicatifs entre les différents agents du réseau, et encapsule les données utiles au format désiré pour leur traitement final~\cite{TW10}.
 Il s'agit de la couche la plus haut niveau  du modèle.
-Elle assure un service propre à l'application déployée, et les protocoles déployés à ce niveau dépendent donc totalement de l'objectif final du réseau, il n'y a donc pas de standard propre aux \rcs.
+Elle assure un service propre à l'application déployée, et les protocoles déployés à ce niveau dépendent totalement de l'objectif final du réseau, il n'y a donc pas de standard propre aux \rcs.
 %2}}}
 %1}}}
 
