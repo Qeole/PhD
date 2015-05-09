@@ -4,8 +4,8 @@
 
     \subsubsection{Différents systèmes de détection d'intrusion}
 %{{{2
-La détection des attaques de \dds passe par la mise en place d'un système spécifique, apte à collecter des indices permettant de déterminer si une attaque a lieu et, si possible, quelle en est l'origine.
-On parle de «\idss», ou \IDS pour \textit{Intrusion Detection System}.
+La détection des attaques par \dds passe par la mise en place d'un système spécifique, apte à collecter des indices permettant de déterminer si une attaque a lieu et, si possible, quelle en est l'origine.
+On parle de «\ids», ou \IDS pour \textit{Intrusion Detection System}.
 Pour être précis, il convient de relever que ces systèmes sont utilisés pour la détection de tous types d'attaques, y compris lorsqu'il ne s'agit pas de \dds.
 Les usages et les spécifications des \IDS sont donc multiples: la \figref{ea:fig:idsmap} résume les différentes catégories existantes, que nous allons brièvement décrire.
 Il existe différentes façon de les distinguer.
@@ -22,7 +22,7 @@ Un \ids peut se concentrer sur les attaques provenant de l'\textbf{extérieur} d
         \paragraph{Selon l'objet de la surveillance}\label{ea:sss:hids}
 Un \IDS peut avoir pour tâche de surveiller l'\textbf{activité du réseau}, en analysant le trafic: le nombre de paquets transmis, leur origine ou leur destination, leur contenu, le taux de succès des transmissions sont autant d'indices à collecter pour déterminer si le réseau fonctionne dans des conditions normales.
 
-En parallèle, d'autres systèmes peuvent être orientés vers la \textbf{sécurité de l'hôte}\index{securité@sécurité!sécurité système} sur lequel ils sont exécuté.
+En parallèle, d'autres systèmes peuvent être orientés vers la \textbf{sécurité de l'hôte}\index{securité@sécurité!sécurité système} sur lequel ils sont exécutés.
 Leur but est de détecter d'éventuelles tentatives de compromission de la machine.
 Les opérations menées à cette fin peuvent comprendre:
 \begin{itemize}
@@ -34,14 +34,14 @@ On parle en anglais de NIDS\index{système de détection d'intrusion!NIDS} (\tex
 De nombreux \IDS cumulent à la fois des mécanismes de surveillance du réseau et du comportement de leurs voisins, et une surveillance des évènements système survenant sur leur hôte~\cite{BMS13}.
 
         \paragraph{Selon le type d'intrusion à détecter}
-Les \IDS sont utilisés pour lutter contre tous types d'«intrusions» (ou d'attaques dans le sens plus général), pas seulement contre le \dds, bien que ce soit le point qui nous préoccupe le plus dans cette thèse~\cite{BMS13}.
+Les \IDS sont utilisés pour lutter contre tous types d'«intrusions» (ou d'attaques dans le sens plus général), pas seulement contre le \dds~\cite{BMS13}, bien que ce soit le point qui nous préoccupe le plus dans cet ouvrage.
 Ainsi ils peuvent être utilisés afin de détecter:
 \begin{itemize}
-    \item des \textbf{tentatives d'accès au réseau} de la part d'un attaquant externe (qui chercherait à passer par exemple par la compromission d'un nœud ou par l'obtention de matériel cryptographique\index{cryptographie}); cette étape n'est souvent qu'un prélude à d'autres attaques (de \dds notamment);
-    \item un \textbf{accès à des ressources non autorisées}, lorsque qu'un capteur tente par exemple de procéder à certaines opérations dans un cluster qui n'est pas le sien;
+    \item des \textbf{tentatives d'accès au réseau} de la part d'un attaquant externe (qui chercherait à passer par exemple par la compromission d'un nœud ou par l'obtention de matériel cryptographique\index{cryptographie}); cette étape n'est souvent qu'un prélude à d'autres attaques (par \dds notamment);
+    \item un \textbf{accès à des ressources non autorisées}, lorsqu'un capteur tente par exemple de procéder à certaines opérations dans un cluster qui n'est pas le sien;
     \item les \textbf{fuites de données}, qui peuvent être difficiles à détecter si l'attaque est passive (simple écoute des données circulant sur le réseau), mais peuvent être identifiées lors de l'extraction de ces données vers l'extérieur du réseau;
     \item les \textbf{comportements cupides} provoquant le blocage des ressources, par accaparement\index{comportement cupide!accaparement};
-    \item les autres attaques de service, \cad les \textbf{comportements destructeurs}, visant à nuire au fonctionnement du réseau par l'anéantissement des ressources, qu'elles soient virtuelles (mise hors service des transmissions) ou bien physiques (épuisement de la batterie des capteurs).
+    \item les autres attaques par \dds, \cad les \textbf{comportements destructeurs}, visant à nuire au fonctionnement du réseau par l'anéantissement des ressources, qu'elles soient virtuelles (mise hors service des transmissions) ou bien physiques (épuisement de la batterie des capteurs).
 \end{itemize}
 
         \paragraph{Selon les méthodes employées pour la détection}
@@ -52,18 +52,18 @@ Ces catégories, et les principales méthodes qu'elles regroupent, sont détaill
 Si de nombreux \IDS ne se préoccupent pas de savoir quelle est la configuration exacte du réseau, et sont élaborés sur des architectures «plates», \textbf{sur un seul niveau}, d'autres en revanche sont spécifiquement construits avec l'idée de tirer profit d'une \textbf{architecture clusterisée}\index{clusterisation!architecture clusterisée}.
 La partition du réseau en clusters va de fait permettre la mise en place d'algorithmes différents, le plus souvent distribués au sein des clusters~\cite{SJ11}.
 
-Il est également intéressant de noter que la clusterisation\index{clusterisation} en soi d'un réseau est un mécanisme efficace pour limiter la portée de la plupart des attaques de \dds, dont les dommages seront en principe circonscrit au cluster dans lequel elles sont menées.
-Une exception concerne toutefois les attaques qui sont menées avec succès contre les \ch (notamment lorsque celui-ci se voit compromis), puisque ce peut être alors le cluster entier qui se retrouve hors service.
+Il est également intéressant de noter que la clusterisation\index{clusterisation} en soi d'un réseau est un mécanisme efficace pour limiter la portée de la plupart des attaques de \dds, dont les dommages seront en principe circonscrits au cluster dans lequel elles sont menées.
+Une exception concerne toutefois les attaques qui sont menées avec succès contre un \ch (notamment lorsque celui-ci se voit compromis), puisque ce peut être alors le cluster entier qui se retrouve hors service.
 
         \paragraph{Selon la \idx{distribution} des calculs}
 La détection passe par la collecte puis le traitement d'indices sur le fonctionnement des nœuds ou du réseau global~\cite{BMS13}.
-Collecte comme traitement peuvent être réalisés par différenties entités ou associations d'entités, à savoir:
+Collecte comme traitement peuvent être réalisés par différentes entités ou associations d'entités, à savoir:
 \begin{itemize}
     \item le traitement, les calculs peuvent être \textbf{centralisés} et réalisés seulement par la \sdb, à laquelle les capteurs font remonter les informations brutes relevées sur le fonctionnement du réseau. Dans certains cas extrêmes, même la collecte d'indices n'est réalisée que par la \sdb;
     \item chaque capteur peut implémenter son propre \ids: «\textbf{chacun pour soi}», quitte à garder pour lui ses conclusions sur le statut des autres nœuds. À l'inverse de la solution précédente, chaque capteur réalise alors de bout en bout les opérations de surveillance;
-    \item la détection peut être menée par des \textbf{agents mobiles}\index{mobilité}, qui se déplacent de nœuds en nœuds dans un \rc autrement statiques (ou peu mobiles en comparaison avec les agents de surveillance). Ces agents mobiles\index{mobilité} disposent en principe de ressources plus importantes que les capteurs ordinaires. Cette configuration ne peut bien sûr pas être déployée pour tous les usages des \rcs;
+    \item la détection peut être menée par des \textbf{agents mobiles}\index{mobilité}, qui se déplacent de nœud en nœud dans un \rc autrement statiques (ou peu mobiles en comparaison avec les agents de surveillance). Ces agents mobiles\index{mobilité} disposent en principe de ressources plus importantes que les capteurs ordinaires. Cette configuration ne peut bien sûr pas être déployée pour tous les usages des \rcs;
     \item la collecte d'informations peut être \textbf{distribuée entre les nœuds}\index{distribution} situés sur un même niveau d'horizontalité dans l'architecture du réseau: cette configuration leur permet d'échanger des informations entre eux, notamment des indices de \idx{confiance}, et de déclencher des observations coordonnées lorsqu'un nœud «suspecte» un pair d'être compromis, sans en avoir la «certitude». Lorsqu'un capteur est jugé définitivement compromis, l'information est partagée entre les nœuds. Dans certains systèmes, les calculs eux-mêmes peuvent être distribués;
-    \item enfin, la distribution peut également être réalisée de façon \textbf{hiérarchique}, sur un plan vertical, dans les réseaux clusterisés\index{clusterisation!réseau clusterisé}. Il y a alors interaction entre les membres d'un cluster et leur \ch, qui se charge au minimum de la propagation des alertes, et parfois également des calculs à mener.
+    \item enfin, la distribution peut également être réalisée de façon \textbf{hiérarchique}, sur un plan vertical, dans les réseaux clusterisés\index{clusterisation!réseau clusterisé}. Il y a alors interaction entre les membres d'un cluster et leur \ch, qui se charge au minimum de la propagation des alertes, et parfois également de mener les calculs.
 \end{itemize}
 
 La gestion de la collecte et des calculs vont bien évidemment influencer l'opérateur du réseau sur le choix du type de méthode de détection (voir plus haut) à mettre en place.
@@ -73,14 +73,14 @@ La plupart des \IDS sont prévus pour fonctionner \textbf{de manière continue} 
 
         \paragraph{Systèmes hybrides}
 En pratique, pour un critère donné, la plupart des \IDS proposés se retrouvent dans plusieurs catégories à la fois: on retrouve ainsi beaucoup de systèmes hybrides surveillant tout à la fois l'hôte sur lequel ils tournent, et le trafic intercepté par le nœud.
-De même, le type d'attaques recherchées par les systèmes sont généralement multiples, et portent souvent sur plusieurs couches protocolaires (en référence au modèle \tcpip).
+De même, les types d'attaques recherchés par les systèmes sont généralement multiples, et portent souvent sur plusieurs couches protocolaires (en référence au modèle \tcpip).
 Et pour en détecter un maximum, il n'est pas rare qu'un \IDS combine plusieurs méthodes de détection.
 On voit ainsi souvent apparaitre en anglais le terme \textit{cross-layer IDS}\index{système de détection d'intrusion!\textit{cross-layer} IDS}, littéralement «IDS sur plusieurs couches»~\cite{BMS13}.
 %2}}}
 
     \subsubsection{Les méthodes de détection}\label{ea:sss:detect}
 %{{{2
-Une fois le réseau déployé, et le \ids mis en place, les nœuds chargés de la surveillance du réseau analysent le trafic environnant et en tirent des déductions sur l'état des réseau.
+Une fois le réseau déployé, et le \ids mis en place, les nœuds chargés de la surveillance du réseau analysent le trafic environnant et en tirent des déductions sur l'état du réseau.
 Ces déductions résultent de l'application d'algorithmes précis sur les données.
 Ces algorithmes sont de plusieurs sortes, que l'on regroupe dans les méthodes de détection basées sur des anomalies\index{anomalie}, sur des signatures d'attaques\index{signature d'attaque}, ou sur le non-respect de spécifications prédéfinies.
 
@@ -100,7 +100,7 @@ La détection basée sur les anomalies\index{anomalie} regroupe trois sous-caté
 \end{itemize}
 
 \paragraph{Règles et signatures des attaques\index{signature d'attaque}}\label{ea:par:rules}
-Plutôt que d'attendre que des anomalies\index{anomalie} de fonctionnement, de performances, soient détectés, d'autres \IDS prennent les devants et mettent en place un système de surveillance du voisinage en établissant un ensemble de règles à ne pas transgresser.
+Plutôt que d'attendre que des anomalies\index{anomalie} de fonctionnement, de performances, soient détectées, d'autres \IDS prennent les devants et mettent en place un système de surveillance du voisinage en établissant un ensemble de règles à ne pas transgresser.
 Ces règles sont construites à partir de la «signature» des attaques connues\index{signature d'attaque} \cad, pour une attaque donnée, à partir du comportement type adopté par un nœud qui tenterait de mener cette attaque~\cite{BMS13}.
 
 Les règles peuvent être nombreuses et variées, en voici quelques exemples représentatifs.\index{signature d'attaque}
@@ -108,11 +108,11 @@ Les règles peuvent être nombreuses et variées, en voici quelques exemples rep
     \item \textbf{Règle sur la fréquence des envois}: le délai entre deux paquets consécutifs, ou plus généralement la fréquence des messages émis sur un intervalle de temps par le nœud surveillé, ne doivent pas dépasser un certain seuil (minimal si l'on parle de délai, maximal pour une fréquence). Cette règle empêche un capteur de procéder à des attaques par \deluge, ou bien d'accaparer\index{comportement cupide!accaparement} le médium de transmission, sans être détecté.
     \item \textbf{Règle de retransmission}: les messages reçus par un nœud relais, mais à destination d'un autre nœud, doivent impérativement être retransmis par ce relais au nœud suivant sur la route définie pour ces paquets, ceci afin de détecter les attaques de type \textit{blackhole} ou \textit{sinkhole}.
     \item \textbf{Règle sur le délai de retransmission}: la retransmission en question par le relais ne doit pas être effectuée après un certain délai, afin d'éviter des ralentissements importants dans le réseau (cette règle est très proche de la précédente, qui est bien obligée de se baser sur un délai limite pour considérer que le paquet ne sera pas retransmis).
-    \item \textbf{Règle sur l'\integrite}: Le contenu du message retransmis par le relais ne doit pas être altérée. Cette règle est bien entendu inapplicable lorsque le relais est censé effectuer un traitement (agrégation, traitement sémantique\dots) sur ce contenu avant de le retransmettre. Les attaques visées sont principalement celles visant l'\integrite des paquets.
+    \item \textbf{Règle sur l'\integrite}: Le contenu du message retransmis par le relais ne doit pas être altéré. Cette règle est bien entendu inapplicable lorsque le relais est censé effectuer un traitement (agrégation, traitement sémantique\dots) sur ce contenu avant de le retransmettre. Les attaques visées sont principalement celles visant l'\integrite des paquets.
     \item \textbf{Règle sur la répétition}: un message ne peut être transmis par un nœud donné au plus qu'un certain nombre de fois. Si ce seuil est dépassé, le nœud peut être suspecté de vouloir influencer les résultats collectés par la \sdb. Si la répétition est espacée dans le temps, il peut aussi s'agir d'une tentative d'attaque par \idx{rejeu} de paquets.
     \item \textbf{Règle sur la portée de transmission}: les paquets «entendus» par les nœuds de surveillance ne devraient provenir que de nœuds voisins dans le réseau, et non de nœuds que l'on sait éloignés. Réciproquement, les nœuds voisins ne sont pas censés émettre avec une puissance dépassant un certain seuil. Cette règle peut permettre de détecter des nœuds qui tenteraient de produire une fuite de données vers l'extérieur du réseau, ou bien de mener des attaques dans des zones plus éloignées du réseau (notamment des attaques sur le \idx{routage}, en prétendant être voisin de nœuds distants, ou bien des attaques par trou de ver\index{trou!trou de ver}).
-    \item \textbf{Règle sur les collisions}: pour lutter contre les tentatives de \idx{brouillage}, un seuil peut être instauré pour le nombre maximum d'échecs de transmission dû à des collisions\index{collision}. Si ces collisions sont trop fréquentes et que le capteur qui en est à l'origine peut être identifié, il est considéré comme compromis.
-    \item \textbf{Règles sur les accès}: si le nombre de tentatives d'un nœud pour s'enregistrer et obtenir un accès à certaines ressources dépasse un certain seuil, une alarme est déclenchée. Cette règle peut notamment s'appliquer à la détection des intrusions au niveau machine, lorsqu'une entité tente et échoue plusieurs fois de se connecter sur le système.
+    \item \textbf{Règle sur les collisions}: pour lutter contre les tentatives de \idx{brouillage}, un seuil peut être instauré pour le nombre maximum d'échecs de transmission dûs à des collisions\index{collision}. Si ces collisions sont trop fréquentes et que le capteur qui en est à l'origine peut être identifié, il est considéré comme compromis.
+    \item \textbf{Règle sur les accès}: si le nombre de tentatives d'un nœud pour s'enregistrer et obtenir un accès à certaines ressources dépasse un certain seuil, une alarme est déclenchée. Cette règle peut notamment s'appliquer à la détection des intrusions au niveau machine, lorsqu'une entité tente et échoue plusieurs fois de se connecter sur le système.
 \end{itemize}
 
 Lorsque les règles sont transgressées, une «alarme» est déclenchée.
@@ -132,7 +132,7 @@ En revanche, elle souffre d'une mauvaise adaptation aux attaques nouvelles, dont
         \paragraph{Respect des spécifications}
 Une troisième classe de méthodes de détection regroupe les méthodes, moins fréquentes, basées sur le respect de spécifications réalisées en amont du déploiement du réseau.
 La détection basée sur les anomalies\index{anomalie} détecte les écarts de performance, celle basée sur les signatures\index{signature d'attaque} relève les comportements suspects; cette troisième catégorie cherche à combiner les avantages de chacune, en se reposant sur des spécifications élaborées par l'opérateur ainsi que sur des contraintes qui caractérisent le bon fonctionnement du réseau.
-Les écarts au profil normal spécifié permettent de détecter les attaques en identifiant leur effet, tandis que les contraintes fixées par ces spécifications entrainent la détection de comportement individuels malicieux~\cite{BMS13}.
+Les écarts au profil normal spécifié permettent de détecter les attaques en identifiant leur effet, tandis que les contraintes fixées par ces spécifications entrainent la détection de comportements individuels malicieux~\cite{BMS13}.
 
 Comme les spécifications sont réalisées par un opérateur humain (il ne s'agit pas d'un modèle généré par un algorithme), le taux de faux positifs est relativement faible.
 En revanche, l'élaboration de ces spécifications peut s'avérer très complexe, et prendre beaucoup de temps.

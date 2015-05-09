@@ -106,7 +106,7 @@ L'attaque devient plus difficile à détecter, puisque le nœud compromis retran
 Les attaques basées sur ce mécanisme sont dites à retransmission «on/off»\index{trou!trou on/off} (\textit{on/off holes} en anglais) lorsque la retransmission de tous les paquets est soit complètement assurée, soit complètement suspendue en alternant entre ces deux phases au fil du temps.
 On parlera plutôt d'attaques de type «trou gris»\index{trou!trou gris} (\textit{grey holes} en anglais) lorsque la retransmission est partielle mais constante dans le temps, qu'elle soit basée sur un mécanisme aléatoire (paquets supprimés au hasard plutôt que d'être retransmis) ou selon des règles (selon le contenu utile, ou selon l'expéditeur ou le destinataire par exemple)~\cite{ZTLMK13}.
 
-        \paragraph{Falsification\index{falsification} des informations de \idx{routage} (\index{comportement cupide!accaparement} du canal de transmission, création de boucles\index{routage!boucle}, \etc)}
+        \paragraph{Falsification\index{falsification} des informations de \idx{routage} (accaparement\index{comportement cupide!accaparement} du canal de transmission, création de boucles\index{routage!boucle}, \etc)}
 Une attaque peut être menée dès le déploiement du réseau en transmettant de fausses informations lors de la mise en place des règles de routages\index{routage}~\cite{AD14}.
 Ces informations vont alors chercher à nuire au \idx{routage} des paquets, en créant des boucles\index{routage!boucle} cycliques dans la structure de \idx{routage}, en partitionnant le réseau, en attirant à tort le trafic vers un nœud corrompu (par exemple pour exploiter les données et porter une attaque sur la confidentialité) ou vers un nœud légitime (pour surcharger ses capacités de traitement)\dots
 
@@ -133,7 +133,7 @@ Par ailleurs, tous les «trous» ne font pas nécessairement référence à des 
 
         \paragraph{Trou de ver (\textit{wormhole})}
 Lorsque deux agents ou plus du réseau sont compromis par un attaquant, il leur est possible de mener une attaque de type «trou de ver»\index{trou!trou de ver} (\textit{wormhole attack} en anglais).
-Cette attaque consiste à capturer du trafic en un point donner du réseau pour le réinjecter\index{injection} en un autre point.
+Cette attaque consiste à capturer du trafic en un point donné du réseau pour le réinjecter\index{injection} en un autre point.
 Il faut donc au moins deux agents complices\index{coopération!complices}, l'un qui capture et l'autre qui injecte\index{injection} le trafic, et qui communiquent l'un avec l'autre par le biais d'un \idx{canal auxiliaire} généralement distinct des canaux légitimes utilisés sur le réseau (un tunnel, ou «trou de ver», qui donne son nom à l'attaque)~\cite{FZM14}.
 Il est intéressant, pour les nœuds menant l'attaque, de retransmettre par exemple les informations (de \idx{routage}, notamment) provenant du voisinage de la \sdb en un point éloigné du réseau, de façon à faire passer le tunnel pour une route de bonne qualité vers la \sdb, puis de mener des attaques de retransmission sélective.
 Ou plus simplement, l'\idx{injection} en un autre point des paquets utilisés pour la découverte de routes lors de la mise en place de la structure de \idx{routage} peut nuire grandement à l'organisation du réseau, et conduire un nœud légitime à imaginer des voisins virtuels qui sont en réalité absolument hors de sa portée d'émission.
@@ -176,15 +176,15 @@ Les attaques par \dds existant sur les réseaux classiques au niveau de la \idx{
 Cette attaque requiert une machine plus puissante (surtout, avec une meilleure alimentation en énergie) qu'un capteur, mais permet à la fois de créer des congestions\index{congestion} dans le réseau, et de saturer les capacités des capteurs en ouvrant un nombre trop grand de sessions \tcp.
 
         \paragraph{Désynchronisation \tcp (ou équivalents)}
-Dans le même registre, un attaquant peut forger des demande de \desync pour mettre fin à des sessions \tcp établies entre deux entités légitimes.
-Les échanges de ces sessions sont donc interrompus jusqu'au rétablissement d'une nouvelle connexion: ces connexions impliquent l'envoi de données de contrôle (elle s'effectue en trois temps, on parle de \textit{three-way handshake} en anglais) qui consomment une quantité d'énergie précieuse pour les capteurs.
+Dans le même registre, un attaquant peut forger des demandes de \desync pour mettre fin à des sessions \tcp établies entre deux entités légitimes.
+Les échanges de ces sessions sont donc interrompus jusqu'au rétablissement d'une nouvelle connexion: ces connexions impliquent l'envoi de données de contrôle (elles s'effectuent en trois temps, on parle de \textit{three-way handshake} en anglais) qui consomment une quantité d'énergie précieuse pour les capteurs.
 
 De manière plus générale, si un protocole de transport est employé, \tcp par exemple, alors les attaques de \dds reposant sur ce protocole~\cite{tcpsec} se retrouvent applicables dans le réseau.
 %2}}}
 
     \subsubsection{Couche application}
 %{{{2
-La \idx{couche application} implémente éventuellement l'application utilisée au niveau le plus haut par le réseau de capteur pour assurer un service en particulier.
+La \idx{couche application} implémente éventuellement l'application utilisée au niveau le plus haut par le \rc pour assurer un service en particulier.
 Les protocoles utilisés sur cette couche dépendent donc totalement de l'objectif final du réseau, il n'y a pas ici de standard à proprement parler.
 Certaines attaques sont néanmoins applicables au niveau applicatif.
 
@@ -205,14 +205,14 @@ La désynchronisation peut aussi être menée sur l'horloge des nœuds, pour les
         \paragraph{Destruction physique\index{destruction physique} des capteurs}
 Les capteurs sont des appareils de petite taille déployés en nombre, et dont la production ne doit par conséquent pas être trop couteuse.
 Cela implique que les appareils sont relativement fragiles, et d'autant plus difficiles à sécuriser que le réseau est souvent déployé en extérieur, parfois en environnement hostile.
-À distance, il est éventuellement possible de mettre des capteurs individuels hors service dans le cas où un nœud attaquant parvient à épuiser la batterie~\cite{MS14}, ou bien aussi la mémoire disponible des capteurs~\cite{WS04};
+À distance, il est éventuellement possible de mettre des capteurs individuels hors service dans le cas où un nœud compromis parvient à faire épuiser la batterie~\cite{MS14}, ou bien la mémoire disponible des capteurs~\cite{WS04}.
 Mais un attaquant peut parfois accéder directement au capteur lui-même~\cite{GK13}.
 C'est l'une des manières de s'emparer d'un capteur pour le reprogrammer et introduire un agent corrompu dans le réseau (l'autre méthode reposant sur des failles logicielles, qui permettent parfois l'injection distante de code).
 Mais sans s'embarrasser de les reprogrammer ou d'en épuiser les ressources, l'attaquant qui obtient un accès physique au réseau peut aussi se contenter de détruire physiquement les capteurs, ce qui est encore le moyen le plus efficace de les empêcher de fournir les services pour lesquels ils ont été conçus.
 
         \paragraph{Altération\index{altération} des mesures}
 Toujours en raison de leur exposition physique, les capteurs peuvent être manipulés par un attaquant pour mesurer des données.
-Des engins munis de caméras peuvent ainsi voir leur objectif obstrué (par une couche de peinture par exemple); ou bien des capteurs chargés de mesurer la température d'un élément donné peuvent être déplacés, de sorte à ce que leur thermomètre ne soit plus en contact avec cet élément.
+Des engins munis de caméras peuvent ainsi voir leur objectif obstrué (par une couche de peinture par exemple); ou bien des capteurs chargés de mesurer la température d'un élément donné peuvent être déplacés, de telle sorte que leur thermomètre ne soit plus en contact avec cet élément.
 Les capteurs continuent dans ce cas à mesurer des valeurs et à les retransmettre jusqu'à la \sdb, mais ces mesures elles-mêmes (et donc les résultats obtenus par l'exploitant) se retrouvent faussées dès le départ.
 
         \paragraph{}
@@ -293,7 +293,7 @@ Toutes les attaques exposées dans cette sous-section ont été décrites à mai
      \end{small}
 \end{table}
 
-Il est bien sûr très difficile de prétendre à l'exhaustivité, et il existe d'autres attaques de \dds applicables au \rcs: certaines dépendent d'applications particulières ou sont introduites par des configurations précises (mobilité des nœuds, structures spécifiques: grille, recherche de couverture maximale\dots).
+Il est bien sûr très difficile de prétendre à l'exhaustivité, et il existe d'autres attaques par \dds applicables aux \rcs: certaines dépendent d'applications particulières ou sont introduites par des configurations précises (mobilité des nœuds, structures spécifiques: grille, recherche de couverture maximale\dots).
 D'autres n'ont sans doute pas encore été découvertes.
 Les attaques que nous avons présentées regroupent néanmoins les principales menaces, en termes de \dds, auxquelles peuvent faire face les \rcs.
 %2}}}
@@ -309,7 +309,7 @@ L'organisme qui gère le \rc attaqué, surtout s'il fait partie du domaine milit
 Cela ne nous empêche pas néanmoins de nous livrer à quelques conjectures.
 
         \paragraph{Critères logiques}
-Pour ne conserver que des attaques plausibles, nous pouvons tout d'abord éliminer celles qui se basent sur les failles de protocoles «obscurs», peu utilisés: si l'on trouve très peu d'implémentations de ces protocoles, très peu d'attaques qui lui sont associées seront déclenchées.
+Pour ne conserver que des attaques plausibles, nous pouvons tout d'abord éliminer celles qui se basent sur les failles de protocoles «obscurs», peu utilisés: si l'on trouve très peu d'implémentations de ces protocoles, très peu d'attaques qui leur sont associées seront déclenchées.
 
 Nous pouvons également éliminer les attaques qui nécessitent de gros efforts de rétroingénierie pour analyser le fonctionnement précis de protocoles ou de systèmes «maison», car cette analyse détaillée coute cher à l'attaquant.
 
@@ -358,10 +358,10 @@ En revanche, la collecte parasite elle-même peut passer par des attaques sur le
 L'annonce de fausses routes, typiques des attaques \textit{sinkhole}\index{trou!puits}, se prêtent particulièrement bien à la collecte frauduleuse de paquets (d'ailleurs, une fois ces paquets collectés par l'attaquant, à quoi bon les retransmettre?).
 
 En comparaison, les attaques de type \textit{blackhole}\index{trou!trou noir} ou \textit{grey hole}\index{trou!trou gris} se limitent à la suppression de paquets, sans influer sur la création des routes.
-Elles peuvent être utiliser pour neutraliser la remontée d'informations, mais une fois encore, on leur préférera dans ce contexte des attaques de \idx{brouillage}.
+Elles peuvent être utilisées pour neutraliser la remontée d'informations, mais une fois encore, on leur préférera dans ce contexte des attaques de \idx{brouillage}.
 
             \subparagraph{Altérer les mesures}
-Les attaques portant sur l'\integrite des données sur les différentes couches semblent efficace pour altérer les résultats perçus par l'exploitant.
+Les attaques portant sur l'\integrite des données sur les différentes couches semblent efficaces pour altérer les résultats perçus par l'exploitant.
 Il y a toutefois une limite relative à l'application pour laquelle le réseau a été déployé: si les résultats finaux sont similaires à des moyennes calculées sur toute la zone couverte par les capteurs, influer significativement sur cette moyenne va demander d'altérer un grand nombre de paquets.
 L'envoi de messages en déluge\index{deluge@déluge de paquets} pour augmenter artificiellement le nombre de valeurs et fausser les résultats ne semble pas très intéressant, car le procédé est extrêmement facile à détecter dès lors qu'un mécanisme d'\idx{authentification} a été mis en place et que l'attaquant ne peut pas masquer son identité.
 La modification\index{altération} des paquets peut être menée sur un grand nombre d'entre eux pour peu que le nœud compromis soit bien situé, \cad s'il s'agir d'un relais proche de la \sdb.

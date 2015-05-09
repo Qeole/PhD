@@ -17,11 +17,12 @@ On parle de mesures de prévention, dans le sens où il s'agit de méthodes mise
 De nombreuses architectures de sécurité\index{architecture de sécurité}, qui apportent \idx{authentification}, chiffrement, \integrite et protection contre le \idx{rejeu} aux échanges, et parmi lesquelles une bonne partie des solutions présentées en \sssref{ea:sss:archi}, se «vantent» ainsi d'atténuer, voire de prévenir totalement plusieurs types d'attaques de \dds.
 %2}}}
 
+\pagebreak %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \subsubsection{Des protocoles de \idx{routage} spécifiques}
 %{{{2
 Toujours dans le but de prévenir les attaques, il est possible d'utiliser des protocoles de routage spécifiquement étudiés pour limiter les risques.
 Ainsi, le protocole de routage \aodv (\textit{Ad hoc On-demand Distance Vector routing}), très utilisé dans les \rcs, a fait l'objet de propositions destinées à améliorer sa résistance aux attaques de \dds de type \textit{blackhole}\index{trou!trou noir} et \textit{sinkhole}\index{trou!puits}: une étude propose par exemple de faire vérifier par chaque nœud, lors de la création des routes, que ses voisins de deuxième degré sont bel et bien accessibles~\cite{DLA02}.
-Ainsi chaque nœud $x$ ayant un voisin $n$ qui lui propose une route vers une destination donnée, $x$ demande à $n$ quel est le prochain saut $n+1$ sur cette route et tente de contacter ce nœud $n+1$ pour vérifier qu'il est effectivement accessible.
+Ainsi pour chaque nœud $x$ ayant un voisin $n$ qui lui propose une route vers une destination donnée, $x$ demande à $n$ quel est le prochain saut $n+1$ sur cette route et tente de contacter ce nœud $n+1$ pour vérifier qu'il est effectivement accessible.
 Si $n+1$ répond, alors $n$ est digne de confiance pour cette route; puisqu'il est digne de confiance, on admet qu'il pourra à son tour vérifier l'accessibilité du nœud $n+2$ à travers le saut annoncé par $n+1$, et ainsi de suite tout au long de la route empruntée pour les données.
 
 Toujours pour parer aux attaques sur le routage, d'autres méthodes se basent sur des mécanismes de \idx{redondance} et de \resilience, pour faire en sorte que si l'une des routes se révèle défectueuse, d'autres exemplaires des paquets, envoyés par des routes distinctes, puissent attendre leur destination.
@@ -58,9 +59,9 @@ Des modifications malveillantes du code exécuté par un nœud peuvent parfois �
 
 Mais outre les accès physiques directs, un attaquant peut très bien tenter de compromettre à distance un capteur, en exploitant des failles logicielles.
 Des injections de code ont déjà été menées avec succès sur des capteurs, en utilisant par exemple des dépassements de tampons pour injecter une fausse pile d'exécution et mener une attaque dite \textit{return-into-libc}~\cite{FC08}.
-La sécurité logicielle\index{securité@sécurité!sécurité logicielle} des capteurs doit donc être vérifiées avant même le déploiement du réseau.
+La sécurité logicielle\index{securité@sécurité!sécurité logicielle} des capteurs doit donc être vérifiée avant même le déploiement du réseau.
 Les bonnes pratiques d'ordre générale en \secu s'appliquent ici comme ailleurs: de bonne pratique de développement pour le système sont indispensables, de même que la désactivation des services non utilisés (qui de toute façon consommeraient inutilement de l'énergie).
-La sécurité du système\index{securité@sécurité!sécurité système} peut éventuellement être spécifiquement renforcée, comme par exemple avec grsecurity pour des systèmes basés sur Linux~\cite{GFN11}.
+La sécurité du système\index{securité@sécurité!sécurité système} peut éventuellement être spécifiquement renforcée, comme par exemple avec \mbox{grsecurity} pour des systèmes basés sur le noyau Linux~\cite{GFN11}.
 %3}}}
 %2}}}
 %1}}}
