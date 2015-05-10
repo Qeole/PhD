@@ -207,7 +207,7 @@ Nous reviendrons plus loin sur des solutions reposant sur un nombre restreint de
 
     \subsection{Sécurité\index{securité@sécurité}, \idx{sureté} et \resilience}
 %{{{1
-    \subsubsection{Sureté\index{sureté}, \resilience}
+        \subsubsection{Sureté\index{sureté}, \resilience}
 %{{{2
 Comme évoqué précédemment, une fois déployés, les \rcs doivent s'organiser et fonctionner seuls, sans intervention humaine.
 Pour autant, ils ne sont pas à l'abri des erreurs ni des pannes.
@@ -220,12 +220,12 @@ Les tests et simulations sont récurrents dans la quasi-totalité des travaux de
 Ils consistent à implémenter le dispositif étudié, physiquement ou virtuellement, pour étudier son évolution au cours d'une exécution «classique» ou bien soumise à des conditions d'expérimentation particulières.
 Certains travaux ont même pour objet des tests comparatifs sur différentes architectures matérielles de capteurs~\cite{PLP06}, ou encore recensent les différents systèmes de simulation permettant d'expérimenter sur les réseaux de capteurs~\cite{AAAHN12}.
 
-Pour la vérification basée sur des méthodes formelles, des outils tels que le \idx{\textit{model checking}} peuvent par exemple être appliqués sur le modèle établi.
-Le \idx{\textit{model checking}} est une technique pouvant être utilisée sur des systèmes concurrents à états finis, et qui permet d'extraire automatiquement certaines propriétés sur les performances ou la \idx{sureté} du modèle puis de s'assurer qu'elles sont respectées dans le réseau à tout instant.
+Pour la vérification basée sur des méthodes formelles, des outils tels que le \modelchecking peuvent par exemple être appliqués sur le modèle établi.
+Le \modelchecking est une technique pouvant être utilisée sur des systèmes concurrents à états finis, et qui permet d'extraire automatiquement certaines propriétés sur les performances ou la \idx{sureté} du modèle puis de s'assurer qu'elles sont respectées dans le réseau à tout instant.
 Si le système ne fonctionne pas comme prévu, l'outil permet parfois d'obtenir une trace qui vient faciliter la localisation de la source de l'erreur.
-Contrairement aux tests et aux simulations, les résultats obtenus à l'aide du \idx{\textit{model checking}} ne varient pas entre deux instances.
+Contrairement aux tests et aux simulations, les résultats obtenus à l'aide du \modelchecking ne varient pas entre deux instances.
 Encore mieux: la spécification formelle du système permet de vérifier les propriétés sur tous les cas possibles d'exécution déterminés par les spécifications du modèle, tandis que des simulations ne permettent de remonter que certaines erreurs détectées (sans assurance de les avoir trouvées toutes).
-Le \idx{\textit{model checking}} est utilisé régulièrement dans les réseaux sans fils, que ce soit pour valider la conception de protocoles de \idx{routage} comme pour la vérification de propriétés de \idx{sureté} concernant les risques de collisions\index{collision} au sein d'un groupe de véhicules~\cite{E-ZCGGK12}.
+Le \modelchecking est utilisé régulièrement dans les réseaux sans fils, que ce soit pour valider la conception de protocoles de \idx{routage} comme pour la vérification de propriétés de \idx{sureté} concernant les risques de collisions\index{collision} au sein d'un groupe de véhicules~\cite{E-ZCGGK12}.
 %2}}}
 
         \subsubsection{Résilience\index{resil@résilience}}

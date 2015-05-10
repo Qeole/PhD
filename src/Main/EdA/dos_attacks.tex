@@ -79,7 +79,7 @@ Ce comportement cupide\index{comportement cupide} (ou \textit{greedy} en anglais
 Le but final de telles attaques peut être d'envoyer plus de données à la \sdb, dans le but par exemple de fausser une moyenne, ou bien de transmettre les données écoutées (attaque sur la \idx{confidentialité}) dans le voisinage à une autre machine corrompue du réseau, en vue de l'exfiltration de ces données utiles capturées.
 On parle aussi parfois en anglais d'\textit{unfairness} («injustice») lorsque les spécifications des protocoles mis en place sont délibérément ignorées par un nœud corrompu.
 
-\paragraph{Falsification\index{falsification} d'accusés de réception (\textit{ACK spoofing})}
+        \paragraph{Falsification\index{falsification} d'accusés de réception (\textit{ACK spoofing})}
 La \idx{falsification} d'un accusé de réception (d'un paquet ACK, pour \textit{acknowledgement}, «accusé de réception» en anglais), à destination d'un nœud venant d'émettre des données, permet à un attaquant d'empêcher ce nœud de réaliser d'autres tentatives de transmission de la trame~\cite{AD14}.
 Elle n'est utile, bien entendu, que dans le cas où l'attaquant pense que l'émission de la trame d'origine a échoué, par exemple parce qu'il a créé une \idx{collision} sur le canal lors de cette première émission.
 C'est une attaque qui vient compléter les techniques de \idx{brouillage} de façon à empêcher la transmission de l'information dans le réseau.
@@ -175,7 +175,7 @@ Les protocoles de \idx{couche transport} ne sont pas toujours implémentés dans
 Les attaques par \dds existant sur les réseaux classiques au niveau de la \idx{couche transport} peuvent aussi être appliquées dans les \rcs: par exemple, si le protocole \tcp est utilisé dans le réseau, un attaquant peut inonder le réseau de paquets SYN utilisés pour initier des connexions entre deux nœuds~\cite{AD14}.
 Cette attaque requiert une machine plus puissante (surtout, avec une meilleure alimentation en énergie) qu'un capteur, mais permet à la fois de créer des congestions\index{congestion} dans le réseau, et de saturer les capacités des capteurs en ouvrant un nombre trop grand de sessions \tcp.
 
-\paragraph{Désynchronisation\index{desynchro@désynchronisation} \tcp (ou équivalents)}
+        \paragraph{Désynchronisation\index{desynchro@désynchronisation} \tcp (ou équivalents)}
 Dans le même registre, un attaquant peut forger des demandes de \desync pour mettre fin à des sessions \tcp établies entre deux entités légitimes.
 Les échanges de ces sessions sont donc interrompus jusqu'au rétablissement d'une nouvelle connexion: ces connexions impliquent l'envoi de données de contrôle (elles s'effectuent en trois temps, on parle de \textit{three-way handshake} en anglais) qui consomment une quantité d'énergie précieuse pour les capteurs.
 

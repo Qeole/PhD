@@ -144,7 +144,7 @@ Ces méthodes sont relativement peu implémentées dans la littérature.
 Nous indiquons ici quelques exemples de propositions concrètes de \idss, sans chercher à couvrir l'ensemble des nombreuses catégories présentées.
 La plupart d'entre elles se basent sur l'emploi d'architectures (\idx{clusterisation}, architectures de sécurité\index{architecture de sécurité}) ou de protocoles (\idx{routage}) déjà existants, auxquelles elles rajoutent des systèmes dédiés à la détection des attaques.
 
-\paragraph{Quelques \IDS pour réseaux clusterisés\index{clusterisation!réseau clusterisé}}
+        \paragraph{Quelques \IDS pour réseaux clusterisés\index{clusterisation!réseau clusterisé}}
 Le système SecCBSN (\textit{Secure Communications of Cluster-Based Sensor Network}, «communications sécurisées des \rcs clusterisés») introduit une architecture de sécurité\index{architecture de sécurité} à laquelle est adjointe un \ids pour sécuriser au mieux possible les réseaux clusterisés~\cite{HHC07}.
 Chaque nœud implémente trois modules: l'un intervient pour l'\election du \ch, réalisée sur le modèle de \leach.
 Le deuxième module est chargé d'apporter \idx{authentification} et \idx{chiffrement} pour les communications entre les capteurs au sein du réseau, et utilise notamment une version retouchée du certificat TESLA.
@@ -184,7 +184,7 @@ Un traitement sur ces données permet de déterminer les zones ou l'énergie des
 Ce traitement consiste en l'application d'un modèle de survie, plus précisément une régression de \textsc{Cox} (modèle à risque proportionnel), qui est réalisée soit par la \sdb, soit, dans une version adaptée, par des nœuds de \idx{confiance} au sein du réseau.
 
         \paragraph{Sécurité système\index{securité@sécurité!sécurité système}}
-        Outre les systèmes de détection d'intrusion machine\index{système de détection d'intrusion!HIDS}, qui opèrent sur le système d'exploitation du nœud même sur lequel ils s'exécutent, il est possible de faire vérifier l'\integrite des systèmes par d'autres entités.
+Outre les systèmes de détection d'intrusion machine\index{système de détection d'intrusion!HIDS}, qui opèrent sur le système d'exploitation du nœud même sur lequel ils s'exécutent, il est possible de faire vérifier l'\integrite des systèmes par d'autres entités.
 Il existe ainsi une proposition concernant l'usage d'agents mobiles\index{mobilité} dans le réseau, qui se déplacent de nœud en nœud pour vérifier que le code binaire de leur système n'a pas été altéré~\cite{HR13}.
 Si des capteurs corrompus sont détectés et que leur état ne peut être immédiatement restauré (soit que l'opération soit impossible, soit que l'agent mobile\index{mobilité} reçoive l'alarme d'un autre capteur et n'ait pas encore eu le temps d'accéder au nœud affecté), ces agents permettent également de propager l'alerte dans le réseau.
 
