@@ -3,17 +3,17 @@
 %{{{1
 Savoir qu'une attaque est en cours dans le réseau est une information de grande valeur; mais encore faut-il savoir l'utiliser pour réagir efficacement.
 
-    \subsubsection{Alertes et exclusion du coupable}
+\subsubsection{Alertes et \idx{exclusion} du coupable}
 %{{{2
         \paragraph{Exclure l'attaquant\index{exclusion}}
 Lorsque l'auteur d'une attaque a été clairement identifié, la réponse la plus souvent employée consiste à l'exclure virtuellement du réseau, \cad à ne plus lui envoyer de paquets, et à ignorer totalement les trames provenant de ce nœud~\cite{LC08}.
-Cette exclusion peut permettre d'empêcher le nœud corrompu de procéder à ses attaques, du moment que ses paquets peuvent effectivement être ignorés.
+Cette \idx{exclusion} peut permettre d'empêcher le nœud corrompu de procéder à ses attaques, du moment que ses paquets peuvent effectivement être ignorés.
 Pour tout ce qui concerne les comportements cupides\index{comportement cupide}, la falsification d'accusés de réception, puis de manière générale l'ensemble des attaques portant sur les couches réseau ou supérieures de la pile \tcpip, ignorer les paquets émis par le capteur s'avère efficace: puisque les informations qu'il envoie ne sont plus traitées, il n'y a plus de danger.
 Elle sera sans effet en revanche sur des attaques de type \idx{brouillage}, ou de création de collisions\index{collision}: non seulement l'attaquant est difficile à identifier, car il ne renseigne pas son identité dans les trames malicieuses, mais en plus le fait de l'«exclure» ne permet en aucun cas de supprimer les collisions produites sur des paquets légitimes par ses émissions.
 
         \paragraph{Identifier l'attaquant}
 Suivant le modèle utilisé, et notamment lorsque la détection est basée sur le relevé d'anomalies\index{anomalie}, détecter une attaque ne revient pas nécessairement à identifier son auteur.
-Pour pouvoir exclure l'attaquant, il est pourtant nécessaire de connaitre son identité: la détection d'une \idx{anomalie} peut donc parfois être suivie de l'activation d'un processus de surveillance des nœuds voisins, afin de repérer quelle entité est à l'origine de l'attaque~\cite{BMS13}.
+Pour pouvoir exclure\index{exclusion} l'attaquant, il est pourtant nécessaire de connaitre son identité: la détection d'une \idx{anomalie} peut donc parfois être suivie de l'activation d'un processus de surveillance des nœuds voisins, afin de repérer quelle entité est à l'origine de l'attaque~\cite{BMS13}.
 
         \paragraph{Diffuser un message d'alerte}
 Si le \ids mis en place fonctionne de manière indépendante sur chaque capteur, il est possible que les nœuds ne diffusent pas d'information lorsqu'ils identifient un nœud corrompu.
@@ -30,9 +30,9 @@ Inscrire les nœuds corrompus sur une liste noire n'est pas nécessairement la s
 Une étude propose, pour un réseau dont les capteurs ne seraient pas trop difficiles d'accès, l'usage d'agents mobiles\index{mobilité} pour récupérer au mieux d'attaques de \dds «sur les chemins»~\cite{LB09}.
 Ces attaques consistent à compromettre plusieurs nœuds, qui à leur tour mènent des attaques par \deluge dans le but de créer des congestions\index{congestion} et d'épuiser la batterie de tous leurs voisins, allant ainsi jusqu'à créer de grands espaces vides dans le réseau.
 La solution proposée repose sur l'usage d'entités mobiles\index{mobilité} qui sont capables de se déplacer dans le réseau pour rétablir le statut initial des capteurs et si possible récupérer le contenu de leur base de données.
-Mais ce déplacement prend du temps: si moins de 15~\% des capteurs sont suspects, il est envisageable de laisser les agents mobiles tourner dans le réseau pour restaurer leur configuration d'origine.
-Les nœuds suspects ne sont pas exclus, ce qui limite le risque de faux positifs.
-Lorsque le taux de capteurs suspects est évalué entre 15~\% et 60~\%, une liste noire\index{exclusion} est créée pour limiter les dégâts infligés aux nœuds légitimes le temps que les agents mobiles puissent agir.
+Mais ce déplacement prend du temps: si moins de 15~\% des capteurs sont suspects, il est envisageable de laisser les agents mobiles\index{mobilité} tourner dans le réseau pour restaurer leur configuration d'origine.
+Les nœuds suspects ne sont pas exclus\index{exclusion}, ce qui limite le risque de faux positifs.
+Lorsque le taux de capteurs suspects est évalué entre 15~\% et 60~\%, une liste noire\index{exclusion} est créée pour limiter les dégâts infligés aux nœuds légitimes le temps que les agents mobiles\index{mobilité} puissent agir.
 Enfin, lorsque le seuil critique de 60~\% est dépassé, les agents mobiles\index{mobilité} s'appliquent avant tout à restaurer l'image mémoire et logicielle des nœuds jugés les plus essentiels au bon fonctionnement du réseau sur des capteurs encore en état de marche, et à entretenir ces derniers.
 
 \paragraph{Résilience\index{resil@résilience} du réseau}
@@ -40,7 +40,7 @@ Il n'est pas toujours possible d'annuler les effets d'un attaque en excluant\ind
 Il faut dans ce cas trouver des méthodes alternatives pour composer avec l'attaque en cours.
 
 Ainsi, l'impact du \idx{brouillage} de certaines fréquences peut être limité, par exemple en changeant la fréquence utilisée pour le canal de transmission.
-Si l'attaquant parvient à s'adapter, un changement de fréquences très rapide ou «sauts de fréquence»\index{sauts de fréquence}, utilisé par des protocoles de \idx{couche de liaison de données} à étalement de spectre\index{etalement@étalement de spectre} comme \cdma (\textit{Code Division Multiple Access}, qui consiste à étendre le spectre d'émission et à convenir, entre pairs, d'une séquence pseudo-aléatoire guidant les sauts rapides de fréquences), peut permettre d'échapper au collisions\index{collision}.
+Si l'attaquant parvient à s'adapter, un changement de fréquences très rapide ou «sauts de fréquence»\index{sauts de fréquence}, utilisé par des protocoles de \idx{couche de liaison de données} à étalement de spectre\index{etalement@étalement de spectre} comme \cdma (\textit{Code Division Multiple Access}, qui consiste à étendre le spectre d'émission et à convenir, entre pairs, d'une séquence pseudo-aléatoire guidant les sauts rapides de fréquences)\index{sauts de fréquence}, peut permettre d'échapper au collisions\index{collision}.
 Le sigle FHSS est utilisé pour cette technique et provient de l'anglais \textit{Frequency-Hopping Spread Spectrum}, en français «étalement de spectre par saut de fréquence»\index{etalement@étalement de spectre!étalement de spectre par saut de fréquence}, à opposer à DSSS, \textit{Direct-sequence spread spectrum}, \cad «étalement de spectre à séquence directe»\index{etalement@étalement de spectre!étalement de spectre à séquence directe} (DSSS est un autre procédé associé à \cdma, mais joue plutôt sur un changement de phase du signal là où FHSS modifie les fréquences employées; DSSS ne permet donc pas de résister aussi bien aux attaques par \idx{brouillage}).
 \nomenclature{FHSS}{\textit{Frequency-Hopping Spread Spectrum}}
 \nomenclature{DSSS}{\textit{Direct-sequence Spread Spectrum}}
@@ -54,15 +54,15 @@ En dehors de ce tunnel, les dispositions évoquées jusque là pour échapper au
 Une technique plus simple pour réagir à du brouillage «intelligent»\index{brouillage!brouillage intelligent}, dans le cas où l'attaquant n'émet que quelques bits de données pour corrompre un paquet, consiste à ajouter des codes de \idx{correction d'erreur} aux messages~\cite{PI11}.
 Ces codes demandent un peu plus de calculs que les sommes de contrôle\index{somme de contrôle}; mais tandis que celles-ci ne font que déceler les erreurs, les codes correcteurs\index{correction d'erreur!code correcteur} permettent parfois de les corriger (et d'éviter ainsi la suppression pure et simple du paquet corrompu, qui mènerait à une demande de retransmission des données).
 
-Laissons à présent de côté les tentatives de \idx{brouillage} pour nous intéresser au \idx{routage}: les attaques sur les protocoles sont stoppées par l'exclusion de l'attaquant du réseau, mais les dégâts causés ne se réparent pas seuls.
-Il faut donc relancer les algorithmes afin de rétablir des routes efficaces.
+Laissons à présent de côté les tentatives de \idx{brouillage} pour nous intéresser au \idx{routage}: les attaques sur les protocoles sont stoppées par l'\idx{exclusion} de l'attaquant du réseau, mais les dégâts causés ne se réparent pas seuls.
+Il faut donc relancer les algorithmes afin de rétablir des routes\index{routage!route} efficaces.
 Le problème s'accentue lorsque l'attaquant est parvenu à mettre des nœuds hors service en les poussant à vider leur batterie.
 Des capteurs peuvent également se retrouver coupés du reste du réseau.
 Il faut alors trouver de nouveaux chemins pour les données, éventuellement en recréer si les nœuds sont mobiles\index{mobilité}.
 Un certain niveau de \resilience est donc nécessaire dans la conception des protocoles de \idx{routage}, de sorte qu'ils soient capables de s'adapter à l'évolution du réseau.
 
-Certains mécanismes proposent même l'intervention d'un opérateur humain pour déclencher une modification de certaines routes et «emprisonner» le trafic frauduleux, qui vise à créer des congestions dans le réseau, sur des nœuds \textit{Shield} («bouclier» en anglais) qui se contenteront de le supprimer~\cite{HSP13}.
-Si l'intervention d'un opérateur humain n'est pas forcément souhaitable dans les \rcs, ce mécanisme a pour avantage de désarmer l'attaque sans mettre au courant l'attaquant de son échec (tandis qu'une exclusion\index{exclusion} directe du réseau serait plus facile à remarquer).
+Certains mécanismes proposent même l'intervention d'un opérateur humain pour déclencher une modification de certaines routes\index{routage!route} et «emprisonner» le trafic frauduleux, qui vise à créer des congestions dans le réseau, sur des nœuds \textit{Shield} («bouclier» en anglais) qui se contenteront de le supprimer~\cite{HSP13}.
+Si l'intervention d'un opérateur humain n'est pas forcément souhaitable dans les \rcs, ce mécanisme a pour avantage de désarmer l'attaque sans mettre au courant l'attaquant de son échec (tandis qu'une \idx{exclusion} directe du réseau serait plus facile à remarquer).
 %2}}}
 
     \subsubsection{Notion de \idx{confiance}}
@@ -71,25 +71,25 @@ Il existe, liée aux \IDS, une notion intéressante de «\idx{confiance}» qui p
 Plutôt que de considérer les capteurs comme «tout blancs» ou «tout noirs», beaucoup de systèmes de détection leur attribuent un score de «\reput», qui évolue dans le temps, et reflète la «\idx{confiance}» (en anglais: \textit{trust}) que l'on peut avoir en tel nœud.
 
 Cette notion de \idx{confiance} intervient en plusieurs endroits.
-Elle fait parfois partie intégrante du système de détection.
-Prenons ainsi l'exemple d'un réseau utilisant un système basé sur les signatures d'attaques: les nœuds exécutant l'\IDS surveillent leurs voisins et, lorsqu'une règle est enfreinte de manière exceptionnelle, ne vont pas immédiatement déclarer le coupable comme étant compromis.
+Elle fait parfois partie intégrante du système de détection\index{système de détection d'intrusion}.
+Prenons ainsi l'exemple d'un réseau utilisant un système basé sur les signatures d'attaques\index{signature d'attaque}: les nœuds exécutant l'\IDS surveillent leurs voisins et, lorsqu'une règle est enfreinte de manière exceptionnelle, ne vont pas immédiatement déclarer le coupable comme étant compromis.
 À la place, son score de \reput diminue.
 Ce n'est que lorsque ce score atteint un certain seuil minimal que le nœud est considéré comme étant corrompu.
-Comme nous l'avons évoqué plus haut, la surveillance peut être réalisée de façon distribuée\index{distribution}, ou chacun de son côté.
+Comme nous l'avons évoqué plus haut, la surveillance peut être réalisée de façon distribuée\index{distribution des calculs}, ou chacun de son côté.
 Il en va de même pour la \reput, dont le score de ses voisins peut très bien n'être établi par un nœud que pour son propre usage.
-Mais elle se prête particulièrement bien à la distribution de la tâche: les nœuds peuvent échanger entre eux le niveau de \idx{confiance} qu'ils attribuent à leurs différents voisins, et adapter leurs valeurs en fonction des données reçues: si $A$ se méfie de $B$ et en informe $C$, tandis que $C$ a pleinement \idx{confiance} en $A$, alors $C$ va légèrement décrémenter le score de \reput qu'il attribue à $B$.
+Mais elle se prête particulièrement bien à la distribution\index{distribution des calculs} de la tâche: les nœuds peuvent échanger entre eux le niveau de \idx{confiance} qu'ils attribuent à leurs différents voisins, et adapter leurs valeurs en fonction des données reçues: si $A$ se méfie de $B$ et en informe $C$, tandis que $C$ a pleinement \idx{confiance} en $A$, alors $C$ va légèrement décrémenter le score de \reput qu'il attribue à $B$.
 Si par ailleurs $C$ constate lui aussi des manquements aux règles commis par $B$, alors les nœuds $A$ et $C$ peuvent décider de concert que $B$ doit être considéré comme corrompu: la \idx{confiance} est ici transitive (dans une certaine mesure).
 
 Mais la \idx{confiance} n'est pas qu'une modulation de la détection: elle permet aussi de prendre des décisions plus adaptées à la situation du réseau.
 Ainsi, il est tout à fait possible d'introduire un mécanisme basé sur la \idx{confiance} pour protéger l'\election des \chs dans le réseau~\cite{CPG06}.
 Si les nœuds procèdent à une \election du \CH, ils vont alors prendre en compte différents paramètres (distances, réserves énergétiques\dots) pour déterminer leur vote, parmi lesquels le score de \reput de leurs voisins jouera un rôle prépondérant: ils ne vont pas voter pour un nœud qui est susceptible d'être compromis, mais au contraire pour ceux en lesquels ils ont le plus \idx{confiance}.
 
-Les mêmes décisions peuvent être appliquées à la création de routes pour la retransmission des paquets.
+Les mêmes décisions peuvent être appliquées à la création de routes\index{routage!route} pour la retransmission des paquets.
 Si un capteur a une mauvaise \reput, \cad s'il est peu fiable, par exemple parce qu'il a déjà perdu de nombreux messages, mieux vaut éviter de le choisir comme relais.
-Certains protocoles de routage intègrent, dès leur déploiement, des mécanismes de \idx{confiance}~\cite{ZTLMK13}.
+Certains protocoles de \idx{routage} intègrent, dès leur déploiement, des mécanismes de \idx{confiance}~\cite{ZTLMK13}.
 
 Pour prendre ces décisions de manière efficace, il est nécessaire d'adapter en temps réel le score de \reput de chaque voisin d'un nœud: les mécanismes de \idx{confiance} sont donc indissociables de la surveillance propre aux \IDS.
-Ils se prêtent bien à la détection basée sur les signatures d'attaques, puisqu'il suffit de mettre à jour les scores lorsque des infractions sont constatées (ou de les remonter au bout d'une période donnée sans faute observée).
+Ils se prêtent bien à la détection basée sur les signatures d'attaques\index{signature d'attaque}, puisqu'il suffit de mettre à jour les scores lorsque des infractions sont constatées (ou de les remonter au bout d'une période donnée sans faute observée).
 Ils peuvent aussi être utilisés en conjonction avec des approches plus formelles utilisées notamment dans les modèles de détection par apprentissage~\cite{F-GRL07,MC10}: la logique floue, les réseaux bayésiens, ou même des éléments de la \idx{théorie des jeux} sont utilisés dans de nombreux systèmes pour établir des scores de \idx{confiance} efficaces.
 %2}}}
 %1}}}
@@ -97,7 +97,7 @@ Ils peuvent aussi être utilisés en conjonction avec des approches plus formell
 \subsection{Une vision d'ensemble}
 %{{{1
 La prévention et le couple détection / réaction sont les deux axes de lutte contre les attaques par \dds, et viennent clore cette section.
-Ces mesures doivent être menées conjointement avec des mécanismes de protection des autres propriétés: l'\idx{authentification}, mais aussi l'\idx{intégrité} des messages échangés par exemple, doivent être assurées pour parer à plusieurs types d'attaques.
+Ces mesures doivent être menées conjointement avec des mécanismes de protection des autres propriétés: l'\idx{authentification}, mais aussi l'\integrite des messages échangés par exemple, doivent être assurées pour parer à plusieurs types d'attaques.
 Le \chapref{ea} se termine également ici: après avoir présenté ces différentes problématiques de \secu, puis en particulier les attaques et les principales contre-mesures concernant le \dds, c'est un aperçu global de la \secu dans les \rcs qui a été établi.
 Il vient se joindre aux éléments du \chapref{st}, qui introduit le fonctionnement générique des capteurs et les problèmes qu'ils apportent.
 
@@ -106,7 +106,7 @@ En résumé, ce sont les points suivants qui ont été présentés dans ces deux
     \item Les \rcsfs comportent des capteurs de petite taille, faibles en capacité de calcul, en mémoire et en batterie, qui communiquent entre eux par voie hertzienne.
     \item Les limites en ressources de ces capteurs, par ailleurs utilisés dans de nombreuses applications, imposent dès le déploiement du réseau d'utiliser des algorithmes et des protocoles adaptés à leurs capacités.
     \item La partition en clusters\index{clusterisation} est une opération couramment utilisée pour faciliter et rendre plus efficace la gestion de ces réseaux.
-    \item Ces réseaux sont par ailleurs soumis à des problématiques de \idx{sureté}, de \idx{résilience}, et surtout de \secu: \idx{confidentialité}, \idx{authentification}, \idx{intégrité}, protection contre le \idx{rejeu} et \idx{disponibilité} des communications et des services en sont les principaux exemples.
+    \item Ces réseaux sont par ailleurs soumis à des problématiques de \idx{sureté}, de \resilience, et surtout de \secu: \idx{confidentialité}, \idx{authentification}, \integrite, protection contre le \idx{rejeu} et \idx{disponibilité} des communications et des services en sont les principaux exemples.
     \item Il existe de nombreuses solutions pour garantir ces propriétés, toutes avec leur avantages et leurs inconvénients. La \secu, en informatique, est toujours un compromis entre les performances attendues et le cout supplémentaire impliqué par les mécanismes mis en place.
 \end{itemize}
 Appliquées aux \rcs, ces solutions se doivent naturellement d'être économes en ressources, et particulièrement en énergie nécessaire.

@@ -39,7 +39,7 @@ Aussi la durée de vie du réseau est-elle souvent définie comme la durée éco
 C'est cette deuxième définition qui sera utilisée par la suite.
 Elle implique que pour obtenir une grande durée de vie, la consommation en énergie du réseau doit être équitablement répartie entre un aussi grand nombre de nœuds que possible.
 
-Pour obtenir une méthode efficace sur les deux points évoqués, nous proposons dès lors d'accompagner la mise en place des nœuds de surveillance par deux mécanismes: une partition hiérarchique récursive des nœuds du réseau d'une part, et une élection dynamique des «sentinelles» d'autre part.
+Pour obtenir une méthode efficace sur les deux points évoqués, nous proposons dès lors d'accompagner la mise en place des nœuds de surveillance par deux mécanismes: une partition hiérarchique récursive\index{clusterisation!partition récursive} des nœuds du réseau d'une part, et une sélection dynamique\index{selection@sélection!sélection dynamique} des «sentinelles» d'autre part.
 
 %===============================================================================
     \subsection{Partition hiérarchique\index{clusterisation!clusterisation hiérarchique} du réseau}
@@ -78,38 +78,38 @@ En pratique, la solution utilisée ici est simple: tous les messages en provenan
 
 Les \cns comparent également la taille des trafics entrant et sortant du \ch.
 En cas d'écarts importants (en tenant compte des éventuels facteurs de \idx{compression} des données et des messages ignorés des nœuds considérés compromis), ils peuvent être amenés à penser que le \ch est lui-même malveillant.
-Dans ce cas, l'élection d'un nouveau \CH dans le cluster est déclenchée.
+Dans ce cas, l'\election d'un nouveau \CH dans le cluster est déclenchée.
 
 %===============================================================================
-    \subsection{Sélection dynamique des \cns}
+    \subsection{Sélection dynamique\index{selection@sélection!sélection dynamique} des \cns}
 
         \subsubsection{Motivations}
 La partition\index{clusterisation} du réseau permet de limiter aux seuls \chs les efforts énergétiques dus aux transmissions longues.
 L'inconvénient est que, justement, ces \CH vont épuiser leur batterie beaucoup plus rapidement que s'ils étaient restés des nœuds ordinaires, tirant ainsi le réseau vers une fin de vie précoce.
-Les nœuds ne sont pas toujours désignés \CH «à vie»: ainsi \leach renouvelle périodiquement la partition du réseau, choisissant à chaque itération de nouveaux \chs et entrainant la sélection d'un nouveau lot de \cns.
+Les nœuds ne sont pas toujours désignés \CH «à vie»: ainsi \leach renouvelle périodiquement la partition du réseau, choisissant à chaque itération de nouveaux \chs et entrainant la sélection\index{selection@sélection} d'un nouveau lot de \cns.
 
-Mais tous les protocoles de clusterisation\index{clusterisation!protocole de clusterisation} ne prévoient pas nécessairement de renouvellement régulier de la partition.
+Mais tous les protocoles de clusterisation\index{clusterisation!protocole de clusterisation} ne prévoient pas nécessairement de \idx{renouvellement} régulier de la partition.
 De plus, s'ils n'émettent pas sur de longues distances, les \cns se retrouvent eux aussi à consommer plus d'énergie que les nœuds normaux, puisqu'il doivent sans cesse rester en écoute des transmissions qui les entourent, et analyser le débit de chacun de leurs voisins.
 Pour répartir cette nouvelle charge, qui touche davantage de nœuds, nous proposons d'élire également les \cns de façon dynamique, sur une période plus courte que celle, éventuelle, qui correspond à la \idx{clusterisation} du réseau.
 
-Il est vrai que le renouvellement périodique des \cns rajoute des contraintes et augmente le volume des messages de contrôles à échanger dans le réseau.
+Il est vrai que le renouvellement périodique\index{renouvellement!renouvellement périodique} des \cns rajoute des contraintes et augmente le volume des messages de contrôles à échanger dans le réseau.
 Pour certaines applications des capteurs, ceci peut représenter un inconvénient que la répartition de la charge ne vient pas contrebalancer; mais de manière générale la préservation des réserves énergétiques est primordiale dans les \rcs, et un meilleur équilibre de la charge obtenu pour un prix relativement modeste ne semble pas superflu.
-Autre remarque: en matière de détection d'intrusion, les \IDS les plus récents se vantent souvent de n'engendrer qu'un faible surplus de consommation dans le réseau~\cite{LZYP08}, et la question se pose donc de savoir si la répartition de la charge par un renouvellement dynamique reste pertinente; nous verrons en section suivante qu'avec un système aussi simple que nos \cns, les simulations annoncent un gain important sur la répartition de la charge.
-Il faut également garder à l'esprit que les mécanismes de renouvellement périodique et de sélection des nœuds de surveillance ne sont pas dépendants du mécanisme de détection utilisé (\cad des \cns qui appliquent des règles sur le trafic analysé).
+Autre remarque: en matière de détection d'intrusion, les \IDS les plus récents se vantent souvent de n'engendrer qu'un faible surplus de consommation dans le réseau~\cite{LZYP08}, et la question se pose donc de savoir si la répartition de la charge par un renouvellement dynamique\index{renouvellement!renouvellement dynamique} reste pertinente; nous verrons en section suivante qu'avec un système aussi simple que nos \cns, les simulations annoncent un gain important sur la répartition de la charge.
+Il faut également garder à l'esprit que les mécanismes de renouvellement périodique\index{renouvellement!renouvellement périodique} et de sélection\index{selection@sélection} des nœuds de surveillance ne sont pas dépendants du mécanisme de détection utilisé (\cad des \cns qui appliquent des règles sur le trafic analysé).
 Ainsi, si un \IDS «concurrent»
 \begin{itemize}
     \item présente une bonne capacité à économiser l'énergie du réseau,
     \item s'exécute seulement sur un sous-ensemble des nœuds du réseau,
     \item et ne nécessite pas, pour fonctionner, d'équipement distinct du matériel de base des capteurs,
 \end{itemize}
-alors la dynamique et les méthodes de sélection présentés dans cette thèse peuvent très bien être mis en œuvre pour optimiser détection et consommation.
+alors la dynamique et les méthodes de sélection\index{selection@sélection} présentés dans cette thèse peuvent très bien être mis en œuvre pour optimiser détection et consommation.
 
 Un dernier point reste à signaler.
-Cette solution de renouvellement périodique améliore aussi la sécurité du réseau: si un attaquant cherche à compromettre tous les \cns du cluster, pour pouvoir poursuivre son attaque discrètement, le renouvellement dynamique apporte une parade efficace à l'attaque en complexifiant largement le nombre de cibles à corrompre.
+Cette solution de renouvellement périodique\index{renouvellement!renouvellement périodique} améliore aussi la \secu du réseau: si un attaquant cherche à compromettre tous les \cns du cluster, pour pouvoir poursuivre son attaque discrètement, le renouvellement dynamique\index{renouvellement!renouvellement dynamique} apporte une parade efficace à l'attaque en complexifiant largement le nombre de cibles à corrompre.
 
         \subsubsection{Le choix par le hasard}
-Le renouvellement périodique des capteurs de surveillance peut être réalisé de plusieurs façons.
-Dans ce chapitre, une façon de faire très simple est employée: la sélection des \cns, pour chaque période, est ---~théoriquement~--- aléatoire.
+Le renouvellement périodique\index{renouvellement!renouvellement périodique} des capteurs de surveillance peut être réalisé de plusieurs façons.
+Dans ce chapitre, une façon de faire très simple est employée: la sélection\index{selection@sélection} des \cns, pour chaque période, est ---~théoriquement~--- aléatoire.
 L'aléatoire est une notion délicate en informatique; nous nous contenterons plutôt d'un algorithme capable de générer des nombres dits «pseudo-aléatoires».
 Une façon de procéder, par exemple, est de recourir à un algorithme capable de générer une suite de nombre d'apparence aléatoire, utilisés pour déterminer quels seront les \cns pour la période à venir~\cite{BMM13}.
 Cet algorithme se doit de respecter les points suivants:
@@ -144,42 +144,42 @@ Ce générateur peut alors être utilisé pour calculer des nombres pseudo-aléa
 Il convient naturellement d'attribuer une graine différente à chaque nœud du réseau, afin d'éviter que tous les nœuds produisent la même suite de nombres pseudo-aléatoires.
 Ceci peut être réalisé en initialisant l'algorithme avec une mesure physique ---~après tout, il s'agit de capteurs!~--- dont la valeur est ramenée à l'entier impair le plus proche.
 
-Mais une question subsiste: quelle va-t-être l'entité chargée d'exécuter cet algorithme et de procéder à l'élection des \cns?
-Trois méthodes différentes sont ici proposées: une auto-élection distribuée, une élection centralisée au niveau des \CH, ou alors une élection centralisée au niveau de la \sdb.
+Mais une question subsiste: quelle va-t-être l'entité chargée d'exécuter cet algorithme et de procéder à l'\election des \cns?
+Trois méthodes différentes sont ici proposées: une auto-élection\index{selection@sélection!auto-élection} distribuée, une \election centralisée au niveau des \CH, ou alors une \election centralisée au niveau de la \sdb.
 %===============================================================================
-    \subsection{Processus de sélection des \cns}
+    \subsection{Processus de sélection\index{selection@sélection} des \cns}
 
-        \subsubsection{Auto-élection distribuée}
-Une première solution consiste à réutiliser l'algorithme d'auto-désignation mis en œuvre par \leach, comme présenté sur la \figref{sa:fig:elecself}.
+        \subsubsection{Auto-élection\index{selection@sélection!auto-élection} distribuée}
+Une première solution consiste à réutiliser l'algorithme d'auto-désignation\index{selection@sélection!auto-élection} mis en œuvre par \leach, comme présenté sur la \figref{sa:fig:elecself}.
 Chaque nœud non \CH choisit un nombre pseudo-aléatoire compris entre 0 et 1.
 Si ce nombre est en dessous du pourcentage de \cns désirés dans le réseau (et fixé au moment de l'implémentation par l'utilisateur), ce nœud devient un \cn.
 Autrement, il reste un capteur normal.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.5\linewidth]{\chapterfig/elec_self.pdf}
-    \caption{Auto-élection des \cns}\label{sa:fig:elecself}
+    \caption{Auto-élection\index{selection@sélection!auto-élection} des \cns}\label{sa:fig:elecself}
 \end{figure}
 
 Cette méthode présente deux inconvénients.
 Tout d'abord, elle impose à chaque nœud de calculer un nombre pseudo-aléatoire --- calcul parfois couteux ---, ce qui n'est pas nécessaire avec les deux autres méthodes.
 Ensuite, chaque nœud choisit lui-même de se désigner (ou non) \cn, sans tenir compte de la décision de ses voisins.
-Si bien que l'élection des \cns ne prend en compte à aucun moment la \idx{clusterisation} du réseau.
+Si bien que l'\election des \cns ne prend en compte à aucun moment la \idx{clusterisation} du réseau.
 Il est très peu probable que les \cns ainsi élus soient uniformément répartis entre les différents $2$-clusters du réseau.
 Il est même possible que certains $2$-clusters se retrouvent totalement dépourvus de \cns (et se retrouvent ainsi dans l'incapacité de détecter une attaque).
 
-Ce second point peut être contourné en menant une élection en deux étapes.
+Ce second point peut être contourné en menant une \election en deux étapes.
 Dans un premier temps les nœuds choisissent d'endosser, ou non, le rôle de \cn; les \cns élus signalent alors leur statut au $2$-\CH auquel ils sont associés.
 Au cours de la seconde étape, les $2$-\CH nomment des \cns supplémentaires dans leurs $2$-clusters respectifs si le nombre de signalements reçus au regard du nombre de nœuds dans les $2$-clusters est en dessous d'un pourcentage minimal.
 
-        \subsubsection{Élection centralisée au niveau des \chs}
-La seconde méthode proposée consiste à décharger les nœuds classiques du processus d'auto-désignation, pour le remplacer par une nomination autoritaire réalisée par les $2$-\chs (voir \figref{sa:fig:elecch}).
+        \subsubsection{Élection\index{selection@sélection!election@élection} centralisée au niveau des \chs}
+La seconde méthode proposée consiste à décharger les nœuds classiques du processus d'auto-désignation\index{selection@sélection!auto-élection}, pour le remplacer par une nomination autoritaire réalisée par les $2$-\chs (voir \figref{sa:fig:elecch}).
 Chaque \CH désigne alors un nombre de \cns correspondant au pourcentage indiqué par l'utilisateur.
 Par exemple, si l'on souhaite obtenir dix pour cent de \cns, et qu'un $2$-cluster comporte cent capteurs, le \CH de ce cluster va produire dix nombres pseudo-aléatoires distincts qui seront associés aux identifiants de dix nœuds du cluster.
 Le \CH envoie alors un message à chacun de ces dix nœuds pour leur ordonner de remplir le rôle de \cn sur la période en cours.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.5\linewidth]{\chapterfig/elec_ch.pdf}
-    \caption{Élection des \cns réalisée par les \chs}\label{sa:fig:elecch}
+    \caption{Élection\index{selection@sélection!election@élection} des \cns réalisée par les \chs}\label{sa:fig:elecch}
 \end{figure}
 
 Cette méthode est plus efficace en terme de calculs puisque seul les $2$-\CH ont à appliquer un algorithme de calcul de nombres pseudo-aléatoires.
@@ -190,15 +190,15 @@ Qui plus est, il faut garder à l'esprit que rien n'empêche un nœud compromis 
 
 Cette méthode est néanmoins celle qui est implémentée dans les travaux de la référence~\cite{GMT12}, et que nous reprenons pour nos tests (dont les résultats sont disponibles en \sref{sa:sec:resultats}).
 
-        \subsubsection{Élection centralisée au niveau de la \sdb}
-L'élection centralisée peut également être effectuée au niveau de la \sdb, comme représenté sur la \figref{sa:fig:elecbs}.
+        \subsubsection{Élection\index{selection@sélection!election@élection} centralisée au niveau de la \sdb}
+L'\election centralisée peut également être effectuée au niveau de la \sdb, comme représenté sur la \figref{sa:fig:elecbs}.
 Les $2$-\CH du réseau font alors remonter à la \sdb la liste des nœuds de leurs $2$-clusters respectifs, et celle-ci retourne une liste de \cns pour chacun d'entre eux.
 Les capacités (en mémoire, calcul, énergie) de la \sdb étant considérées comme illimitées, cette méthode a pour avantage de déporter toutes les tâches couteuses dans un environnement «sans contraintes».
 Le calcul des nombres pseudo-aléatoires par la \sdb ne lui coute, pour ainsi dire, rien.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.5\linewidth]{\chapterfig/elec_bs.pdf}
-    \caption{Élection des \cns réalisée par la \sdb}\label{sa:fig:elecbs}
+    \caption{Élection\index{selection@sélection!election@élection} des \cns réalisée par la \sdb}\label{sa:fig:elecbs}
 \end{figure}
 
 En revanche cette méthode n'offre pas une meilleure fiabilité que la précédente.
@@ -208,7 +208,7 @@ Pour parer à cette éventualité, la \sdb pourrait agir autrement lorsqu'elle r
 Plus spécifiquement, elle devrait considérer que les nœuds dont elle n'a pas eu de nouvelles \via les listes des \CH ne sont peut-être pas simplement morts, mais escamotés par un \ch corrompu.
 Ces nœuds disparus devraient donc être considérés comme potentiellement éligibles, de sorte que certains d'entre eux au moins soient déclarés \cns.
 
-L'inconvénient majeur de cette méthode est le fait que la nature distribuée de l'élection (avec tous les avantages qu'apporte un algorithme distribué) est complètement
+L'inconvénient majeur de cette méthode est le fait que la nature distribuée de l'\election (avec tous les avantages qu'apporte un algorithme distribué) est complètement
 perdue.
 
 Les avantages et inconvénients de chacune de ces trois méthodes présentées sont résumés dans la \tabref{sa:table:elec}.
@@ -240,6 +240,6 @@ Les avantages et inconvénients de chacune de ces trois méthodes présentées s
                 \textbullet\;Si le \CH est compromis, il déclare un cluster vide\newline%
                 \textbullet\;Perte de l'aspect centralisé de l'algorithme\tabularnewline
             \bottomrule
-        \end{tabu}
+        \end{tabu}\index{selection@sélection!auto-élection}\index{selection@sélection!election@élection}
     \end{small}
 \end{table}

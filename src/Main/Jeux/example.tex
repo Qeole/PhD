@@ -1,7 +1,7 @@
 % vim: set spelllang=fr foldmethod=marker:
 \section{Exemple d'application}
 \label{tj:sec:example}
-Pour illustrer concrètement le modèle présenté en \sref{tj:sec:model}, nous décrivons le graphe $\G_{ex} = (\S,\A)$ représentant le jeu pour un exemple de réseau.
+Pour illustrer concrètement le modèle présenté en \sref{tj:sec:model}, nous décrivons le graphe\index{jeu!graphe de jeu} $\G_{ex} = (\S,\A)$ représentant le \idx{jeu} pour un exemple de réseau.
 
     \subsection{Machine à états}
 
@@ -34,12 +34,12 @@ Nous définissons quatre états distincts pour les capteurs:
 La machine à états pour un nœud légitime (non compromis) est présentée sur la \figref{tj:fig:autGoodNode}.
 Pour les nœuds non compromis par un attaquant, l'énergie décroit lorsque le composant radio est utilisé, \cad lors de l'écoute ainsi que lors de l'envoi de données.
 Lorsqu'un paquet est reçu, il est d'abord placé en mémoire tampon, avant de subir éventuellement des opérations de traitement (\idx{agrégation}, \idx{compression}, traitement sémantique) puis d'être transmis vers la \sdb.
-Un nœud accumule du gain lorsqu'il envoie ses propres paquets.
-Il n'en accumule pas, en revanche, lorsqu'il ne fait que retransmettre des paquets (opération de routage) envoyés par un autre nœud.
+Un nœud accumule du \idx{gain} lorsqu'il envoie ses propres paquets.
+Il n'en accumule pas, en revanche, lorsqu'il ne fait que retransmettre des paquets (opération de \idx{routage}) envoyés par un autre nœud.
 
 Nous supposons ici qu'un capteur est capable de recharger sa batterie lorsqu'il reste au repos (\cad lorsqu'il boucle sur l'état \idle).
 Ce pourrait être le cas, par exemple, de capteurs équipés de panneaux solaires.
-En pratique, la plupart des capteurs sont incapables de recharger leurs batteries, mais cette supposition nous permet ici de considérer des exécutions de durée infinie sur le jeu, ce qui serait impossible si l'énergie était strictement décroissante.
+En pratique, la plupart des capteurs sont incapables de recharger leurs batteries, mais cette supposition nous permet ici de considérer des exécutions\index{jeu!exécution} de durée infinie sur le \idx{jeu}, ce qui serait impossible si l'énergie était strictement décroissante.
 \begin{figure}[H]
     \centering
     \input{\chapterpath/Automata/GoodNode.tikz}
@@ -56,31 +56,31 @@ Aussi peuvent-ils revenir sur l'état \idle sans retransmettre les paquets enreg
     \caption{Machine à états d'un nœud compromis}\label{tj:fig:autBadNode}
 \end{figure}
 
-\subsection{L'arène}
+\subsection{L'arène\index{jeu!arène}}
 Nous considérons pour cet exercice un réseau contenant trois capteurs sans fil.
 L'un d'entre eux exactement a été compromis par un attaquant.
 Nous nommerons ces capteurs $\gn1$, $\gn2$ et $\bn3$, où $\bn3$ est le nœud compromis.
-Pour représenter le comportement asynchrone des nœuds sur le graphe, nous choisissons de découper le temps en intervalles.
+Pour représenter le comportement asynchrone des nœuds sur le graphe\index{jeu!graphe de jeu}, nous choisissons de découper le temps en intervalles.
 Nous considérons alors que pour chaque intervalle, chaque capteur a le temps d'exécuter exactement une action\,\footnote{À noter qu'une «action» correspond ici à un état, et peut entre autres consister à «rester au repos».}.
-Sur chaque intervalle, les participants jouent de manière séquentielle (les uns après les autres) en se déplaçant sur le graphe.
+Sur chaque intervalle, les participants jouent de manière séquentielle (les uns après les autres) en se déplaçant sur le graphe\index{jeu!graphe de jeu}.
 Nous choisissons un ordre arbitraire pour cette séquence: $\gn1$ joue en premier, puis vient le tour de $\gn2$, et enfin $\bn3$ passe en dernier.
-Comme les nœuds sont supposés jouer de façon \emph{simultanée}, cet ordre utilisé pour la modélisation n'a aucune importance.
+Comme les nœuds sont supposés jouer de façon \emph{simultanée}, cet ordre utilisé pour la \idx{modélisation} n'a aucune importance.
 
-Le graphe qui représente le jeu possède un ensemble d'états symbolisant les différents états du réseau.
-Étant donné que chacun des trois joueurs dispose de quatre états (\idle, \send, \listen, \treatmsg), le réseau dans son ensemble peut en théorie adopter jusqu'à $4^3=64$ états différents.
-En pratique, certains de ces états ne seront jamais atteints: par exemple, un état où tous les joueurs sont simultanément en train de traiter les paquets reçus n'aurait pas de sens, puisqu'il faudrait qu'au moins l'un d'entre eux ait émis ces paquets au tour précédent, et devrait désormais se retrouver au repos.
-La forme donnée aux états du graphe de jeu indique quelle «équipe» s'apprête à jouer: les cercles sont utilisés pour les coups des capteurs légitimes, les rectangles servent pour les actions du nœud compromis\,\footnote{Cette convention n'est en fait pas toujours respectée sur la \figref{tj:fig:autFirstTurn}, car pour simplifier le graphe nous avons fusionné les états identiques (d'où les états possédant des arêtes bouclant sur eux-mêmes), et dans certains cas le joueur $\bn$3 est ainsi amené à agir depuis un état circulaire. En revanche, le code de couleur indiqué sur la figure pour les arêtes est respecté.}.
+Le graphe\index{jeu!graphe de jeu} qui représente le \idx{jeu} possède un ensemble d'états symbolisant les différents états du réseau.
+Étant donné que chacun des trois joueurs\index{joueur} dispose de quatre états (\idle, \send, \listen, \treatmsg), le réseau dans son ensemble peut en théorie adopter jusqu'à $4^3=64$ états différents.
+En pratique, certains de ces états ne seront jamais atteints: par exemple, un état où tous les joueurs\index{joueur} sont simultanément en train de traiter les paquets reçus n'aurait pas de sens, puisqu'il faudrait qu'au moins l'un d'entre eux ait émis ces paquets au tour précédent, et devrait désormais se retrouver au repos.
+La forme donnée aux états du graphe\index{jeu!graphe de jeu} de jeu indique quelle «équipe» s'apprête à jouer: les cercles sont utilisés pour les coups des capteurs légitimes, les rectangles servent pour les actions du nœud compromis\,\footnote{Cette convention n'est en fait pas toujours respectée sur la \figref{tj:fig:autFirstTurn}, car pour simplifier le graphe\index{jeu!graphe de jeu} nous avons fusionné les états identiques (d'où les états possédant des arêtes bouclant sur eux-mêmes), et dans certains cas le \idx{joueur} $\bn$3 est ainsi amené à agir depuis un état circulaire. En revanche, le code de couleur indiqué sur la figure pour les arêtes est respecté.}.
 
-Chaque arête du graphe représente l'action réalisée par le joueur qui a la main.
-Elles correspondent aux arêtes empruntées par les joueurs sur leurs propres machines à états, auxquelles seraient ajoutées des valeur nulles en gain et en énergie pour les deux autres joueurs qui attendent leur tour.
-La \figref{tj:fig:autFirstTurn} présente le premier tour du jeu pour chacun des trois joueurs (autrement dit, le premier intervalle de temps).
+Chaque arête du graphe\index{jeu!graphe de jeu} représente l'action réalisée par le \idx{joueur} qui a la main.
+Elles correspondent aux arêtes empruntées par les joueurs\index{joueur} sur leurs propres machines à états, auxquelles seraient ajoutées des valeur nulles en \idx{gain} et en énergie pour les deux autres joueurs\index{joueur} qui attendent leur tour.
+La \figref{tj:fig:autFirstTurn} présente le premier tour du \idx{jeu} pour chacun des trois joueurs\index{joueur} (autrement dit, le premier intervalle de temps).
 \begin{figure}[p]
     \centering
     \input{\chapterpath/Automata/FirstTurn.tikz}
-    \caption{Sous-ensemble du graphe associé au jeu, représentant le premier tour}\label{tj:fig:autFirstTurn}
+    \caption{Sous-ensemble du graphe\index{jeu!graphe de jeu} associé au jeu, représentant le premier tour}\label{tj:fig:autFirstTurn}
 \end{figure}
-Les états \treatmsg ne peuvent pas être atteints avant le second tour de jeu, puisqu'ils requièrent que l'un des joueurs au moins soit passé auparavant par l'état \listen.
-Comme précisé plus haut, le graphe complet n'a pas d'état final.
+Les états \treatmsg ne peuvent pas être atteints avant le second tour de \idx{jeu}, puisqu'ils requièrent que l'un des joueurs\index{joueur} au moins soit passé auparavant par l'état \listen.
+Comme précisé plus haut, le graphe\index{jeu!graphe de jeu} complet n'a pas d'état final.
 
     \subsection{Conditions de victoire}
 
@@ -90,17 +90,17 @@ Le choix de la condition à retenir dépend du but que cherche à atteindre le n
         \subsubsection{Comportement cupide\index{comportement cupide}}
 Un capteur agissant de manière \emph{cupide} cherche à envoyer le plus de messages possible, tout en restant en vie.
 
-La formule de gain peut alors s'exprimer comme suit: $e_3 > 0 \wedge p_3 \geq \frac16$, ce qui signifie dans cet exemple que pour gagner la partie le nœud compromis doit envoyer un message toutes les 6~étapes.
-Comme une action du nœud compromis n'intervient que toutes les 3~étapes seulement (les deux autres correspondant aux coups des autres joueurs), le nœud compromis doit en fait emprunter une fois sur deux l'arête \startsend.
+La formule de \idx{gain} peut alors s'exprimer comme suit: $e_3 > 0 \wedge p_3 \geq \frac16$, ce qui signifie dans cet exemple que pour gagner la partie\index{jeu!partie} le nœud compromis doit envoyer un message toutes les 6~étapes.
+Comme une action du nœud compromis n'intervient que toutes les 3~étapes seulement (les deux autres correspondant aux coups des autres joueurs\index{joueur}), le nœud compromis doit en fait emprunter une fois sur deux l'arête \startsend.
 
 Dans ce cas il lui est en fait impossible de gagner, puisque l'envoi d'un message consomme ici 2~unités d'énergie, et la recharge de la batterie nécessite trop de «temps» pour permettre un envoi toutes les deux actions.
 L'objectif pourrait bien sûr être adapté à une autre définition d'un comportement «cupide»:\index{comportement cupide} nous pourrions considérer, par exemple, que l'envoi d'un message toutes les 15~étapes peut remplir l'objectif d'un nœud cupide.
 
         \subsubsection{Comportement destructeur}
-Un capteur se comportant de façon \emph{destructrice} cherche à rendre le réseau inutilisable, par exemple en agissant de telle façon que tous les nœuds épuisent leur batterie: son but est alos de demeurer le dernier nœud en état de marche dans le réseau.
-La formule de gain s'écrit dans ce cas $e_3 >0 \wedge e_1 \leq 0 \wedge e_2 \leq 0$.
+Un capteur se comportant de façon \emph{destructrice} cherche à rendre le réseau inutilisable, par exemple en agissant de telle façon que tous les nœuds épuisent leur batterie: son but est alors de demeurer le dernier nœud en état de marche dans le réseau.
+La formule de \idx{gain} s'écrit dans ce cas $e_3 >0 \wedge e_1 \leq 0 \wedge e_2 \leq 0$.
 
         \subsubsection{Comportement perturbateur}
 Un capteur adoptant un comportement \emph{perturbateur} cherche à empêcher ses voisins de transmettre leurs messages, tout en cherchant encore une fois à rester en état de marche.
-Son objectif n'est donc plus de vider la batterie des nœuds, mais seulement de rendre ceux-ci inutiles, de les empêcher d'accumuler du gain.
-La formule de gain devient alors $e_3 >0 \wedge (e_1 \leq 0 \vee p_1\leq0) \wedge (e_2 \leq 0 \vee p_2\leq0)$.
+Son objectif n'est donc plus de vider la batterie des nœuds, mais seulement de rendre ceux-ci inutiles, de les empêcher d'accumuler du \idx{gain}.
+La formule de \idx{gain} devient alors $e_3 >0 \wedge (e_1 \leq 0 \vee p_1\leq0) \wedge (e_2 \leq 0 \vee p_2\leq0)$.

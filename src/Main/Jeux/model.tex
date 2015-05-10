@@ -1,50 +1,50 @@
 % vim: set spelllang=fr foldmethod=marker:
-\section{Jeux quantitatifs infinis sur graphes finis}
+\section{Jeux quantitatifs\index{jeu!jeu quantitatif} infinis sur graphes\index{jeu!graphe de jeu} finis}
 \label{tj:sec:model}
 
 \subsection{Modèle}
 Nous considérons dans la suite un \rcsf, qui ne comporte pas nécessairement de clusters, déployé et en cours de fonctionnement.
 L'un (ou plusieurs) des capteurs a été compromis par un attaquant, et tente d'envoyer un maximum de messages, tout en cessant de relayer les messages de ses voisins.
-Les nœuds non compromis tentent de collaborer entre eux, et ils peuvent être vus comme membres d'une \emph{coalition} dont le but est d'assurer le bon fonctionnement du réseau global.
+Les nœuds non compromis tentent de collaborer entre eux, et ils peuvent être vus comme membres d'une \emph{coalition}\index{coopération!coalition} dont le but\index{jeu!but} est d'assurer le bon fonctionnement du réseau global.
 Le nœud compromis poursuit un objectif différent: il tente d'envoyer le plus de messages possibles.
 Tous les capteurs doivent faire face aux même contraintes énergétiques.
 L'envoi de données est plus couteux pour un capteur, en termes d'énergie, que de rester inactif: envoyer trop de données peut naturellement conduire à l'épuisement des réserves des nœuds.
 
-\subsection{Graphe du jeu}
-L'\emph{arène} du jeu est un graphe~$\G = (\S,\A)$ où $\S = \S_\bn \uplus \S_\gn$ est l'ensemble des états, partitionné entre l'ensemble~$\S_\gn$ des états des capteurs non compromis et les états~$\S_\bn$ des capteurs compromis.
+\subsection{Graphe du jeu\index{jeu!graphe de jeu}}
+L'\emph{arène}\index{jeu!arène} du \idx{jeu} est un graphe\index{jeu!graphe de jeu}~$\G = (\S,\A)$ où $\S = \S_\bn \uplus \S_\gn$ est l'ensemble des états, partitionné entre l'ensemble~$\S_\gn$ des états des capteurs non compromis et les états~$\S_\bn$ des capteurs compromis.
 L'ensemble~$\A$ des arêtes est un sous-ensemble de~$\S \times \S$ tel que pour tout~$q \in \S, \exists q' \in \S, (q,q')\in \A$, autrement dit: il n'existe pas d'état final.
-Le graphe est \emph{pondéré} sur $k$ dimensions, ce qui signifie que l'on fait appel à une fonction~$w: \A \rightarrow \Z^k$ qui assigne des poids pour chaque dimension considérée, à chaque arête du graphe.
+Le graphe\index{jeu!graphe de jeu} est \emph{pondéré} sur $k$ dimensions, ce qui signifie que l'on fait appel à une fonction~$w: \A \rightarrow \Z^k$ qui assigne des poids pour chaque dimension considérée, à chaque arête du graphe\index{jeu!graphe de jeu}.
 
 \subsection{La sémantique}
-Une \emph{configuration} du jeu est un tuple~$(q,p) \in \S \times \Z^k$: $q$ est l'état actuel tandis que $p$ est le gain accumulé.
-Depuis une configuration donnée~$(q,p)$, si l'on emprunte une arête~$e=(q,q')$, alors la configuration suivante est $(q',p+w(e))$.
+Une \emph{configuration}\index{jeu!configuration} du \idx{jeu} est un tuple~$(q,p) \in \S \times \Z^k$: $q$ est l'état actuel tandis que $p$ est le \idx{gain} accumulé.
+Depuis une configuration\index{jeu!configuration} donnée~$(q,p)$, si l'on emprunte une arête~$e=(q,q')$, alors la configuration\index{jeu!configuration} suivante est $(q',p+w(e))$.
 
-Une \emph{exécution} est une séquence infinie de telles configurations.
-Un préfixe fini d'une exécution est appelé un \emph{historique}.
-La partition de~$\S$ détermine le joueur qui, depuis un état, choisira l'arête suivante.
+Une \emph{exécution}\index{jeu!exécution} est une séquence infinie de telles configurations\index{jeu!configuration}.
+Un préfixe fini d'une exécution\index{jeu!exécution} est appelé un \emph{historique}\index{jeu!historique}.
+La partition de~$\S$ détermine le \idx{joueur} qui, depuis un état, choisira l'arête suivante.
 
-Une \emph{stratégie}, pour un joueur donné, est une fonction qui détermine le prochain état qui sera atteint (autrement dit, l'arête qui sera empruntée): ainsi $\sigma_\bn: \S^* \S_\bn \rightarrow \S$ et $\sigma_\gn: \S^* \S_\gn \rightarrow \S$.
+Une \emph{\idx{stratégie}}, pour un \idx{joueur} donné, est une fonction qui détermine le prochain état qui sera atteint (autrement dit, l'arête qui sera empruntée): ainsi $\sigma_\bn: \S^* \S_\bn \rightarrow \S$ et $\sigma_\gn: \S^* \S_\gn \rightarrow \S$.
 
-Si l'on considère une paire de ces stratégies ainsi qu'une configuration initiale donnée, le jeu produit une unique exécution appelée \emph{résultat} des stratégies, et notée: $\issue(\sigma_\bn,\sigma_\gn)$.
+Si l'on considère une paire de ces stratégies\index{stratégie} ainsi qu'une configuration\index{jeu!configuration} initiale donnée, le \idx{jeu} produit une unique exécution\index{jeu!exécution} appelée \emph{résultat} des stratégies\index{stratégie}, et notée: $\issue(\sigma_\bn,\sigma_\gn)$.
 
 \begin{remark}
-Toutes les notions définies ci-dessus s'étendent naturellement au cas des jeux impliquant plus de deux joueurs.
+Toutes les notions définies ci-dessus s'étendent naturellement au cas des jeux\index{jeu} impliquant plus de deux joueurs\index{joueur}.
 \end{remark}
 
 \subsection{Conditions de victoire}
 
-Nous considérons ici des jeux à somme nulle: le but des capteurs «sains» n'est pas d'atteindre un gain fixé, mais de faire en sorte que les capteurs compromis perdent la partie.
-D'une manière générale, une \emph{condition de victoire} est un sous-ensemble des exécutions du jeu.
+Nous considérons ici des jeux à somme nulle\index{jeu!jeu a somme nulle@jeu à somme nulle}: le but\index{jeu!but} des capteurs «sains» n'est pas d'atteindre un \idx{gain} fixé, mais de faire en sorte que les capteurs compromis perdent la partie\index{jeu!partie}.
+D'une manière générale, une \emph{condition de victoire} est un sous-ensemble des exécutions\index{jeu!exécution} du \idx{jeu}.
 Pour des raisons pratiques, les conditions de victoire étudiées dans la littérature sont celles qui peuvent être exprimées de manière finie, aussi appelées conditions $\omega$-régulières~\cite{GTW02}, et celles qui sont basées sur les valeurs de compteurs.
 
-Dans notre cas, les dimensions relatives aux poids correspondent soit à un niveau d'énergie, soit à un gain.
-Elles peuvent donc être dissociées en deux ensembles: $k_e$ dimensions relatives à l'énergie, et $k_v$ relatives aux gains.
-Une configuration du jeu devient alors $(q,\val,\energ)$.
+Dans notre cas, les dimensions relatives aux poids correspondent soit à un niveau d'énergie, soit à un \idx{gain}.
+Elles peuvent donc être dissociées en deux ensembles: $k_e$ dimensions relatives à l'énergie, et $k_v$ relatives aux gains\index{gain}.
+Une configuration\index{jeu!configuration} du \idx{jeu} devient alors $(q,\val,\energ)$.
 Les niveaux d'énergie doivent rester supérieurs à zéro, quelles que soient leurs valeurs par ailleurs.
-Les gains peuvent être négatifs, bien que le but des joueurs soit de le maximiser.
-Comme l'on considère des exécutions infinies, il est plus pertinent de considérer la moyenne du gain sur la durée des exécutions, \cad de prendre le \emph{gain moyen} pour objectif.
+Les gains\index{gain} peuvent être négatifs, bien que le but\index{jeu!but} des joueurs\index{joueur} soit de le maximiser.
+Comme l'on considère des exécutions\index{jeu!exécution} infinies, il est plus pertinent de considérer la moyenne du \idx{gain} sur la durée des exécutions\index{jeu!exécution}, \cad de prendre le \emph{gain moyen}\index{gain!gain moyen} pour objectif.
 
-L'ensemble des exécutions victorieuses pour un joueur est constituée des exécutions qui vérifient une \emph{formule de gain} donnée, elle-même définie par la grammaire suivante:
+L'ensemble des exécutions\index{jeu!exécution} victorieuses pour un \idx{joueur} est constitué des exécutions\index{jeu!exécution} qui vérifient une \emph{formule de gain}\index{gain!formule de gain} donnée, elle-même définie par la grammaire suivante:
 \[ \varphi ::= \varphi \vee \varphi \mid \varphi \wedge \varphi \mid \neg\mathit{at}
 \hspace{6em}
 \mathit{at} ::= p_e \bowtie c \mid p_v \bowtie c \]
@@ -53,32 +53,32 @@ où:
     \item $c \in \N$;
     \item $\bowtie\ \in \{\geq,>\}$ est un opérateur de comparaison;
     \item $p_e$ est une composante relative à l'énergie;
-    \item $p_v$ est une composante relative au gain.
+    \item $p_v$ est une composante relative au \idx{gain}.
 \end{itemize}
 
 La sémantique employée est la suivante:
 \begin{itemize}
-    \item une exécution $\rho$ satisfait un atome $p_e \bowtie c$ si pour chaque $i \in \N$, $\energ(\rho_i)_e \bowtie c$.
-    \item une exécution $\rho$ satisfait un atome $p_v \geq c$ si $\limsup_{n \rightarrow \infty} \frac{\val(\rho_{\leq n})_v}{n} \geq c$.
+    \item une exécution\index{jeu!exécution} $\rho$ satisfait un atome $p_e \bowtie c$ si pour chaque $i \in \N$, $\energ(\rho_i)_e \bowtie c$.
+    \item une exécution\index{jeu!exécution} $\rho$ satisfait un atome $p_v \geq c$ si $\limsup_{n \rightarrow \infty} \frac{\val(\rho_{\leq n})_v}{n} \geq c$.
 \end{itemize}
 Autrement dit, pour une composante donnée, on considère la somme de tous les poids divisée par le nombre d'étapes menées.
-Puisque les exécutions sont infinies, on considère la limite de la moyenne pour des préfixes de taille croissant vers l'infini.
+Puisque les exécutions\index{jeu!exécution} sont infinies, on considère la limite de la moyenne pour des préfixes de taille croissant vers l'infini.
 Comme la limite en elle-même n'existe pas toujours (si la valeur oscille, par exemple), nous choisissons la limite supérieure.
-Cela s'accorde avec l'idée que le réseau considère le pire scénario possible: le joueur gagne si, au pire, son gain moyen repasse périodiquement au-dessus de $c$ lorsque la longueur du préfixe de l'exécution tend vers l'infini (bien que l'utilisation de la limite inférieure soit également possible, elle conduirait à la conception d'un modèle différent (d'une vision différente du problème), qui serait par ailleurs plus compliqué à résoudre).
+Cela s'accorde avec l'idée que le réseau considère le pire scénario possible: le \idx{joueur} gagne si, au pire, son gain moyen\index{gain!gain moyen} repasse périodiquement au-dessus de $c$ lorsque la longueur du préfixe de l'exécution\index{jeu!exécution} tend vers l'infini (bien que l'utilisation de la limite inférieure soit également possible, elle conduirait à la conception d'un modèle différent (d'une vision différente du problème), qui serait par ailleurs plus compliqué à résoudre).
 
 La satisfaction d'une combinaison booléenne d'atomes est définie de la manière classique.
 La négation ne peut être appliquée que sur des atomes.
 On appelle \emph{littéral} un atome ou sa négation.
-Lors de la résolution des jeux, on considérera le \emph{fragment positif} de cette logique, \cad des conjonctions\index{conjonction} de littéraux.
-Une exécution devient ainsi gagnante si la formule est satisfaite, ce que l'on note $\rho\vDash\varphi$.
+Lors de la résolution des jeux\index{jeu}, on considérera le \emph{fragment positif} de cette logique, \cad des conjonctions\index{conjonction} de littéraux.
+Une exécution\index{jeu!exécution} devient ainsi gagnante si la formule est satisfaite, ce que l'on note $\rho\vDash\varphi$.
 
-Les gains des joueurs débuteront avec la valeur $0$, tandis que les niveaux en énergie seront crédités dès le début du jeu d'une valeur strictement positive, appelée \emph{crédit initial}.
+Les gains\index{gain} des joueurs\index{joueur} débuteront avec la valeur $0$, tandis que les niveaux en énergie seront crédités dès le début du \idx{jeu} d'une valeur strictement positive, appelée \emph{crédit initial}.
 
 \subsection{Problèmes de décision}
 
 Les problèmes de décisions qui sont étudiés dans ce contexte sont les suivants:
 
 \begin{itemize}
-    \item \textbf{Problème de victoire:} étant données une configuration initiale ainsi qu'une formule de gain $\varphi$, existe-t-il une stratégie $\sigma_\bn$ pour le capteur compromis telle que pour toute stratégie $\sigma_\gn$ des capteurs «sains», $\issue(\sigma_\bn,\sigma_\gn) \vDash \varphi$?
-    \item \textbf{Problème du crédit initial:} étant donnés un état initial $q$ ainsi qu'une formule de gain, existe-t-il une valeur $\chi \in \N$ telle que le problème de victoire basé sur la configuration $(q,0^{k_p},\chi^{k_e})$ ait une réponse positive?
+    \item \textbf{Problème de victoire:} étant données une configuration\index{jeu!configuration} initiale ainsi qu'une formule de gain\index{gain!formule de gain} $\varphi$, existe-t-il une \idx{stratégie} $\sigma_\bn$ pour le capteur compromis telle que pour toute \idx{stratégie} $\sigma_\gn$ des capteurs «sains», $\issue(\sigma_\bn,\sigma_\gn) \vDash \varphi$?
+    \item \textbf{Problème du crédit initial:} étant donnés un état initial $q$ ainsi qu'une formule de gain\index{gain!formule de gain}, existe-t-il une valeur $\chi \in \N$ telle que le problème de victoire basé sur la configuration\index{jeu!configuration} $(q,0^{k_p},\chi^{k_e})$ ait une réponse positive?
 \end{itemize}

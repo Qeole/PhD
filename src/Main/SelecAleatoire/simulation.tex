@@ -4,7 +4,7 @@
 %===============================================================================
     \subsection{Modèle de la simulation}\label{sa:ssec:modelsim}
 
-Afin d'étudier les avantages concrets qu'apporte l'élection dynamique des \cns, nous avons réalisé une série de simulations à l'aide du logiciel \nsii~\cite{ns2,ns3}.
+Afin d'étudier les avantages concrets qu'apporte l'\elecdyn des \cns, nous avons réalisé une série de simulations à l'aide du logiciel \nsii~\cite{ns2,ns3}.
 Les résultats obtenus sont présentés dans cette section.
 Ils sont issus de tests simulant le comportement d'un cluster qui se présente sous la forme d'une grille régulière de dix nœuds de côté par dix (voir \figref{sa:fig:grille}).
 Nous supposons, lorsque la question se pose, que c'est le protocole \leach qui a été mis en œuvre pour établir ce cluster.
@@ -20,7 +20,7 @@ Les caractéristiques du cluster étudié sont les suivantes:
     \item le \ch est placé au centre géométrique de la grille;
     \item la grille contient cent capteurs, disposés régulièrement à chaque nœud de la grille;
     \item chaque capteur peut communiquer directement avec le \ch; autrement dit, chaque nœud a une portée au moins équivalente à la distance $\frac{a \sqrt{2}}{2}$, soit une sphère de rayon égal à la moitié de la diagonale du carré. Chaque capteur, y compris ceux situés dans les coins du carré, peut ainsi communiquer avec le \ch sans intermédiaire. Aucun ajustement de la puissance de transmission n'est effectué par les capteurs;
-    \item les \cns sont élus selon la méthode statique (unique sélection en début de simulation) ou bien dynamique (élection renouvelée périodiquement), selon le cas.
+    \item les \cns sont élus selon la méthode statique (unique sélection\index{selection@sélection} en début de simulation) ou bien dynamique (\election renouvelée périodiquement), selon le cas.
 \end{itemize}
 
 %===============================================================================
@@ -53,8 +53,8 @@ La \figref{sa:fig:detec-nbcn} présente le taux de détection du nœud compromis
 Au cours de la seconde période de la simulation impliquant dix \cns, nous obervons qu'aucun \cn n'a détecté le nœud compromis: les \cns n'étaient donc pas répartis efficacement dans le cluster.
 Lorsque leur nombre monte à quinze, il y a, en moyenne sur les périodes, trois \cns qui détectent le capteur corrompu.
 Lorsque ce nombre s'accroit encore, il n'y a plus d'évolution notable.
-Quinze \cns semblent donc être une mesure idéale pour notre réseau, si l'on considère une élection statique.
-En revanche, on peut très bien descendre à dix \cns si l'on envisage un processus d'élection dynamique: le nœud compromis ne sera peut-être pas détecté sur une période donnée, mais le renouvellement rapide des \cns permet de s'assurer qu'il sera détecté rapidement sur la période suivante.
+Quinze \cns semblent donc être une mesure idéale pour notre réseau, si l'on considère une \elecstat.
+En revanche, on peut très bien descendre à dix \cns si l'on envisage un processus d'\elecdyn: le nœud compromis ne sera peut-être pas détecté sur une période donnée, mais le \idx{renouvellement} rapide des \cns permet de s'assurer qu'il sera détecté rapidement sur la période suivante.
 On note par ailleurs que jusqu'à quarante pour cent (soit quatre nœuds sur dix) ont pu détecter simultanément le nœud compromis sur les périodes~7,~8~et~9.
 \begin{figure}[t]
     \centering
@@ -68,7 +68,7 @@ La valeur de $\lambda_c$ a elle aussi un rôle à jouer dans la détection: plus
     \includegraphics{\chapterfig/plot_detection-txRate.pdf}
     \caption{Taux de détection en fonction de $\lambda_c$}\label{sa:fig:detection-txRate}
 \end{figure}
-Mais ici encore, le renouvellement rapide des \cns apporte une meilleure détection, puisque statistiquement, davantage de voisins proches du nœud compromis se retrouveront \cns à un moment ou l'autre au cours de la simulation.
+Mais ici encore, le \idx{renouvellement} rapide des \cns apporte une meilleure détection, puisque statistiquement, davantage de voisins proches du nœud compromis se retrouveront \cns à un moment ou l'autre au cours de la simulation.
 La courbe présentée en \figref{sa:fig:detection-txRate} illustre cet état de fait.
 
 %===============================================================================
@@ -91,7 +91,7 @@ Les paramètres utilisés pour les simulations présentées dans cette sous-sect
     \end{tabular}
 \end{table}
 
-L'histogramme donné en \figref{sa:fig:conso-moyenne} expose la consommation en énergie des nœuds, pour la méthode d'élection statique et pour la méthode dynamique, en fonction du pourcentage de \cns.
+L'histogramme donné en \figref{sa:fig:conso-moyenne} expose la consommation en énergie des nœuds, pour la méthode d'\elecstat et pour la méthode dynamique, en fonction du pourcentage de \cns.
 \begin{figure}[!b]
     \centering
     \includegraphics{\chapterfig/plot_mean.pdf}
@@ -183,5 +183,5 @@ Le nombre de \cns ayant détecté l'attaque est indiqué sur chaque période de 
     \caption{Détection des attaques de \dds}\label{sa:fig:detection-dos}
 \end{figure}
 Après la quatrième minute de simulation, tous les \cns élus par la méthode statique ont stoppé leur activité par manque d'énergie, et les attaques ne peuvent plus être détectées.
-Avec la méthode dynamique, une moyenne approximative de 6,5~nœuds en vie sur~10 détecte le nœud compromis au cours de chaque période de 60~secondes séparant deux élections.
+Avec la méthode dynamique, une moyenne approximative de 6,5~nœuds en vie sur~10 détecte le nœud compromis au cours de chaque période de 60~secondes séparant deux élections\index{selection@sélection!election@élection}.
 Le capteur malveillant est toujours détecté par plus d'un nœud en moyenne après une demi-heure de simulation.

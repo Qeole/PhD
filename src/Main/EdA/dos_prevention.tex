@@ -7,7 +7,7 @@
     La \secu est transversale à l'ensemble des domaines d'études en informatique, et la protection contre le déni de service\index{deni@déni de service}… est elle-même liée aux autres problématiques de \secu.
 Il faut entendre par là que si des failles du système compromettant l'\idx{authentification} des agents ou l'\integrite des données peuvent également être exploitées d'une façon ou d'une autre pour nuire au bon fonctionnement du réseau, alors l'attaque en question vient également se classer parmi les attaques de \dds.
 
-De manière plus concrète, assurer correctement l'\idx{authentification} des nœuds du réseau empêchera un attaquant de mener des attaques basées sur l'usurpation de l'identité d'un autre nœud.
+De manière plus concrète, assurer correctement l'\idx{authentification} des nœuds du réseau empêchera un attaquant de mener des attaques basées sur l'usurpation de l'identité\index{usurpation d'identité} d'un autre nœud.
 Les attaques par \desync, ou la \idx{falsification} d'accusés de réception par exemple, deviennent inapplicables.
 Si des mécanismes permettant de limiter le \idx{rejeu} de paquets capturés sont rajoutés, l'ampleur des attaques Sybil\index{attaque Sybil} ainsi que des attaques par trou de ver\index{trou!trou de ver} se verront fortement réduites.
 La protection de l'\integrite des données assure de son côté l'échec de toute tentative d'\idx{altération} des valeurs transmises lors des opérations de \idx{routage}.
@@ -20,13 +20,13 @@ De nombreuses architectures de sécurité\index{architecture de sécurité}, qui
 \pagebreak %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     \subsubsection{Des protocoles de \idx{routage} spécifiques}
 %{{{2
-Toujours dans le but de prévenir les attaques, il est possible d'utiliser des protocoles de routage spécifiquement étudiés pour limiter les risques.
-Ainsi, le protocole de routage \aodv (\textit{Ad hoc On-demand Distance Vector routing}), très utilisé dans les \rcs, a fait l'objet de propositions destinées à améliorer sa résistance aux attaques de \dds de type \textit{blackhole}\index{trou!trou noir} et \textit{sinkhole}\index{trou!puits}: une étude propose par exemple de faire vérifier par chaque nœud, lors de la création des routes, que ses voisins de deuxième degré sont bel et bien accessibles~\cite{DLA02}.
-Ainsi pour chaque nœud $x$ ayant un voisin $n$ qui lui propose une route vers une destination donnée, $x$ demande à $n$ quel est le prochain saut $n+1$ sur cette route et tente de contacter ce nœud $n+1$ pour vérifier qu'il est effectivement accessible.
-Si $n+1$ répond, alors $n$ est digne de \idx{confiance} pour cette route; puisqu'il est digne de \idx{confiance}, on admet qu'il pourra à son tour vérifier l'accessibilité du nœud $n+2$ à travers le saut annoncé par $n+1$, et ainsi de suite tout au long de la route empruntée pour les données.
+Toujours dans le but de prévenir les attaques, il est possible d'utiliser des protocoles de \idx{routage} spécifiquement étudiés pour limiter les risques.
+Ainsi, le protocole de \idx{routage} \aodv (\textit{Ad hoc On-demand Distance Vector routing}), très utilisé dans les \rcs, a fait l'objet de propositions destinées à améliorer sa résistance aux attaques de \dds de type \textit{blackhole}\index{trou!trou noir} et \textit{sinkhole}\index{trou!puits}: une étude propose par exemple de faire vérifier par chaque nœud, lors de la création des routes\index{routage!route}, que ses voisins de deuxième degré sont bel et bien accessibles~\cite{DLA02}.
+Ainsi pour chaque nœud $x$ ayant un voisin $n$ qui lui propose une route\index{routage!route} vers une destination donnée, $x$ demande à $n$ quel est le prochain saut $n+1$ sur cette route\index{routage!route} et tente de contacter ce nœud $n+1$ pour vérifier qu'il est effectivement accessible.
+Si $n+1$ répond, alors $n$ est digne de \idx{confiance} pour cette route\index{routage!route}; puisqu'il est digne de \idx{confiance}, on admet qu'il pourra à son tour vérifier l'accessibilité du nœud $n+2$ à travers le saut annoncé par $n+1$, et ainsi de suite tout au long de la route\index{routage!route} empruntée pour les données.
 
-Toujours pour parer aux attaques sur le routage, d'autres méthodes se basent sur des mécanismes de \idx{redondance} et de \resilience, pour faire en sorte que si l'une des routes se révèle défectueuse, d'autres exemplaires des paquets, envoyés par des routes distinctes, puissent attendre leur destination.
-Des mécanismes tels que le \idx{partage de secret} peuvent être utilisés à cette fin de redondance, pour limiter l'augmentation du volume de données envoyées~\cite{MMB13}.
+Toujours pour parer aux attaques sur le \idx{routage}, d'autres méthodes se basent sur des mécanismes de \idx{redondance} et de \resilience, pour faire en sorte que si l'une des routes\index{routage!route} se révèle défectueuse, d'autres exemplaires des paquets, envoyés par des routes\index{routage!route} distinctes, puissent attendre leur destination.
+Des mécanismes tels que le \idx{partage de secret} peuvent être utilisés à cette fin de \idx{redondance}, pour limiter l'augmentation du volume de données envoyées~\cite{MMB13}.
 %2}}}
 
     \subsubsection{Prévenir la compromission des capteurs}
@@ -39,7 +39,7 @@ L'usage d'antennes directionnelles\index{antenne directionnelle} peut également
 Au final, un attaquant correctement équipé pourra toujours trouver un capteur en procédant par triangulation du signal électromagnétique.
 
 Il peut alors devenir intéressant de cacher à l'attaquant quels sont les nœuds qui représenteraient le plus d'intérêt pour lui.
-Un exemple traité est le jeu des «chasseurs de panda»: des capteurs dispersés dans l'habitat naturel d'un panda suivent les déplacements de l'animal et les rapportent à une \sdb.
+Un exemple traité est le \idx{jeu} des «chasseurs de panda»: des capteurs dispersés dans l'habitat naturel d'un panda suivent les déplacements de l'animal et les rapportent à une \sdb.
 Mais des braconniers recherchent l'animal et tentent d'utiliser les données du réseau en vue de le localiser plus facilement.
 S'il est impossible de cacher le signal des capteurs et d'empêcher les attaquants d'accéder directement aux machines, il est en revanche possible de déployer des mécanismes pour empêcher les chasseurs de savoir quel est le capteur qui renvoie à un instant donné les informations sur la présence du panda dans son secteur.
 Un mécanisme pour disséminer l'information, basé sur le modèle des épidémies, a ainsi été proposé dans cet exemple~\cite{KDA14}.
@@ -55,13 +55,13 @@ Si le nœud tentait malgré tout de reprendre son activité au-delà de la péri
 %{{{3
 Si un attaquant parvient à accéder physiquement à un capteur, il devient très compliqué de l'empêcher d'accéder au contenu de la mémoire de l'appareil, et/ou de le reprogrammer selon ses besoins.
 Des méthodes de \idx{chiffrement} de la mémoire (principalement pour la mémoire non volatile) existent, mais sont peu implémentés sur les capteurs, car ils augmentent significativement la consommation en ressources de la machine et diminuent ses performances.
-Des modifications malveillantes du code exécuté par un nœud peuvent parfois être détectées, comme nous le verrons lorsque nous traiterons des systèmes de détection d'intrusion machine en \sssref{ea:sss:hids}.
+Des modifications malveillantes du code exécuté par un nœud peuvent parfois être détectées, comme nous le verrons lorsque nous traiterons des \idss machine en \sssref{ea:sss:hids}.
 
 Mais outre les accès physiques directs, un attaquant peut très bien tenter de compromettre à distance un capteur, en exploitant des failles logicielles.
-Des injections de code ont déjà été menées avec succès sur des capteurs, en utilisant par exemple des dépassements de tampons pour injecter une fausse pile d'exécution et mener une attaque dite \textit{return-into-libc}~\cite{FC08}.
+Des injections\index{injection} de code ont déjà été menées avec succès sur des capteurs, en utilisant par exemple des dépassements de tampons pour injecter une fausse pile d'exécution et mener une attaque dite \textit{return-into-libc}~\cite{FC08}.
 La sécurité logicielle\index{securité@sécurité!sécurité logicielle} des capteurs doit donc être vérifiée avant même le déploiement du réseau.
 Les bonnes pratiques d'ordre générale en \secu s'appliquent ici comme ailleurs: de bonne pratique de développement pour le système sont indispensables, de même que la désactivation des services non utilisés (qui de toute façon consommeraient inutilement de l'énergie).
-La sécurité du système\index{securité@sécurité!sécurité système} peut éventuellement être spécifiquement renforcée, comme par exemple avec \mbox{grsecurity} pour des systèmes basés sur le noyau Linux~\cite{GFN11}.
+La sécurité du système\index{securité@sécurité!sécurité système} peut éventuellement être spécifiquement renforcée, comme par exemple avec \mbox{\idx{grsecurity}} pour des systèmes basés sur le noyau \idx{Linux}~\cite{GFN11}.
 %3}}}
 %2}}}
 %1}}}

@@ -1,8 +1,8 @@
 % vim: set spelllang=fr foldmethod=marker foldlevel=1:
-\subsection{Détecter les attaques: systèmes de détection d'intrusion}
+\subsection{Détecter les attaques: \idss}
 %{{{1
 
-    \subsubsection{Différents systèmes de détection d'intrusion}
+    \subsubsection{Différents \idss}
 %{{{2
 La détection des attaques par \dds passe par la mise en place d'un système spécifique, apte à collecter des indices permettant de déterminer si une attaque a lieu et, si possible, quelle en est l'origine.
 On parle de «\ids», ou \IDS pour \textit{Intrusion Detection System}.
@@ -55,15 +55,15 @@ La partition du réseau en clusters\index{clusterisation} va de fait permettre l
 Il est également intéressant de noter que la clusterisation\index{clusterisation} en soi d'un réseau est un mécanisme efficace pour limiter la portée de la plupart des attaques de \dds, dont les dommages seront en principe circonscrits au cluster dans lequel elles sont menées.
 Une exception concerne toutefois les attaques qui sont menées avec succès contre un \ch (notamment lorsque celui-ci se voit compromis), puisque ce peut être alors le cluster entier qui se retrouve hors service.
 
-        \paragraph{Selon la \idx{distribution} des calculs}
+        \paragraph{Selon la \idx{distribution des calculs}}
 La détection passe par la collecte puis le traitement d'indices sur le fonctionnement des nœuds ou du réseau global~\cite{BMS13}.
 Collecte comme traitement peuvent être réalisés par différentes entités ou associations d'entités, à savoir:
 \begin{itemize}
     \item le traitement, les calculs peuvent être \textbf{centralisés} et réalisés seulement par la \sdb, à laquelle les capteurs font remonter les informations brutes relevées sur le fonctionnement du réseau. Dans certains cas extrêmes, même la collecte d'indices n'est réalisée que par la \sdb;
     \item chaque capteur peut implémenter son propre \ids: «\textbf{chacun pour soi}», quitte à garder pour lui ses conclusions sur le statut des autres nœuds. À l'inverse de la solution précédente, chaque capteur réalise alors de bout en bout les opérations de surveillance;
     \item la détection peut être menée par des \textbf{agents mobiles}\index{mobilité}, qui se déplacent de nœud en nœud dans un \rc autrement statiques (ou peu mobiles en comparaison avec les agents de surveillance). Ces agents mobiles\index{mobilité} disposent en principe de ressources plus importantes que les capteurs ordinaires. Cette configuration ne peut bien sûr pas être déployée pour tous les usages des \rcs;
-    \item la collecte d'informations peut être \textbf{distribuée entre les nœuds}\index{distribution} situés sur un même niveau d'horizontalité dans l'architecture du réseau: cette configuration leur permet d'échanger des informations entre eux, notamment des indices de \idx{confiance}, et de déclencher des observations coordonnées lorsqu'un nœud «suspecte» un pair d'être compromis, sans en avoir la «certitude». Lorsqu'un capteur est jugé définitivement compromis, l'information est partagée entre les nœuds. Dans certains systèmes, les calculs eux-mêmes peuvent être distribués;
-    \item enfin, la distribution peut également être réalisée de façon \textbf{hiérarchique}, sur un plan vertical, dans les réseaux clusterisés\index{clusterisation!réseau clusterisé}. Il y a alors interaction entre les membres d'un cluster et leur \ch, qui se charge au minimum de la propagation des alertes, et parfois également de mener les calculs.
+    \item la collecte d'informations peut être \textbf{distribuée entre les nœuds}\index{distribution des calculs} situés sur un même niveau d'horizontalité dans l'architecture du réseau: cette configuration leur permet d'échanger des informations entre eux, notamment des indices de \idx{confiance}, et de déclencher des observations coordonnées lorsqu'un nœud «suspecte» un pair d'être compromis, sans en avoir la «certitude». Lorsqu'un capteur est jugé définitivement compromis, l'information est partagée entre les nœuds. Dans certains systèmes, les calculs eux-mêmes peuvent être distribués;
+    \item enfin, la distribution\index{distribution des calculs} peut également être réalisée de façon \textbf{hiérarchique}, sur un plan vertical, dans les réseaux clusterisés\index{clusterisation!réseau clusterisé}. Il y a alors interaction entre les membres d'un cluster et leur \ch, qui se charge au minimum de la propagation des alertes, et parfois également de mener les calculs.
 \end{itemize}
 
 La gestion de la collecte et des calculs vont bien évidemment influencer l'opérateur du réseau sur le choix du type de méthode de détection (voir plus haut) à mettre en place.
@@ -106,7 +106,7 @@ Ces règles sont construites à partir de la «signature» des attaques connues\
 Les règles peuvent être nombreuses et variées, en voici quelques exemples représentatifs.\index{signature d'attaque}
 \begin{itemize}
     \item \textbf{Règle sur la fréquence des envois}: le délai entre deux paquets consécutifs, ou plus généralement la fréquence des messages émis sur un intervalle de temps par le nœud surveillé, ne doivent pas dépasser un certain seuil (minimal si l'on parle de délai, maximal pour une fréquence). Cette règle empêche un capteur de procéder à des attaques par \deluge, ou bien d'accaparer\index{comportement cupide!accaparement} le médium de transmission, sans être détecté.
-    \item \textbf{Règle de retransmission}: les messages reçus par un nœud relais, mais à destination d'un autre nœud, doivent impérativement être retransmis par ce relais au nœud suivant sur la route définie pour ces paquets, ceci afin de détecter les attaques de type \textit{blackhole} ou \textit{sinkhole}.
+    \item \textbf{Règle de retransmission}: les messages reçus par un nœud relais, mais à destination d'un autre nœud, doivent impérativement être retransmis par ce relais au nœud suivant sur la route\index{routage!route} définie pour ces paquets, ceci afin de détecter les attaques de type \textit{blackhole} ou \textit{sinkhole}.
     \item \textbf{Règle sur le délai de retransmission}: la retransmission en question par le relais ne doit pas être effectuée après un certain délai, afin d'éviter des ralentissements importants dans le réseau (cette règle est très proche de la précédente, qui est bien obligée de se baser sur un délai limite pour considérer que le paquet ne sera pas retransmis).
     \item \textbf{Règle sur l'\integrite}: Le contenu du message retransmis par le relais ne doit pas être altéré. Cette règle est bien entendu inapplicable lorsque le relais est censé effectuer un traitement (\idx{agrégation}, traitement sémantique\dots) sur ce contenu avant de le retransmettre. Les attaques visées sont principalement celles visant l'\integrite des paquets.
     \item \textbf{Règle sur la répétition}: un message ne peut être transmis par un nœud donné au plus qu'un certain nombre de fois. Si ce seuil est dépassé, le nœud peut être suspecté de vouloir influencer les résultats collectés par la \sdb. Si la répétition est espacée dans le temps, il peut aussi s'agir d'une tentative d'attaque par \idx{rejeu} de paquets.
@@ -141,7 +141,7 @@ Ces méthodes sont relativement peu implémentées dans la littérature.
 
     \subsubsection{Des architectures adaptées}
 %{{{2
-Nous indiquons ici quelques exemples de propositions concrètes de systèmes de détection d'intrusion, sans chercher à couvrir l'ensemble des nombreuses catégories présentées.
+Nous indiquons ici quelques exemples de propositions concrètes de \idss, sans chercher à couvrir l'ensemble des nombreuses catégories présentées.
 La plupart d'entre elles se basent sur l'emploi d'architectures (\idx{clusterisation}, architectures de sécurité\index{architecture de sécurité}) ou de protocoles (\idx{routage}) déjà existants, auxquelles elles rajoutent des systèmes dédiés à la détection des attaques.
 
 \paragraph{Quelques \IDS pour réseaux clusterisés\index{clusterisation!réseau clusterisé}}
@@ -163,7 +163,7 @@ C'est sur ces points que se concentrent la majeure partie des travaux présenté
 Nous nous attachons, dans le choix des nœuds de surveillance, à répartir au mieux la consommation énergétique dans le cluster; d'autres études cherchent à désigner ces nœuds de manière à obtenir la meilleure couverture possible, et à maximiser les chances de détection des nœuds compromis à l'aide d'heuristiques pour le placement de l'\IDS~\cite{INK09}.
 
         \paragraph{Lutter contre les pertes de paquets}
-À travers l'usage plus ou moins direct de systèmes de détection d'intrusion, plusieurs architectures déjà établies ont été adaptées dans le but de faciliter la détection de nœuds corrompus au sein du réseau.
+À travers l'usage plus ou moins direct de \idss, plusieurs architectures déjà établies ont été adaptées dans le but de faciliter la détection de nœuds corrompus au sein du réseau.
 
 \olsr (\textit{Optimized Link State Routing protocol}) est l'un des protocoles de \idx{routage} les plus souvent mis en place dans les \rcs.
 Une nouvelle version de ce protocole, appelée DLSR (\textit{DDoS-preventing \olsr})~\cite{MKASF10}, a été proposée en vue de reprendre ses fonctionnalités tout en ajoutant des mécanismes de détection contre les attaques par \dds distribuées.
@@ -173,8 +173,8 @@ DLSR fait signaler par la \sdb la fin de l'attaque, afin que les nœuds cessent 
 \nomenclature{DLSR}{\textit{DDoS-preventing \olsr}}
 
 Basé sur des mécanismes simples, REWARD reprend la règle de retransmission pour assurer qu'aucun nœud ne commet d'attaque de type \textit{blackhole}\index{trou!trou noir}~\cite{Kar05}.
-À chaque émission de paquet, le nœud émetteur (qu'il soit émetteur d'origine ou relais, sauf s'il est le dernier relais de la route empruntée) vérifie que le destinataire retransmet le paquet sur le saut suivant.
-Cette procédure ne permet pas de détecter deux attaquants «alignés» sur la route des paquets, qui agiraient de concert, le premier transmettant le paquet au second, sans lever d'alerte lorsque celui-ci se contenterait de supprimer le paquet.
+À chaque émission de paquet, le nœud émetteur (qu'il soit émetteur d'origine ou relais, sauf s'il est le dernier relais de la route\index{routage!route} empruntée) vérifie que le destinataire retransmet le paquet sur le saut suivant.
+Cette procédure ne permet pas de détecter deux attaquants «alignés» sur la route\index{routage!route} des paquets, qui agiraient de concert, le premier transmettant le paquet au second, sans lever d'alerte lorsque celui-ci se contenterait de supprimer le paquet.
 Aussi lorsque l'on suspecte que des attaquants coopèrent\index{coopération}, REWARD ne se contente plus de ne faire surveiller que ses voisins directs par un capteur, mais propose d'augmenter la puissance de transmission lors du transit du paquet, de sorte que la règle puisse être vérifiée par chaque nœud sur les deux sauts suivant son émission.
 
 Une conséquence des attaques de type \textit{sinkhole}\index{trou!puits}, outre la perte des paquets, est la consommation supplémentaire en énergie que l'attaquant impose à ses voisins.
@@ -184,12 +184,12 @@ Un traitement sur ces données permet de déterminer les zones ou l'énergie des
 Ce traitement consiste en l'application d'un modèle de survie, plus précisément une régression de \textsc{Cox} (modèle à risque proportionnel), qui est réalisée soit par la \sdb, soit, dans une version adaptée, par des nœuds de \idx{confiance} au sein du réseau.
 
         \paragraph{Sécurité système\index{securité@sécurité!sécurité système}}
-Outre les systèmes de détection d'intrusion machine, qui opèrent sur le système d'exploitation du nœud même sur lequel ils s'exécutent, il est possible de faire vérifier l'\integrite des systèmes par d'autres entités.
+        Outre les systèmes de détection d'intrusion machine\index{système de détection d'intrusion!HIDS}, qui opèrent sur le système d'exploitation du nœud même sur lequel ils s'exécutent, il est possible de faire vérifier l'\integrite des systèmes par d'autres entités.
 Il existe ainsi une proposition concernant l'usage d'agents mobiles\index{mobilité} dans le réseau, qui se déplacent de nœud en nœud pour vérifier que le code binaire de leur système n'a pas été altéré~\cite{HR13}.
 Si des capteurs corrompus sont détectés et que leur état ne peut être immédiatement restauré (soit que l'opération soit impossible, soit que l'agent mobile\index{mobilité} reçoive l'alarme d'un autre capteur et n'ait pas encore eu le temps d'accéder au nœud affecté), ces agents permettent également de propager l'alerte dans le réseau.
 
 \bigskip
-Plusieurs études se proposent de résumer les avancées des solutions proposées en termes de systèmes de détection d'intrusion~\cite{ME13,MS14}, et fournissent de nombreux autres exemples de ces systèmes.
+Plusieurs études se proposent de résumer les avancées des solutions proposées en termes de \idss~\cite{ME13,MS14}, et fournissent de nombreux autres exemples de ces systèmes.
 Les travaux de synthèse récents de \textsc{Butun, Morgera} et \textsc{Sankar}, qui classent et détaillent les \IDS pour \manet et \rcsfs~\cite{BMS13} sont notamment très complets.
 Et parce qu'aucun système \IDS n'est parfait, on trouve même des travaux réalisés sur les limites de certaines méthodes de détection et des mécanismes de \idx{confiance} (que nous verrons plus bas), assorties de mesures permettant d'améliorer l'efficacité de ces méthodes~\cite{CQW12}.
 %2}}}

@@ -1,8 +1,8 @@
 % vim: set spelllang=fr foldmethod=marker:
-\section{Modélisation}
+\section{Modélisation\index{modélisation}}
 \label{sa:sec:modelisation}
 
-Nous avons établi un processus de sélection aléatoire, périodiquement renouvelé, des \cns assurant la détection des nœuds compromis dans le réseau.
+Nous avons établi un processus de sélection aléatoire\index{selection@sélection!sélection aléatoire}, périodiquement renouvelé, des \cns assurant la détection des nœuds compromis dans le réseau.
 Les simulations réalisées ont fourni des valeurs numériques permettant de valider le modèle proposé; mais elle n'ont pas la rigueur des méthodes formelles et n'offrent pas, comme ces dernières, la possibilité de vérifier de façon sure des propriétés sur l'état du système.
 
 Dans cette section sont introduits plusieurs modèles pouvant permettre de représenter notre système, et d'en évaluer les performances selon divers critères.
@@ -25,7 +25,7 @@ Notre modèle représente un cluster d'un \rcsf qui vérifie les hypothèses sui
     \item la topologie du cluster correspond à un graphe connexe: chaque nœud peut atteindre directement chacun des autres nœuds du cluster.
 \end{itemize}
 
-        \subsubsection{Modélisation}
+\subsubsection{Modélisation\index{modélisation}}
 Sous les hypothèses précédentes, notre modèle peut être représenté par une \cmtc multidimensionnelle de taille $m$.
 Il est alors exprimé sous la forme d'un $m$-uplet $x\!=\!(x_1,x_2,\dots,x_m)$ de macro-états $x_k\!=\!(x_{k_1},x_{k_2},\dots,x_{k_s},x_{k_d})$.
 Chaque macro-état $x_k$ représente le nombre de paquets détectés par le \cn $k$ ($1\leq k\leq m$).
@@ -129,15 +129,15 @@ Par exemple, sur la partie droite de la \figref{sa:fig:gspnex1}, la transition \
     \caption{Exemples simples de \rpsge: transitions immédiates, transition minutée et arcs inhibiteurs}\label{sa:fig:gspnex1}
 \end{figure}
 
-        \subsubsection{Modélisation des nœuds}
+        \subsubsection{Modélisation\index{modélisation} des nœuds}
 Nous allons procéder par étapes en modélisant:
 \begin{enumerate}
     \item les nœuds capteurs «simples»;
     \item les \cns désignés de manière statique;
-    \item les \cns désignés de façon dynamique (dont la modélisation diffère légèrement).
+    \item les \cns désignés de façon dynamique (dont la \idx{modélisation} diffère légèrement).
 \end{enumerate}
 
-            \paragraph{Modélisation des capteurs simples}
+            \paragraph{Modélisation\index{modélisation} des capteurs simples}
 Le comportement des capteurs basiques (qui poursuivent simplement leur mission de récolte de données) est simple: chaque capteur $i$ envoie des paquets selon un processus de \textsc{Poisson} de paramètre $\lambda_i$.
 Ce comportement est modélisé par le \rpsg présenté en \figref{sa:fig:snodegspn}.
 Le nœud y est symbolisé par les pointillés bleus.
@@ -152,7 +152,7 @@ Un nœud compromis $c$ sera également représenté selon le même modèle, avec
     \caption{Modèle \rpsg d'un nœud capteur simple}\label{sa:fig:snodegspn}
 \end{figure}
 
-            \paragraph{Modélisation du \ch}
+            \paragraph{Modélisation\index{modélisation} du \ch}
 Nous travaillons de l'intérieur du cluster, et le \ch est vu comme un simple puits qui reçoit les paquets émis par les autres nœuds.
 Son activité de retransmission à destination de la \sdb n'est donc pas représentée.
 Représenté en\figref{sa:fig:chgspn}, le \CH ne contient donc qu'une place \textsf{InBuff$_\textsf{CH}$} qui représente le tampon contenant les messages reçus, et reliée aux transitions \textsf{TX$_i$} de tous les autres nœuds.
@@ -163,7 +163,7 @@ Représenté en\figref{sa:fig:chgspn}, le \CH ne contient donc qu'une place \tex
 \end{figure}
 En réalité, il devrait y avoir une place \textsf{InBuff$_i$} distincte pour les jetons provenant de chaque nœud voisin $i$ du \ch. Pour simplifier la représentation, tous les jetons arrivant au modèle du nœud sont rassemblés dans une place unique.
 
-            \paragraph{Modélisation des \cns désignés de façon statique}
+            \paragraph{Modélisation\index{modélisation} des \cns désignés de façon statique}
 Un \cn élu de façon statique joue uniquement son rôle de \cn: il écoute le trafic, mais n'effectue pas de mesure sur son environnement.
 Le modèle \rpsge associé à ce type de nœud est présenté en \figref{sa:fig:cnodegspn1}.
 La place \textsf{InBuff} représente le tampon contenant les messages reçu par le nœud.
@@ -185,9 +185,9 @@ Les étapes permettant de vider le tampon ne consomment pas de temps, et permett
     \caption{Modèle \rpsge d'un \cn élu de manière \emph{statique}}\label{sa:fig:cnodegspn1}
 \end{figure}
 
-            \paragraph{Modélisation des \cns désignés de façon statique}
+            \paragraph{Modélisation\index{modélisation} des \cns désignés de façon statique}
 Le modèle \rpsge représentant le \cn élu de façon dynamique ressemble à son homologue élu de façon statique.
-Cependant, en raison de l'élection dynamique, tous les nœuds vont assumer périodiquement le rôle de \cn et le rôle de capteur simple.
+Cependant, en raison de l'\elecdyn, tous les nœuds vont assumer périodiquement le rôle de \cn et le rôle de capteur simple.
 Il est donc nécessaire d'ajouter, aux places et transitions des précédents \cns, une place \textsf{cNode} ainsi qu'une transition toujours autorisée, associée à une distribution exponentielle.
 La première permet d'indiquer à chaque instant si le nœud joue le rôle de \cn (si la place contient un jeton) ou bien de capteur simple (cas contraire).
 La seconde permet de produire des jetons selon un processus de \textsc{Poisson} lorsque le nœud fait office de capteur simple (dans ce cas la place \textsf{cNode} est vide et l'arc inhibiteur autorise le franchissement de la transition \textsf{TX}; le nœud se comporte exactement comme avec le modèle de la \figref{sa:fig:snodegspn}).
@@ -198,7 +198,7 @@ Le modèle est représenté sur la \figref{sa:fig:cnodegspn2}.
     \caption{Modèle \rpsge d'un \cn élu de manière \emph{dynamique}}\label{sa:fig:cnodegspn2}
 \end{figure}
 
-        \subsubsection{Modélisation du cluster}
+        \subsubsection{Modélisation\index{modélisation} du cluster}
 
             \paragraph{\cns désignés de façon statique}
 Maintenant que la représentation des nœuds individuels a été donnée, nous sommes en mesure de modéliser notre cluster.
@@ -217,9 +217,9 @@ Là encore, il s'agit d'un choix permettant de simplifier le graphique, et la co
 \end{figure}
 
             \paragraph{\cns désignés de façon dynamique}
-L'élection dynamique des \cns vient compliquer légèrement la modélisation de notre cluster.
+L'\elecdyn des \cns vient compliquer légèrement la \idx{modélisation} de notre cluster.
 Bien évidemment, tous les nœuds seront représentés selon le modèle ambivalent illustré par la \figref{sa:fig:cnodegspn2}.
-Mais il est aussi nécessaire de rajouter un module qui permettra l'élection des \cns pour chaque période.
+Mais il est aussi nécessaire de rajouter un module qui permettra l'\election des \cns pour chaque période.
 Pour une meilleure clarté, le cluster sera représenté en deux temps.
 
 Tout d'abord, la \figref{sa:fig:petridyn} représente le cluster comme nous l'avons vu jusqu'ici, sous formes de nœud distincts et de transitions représentant le trafic émis.
@@ -231,15 +231,15 @@ Le \ch n'est toujours considéré que comme un simple puits, uniquement équipé
     \caption{Modèle \rpsge pour le trafic d'un cluster (topologie: grille $3\times3$) comprenant un nœud compromis et deux \cns sélectionnés de façon dynamique}\label{sa:fig:petridyn}
 \end{figure}
 
-Un second réseau de \textsc{Petri} est utilisé pour modélisé le processus de sélection lui-même.
-En considérant $n$ comme le nombre de résultats possibles à l'élection, le module représentant l'élection dynamique des \cns comprend:
+Un second réseau de \textsc{Petri} est utilisé pour modélisé le processus de sélection\index{selection@sélection} lui-même.
+En considérant $n$ comme le nombre de résultats possibles à l'\election, le module représentant l'\elecdyn des \cns comprend:
 \begin{itemize}
     \item une unique place centrale;
     \item $n$ transitions minutées, suivant une distribution déterministe, et mutuellement exclusives, menant à cette place (en bleu sur la \figref{sa:fig:petrielec});
     \item $n$ transitions immédiates et mutuellement exclusives, franchissables depuis la place centrale (en noir sur la \figref{sa:fig:petrielec}).
 \end{itemize}
-Dans notre cas, pour choisir deux \cns au sein du cluster, et en supposant que le nœud compromis ne peut être désigné, nous avons $n=\binom{7}{2}=21$~issues possible pour l'élection.
-À la fin d'une période d'activité des \cns, une nouvelle élection est déclenchée.
+Dans notre cas, pour choisir deux \cns au sein du cluster, et en supposant que le nœud compromis ne peut être désigné, nous avons $n=\binom{7}{2}=21$~issues possible pour l'\election.
+À la fin d'une période d'activité des \cns, une nouvelle \election est déclenchée.
 La transition minutée correspondant aux \cns sélectionnés pour la période qui s'achève est déclenchée; les jetons présents dans les places \textsf{cNode} de ces \cns sont consommés, et produisent ainsi un jeton dans l'unique place centrale du module.
 Chaque transition immédiate tente alors de produire un jeton.
 Comme elles sont mutuellement exclusives, mais ont la même priorité et le même poids (voir \sssref{sa:subsubsec:presRPSGe}), un tirage aléatoire a lieu pour déterminer l'unique transition qui est franchie et qui produit ses jetons.
@@ -247,7 +247,7 @@ Ceux-ci sont envoyés dans les places \textsf{cNode} des nœuds sélectionnés p
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=.9\linewidth]{\chapterfig/RPSGe_network3x3_selection.pdf}
-    \caption{Modèle \rpsge pour l'élection dynamique de deux \cns parmi les nœuds du cluster}\label{sa:fig:petrielec}
+    \caption{Modèle \rpsge pour l'\elecdyn de deux \cns parmi les nœuds du cluster}\label{sa:fig:petrielec}
 \end{figure}
 %===============================================================================
     \subsection{Logique stochastique avec automates hybrides}
@@ -301,7 +301,7 @@ Au final, \lsah fonctionne de la façon suivante:
 
         \subsubsection{Automate linéaire hybride et formule \lsah associés au modèle utilisé}
 Nous présentons ici quelques exemples de formules \lsah, constitués des expressions \lsah et d'un automate linéaire hybride (\alh) associé au modèle \rpsge présenté plus haut (en \figref{sa:fig:petridyn}).
-Ces exemples présentent une manière de mesurer des données sur un nœud du \rc à partir de la version modélisée sous forme de réseaux de \textsc{Petri}, à fin d'étude, ou bien de comparaison de notre solution avec d'autres systèmes de détection des attaques de \dds.
+Ces exemples présentent une manière de mesurer des données sur un nœud du \rc à partir de la version modélisée sous forme de réseaux de \textsc{Petri}, à fin d'étude, ou bien de comparaison de notre solution avec d'autres systèmes de détection\index{système de détection d'intrusion} des attaques par \dds.
 Ces exemples peuvent en outre être modélisés facilement avec l'outil de \idx{\textit{model checking}} \textsf{COSMOS}~\cite{BDDHP11cosmos}.
 
 On considère un nœud quelconque $i$ ($1\leq i\leq$~nombre de capteurs).
@@ -385,13 +385,13 @@ Voici quelques exemples de formules \lsah permettant d'obtenir plusieurs valeurs
 %===============================================================================
     \subsection{Amélioration de la solution}
 
-Le renouvellement périodique des nœuds de surveillance permet d'améliorer tout à la fois la détection des attaques et la répartition de la charge en énergie dans le cluster, comme le démontrent les valeurs obtenues par simulation.
-Suite aux résultats numériques, le système a été modélisé de plusieurs façons différentes: après avoir étudié les limites des processus markoviens, orientés vers la modélisation d'événements à distribution exponentielle, nous avons présenté une autre évaluation formelle possible.
+Le renouvellement périodique\index{renouvellement!renouvellement périodique} des nœuds de surveillance permet d'améliorer tout à la fois la détection des attaques et la répartition de la charge en énergie dans le cluster, comme le démontrent les valeurs obtenues par simulation.
+Suite aux résultats numériques, le système a été modélisé de plusieurs façons différentes: après avoir étudié les limites des processus markoviens, orientés vers la \idx{modélisation} d'événements à distribution exponentielle, nous avons présenté une autre évaluation formelle possible.
 Elle fait intervenir une version étendue des réseaux de \textsc{Petri}, dédiée à la représentation de toutes sortes de distributions événementielles, et permet la visualisation du modèle sous l'aspect classique des réseaux de \textsc{Petri}.
 Elle est accompagnée d'une troisième méthode basée sur un langage récent, la logique stochastique avec automates hybrides, qui réutilise le modèle précédent pour permettre l'évaluation formelle des performances du système par le biais d'outils de \idx{\textit{model checking}}.
 Toutes ont pour objectifs, d'une part, de modéliser notre solution afin d'en souligner les avantages et inconvénients; mais aussi, d'autre part, de présenter différents moyens existants d'employer les méthodes formelles en vue de modéliser des \rcs, et ce de façon plus générale que dans le seul contexte de la solution proposée.
 
-Cette solution, d'ailleurs, a reposé jusqu'à présent sur un processus de sélection aléatoire des \cns, qu'il soit mené au niveau du \ch, de la \sdb, ou des capteurs eux-mêmes.
+Cette solution, d'ailleurs, a reposé jusqu'à présent sur un processus de sélection aléatoire\index{selection@sélection!sélection aléatoire} des \cns, qu'il soit mené au niveau du \ch, de la \sdb, ou des capteurs eux-mêmes.
 Mais n'y aurait-il pas un moyen plus efficace d'assigner les rôles au nœuds du cluster?
-Il devrait être possible d'utiliser d'autres paramètres, comme l'énergie des capteurs, ou la réputation qu'ils ont su entretenir auprès de leurs voisins respectifs, pour établir un processus plus efficace.
-Pour tenter de répondre correctement à la question, ce changement du mode de sélection fait l'objet des deux chapitres qui suivent.
+Il devrait être possible d'utiliser d'autres paramètres, comme l'énergie des capteurs, ou la \reput qu'ils ont su entretenir auprès de leurs voisins respectifs, pour établir un processus plus efficace.
+Pour tenter de répondre correctement à la question, ce changement du mode de sélection\index{selection@sélection} fait l'objet des deux chapitres qui suivent.

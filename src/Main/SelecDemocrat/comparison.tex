@@ -1,5 +1,5 @@
 % vim: set spelllang=fr foldmethod=marker:
-\section{Comparaison numérique des méthodes de sélection}
+\section{Comparaison numérique des méthodes de sélection\index{selection@sélection}}
 
     \subsection{Mise en place des simulations}
 
@@ -25,7 +25,7 @@ La \tabref{sd:table:param} récapitule les principaux paramètres impliqués dan
         Fréquence de renouvellement des \cns                        & toutes les 10~secondes \\
         Durée de la période initiale pour la sélection démocratique & 60~secondes            \\
         Mobilité des nœuds                                          & nulle                  \\
-    \end{tabu}
+    \end{tabu}\index{renouvellement}\index{selection@sélection!election democratique@élection démocratique}
     \begin{tabu}to \textwidth {l X[c] X[c]}
         \midrule
         \multirow{2}{*}{\textsc{Paramètre}} & \textsc{Valeur}                    & \textsc{Valeur}           \\
@@ -38,7 +38,7 @@ La \tabref{sd:table:param} récapitule les principaux paramètres impliqués dan
         Cons. énergétique en réception      & 0,395~W                            & non prise en compte       \\
         Quantité initiale d'énergie         & 10~\joule\ --- $\infty$ (sel. sc.) & $\infty$                  \\
         \bottomrule
-    \end{tabu}
+    \end{tabu}\index{renouvellement}
 \end{table}
 
 \newcommand\idstat{\textsf{\#Stat10}\xspace}
@@ -47,21 +47,21 @@ La \tabref{sd:table:param} récapitule les principaux paramètres impliqués dan
 \newcommand\iddemx{\textsf{\#Démc10}\xspace}
 \newcommand\iddems{\textsf{\#Démc07}\xspace}
 Dans les chapitres précédents, le but des simulations étaient de souligner les apports des nouvelles solutions proposées par rapport aux éléments antérieurs.
-Ici, l'objectif consiste plutôt à comparer tous les scénarios que nous avons défini au cours des trois chapitres sur les processus de sélection.
-Un «scénario» se caractérise donc avant tout par le choix d'un processus de renouvellement des \cns, mais aussi par le nombre de \cns sélectionnés à chaque tour, et par le montant d'énergie initialement attribué aux capteurs.
+Ici, l'objectif consiste plutôt à comparer tous les scénarios que nous avons défini au cours des trois chapitres sur les processus de sélection\index{selection@sélection}.
+Un «scénario» se caractérise donc avant tout par le choix d'un processus de \idx{renouvellement} des \cns, mais aussi par le nombre de \cns sélectionnés à chaque tour, et par le montant d'énergie initialement attribué aux capteurs.
 Chaque graphe présente, pour un montant d'énergie initiale donné, les valeurs obtenues pour cinq scénarios distincts, auxquels nous attribuons des identifiants pour pouvoir nous y référer plus facilement par la suite:
 \begin{itemize}
-    \item l'un ne comporte aucun renouvellement des dix~\cns (il s'agit de la méthode dite «\underline{stat}ique», que nous nommons dans cette section \idstat);
-    \item l'un se base sur un processus de renouvellement \underline{aléa}toire tel que présenté au \chapref{sa} (\idrand);
-    \item l'un se base sur un renouvellement selon l'\underline{é}nergie \underline{rés}iduelle (avec usage de \vns) tel que présenté au \chapref{se} (\ideres);
-    \item les deux derniers se basent sur le mécanisme d'élection \underline{dém}o\underline{c}ratique abordé dans ce chapitre:
+    \item l'un ne comporte aucun \idx{renouvellement} des dix~\cns (il s'agit de la méthode dite «\underline{stat}ique», que nous nommons dans cette section \idstat);
+    \item l'un se base sur un processus de \idx{renouvellement} \underline{aléa}toire tel que présenté au \chapref{sa} (\idrand);
+    \item l'un se base sur un \idx{renouvellement} selon l'\underline{é}nergie \underline{rés}iduelle (avec usage de \vns) tel que présenté au \chapref{se} (\ideres);
+    \item les deux derniers se basent sur le mécanisme d'élection \underline{dém}o\underline{c}ratique\index{selection@sélection!election democratique@élection démocratique} abordé dans ce chapitre:
         \begin{itemize}
             \item l'un avec dix~\cns (\iddemx),
             \item l'autre avec sept~\cns seulement, afin d'observer l'effet de la diminution du nombre de nœuds sélectionnés (\iddems).
         \end{itemize}
 \end{itemize}
 Sauf indication contraire, tous les résultats numériques présentés dans cette section sont des moyennes calculées à partir des valeurs de dix instances distinctes (pour chaque scénario).
-Ces instances sont différenciées par les valeurs utilisées pour initialiser le générateur de nombres pseudo-aléatoires de \nsii, et (le cas échéant) celui utilisé par les nœuds pour la sélection des \cns.
+Ces instances sont différenciées par les valeurs utilisées pour initialiser le générateur de nombres pseudo-aléatoires de \nsii, et (le cas échéant) celui utilisé par les nœuds pour la sélection\index{selection@sélection} des \cns.
 
 Les moyennes sur les capteurs sont calculées à partir des valeurs des quatre-vingt-dix-neuf nœuds «sains».
 Le \ch ainsi que le nœud compromis sont dotés d'une réserve d'énergie illimitée pour les simulations:
@@ -96,10 +96,10 @@ Le \ch ainsi que le nœud compromis sont dotés d'une réserve d'énergie illimi
         \subsubsection{Consommation énergétique}
 
 Une première série d'instances a été exécutée en attribuant une quantité d'énergie «illimitée» aux capteurs au regard de la durée virtuelle de la simulation.
-Ceci permet d'observer la quantité d'énergie moyenne consommée par les nœuds lorsque chaque méthode de sélection des \cns est déployée dans le cluster.
+Ceci permet d'observer la quantité d'énergie moyenne consommée par les nœuds lorsque chaque méthode de sélection\index{selection@sélection} des \cns est déployée dans le cluster.
 La \figref{sd:fig:cons-inf} présente les valeurs obtenues.
-On peut y observer une consommation quasiment identique entre les méthodes \idstat et \idrand, puisque le renouvellement en soi, à l'aide de la sélection pseudo-aléatoire des \cns, ne représente pratiquement aucun cout additionnel.
-Les méthodes \ideres et \iddemx consomment toutes deux davantage, à cause des mécanismes mis en place pour récolter les valeurs de l'énergie résiduels des nœuds, et pour assurer la sécurité du processus.
+On peut y observer une consommation quasiment identique entre les méthodes \idstat et \idrand, puisque le \idx{renouvellement} en soi, à l'aide de la sélection pseudo-aléatoire\index{selection@sélection!sélection aléatoire} des \cns, ne représente pratiquement aucun cout additionnel.
+Les méthodes \ideres et \iddemx consomment toutes deux davantage, à cause des mécanismes mis en place pour récolter les valeurs de l'énergie résiduels des nœuds, et pour assurer la \secu du processus.
 \begin{figure}[!hb]
     \centering
     \includegraphics{\chapterfig/plot_sd_consumptionXtime.pdf}
@@ -112,7 +112,7 @@ La méthode \iddemx est plus couteuse au départ, ce qui est parfaitement visibl
     \includegraphics{\chapterfig/plot_sd_consumptionXtime_zoom10.pdf}
     \caption[Moyenne de l'énergie consommée par les capteurs au cours du temps: agrandissement de la vue près de l'origine du repère]{Moyenne de l'énergie consommée par les capteurs au cours du temps: agrandissement de la vue près de l'origine du repère (énergie initiale: $\infty$)}\label{sd:fig:cons-inf-zoom}
 \end{figure}
-Les deux scénarios basés sur la sélection démocratique voient leur quantité d'énergie consommée augmenter très rapidement pendant la première minute de la simulation, qui correspond à la période initiale (où tous les nœuds agissent comme des \cns en plus de prendre des mesures, d'où la consommation accrue).
+Les deux scénarios basés sur la sélection démocratique\index{selection@sélection!election democratique@élection démocratique} voient leur quantité d'énergie consommée augmenter très rapidement pendant la première minute de la simulation, qui correspond à la période initiale (où tous les nœuds agissent comme des \cns en plus de prendre des mesures, d'où la consommation accrue).
 En revanche, on observe une inversion entre \ideres et \iddemx peu avant 40~minutes, signe que sur le long terme, \iddemx consomme moins d'énergie que l'usage des \vns.
 \iddems, quant à elle, est à terme la méthode la plus économe en énergie: ceci met en avant le poids des \cns dans la consommation totale en énergie du cluster.
 Moins on utilise de \cns, moins l'énergie consommée est importante (comme indiqué déjà par les résultats du \chapref{sa}, en \sref{sa:sec:resultats}).
@@ -146,7 +146,7 @@ Et pour cause: comme les \cns ne sont pas renouvelés, les 10~capteurs initialem
 Le dixième nœud à épuiser sa batterie s'arrête longtemps après le neuvième: cela est dû au calcul des moyennes sur plusieurs instances.
 Il arrive en effet que le nœud compromis soit sélectionné parmi les \cns; mais comme sont énergie n'apparait pas sur la courbe, les résultats sont ceux obtenus pour seulement 9~\cns sélectionnés dans ce cas, et le dixième nœud à tomber hors service est un nœud normal qui survit largement à l'heure que dure la simulation.
 
-La méthode de renouvellement aléatoire \idrand est efficace pour préserver l'énergie dans le cluster.
+La méthode de \idx{renouvellement} aléatoire \idrand est efficace pour préserver l'énergie dans le cluster.
 Comme le nombre de \cns sélectionnés est statistiquement un pourcentage du nombre de nœuds dans le cluster (on sélectionne $k$ nœuds de façon aléatoire, sans regarder s'ils sont encore en vie), la réduction du nombre de nœuds n'entraine pas l'accélération de la consommation.
 De plus, la méthode est simple à mettre en œuvre, et ne nécessite que peu d'échanges de données de contrôle.
 
@@ -175,24 +175,24 @@ Avec une quantité plus élevée d'énergie initiale, le nombre inférieur de \c
 
         \subsubsection{Taux de détection}
 Le nombre de nœuds en mesure de détecter l'attaque du nœud compromis est directement lié au nombre de nœuds encore en activité dans le réseau, puisque les capteurs ayant épuisé leur batterie n'ont plus aucune chance de mener à bien l'opération de surveillance.
-À titre indicatif, la \figref{sd:fig:detec-one-10J} représente le taux de détection à chaque phase (de 10~secondes), sur une seule instance (pas de moyenne, donc), pour chaque méthode de sélection, l'énergie initiale assignée aux capteurs étant de 10~\joule.
+À titre indicatif, la \figref{sd:fig:detec-one-10J} représente le taux de détection à chaque phase (de 10~secondes), sur une seule instance (pas de moyenne, donc), pour chaque méthode de sélection\index{selection@sélection}, l'énergie initiale assignée aux capteurs étant de 10~\joule.
 \begin{figure}[p]
     \centering
     \includegraphics{\chapterfig/plot_sd_detectionXtime-single_10J.pdf}
-    \caption[Taux de détection au cours du temps (énergie initiale: 10~\joule; valeurs sur une seule instance)]{Taux de détection, pour chaque processus de sélection, au cours du temps (énergie initiale: 10~\joule; valeurs sur une seule instance)}\label{sd:fig:detec-one-10J}
+    \caption[Taux de détection au cours du temps (énergie initiale: 10~\joule; valeurs sur une seule instance)]{Taux de détection, pour chaque processus de sélection\index{selection@sélection}, au cours du temps (énergie initiale: 10~\joule; valeurs sur une seule instance)}\label{sd:fig:detec-one-10J}
 \end{figure}
 En dehors d'un intérêt artistique certain, ces courbes permettent d'observer les extremums atteints, mais sont très peu lisibles.
 La \figref{sd:fig:detec-min-10J} reprend donc ces valeurs, lissées une première fois en calculant la moyenne du nombre d'attaques détectées par les différentes instances (10~par scénario), puis une seconde fois sur une séquence d'une minutes (donc 6~phases de 10~secondes).
 \begin{figure}[p]
     \centering
     \includegraphics{\chapterfig/plot_sd_detectionXtime-minute_10J.pdf}
-    \caption[Taux de détection au cours du temps (énergie initiale: 10~\joule)]{Taux de détection, pour chaque processus de sélection, au cours du temps (énergie initiale: 10~\joule; valeurs lissées sur une durée d'une minute)}\label{sd:fig:detec-min-10J}
+    \caption[Taux de détection au cours du temps (énergie initiale: 10~\joule)]{Taux de détection, pour chaque processus de sélection\index{selection@sélection}, au cours du temps (énergie initiale: 10~\joule; valeurs lissées sur une durée d'une minute)}\label{sd:fig:detec-min-10J}
 \end{figure}
 On observe que pour la méthode \idstat, la détection chute très rapidement à zéro; en fait dès que les \cns d'origine, non renouvelés, ont consommé leurs réserves.
 Les méthodes \idrand, \ideres et \iddemx ont toutes les trois un bon niveau de détection, avec en moyenne 5~\cns parmi les 10~sélectionnés qui repèrent l'attaque tant que la plupart des nœuds sont en activité.
 La méthode \iddems tourne plutôt sur une moyenne de 3~à 4~\cns détectant l'attaque, mais sur un total de~7.
 La détection se poursuit en revanche un peu plus longtemps que sur \ideres et \iddemx, puisque les nœuds consomment au total moins d'énergie.
-Les maigres réservent accordées ne lui permettent pas d'avoir le temps, en revanche, de passer devant la sélection aléatoire \idrand, qui détecte encore parfois l'attaque au-delà de 30~minutes de simulation.
+Les maigres réservent accordées ne lui permettent pas d'avoir le temps, en revanche, de passer devant la sélection aléatoire\index{selection@sélection!sélection aléatoire} \idrand, qui détecte encore parfois l'attaque au-delà de 30~minutes de simulation.
 
 Il est à noter que la position du nœud compromis a une influence directe sur le nombre de nœuds détectant l'attaque.
 Suivant le nombre de voisins directs qu'il possède, ce nœud a plus ou moins de chances d'être détecté.
@@ -244,7 +244,7 @@ Cette remarque sur la disposition permet de réaliser une seconde observation su
 Avec les méthodes \ideres, \iddemx et \iddems, cette chance est nulle (tant qu'il reste suffisamment de nœuds actifs), puisque les méthodes employées spécifient que chaque nœud du cluster doit être couvert par au moins deux \cns.
 Mais le processus \idrand, en revanche, est tel que pour certaines phases, tous les \cns peuvent être sélectionnés parmi l'ensemble des nœuds non~voisins du nœud compromis.
 Cette probabilité se calcule.
-La répartition des \cns, lors du processus de sélection aléatoire, suit une loi de probabilité hypergéométrique.
+La répartition des \cns, lors du processus de sélection aléatoire\index{selection@sélection!sélection aléatoire}, suit une loi de probabilité hypergéométrique.
 Il est possible de calculer la probabilité pour que $k$ \cns sur les $n=10$ soient choisis parmi les $m=61$ voisins directs du nœud compromis, sur un total de $N=100$ candidats, à l'aide de la formule suivante:
 $$P(k) = \frac{{m\choose k}{N-m\choose n-k}}{{N\choose n}}=
 \frac{m!}{k!\,(m-k)!}\times\frac{(N-m)!}{(n-k)!\,((N-m)-(n-k))!}\times\frac{n!\,(N-n)!}{N!}$$
@@ -262,7 +262,7 @@ Avec encore un peu plus d'énergie allouée au début de la simulation, \iddemx 
 \begin{figure}[p]
     \centering
     \includegraphics{\chapterfig/plot_sd_detectionXtime-minute_20J.pdf}
-    \caption[Taux de détection au cours du temps (énergie initiale: 20~\joule)]{Taux de détection, pour chaque processus de sélection, au cours du temps (énergie initiale: 20~\joule; valeurs lissées sur une durée d'une minute)}\label{sd:fig:detec-min-20J}
+    \caption[Taux de détection au cours du temps (énergie initiale: 20~\joule)]{Taux de détection, pour chaque processus de sélection\index{selection@sélection}, au cours du temps (énergie initiale: 20~\joule; valeurs lissées sur une durée d'une minute)}\label{sd:fig:detec-min-20J}
 \end{figure}
 
 Au vu des caractéristiques obtenues pour chaque méthode, nous pouvons à présent résumer leurs avantages et leurs inconvénients, et en déduire des recommandations d'usage selon la configuration du réseau déployé.

@@ -1,7 +1,7 @@
 % vim: set spelllang=fr foldmethod=marker:
 \lettrineh{P}{uisque} les travaux présentés dans cette thèse portent sur les \rcsfs, il semble indispensable d'introduire tout d'abord les caractéristiques de ces capteurs et des réseaux qu'ils peuvent former.
 Le présent chapitre décrit donc le fonctionnement basique des capteurs, des réseaux, et fournit des exemples d'applications.
-Dans un second temps, ce sont certains des principaux problèmes soulevés par le déploiement des capteurs qui sont brièvement introduits, notamment la nécessité d'adapter les protocoles employés aux capacités des capteurs, les besoins éventuels de partition du réseau pour en obtenir une gestion plus efficace, ou encore des problèmes de mobilité, de sureté, de sécurité, de résilience.
+Dans un second temps, ce sont certains des principaux problèmes soulevés par le déploiement des capteurs qui sont brièvement introduits, notamment la nécessité d'adapter les protocoles employés aux capacités des capteurs, les besoins éventuels de partition du réseau pour en obtenir une gestion plus efficace, ou encore des problèmes de \idx{mobilité}, de \idx{sureté}, de \secu, de \resilience.
 
 \section{Réseaux de capteurs sans fil}
 
@@ -16,7 +16,7 @@ Dans un second temps, ce sont certains des principaux problèmes soulevés par l
 Les \rcsfs, ou \textit{\WSN} (pour \wsns en anglais), sont des réseaux constitués de petits appareils, les capteurs, ainsi que d'une \sdb.
 \nomenclature{WSN}{\wsns}
 Les capteurs échangent par communications hertziennes, en utilisant des protocoles tels ceux définis dans la pile \ieeee.
-Le routage des paquets dans le réseau peut faire appel à l'un des nombreux protocoles développés à cet effet (par exemple: \aodv, \olsr), qu'il repose sur un algorithme centralisé (dirigé par une seule entité) ou distribué (exécuté par chaque entité du réseau).
+Le \idx{routage} des paquets dans le réseau peut faire appel à l'un des nombreux protocoles développés à cet effet (par exemple: \aodv, \olsr), qu'il repose sur un algorithme centralisé (dirigé par une seule entité) ou distribué (exécuté par chaque entité du réseau).
 Les capteurs collectent des informations sur leur environnement et les font remonter à la \sdb.
 Cette \sdb, ou \BS (pour \bs), ou encore parfois \textit{puits} (\textit{sink} en anglais), est chargée de récolter et traiter les données provenant des capteurs.
 Une fois les capteurs déployés, l'administrateur n'interagit plus avec le réseau que par le biais de la \sdb.
@@ -88,12 +88,12 @@ En forêt, les \rcs peuvent permettre de détecter les départs de feu et de lut
 Et en zones à risques, ils peuvent être utilisés pour mesurer l'activité sismique ou volcanique du sol, et permettre une meilleure anticipation des phénomènes naturels.
 L'industrie a également recours à ces réseaux pour détecter d'éventuelles fuites de produits toxiques (pétrole, gaz, éléments radioactifs).
 
-Il est à noter que certaines de ces applications touchent à des domaines critiques (en termes de sécurité des installations, voire de vies humaines): il est indispensable d'assurer le bon fonctionnement du réseau déployé dans un tel contexte.
+Il est à noter que certaines de ces applications touchent à des domaines critiques (en termes de \secu des installations, voire de vies humaines): il est indispensable d'assurer le bon fonctionnement du réseau déployé dans un tel contexte.
 %2}}}
 
         \paragraph{Surveillance et détection}
 %{{{2
-Les \rcsfs sont aussi employés pour des mesures de sureté ou de sécurité, par exemple pour surveiller l'intégrité structurelle de certaines architectures (ferroviaires, aérospatiales, maritimes, ou plus simplement dans le bâtiment: gros œuvre, ouvrages d'art) et peuvent permettre une prévention efficace des pannes matérielles~\cite{SCOA13}.
+Les \rcsfs sont aussi employés pour des mesures de \idx{sureté} ou de \secu, par exemple pour surveiller l'intégrité structurelle de certaines architectures (ferroviaires, aérospatiales, maritimes, ou plus simplement dans le bâtiment: gros œuvre, ouvrages d'art) et peuvent permettre une prévention efficace des pannes matérielles~\cite{SCOA13}.
 Mis à part la détection de pannes, les capteurs peuvent être utilisés dans des systèmes de vidéosurveillance en milieu urbain, ou sur des sites sensibles afin de prévenir les intrusions humaines, ou bien pour détecter des incidents ou encore établir le suivi de certaines entités; la gestion du trafic routier, ou même seulement des autobus, en sont des exemples.
 Le CEREMA (Centre d'études et d'expertise sur les risques, l'environnement, la mobilité et l'aménagement) a mis en ligne un site Internet particulièrement riche en exemples d'application des capteurs, et détaillant notamment les différentes technologies utilisées pour réaliser les mesures~\cite{sti}.
 Pour exemple la seule détection de véhicules sur les voies de circulation peut reposer sur:
@@ -241,7 +241,7 @@ Le protocole de couche \mac définit la manière dont les différents agents du 
             \midrule
             \textit{Frequency Division Multiple Access} (\fdma) & Accès multiple par répartition en fréquence & Plusieurs canaux basés sur des fréquences différentes\\
             \midrule
-            \textit{Code division multiple access} (\cdma) & Accès multiple par répartition en code & Étalement du spectre de fréquence\index{etalement@étalement de spectre} utilisé en conjonction avec des techniques comme les sauts de fréquences ou la génération de bruit pseudo-aléatoires (avec la même séquence pseudo-aléatoire appliquée au signal côté émetteur comme côté destinataire)\\
+            \textit{Code division multiple access} (\cdma) & Accès multiple par répartition en code & Étalement du spectre de fréquence\index{etalement@étalement de spectre} utilisé en conjonction avec des techniques comme les \idx{sauts de fréquence} ou la génération de bruit pseudo-aléatoires (avec la même séquence pseudo-aléatoire appliquée au signal côté émetteur comme côté destinataire)\\
             \midrule
             \textit{Time division multiple access} (\tdma) & Accès multiple à répartition dans le temps & Un seul canal dont l'accès est réparti par créneaux dans le temps\\
             \midrule
@@ -277,11 +277,11 @@ Les capteurs sont associés dans des groupes (qui ne correspondent pas tout à f
 
             \paragraph{La \idx{couche réseau}}
 %{{{2
-Cette couche, pour les capteurs sans fil, repose le plus souvent sur le protocole \ip (\textit{Internet Protocol} en anglais), que ce soit en version 4 ou 6 (la version 6 est notamment utilisée avec la pile \slowpan), pour l'adressage, et sur un protocole de routage qui détermine comment les paquets sont retransmis saut après saut dans le réseau~\cite{TW10}.
+Cette couche, pour les capteurs sans fil, repose le plus souvent sur le protocole \ip (\textit{Internet Protocol} en anglais), que ce soit en version 4 ou 6 (la version 6 est notamment utilisée avec la pile \slowpan), pour l'adressage, et sur un protocole de \idx{routage} qui détermine comment les paquets sont retransmis saut après saut dans le réseau~\cite{TW10}.
 
 Les \rcsfs composent en quelque sorte une sous-famille des réseaux sans fil \adhoc (ou \wanet, de l'anglais \textit{Wireless Ad hoc Network}), et une grande partie des protocoles et algorithmes utilisés proviennent du monde des \wanet.
-Des exemples classiques de ces algorithmes de routage incluent \aodv (\textit{Ad hoc On-Demand Distance Vector Routing})~\cite{aodv} ou son évolution \dsr~\cite{dsr} (\textit{Dynamic Source Routing}), \olsr~\cite{olsr} (\textit{Optimized Link State Routing Protocol}) ou ses évolutions \dsdv (\textit{Destination-Sequenced Distance Vector routing}) et \batman (\textit{Better Approach To Mobile Adhoc Networking}), \etc.
-Ces protocoles se répartissent le plus souvent en deux grandes classes: les protocoles «proactifs» reposant sur une table de \idx{routage} établie \apriori, en amont des requêtes (\aodv par exemple); et les protocoles de routage «à la demande» (dont \olsr), qui établissent les routes à la volée lorsqu'une requête de retransmission parvient au nœud relais.
+Des exemples classiques de ces algorithmes de \idx{routage} incluent \aodv (\textit{Ad hoc On-Demand Distance Vector Routing})~\cite{aodv} ou son évolution \dsr~\cite{dsr} (\textit{Dynamic Source Routing}), \olsr~\cite{olsr} (\textit{Optimized Link State Routing Protocol}) ou ses évolutions \dsdv (\textit{Destination-Sequenced Distance Vector routing}) et \batman (\textit{Better Approach To Mobile Adhoc Networking}), \etc.
+Ces protocoles se répartissent le plus souvent en deux grandes classes: les protocoles «proactifs» reposant sur une table de \idx{routage} établie \apriori, en amont des requêtes (\aodv par exemple); et les protocoles de \idx{routage} «à la demande» (dont \olsr), qui établissent les routes\index{routage!route} à la volée lorsqu'une requête de retransmission parvient au nœud relais.
 \nomenclature{AODV}{\textit{Ad hoc On-demand Distance Vector routing}}
 \nomenclature{DSR}{\textit{Dynamic Source Routing}}
 \nomenclature{OLSR}{\textit{Optimized Link State Routing protocol}}

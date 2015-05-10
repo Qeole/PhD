@@ -4,7 +4,7 @@
 Certaines ont même des exigences plus fortes, et les protocoles utilisés doivent être à l'épreuve d'un grand nombre d'attaques.
 Mais comme mentionné précédemment, les faibles ressources des capteurs se prêtent assez mal à la mise en place des mécanismes traditionnellement déployés dans ce contexte, quand ils ne permettent pas tout simplement à l'attaquant d'exploiter de nouvelles failles.
 L'application de la \secu aux \rcs est donc un domaine spécifique qui est ici abordé en plusieurs temps.
-Ce sont d'abord les différentes composantes de la sécurité qui sont abordées: \idx{confidentialité}, \idx{authentification}, \idx{intégrité} et autres propriétés sont introduites, avant de présenter les principales solutions correspondantes.
+Ce sont d'abord les différentes composantes de la \secu qui sont abordées: \idx{confidentialité}, \idx{authentification}, \integrite et autres propriétés sont introduites, avant de présenter les principales solutions correspondantes.
 Tout ce qui touche au \dds fait l'objet d'un traitement à part et se trouve plus amplement développé en seconde partie du chapitre: y sont présentées les différentes classifications des attaques, les attaques à proprement parler, puis les solutions existantes pour s'en protéger, selon les trois axes suivants: prévention, détection et réaction.
 \vfil
 
@@ -50,7 +50,7 @@ Idéalement, pour des \rcs, ces algorithmes doivent être implémentés de telle
     \item la confidentialité persistante\index{confidentialité!confidentialité persistante} (\textit{forward secrecy} en anglais, littéralement «confidentialité vers l'avant»), qui permet d'empêcher un nœud de déchiffrer les messages une fois qu'il a quitté le réseau;
     \item la confidentialité «vers l'arrière»\index{confidentialité!confidentialité vers l'arrière} (\textit{backward secrecy}), chargée d'assurer qu'un nouveau nœud entrant sur le réseau n'est pas en mesure de déchiffrer un message émis avant son arrivée.
 \end{itemize}
-Les mécanismes généralement impliqués tiennent bien sûr du domaine de la \idx{cryptographie}, et doivent être intégrés aux protocoles de sécurité utilisés~\cite{DSK10}.
+Les mécanismes généralement impliqués tiennent bien sûr du domaine de la \idx{cryptographie}, et doivent être intégrés aux protocoles de \secu utilisés~\cite{DSK10}.
 
 Les algorithmes de \idx{chiffrement} nécessitent en général de nombreux calculs, voire beaucoup de mémoire tampon, pour être mis en œuvre, surtout lorsque l'appareil ne dispose pas de matériel dédié~\cite{PLP06}, ce qui les rend parfois peu adaptés aux \rcs.
 Qui plus est, ils requièrent la plupart du temps la mise en place d'une architecture d'échange et de gestion du matériel cryptographique\index{cryptographie}, notamment en ce qui concerne les échanges de clés: cette architecture peut considérablement alourdir la structure du réseau ainsi que les échanges en termes de volume de données de contrôle.
@@ -67,24 +67,24 @@ Proposés pour les \rcs~\cite{BBTY14}, ces algorithmes permettent de procéder, 
 
 À part les solutions de \idx{chiffrement}, d'autres méthodes consistent plus simplement à compliquer l'accès aux paquets plutôt qu'à chiffrer le contenu.
 Moins robustes, ces solutions sont aussi moins couteuses en termes de calculs et, \infine, de consommation énergétique.
-Certaines méthodes proposent ainsi de découper les paquets à envoyer en fragments, qui seront injectés à travers le réseau par des routes distinctes.
+Certaines méthodes proposent ainsi de découper les paquets à envoyer en fragments, qui seront injectés à travers le réseau par des routes\index{routage!route} distinctes.
 Ces fragments seront combinés de telle sorte que seule la détention d'un certain nombre d'entre eux permette de reconstituer le message original.
 Cette combinaison des fragments peut faire appel à des mécanismes très simples, par exemple un «ou exclusif» logique comme avec la méthode SDMP (\textit{Securing Data based on Multi-Path routing})~\cite{BM10}, ou bien à un mécanisme un peu plus élaboré de \idx{partage de secret} entre plusieurs entités, comme l'a proposé par exemple \textsc{Schamir}~\cite{Sha79}.
 \nomenclature{SDMP}{\textit{Securing Data based on Multi-Path routing}}
 Ces méthodes ont pour intérêt de gêner l'attaquant pour la reconstruction des messages dont il ne dispose que de quelques fragments.
-Elles sont inefficaces en revanche si l'attaquant contrôle toutes les routes du réseau, ou simplement s'il se trouve très proche géographiquement de l'émetteur ou du destinataire pour l'échange concerné.
+Elles sont inefficaces en revanche si l'attaquant contrôle toutes les routes\index{routage!route} du réseau, ou simplement s'il se trouve très proche géographiquement de l'émetteur ou du destinataire pour l'échange concerné.
 Plusieurs de ces méthodes peuvent être associées, pour ajuster au mieux le compromis entre la \secu et l'économie des ressources.
 Nous avons ainsi proposé une solution pour assurer la \idx{confidentialité} des échanges basée sur un système de priorités~\cite{MMB13}:
 \begin{itemize}
-    \item les paquets d'importance moindre peuvent être simplement découpés en fragment et envoyés par plusieurs routes distinctes selon la méthode SDMP;
-    \item les paquets dont le contenu est plus important peuvent se voir rajouter une couche de \secu, comme avec l'usage de la méthode de secret partagé;
+    \item les paquets d'importance moindre peuvent être simplement découpés en fragment et envoyés par plusieurs routes\index{routage!route} distinctes selon la méthode SDMP;
+    \item les paquets dont le contenu est plus important peuvent se voir rajouter une couche de \secu, comme avec l'usage de la méthode de secret partagé\index{partage de secret};
     \item enfin, les messages d'importance critique, moins fréquents, utilisent des solutions plus lourdes, mais plus efficaces, de \idx{chiffrement} cryptographique, qui seules sont à même d'apporter dans ce cas un degré convenable de \secu.
 \end{itemize}
 
 Il est à noter qu'aucune des méthodes présentées ici, qu'elles reposent ou non sur l'usage de \idx{chiffrement}, n'empêchent un attaquant de pouvoir récolter des métadonnées\index{metadonnees@métadonnées} sur les échanges effectués, et d'en déduire par exemple qui communique avec qui, ou quel est le volume des données échangées.
 Ces métadonnées\index{metadonnees@métadonnées} n'ont pas toujours une valeur importante dans les \rcs, et peuvent être en partie masquées, au besoin, par l'envoi de faux messages supplémentaires pour «brouiller les pistes», mais cela s'avèrerait très couteux pour le réseau.
 
-\subsection{Intégrité, \idx{authentification}, \idx{non-répudiation}, \idx{rejeu}}\label{ea:ssec:auth}
+\subsection{Intégrité\index{integrite@intégrité}, \idx{authentification}, \idx{non-répudiation}, \idx{rejeu}}\label{ea:ssec:auth}
 
     \subsubsection{Les concepts}
 Assurer l'\integrite d'un message revient à s'assurer que le contenu utile du message n'a pas été altéré\index{altération} ou amputé entre sa création par l'émetteur et la réception par le destinataire final.
@@ -117,7 +117,7 @@ Par exemple, l'usage d'un \idx{condensat} signé permet d'assurer à la fois l'\
 
     \subsubsection{Les solutions}
 Une solution intéressante pour économiser des ressources consiste à n'introduire l'usage de solutions cryptographiques\index{cryptographie} que lorsqu'elles deviennent nécessaires, et à s'en dispenser lorsque le réseau fonctionne correctement.
-Ce système a été proposé en association avec l'usage d'un «arbre d'\idx{agrégation} sécurisée», structure du réseau utilisée pour le routage des paquets~\cite{WDSX07}.
+Ce système a été proposé en association avec l'usage d'un «arbre d'\idx{agrégation} sécurisée», structure du réseau utilisée pour le \idx{routage} des paquets~\cite{WDSX07}.
 Lorsqu'un comportement malveillant est détecté dans le réseau, cet arbre permet de mettre en place rapidement et avec peu de données de contrôle un mécanisme d'\idx{authentification} et de \idx{chiffrement} des messages.
 Le danger de cette proposition repose sur la capacité du réseau à détecter les attaques: si aucun comportement suspect n'est constaté, aucune mesure de \secu n'est mise en place.
 En cas d'écoute passive de la part de l'attaquant notamment, aucune mesure n'est appliquée pour protéger la \idx{confidentialité} des données échangées.
@@ -138,7 +138,7 @@ Il s'agit d'un système reposant sur deux blocs: \idx{SNEP} (\textit{Secure Netw
 Des codes d'\idx{authentification} des messages associés à un compteur partagé entre les interlocuteurs, et utilisé pour le bloc de chiffrement\index{chiffrement!bloc de chiffrement} (le compteur est incrémenté après chaque bloc), sont employés à cette fin.
 Le second bloc est appelé \idx{$\mu$TESLA} (version «micro» du \textit{Timed, Efficient, Streaming, Loss-tolerant Authentication Protocol}), il fournit des diffusions générales (\textit{broadcast}) authentifiées à l'aide de chaines de clés: ces chaines à sens uniques fournissent des clés associées à chaque intervalle de temps pour la \idx{signature} des messages.
 Les paquets ainsi envoyés pendant l'intervalle en cours sont signés de manière symétrique\index{cryptographie!cryptographie symétrique} à l'aide de la clé, tenue secrète, correspondant à l'intervalle temporel; à la fin de cet intervalle, la clé est envoyée à tous les correspondants qui peuvent alors vérifier la légitimité des paquets enregistrés pendant la période.
-Le module SNEP a fait l'objet d'études comparatives sur les performances que lui confèrent différents algorithmes de \idx{chiffrement}~\cite{SS14-snep}.
+Le module \idx{SNEP} a fait l'objet d'études comparatives sur les performances que lui confèrent différents algorithmes de \idx{chiffrement}~\cite{SS14-snep}.
 \nomenclature{TESLA}{\textit{Timed Efficient Stream Loss-tolerant Authentication}}
 \nomenclature{$\mu$-TESLA}{\textit{Micro version of the Timed Efficient Stream Loss-tolerant Authentication}}
 \nomenclature{SPINS}{\textit{Security Protocols for Sensor Networks}}
@@ -215,7 +215,7 @@ La \tabref{ea:tab:proto} compare brièvement les fonctionnalités apportées par
             \bottomrule
         \end{tabu}
     \end{footnotesize}
-    \index{SPINS}\index{TinySec}\index{TinyKey}\index{MiniSec}\index{LEAP}\index{LEAP+}\index{pDCS}\index{ERP-DCS}\index{architecture de sécurité}\index{chiffrement}\index{AES}\index{intégrité}\index{authentification}\index{rejeu}
+    \index{SPINS}\index{TinySec}\index{TinyKey}\index{MiniSec}\index{LEAP}\index{LEAP+}\index{pDCS}\index{ERP-DCS}\index{architecture de sécurité}\index{chiffrement}\index{AES}\index{integrite@intégrité}\index{authentification}\index{rejeu}
 \end{table}
 %}}}
 \nomenclature{CTR}{\textit{CounTeR mode}}
@@ -223,7 +223,7 @@ La \tabref{ea:tab:proto} compare brièvement les fonctionnalités apportées par
 \nomenclature{CBC-MAC}{\textit{Cipher Block Chaining Message Authentication Code}}
 \nomenclature{RC5}{\textit{\textsc{Rivest} Cipher version 5}}
 
-Une première observation à réaliser concerne l'importance de la gestion des clés, qui occupe une place essentielle dans la plupart des systèmes proposés: il est en effet indispensable de disposer d'un moyen d'échanger, et au besoin de renouveler les clés nécessaires à ces architectures\index{architecture de sécurité}, sans compromettre leur \secu mais sans pour autant consommer trop de ressources.
+Une première observation à réaliser concerne l'importance de la \idx{gestion des clés}, qui occupe une place essentielle dans la plupart des systèmes proposés: il est en effet indispensable de disposer d'un moyen d'échanger, et au besoin de renouveler les clés nécessaires à ces architectures\index{architecture de sécurité}, sans compromettre leur \secu mais sans pour autant consommer trop de ressources.
 De nombreux mécanismes ont été proposés et continuent de l'être~\cite{DSK10,BSK13}.
 Nous ne les détaillerons pas ici; mais il reste possible, pour en savoir davantage, de se tourner vers des travaux de synthèse qui catégorisent et décrivent les principales approches~\cite{HWMRKP06,XRSDHG07}.
 
@@ -234,7 +234,7 @@ Plusieurs codes sont vérifiés par chaque nœud, qui possède son propre sous-e
 Le bloc \idx{$\mu$TESLA} en particulier est par ailleurs repris dans de nombreuses propositions, notamment avec le protocole \idx{SecLEACH} qui l'introduit dans un réseau clusterisé de façon hiérarchique pour combler certains manques de l'algorithme \leach en termes de \secu~\cite{OFVWBDL07}.
 \nomenclature{SecLEACH}{\textit{Secure LEACH}}
 
-À noter enfin que les architectures \idx{LEAP} et \idx{TinyKey} ont été analysées à l'aide d'un outil de \idx{\textit{model checking}} appelé AVISPA, spécifiquement conçu pour vérifier les protocoles de sécurité~\cite{TCCDC09}.
+À noter enfin que les architectures \idx{LEAP} et \idx{TinyKey} ont été analysées à l'aide d'un outil de \idx{\textit{model checking}} appelé AVISPA, spécifiquement conçu pour vérifier les protocoles de \secu~\cite{TCCDC09}.
 
     \subsection{Sécurité physique\index{securité@sécurité!sécurité physique}}
 
