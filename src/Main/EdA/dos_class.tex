@@ -7,9 +7,9 @@
 Une première façon de classer les attaques est de considérer l'objectif de l'attaquant.
 Les buts principaux de ces attaques sont:
 \begin{itemize}
-    \item l'accaparement de ressources pour les besoins propres de l'attaquant, au détriment des autres agents du réseau (par exemple, monopolisation du canal de transmission pour l'envoi des données de l'attaquant exclusivement). Il s'agit de comportements «cupides»\index{comportement cupide} (\textit{greedy} en anglais);
+    \item l'accaparement\index{comportement cupide!accaparement} de ressources pour les besoins propres de l'attaquant, au détriment des autres agents du réseau (par exemple, monopolisation du canal de transmission pour l'envoi des données de l'attaquant exclusivement). Il s'agit de comportements «cupides»\index{comportement cupide} (\textit{greedy} en anglais);
     \item la réduction, voir l'annihilation de la capacité du réseau à assurer correctement les services pour lequel il a été déployé, afin de nuire aux exploitants de ce réseau. Cette nuisance peut s'exprimer par des pertes financières, par exemple lorsqu'une telle attaque est menée sur Internet contre un site de commerce en ligne; dans le cas des \rcsfs, et notamment lorsqu'ils sont utilisés dans un cadre militaire, l'exploitant d'un réseau peut alors se voir priver de l'accès aux informations stratégiques que devaient récolter les capteurs. On parle le plus souvent d'attaques de type \textit{jamming} en anglais, qui se traduit selon le cas par «\idx{brouillage}», «encombrement», mais d'autres attaques reposant sur la \idx{privation de sommeil} des capteurs, ou bien leur \idx{destruction physique}, peuvent aussi être réalisées dans cet objectif;
-    \item plus rarement, l'\idx{induction} en erreur de l'exploitant du \rc. Pour ceci l'attaquant cherche à fausser les résultats collectés (changement d'environnement des capteurs) ou transmis (altération du contenu ou du volume de données transmises).
+    \item plus rarement, l'\idx{induction} en erreur de l'exploitant du \rc. Pour ceci l'attaquant cherche à fausser les résultats collectés (changement d'environnement des capteurs) ou transmis (\idx{altération} du contenu ou du volume de données transmises).
 \end{itemize}
 %2}}}
 
@@ -19,7 +19,7 @@ Les buts principaux de ces attaques sont:
 Ce deuxième cas peut être illustré par un attaquant qui chercherait à brouiller de manière globale toutes les fréquences radio utilisées par les capteurs pour communiquer.
 
 Un attaquant extérieur n'a pas forcément connaissance de la façon dont fonctionne le réseau (architecture, protocoles employés, mesure de détection mises en place).
-Il peut mener une attaque sans ces informations (cas du brouillage des fréquences par exemple), ou bien justement chercher à s'introduire dans le réseau.
+Il peut mener une attaque sans ces informations (cas du \idx{brouillage} des fréquences par exemple), ou bien justement chercher à s'introduire dans le réseau.
 Cette intrusion peut être réalisée par l'attaquant soit en faisant accepter l'un de ses propres appareils aux autres agents du réseau, soit en compromettant l'un des agents jusqu'alors légitime dans le réseau.
 Une fois l'accès interne obtenu, il devient généralement beaucoup plus facile d'accéder à des informations sur le fonctionnement du réseau.
 L'attaquant, en fonction des mesures mises en place, devient aussi susceptible d'être détecté et exclu\index{exclusion} du réseau.
@@ -53,7 +53,7 @@ Les paradigmes suivants peuvent être considérés:
     \item la collecte et la transmission simples des données (paradigme qui se concentre sur une collecte simple et un envoi direct à la \sdb, sans traitement, sans routage dans le réseau);
     \item la transmission des données d'un point à un autre du réseau (\cad tout ce qui touche au \idx{routage} des paquets dans le réseau, donc en faisant intervenir la retransmission des paquets par plusieurs nœuds intermédiaires);
     \item la réception et le traitement de commandes (dans le cas où les nœuds sont susceptibles de communiquer entre eux et de s'échanger des commandes, pouvant mener à des changement de configuration des capteurs);
-    \item l'organisation autonome du réseau (les \rcs s'organisent de façon autonome, mais des attaques peuvent chercher à interférer avec la formation d'une architecture cohérente; dans ce paradigme sont inclus les protocoles de clusterisation éventuellement mis en application);
+    \item l'organisation autonome du réseau (les \rcs s'organisent de façon autonome, mais des attaques peuvent chercher à interférer avec la formation d'une architecture cohérente; dans ce paradigme sont inclus les protocoles de clusterisation\index{clusterisation!protocole de clusterisation} éventuellement mis en application);
     \item l'\idx{agrégation} de données (qui consiste à agréger, éventuellement compresser les données reçues avant retransmission, dans le but de limiter la taille et le nombre de paquets envoyés, afin de minimiser l'utilisation du canal de transmission, et surtout la consommation en énergie des capteurs);
     \item l'optimisation du modèle utilisé (qui intervient lorsque les capteurs ont des décisions à prendre, basées sur le contenu des paquets, telles que la retransmission directe ou différée, le niveau de \secu à fournir\dots).
 \end{itemize}

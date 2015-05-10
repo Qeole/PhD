@@ -88,7 +88,7 @@ Ces métadonnées\index{metadonnees@métadonnées} n'ont pas toujours une valeur
 
     \subsubsection{Les concepts}
 Assurer l'\integrite d'un message revient à s'assurer que le contenu utile du message n'a pas été altéré\index{altération} ou amputé entre sa création par l'émetteur et la réception par le destinataire final.
-Des méthodes cryptographiques\index{cryptographique} peuvent être employées pour créer un \idx{condensat} ou (s'il est utilisé avec une clé symétrique\index{cryptographie!cryptographie symétrique}) un code d'\idx{authentification} (\macc en anglais, pour \textit{Message Authentication Code}) des messages, permettant cette vérification.
+Des méthodes cryptographiques\index{cryptographie} peuvent être employées pour créer un \idx{condensat} ou (s'il est utilisé avec une clé symétrique\index{cryptographie!cryptographie symétrique}) un code d'\idx{authentification} (\macc en anglais, pour \textit{Message Authentication Code}) des messages, permettant cette vérification.
 \nomenclature{MAC}{\textit{Message Authentication Code}}
 
 L'\idx{authentification} sert à prouver la validité de l'expéditeur des messages.
@@ -187,8 +187,8 @@ pDCS a été améliorée avec ERP-DCS (\textit{Efficient Rekeying Protocol for D
 \zigbee\cite{zigbee} est un protocole basé sur la pile \ieeeff, parfois utilisé dans les \rcs, bien que son orientation soit plus large.
 Il est en quelque sorte actuellement candidat pour devenir un standard pour les objets connectés dans le contexte d'un «\idx{Internet des objets}».
 Utilisé avec les capteurs, il apporte \idx{chiffrement}, \idx{authentification}, protection contre le \idx{rejeu}.
-La \idx{gestion des clés} est centralisée (\zigbee introduit une notion de «centre de confiance»).
-La \secu apportée vient toutefois au prix d'en-têtes et de calculs qui peuvent être plus importants qu'avec d'autres architectures.
+La \idx{gestion des clés} est centralisée (\zigbee introduit une notion de «centre de \idx{confiance}»).
+La \secu apportée vient toutefois au prix d'en-têtes et de calculs qui peuvent être plus importants qu'avec d'autres architectures\index{architecture de sécurité}.
 
 La \tabref{ea:tab:proto} compare brièvement les fonctionnalités apportées par ces différentes modèles.
 
@@ -215,7 +215,7 @@ La \tabref{ea:tab:proto} compare brièvement les fonctionnalités apportées par
             \bottomrule
         \end{tabu}
     \end{footnotesize}
-    \index{SPINS}\index{TinySec}\index{TinyKey}\index{MiniSec}\index{LEAP}\index{LEAP+}\index{pDCS}\index{ERP-DCS}\index{architecture de sécurité}\index{chiffrement}
+    \index{SPINS}\index{TinySec}\index{TinyKey}\index{MiniSec}\index{LEAP}\index{LEAP+}\index{pDCS}\index{ERP-DCS}\index{architecture de sécurité}\index{chiffrement}\index{AES}\index{intégrité}\index{authentification}\index{rejeu}
 \end{table}
 %}}}
 \nomenclature{CTR}{\textit{CounTeR mode}}
@@ -223,11 +223,11 @@ La \tabref{ea:tab:proto} compare brièvement les fonctionnalités apportées par
 \nomenclature{CBC-MAC}{\textit{Cipher Block Chaining Message Authentication Code}}
 \nomenclature{RC5}{\textit{\textsc{Rivest} Cipher version 5}}
 
-Une première observation à réaliser concerne l'importance de la gestion des clés, qui occupe une place essentielle dans la plupart des systèmes proposés: il est en effet indispensable de disposer d'un moyen d'échanger, et au besoin de renouveler les clés nécessaires à ces architectures, sans compromettre leur \secu mais sans pour autant consommer trop de ressources.
+Une première observation à réaliser concerne l'importance de la gestion des clés, qui occupe une place essentielle dans la plupart des systèmes proposés: il est en effet indispensable de disposer d'un moyen d'échanger, et au besoin de renouveler les clés nécessaires à ces architectures\index{architecture de sécurité}, sans compromettre leur \secu mais sans pour autant consommer trop de ressources.
 De nombreux mécanismes ont été proposés et continuent de l'être~\cite{DSK10,BSK13}.
 Nous ne les détaillerons pas ici; mais il reste possible, pour en savoir davantage, de se tourner vers des travaux de synthèse qui catégorisent et décrivent les principales approches~\cite{HWMRKP06,XRSDHG07}.
 
-Seconde remarque: dans la littérature, plusieurs des mécanismes introduits dans les architectures complexes présentées ci-dessus ont été repris pour des solutions ultérieures~\cite{SS14-rev}.
+Seconde remarque: dans la littérature, plusieurs des mécanismes introduits dans les architectures\index{architecture de sécurité} complexes présentées ci-dessus ont été repris pour des solutions ultérieures~\cite{SS14-rev}.
 Par exemple, il existe une proposition concernant la combinaison de signatures\index{signature} numériques (cryptographie asymétrique)\index{cryptographie!cryptographie asymétrique}, du bloc \idx{$\mu$TESLA} (asymétrie temporelle) introduit avec \idx{SPINS} mais sans reprendre \idx{SNEP}, et d'un filtre de \textsc{Bloom} pour créer un mécanisme d'\textit{Information Asymmetry}, qui assure des diffusions générales (\textit{broadcast}) authentifiées~\cite{SLS10}.
 Le filtre de \textsc{Bloom} est utilisé pour condenser plusieurs codes d'authentification de messages (\macc), qui sont ajoutés aux paquets pour l'\idx{authentification} des transmissions par les nœuds.
 Plusieurs codes sont vérifiés par chaque nœud, qui possède son propre sous-ensemble de clés, de sorte que si certaines clés ont été compromises, il en reste d'autres à vérifier.

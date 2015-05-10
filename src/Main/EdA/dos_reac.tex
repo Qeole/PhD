@@ -8,7 +8,7 @@ Savoir qu'une attaque est en cours dans le réseau est une information de grande
         \paragraph{Exclure l'attaquant\index{exclusion}}
 Lorsque l'auteur d'une attaque a été clairement identifié, la réponse la plus souvent employée consiste à l'exclure virtuellement du réseau, \cad à ne plus lui envoyer de paquets, et à ignorer totalement les trames provenant de ce nœud~\cite{LC08}.
 Cette exclusion peut permettre d'empêcher le nœud corrompu de procéder à ses attaques, du moment que ses paquets peuvent effectivement être ignorés.
-Pour tout ce qui concerne les comportements cupides, la falsification d'accusés de réception, puis de manière générale l'ensemble des attaques portant sur les couches réseau ou supérieures de la pile \tcpip, ignorer les paquets émis par le capteur s'avère efficace: puisque les informations qu'il envoie ne sont plus traitées, il n'y a plus de danger.
+Pour tout ce qui concerne les comportements cupides\index{comportement cupide}, la falsification d'accusés de réception, puis de manière générale l'ensemble des attaques portant sur les couches réseau ou supérieures de la pile \tcpip, ignorer les paquets émis par le capteur s'avère efficace: puisque les informations qu'il envoie ne sont plus traitées, il n'y a plus de danger.
 Elle sera sans effet en revanche sur des attaques de type \idx{brouillage}, ou de création de collisions\index{collision}: non seulement l'attaquant est difficile à identifier, car il ne renseigne pas son identité dans les trames malicieuses, mais en plus le fait de l'«exclure» ne permet en aucun cas de supprimer les collisions produites sur des paquets légitimes par ses émissions.
 
         \paragraph{Identifier l'attaquant}
@@ -41,18 +41,18 @@ Il faut dans ce cas trouver des méthodes alternatives pour composer avec l'atta
 
 Ainsi, l'impact du \idx{brouillage} de certaines fréquences peut être limité, par exemple en changeant la fréquence utilisée pour le canal de transmission.
 Si l'attaquant parvient à s'adapter, un changement de fréquences très rapide ou «sauts de fréquence»\index{sauts de fréquence}, utilisé par des protocoles de \idx{couche de liaison de données} à étalement de spectre\index{etalement@étalement de spectre} comme \cdma (\textit{Code Division Multiple Access}, qui consiste à étendre le spectre d'émission et à convenir, entre pairs, d'une séquence pseudo-aléatoire guidant les sauts rapides de fréquences), peut permettre d'échapper au collisions\index{collision}.
-Le sigle FHSS est utilisé pour cette technique et provient de l'anglais \textit{Frequency-Hopping Spread Spectrum}, en français «étalement de spectre par saut de fréquence»\index{etalement@étalement de spectre!étalement de spectre par saut de fréquence}, à opposer à DSSS, \textit{Direct-sequence spread spectrum}, \cad «étalement de spectre à séquence directe»\index{etalement@étalement de spectre!étalement de spectre à séquence directe} (DSSS est un autre procédé associé à \cdma, mais joue plutôt sur un changement de phase du signal là où FHSS modifie les fréquences employées; DSSS ne permet donc pas de résister aussi bien aux attaques par brouillage).
+Le sigle FHSS est utilisé pour cette technique et provient de l'anglais \textit{Frequency-Hopping Spread Spectrum}, en français «étalement de spectre par saut de fréquence»\index{etalement@étalement de spectre!étalement de spectre par saut de fréquence}, à opposer à DSSS, \textit{Direct-sequence spread spectrum}, \cad «étalement de spectre à séquence directe»\index{etalement@étalement de spectre!étalement de spectre à séquence directe} (DSSS est un autre procédé associé à \cdma, mais joue plutôt sur un changement de phase du signal là où FHSS modifie les fréquences employées; DSSS ne permet donc pas de résister aussi bien aux attaques par \idx{brouillage}).
 \nomenclature{FHSS}{\textit{Frequency-Hopping Spread Spectrum}}
 \nomenclature{DSSS}{\textit{Direct-sequence Spread Spectrum}}
 Des antennes directionnelles\index{antenne directionnelle} peuvent aussi permettre une meilleure qualité de signal, et rendent parfois possibles les communications au travers d'une tentative de \idx{brouillage}~\cite{PI11}.
 Enfin, si les nœuds sont mobiles\index{mobilité}, ils peuvent tenter de sortir de la zone affectée par les émissions de l'attaquant~\cite{PI11}.
 
 Lorsque toute une zone du réseau est sous l'effet d'une attaque de \idx{brouillage} et se retrouve coupée de la \sdb, une possibilité intéressante est d'établir un «trou de ver»\index{trou!trou de ver}, légitime cette fois-ci, entre un relais de la zone atteinte et un nœud extérieur, qui sert alors de passerelle vers le reste du réseau~\cite{CCH07}.
-Ce tunnel permet de n'équiper qu'un sous-ensemble réduit de capteurs en matériel nécessaire pour contrer les attaques de brouillage radio, et de compter sur eux pour établir la passerelle salvatrice.
+Ce tunnel permet de n'équiper qu'un sous-ensemble réduit de capteurs en matériel nécessaire pour contrer les attaques de \idx{brouillage} radio, et de compter sur eux pour établir la passerelle salvatrice.
 
 En dehors de ce tunnel, les dispositions évoquées jusque là pour échapper au \idx{brouillage} sont très couteuses pour des \rcs, car elles demandent un équipement ou bien une capacité de calcul conséquents.
-Une technique plus simple pour réagir à du brouillage «intelligent», dans le cas où l'attaquant n'émet que quelques bits de données pour corrompre un paquet, consiste à ajouter des codes de \idx{correction d'erreur} aux messages~\cite{PI11}.
-Ces codes demandent un peu plus de calculs que les sommes de contrôle; mais tandis que celles-ci ne font que déceler les erreurs, les codes correcteurs permettent parfois de les corriger (et d'éviter ainsi la suppression pure et simple du paquet corrompu, qui mènerait à une demande de retransmission des données).
+Une technique plus simple pour réagir à du brouillage «intelligent»\index{brouillage!brouillage intelligent}, dans le cas où l'attaquant n'émet que quelques bits de données pour corrompre un paquet, consiste à ajouter des codes de \idx{correction d'erreur} aux messages~\cite{PI11}.
+Ces codes demandent un peu plus de calculs que les sommes de contrôle\index{somme de contrôle}; mais tandis que celles-ci ne font que déceler les erreurs, les codes correcteurs\index{correction d'erreur!code correcteur} permettent parfois de les corriger (et d'éviter ainsi la suppression pure et simple du paquet corrompu, qui mènerait à une demande de retransmission des données).
 
 Laissons à présent de côté les tentatives de \idx{brouillage} pour nous intéresser au \idx{routage}: les attaques sur les protocoles sont stoppées par l'exclusion de l'attaquant du réseau, mais les dégâts causés ne se réparent pas seuls.
 Il faut donc relancer les algorithmes afin de rétablir des routes efficaces.
@@ -98,17 +98,17 @@ Ils peuvent aussi être utilisés en conjonction avec des approches plus formell
 %{{{1
 La prévention et le couple détection / réaction sont les deux axes de lutte contre les attaques par \dds, et viennent clore cette section.
 Ces mesures doivent être menées conjointement avec des mécanismes de protection des autres propriétés: l'\idx{authentification}, mais aussi l'\idx{intégrité} des messages échangés par exemple, doivent être assurées pour parer à plusieurs types d'attaques.
-Le \chapref{ea} se termine également ici: après avoir présenté ces différentes problématiques de sécurité, puis en particulier les attaques et les principales contre-mesures concernant le \dds, c'est un aperçu global de la \secu dans les \rcs qui a été établi.
+Le \chapref{ea} se termine également ici: après avoir présenté ces différentes problématiques de \secu, puis en particulier les attaques et les principales contre-mesures concernant le \dds, c'est un aperçu global de la \secu dans les \rcs qui a été établi.
 Il vient se joindre aux éléments du \chapref{st}, qui introduit le fonctionnement générique des capteurs et les problèmes qu'ils apportent.
 
 En résumé, ce sont les points suivants qui ont été présentés dans ces deux chapitres.
 \begin{itemize}
     \item Les \rcsfs comportent des capteurs de petite taille, faibles en capacité de calcul, en mémoire et en batterie, qui communiquent entre eux par voie hertzienne.
     \item Les limites en ressources de ces capteurs, par ailleurs utilisés dans de nombreuses applications, imposent dès le déploiement du réseau d'utiliser des algorithmes et des protocoles adaptés à leurs capacités.
-    \item La partition en clusters est une opération couramment utilisée pour faciliter et rendre plus efficace la gestion de ces réseaux.
-    \item Ces réseaux sont par ailleurs soumis à des problématiques de sureté, de résilience, et surtout de sécurité: confidentialité, authentification, intégrité, protection contre le rejeu et disponibilité des communications et des services en sont les principaux exemples.
-    \item Il existe de nombreuses solutions pour garantir ces propriétés, toutes avec leur avantages et leurs inconvénients. La sécurité, en informatique, est toujours un compromis entre les performances attendues et le cout supplémentaire impliqué par les mécanismes mis en place.
+    \item La partition en clusters\index{clusterisation} est une opération couramment utilisée pour faciliter et rendre plus efficace la gestion de ces réseaux.
+    \item Ces réseaux sont par ailleurs soumis à des problématiques de \idx{sureté}, de \idx{résilience}, et surtout de \secu: \idx{confidentialité}, \idx{authentification}, \idx{intégrité}, protection contre le \idx{rejeu} et \idx{disponibilité} des communications et des services en sont les principaux exemples.
+    \item Il existe de nombreuses solutions pour garantir ces propriétés, toutes avec leur avantages et leurs inconvénients. La \secu, en informatique, est toujours un compromis entre les performances attendues et le cout supplémentaire impliqué par les mécanismes mis en place.
 \end{itemize}
 Appliquées aux \rcs, ces solutions se doivent naturellement d'être économes en ressources, et particulièrement en énergie nécessaire.
-Armés de cette vision d'ensemble des capteurs, des contraintes en ressources et des exigences soulevées par les questions de sécurité, nous sommes maintenant à même d'introduire de nouveaux mécanismes pour préserver encore davantage la batterie des capteurs.
+Armés de cette vision d'ensemble des capteurs, des contraintes en ressources et des exigences soulevées par les questions de \secu, nous sommes maintenant à même d'introduire de nouveaux mécanismes pour préserver encore davantage la batterie des capteurs.
 %1}}}

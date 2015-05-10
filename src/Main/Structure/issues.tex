@@ -78,7 +78,7 @@ Or les communications sur de plus grandes distances se traduisent par une plus g
 Les capteurs normaux (non \chs) n'ont pas à atteindre directement des nœuds situés en dehors de leur cluster; ils économisent d'autant en énergie.
 De plus, les \chs sont idéalement placés pour réaliser des opérations d'\idx{agrégation} voire de \idx{compression} sur les paquets qu'ils reçoivent, afin de limiter encore le volume des retransmissions couteuses en énergie.
 
-À part les économies substantielles en énergie, la clusterisation d'un réseau présente plusieurs autres avantages:
+À part les économies substantielles en énergie, la \idx{clusterisation} d'un réseau présente plusieurs autres avantages:
 \begin{itemize}
     \item elle permet de déployer une gestion «centralisée» d'un cluster, puisque le \ch est à même d'appliquer un algorithme tenant compte de tous les capteurs de son groupe. Pour autant, la topologie décentralisée de l'ensemble du réseau n'est pas sacrifiée, car les clusters sont indépendants de la \sdb, qui n'intervient pas dans leur fonctionnement interne;
     \item elle permet de gagner en \idx{extensibilité}, puisqu'il est aisé de rajouter des clusters au réseau, voire peu contraignant de rajouter des nœuds dans un cluster donné. L'évolution du réseau est ainsi plus simple à assurer que s'il fallait modifier un algorithme distribué pour prendre en compte l'intégration de nouveaux capteurs.
@@ -89,7 +89,7 @@ De plus, les \chs sont idéalement placés pour réaliser des opérations d'\idx
 %{{{2
 Une fois le \rc divisé en clusters, rien n'empêche de considérer les clusters un à un et de leur appliquer à nouveau un algorithme de \idx{clusterisation}, de façon à établir des sous-ensembles dans chaque cluster.
 Et ainsi de suite, de façon récursive, jusqu'à atteindre le degré de hiérarchie désiré.
-L'intérêt de cette méthode est de créer une partition hiérarchique dans le réseau, permettant un meilleur contrôle des sous-ensembles de capteurs.
+L'intérêt de cette méthode est de créer une partition hiérarchique\index{clusterisation!clusterisation hiérarchique} dans le réseau, permettant un meilleur contrôle des sous-ensembles de capteurs.
 Par ailleurs, les clusters situés tout en bas dans la hiérarchie constituée seront de petite taille.
 Les communications intra-clusters seront donc peu consommatrices en énergie.
 
@@ -99,7 +99,7 @@ Lorsque nous parlons simplement de \textit{clusters}, il faudra comprendre $1$-c
 
 De même, on désignera par $k$-\ch (ou bien par $k$-\CH) les \chs de chacun des $k$-clusters du réseau.
 Le rôle de $0$-\CH pourra alors être attribué à la \sdb.
-Chaque $k$-\CH reçoit des données (provenant soit de nœuds normaux si $k$ est le dernier degré de la hiérarchie constituée, soit de ($k+1$)-\CH), les agrège et les transmet au ($k-1$)-\CH auquel il est rattaché.
+Chaque $k$-\CH reçoit des données (provenant soit de nœuds normaux si $k$ est le dernier degré de la hiérarchie constituée, soit de ($k+1$)-\CH), les agrège\index{agrégation} et les transmet au ($k-1$)-\CH auquel il est rattaché.
 %2}}}
 
         \subsubsection{Un exemple: fonctionnement de l'algorithme \leach}\label{st:subsubsec:leach}
@@ -126,7 +126,7 @@ Chaque ronde $r$ est organisée de la façon suivante:
         Il est à noter que le calcul de $S(i)$ est réalisé de telle façon que chaque nœud devienne \ch une fois et une fois seulement au cours de chaque cycle de $\frac{1}{P}$~rondes: le taux de probabilité d'auto-désignation $S(i)$ est égal à $1$ lorsque la fin du cycle est atteinte (autrement dit, lorsque $r = \frac{1}{P}-1$).
     \item Les \CHs auto-désignés informent leurs nœuds voisins de leur changement de statut à l'aide de messages en diffusion générale (\textit{broadcast}).
         Tous ces messages sont envoyés en utilisant la même puissance de transmission (valeur fixe et prédéterminée lors de l'implémentation).
-        Pour limiter les collisions, il est fait usage sur la couche MAC de la méthode \textit{Carrier Sense Multiple Access} (\csma).
+        Pour limiter les collisions\index{collision}, il est fait usage sur la couche MAC de la méthode \textit{Carrier Sense Multiple Access} (\csma).
     \item Les autres nœuds, qui ne se sont pas désignés en tant que \chs pour la ronde en cours, choisissent de se joindre au cluster du \CH dont ils perçoivent le signal avec l'intensité la plus élevée, \cad le \CH le plus proche en termes de puissance du signal électromagnétique.
         Chaque nœud prévient le \ch qu'il décide de rejoindre en lui envoyant un message.
         La méthode \csma est là encore appliquée.
@@ -137,7 +137,7 @@ Chaque ronde $r$ est organisée de la façon suivante:
         Les \chs restent en écoute et reçoivent les données des autres capteurs de leur cluster.
         Les capteurs «normaux» effectuent leur mission (ils réalisent des mesures sur leur environnement), et envoient leurs résultats au \ch lorsque c'est à leur tour de le faire.
         Quand ce n'est pas à leur tour de communiquer, ces nœuds mettent leur équipement radio en veille afin d'économiser leur énergie.
-        Les collisions entre les transmissions des nœuds de différents clusters sont évitées grâce à la méthode appelée \textit{Code Division Multiple Access} (\cdma).
+        Les collisions\index{collision} entre les transmissions des nœuds de différents clusters sont évitées grâce à la méthode appelée \textit{Code Division Multiple Access} (\cdma).
     \item Au fur et à mesure qu'ils reçoivent les données, les \chs agrègent\index{agrégation}, et éventuellement compressent\index{compression} ces dernières.
         Ils les envoient ensuite à la \sdb, soit au cours d'une unique transmission directe, soit en faisant relayer les paquets par d'autres \chs.
     \item Les étapes~5 et~6 sont répétées jusqu'à la fin de la ronde.
@@ -168,7 +168,7 @@ D'autres travaux sont basés sur \leach, que ce soit pour améliorer ses perform
 
 Mais on trouve également de nombreux autres protocoles~\cite{AY07,DQWH13}.
 Certains d'entre eux prennent en compte deux à trois paramètres, comme l'énergie résiduelle des nœuds, leur distance aux \chs potentiels et/ou le nombre de voisins de ces derniers: c'est le cas du protocole \heed~\cite{YF04}, assez souvent utilisé, ou du protocole MPC~\cite{KTAA12}, plus récent et moins répandu, se basant sur les k-moyennes.
-Un quatrième élément, la confiance portée au nœud, est même utilisé parfois pour réaliser une sélection plus sure des \CH~\cite{KMSL09}.
+Un quatrième élément, la \idx{confiance} portée au nœud, est même utilisé parfois pour réaliser une sélection plus sure des \CH~\cite{KMSL09}.
 
 Certains protocoles ont des buts plus précis, comme \ffuca~\cite{FL11,FMMMI12} qui repose sur l'exploitation de propriétés ultramétriques dans le réseau afin de créer une répartition «idéale» des nœuds dans les clusters en fonction de leur distance aux \CH; ou bien comme VSR~\cite{TV08}, créé à l'intention des \idx{MANET}, qui à l'aide d'une structure virtuelle détermine un routage proactif pour l'intérieur des clusters (où les nœuds émettent au \ch en plusieurs sauts) et à la demande sur l'épine dorsale du réseau qui relie entre eux les \CH\,\footnote{Pour conserver la lisibilité du paragraphe, le développement des sigles HEED, FFUCA, MPC et VSR n'est pas donné ici. Il est néanmoins disponible \hyperref[sigles]{en fin d'ouvrage}.}.
 \nomenclature{LEACH}{\textit{Low-Energy Adaptive Clustering Hierarchy}}
@@ -197,7 +197,7 @@ Certaines solutions développées pour les \manet, des mécanismes de sécurité
 
 Mais revenons à la \idx{mobilité} en elle-même: elle n'est pas systématique dans les \rcsfs, dont les nœuds sont la plupart du temps statiques ou quasiment statiques.
 Il arrive néanmoins que des réseaux soit constitués, en intégralité ou bien en partie, par des capteurs mobiles.
-Le fait de se retrouver dans un environnement où les distances et les vitesses évoluent continuellement rend accessibles de nouvelles applications, mais vient bien sûr compliquer le \idx{routage}, la collecte des données, et même la gestion de la \idx{mobilité} des nœuds (s'ils n'ont pas de pilotes humains par exemple, il faut éviter les collisions~\cite{E-ZCGGK12}).
+Le fait de se retrouver dans un environnement où les distances et les vitesses évoluent continuellement rend accessibles de nouvelles applications, mais vient bien sûr compliquer le \idx{routage}, la collecte des données, et même la gestion de la \idx{mobilité} des nœuds (s'ils n'ont pas de pilotes humains par exemple, il faut éviter les collisions~\cite{E-ZCGGK12})\index{collision}.
 Dans le cas de \rcs comportant des nœuds mobiles, le modèle du réseau se verra en général rattaché aux \manet et, bien que ne bénéficiant pas forcément des mêmes ressources, ce sont les mêmes algorithmes de \idx{routage} qui vont être utilisés pour assurer l'acheminement des paquets de bout en bout.
 Nous reviendrons plus loin sur des solutions reposant sur un nombre restreint de nœuds mobiles se déplaçant au sein d'un réseau de capteurs fixes pour réaliser différentes opérations sur les appareils (collecte de données, diffusion d'information, réinitialisation de la configuration d'origine, \etc)~\cite{HR13}.
 \nomenclature{MANET}{\textit{Mobile Ad hoc NETworks}}
@@ -221,11 +221,11 @@ Ils consistent à implémenter le dispositif étudié, physiquement ou virtuelle
 Certains travaux ont même pour objet des tests comparatifs sur différentes architectures matérielles de capteurs~\cite{PLP06}, ou encore recensent les différents systèmes de simulation permettant d'expérimenter sur les réseaux de capteurs~\cite{AAAHN12}.
 
 Pour la vérification basée sur des méthodes formelles, des outils tels que le \idx{\textit{model checking}} peuvent par exemple être appliqués sur le modèle établi.
-Le \textit{model checking} est une technique pouvant être utilisée sur des systèmes concurrents à états finis, et qui permet d'extraire automatiquement certaines propriétés sur les performances ou la sureté du modèle puis de s'assurer qu'elles sont respectées dans le réseau à tout instant.
+Le \idx{\textit{model checking}} est une technique pouvant être utilisée sur des systèmes concurrents à états finis, et qui permet d'extraire automatiquement certaines propriétés sur les performances ou la sureté du modèle puis de s'assurer qu'elles sont respectées dans le réseau à tout instant.
 Si le système ne fonctionne pas comme prévu, l'outil permet parfois d'obtenir une trace qui vient faciliter la localisation de la source de l'erreur.
 Contrairement aux tests et aux simulations, les résultats obtenus à l'aide du \idx{\textit{model checking}} ne varient pas entre deux instances.
 Encore mieux: la spécification formelle du système permet de vérifier les propriétés sur tous les cas possibles d'exécution déterminés par les spécifications du modèle, tandis que des simulations ne permettent de remonter que certaines erreurs détectées (sans assurance de les avoir trouvées toutes).
-Le \textit{\idx{model checking}} est utilisé régulièrement dans les réseaux sans fils, que ce soit pour valider la conception de protocoles de routage comme pour la vérification de propriétés de sureté concernant les risques de collisions au sein d'un groupe de véhicules~\cite{E-ZCGGK12}.
+Le \idx{\textit{model checking}} est utilisé régulièrement dans les réseaux sans fils, que ce soit pour valider la conception de protocoles de routage comme pour la vérification de propriétés de sureté concernant les risques de collisions\index{collision} au sein d'un groupe de véhicules~\cite{E-ZCGGK12}.
 %2}}}
 
         \subsubsection{Résilience}
@@ -234,7 +234,7 @@ La \resilience d'un système est la capacité de ce système à outrepasser et �
 Autrement dit, un système résilient est capable de poursuivre son fonctionnement avec toujours autant d'efficacité ou presque, même si des pannes matérielles, des erreurs logicielles ou d'autres types d'incidents viennent perturber le système.
 Assurer la \resilience revient donc à anticiper, à prévoir des «plans de secours», des mécanismes de correction et de réparation automatiques.
 
-Concrètement, dans un \rcsfs, elle met en jeu des principes comme la redondance des données stockées et envoyées, ou des routes de retransmission~\cite{SP10}; elle s'établit sur l'usage de protocoles capables de se mettre à jour lorsque des nœuds disparaissent (épuisement supposé) ou apparaissent (nouveaux arrivants) dans le réseau, de mécanismes de correction d'erreurs…
+Concrètement, dans un \rcsfs, elle met en jeu des principes comme la redondance des données stockées et envoyées, ou des routes de retransmission~\cite{SP10}; elle s'établit sur l'usage de protocoles capables de se mettre à jour lorsque des nœuds disparaissent (épuisement supposé) ou apparaissent (nouveaux arrivants) dans le réseau, de mécanismes de correction d'erreurs…\index{correction d'erreur}
 La résilience matérielle passe le plus souvent par la redondance des composants, mais n'est que rarement mise en place, pour des raisons de couts, dans les \rcs.
 On préféra en général utiliser quelques capteurs en plus par rapport à la quantité strictement nécessaire pour assurer le service, sans avoir à augmenter le prix de \emph{tous} les capteurs.
 
@@ -244,7 +244,7 @@ La sureté et la résilience des réseaux ne sont pas des problématiques de sé
         \subsubsection{Sécurité}
 %{{{2
 En raison de leurs faibles capacités, conjuguées aux domaines critiques dans lesquels ils interviennent parfois, les capteurs peuvent présenter des cibles de choix pour un attaquant.
-Les algorithmes et mécanismes classiques utilisés en \idx{cryptographie} afin d'assurer la confidentialité ou l'authentification des données sont souvent très exigeants en ressources (en termes de calculs notamment, et donc de consommation énergétique).
+Les algorithmes et mécanismes classiques utilisés en \idx{cryptographie} afin d'assurer la \idx{confidentialité} ou l'\idx{authentification} des données sont souvent très exigeants en ressources (en termes de calculs notamment, et donc de consommation énergétique).
 Il a fallu adapter ces mécanismes aux capteurs.
 
 D'autres attaques peuvent être menées, non plus pour intercepter des données, mais dans le but de perturber le bon fonctionnement du réseau.

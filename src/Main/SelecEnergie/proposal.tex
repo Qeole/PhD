@@ -138,8 +138,8 @@ Aussi l'algorithme de sélection présenté plus haut doit-il être modifié, po
     \item Le \CH envoie un message aux nœuds sélectionnés pour leur notifier leur rôle de \cn.
 \end{enumerate}
 
-Il est intéressant de noter que certains algorithmes de clusterisation (\heed~\cite{YF04} par exemple) utilisent d'autres mécanismes de sélection basés sur l'énergie résiduelle des nœuds ---~pour choisir des \chs, mais qui pourraient être transposer à la sélection des \cns.
-Nous ne souhaitons pas utiliser dans ce chapitre de telles solutions qui n'utilisent l'énergie que comme l'un des paramètres pris en compte, et reposent donc sur la confiance vis à vis des nœuds qui calculent leur score propre.
+Il est intéressant de noter que certains algorithmes de clusterisation\index{clusterisation!protocole de clusterisation} (\heed~\cite{YF04} par exemple) utilisent d'autres mécanismes de sélection basés sur l'énergie résiduelle des nœuds ---~pour choisir des \chs, mais qui pourraient être transposer à la sélection des \cns.
+Nous ne souhaitons pas utiliser dans ce chapitre de telles solutions qui n'utilisent l'énergie que comme l'un des paramètres pris en compte, et reposent donc sur la \idx{confiance} vis à vis des nœuds qui calculent leur score propre.
 Au contraire, nous préférons obtenir l'énergie annoncée par les nœuds pour la comparer au modèle théorique, et permettre ainsi aux \vns de veiller à la sécurité du processus.
 
     \subsection{Observations}
@@ -167,5 +167,5 @@ Une troisième condition à l'application du modèle est d'être en mesure de co
 Mais une nouvelle fois, la sécurité d'un système est avant tout une affaire de compromis: plus on cherche à bloquer d'attaques, plus la complexité augmente.
 
 \paragraph{Outils de modélisation}
-Si ce chapitre ne présente aucune modélisation formelle du processus introduit, le système n'en a pas moins fait l'objet d'une modélisation, dans une autre étude~\cite{HMMBA14}, sous forme d'automates temporels, dont des propriétés ont été exprimées à l'aide d'un sous-ensemble de CTL (\textit{Computation Tree Logic}, «logique d'arbre de calcul» en anglais) pour être vérifiées à l'aide de l'outil de \textit{model checking} \textsc{Uppaal}\,\footnote{Il ne s'agit cette fois pas d'un sigle, mais d'un nom composé à partir des deux principaux établissements qui ont contribué à l'élaboration de l'outil: le département d'informatique de l'université d'Uppsala (UPP) en Suède, et le département d'informatique de l'université d'Aalborg (AAL) au Danemark.}~\cite{BDL04, uppaal}.
+Si ce chapitre ne présente aucune modélisation formelle du processus introduit, le système n'en a pas moins fait l'objet d'une modélisation, dans une autre étude~\cite{HMMBA14}, sous forme d'automates temporels, dont des propriétés ont été exprimées à l'aide d'un sous-ensemble de CTL (\textit{Computation Tree Logic}, «logique d'arbre de calcul» en anglais) pour être vérifiées à l'aide de l'outil de \idx{\textit{model checking}} \textsc{Uppaal}\,\footnote{Il ne s'agit cette fois pas d'un sigle, mais d'un nom composé à partir des deux principaux établissements qui ont contribué à l'élaboration de l'outil: le département d'informatique de l'université d'Uppsala (UPP) en Suède, et le département d'informatique de l'université d'Aalborg (AAL) au Danemark.}~\cite{BDL04, uppaal}.
 \nomenclature{CTL}{\textit{Computation Tree Logic}}

@@ -33,7 +33,7 @@ Nous définissons quatre états distincts pour les capteurs:
         \subsubsection{Nœud légitime}
 La machine à états pour un nœud légitime (non compromis) est présentée sur la \figref{tj:fig:autGoodNode}.
 Pour les nœuds non compromis par un attaquant, l'énergie décroit lorsque le composant radio est utilisé, \cad lors de l'écoute ainsi que lors de l'envoi de données.
-Lorsqu'un paquet est reçu, il est d'abord placé en mémoire tampon, avant de subir éventuellement des opérations de traitement (agrégation, compression, traitement sémantique) puis d'être transmis vers la \sdb.
+Lorsqu'un paquet est reçu, il est d'abord placé en mémoire tampon, avant de subir éventuellement des opérations de traitement (\idx{agrégation}, \idx{compression}, traitement sémantique) puis d'être transmis vers la \sdb.
 Un nœud accumule du gain lorsqu'il envoie ses propres paquets.
 Il n'en accumule pas, en revanche, lorsqu'il ne fait que retransmettre des paquets (opération de routage) envoyés par un autre nœud.
 
@@ -87,14 +87,14 @@ Comme précisé plus haut, le graphe complet n'a pas d'état final.
 Plusieurs conditions de victoire peuvent être considérées.
 Le choix de la condition à retenir dépend du but que cherche à atteindre le nœud compromis.
 
-        \subsubsection{Comportement cupide}
+        \subsubsection{Comportement cupide\index{comportement cupide}}
 Un capteur agissant de manière \emph{cupide} cherche à envoyer le plus de messages possible, tout en restant en vie.
 
 La formule de gain peut alors s'exprimer comme suit: $e_3 > 0 \wedge p_3 \geq \frac16$, ce qui signifie dans cet exemple que pour gagner la partie le nœud compromis doit envoyer un message toutes les 6~étapes.
 Comme une action du nœud compromis n'intervient que toutes les 3~étapes seulement (les deux autres correspondant aux coups des autres joueurs), le nœud compromis doit en fait emprunter une fois sur deux l'arête \startsend.
 
 Dans ce cas il lui est en fait impossible de gagner, puisque l'envoi d'un message consomme ici 2~unités d'énergie, et la recharge de la batterie nécessite trop de «temps» pour permettre un envoi toutes les deux actions.
-L'objectif pourrait bien sûr être adapté à une autre définition d'un comportement «cupide»: nous pourrions considérer, par exemple, que l'envoi d'un message toutes les 15~étapes peut remplir l'objectif d'un nœud cupide.
+L'objectif pourrait bien sûr être adapté à une autre définition d'un comportement «cupide»:\index{comportement cupide} nous pourrions considérer, par exemple, que l'envoi d'un message toutes les 15~étapes peut remplir l'objectif d'un nœud cupide.
 
         \subsubsection{Comportement destructeur}
 Un capteur se comportant de façon \emph{destructrice} cherche à rendre le réseau inutilisable, par exemple en agissant de telle façon que tous les nœuds épuisent leur batterie: son but est alos de demeurer le dernier nœud en état de marche dans le réseau.

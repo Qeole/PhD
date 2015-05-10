@@ -253,12 +253,12 @@ Ceux-ci sont envoyés dans les places \textsf{cNode} des nœuds sélectionnés p
     \subsection{Logique stochastique avec automates hybrides}
 
         \subsubsection{Présentation de la logique stochastique avec automates hybrides}
-La logique stochastique avec automates hybrides (\lsah; \textit{Hybrid Automata Stochastic Logic} en anglais) est un langage récent, qui introduit une architecture regroupant des études de \textit{model checking} et d'évaluation des performances ainsi que de fiabilité sur des processus stochastiques à événements discrets (PSED) exprimés sous forme de réseaux de \textsc{Petri} stochastiques généralisés (\rpsg)~\cite{BDDHP11hasl}.
-Plus concrètement, à partir d'un modèle \rpsg, les mesures de performances sont exprimées à l'aide de formules \lsah avant que leur soit appliquées des fonctions de \textit{model checking} statique permettant de vérifier automatiquement ces formules.
+La logique stochastique avec automates hybrides (\lsah; \textit{Hybrid Automata Stochastic Logic} en anglais) est un langage récent, qui introduit une architecture regroupant des études de \idx{\textit{model checking}} et d'évaluation des performances ainsi que de fiabilité sur des processus stochastiques à événements discrets (PSED) exprimés sous forme de réseaux de \textsc{Petri} stochastiques généralisés (\rpsg)~\cite{BDDHP11hasl}.
+Plus concrètement, à partir d'un modèle \rpsg, les mesures de performances sont exprimées à l'aide de formules \lsah avant que leur soit appliquées des fonctions de \idx{\textit{model checking}} statique permettant de vérifier automatiquement ces formules.
 %en place de vérifications, en termes d'études statistiques, de modèles stochastiques~\cite{BDDHP11hasl}.
 \nomenclature{LSAH}{Logique Stochastique avec Automates Hybrides}
 
-Pour bien comprendre le fonctionnement de \lsah, voici quelques rappels sur le \textit{model checking}.
+Pour bien comprendre le fonctionnement de \lsah, voici quelques rappels sur le \idx{\textit{model checking}}.
 Il s'agit d'une procédure de vérification formelle utilisant:
 \begin{itemize}
     \item un modèle $M$ à états discrets;
@@ -302,7 +302,7 @@ Au final, \lsah fonctionne de la façon suivante:
         \subsubsection{Automate linéaire hybride et formule \lsah associés au modèle utilisé}
 Nous présentons ici quelques exemples de formules \lsah, constitués des expressions \lsah et d'un automate linéaire hybride (\alh) associé au modèle \rpsge présenté plus haut (en \figref{sa:fig:petridyn}).
 Ces exemples présentent une manière de mesurer des données sur un nœud du \rc à partir de la version modélisée sous forme de réseaux de \textsc{Petri}, à fin d'étude, ou bien de comparaison de notre solution avec d'autres systèmes de détection des attaques de \dds.
-Ces exemples peuvent en outre être modélisés facilement avec l'outil de \textit{model checking} \textsf{COSMOS}~\cite{BDDHP11cosmos}.
+Ces exemples peuvent en outre être modélisés facilement avec l'outil de \idx{\textit{model checking}} \textsf{COSMOS}~\cite{BDDHP11cosmos}.
 
 On considère un nœud quelconque $i$ ($1\leq i\leq$~nombre de capteurs).
 L'automate linéaire hybride que nous utilisons fait appel aux variables suivantes:
@@ -388,7 +388,7 @@ Voici quelques exemples de formules \lsah permettant d'obtenir plusieurs valeurs
 Le renouvellement périodique des nœuds de surveillance permet d'améliorer tout à la fois la détection des attaques et la répartition de la charge en énergie dans le cluster, comme le démontrent les valeurs obtenues par simulation.
 Suite aux résultats numériques, le système a été modélisé de plusieurs façons différentes: après avoir étudié les limites des processus markoviens, orientés vers la modélisation d'événements à distribution exponentielle, nous avons présenté une autre évaluation formelle possible.
 Elle fait intervenir une version étendue des réseaux de \textsc{Petri}, dédiée à la représentation de toutes sortes de distributions événementielles, et permet la visualisation du modèle sous l'aspect classique des réseaux de \textsc{Petri}.
-Elle est accompagnée d'une troisième méthode basée sur un langage récent, la logique stochastique avec automates hybrides, qui réutilise le modèle précédent pour permettre l'évaluation formelle des performances du système par le biais d'outils de \textit{model checking}.
+Elle est accompagnée d'une troisième méthode basée sur un langage récent, la logique stochastique avec automates hybrides, qui réutilise le modèle précédent pour permettre l'évaluation formelle des performances du système par le biais d'outils de \idx{\textit{model checking}}.
 Toutes ont pour objectifs, d'une part, de modéliser notre solution afin d'en souligner les avantages et inconvénients; mais aussi, d'autre part, de présenter différents moyens existants d'employer les méthodes formelles en vue de modéliser des \rcs, et ce de façon plus générale que dans le seul contexte de la solution proposée.
 
 Cette solution, d'ailleurs, a reposé jusqu'à présent sur un processus de sélection aléatoire des \cns, qu'il soit mené au niveau du \ch, de la \sdb, ou des capteurs eux-mêmes.

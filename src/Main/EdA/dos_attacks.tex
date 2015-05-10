@@ -27,7 +27,7 @@ Des deux sous-couches \llc et \mac, c'est principalement la seconde qui nous int
 Les différents modes d'accès au médium existants ont été résumés au \chapref{st}, \ssref{st:ssec:mac}: certains consistent à créer des canaux de transmission distincts, tandis que d'autres déterminent l'accès à une même bande de fréquences en instaurant des règles.
 Ces règles peuvent être contournées, et la couche \mac va donc se retrouver associée à plusieurs types d'attaques.
 
-\paragraph{Création de collisions\index{collision} et \idx{brouillage} «intelligent»}
+        \paragraph{Création de collisions\index{collision} et \idx{brouillage} «intelligent»}
 Lorsque plusieurs nœuds dont les portées se chevauchent émettent de façon simultanée en utilisant la même fréquence (donc sur un même canal), il se produit des collisions\index{collision}.
 La plupart des protocoles \mac employés avec les \rcs introduisent dans les trames un champ contenant une \idx{somme de contrôle}, qui permet de vérifier l'\integrite de la trame.
 Mais cette \idx{somme de contrôle} ne permet pas, la plupart du temps, de corriger d'éventuelles erreurs (aucun des standards \ieeee (\wifi), \ieeefo (\bluetooth) ou \ieeeff (\zigbee, \slowpan) n'inclue de code de correction des erreurs\index{correction d'erreur}).
@@ -41,7 +41,7 @@ Il existe plusieurs façons de procéder~\cite{PI11}:
     \item une technique plus difficile à détecter consiste à envoyer des paquets normaux mais de façon continue, de façon à occuper le canal sans interruption~\cite{PI11}. Elle empêche les nœuds légitimes de transmettre dans le cas ou le protocole de couche \mac\index{couche de liaison de données} est \csmaca par exemple (on parle en anglais de \textit{deceptive jamming}, «brouillage trompeur»);\index{brouillage!brouillage trompeur}
     \item une technique plus économe consiste à envoyer des bits à intervalles distincts (réguliers ou non), des \textit{cybermines} en anglais, dans l'espoir de créer des collisions\index{collision}~\cite{PI11}. Il n'est alors plus nécessaire d'émettre en continu, et l'attaque est moins facile à détecter. Elle est bien sûr moins efficace, car l'attaquant n'a plus la garantie de brouiller tous les paquets émis;\index{brouillage!cybermine}
     \item la méthode dite \textit{reactive jamming} («brouillage réactif») consiste à ne pas transmettre de façon aléatoire, mais uniquement lorsqu'une émission émanant d'un autre nœud est détectée\cite{PI11}. Elle permet une meilleure conservation de l'énergie, mais ne joue plus sur les mécanismes d'esquive de \idx{collision}, qui font régulièrement reporter, avec les techniques précédentes, leurs transmissions aux nœuds légitimes dans l'attente de la libération du canal.\index{brouillage!brouillage réactif}
-    \item les attaques «intelligentes» à proprement parler reposent sur la connaissance des spécifications du protocole \mac employé, et consistent à jouer sur la nature des paquets de contrôle et les délais d'attente~\cite{PI11}. Ainsi, pour le protocole \csmaca employé avec la suite \ieeee~\cite{ieee802.11}, une trame spécifique dite RTS (\textit{Request To Send} en anglais) de demande de réservation du canal est suivie d'une trame CTS (\textit{Clear To Send}) après une durée SIFS (\textit{Short InterFrame Space}) si le destinataire est prêt à recevoir des données. En créant une collision sur la seule trame CTS, l'attaquant prévient entièrement l'échange de données utiles entre les nœuds. D'autres trames peuvent être utilisées dans le même but, leurs sigles sont dans la \tabref{ea:tab:smartjam}.\index{brouillage!brouillage intelligent}
+    \item les attaques «intelligentes» à proprement parler reposent sur la connaissance des spécifications du protocole \mac employé, et consistent à jouer sur la nature des paquets de contrôle et les délais d'attente~\cite{PI11}. Ainsi, pour le protocole \csmaca employé avec la suite \ieeee~\cite{ieee802.11}, une trame spécifique dite RTS (\textit{Request To Send} en anglais) de demande de réservation du canal est suivie d'une trame CTS (\textit{Clear To Send}) après une durée SIFS (\textit{Short InterFrame Space}) si le destinataire est prêt à recevoir des données. En créant une \idx{collision} sur la seule trame CTS, l'attaquant prévient entièrement l'échange de données utiles entre les nœuds. D'autres trames peuvent être utilisées dans le même but, leurs sigles sont dans la \tabref{ea:tab:smartjam}.\index{brouillage!brouillage intelligent}
 \end{itemize}
 \nomenclature{RTS}{\textit{Request To Send}}
 \nomenclature{CTS}{\textit{Clear To Send}}
@@ -76,7 +76,7 @@ Si l'attaquant se sert d'un capteur corrompu ou d'un appareil équivalent pour m
         \paragraph{Accaparement\index{comportement cupide!accaparement} du canal de transmission}
 Un appareil compromis introduit dans le réseau peut chercher à s'octroyer un accès plus important que les agents légitimes au canal de transmission.
 Ce comportement cupide\index{comportement cupide} (ou \textit{greedy} en anglais) peut être atteint par exemple en jouant sur les paramètres du protocole de couche \mac~\cite{PI11}: non respect des durées minimales DIFS entre deux envois (pour \ieeee par exemple), non respect des valeurs employées pour la taille des fenêtres de \idx{congestion}, non respect de la réservation des ressources par d'autres nœuds, \etc.
-Le but final de telles attaques peut être d'envoyer plus de données à la \sdb, dans le but par exemple de fausser une moyenne, ou bien de transmettre les données écoutées (attaque sur la confidentialité) dans le voisinage à une autre machine corrompue du réseau, en vue de l'exfiltration de ces données utiles capturées.
+Le but final de telles attaques peut être d'envoyer plus de données à la \sdb, dans le but par exemple de fausser une moyenne, ou bien de transmettre les données écoutées (attaque sur la \idx{confidentialité}) dans le voisinage à une autre machine corrompue du réseau, en vue de l'exfiltration de ces données utiles capturées.
 On parle aussi parfois en anglais d'\textit{unfairness} («injustice») lorsque les spécifications des protocoles mis en place sont délibérément ignorées par un nœud corrompu.
 
         \paragraph{Falsification d'accusés de réception (\textit{ACK spoofing})}
@@ -108,7 +108,7 @@ On parlera plutôt d'attaques de type «trou gris»\index{trou!trou gris} (\text
 
         \paragraph{Falsification\index{falsification} des informations de \idx{routage} (accaparement\index{comportement cupide!accaparement} du canal de transmission, création de boucles\index{routage!boucle}, \etc)}
 Une attaque peut être menée dès le déploiement du réseau en transmettant de fausses informations lors de la mise en place des règles de routages\index{routage}~\cite{AD14}.
-Ces informations vont alors chercher à nuire au \idx{routage} des paquets, en créant des boucles\index{routage!boucle} cycliques dans la structure de \idx{routage}, en partitionnant le réseau, en attirant à tort le trafic vers un nœud corrompu (par exemple pour exploiter les données et porter une attaque sur la confidentialité) ou vers un nœud légitime (pour surcharger ses capacités de traitement)\dots
+Ces informations vont alors chercher à nuire au \idx{routage} des paquets, en créant des boucles\index{routage!boucle} cycliques dans la structure de \idx{routage}, en partitionnant le réseau, en attirant à tort le trafic vers un nœud corrompu (par exemple pour exploiter les données et porter une attaque sur la \idx{confidentialité}) ou vers un nœud légitime (pour surcharger ses capacités de traitement)\dots
 
 De telles attaques peuvent aussi être menées lorsqu'un protocole de clusterisation\index{clusterisation!protocole de clusterisation} est mis en application, dans le but de gêner l'organisation structurelle du réseau (puisque la mise en place des clusters définit le plus souvent la façon dont les paquets seront routés dans le réseau).
 
@@ -196,7 +196,7 @@ Les valeurs transmises au niveau application viendront alors fausser les résult
 Suivant l'application mise en place, il peut être envisageable pour un attaquant d'inonder le réseau de données utiles, qu'elles aient été effectivement mesurées ou non, soit dans une tentative de fausser les résultats obtenus par la \sdb en faisant des moyennes sur les valeurs rapportées par l'ensemble des capteurs, soit pour créer des congestions\index{congestion} dans le réseau~\cite{AJ11}.
 
         \paragraph{Désynchronisation}
-Si jamais le protocole utilisé sur la couche application induit la création de sessions en mode connecté (comme pour \tcp sur la couche transport), des attaques de \desync peuvent être menées par un attaquant en vue de briser ces sessions~\cite{AD14}.
+Si jamais le protocole utilisé sur la \idx{couche application} induit la création de sessions en mode connecté (comme pour \tcp sur la \idx{couche transport}), des attaques de \desync peuvent être menées par un attaquant en vue de briser ces sessions~\cite{AD14}.
 La désynchronisation peut aussi être menée sur l'horloge des nœuds, pour les empêcher d'établir le même référentiel temporel, ce qui peut nuire au fonctionnement correct de certaines applications~\cite{SZFDXC14}.
 %2}}}
 
@@ -289,7 +289,7 @@ Toutes les attaques exposées dans cette sous-section ont été décrites à mai
             Optimisation des modèles & Attaques précédentes\\
             \bottomrule
          \end{tabu}
-         \index{destruction physique}\index{altération}\index{brouillage}\index{collision}\index{brouillage!brouillage intelligent}\index{comportement cupide!accaparement}\index{falsification}\index{trou!trou noir}\index{trou!trou gris}\index{trou!trou on/off}\index{routage}\index{routage!boucle}\index{trou!puits}\index{trou!trou de ver}\index{attaque Sybil}\index{deluge@déluge de paquets}\index{desynchro@désynchronisation}\index{congestion}
+         \index{destruction physique}\index{agrégation}\index{altération}\index{brouillage}\index{collision}\index{brouillage!brouillage intelligent}\index{comportement cupide!accaparement}\index{falsification}\index{trou!trou noir}\index{trou!trou gris}\index{trou!trou on/off}\index{routage}\index{routage!boucle}\index{trou!puits}\index{trou!trou de ver}\index{attaque Sybil}\index{deluge@déluge de paquets}\index{desynchro@désynchronisation}\index{congestion}
      \end{small}
 \end{table}
 
@@ -325,7 +325,7 @@ Voici nos suppositions concernant les principales motivations des attaquants.
     \item \textbf{Neutraliser les communications}: l'attaquant souhaite mettre le réseau hors service. Il veut empêcher l'exploitant du réseau d'accéder aux informations collectées, que ce soit pour des raisons financières ou militaires. Il ne veut pas de communication entre les nœuds, et surtout, pas de remontées d'informations vers la \sdb.
     \item \textbf{Détruire définitivement le réseau}: l'existence en soi du réseau est une nuisance pour l'attaquant. Celui-ci souhaite désactiver le réseau de façon définitive, car il ne peut pas se permettre de le mettre simplement hors service de façon ponctuelle lorsque le besoin s'en ferait sentir.
     \item \textbf{Parasiter la collecte de donnés}: l'attaquant souhaite profiter du réseau mis en place par un concurrent pour obtenir des informations stratégiques à moindre frais. Il récupère et exporte des données circulant sur le réseau. Bien que cela ne soit pas une attaque de \dds en soi, l'usage d'attaques par trous de ver\index{trou!trou de ver}, par accaparement\index{comportement cupide!accaparement} du médium peuvent être menées pour rendre la tâche plus aisée, sans compter que la circulation supplémentaire des données exfiltrées risque de puiser davantage dans la batterie des capteurs légitimes.
-    \item \textbf{Altérer les résultats}: l'attaquant souhaite induire sa cible en erreur en lui faisant parvenir des résultats erronés. Les prises de décision de l'opérateur vont alors se retrouver basées sur une vision erronée de la situation en cours. C'est l'exemple classique des séries d'espionnage, dans lesquelles les agents infiltrés font en sorte d'afficher l'image d'une pièce vide dans la salle de contrôle des dispositifs de vidéosurveillance afin de camoufler leur intrusion.
+    \item \textbf{Altérer\index{altération} les résultats}: l'attaquant souhaite induire sa cible en erreur en lui faisant parvenir des résultats erronés. Les prises de décision de l'opérateur vont alors se retrouver basées sur une vision erronée de la situation en cours. C'est l'exemple classique des séries d'espionnage, dans lesquelles les agents infiltrés font en sorte d'afficher l'image d'une pièce vide dans la salle de contrôle des dispositifs de vidéosurveillance afin de camoufler leur intrusion.
 \end{itemize}
 
         \paragraph{Les attaques correspondantes}
@@ -341,7 +341,7 @@ Ces attaques peuvent être menées sur des protocoles simples et largement répa
 Elles peuvent également être menées depuis l'extérieur du réseau, ce qui évite d'avoir à compromette un agent.
 Cet avantage est important, car détourner un capteur de son but d'origine peut être très couteux en temps.
 
-Aussi le brouillage, attaque externe, semble préférable, car plus simple, à bon nombre d'attaques plus complexes à mettre en place et nécessitant un accès dans le réseau.
+Aussi le \idx{brouillage}, attaque externe, semble préférable, car plus simple, à bon nombre d'attaques plus complexes à mettre en place et nécessitant un accès dans le réseau.
 Il semble donc plus rentable que les attaques portant sur les protocoles de routage, ou bien les attaques de couche supérieure (par \desync ou création de congestions\index{congestion}), elles aussi destinées à rendre le réseau hors service.
 
             \subparagraph{Détruire le réseau}
@@ -360,9 +360,9 @@ L'annonce de fausses routes, typiques des attaques \textit{sinkhole}\index{trou!
 En comparaison, les attaques de type \textit{blackhole}\index{trou!trou noir} ou \textit{grey hole}\index{trou!trou gris} se limitent à la suppression de paquets, sans influer sur la création des routes.
 Elles peuvent être utilisées pour neutraliser la remontée d'informations, mais une fois encore, on leur préférera dans ce contexte des attaques de \idx{brouillage}.
 
-            \subparagraph{Altérer les mesures}
-Les attaques portant sur l'\integrite des données sur les différentes couches semblent efficaces pour altérer les résultats perçus par l'exploitant.
-Il y a toutefois une limite relative à l'application pour laquelle le réseau a été déployé: si les résultats finaux sont similaires à des moyennes calculées sur toute la zone couverte par les capteurs, influer significativement sur cette moyenne va demander d'altérer un grand nombre de paquets.
+            \subparagraph{Altérer\index{altération} les mesures}
+Les attaques portant sur l'\integrite des données sur les différentes couches semblent efficaces pour altérer\index{altération} les résultats perçus par l'exploitant.
+Il y a toutefois une limite relative à l'application pour laquelle le réseau a été déployé: si les résultats finaux sont similaires à des moyennes calculées sur toute la zone couverte par les capteurs, influer significativement sur cette moyenne va demander d'altérer\index{altération} un grand nombre de paquets.
 L'envoi de messages en déluge\index{deluge@déluge de paquets} pour augmenter artificiellement le nombre de valeurs et fausser les résultats ne semble pas très intéressant, car le procédé est extrêmement facile à détecter dès lors qu'un mécanisme d'\idx{authentification} a été mis en place et que l'attaquant ne peut pas masquer son identité.
 La modification\index{altération} des paquets peut être menée sur un grand nombre d'entre eux pour peu que le nœud compromis soit bien situé, \cad s'il s'agir d'un relais proche de la \sdb.
 

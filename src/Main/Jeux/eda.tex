@@ -43,12 +43,12 @@ Les jeux bayésiens\index{jeu!jeu bayésien} ont aussi été utilisés dans des 
 
 Les jeux répétés\index{jeu!jeu répété} sont des modèles basés sur des séquences de stratégies\index{stratégie} qui dépendent de l'historique des actions déjà réalisées, où les décisions des joueurs\index{joueur} vont se retrouver influencées par les actions passées de leurs adversaires et par les résultats intermédiaires qui en découlent.
 Ils peuvent facilement être rattachés à des mécanismes produisant des scores de \reput.
-Ces jeux\index{jeu} sont donc employés pour créer des systèmes de détection d'intrusion génériques basés sur des mécanismes de confiance~\cite{AD07}, ou bien sur des solutions plus particulières qui se concentrent sur l'usage d'accusés de réception dans le but de détecter un nœud compromis situé sur la route de retransmission des données~\cite{Red09}.
+Ces jeux\index{jeu} sont donc employés pour créer des systèmes de détection d'intrusion génériques basés sur des mécanismes de \idx{confiance}~\cite{AD07}, ou bien sur des solutions plus particulières qui se concentrent sur l'usage d'accusés de réception dans le but de détecter un nœud compromis situé sur la route de retransmission des données~\cite{Red09}.
 
     \subsection{Jeux quantitatifs, tours de jeux}
 
 Notre approche est différente, dans le sens où l'arrêt potentiel (dû à l'épuisement de la batterie) est inclus dans les contraintes du \idx{jeu}, en parallèle aux valeurs de \idx{gain}.
-Pour autant que nous sachions, les travaux portant sur des configurations similaires considèrent toutes les dimensions comme étant soit liées à l'énergie, soit au \idx{gain}, et traitent uniquement des \idx{conjonctions} d'atomes~\cite{chatterjee12,velner12a}.
+Pour autant que nous sachions, les travaux portant sur des configurations similaires considèrent toutes les dimensions comme étant soit liées à l'énergie, soit au \idx{gain}, et traitent uniquement des conjonctions\index{conjonction} d'atomes~\cite{chatterjee12,velner12a}.
 Dans de tels cas, les algorithmes sont établis sur une même structure: l'objectif du jeu est décomposé selon les dimensions établies, et l'on cherche pour chacune de ces dimensions une stratégie gagnante\index{stratégie!stratégie gagnante} à mémoire finie\index{stratégie!stratégie à mémoire finie}.
 Ces stratégies sont ensuite combinées pour obtenir une stratégie globale pour le problème, qui elle peut éventuellement nécessiter une mémoire infinie\index{stratégie!stratégie à mémoire infinie}.
 

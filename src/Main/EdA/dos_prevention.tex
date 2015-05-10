@@ -14,7 +14,7 @@ La protection de l'\integrite des données assure de son côté l'échec de tout
 
 Les mécanismes dédiés à la garantie de ces différentes propriétés, présentés en \sref{ea:sec:secu}, sont donc également utiles pour protéger un \rc de certaines attaques de \dds.
 On parle de mesures de prévention, dans le sens où il s'agit de méthodes mises en place pour empêcher une attaque de survenir.
-De nombreuses architectures de sécurité\index{architecture de sécurité}, qui apportent \idx{authentification}, chiffrement, \integrite et protection contre le \idx{rejeu} aux échanges, et parmi lesquelles une bonne partie des solutions présentées en \sssref{ea:sss:archi}, se «vantent» ainsi d'atténuer, voire de prévenir totalement plusieurs types d'attaques de \dds.
+De nombreuses architectures de sécurité\index{architecture de sécurité}, qui apportent \idx{authentification}, \idx{chiffrement}, \integrite et protection contre le \idx{rejeu} aux échanges, et parmi lesquelles une bonne partie des solutions présentées en \sssref{ea:sss:archi}, se «vantent» ainsi d'atténuer, voire de prévenir totalement plusieurs types d'attaques de \dds.
 %2}}}
 
 \pagebreak %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -23,7 +23,7 @@ De nombreuses architectures de sécurité\index{architecture de sécurité}, qui
 Toujours dans le but de prévenir les attaques, il est possible d'utiliser des protocoles de routage spécifiquement étudiés pour limiter les risques.
 Ainsi, le protocole de routage \aodv (\textit{Ad hoc On-demand Distance Vector routing}), très utilisé dans les \rcs, a fait l'objet de propositions destinées à améliorer sa résistance aux attaques de \dds de type \textit{blackhole}\index{trou!trou noir} et \textit{sinkhole}\index{trou!puits}: une étude propose par exemple de faire vérifier par chaque nœud, lors de la création des routes, que ses voisins de deuxième degré sont bel et bien accessibles~\cite{DLA02}.
 Ainsi pour chaque nœud $x$ ayant un voisin $n$ qui lui propose une route vers une destination donnée, $x$ demande à $n$ quel est le prochain saut $n+1$ sur cette route et tente de contacter ce nœud $n+1$ pour vérifier qu'il est effectivement accessible.
-Si $n+1$ répond, alors $n$ est digne de confiance pour cette route; puisqu'il est digne de confiance, on admet qu'il pourra à son tour vérifier l'accessibilité du nœud $n+2$ à travers le saut annoncé par $n+1$, et ainsi de suite tout au long de la route empruntée pour les données.
+Si $n+1$ répond, alors $n$ est digne de \idx{confiance} pour cette route; puisqu'il est digne de \idx{confiance}, on admet qu'il pourra à son tour vérifier l'accessibilité du nœud $n+2$ à travers le saut annoncé par $n+1$, et ainsi de suite tout au long de la route empruntée pour les données.
 
 Toujours pour parer aux attaques sur le routage, d'autres méthodes se basent sur des mécanismes de \idx{redondance} et de \resilience, pour faire en sorte que si l'une des routes se révèle défectueuse, d'autres exemplaires des paquets, envoyés par des routes distinctes, puissent attendre leur destination.
 Des mécanismes tels que le \idx{partage de secret} peuvent être utilisés à cette fin de redondance, pour limiter l'augmentation du volume de données envoyées~\cite{MMB13}.
@@ -34,7 +34,7 @@ Des mécanismes tels que le \idx{partage de secret} peuvent être utilisés à c
         \paragraph{Compliquer l'accès aux capteurs}
 %{{{3
 Il est en fin de compte très difficile de cacher la \idx{localisation géographique} d'un capteur à un attaquant déterminé.
-Des mécanismes alliant clusterisation et usage de fausses sources pour les messages peuvent être employés afin de compliquer la tâche à l'attaquant~\cite{GK13}.
+Des mécanismes alliant \idx{clusterisation} et usage de fausses sources pour les messages peuvent être employés afin de compliquer la tâche à l'attaquant~\cite{GK13}.
 L'usage d'antennes directionnelles\index{antenne directionnelle} peut également complexifier la localisation des nœuds, mais n'est pas adapté à toutes les utilisations des \rcs.
 Au final, un attaquant correctement équipé pourra toujours trouver un capteur en procédant par triangulation du signal électromagnétique.
 
@@ -54,7 +54,7 @@ Si le nœud tentait malgré tout de reprendre son activité au-delà de la péri
 \paragraph{Durcir la sécurité logicielle\index{securité@sécurité!sécurité logicielle}}
 %{{{3
 Si un attaquant parvient à accéder physiquement à un capteur, il devient très compliqué de l'empêcher d'accéder au contenu de la mémoire de l'appareil, et/ou de le reprogrammer selon ses besoins.
-Des méthodes de chiffrement de la mémoire (principalement pour la mémoire non volatile) existent, mais sont peu implémentés sur les capteurs, car ils augmentent significativement la consommation en ressources de la machine et diminuent ses performances.
+Des méthodes de \idx{chiffrement} de la mémoire (principalement pour la mémoire non volatile) existent, mais sont peu implémentés sur les capteurs, car ils augmentent significativement la consommation en ressources de la machine et diminuent ses performances.
 Des modifications malveillantes du code exécuté par un nœud peuvent parfois être détectées, comme nous le verrons lorsque nous traiterons des systèmes de détection d'intrusion machine en \sssref{ea:sss:hids}.
 
 Mais outre les accès physiques directs, un attaquant peut très bien tenter de compromettre à distance un capteur, en exploitant des failles logicielles.

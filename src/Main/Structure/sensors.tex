@@ -210,7 +210,7 @@ Les principaux standards qui sont employés dans les \rcs sont les piles \ieeee 
 \nomenclature{6LoWPAN}{\textit{IPv6 over Low power Wireless Personal Area Networks}}
 %2}}}
 
-            \paragraph{La couche physique}
+            \paragraph{La \idx{couche physique}}
 %{{{2
 Cette couche concerne l'émission et la réception en soi des ondes électromagnétiques, et l'encodage utilisé pour leur faire porter des valeurs numériques (par opposition à un signal analogique)~\cite{TW10}.
 Les réseaux sans fil ont la particularité de ne pas pouvoir restreindre l'envoi d'un paquet vers son seul destinataire: un paquet émis par transmission électromagnétique est reçu par tout nœud voisin (\cad à distance suffisamment faible pour être couvert par la portée d'émission de l'émetteur) qui écoute le canal (donc les plages de fréquences concernées) au moment de la transmission.
@@ -221,13 +221,13 @@ Plus le signal est fort, plus il portera loin (et permettra d'atteindre des nœu
 Naturellement, l'émission consommera également plus d'énergie.
 %2}}}
 
-            \paragraph{La couche de liaison de données}\label{st:ssec:mac}
+            \paragraph{La \idx{couche de liaison de données}}\label{st:ssec:mac}
 %{{{2
 La deuxième couche du modèle fournit les moyens fonctionnels et procéduraux pour le transfert des données entre deux entités du réseau~\cite{TW10}.
-Elle permet aussi, le plus souvent, de détecter et éventuellement corriger certaines erreurs survenues sur la couche physique (en cas de perturbation ou dégradation du signal électromagnétique).
+Elle permet aussi, le plus souvent, de détecter et éventuellement corriger certaines erreurs survenues sur la \idx{couche physique} (en cas de perturbation ou dégradation du signal électromagnétique).
 Elle se décompose en deux sous-couches: la couche de contrôle de la liaison logique (\llc, pour \textit{Logical Link Control} en anglais, «contrôle de la liaison logique») et la couche du contrôle d'accès au support (\mac, pour \textit{Media Access Control}, «contrôle d'accès au support»).
 \llc est la sous-couche haute, utilisée pour fiabiliser la sous-couche \mac; elle intervient peu dans les \rcs.
-Le protocole de couche \mac définit la manière dont les différents agents du réseau accèdent au médium de transmission de façon à limiter les collisions, et à garantir un accès le plus souvent équivalent au médium pour tous les nœuds.
+Le protocole de couche \mac définit la manière dont les différents agents du réseau accèdent au médium de transmission de façon à limiter les collisions\index{collision}, et à garantir un accès le plus souvent équivalent au médium pour tous les nœuds.
 \begin{table}[!ht]
     \caption{Méthodes d'accès au médium de transmission}\label{st:tab:mac}
     \centering
@@ -249,7 +249,7 @@ Le protocole de couche \mac définit la manière dont les différents agents du 
             \midrule
             \multicolumn{3}{c}{Modes d'accès par paquet}\\
             \midrule
-            \textit{Contention based random multiple access methods} & Accès par contention & Contention par le nœud du paquet à envoyer jusqu'à ce que le protocole le lui autorise. Dans cette catégorie se trouve notamment le protocole \csmaca (\textit{Carrier Sense Multiple Access with Collision Avoidance}, accès multiple par écoute du canal avec esquive de collision), très utilisé dans les réseaux sans fil (\ieeee entre autres).\\
+            \textit{Contention based random multiple access methods} & Accès par contention & Contention par le nœud du paquet à envoyer jusqu'à ce que le protocole le lui autorise. Dans cette catégorie se trouve notamment le protocole \csmaca (\textit{Carrier Sense Multiple Access with Collision Avoidance}, accès multiple par écoute du canal avec esquive de \idx{collision}), très utilisé dans les réseaux sans fil (\ieeee entre autres).\\
             \midrule
             \textit{Resource reservation (scheduled) packet-mode protocols} & Réservation des ressources & Réservation par un nœud des ressources (par exemple: créneau temporel) nécessaires à la transmission)\\
             \midrule
@@ -275,7 +275,7 @@ Les capteurs sont associés dans des groupes (qui ne correspondent pas tout à f
 \nomenclature{S-MAC}{\textit{Sensor-MAC}}
 %2}}}
 
-            \paragraph{La couche réseau}
+            \paragraph{La \idx{couche réseau}}
 %{{{2
 Cette couche, pour les capteurs sans fil, repose le plus souvent sur le protocole \ip (\textit{Internet Protocol} en anglais), que ce soit en version 4 ou 6 (la version 6 est notamment utilisée avec la pile \slowpan), pour l'adressage, et sur un protocole de routage qui détermine comment les paquets sont retransmis saut après saut dans le réseau~\cite{TW10}.
 
@@ -290,7 +290,7 @@ Ces protocoles se répartissent le plus souvent en deux grandes classes: les pro
 \nomenclature{WANET}{\textit{Wireless Ad hoc NETwork}}
 %2}}}
 
-            \paragraph{La couche transport}
+            \paragraph{La \idx{couche transport}}
 %{{{2
 Cette couche gère les communications de bout en bout entre processus.
 Les protocoles les plus fréquemment utilisés, \tcp (\textit{Transmission Control Protocol}) et \udp (\textit{User Datagram Protocol}) assurent l'ordonnancement des paquets et permettent d'éviter les pertes, les doublons et la corruption des paquets~\cite{TW10}.
@@ -298,7 +298,7 @@ Le protocole \tcp permet en plus à deux entités de communiquer en mode connect
 En raison des données de contrôle que ces protocoles impliquent, ils ne sont pas systématiquement implémentés dans les \rcs (ils le sont parfois dans des versions allégées).
 %2}}}
 
-            \paragraph{La couche application}
+            \paragraph{La \idx{couche application}}
 %{{{2
 La dernière couche gère les échanges applicatifs entre les différents agents du réseau, et encapsule les données utiles au format désiré pour leur traitement final~\cite{TW10}.
 Il s'agit de la couche la plus haut niveau  du modèle.
@@ -321,7 +321,7 @@ Leur alternance n'a le plus souvent que pour but de limiter les répétitions au
 %{{{2
 Les «nœuds normaux» ont deux significations possibles selon le contexte.
 \begin{enumerate}
-    \item Lorsqu'il est question de partition, de «clusterisation» du réseau, un nœud \textit{normal} est un nœud qui n'a pas été sélectionné pour assurer la fonction de «chef» du cluster, de \ch. De même lorsque des nœuds de contrôle (\cns ou \vns) ont été sélectionnés, les nœuds \textit{normaux} sont les nœuds qui n'ont pas été sélectionnés (ni comme nœud de contrôle, ni comme \ch): ils poursuivent donc simplement leur rôle de collecte et de transmission des données mesurées.
+    \item Lorsqu'il est question de partition, de «\idx{clusterisation}» du réseau, un nœud \textit{normal} est un nœud qui n'a pas été sélectionné pour assurer la fonction de «chef» du cluster, de \ch. De même lorsque des nœuds de contrôle (\cns ou \vns) ont été sélectionnés, les nœuds \textit{normaux} sont les nœuds qui n'ont pas été sélectionnés (ni comme nœud de contrôle, ni comme \ch): ils poursuivent donc simplement leur rôle de collecte et de transmission des données mesurées.
     \item Lorsqu'il est question de \secu et d'attaques menées depuis l'intérieur du réseau, un nœud \textit{normal} désigne un nœud non compromis. Les termes «nœud légitime», «nœud sain» ont le même sens dans cette thèse. Ils sont à opposer au nœud «attaquant», «compromis», «corrompu» ou occasionnellement «cupide».
 \end{enumerate}
 %2}}}

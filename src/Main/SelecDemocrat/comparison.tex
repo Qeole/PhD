@@ -196,8 +196,8 @@ Les maigres réservent accordées ne lui permettent pas d'avoir le temps, en rev
 
 Il est à noter que la position du nœud compromis a une influence directe sur le nombre de nœuds détectant l'attaque.
 Suivant le nombre de voisins directs qu'il possède, ce nœud a plus ou moins de chances d'être détecté.
-Pour toutes les simulations réalisées dans cette partie, le nœud compromis occupe la position indiquée sur la \figref{sd:fig:neighbors}, et possède (en dehors du \ch) un total de 61~voisins directs, qui sont autant de \cns en puissance capables de détecter l'attaque\,\footnote{Le modèle de couche physique utilisé pour les simulations ne comporte pas de composante aléatoire: hors collisions, soit deux nœuds sont à portée et reçoivent tous leurs messages sans pertes dues à l'affaiblissement, soit l'échange est systématiquement impossible.}.
-Toutefois, «surveillance» n'est pas systématiquement égale à «détection», et un \cn à portée peut échouer à détecter l'attaque (s'il manque trop de paquets à cause des collisions, par exemple).
+Pour toutes les simulations réalisées dans cette partie, le nœud compromis occupe la position indiquée sur la \figref{sd:fig:neighbors}, et possède (en dehors du \ch) un total de 61~voisins directs, qui sont autant de \cns en puissance capables de détecter l'attaque\,\footnote{Le modèle de couche physique utilisé pour les simulations ne comporte pas de composante aléatoire: hors collisions\index{collision}, soit deux nœuds sont à portée et reçoivent tous leurs messages sans pertes dues à l'affaiblissement, soit l'échange est systématiquement impossible.}.
+Toutefois, «surveillance» n'est pas systématiquement égale à «détection», et un \cn à portée peut échouer à détecter l'attaque (s'il manque trop de paquets à cause des collisions\index{collision}, par exemple).
 \begin{figure}[p]
     \centering
     \includegraphics[width=6.5cm]{\chapterfig/WSN_neighbors.pdf}
@@ -254,7 +254,7 @@ La probabilité que le nœud compromis ne soit surveillé par aucun \cn est donc
         %&\approx3,6\times10^{-5}\approx1/27228
 %\end{align*}
 $$P(k=0)\approx3,6\times10^{-5}\approx1/27228$$
-Elle est très faible; mais il ne faut pas oublier que «surveillance» n'est pas systématiquement égale à «détection» (si un \cn manque trop de paquets en raison de collisions dans le réseau, par exemple).
+Elle est très faible; mais il ne faut pas oublier que «surveillance» n'est pas systématiquement égale à «détection» (si un \cn manque trop de paquets en raison de collisions\index{collision} dans le réseau, par exemple).
 
 La \figref{sd:fig:detec-min-20J} présente les mêmes résultats, pour une énergie initiale de 20~\joule assignée aux capteurs.
 Les résultats, de manière prévisible, montrent que la durée de surveillance a à peu près doublé pour chaque méthode, avec une augmentation des performances pour \iddemx et \iddems (par rapport à la figure précédente), qui ont eu l'occasion de «rattraper» davantage l'écart creusé sur la consommation en énergie lors de leur période initiale.

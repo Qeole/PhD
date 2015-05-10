@@ -42,7 +42,7 @@ Elle implique que pour obtenir une grande durée de vie, la consommation en éne
 Pour obtenir une méthode efficace sur les deux points évoqués, nous proposons dès lors d'accompagner la mise en place des nœuds de surveillance par deux mécanismes: une partition hiérarchique récursive des nœuds du réseau d'une part, et une élection dynamique des «sentinelles» d'autre part.
 
 %===============================================================================
-    \subsection{Partition hiérarchique du réseau}
+    \subsection{Partition hiérarchique\index{clusterisation!clusterisation hiérarchique} du réseau}
 
 Le fait de clusteriser le \rc tel que présenté au \chapref{st}, \ssref{st:subsec:partition} permet de limiter la consommation en énergie de la plupart des nœuds du réseau, puisque seuls les \chs se retrouvent à effectuer des émissions sur des distances plus longues que le rayon d'un cluster.
 La partition récursive\index{clusterisation!partition récursive} permet d'obtenir une gestion encore plus efficace des clusters, puisqu'elle introduit plus de granularité.
@@ -63,7 +63,7 @@ Des expériences ayant recours au matériel considéré sont indispensables pour
 %===============================================================================
     \subsection{Des \cns pour surveiller le trafic}
 
-La partition hiérarchique d'un réseau en clusters établit déjà une distinction entre deux rôles que peuvent assumer les capteurs: celui de nœud «normal», qui poursuit ses opérations de captage et de retransmission des données de façon classique, et celui de \ch, qui se retrouve chargé d'assurer la liaison entre les membres de son cluster et le restant du réseau.
+La partition hiérarchique\index{clusterisation!clusterisation hiérarchique} d'un réseau en clusters établit déjà une distinction entre deux rôles que peuvent assumer les capteurs: celui de nœud «normal», qui poursuit ses opérations de captage et de retransmission des données de façon classique, et celui de \ch, qui se retrouve chargé d'assurer la liaison entre les membres de son cluster et le restant du réseau.
 À côté des nœuds «normaux» et des \chs, un troisième rôle va être attribué à certains capteurs, afin d'assurer la détection des attaques de type «\dds».
 Certains capteurs se voient ainsi confier le rôle de «nœuds de contrôle», ici nommés \cns (introduits sous le nom de \textit{gNodes}\index{gNodes@\textit{gNodes}} dans~\cite{LC08}), et sont chargés de surveiller le trafic entrant et sortant des \chs.
 
@@ -77,20 +77,20 @@ Une fois que la malveillance d'un capteur est effectivement actée par un \ch, l
 En pratique, la solution utilisée ici est simple: tous les messages en provenance des nœuds considérés malveillants par le \ch sont ignorés (le \CH se met immédiatement à les ignorer, et il prévient les capteurs du cluster afin qu'ils puissent en faire autant).
 
 Les \cns comparent également la taille des trafics entrant et sortant du \ch.
-En cas d'écarts importants (en tenant compte des éventuels facteurs de compression des données et des messages ignorés des nœuds considérés compromis), ils peuvent être amenés à penser que le \ch est lui-même malveillant.
+En cas d'écarts importants (en tenant compte des éventuels facteurs de \idx{compression} des données et des messages ignorés des nœuds considérés compromis), ils peuvent être amenés à penser que le \ch est lui-même malveillant.
 Dans ce cas, l'élection d'un nouveau \CH dans le cluster est déclenchée.
 
 %===============================================================================
     \subsection{Sélection dynamique des \cns}
 
         \subsubsection{Motivations}
-La partition du réseau permet de limiter aux seuls \chs les efforts énergétiques dus aux transmissions longues.
+La partition\index{clusterisation} du réseau permet de limiter aux seuls \chs les efforts énergétiques dus aux transmissions longues.
 L'inconvénient est que, justement, ces \CH vont épuiser leur batterie beaucoup plus rapidement que s'ils étaient restés des nœuds ordinaires, tirant ainsi le réseau vers une fin de vie précoce.
 Les nœuds ne sont pas toujours désignés \CH «à vie»: ainsi \leach renouvelle périodiquement la partition du réseau, choisissant à chaque itération de nouveaux \chs et entrainant la sélection d'un nouveau lot de \cns.
 
-Mais tous les protocoles de \idx{clusterisation} ne prévoient pas nécessairement de renouvellement régulier de la partition.
+Mais tous les protocoles de clusterisation\index{clusterisation!protocole de clusterisation} ne prévoient pas nécessairement de renouvellement régulier de la partition.
 De plus, s'ils n'émettent pas sur de longues distances, les \cns se retrouvent eux aussi à consommer plus d'énergie que les nœuds normaux, puisqu'il doivent sans cesse rester en écoute des transmissions qui les entourent, et analyser le débit de chacun de leurs voisins.
-Pour répartir cette nouvelle charge, qui touche davantage de nœuds, nous proposons d'élire également les \cns de façon dynamique, sur une période plus courte que celle, éventuelle, qui correspond à la clusterisation du réseau.
+Pour répartir cette nouvelle charge, qui touche davantage de nœuds, nous proposons d'élire également les \cns de façon dynamique, sur une période plus courte que celle, éventuelle, qui correspond à la \idx{clusterisation} du réseau.
 
 Il est vrai que le renouvellement périodique des \cns rajoute des contraintes et augmente le volume des messages de contrôles à échanger dans le réseau.
 Pour certaines applications des capteurs, ceci peut représenter un inconvénient que la répartition de la charge ne vient pas contrebalancer; mais de manière générale la préservation des réserves énergétiques est primordiale dans les \rcs, et un meilleur équilibre de la charge obtenu pour un prix relativement modeste ne semble pas superflu.
@@ -109,7 +109,7 @@ Cette solution de renouvellement périodique améliore aussi la sécurité du r�
 
         \subsubsection{Le choix par le hasard}
 Le renouvellement périodique des capteurs de surveillance peut être réalisé de plusieurs façons.
-Dans ce chapitre, une façon de faire très simple est employée: la sélection des \cns, pour chaque période, est ---~théoriquement~--- \idx{aléatoire}.
+Dans ce chapitre, une façon de faire très simple est employée: la sélection des \cns, pour chaque période, est ---~théoriquement~--- aléatoire.
 L'aléatoire est une notion délicate en informatique; nous nous contenterons plutôt d'un algorithme capable de générer des nombres dits «pseudo-aléatoires».
 Une façon de procéder, par exemple, est de recourir à un algorithme capable de générer une suite de nombre d'apparence aléatoire, utilisés pour déterminer quels seront les \cns pour la période à venir~\cite{BMM13}.
 Cet algorithme se doit de respecter les points suivants:
@@ -163,7 +163,7 @@ Autrement, il reste un capteur normal.
 Cette méthode présente deux inconvénients.
 Tout d'abord, elle impose à chaque nœud de calculer un nombre pseudo-aléatoire --- calcul parfois couteux ---, ce qui n'est pas nécessaire avec les deux autres méthodes.
 Ensuite, chaque nœud choisit lui-même de se désigner (ou non) \cn, sans tenir compte de la décision de ses voisins.
-Si bien que l'élection des \cns ne prend en compte à aucun moment la clusterisation du réseau.
+Si bien que l'élection des \cns ne prend en compte à aucun moment la \idx{clusterisation} du réseau.
 Il est très peu probable que les \cns ainsi élus soient uniformément répartis entre les différents $2$-clusters du réseau.
 Il est même possible que certains $2$-clusters se retrouvent totalement dépourvus de \cns (et se retrouvent ainsi dans l'incapacité de détecter une attaque).
 

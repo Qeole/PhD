@@ -46,7 +46,7 @@ Chaque itération~$k$ se décompose en étapes, qui sont détaillées ici:
     \item À la fin de l'itération~$k$, chaque nœud~$i$ envoie son énergie résiduelle (dénotée~$\mathit{ÉR}_k[i]$); chaque \cn~$j$ envoie en plus un tableau~$\mathit{Obs}_k[j]$ contenant les observations effectuées sur le débit d'émission de ses voisins au cours de l'itération.
     \item Pour chaque nœud~$i$, le \ch réalise l'analyse suivante:
         \begin{itemize}
-            \item en se basant sur un modèle mathématique adapté, le \CH calcule l'énergie consommée «effective» $\mathit{ÉCe}$ relative à la moyenne des débits pour~$i$ $\{\mathit{Obs}_k[j][i]\}|_{j\in \mathcal{CN}}$ observés par les $j$~\cns voisins de~$i$ pendant le déroulement de l'itération\,\footnote{La méthode proposée consiste ici à calculer la moyenne des valeurs relevées par les différents \cns pour le trafic émis par le nœud $i$. Une autre solution serait de prendre la valeur maximale. Dans les deux cas, si malgré tout un capteur compromis est parvenu à accéder au rôle de \cn, il pourrait tenter de fournir des valeurs anormalement élevées pour fausser le calcul de $\mathit{ÉCe}$ et empêcher l'élection du nœud~$i$. Une solution idéale serait en fait de calculer une moyenne pondérée, en utilisant comme coefficients les degrés de confiance associés à chaque \cn.};
+            \item en se basant sur un modèle mathématique adapté, le \CH calcule l'énergie consommée «effective» $\mathit{ÉCe}$ relative à la moyenne des débits pour~$i$ $\{\mathit{Obs}_k[j][i]\}|_{j\in \mathcal{CN}}$ observés par les $j$~\cns voisins de~$i$ pendant le déroulement de l'itération\,\footnote{La méthode proposée consiste ici à calculer la moyenne des valeurs relevées par les différents \cns pour le trafic émis par le nœud $i$. Une autre solution serait de prendre la valeur maximale. Dans les deux cas, si malgré tout un capteur compromis est parvenu à accéder au rôle de \cn, il pourrait tenter de fournir des valeurs anormalement élevées pour fausser le calcul de $\mathit{ÉCe}$ et empêcher l'élection du nœud~$i$. Une solution idéale serait en fait de calculer une moyenne pondérée, en utilisant comme coefficients les degrés de \idx{confiance} associés à chaque \cn.};
             \item le \CH calcule alors la consommation «annoncée» $\mathit{ÉCa}$ pour la période~$k$, en prenant la différence entre les valeurs tout juste annoncées par~$i$ et celles de la période précédente: $\mathit{ÉCa}=\mathit{ÉR}_{k-1}[i] - \mathit{ÉR}_k[i]$;
             \item si $|\mathit{ÉCa}-\mathit{ÉCe}|\leq\epsilon$ (où $\epsilon$ est la marge d'erreur tolérée), alors le nœud~$i$ est déclaré «sain», et il est ajouté à la liste~$\mathit{LNÉ}$ des nœuds éligibles pour la prochaine sélection des \cns;
             \item sinon, le nœud est placé dans la liste~$\mathit{LNS}$ des nœuds suspects;
@@ -73,7 +73,7 @@ Par exemple, il est possible de tirer aléatoirement des \cns parmi les nœuds d
 D'autres façons d'effectuer ce choix pourraient consister par exemple à prendre en compte un ou plusieurs critères parmi la liste suivante:
 \begin{itemize}
     \item l'énergie résiduelle des nœuds;
-    \item la confiance attribuée à ce nœud (sous la forme d'un score de réputation);
+    \item la \idx{confiance} attribuée à ce nœud (sous la forme d'un score de \reput);
     \item l'index de connectivité (le nombre de voisins directs des nœuds);
     \item la puissance du signal;
     \item \etc.

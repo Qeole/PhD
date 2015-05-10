@@ -177,12 +177,12 @@ Ces jeux ont une solution simple, dans le sens où:
     \item si une stratégie gagnante existe, alors il en existe une qui repose sur une mémoire finie;
     \item déterminer quel sera le joueur vainqueur peur être réalisé en $\NP\cap \coNP$~\cite{zwick96}.
 \end{itemize}
-De plus, il a été prouvé~\cite{velner12a} qu'une mémoire finie est suffisante pour gagner sur une conjonction de contraintes sur l'énergie.
-Le cas des conjonctions de contraintes sur le gain a lui aussi fait l'objet d'études dans~\cite{velner12a}, où les stratégies sans mémoire pour chaque condition sur le gain sont combinées en stratégies à mémoire infinie pour l'objectif global.
+De plus, il a été prouvé~\cite{velner12a} qu'une mémoire finie est suffisante pour gagner sur une \idx{conjonction} de contraintes sur l'énergie.
+Le cas des conjonctions\index{conjonction} de contraintes sur le gain a lui aussi fait l'objet d'études dans~\cite{velner12a}, où les stratégies sans mémoire pour chaque condition sur le gain sont combinées en stratégies à mémoire infinie pour l'objectif global.
 Par exemple, lorsque le gain moyen des défini par la limite supérieur du gain, chaque stratégie peut être jouée au cours de phases de durée croissante jusqu'à atteindre (ou à s'approcher aussi près que nécessaire de) la valeur désirée.
 
 Par conséquent nous allons nous concentrer ici sur l'association d'objectifs portant à la fois sur l'énergie et sur le gain moyen.
-Il est bon de noter avant tout que si l'objectif du nœud compromis est une conjonction de littéraux, et que l'un deux ne peut être réalisé, il est évident que le jeu ne peut être remporté.
+Il est bon de noter avant tout que si l'objectif du nœud compromis est une \idx{conjonction} de littéraux, et que l'un deux ne peut être réalisé, il est évident que le jeu ne peut être remporté.
 
 S'il existe des stratégies pour chacun des sous-objectifs, il peut être possible de combiner des stratégies gagnantes à mémoire finie pour chacun des littéraux en une unique stratégie gagnante, nécessitant potentiellement une mémoire infinie.
 Nous allons fournir des conditions suffisantes pour obtenir une telle stratégie globale; la recherche algorithmique de la stratégie en question est un problème non résolu.
@@ -230,7 +230,7 @@ Par définition d'un attracteur, on a alors $q \in \attractor{j}(\Q)$, et on en 
 
 Dans ce premier exemple simple, nous étudions les objectifs, pour le \jo, de la forme $p_e \geq c_e \wedge p_v \geq c_v$, où $p_e$ et $p_v$ sont le niveau d'énergie et la valeur du gain moyen accumulé par le \jo, et avec $c_e, c_v \in \N$.
 De tels objectifs se traduisent par le besoin d'atteindre une certaine valeur de gain tandis que le niveau d'énergie demeure supérieur à une limite donnée.
-Un comportement cupide est une illustration simple d'un objectif de ce type: le nœud compromis cherche à rester «en vie» (donc à vérifier à tout instant $p_e \geq 1$) tout en émettant au moins un message toutes les 6~étapes ($p_v \geq \frac1{6}$, mais comme nous l'avons remarqué plus haut, il est possible d'obtenir un seuil à valeur entière en multipliant tous les poids de la composante par~6).
+Un \idx{comportement cupide} est une illustration simple d'un objectif de ce type: le nœud compromis cherche à rester «en vie» (donc à vérifier à tout instant $p_e \geq 1$) tout en émettant au moins un message toutes les 6~étapes ($p_v \geq \frac1{6}$, mais comme nous l'avons remarqué plus haut, il est possible d'obtenir un seuil à valeur entière en multipliant tous les poids de la composante par~6).
 
 Tout d'abord, nous pouvons clairement établir que depuis un état à partir duquel au moins un des objectifs ne peut être rempli, le \jo ne peut pas gagner.
 De plus, si le \ji peut forcer le \jo à atteindre l'un de ces états, alors l'objectif du \jo ne sera pas rempli.
