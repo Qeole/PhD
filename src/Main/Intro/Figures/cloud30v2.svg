@@ -8,11 +8,11 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
-   height="600"
-   width="960"
+   height="586.61243"
+   width="921.90991"
    id="svg2"
    inkscape:version="0.48.5 r10040"
-   sodipodi:docname="cloud30v2.pdf">
+   sodipodi:docname="cloud30v2.svg">
   <metadata
      id="metadata370">
     <rdf:RDF>
@@ -40,1087 +40,1100 @@
      inkscape:window-height="880"
      id="namedview366"
      showgrid="false"
-     inkscape:zoom="1.1047135"
-     inkscape:cx="490.40994"
-     inkscape:cy="300"
+     inkscape:zoom="1.0969671"
+     inkscape:cx="628.54582"
+     inkscape:cy="297.42222"
      inkscape:window-x="-2"
      inkscape:window-y="-3"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg2" />
+     inkscape:current-layer="svg2"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <text
+     id="text86"
+     transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
+     style="font-size:23px;text-anchor:middle;fill:#ff9b3c;fill-opacity:1;font-family:Impact"
+     x="271.04623"
+     y="246.27582">MAC (couche)</text>
+  <text
+     id="text124"
+     transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
+     style="font-size:20px;text-anchor:middle;fill:#ff9b3c;fill-opacity:1;font-family:Impact"
+     x="464.3447"
+     y="337.2963">désynchronisation</text>
+  <text
+     id="text164"
+     transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
+     style="font-size:17px;text-anchor:middle;fill:#ff9b3c;fill-opacity:1;font-family:Impact"
+     x="57.106998"
+     y="120.65269">clusterisation hiérarchique</text>
+  <text
+     id="text200"
+     transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
+     style="font-size:15px;text-anchor:middle;fill:#ff9b3c;fill-opacity:1;font-family:Impact"
+     x="294.93057"
+     y="778.73016">TinyKey</text>
+  <text
+     id="text278"
+     transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
+     style="font-size:12px;text-anchor:middle;fill:#ff9b3c;fill-opacity:1;font-family:Impact"
+     x="-149.61285"
+     y="332.702">historique</text>
+  <text
+     id="text346"
+     transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
+     style="font-size:10px;text-anchor:middle;fill:#ff9b3c;fill-opacity:1;font-family:Impact"
+     x="699.1427"
+     y="560.61426">bloc de chiffrement</text>
+  <text
+     id="text348"
+     transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
+     style="font-size:10px;text-anchor:middle;fill:#ff9b3c;fill-opacity:1;font-family:Impact"
+     x="-226.23016"
+     y="519.4071">équilibre de Nash</text>
+  <text
+     id="text360"
+     transform="matrix(0.8660254,-0.5,0.5,0.8660254,0,0)"
+     style="font-size:13px;text-anchor:middle;fill:#ff9b3c;fill-opacity:1;font-family:Impact"
+     x="474.12604"
+     y="898.35449">cryptographie symétrique</text>
   <g
-     id="g4" />
+     id="g4"
+     transform="translate(-18.217549,-0.06521264)" />
   <text
      id="text8"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:31px;text-anchor:middle;fill:#5598d3;font-family:Impact;fill-opacity:1"
-     x="0.43455061"
-     y="515.24731">collision</text>
+     style="font-size:31px;text-anchor:middle;fill:#5598d3;fill-opacity:1;font-family:Impact"
+     x="-15.309703"
+     y="506.08209">collision</text>
   <text
      id="text10"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:16px;text-anchor:middle;fill:#aacbe9;font-family:Impact;fill-opacity:1"
-     x="-115.38081"
-     y="451.8454">compression</text>
+     style="font-size:16px;text-anchor:middle;fill:#aacbe9;fill-opacity:1;font-family:Impact"
+     x="-131.12506"
+     y="442.68018">compression</text>
   <text
      id="text12"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:100px;text-anchor:middle;fill:#0065bd;font-family:Impact;fill-opacity:1"
-     x="416.17484"
-     y="605.164">cNode</text>
+     style="font-size:100px;text-anchor:middle;fill:#0065bd;fill-opacity:1;font-family:Impact"
+     x="400.43057"
+     y="595.99878">cNode</text>
   <text
      id="text14"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:76px;text-anchor:middle;fill:#5598d3;font-family:Impact;fill-opacity:1"
-     x="194.00119"
-     y="387.98007">cluster head</text>
+     style="font-size:76px;text-anchor:middle;fill:#5598d3;fill-opacity:1;font-family:Impact"
+     x="178.25694"
+     y="378.81485">cluster head</text>
   <text
      id="text16"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:56px;text-anchor:middle;fill:#004078;font-family:Impact;fill-opacity:1"
-     x="461.73444"
-     y="652.2525">joueur</text>
+     style="font-size:56px;text-anchor:middle;fill:#004078;fill-opacity:1;font-family:Impact"
+     x="445.99017"
+     y="643.08728">joueur</text>
   <text
      id="text18"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:48px;text-anchor:middle;fill:#aacbe9;font-family:Impact;fill-opacity:1"
-     x="361.50049"
-     y="515.86273">sécurité</text>
+     style="font-size:48px;text-anchor:middle;fill:#aacbe9;fill-opacity:1;font-family:Impact"
+     x="345.75623"
+     y="506.69751">sécurité</text>
   <text
      id="text20"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:47px;text-anchor:middle;fill:#637939;font-family:Impact"
-     x="334.63705"
-     y="448.3916">station de base</text>
+     x="318.89279"
+     y="439.22638">station de base</text>
   <text
      id="text22"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:43px;text-anchor:middle;fill:#8ca252;font-family:Impact"
-     x="85.015968"
-     y="322.74802">routage</text>
+     x="69.271713"
+     y="313.58279">routage</text>
   <text
      id="text24"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:42px;text-anchor:middle;fill:#b5cf6b;font-family:Impact"
-     x="204.40758"
-     y="557.95569">sélection</text>
+     x="188.66333"
+     y="548.79047">sélection</text>
   <text
      id="text26"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:40px;text-anchor:middle;fill:#cedb9c;font-family:Impact"
-     x="198.38646"
-     y="322.38458">gain</text>
+     x="182.64221"
+     y="313.21936">gain</text>
   <text
      id="text28"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:40px;text-anchor:middle;fill:#8c6d31;font-family:Impact"
-     x="247.88576"
-     y="654.64923">vNode</text>
+     x="232.14151"
+     y="645.48401">vNode</text>
   <text
      id="text30"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:39px;text-anchor:middle;fill:#bd9e39;font-family:Impact"
-     x="141.73067"
-     y="594.51526">déni de service</text>
+     x="125.98641"
+     y="585.35004">déni de service</text>
   <text
      id="text32"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:35px;text-anchor:middle;fill:#e7cb94;font-family:Impact"
-     x="563.05493"
-     y="516.76019">renouvellement</text>
+     x="547.31067"
+     y="507.59497">renouvellement</text>
   <text
      id="text34"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:34px;text-anchor:middle;fill:#843c39;font-family:Impact"
-     x="520.4787"
-     y="412.50446">authentification</text>
+     x="504.73444"
+     y="403.33923">authentification</text>
   <text
      id="text36"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:34px;text-anchor:middle;fill:#ad494a;font-family:Impact"
-     x="566.88251"
-     y="632.13074">jeu</text>
+     x="551.13824"
+     y="622.96552">jeu</text>
   <text
      id="text38"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:33px;text-anchor:middle;fill:#d6616b;font-family:Impact"
-     x="146.19289"
-     y="288.7865">route</text>
+     x="130.44864"
+     y="279.62128">route</text>
   <text
      id="text40"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:32px;text-anchor:middle;fill:#e7969c;font-family:Impact"
-     x="334.78253"
-     y="722.13965">chiffrement</text>
+     x="319.03827"
+     y="712.97443">chiffrement</text>
   <text
      id="text42"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:31px;text-anchor:middle;fill:#7b4173;font-family:Impact"
-     x="222.25694"
-     y="477.03967">brouillage</text>
+     x="206.5127"
+     y="467.87445">brouillage</text>
   <text
      id="text44"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:31px;text-anchor:middle;fill:#a55194;font-family:Impact"
-     x="84.353134"
-     y="415.89609">confiance</text>
+     x="68.608879"
+     y="406.73087">confiance</text>
   <text
      id="text46"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:31px;text-anchor:middle;fill:#004078;font-family:Impact;fill-opacity:1"
-     x="55.879414"
-     y="487.21402">mobilité</text>
+     style="font-size:31px;text-anchor:middle;fill:#004078;fill-opacity:1;font-family:Impact"
+     x="36.855141"
+     y="478.26035">mobilité</text>
   <text
      id="text48"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:31px;text-anchor:middle;fill:#de9ed6;font-family:Impact"
-     x="67.618507"
-     y="552.88129">élection</text>
+     x="51.874256"
+     y="543.71606">élection</text>
   <text
      id="text50"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:30px;text-anchor:middle;fill:#0065bd;font-family:Impact;fill-opacity:1"
-     x="486.77292"
-     y="488.88458">LEACH</text>
+     style="font-size:30px;text-anchor:middle;fill:#0065bd;fill-opacity:1;font-family:Impact"
+     x="471.02866"
+     y="479.71936">LEACH</text>
   <text
      id="text52"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:30px;text-anchor:middle;fill:#5598d3;font-family:Impact;fill-opacity:1"
-     x="160.96083"
-     y="259.20767">stratégie</text>
+     style="font-size:30px;text-anchor:middle;fill:#5598d3;fill-opacity:1;font-family:Impact"
+     x="145.21658"
+     y="250.04242">stratégie</text>
   <text
      id="text54"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:29px;text-anchor:middle;fill:#004078;font-family:Impact;fill-opacity:1"
-     x="148.88388"
-     y="520.12555">graphe de jeu</text>
+     style="font-size:29px;text-anchor:middle;fill:#004078;fill-opacity:1;font-family:Impact"
+     x="133.13963"
+     y="510.96033">graphe de jeu</text>
   <text
      id="text56"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:28px;text-anchor:middle;fill:#aacbe9;font-family:Impact;fill-opacity:1"
-     x="47.862755"
-     y="449.09927">sélection aléatoire</text>
+     style="font-size:28px;text-anchor:middle;fill:#aacbe9;fill-opacity:1;font-family:Impact"
+     x="32.118504"
+     y="439.93405">sélection aléatoire</text>
   <text
      id="text58"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:28px;text-anchor:middle;fill:#637939;font-family:Impact"
-     x="295.99863"
-     y="323.31537">intégrité</text>
+     x="280.25436"
+     y="314.15015">intégrité</text>
   <text
      id="text60"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:28px;text-anchor:middle;fill:#8ca252;font-family:Impact"
-     x="21.430088"
-     y="284.88199">modélisation</text>
+     x="5.6858349"
+     y="275.71677">modélisation</text>
   <text
      id="text62"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:27px;text-anchor:middle;fill:#b5cf6b;font-family:Impact"
-     x="81.321701"
-     y="623.14667">stratégie gagnante</text>
+     x="65.577446"
+     y="613.98145">stratégie gagnante</text>
   <text
      id="text64"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:26px;text-anchor:middle;fill:#cedb9c;font-family:Impact"
-     x="-31.024395"
-     y="337.73581">RPSGe</text>
+     x="-46.768646"
+     y="328.57059">RPSGe</text>
   <text
      id="text66"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:26px;text-anchor:middle;fill:#8c6d31;font-family:Impact"
-     x="-60.167988"
-     y="420.21402">clusterisation</text>
+     x="-75.912247"
+     y="411.0488">clusterisation</text>
   <text
      id="text68"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:26px;text-anchor:middle;fill:#bd9e39;font-family:Impact"
-     x="423.72482"
-     y="748.0871">confidentialité</text>
+     x="407.98056"
+     y="738.92188">confidentialité</text>
   <text
      id="text70"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:26px;text-anchor:middle;fill:#e7ba52;font-family:Impact"
-     x="122.989"
-     y="652.97681">exécution</text>
+     x="107.24474"
+     y="643.81158">exécution</text>
   <text
      id="text72"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:26px;text-anchor:middle;fill:#e7cb94;font-family:Impact"
-     x="372.60818"
-     y="472.62366">exclusion</text>
+     x="356.86392"
+     y="463.45844">exclusion</text>
   <text
      id="text74"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:26px;text-anchor:middle;fill:#843c39;font-family:Impact"
-     x="266.94537"
-     y="747.63708">gain moyen</text>
+     x="251.20113"
+     y="738.47186">gain moyen</text>
   <text
      id="text76"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:26px;text-anchor:middle;fill:#ad494a;font-family:Impact"
-     x="660.4447"
-     y="484.07626">élection démocratique</text>
+     x="644.70044"
+     y="474.91104">élection démocratique</text>
   <text
      id="text78"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:25px;text-anchor:middle;fill:#d6616b;font-family:Impact"
-     x="178.50119"
-     y="414.82687">LSAH</text>
+     x="162.75694"
+     y="405.66165">LSAH</text>
   <text
      id="text80"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:25px;text-anchor:middle;fill:#e7969c;font-family:Impact"
-     x="49.090343"
-     y="256.97302">résilience</text>
+     x="33.346092"
+     y="247.80777">résilience</text>
   <text
      id="text82"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:24px;text-anchor:middle;fill:#7b4173;font-family:Impact"
-     x="238.87683"
-     y="282.25317">altération</text>
+     x="223.13258"
+     y="273.08795">altération</text>
   <text
      id="text84"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:24px;text-anchor:middle;fill:#a55194;font-family:Impact"
-     x="203.28134"
-     y="225.90639">sélection selon lénergie résid</text>
-  <text
-     id="text86"
-     transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:23px;text-anchor:middle;fill:#ce6dbd;font-family:Impact"
-     x="288.49158"
-     y="254.31793">MAC couche</text>
+     x="187.53709"
+     y="216.74113">sélection selon l'énergie résid.</text>
   <text
      id="text88"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:23px;text-anchor:middle;fill:#de9ed6;font-family:Impact"
-     x="-77.043633"
-     y="477.44348">cryptographie</text>
+     x="-92.787888"
+     y="468.27826">cryptographie</text>
   <text
      id="text90"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:23px;text-anchor:middle;fill:#0065bd;font-family:Impact;fill-opacity:1"
-     x="344.99792"
-     y="656.44604">rejeu</text>
+     style="font-size:23px;text-anchor:middle;fill:#0065bd;fill-opacity:1;font-family:Impact"
+     x="329.25366"
+     y="647.28082">rejeu</text>
   <text
      id="text92"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:23px;text-anchor:middle;fill:#5598d3;font-family:Impact;fill-opacity:1"
-     x="444.50049"
-     y="372.10254">réputation</text>
+     style="font-size:23px;text-anchor:middle;fill:#5598d3;fill-opacity:1;font-family:Impact"
+     x="428.75623"
+     y="362.93732">réputation</text>
   <text
      id="text94"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:22px;text-anchor:middle;fill:#004078;font-family:Impact;fill-opacity:1"
-     x="233.17296"
-     y="616.13257">RPSG</text>
+     style="font-size:22px;text-anchor:middle;fill:#004078;fill-opacity:1;font-family:Impact"
+     x="217.42871"
+     y="606.96735">RPSG</text>
   <text
      id="text96"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:22px;text-anchor:middle;fill:#aacbe9;font-family:Impact;fill-opacity:1"
-     x="492.56198"
-     y="720.8576">accaparement</text>
+     style="font-size:22px;text-anchor:middle;fill:#aacbe9;fill-opacity:1;font-family:Impact"
+     x="476.81772"
+     y="711.69238">accaparement</text>
   <text
      id="text98"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:22px;text-anchor:middle;fill:#637939;font-family:Impact"
-     x="539.92352"
-     y="446.82498">agrégation</text>
+     x="524.17926"
+     y="437.65976">agrégation</text>
   <text
      id="text100"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:22px;text-anchor:middle;fill:#8ca252;font-family:Impact"
-     x="463.06198"
-     y="771.95312">model checking</text>
+     x="447.31772"
+     y="762.7879">model checking</text>
   <text
      id="text102"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:22px;text-anchor:middle;fill:#cedb9c;font-family:Impact"
-     x="307.76398"
-     y="410.93713">sureté</text>
+     x="292.01971"
+     y="401.77191">sureté</text>
   <text
      id="text104"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:21px;text-anchor:middle;fill:#8c6d31;font-family:Impact"
-     x="260.46014"
-     y="504.86981">ALH</text>
+     x="244.7159"
+     y="495.70459">ALH</text>
   <text
      id="text106"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:21px;text-anchor:middle;fill:#bd9e39;font-family:Impact"
-     x="371.76141"
-     y="412.09033">TCP</text>
+     x="356.01715"
+     y="402.92511">TCP</text>
   <text
      id="text108"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:21px;text-anchor:middle;fill:#e7ba52;font-family:Impact"
-     x="175.7384"
-     y="199.61217">architecture de sécurité</text>
+     x="159.99416"
+     y="190.44691">architecture de sécurité</text>
   <text
      id="text110"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:21px;text-anchor:middle;fill:#e7cb94;font-family:Impact"
-     x="-86.478882"
-     y="395.7858">signature dattaque</text>
+     x="-102.22314"
+     y="386.62057">signature d'attaque</text>
   <text
      id="text112"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:21px;text-anchor:middle;fill:#843c39;font-family:Impact"
-     x="395.47681"
-     y="323.0141">trou noir</text>
+     x="379.73254"
+     y="313.84888">trou noir</text>
   <text
      id="text114"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:20px;text-anchor:middle;fill:#ad494a;font-family:Impact"
-     x="578.20557"
-     y="540.51855">IEEE 80211</text>
+     x="562.4613"
+     y="531.35333">IEEE 802.11</text>
   <text
      id="text116"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:20px;text-anchor:middle;fill:#d6616b;font-family:Impact"
-     x="332.0249"
-     y="282.91602">anomalie</text>
+     x="316.28064"
+     y="273.75079">anomalie</text>
   <text
      id="text118"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:20px;text-anchor:middle;fill:#e7969c;font-family:Impact"
-     x="67.305733"
-     y="177.42305">autoélection</text>
+     x="54.963634"
+     y="166.01151">auto-élection</text>
   <text
      id="text120"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:20px;text-anchor:middle;fill:#7b4173;font-family:Impact"
-     x="608.48059"
-     y="566.08075">configuration</text>
+     x="592.73633"
+     y="556.91553">configuration</text>
   <text
      id="text122"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:20px;text-anchor:middle;fill:#a55194;font-family:Impact"
-     x="-38.478878"
-     y="312.64737">congestion</text>
-  <text
-     id="text124"
-     transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:20px;text-anchor:middle;fill:#ce6dbd;font-family:Impact"
-     x="480.08896"
-     y="346.46152">désynchronisation</text>
+     x="-54.223129"
+     y="303.48215">congestion</text>
   <text
      id="text126"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:20px;text-anchor:middle;fill:#de9ed6;font-family:Impact"
-     x="372.04791"
-     y="765.59412">ns</text>
+     x="356.30365"
+     y="756.42889">ns</text>
   <text
      id="text128"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:20px;text-anchor:middle;fill:#0065bd;font-family:Impact;fill-opacity:1"
-     x="315.49088"
-     y="625.55377">puits</text>
+     style="font-size:20px;text-anchor:middle;fill:#0065bd;fill-opacity:1;font-family:Impact"
+     x="299.74661"
+     y="616.38855">puits</text>
   <text
      id="text130"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:19px;text-anchor:middle;fill:#5598d3;font-family:Impact;fill-opacity:1"
-     x="150.90123"
-     y="150.63139">destruction physique</text>
+     style="font-size:19px;text-anchor:middle;fill:#5598d3;fill-opacity:1;font-family:Impact"
+     x="135.15698"
+     y="141.46614">destruction physique</text>
   <text
      id="text132"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:19px;text-anchor:middle;fill:#004078;font-family:Impact;fill-opacity:1"
-     x="-27.325665"
-     y="231.32944">déluge de paquets</text>
+     style="font-size:19px;text-anchor:middle;fill:#004078;fill-opacity:1;font-family:Impact"
+     x="-43.069916"
+     y="222.16418">déluge de paquets</text>
   <text
      id="text134"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:19px;text-anchor:middle;fill:#aacbe9;font-family:Impact;fill-opacity:1"
-     x="621.2652"
-     y="591.93713">formule de gain</text>
+     style="font-size:19px;text-anchor:middle;fill:#aacbe9;fill-opacity:1;font-family:Impact"
+     x="605.52094"
+     y="582.77191">formule de gain</text>
   <text
      id="text136"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:19px;text-anchor:middle;fill:#637939;font-family:Impact"
-     x="218.2159"
-     y="716.039">injection</text>
+     x="202.47165"
+     y="706.87378">injection</text>
   <text
      id="text138"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:19px;text-anchor:middle;fill:#8ca252;font-family:Impact"
-     x="406.97681"
-     y="303.09549">signature</text>
+     x="391.23254"
+     y="293.93027">signature</text>
   <text
      id="text140"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:19px;text-anchor:middle;fill:#b5cf6b;font-family:Impact"
-     x="495.59531"
-     y="819.60376">stratégie à mémoire finie</text>
+     x="479.85104"
+     y="810.43854">stratégie à mémoire finie</text>
   <text
      id="text142"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:19px;text-anchor:middle;fill:#cedb9c;font-family:Impact"
-     x="291.65817"
-     y="768.83319">théorie des jeux</text>
+     x="275.91391"
+     y="759.66797">théorie des jeux</text>
   <text
      id="text144"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:18px;text-anchor:middle;fill:#8c6d31;font-family:Impact"
-     x="133.50119"
-     y="492.76913">TCPIP</text>
+     x="117.75694"
+     y="483.60391">TCP/IP</text>
   <text
      id="text146"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:18px;text-anchor:middle;fill:#bd9e39;font-family:Impact"
-     x="-78.66095"
-     y="534.24475">brouillage intelligent</text>
+     x="-94.405205"
+     y="525.07953">brouillage intelligent</text>
   <text
      id="text148"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:18px;text-anchor:middle;fill:#e7ba52;font-family:Impact"
-     x="-73.572495"
-     y="561.43127">comportement cupide</text>
+     x="-89.31675"
+     y="552.26605">comportement cupide</text>
   <text
      id="text150"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:18px;text-anchor:middle;fill:#e7cb94;font-family:Impact"
-     x="-73.675034"
-     y="361.60889">couche physique</text>
+     x="-89.419289"
+     y="352.44366">couche physique</text>
   <text
      id="text152"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:18px;text-anchor:middle;fill:#843c39;font-family:Impact"
-     x="-38.565449"
-     y="582.7973">falsification</text>
+     x="-54.3097"
+     y="573.63208">falsification</text>
   <text
      id="text154"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:18px;text-anchor:middle;fill:#ad494a;font-family:Impact"
-     x="-47.289764"
-     y="257.90826">trou de ver</text>
+     x="-63.034016"
+     y="248.74301">trou de ver</text>
   <text
      id="text156"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:17px;text-anchor:middle;fill:#d6616b;font-family:Impact"
-     x="427.15817"
-     y="534.14032">CSMACA</text>
+     x="411.41391"
+     y="524.9751">CSMA/CA</text>
   <text
      id="text158"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:17px;text-anchor:middle;fill:#e7969c;font-family:Impact"
-     x="515.29218"
-     y="379.48779">OLSR</text>
+     x="499.54791"
+     y="370.32257">OLSR</text>
   <text
      id="text160"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:17px;text-anchor:middle;fill:#7b4173;font-family:Impact"
-     x="565.04272"
-     y="655.31726">TinySec</text>
+     x="549.29846"
+     y="646.15204">TinySec</text>
   <text
      id="text162"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:17px;text-anchor:middle;fill:#a55194;font-family:Impact"
-     x="430.01648"
-     y="867.18964">antenne directionnelle</text>
-  <text
-     id="text164"
-     transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:17px;text-anchor:middle;fill:#ce6dbd;font-family:Impact"
-     x="72.85125"
-     y="129.81793">clusterisation hiérarchique</text>
+     x="414.27222"
+     y="858.02441">antenne directionnelle</text>
   <text
      id="text166"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:17px;text-anchor:middle;fill:#de9ed6;font-family:Impact"
-     x="94.828743"
-     y="681.75177">gestion des clés</text>
+     x="79.084488"
+     y="672.58655">gestion des clés</text>
   <text
      id="text168"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:17px;text-anchor:middle;fill:#0065bd;font-family:Impact;fill-opacity:1"
-     x="-20.387842"
-     y="205.31277">élection dynamique</text>
+     style="font-size:17px;text-anchor:middle;fill:#0065bd;fill-opacity:1;font-family:Impact"
+     x="-36.132095"
+     y="196.14752">élection dynamique</text>
   <text
      id="text170"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:16px;text-anchor:middle;fill:#5598d3;font-family:Impact;fill-opacity:1"
-     x="251.59669"
-     y="406.22174">MANET</text>
+     style="font-size:16px;text-anchor:middle;fill:#5598d3;fill-opacity:1;font-family:Impact"
+     x="235.85245"
+     y="397.05652">MANET</text>
   <text
      id="text172"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:16px;text-anchor:middle;fill:#004078;font-family:Impact;fill-opacity:1"
-     x="-93.753868"
-     y="330.38644">ZigBee</text>
+     style="font-size:16px;text-anchor:middle;fill:#004078;fill-opacity:1;font-family:Impact"
+     x="-109.49812"
+     y="321.22122">ZigBee</text>
   <text
      id="text174"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:16px;text-anchor:middle;fill:#aacbe9;font-family:Impact;fill-opacity:1"
-     x="357.99792"
-     y="633.92938">arène</text>
+     style="font-size:16px;text-anchor:middle;fill:#aacbe9;fill-opacity:1;font-family:Impact"
+     x="342.25366"
+     y="624.76416">arène</text>
   <text
      id="text176"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:16px;text-anchor:middle;fill:#637939;font-family:Impact"
-     x="-81.615433"
-     y="501.36206">boucle</text>
+     x="-97.359688"
+     y="492.19684">boucle</text>
   <text
      id="text178"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:16px;text-anchor:middle;fill:#8ca252;font-family:Impact"
-     x="545.79144"
-     y="744.66144">condensat</text>
+     x="530.04718"
+     y="735.49622">condensat</text>
   <text
      id="text180"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:16px;text-anchor:middle;fill:#b5cf6b;font-family:Impact"
-     x="644.37994"
-     y="609.90125">conjonction</text>
+     x="628.63568"
+     y="600.73602">conjonction</text>
   <text
      id="text182"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:16px;text-anchor:middle;fill:#cedb9c;font-family:Impact"
-     x="443.93506"
-     y="889.08191">couche transport</text>
+     x="428.1908"
+     y="879.91669">couche transport</text>
   <text
      id="text184"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:16px;text-anchor:middle;fill:#bd9e39;font-family:Impact"
-     x="190.47044"
-     y="178.0955">réseau clusterisé</text>
+     x="174.7262"
+     y="168.93025">réseau clusterisé</text>
   <text
      id="text186"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:16px;text-anchor:middle;fill:#e7cb94;font-family:Impact"
-     x="404.5845"
-     y="283.23911">trou gris</text>
+     x="388.84024"
+     y="274.07388">trou gris</text>
   <text
      id="text188"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:16px;text-anchor:middle;fill:#843c39;font-family:Impact"
-     x="698.54016"
-     y="536.09296">usurpation didentité</text>
+     x="682.7959"
+     y="526.92773">usurpation didentité</text>
   <text
      id="text190"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:15px;text-anchor:middle;fill:#ad494a;font-family:Impact"
-     x="225.28322"
-     y="493.798">AODV</text>
+     x="209.53897"
+     y="484.63278">AODV</text>
   <text
      id="text192"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:15px;text-anchor:middle;fill:#d6616b;font-family:Impact"
-     x="261.12039"
-     y="523.7262">CDMA</text>
+     x="245.37614"
+     y="514.56097">CDMA</text>
   <text
      id="text194"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:15px;text-anchor:middle;fill:#e7969c;font-family:Impact"
-     x="483.06268"
-     y="319.31088">IEEE 802154</text>
+     x="467.31842"
+     y="310.14566">IEEE 802.15.4</text>
   <text
      id="text196"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:15px;text-anchor:middle;fill:#7b4173;font-family:Impact"
-     x="131.20181"
-     y="702.75177">MAC code</text>
+     x="115.09116"
+     y="699.6908">MAC (code)</text>
   <text
      id="text198"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:15px;text-anchor:middle;fill:#a55194;font-family:Impact"
-     x="135.20697"
-     y="471.81467">SNEP</text>
-  <text
-     id="text200"
-     transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:15px;text-anchor:middle;fill:#ce6dbd;font-family:Impact"
-     x="310.67484"
-     y="787.89539">TinyKey</text>
+     x="119.46272"
+     y="462.64944">SNEP</text>
   <text
      id="text202"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:15px;text-anchor:middle;fill:#de9ed6;font-family:Impact"
-     x="308.95755"
-     y="532.86981">WANET</text>
+     x="293.21329"
+     y="523.70459">WANET</text>
   <text
      id="text204"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:15px;text-anchor:middle;fill:#0065bd;font-family:Impact;fill-opacity:1"
-     x="345.54791"
-     y="811.49347">attaque Sybil</text>
+     style="font-size:15px;text-anchor:middle;fill:#0065bd;fill-opacity:1;font-family:Impact"
+     x="329.80365"
+     y="802.32825">attaque Sybil</text>
   <text
      id="text206"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:15px;text-anchor:middle;fill:#5598d3;font-family:Impact;fill-opacity:1"
-     x="659.95428"
-     y="454.92563">correction derreur</text>
+     style="font-size:15px;text-anchor:middle;fill:#5598d3;fill-opacity:1;font-family:Impact"
+     x="644.21002"
+     y="445.76041">correction d'erreur</text>
   <text
      id="text208"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:15px;text-anchor:middle;fill:#004078;font-family:Impact;fill-opacity:1"
-     x="666.99017"
-     y="434.73911">couche application</text>
+     style="font-size:15px;text-anchor:middle;fill:#004078;fill-opacity:1;font-family:Impact"
+     x="651.24591"
+     y="425.57388">couche application</text>
   <text
      id="text210"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:15px;text-anchor:middle;fill:#aacbe9;font-family:Impact;fill-opacity:1"
-     x="249.40947"
-     y="786.01013">gNodes</text>
+     style="font-size:15px;text-anchor:middle;fill:#aacbe9;fill-opacity:1;font-family:Impact"
+     x="233.66522"
+     y="776.84491">
+    <tspan
+       style="font-style:normal;-inkscape-font-specification:Impact Bold"
+       id="tspan3163">gNodes</tspan>
+  </text>
   <text
      id="text212"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:15px;text-anchor:middle;fill:#637939;font-family:Impact"
-     x="613.39661"
-     y="715.56598">jeu quantitatif</text>
+     x="597.65234"
+     y="706.40076">jeu quantitatif</text>
   <text
      id="text214"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:15px;text-anchor:middle;fill:#8ca252;font-family:Impact"
-     x="12.752481"
-     y="645.91205">nonrépudiation</text>
+     x="-2.9917722"
+     y="636.74683">non-répudiation</text>
   <text
      id="text216"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:15px;text-anchor:middle;fill:#b5cf6b;font-family:Impact"
-     x="612.88953"
-     y="634.44415">partie</text>
+     x="597.14526"
+     y="625.27893">partie</text>
   <text
      id="text218"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:15px;text-anchor:middle;fill:#cedb9c;font-family:Impact"
-     x="56.674335"
-     y="85.837166">privation de sommeil</text>
+     x="40.930084"
+     y="76.671913">privation de sommeil</text>
   <text
      id="text220"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:15px;text-anchor:middle;fill:#8c6d31;font-family:Impact"
-     x="-38.538479"
-     y="186.7506">redondance</text>
+     x="-54.28273"
+     y="177.58534">redondance</text>
   <text
      id="text222"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:15px;text-anchor:middle;fill:#bd9e39;font-family:Impact"
-     x="-5.7801466"
-     y="156.01151">sécurité système</text>
+     x="-21.524399"
+     y="146.84625">sécurité système</text>
   <text
      id="text224"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:13px;text-anchor:middle;fill:#e7ba52;font-family:Impact"
-     x="-88.306427"
-     y="276.9512">µTESLA</text>
+     x="-104.05069"
+     y="267.78598">µTESLA</text>
   <text
      id="text226"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:13px;text-anchor:middle;fill:#e7cb94;font-family:Impact"
-     x="392.89795"
-     y="261.48077">6LoWPAN</text>
+     x="377.15369"
+     y="252.31552">6LoWPAN</text>
   <text
      id="text228"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:13px;text-anchor:middle;fill:#843c39;font-family:Impact"
-     x="176.49158"
-     y="448.30762">IP</text>
+     x="160.74733"
+     y="439.1424">IP</text>
   <text
      id="text230"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:13px;text-anchor:middle;fill:#ad494a;font-family:Impact"
-     x="302.54858"
-     y="467.97046">LEAP</text>
+     x="286.80432"
+     y="458.80524">LEAP</text>
   <text
      id="text232"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:13px;text-anchor:middle;fill:#d6616b;font-family:Impact"
-     x="247.00119"
-     y="296.18137">LLC</text>
+     x="231.25694"
+     y="287.01614">LLC</text>
   <text
      id="text234"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:13px;text-anchor:middle;fill:#e7969c;font-family:Impact"
-     x="-9.9866114"
-     y="599.2973">SPINS</text>
+     x="-25.730864"
+     y="590.13208">SPINS</text>
   <text
      id="text236"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:13px;text-anchor:middle;fill:#7b4173;font-family:Impact"
-     x="147.71848"
-     y="726.1441">coopération</text>
+     x="131.97423"
+     y="716.97888">coopération</text>
   <text
      id="text238"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:13px;text-anchor:middle;fill:#a55194;font-family:Impact"
-     x="-175.57437"
-     y="432.10373">couche réseau</text>
+     x="-191.31862"
+     y="422.93851">couche réseau</text>
   <text
      id="text240"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:13px;text-anchor:middle;fill:#de9ed6;font-family:Impact"
-     x="643.06647"
-     y="654.17621">disponibilité</text>
+     x="627.3222"
+     y="645.01099">disponibilité</text>
   <text
      id="text242"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:13px;text-anchor:middle;fill:#0065bd;font-family:Impact;fill-opacity:1"
-     x="589.72668"
-     y="766.56335">partage de secret</text>
+     style="font-size:13px;text-anchor:middle;fill:#0065bd;fill-opacity:1;font-family:Impact"
+     x="573.98242"
+     y="757.39813">partage de secret</text>
   <text
      id="text244"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:13px;text-anchor:middle;fill:#5598d3;font-family:Impact;fill-opacity:1"
-     x="-85.144287"
-     y="597.47424">sauts de fréquence</text>
+     style="font-size:13px;text-anchor:middle;fill:#5598d3;fill-opacity:1;font-family:Impact"
+     x="-100.88854"
+     y="588.30902">sauts de fréquence</text>
   <text
      id="text246"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:13px;text-anchor:middle;fill:#004078;font-family:Impact;fill-opacity:1"
-     x="560.27289"
-     y="361.57886">somme de contrôle</text>
+     style="font-size:13px;text-anchor:middle;fill:#004078;fill-opacity:1;font-family:Impact"
+     x="544.52863"
+     y="352.41364">somme de contrôle</text>
   <text
      id="text248"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:13px;text-anchor:middle;fill:#aacbe9;font-family:Impact;fill-opacity:1"
-     x="-14.780147"
-     y="171.59996">trou onoff</text>
+     style="font-size:13px;text-anchor:middle;fill:#aacbe9;fill-opacity:1;font-family:Impact"
+     x="-37.418114"
+     y="161.6125">trou on/off</text>
   <text
      id="text250"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:12px;text-anchor:middle;fill:#637939;font-family:Impact"
-     x="594.56647"
-     y="738.18066">AES</text>
+     x="578.8222"
+     y="729.01544">AES</text>
   <text
      id="text252"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:12px;text-anchor:middle;fill:#8ca252;font-family:Impact"
-     x="171.43127"
-     y="749.07233">Bluetooth</text>
+     x="155.68703"
+     y="739.9071">Bluetooth</text>
   <text
      id="text254"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:12px;text-anchor:middle;fill:#b5cf6b;font-family:Impact"
-     x="272.88577"
-     y="611.34796">CMTC</text>
+     x="257.14151"
+     y="602.18274">CMTC</text>
   <text
      id="text256"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:12px;text-anchor:middle;fill:#cedb9c;font-family:Impact"
-     x="411.81396"
-     y="386.71729">CSMA</text>
+     x="396.0697"
+     y="377.55206">CSMA</text>
   <text
      id="text258"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:12px;text-anchor:middle;fill:#8c6d31;font-family:Impact"
-     x="192.80246"
-     y="490.05634">HEED</text>
+     x="177.05821"
+     y="480.89111">HEED</text>
   <text
      id="text260"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:12px;text-anchor:middle;fill:#bd9e39;font-family:Impact"
-     x="447.2037"
-     y="461.42047">HIDS</text>
+     x="431.45944"
+     y="452.25525">HIDS</text>
   <text
      id="text262"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:12px;text-anchor:middle;fill:#e7ba52;font-family:Impact"
-     x="595.41394"
-     y="380.71283">IEEE 802151</text>
+     x="579.66968"
+     y="371.54761">IEEE 802.15.1</text>
   <text
      id="text264"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:12px;text-anchor:middle;fill:#e7cb94;font-family:Impact"
-     x="372.64926"
-     y="240.55257">Internet</text>
+     x="356.905"
+     y="231.38731">Internet</text>
   <text
      id="text266"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:12px;text-anchor:middle;fill:#843c39;font-family:Impact"
-     x="-103.67245"
-     y="301.56595">LEAP+</text>
+     x="-119.41671"
+     y="292.40073">LEAP+</text>
   <text
      id="text268"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:12px;text-anchor:middle;fill:#ad494a;font-family:Impact"
-     x="40.965294"
-     y="661.04602">MiniSec</text>
+     x="25.221041"
+     y="651.8808">MiniSec</text>
   <text
      id="text270"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:12px;text-anchor:middle;fill:#d6616b;font-family:Impact"
-     x="162.93901"
-     y="427.78134">TDMA</text>
+     x="147.19476"
+     y="418.61612">TDMA</text>
   <text
      id="text272"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:12px;text-anchor:middle;fill:#e7969c;font-family:Impact"
-     x="14.810195"
-     y="462.34799">WiFi</text>
+     x="-0.93405861"
+     y="453.18277">Wi-Fi</text>
   <text
      id="text274"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:12px;text-anchor:middle;fill:#7b4173;font-family:Impact"
-     x="660.16455"
-     y="630.56146">coalition</text>
+     x="644.42029"
+     y="621.39624">coalition</text>
   <text
      id="text276"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:12px;text-anchor:middle;fill:#a55194;font-family:Impact"
-     x="551.31519"
-     y="869.09412">extensibilité</text>
-  <text
-     id="text278"
-     transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:12px;text-anchor:middle;fill:#ce6dbd;font-family:Impact"
-     x="-133.86861"
-     y="341.86722">historique</text>
+     x="535.57092"
+     y="859.92889">extensibilité</text>
   <text
      id="text280"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:12px;text-anchor:middle;fill:#de9ed6;font-family:Impact"
-     x="263.46204"
-     y="805.67041">jeu bayésien</text>
+     x="247.71779"
+     y="796.50519">jeu bayésien</text>
   <text
      id="text282"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:12px;text-anchor:middle;fill:#0065bd;font-family:Impact;fill-opacity:1"
-     x="-127.81605"
-     y="375.38388">métadonnées</text>
+     style="font-size:12px;text-anchor:middle;fill:#0065bd;fill-opacity:1;font-family:Impact"
+     x="-143.5603"
+     y="366.21866">métadonnées</text>
   <text
      id="text284"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:12px;text-anchor:middle;fill:#004078;font-family:Impact;fill-opacity:1"
-     x="377.8588"
-     y="825.52936">pDCS</text>
+     style="font-size:12px;text-anchor:middle;fill:#004078;fill-opacity:1;font-family:Impact"
+     x="362.11453"
+     y="816.36414">pDCS</text>
   <text
      id="text286"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:10px;text-anchor:middle;fill:#004078;font-family:Impact;fill-opacity:1"
-     x="566.03827"
-     y="459.59293">BATMAN</text>
+     style="font-size:10px;text-anchor:middle;fill:#004078;fill-opacity:1;font-family:Impact"
+     x="550.29401"
+     y="450.4277">B.A.T.M.A.N</text>
   <text
      id="text288"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:10px;text-anchor:middle;fill:#004078;font-family:Impact;fill-opacity:1"
-     x="206.14479"
-     y="334.94675">DSDV</text>
+     style="font-size:10px;text-anchor:middle;fill:#004078;fill-opacity:1;font-family:Impact"
+     x="190.40054"
+     y="325.78152">DSDV</text>
   <text
      id="text290"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:10px;text-anchor:middle;fill:#637939;font-family:Impact"
-     x="-80.553253"
-     y="513.52234">DSR</text>
+     x="-96.297508"
+     y="504.35712">DSR</text>
   <text
      id="text292"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:10px;text-anchor:middle;fill:#8ca252;font-family:Impact"
-     x="292.64221"
-     y="297.12881">ERPDCS</text>
+     x="276.89795"
+     y="287.96359">ERP-DCS</text>
   <text
      id="text294"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:10px;text-anchor:middle;fill:#b5cf6b;font-family:Impact"
-     x="510.87802"
-     y="535.1333">FDMA</text>
+     x="495.13376"
+     y="525.96808">FDMA</text>
   <text
      id="text296"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:10px;text-anchor:middle;fill:#cedb9c;font-family:Impact"
-     x="210.5723"
-     y="761.27808">FFUCA</text>
+     x="194.82805"
+     y="752.11285">FFUCA</text>
   <text
      id="text298"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:10px;text-anchor:middle;fill:#8c6d31;font-family:Impact"
-     x="571.22223"
-     y="604.61407">IEEE</text>
+     x="555.47797"
+     y="595.44885">IEEE</text>
   <text
      id="text300"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:10px;text-anchor:middle;fill:#bd9e39;font-family:Impact"
-     x="167.61594"
-     y="491.68069">IETF</text>
+     x="151.87169"
+     y="482.51547">IETF</text>
   <text
      id="text302"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:10px;text-anchor:middle;fill:#e7ba52;font-family:Impact"
-     x="480.28699"
-     y="664.11853">Linux</text>
+     x="464.54272"
+     y="654.95331">Linux</text>
   <text
      id="text304"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:10px;text-anchor:middle;fill:#e7cb94;font-family:Impact"
-     x="216.48195"
-     y="409.04224">NIDS</text>
+     x="200.7377"
+     y="399.87701">NIDS</text>
   <text
      id="text306"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:10px;text-anchor:middle;fill:#843c39;font-family:Impact"
-     x="-16.177608"
-     y="374.02045">OSI</text>
+     x="-31.921864"
+     y="364.85522">OSI</text>
   <text
      id="text308"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:10px;text-anchor:middle;fill:#ad494a;font-family:Impact"
-     x="414.42355"
-     y="664.19733">SMAC</text>
+     x="398.67929"
+     y="655.0321">SMAC</text>
   <text
      id="text310"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:10px;text-anchor:middle;fill:#d6616b;font-family:Impact"
-     x="502.18445"
-     y="426.19101">SDMA</text>
+     x="486.44019"
+     y="417.02579">SDMA</text>
   <text
      id="text312"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:10px;text-anchor:middle;fill:#e7969c;font-family:Impact"
-     x="472.97421"
-     y="300.78461">SecLEACH</text>
+     x="457.22995"
+     y="291.61938">SecLEACH</text>
   <text
      id="text314"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:10px;text-anchor:middle;fill:#7b4173;font-family:Impact"
-     x="225.7858"
-     y="380.92752">UDP</text>
+     x="210.04155"
+     y="371.7623">UDP</text>
   <text
      id="text316"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:10px;text-anchor:middle;fill:#a55194;font-family:Impact"
-     x="77.498611"
-     y="701.76843">VANET</text>
+     x="61.75436"
+     y="692.60321">VANET</text>
   <text
      id="text318"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:10px;text-anchor:middle;fill:#0065bd;font-family:Impact;fill-opacity:1"
-     x="-179.69873"
-     y="411.24731">canal auxiliaire</text>
+     style="font-size:10px;text-anchor:middle;fill:#0065bd;fill-opacity:1;font-family:Impact"
+     x="-195.44298"
+     y="402.08209">canal auxiliaire</text>
   <text
      id="text320"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:10px;text-anchor:middle;fill:#5598d3;font-family:Impact;fill-opacity:1"
-     x="-204.69873"
-     y="454.54858">code correcteur</text>
+     style="font-size:10px;text-anchor:middle;fill:#5598d3;fill-opacity:1;font-family:Impact"
+     x="-220.44298"
+     y="445.38336">code correcteur</text>
   <text
      id="text322"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:10px;text-anchor:middle;fill:#004078;font-family:Impact;fill-opacity:1"
-     x="-92.354523"
-     y="433.96271">complices</text>
+     style="font-size:10px;text-anchor:middle;fill:#004078;fill-opacity:1;font-family:Impact"
+     x="-108.09878"
+     y="424.79749">complices</text>
   <text
      id="text324"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:10px;text-anchor:middle;fill:#aacbe9;font-family:Impact;fill-opacity:1"
-     x="39.595497"
-     y="49.418583">crosslayer IDS</text>
+     style="font-size:10px;text-anchor:middle;fill:#aacbe9;fill-opacity:1;font-family:Impact"
+     x="20.571222"
+     y="40.464874">
+    <tspan
+       style="font-style:normal;-inkscape-font-specification:Impact Bold"
+       id="tspan3161">cross-layer IDS</tspan>
+  </text>
   <text
      id="text326"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:10px;text-anchor:middle;fill:#637939;font-family:Impact"
-     x="-54.405197"
-     y="630.23254">cybermine</text>
+     x="-70.149452"
+     y="621.06732">cybermine</text>
   <text
      id="text328"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:10px;text-anchor:middle;fill:#8ca252;font-family:Impact"
-     x="494.34473"
-     y="459.76984">emplacement</text>
+     x="478.60046"
+     y="450.60461">emplacement</text>
   <text
      id="text330"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:10px;text-anchor:middle;fill:#b5cf6b;font-family:Impact"
-     x="-166.82309"
-     y="360.94604">grsecurity</text>
+     x="-176.64713"
+     y="350.98834">grsecurity</text>
   <text
      id="text332"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:10px;text-anchor:middle;fill:#cedb9c;font-family:Impact"
-     x="-62.818623"
-     y="374.80505">jeu répété</text>
+     x="-78.562881"
+     y="365.63983">jeu répété</text>
   <text
      id="text334"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:10px;text-anchor:middle;fill:#bd9e39;font-family:Impact"
-     x="632.64526"
-     y="738.2262">réplication</text>
+     x="616.901"
+     y="729.06097">réplication</text>
   <text
      id="text336"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:13px;text-anchor:middle;fill:#843c39;font-family:Impact"
-     x="733.86066"
-     y="514.91602">sécurité logicielle</text>
+     x="718.11639"
+     y="505.75079">sécurité logicielle</text>
   <text
      id="text338"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:12px;text-anchor:middle;fill:#ad494a;font-family:Impact"
-     x="-172.12952"
-     y="494.13705">Internet des objets</text>
+     x="-187.87376"
+     y="484.97183">Internet des objets</text>
   <text
      id="text340"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:12px;text-anchor:middle;fill:#d6616b;font-family:Impact"
-     x="-197.11028"
-     y="477.405">objectif de parité</text>
+     x="-212.85452"
+     y="468.23978">objectif de parité</text>
   <text
      id="text342"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:18px;text-anchor:middle;fill:#5598d3;font-family:Impact;fill-opacity:1"
-     x="422.42801"
-     y="844.33319">couche de liaison de données</text>
+     style="font-size:18px;text-anchor:middle;fill:#5598d3;fill-opacity:1;font-family:Impact"
+     x="406.68375"
+     y="835.16797">couche de liaison de données</text>
   <text
      id="text344"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:39px;text-anchor:middle;fill:#e7ba52;font-family:Impact"
-     x="409.0838"
-     y="693.44604">système de détection dintrusio</text>
-  <text
-     id="text346"
-     transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:10px;text-anchor:middle;fill:#ce6dbd;font-family:Impact"
-     x="714.88696"
-     y="569.77948">bloc de chiffrement</text>
-  <text
-     id="text348"
-     transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:10px;text-anchor:middle;fill:#ce6dbd;font-family:Impact"
-     x="-210.48592"
-     y="528.57233">équilibre de Nash</text>
+     x="407.58276"
+     y="685.13574">système de détection d'intrusion</text>
   <text
      id="text350"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
-     style="font-size:12px;text-anchor:middle;fill:#0065bd;font-family:Impact;fill-opacity:1"
-     x="37.291653"
-     y="65.408966">sécurité physique</text>
+     style="font-size:12px;text-anchor:middle;fill:#0065bd;fill-opacity:1;font-family:Impact"
+     x="21.5474"
+     y="56.243717">sécurité physique</text>
   <text
      id="text352"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:10px;text-anchor:middle;fill:#de9ed6;font-family:Impact"
-     x="713.86066"
-     y="549.55701">brouillage réactif</text>
+     x="698.11639"
+     y="540.39178">brouillage réactif</text>
   <text
      id="text354"
      transform="matrix(0.8660254,-0.50000001,0.50000001,0.8660254,0,0)"
      style="font-size:22px;text-anchor:middle;fill:#b5cf6b;font-family:Impact"
-     x="467.05237"
-     y="795.04156">renouvellement périodique</text>
+     x="451.30811"
+     y="785.87634">renouvellement périodique</text>
   <text
      id="text356"
      transform="matrix(0.8660254,-0.5,0.5,0.8660254,0,0)"
      style="font-size:16px;text-anchor:middle;fill:#8c6d31;font-family:Impact"
-     x="75.42305"
-     y="109.36345">distribution des calculs</text>
+     x="59.678799"
+     y="100.1982">distribution des calculs</text>
   <text
      id="text358"
      transform="matrix(0.8660254,-0.5,0.5,0.8660254,0,0)"
      style="font-size:13px;text-anchor:middle;fill:#de9ed6;font-family:Impact"
-     x="-176.56734"
-     y="515.82361">cryptographie asymétrique</text>
-  <text
-     id="text360"
-     transform="matrix(0.8660254,-0.5,0.5,0.8660254,0,0)"
-     style="font-size:13px;text-anchor:middle;fill:#ce6dbd;font-family:Impact"
-     x="489.8703"
-     y="907.51971">cryptographie symétrique</text>
+     x="-192.31158"
+     y="506.65836">cryptographie asymétrique</text>
   <text
      id="text362"
      transform="matrix(0.8660254,-0.5,0.5,0.8660254,0,0)"
      style="font-size:10px;text-anchor:middle;fill:#a55194;font-family:Impact"
-     x="741.99463"
-     y="498.82755">brouillage aléatoire</text>
+     x="726.25037"
+     y="489.66229">brouillage aléatoire</text>
   <text
      id="text364"
      transform="matrix(0.8660254,-0.5,0.5,0.8660254,0,0)"
-     style="font-size:10px;text-anchor:middle;fill:#004078;font-family:Impact;fill-opacity:1"
-     x="-186.87119"
-     y="545.67035">brouillage trompeur</text>
+     style="font-size:10px;text-anchor:middle;fill:#004078;fill-opacity:1;font-family:Impact"
+     x="-202.61543"
+     y="536.50513">brouillage trompeur</text>
 </svg>

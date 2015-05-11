@@ -20,7 +20,7 @@ def build(bld):
         #tg = bld(rule='${DOT} -Tpdf -o${TGT[0].get_bld().abspath()} ${SRC[0].abspath()}', source=x, target=x.change_ext('.pdf'))
     #bld.add_group()
 
-    deps_str = 'src/thesismanuscrit.cls '
+    deps_str = 'src/laclthesis.cls '
     for i in bld.path.ant_glob('src/**/*'):
     #for i in bld.path.ant_glob('src/**'):
         deps_str += i.path_from(bld.path.search(top)) + " "

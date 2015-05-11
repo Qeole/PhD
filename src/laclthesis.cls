@@ -14,9 +14,9 @@
 %% version 2005/12/01 or later.
 %% 
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
-\ProvidesClass{thesismanuscrit}
+\ProvidesClass{laclthesis}
               [2014/04/11 v1.0
- Yet another PhD thesis class]
+ Yet another PhD thesis class, for LACL]
 \newcommand\@ptsize{}
 \newif\if@restonecol
 \newif\if@minitoc \@minitoctrue
@@ -156,8 +156,6 @@
 \newcommand{\@docschool}{\@latex@warning@no@line{No \noexpand\docschool given}}
 \newcommand{\speciality}[1]{\gdef\@speciality{#1}}%
 \newcommand{\@speciality}{\@latex@warning@no@line{No \noexpand\speciality given}}
-\newcommand{\labo}[1]{\gdef\@labo{#1}}%
-\newcommand{\@labo}{\@latex@warning@no@line{No \noexpand\labo given}}
 \newcommand{\director}[1]{\gdef\@director{#1}}%
 \newcommand{\@director}{\@latex@warning@no@line{No \noexpand\director given}}
 \newcommand{\jury}[1]{\gdef\@jury{#1}}%
@@ -201,9 +199,6 @@
     \begin{minipage}[t][296mm]{\titlep@getextwidth}%
       \vspace*{\titlep@getopmargin}%
       \vskip2em%
-      %\parbox[b][96mm]{\linewidth}{%
-        %\raggedleft\fontsize{20}{25}\selectfont\@title\vfill%
-      %}%
       \color{white}%
       \setsansfont[%
             Numbers=OldStyle,%
@@ -215,7 +210,6 @@
             Numbers=OldStyle,%
             UprightFeatures={Ligatures={TeX,Rare,Historic},StylisticSet=2},%
             BoldFeatures={Ligatures={TeX,Historic},StylisticSet=1},%
-            %BoldItalicFeatures={Ligatures={TeX,Historic},StylisticSet=1}%
         ]{Linux Libertine O}
       {\color{white}\vrule height 1pt width \titlep@getextwidth}\\%
       \vskip1.5em%
@@ -242,27 +236,12 @@
       {\fontsize{24}{29}\selectfont\sffamily\slshape\@title}\\%
       \vskip3em%
       {\fontsize{16}{19}\selectfont\sffamily {\addfontfeature{Style=Alternate}Directrice de thèse:} \@director}\\%
-      \vskip3em%
-      {\fontsize{12}{14}\selectfont\slshape préparée au}\\%
-      \vskip.2em%
-      {\fontsize{14}{17}\selectfont\sffamily\@labo}\\%
       \vfill%
       {\fontsize{12}{14}\selectfont\slshape soutenue le \@date\ devant le jury composé de:}\\%
       \vskip1em%
       {\fontsize{12}{14}\selectfont\sffamily \@jury}%
-      %%\vskip4em%
-      %%\raggedright%
-      %%\includegraphics[height=1.4cm]{Preamble/upe.png}%
-      %%\hfill%
-      %%\includegraphics[height=1.4cm]{Preamble/lacl.png}\\%
-      %%\vspace*{\titlep@getopmargin}%
-      %\includegraphics[height=2.8cm]{Preamble/lacl_new.png}%
-      %\hfill%
-      %\includegraphics[height=1.4cm]{Preamble/upe.png}%
-      %\vspace*{\titlep@getopmargin}%
-      \vspace{1.4cm}%
-      \includegraphics[height=1.4cm]{Preamble/lacl.png}%
-      \hfill%
+      \vfill
+      \centering%
       \includegraphics[height=1.4cm]{Preamble/upe.png}%
       \vspace*{\titlep@getopmargin}%
     \end{minipage}%
@@ -293,10 +272,8 @@
   \global\let\@docschool\@empty
   \global\let\@speciality\@empty
   \global\let\@director\@empty
-  \global\let\@labo\@empty
   \global\let\@jury\@empty
   \global\let\jury\relax
-  \global\let\labo\relax
   \global\let\director\relax
   \global\let\speciality\relax
   \global\let\docschool\relax
@@ -804,4 +781,4 @@
 \fi
 \endinput
 %%
-%% End of file `book.cls'.
+%% End of file `laclthesis.cls'.
