@@ -89,30 +89,46 @@ Nous donnons ainsi les spécifications des graphes de jeu, notamment au travers 
 
 Nous avons déjà mené une étude poussée sur les processus de renouvellement des \cnst, mais il reste néanmoins beaucoup de pistes de réflexion à explorer.
 
+    \paragraph{Varier les méthodes de détection et les réactions aux attaques}
 Notre modèle de détection s'adapte bien à différents modèles d'attaques tant qu'il existe des règles permettant de traduire la signature des attaques en termes de trafic observé.
 Un angle d'approche concernerait l'étude et l'adoption, à la place, d'autres mécanismes (basés par exemple sur les anomalies de fonctionnement), dans le but de détecter de nouveaux schémas d'attaque.
 Et une fois la détection réalisée, il faudrait se pencher sur les réactions à adopter en réponse: y aurait-il, avec nos solutions, des éléments à mettre en œuvre à la place (ou bien en addition) de l'exclusion des capteurs compromis?
 La création d'un nouveau canal de communication, que l'attaquant exclu ne pourrait rejoindre, est un exemple à envisager.
 
-Toujours à propos des mécanismes décrits et implémentés sous forme de simulations, il serait possible d'étendre les cas étudiés à d'autres topologies de réseaux, à d'autres architectures que des systèmes clusterisés où tous les capteurs sont voisins directs d'un cluster head.
+    \paragraph{D'autres approches de lutte contre le déni de service}
+Outre les méthodes de détection, c'est l'approche même, du point de vue de la sécurité, qui peut être étendue pour cibler d'autres types d'attaques par déni de service.
+La question du brouillage, par exemple, a été peu abordée: il pourrait être intéressant de s'appuyer en détail sur les spécifications d'un protocole choisi de couche de liaison de données, d'en trouver les faiblesses face aux tentatives de brouillage intelligent par exemple, et d'en dériver des mécanismes à inclure au niveau de la surveillance effectuée par les \cnst.
+Dans le même ordre d'idée, le travail sur la sécurité des algorithmes de clusterisation, les mécanismes de confiance, ou sur la résilience du routage face aux attaques, ne sont que quelques exemples de sujets brièvement étudiés au cours de cette thèse, mais qui mériteraient chacun d'être approfondis.
+
+    \paragraph{D'autres domaines de mise en œuvre}
+En se recentrant sur les mécanismes décrits et implémentés sous forme de simulations, il serait possible d'étendre les cas étudiés à d'autres topologies de réseaux, à d'autres architectures que des systèmes clusterisés où tous les capteurs sont voisins directs d'un cluster head.
 Les différentes méthodes de renouvellement des \cnst proposées pourraient encore être complétées, soit par de nouveaux mécanismes qui rechercheraient des performances encore meilleures, soit dans un contexte radicalement différent.
 Par exemple, elles pourraient être transposées aux VANET, pour lesquels la mobilité est plus accentuée, qui possèdent une connectivité très différente entre les nœuds, mais dans lesquels le problème de l'énergie ne se pose (pratiquement) pas.
 
+\pagebreak %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \paragraph{Des applications réelles: contraintes de qualité de service}
 Toutes ces méthodes méritent également d'être étudiées dans le cadre d'applications plus spécifiques (en s'extrayant du cadre d'un comportement général).
 En fonction des scénarios déployés, les mécanismes de sélection devront peut-être subir de nouvelles adaptations.
 Imaginons par exemple une application qui introduirait une différenciation de services, avec plusieurs flux de nature distincte dans le réseau, et qui imposerait à l'architecture des contraintes de qualité de service: non seulement les contraintes risquent de se répercuter sur la mise en place de la surveillance, mais elles pourraient même, de par les nouvelles exigences vis à vis du bon fonctionnement des services, rendre possible de nouvelles attaques qu'il faudrait alors prévenir.
 
+    \paragraph{Mise en application}
 Quoi qu'il en soit, les résultats numériques obtenus par simulation profiteraient logiquement de l'usage d'applications plus proches d'une mise en production réelle.
+
+        \vspace{-1em}
+        \subparagraph{Réalisation d'une plate-forme opérationnelle}
 Mais nous pourrions faire encore mieux: implémenter de tels scénarios sur un véritable réseau de capteurs, en usant par exemple du système d'exploitation TinyOS~\cite{tinyos}, ce qui nous permettrait d'obtenir des valeurs en meilleure adéquation avec une mise en place opérationnelle du système.
 
+        \vspace{-1em}
+        \subparagraph{Validation des modèles proposés}
 Il en va de même pour les modèles présentés, qui gagneraient d'une part à être mis en œuvre sur des configurations différentes, et d'une autre à être effectivement réutilisés avec les outils de \textit{model checking} que nous avons mentionnés.
 Il serait particulièrement intéressant de mettre en place le renouvellement des \cnst sur un véritable cas d'application, sur un véritable réseau, et de modéliser celui-ci sous forme de réseaux de \textsc{Petri} pour vérifier si les variables formelles obtenues correspondent bien à la situation réelle.
 
+    \paragraph{Étude de nouveaux modèles}
 En fonction des résultats, il serait alors possible de rechercher l'amélioration des modèles obtenus, ou bien l'utilisation d'outils plus adaptés pour obtenir des modèles plus fidèles et plus efficaces.
-Les automates temporels comme les réseaux d'automates stochastiques font partie des pistes envisageables à ce sujet.
+Les automates temporels sont l'une des pistes envisageables à ce sujet.
+Les réseaux d'automates stochastiques en sont une autre: leur gestion des évènements synchronisés pourrait leur donner un avantage conséquent par rapport aux chaines de \textsc{Markov}, qui présentent des faiblesses sur ce point particulier.
 
+        \vspace{-1em}
+        \subparagraph{Approfondissement des modèles actuels}
 Le modèle utilisant les jeux quantitatifs constitue aussi une base de travail intéressante que nous aimerions affiner, dans le but d'améliorer le mécanisme de détection lui-même, par exemple en parvenant à exprimer des contraintes encore plus fortes qui forceraient les nœuds compromis à coopérer sous peine d'être immédiatement détectés.
 
-Enfin, de nombreuses autres approches peuvent être envisagées pour lutter contre les attaques par déni de service.
-La question du brouillage, par exemple, a été peu abordée: il pourrait être intéressant de s'appuyer en détail sur les spécifications d'un protocole choisi de couche de liaison de données, d'en trouver les faiblesses face aux tentatives de brouillage intelligent par exemple, et d'en dériver des mécanismes à inclure au niveau de la surveillance effectuée par les \cnst.
-Dans le même ordre d'idée, le travail sur la sécurité des algorithmes de clusterisation, les mécanismes de confiance, ou sur la résilience du routage face aux attaques, ne sont que quelques exemples de sujets brièvement étudiés au cours de cette thèse, mais qui mériteraient chacun d'être approfondis.
