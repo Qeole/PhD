@@ -351,3 +351,17 @@ En effet, tout chemin infini qui ne satisferait pas $p_e \geq c_e \wedge p_v \ge
 Dans les deux cas cela revient à trouver un chemin en «lasso» dans le graphe\index{jeu!graphe de jeu}, ce qui peut être deviné.
 
 En ce qui concerne la complexité, la procédure que nous venons de décrire est dans $\NEXPSPACE$ (qui est équivalent à $\EXPSPACE$~\cite[Chap.~20]{papadimitriou94}), même si la borne n'est pas atteinte.
+
+\subsection{Des jeux\index{jeu} aux méthodes de détection}
+
+Nous avons modélisé le \rcsf sous forme de jeux quantitatifs\index{jeu quantitatif} basés à la fois sur des valeurs de \idx{gain} et d'énergie, dans lequel évoluent un nœud compromis ainsi qu'une équipe de capteurs sains.
+L'\idx{arène} du \idx{jeu}, les actions de chaque équipe, ainsi que la grammaire des conditions de victoire ont été spécifiées, avant que ne soit fourni un exemple détaillé d'un tel \idx{jeu}.
+
+Nous venons à présent de nous pencher sur la résolution des problèmes de victoire et de crédit initiale, qui n'est possible que pour des formules de gain\index{gain!formule de gain} définies sous forme de conjonctions de littéraux.
+L'indécidabilité du cas général montre bien que l'étude des interactions entre capteurs légitimes et nœuds compromis n'est pas triviale.
+La résolution sur le segment positif est toutefois un cas intéressant, qui permet de déterminer des conditions de victoire, ici pour le nœud compromis (\cad une situation dans laquelle il sera à même de mener son attaque sans être détecté).
+
+Les travaux menés à ce jour sur cette modélisation du réseau sous forme de jeux quantitatifs\index{jeu!jeu quantitatif} s'arrête ici.
+Nous envisageons de poursuivre leur étude afin de pouvoir, à terme, obtenir des jeux\index{jeu}, des conditions de victoire et des résolutions suffisamment poussés pour nous permettre d'établir de nouvelles méthodes de détection ou de prévention des attaques par \dds dans le réseau, en forçant un nœud compromis à coopérer avec les capteurs alentour sous peine de perdre la partie.
+
+Avec ce chapitre se referme les aspects techniques présentés dans cet ouvrage; il ne nous reste plus à présent qu'à tirer les conclusions des travaux présentés, et à introduire les perspectives envisagées pour la suite des recherches.
