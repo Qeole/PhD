@@ -25,7 +25,7 @@ Dans ce contexte, le modèle de l'attaque étudié est donc le suivant: un capte
     \item à l'accaparement\index{comportement cupide!accaparement} du canal de transmission, ce qui peut empêcher les nœuds légitimes d'envoyer leurs propres messages;
     \item à des congestions\index{congestion} sur le trafic, par exemple si les paquets sont envoyés à un rythme trop soutenu pour que le \CH ait le temps de tous les traiter;
     \item à l'épuisement des nœuds en écoute, et notamment du \ch submergé de données à retransmettre;
-    \item à l'altération de la représentativité des données obtenues par l'exploitant, surtout dans le cas ou les paquets contiennent des données erronées.
+    \item à l'altération de la représentativité des données obtenues par l'exploitant, surtout dans le cas où les paquets contiennent des données erronées.
 \end{itemize}
 
 L'efficacité d'une méthode de détection de ce nœud compromis peut être mesurée sur deux aspects:
@@ -34,7 +34,7 @@ L'efficacité d'une méthode de détection de ce nœud compromis peut être mesu
     \item la durée de vie du réseau.
 \end{itemize}
 Le second critère peut lui-même être exprimé de plusieurs façons.
-Par exemple, il peut être directement associé la durée de vie du dernier capteur restant dans le réseau; mais ce capteur seul n'est plus forcément à même de fournir un service efficace.
+Par exemple, il peut être directement associé à la durée de vie du dernier capteur restant dans le réseau; mais ce capteur seul n'est plus forcément à même de fournir un service efficace.
 Aussi la durée de vie du réseau est-elle souvent définie comme la durée écoulée entre le déploiement du réseau et l'instant où le premier capteur à manquer d'énergie s'éteint.
 C'est cette deuxième définition qui sera utilisée par la suite.
 Elle implique que pour obtenir une grande durée de vie, la consommation en énergie du réseau doit être équitablement répartie entre un aussi grand nombre de nœuds que possible.
@@ -64,7 +64,7 @@ Des expériences ayant recours au matériel considéré sont indispensables pour
     \subsection{Des \cns pour surveiller le trafic}
 
 La partition hiérarchique\index{clusterisation!clusterisation hiérarchique} d'un réseau en clusters établit déjà une distinction entre deux rôles que peuvent assumer les capteurs: celui de nœud «normal», qui poursuit ses opérations de captage et de retransmission des données de façon classique, et celui de \ch, qui se retrouve chargé d'assurer la liaison entre les membres de son cluster et le restant du réseau.
-À côté des nœuds «normaux» et des \chs, un troisième rôle va être attribué à certains capteurs, afin d'assurer la détection des attaques de type «\dds».
+À côté des nœuds «normaux» et des \chs, un troisième rôle va être attribué à certains capteurs, afin d'assurer la détection des attaques par \dds.
 Certains capteurs se voient ainsi confier le rôle de «nœuds de contrôle», ici nommés \cns (introduits sous le nom de \textit{gNodes}\index{gNodes@\textit{gNodes}} dans~\cite{LC08}), et sont chargés de surveiller le trafic entrant et sortant des \chs.
 
 Si un \cn constate qu'un capteur envoie, au cours d'une unité de temps, plus de données à leur \CH qu'une valeur de seuil déterminée $S_{\textrm{débit}}$, il retient que le nœud a eu un comportement anormal (il y a eu un écart important à la moyenne de la quantité de données envoyées par unité de temps).
@@ -89,10 +89,10 @@ L'inconvénient est que, justement, ces \CH vont épuiser leur batterie beaucoup
 Les nœuds ne sont pas toujours désignés \CH «à vie»: ainsi \leach renouvelle périodiquement la partition du réseau, choisissant à chaque itération de nouveaux \chs et entrainant la sélection\index{selection@sélection} d'un nouveau lot de \cns.
 
 Mais tous les protocoles de clusterisation\index{clusterisation!protocole de clusterisation} ne prévoient pas nécessairement de \idx{renouvellement} régulier de la partition.
-De plus, s'ils n'émettent pas sur de longues distances, les \cns se retrouvent eux aussi à consommer plus d'énergie que les nœuds normaux, puisqu'il doivent sans cesse rester en écoute des transmissions qui les entourent, et analyser le débit de chacun de leurs voisins.
+De plus, s'ils n'émettent pas sur de longues distances, les \cns se retrouvent eux aussi à consommer plus d'énergie que les nœuds normaux, puisqu'ils doivent sans cesse rester à l'écoute des transmissions qui les entourent, et analyser le débit de chacun de leurs voisins.
 Pour répartir cette nouvelle charge, qui touche davantage de nœuds, nous proposons d'élire également les \cns de façon dynamique, sur une période plus courte que celle, éventuelle, qui correspond à la \idx{clusterisation} du réseau.
 
-Il est vrai que le renouvellement périodique\index{renouvellement!renouvellement périodique} des \cns rajoute des contraintes et augmente le volume des messages de contrôles à échanger dans le réseau.
+Il est vrai que le renouvellement périodique\index{renouvellement!renouvellement périodique} des \cns rajoute des contraintes et augmente le volume des messages de contrôle à échanger dans le réseau.
 Pour certaines applications des capteurs, ceci peut représenter un inconvénient que la répartition de la charge ne vient pas contrebalancer; mais de manière générale la préservation des réserves énergétiques est primordiale dans les \rcs, et un meilleur équilibre de la charge obtenu pour un prix relativement modeste ne semble pas superflu.
 Autre remarque: en matière de détection d'intrusion, les \IDS les plus récents se vantent souvent de n'engendrer qu'un faible surplus de consommation dans le réseau~\cite{LZYP08}, et la question se pose donc de savoir si la répartition de la charge par un renouvellement dynamique\index{renouvellement!renouvellement dynamique} reste pertinente; nous verrons en section suivante qu'avec un système aussi simple que nos \cns, les simulations annoncent un gain important sur la répartition de la charge.
 Il faut également garder à l'esprit que les mécanismes de renouvellement périodique\index{renouvellement!renouvellement périodique} et de sélection\index{selection@sélection} des nœuds de surveillance ne sont pas dépendants du mécanisme de détection utilisé (\cad des \cns qui appliquent des règles sur le trafic analysé).
@@ -102,7 +102,7 @@ Ainsi, si un \IDS «concurrent»
     \item s'exécute seulement sur un sous-ensemble des nœuds du réseau,
     \item et ne nécessite pas, pour fonctionner, d'équipement distinct du matériel de base des capteurs,
 \end{itemize}
-alors la dynamique et les méthodes de sélection\index{selection@sélection} présentés dans cette thèse peuvent très bien être mis en œuvre pour optimiser détection et consommation.
+alors la dynamique et les méthodes de sélection\index{selection@sélection} présentées dans cette thèse peuvent très bien être mises en œuvre pour optimiser détection et consommation.
 
 Un dernier point reste à signaler.
 Cette solution de renouvellement périodique\index{renouvellement!renouvellement périodique} améliore aussi la \secu du réseau: si un attaquant cherche à compromettre tous les \cns du cluster, pour pouvoir poursuivre son attaque discrètement, le renouvellement dynamique\index{renouvellement!renouvellement dynamique} apporte une parade efficace à l'attaque en complexifiant largement le nombre de cibles à corrompre.
@@ -182,7 +182,7 @@ Le \CH envoie alors un message à chacun de ces dix nœuds pour leur ordonner de
     \caption{Élection\index{selection@sélection!election@élection} des \cns réalisée par les \chs}\label{sa:fig:elecch}
 \end{figure}
 
-Cette méthode est plus efficace en terme de calculs puisque seul les $2$-\CH ont à appliquer un algorithme de calcul de nombres pseudo-aléatoires.
+Cette méthode est plus efficace en terme de calculs puisque seuls les $2$-\CH ont à appliquer un algorithme de calcul de nombres pseudo-aléatoires.
 Cependant, elle présente un autre désavantage: si l'un de ces \CH est compromis par un attaquant, il ne déclarera sans doute aucun \cn susceptible de le détecter, laissant ainsi tout son cluster à la merci d'autres attaques.
 Comme l'algorithme \leach désigne à tour de rôle chaque capteur, sur un cycle complet, pour accomplir le rôle de \CH, tout nœud compromis deviendra logiquement \CH à un moment ou l'autre.
 Le problème du \CH ne désignant aucun \cn peut donc légitimement se poser pour n'importe quel nœud compromis du réseau.
@@ -228,7 +228,7 @@ Les avantages et inconvénients de chacune de ces trois méthodes présentées s
                 \textbullet\;Chaque nœud doit calculer un nombre pseudo-aléatoire\newline%
                 \textbullet\;Ne tient pas compte de la topologie du réseau\tabularnewline
             \midrule
-            Élection des \cns par les \ch                        & %
+            Élection des \cns par les \chs                        & %
                 \textbullet\;Seuls les \CH calculent les nombres pseudo-aléatoires%
                 & %
                 \textbullet\;Si le \CH est compromis, il ne désigne aucun \cn (un nœud compromis peut se déclarer \CH à chaque ronde de \leach)\tabularnewline

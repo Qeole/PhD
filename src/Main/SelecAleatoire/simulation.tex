@@ -47,7 +47,7 @@ La \tabref{sa:table:parametres1} indique les valeurs (ou les fourchettes de vale
 \end{table}
 
 Pour la première simulation, les nœuds sont élus de façon dynamique sur dix périodes consécutives.
-Nous avons supposé que la génération de trafic suit une loi de \textsc{Poisson} (la génération est aléatoire, mais l'on connait sa valeur moyenne).
+Nous avons supposé que la génération de trafic suit une loi de \textsc{Poisson} (la génération est aléatoire, mais on connait sa valeur moyenne).
 On nomme $\lambda_i$ le paramètre de cette loi appliquée au nœud $i$ (et $\lambda_c$ est le nombre moyen de messages envoyés par seconde par le nœud compromis).
 La \figref{sa:fig:detec-nbcn} présente le taux de détection du nœud compromis pour différentes quantités de \cns dans le réseau, par période.
 Au cours de la seconde période de la simulation impliquant dix \cns, nous obervons qu'aucun \cn n'a détecté le nœud compromis: les \cns n'étaient donc pas répartis efficacement dans le cluster.
@@ -97,7 +97,7 @@ L'histogramme donné en \figref{sa:fig:conso-moyenne} expose la consommation en 
     \includegraphics{\chapterfig/plot_mean.pdf}
     \caption{Consommation moyenne en énergie}\label{sa:fig:conso-moyenne}
 \end{figure}
-Par «consommation en énergie», on entend ici la consommation moyenne en fin de simulation ramenée sur la totalité des nœuds, à l'exception du \ch ainsi que du nœud compromis, qui consomment évidemment plus que les autres, et dont le comportement est invariant entre les méthodes statiques et dynamiques.
+Par «consommation en énergie», on entend ici la consommation moyenne en fin de simulation ramenée sur la totalité des nœuds, à l'exception du \ch ainsi que du nœud compromis, qui consomment évidemment plus que les autres, et dont le comportement est invariant entre les méthodes statique et dynamique.
 Pour rappel, les nœuds normaux (non \cns) ne reçoivent pas les messages de leurs voisins et donc ne consomment pas d'énergie en dehors de leur période d'émission (voir le fonctionnement détaillé de \leach au \chapref{st}, \sssref{st:subsubsec:leach}).
 La consommation moyenne en fin de simulation est identique pour les deux méthodes: il s'agit d'un résultat attendu, puisque les deux méthodes mettent en œuvre, à tout instant $t$, autant de nœuds normaux et de \cns l'une que l'autre.
 

@@ -126,7 +126,7 @@ Par exemple, sur la partie droite de la \figref{sa:fig:gspnex1}, la transition \
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.8\linewidth]{\chapterfig/RPSGe_example.pdf}
-    \caption{Exemples simples de \rpsge: transitions immédiates, transition minutée et arcs inhibiteurs}\label{sa:fig:gspnex1}
+    \caption{Exemples simples de \rpsge: transitions immédiates, transitions minutées et arcs inhibiteurs}\label{sa:fig:gspnex1}
 \end{figure}
 
         \subsubsection{Modélisation\index{modélisation} des nœuds}
@@ -155,7 +155,7 @@ Un nœud compromis $c$ sera également représenté selon le même modèle, avec
             \paragraph{Modélisation\index{modélisation} du \ch}
 Nous travaillons de l'intérieur du cluster, et le \ch est vu comme un simple puits qui reçoit les paquets émis par les autres nœuds.
 Son activité de retransmission à destination de la \sdb n'est donc pas représentée.
-Représenté en\figref{sa:fig:chgspn}, le \CH ne contient donc qu'une place \textsf{InBuff$_\textsf{CH}$} qui représente le tampon contenant les messages reçus, et reliée aux transitions \textsf{TX$_i$} de tous les autres nœuds.
+Illustré en \figref{sa:fig:chgspn}, le \CH ne contient donc qu'une place \textsf{InBuff$_\textsf{CH}$} qui représente le tampon contenant les messages reçus, et reliée aux transitions \textsf{TX$_i$} de tous les autres nœuds.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.45\linewidth]{\chapterfig/RPSGe_CH.pdf}
@@ -164,9 +164,9 @@ Représenté en\figref{sa:fig:chgspn}, le \CH ne contient donc qu'une place \tex
 En réalité, il devrait y avoir une place \textsf{InBuff$_i$} distincte pour les jetons provenant de chaque nœud voisin $i$ du \ch. Pour simplifier la représentation, tous les jetons arrivant au modèle du nœud sont rassemblés dans une place unique.
 
             \paragraph{Modélisation\index{modélisation} des \cns désignés de façon statique}
-Un \cn élu de façon statique joue uniquement son rôle de \cn: il écoute le trafic, mais n'effectue pas de mesure sur son environnement.
+Un \cn élu de façon statique joue uniquement son rôle de \cn: il écoute le trafic, mais n'effectue pas de mesures sur son environnement.
 Le modèle \rpsge associé à ce type de nœud est présenté en \figref{sa:fig:cnodegspn1}.
-La place \textsf{InBuff} représente le tampon contenant les messages reçu par le nœud.
+La place \textsf{InBuff} représente le tampon contenant les messages reçus par le nœud.
 Un jeton arrivant dans cette place (depuis un nœud «normal») représente un message capté par le \cn.
 La vérification du respect de la valeur seuil $K$ pour le trafic est réalisée à intervalles de temps constants.
 Les transitions \textsf{vérif\_OUI} et \textsf{vérif\_NON} sont «activées» au bout de chaque période, et servent à assurer la vérification.
@@ -231,14 +231,14 @@ Le \ch n'est toujours considéré que comme un simple puits, uniquement équipé
     \caption{Modèle \rpsge pour le trafic d'un cluster (topologie: grille $3\times3$) comprenant un nœud compromis et deux \cns sélectionnés de façon dynamique}\label{sa:fig:petridyn}
 \end{figure}
 
-Un second réseau de \textsc{Petri} est utilisé pour modélisé le processus de sélection\index{selection@sélection} lui-même.
+Un second réseau de \textsc{Petri} est utilisé pour modéliser le processus de sélection\index{selection@sélection} lui-même.
 En considérant $n$ comme le nombre de résultats possibles à l'\election, le module représentant l'\elecdyn des \cns comprend:
 \begin{itemize}
     \item une unique place centrale;
     \item $n$ transitions minutées, suivant une distribution déterministe, et mutuellement exclusives, menant à cette place (en bleu sur la \figref{sa:fig:petrielec});
     \item $n$ transitions immédiates et mutuellement exclusives, franchissables depuis la place centrale (en noir sur la \figref{sa:fig:petrielec}).
 \end{itemize}
-Dans notre cas, pour choisir deux \cns au sein du cluster, et en supposant que le nœud compromis ne peut être désigné, nous avons $n=\binom{7}{2}=21$~issues possible pour l'\election.
+Dans notre cas, pour choisir deux \cns au sein du cluster, et en supposant que le nœud compromis ne peut être désigné, nous avons $n=\binom{7}{2}=21$~issues possibles pour l'\election.
 À la fin d'une période d'activité des \cns, une nouvelle \election est déclenchée.
 La transition minutée correspondant aux \cns sélectionnés pour la période qui s'achève est déclenchée; les jetons présents dans les places \textsf{cNode} de ces \cns sont consommés, et produisent ainsi un jeton dans l'unique place centrale du module.
 Chaque transition immédiate tente alors de produire un jeton.
@@ -266,7 +266,7 @@ Il s'agit d'une procédure de vérification formelle utilisant:
 \end{itemize}
 Un algorithme est alors utilisé pour déterminer automatiquement si $\phi$ vérifie $M$ (ce que l'on note $M\models\phi$).
 Dans le cas d'un modèle stochastique, des probabilités sont associées aux formules.
-Vérifier que $M\models\phi$ revient alors à déterminer la probabilité de la formule $\phi$ dans le contexte du modèle $M$.
+Vérifier que $M\models\phi$ revient alors à déterminer la probabilité de la formule $\phi$ dans le contexte du modèle $M$\kern-1pt.
 \lsah étend ce concept dans le sens où l'évaluation d'une formule peut donner n'importe quel nombre réel, et représenter ainsi une probabilité aussi bien que toute autre mesure de performance.
 À cette fin, \lsah fait appel à des automates linéaires hybrides (\alh).
 \nomenclature{ALH}{Automate Linéaire Hybride}
@@ -288,7 +288,7 @@ Basée sur ce modèle une formule \lsah comprend ainsi deux sous-éléments:
         \item $x$ est une variable de données de l'automate:
         \item $y$ est une expression arithmétique à partir de ces variables de données;
         \item $Y$ est une variable de chemin aléatoire, \cad une variable évaluée à l'aide d'un chemin de synchronisation, lui-même créé par la synchronisation entre une trajectoire du modèle \rpsg et l'\alh;
-        \item $\mbox{dern}(y)$ est la dernière des valeurs endossées par l'expression $y$ le long d'un chemin synchronisé; $\mbox{min}(y)$ et $\mbox{max}(y)$ sont les valeurs optimales obtenues le long de ce chemin. $\mbox{int}(y)$ est l'intégrale d'$y$, et $\mbox{moy}(y)$ la moyenne des valeurs obtenues le long du chemin.
+        \item $\mbox{dern}(y)$ est la dernière des valeurs endossées par l'expression $y$ le long d'un chemin synchronisé; $\mbox{min}(y)$ et $\mbox{max}(y)$ sont les valeurs optimales obtenues le long de ce chemin; $\mbox{int}(y)$ est l'intégrale d'$y$, et $\mbox{moy}(y)$ la moyenne des valeurs obtenues le long du chemin.
     \end{itemize}
 \end{itemize}
 
