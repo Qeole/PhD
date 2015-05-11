@@ -109,26 +109,34 @@ Par exemple, elles pourraient être transposées aux VANET, pour lesquels la mob
     \paragraph{Des applications réelles: contraintes de qualité de service}
 Toutes ces méthodes méritent également d'être étudiées dans le cadre d'applications plus spécifiques (en s'extrayant du cadre d'un comportement général).
 En fonction des scénarios déployés, les mécanismes de sélection devront peut-être subir de nouvelles adaptations.
-Imaginons par exemple une application qui introduirait une différenciation de services, avec plusieurs flux de nature distincte dans le réseau, et qui imposerait à l'architecture des contraintes de qualité de service: non seulement les contraintes risquent de se répercuter sur la mise en place de la surveillance, mais elles pourraient même, de par les nouvelles exigences vis à vis du bon fonctionnement des services, rendre possible de nouvelles attaques qu'il faudrait alors prévenir.
+Imaginons par exemple une application qui introduirait une différenciation de services, avec plusieurs flux de nature distincte dans le réseau, et qui imposerait à l'architecture des contraintes de qualité de service: non seulement les contraintes risquent de se répercuter sur la mise en place de la surveillance, mais elles pourraient même, de par les nouvelles exigences vis-à-vis du bon fonctionnement des services, rendre possible de nouvelles attaques qu'il faudrait alors prévenir.
 
+    \vspace{1em}
     \paragraph{Mise en application}
 Quoi qu'il en soit, les résultats numériques obtenus par simulation profiteraient logiquement de l'usage d'applications plus proches d'une mise en production réelle.
 
         \vspace{-1em}
         \subparagraph{Réalisation d'une plate-forme opérationnelle}
-Mais nous pourrions faire encore mieux: implémenter de tels scénarios sur un véritable réseau de capteurs, en usant par exemple du système d'exploitation TinyOS~\cite{tinyos}, ce qui nous permettrait d'obtenir des valeurs en meilleure adéquation avec une mise en place opérationnelle du système.
+Mais nous pourrions faire encore mieux: implémenter de tels scénarios sur un véritable réseau de capteurs, en usant par exemple du système d'exploitation TinyOS~\cite{tinyos}, ce qui nous permettrait d'obtenir des valeurs en meilleure adéquation avec une mise en production du système.
 
         \vspace{-1em}
         \subparagraph{Validation des modèles proposés}
 Il en va de même pour les modèles présentés, qui gagneraient d'une part à être mis en œuvre sur des configurations différentes, et d'une autre à être effectivement réutilisés avec les outils de \textit{model checking} que nous avons mentionnés.
 Il serait particulièrement intéressant de mettre en place le renouvellement des \cnst sur un véritable cas d'application, sur un véritable réseau, et de modéliser celui-ci sous forme de réseaux de \textsc{Petri} pour vérifier si les variables formelles obtenues correspondent bien à la situation réelle.
 
-    \paragraph{Étude de nouveaux modèles}
+    \vspace{1em}
+    \paragraph{Vers une modélisation toujours plus précise}
 En fonction des résultats, il serait alors possible de rechercher l'amélioration des modèles obtenus, ou bien l'utilisation d'outils plus adaptés pour obtenir des modèles plus fidèles et plus efficaces.
+        \vspace{-1em}
+        \subparagraph{Étude de nouveaux modèles}
 Les automates temporels sont l'une des pistes envisageables à ce sujet.
-Les réseaux d'automates stochastiques en sont une autre: leur gestion des évènements synchronisés pourrait leur donner un avantage conséquent par rapport aux chaines de \textsc{Markov}, qui présentent des faiblesses sur ce point particulier.
+Les réseaux d'automates stochastiques en constituent une seconde: leur gestion efficace des évènements synchronisés pourrait leur donner un avantage conséquent, dans le contexte étudié, par rapport aux chaines de \textsc{Markov}, qui présentent des faiblesses sur ce point particulier.
 
         \vspace{-1em}
         \subparagraph{Approfondissement des modèles actuels}
-Le modèle utilisant les jeux quantitatifs constitue aussi une base de travail intéressante que nous aimerions affiner, dans le but d'améliorer le mécanisme de détection lui-même, par exemple en parvenant à exprimer des contraintes encore plus fortes qui forceraient les nœuds compromis à coopérer sous peine d'être immédiatement détectés.
+Enfin le modèle utilisant les jeux quantitatifs constitue une base de travail intéressante que nous aimerions affiner, dans le but d'améliorer le mécanisme de détection lui-même, par exemple en parvenant à exprimer des contraintes encore plus fortes qui forceraient les nœuds compromis à coopérer sous peine d'être immédiatement détectés.
 
+    \vspace{1em}
+    \paragraph{}
+Toutes ces approches sont autant de perspectives à étudier dans de futurs travaux, afin de concevoir, à partir des solutions apportées au cours de cette thèse, des mécanismes et des modèles toujours plus performants dans la lutte contre les attaques par déni de service dans les réseaux de capteurs sans fil.
+\pagebreak
