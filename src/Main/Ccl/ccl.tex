@@ -37,16 +37,16 @@ Le risque, dans le cas contraire, est de voir un sous-ensemble restreint des cap
 Peu de travaux existent à propos de la façon précise dont peuvent être désignées ces sentinelles.
 La première contribution consiste donc à introduire un mécanisme de renouvellement simple à mettre en œuvre: une sélection aléatoire des \cnst qui peut être implémentée par la station de base du réseau (au détriment de l'aspect décentralisé du réseau), par les cluster heads, ou encore par les capteurs eux-mêmes, capables de s'auto-désigner aléatoirement.
 Cette méthode assure une bonne rotation des \cnst, et le processus aléatoire empêche un nœud compromis de l'utiliser à son avantage pour être désigné à chaque tour (et réduire ainsi les risques de détection de son attaque, ou bien pour «dénoncer» à tort des nœuds légitimes).
-Elle permet surtout de répartir le surplus de consommation en énergie que ne prendrait pas en compte une implémentation «statique» du système de surveillance, comme l'attestent les résultats numériques obtenus par simulation à l'aide du logiciel \textsf{ns-2}.
+Elle permet surtout de répartir le surplus de consommation en énergie que ne prendrait pas en compte une implémentation «statique» du système de surveillance, comme l'attestent les résultats numériques obtenus par simulation à l'aide du logiciel \textsf{ns}.
 
 Pourtant, il est possible de pousser encore plus loin la recherche d'un équilibre optimal, toujours dans le but de répartir la charge le plus équitablement possible.
 Pour ce faire, nous proposons dans un deuxième temps une méthode qui, justement, repose sur l'énergie résiduelle des nœuds au moment du renouvellement: les capteurs possédant le plus d'énergie en réserve seront désignés \cnst.
-Les résultats de simulation montreront un écart-type très bas entre les nœuds sur la consommation énergétique, preuve que l'équilibre obtenu est très bon.
-Pourtant cette méthode a ses inconvénients: reposant sur un processus déterministe, elle introduit un risque quant à la couverture du cluster par les \cnst, menacée si le nœuds d'une certaine zone géographique sont amenés, par l'application qu'ils exécutent, à consommer davantage que leurs pairs.
-Le cluster head est donc responsable de contourner ce problème, en veillant à la bonne couverture du cluster par les sentinelles.
+Les résultats de simulation montrent un écart-type très bas entre les nœuds sur la consommation énergétique, preuve que l'équilibre obtenu est très bon.
+Pourtant cette méthode a ses inconvénients: reposant sur un processus déterministe, elle introduit un risque quant à la couverture du cluster par les \cnst, menacée si les nœuds d'une certaine zone géographique sont amenés, par l'application qu'ils exécutent, à consommer davantage que leurs pairs.
+Le cluster head est donc responsable du contournement de ce problème, en veillant à la bonne couverture du cluster par les sentinelles.
 Mais il reste un second problème: un capteur compromis peut cette fois-ci jouer sur le processus de sélection, et annoncer une réserve d'énergie très élevée (mais factice) dans le but d'être systématiquement sélectionné.
 Pour parer cette faille potentielle, chaque \cnt est entouré d'un ou de plusieurs «\vnst», chargés de l'interroger régulièrement sur son énergie résiduelle et de comparer ses réponses avec un modèle théorique de consommation, le tout afin de détecter les tentatives de fraude.
-Ce second rôle vient charger la méthode en complexité d'implémentation, ainsi qu'en volume de données de contrôle nécessaire: la consommation en énergie est mieux répartie en effet, cependant elle est aussi plus élevée.
+Ce second rôle vient charger la méthode en complexité d'implémentation, ainsi qu'en volume de données de contrôle nécessaire: la consommation en énergie est effectivement mieux répartie, cependant elle est aussi plus élevée.
 
 Aussi avons-nous été amenés à apporter une troisième contribution, toujours orientée à la fois vers l'équilibre de la consommation et vers la sécurité du processus.
 Ce troisième mécanisme de renouvellement est un processus d'élection démocratique, au cours duquel ce sont les nœuds du cluster qui votent auprès de leur cluster head afin de déterminer quels seront les \cnst.
@@ -57,7 +57,7 @@ Elle permet aussi aux votants de tenir compte d'autres critères (index de conne
 Les valeurs obtenues lors des simulations, en comparaison avec les deux méthodes précédentes, sont bonnes, malgré une consommation énergétique très intense lors de la période initiale.
 
 L'élection par les \cnst de cette dernière méthode implique un échange de données de contrôle légèrement plus important qu'une sélection aléatoire des nœuds, \cad une consommation globale très légèrement plus élevée (pour un meilleur équilibre).
-Le choix entre ces deux méthodes se fera donc suivant le réseau et l'application considérée, en fonction du besoin d'assurer en priorité la longévité maximale pour les «derniers capteurs» (méthode aléatoire) ou bien de conserver en service le plus longtemps possible un maximum de capteurs (méthode d'élection démocratique).
+Le choix entre ces deux méthodes se fera donc suivant le réseau et l'application considérés, en fonction du besoin d'assurer en priorité la longévité maximale pour les «derniers capteurs» (méthode aléatoire) ou bien de conserver en service le plus longtemps possible un maximum de capteurs (méthode d'élection démocratique).
 La méthode de sélection selon l'énergie résiduelle ne viendra remplacer la méthode d'élection démocratique que dans de rares cas d'applications où les capteurs ne resteraient actifs que sur de courtes périodes, et où la réactivation du cluster entrainerait le besoin systématique de relancer une période initiale, avec la méthode d'élection démocratique, très couteuse en énergie.
 
     \subsection{\dots\ et des modèles}
@@ -69,7 +69,7 @@ Les chaines de \textsc{Markov} à temps continu ont d'abord été utilisées pou
 Mais ce modèle suppose que la vérification du trafic par les \cnst est réalisée de façon ponctuelle, à intervalles aléatoires.
 Il s'agit d'une approximation trop large pour pouvoir adapter proprement cet outil au système modélisé.
 
-Nous nous sommes donc tournés vers d'autres représentations, et avons modélisé chaque type de capteur, à la fois sous sa forme «statique» et dans un contexte de renouvellement dynamique, sous la forme de réseaux de \textsc{Petri} généralisés étendus (comportant des transitions minutées).
+Nous nous sommes donc tournés vers d'autres représentations, et avons modélisé chaque type de capteur, à la fois sous sa forme «statique» et dans un contexte de renouvellement dynamique, sous la forme de réseaux de \textsc{Petri} stochastiques généralisés étendus (comportant des transitions minutées).
 Une fois les capteurs représentés, nous avons pu formaliser une représentation de l'intégralité du cluster ainsi que du processus de renouvellement des \cnst.
 
 Parmi les intérêts du modèle figure la possibilité de le réutiliser en combinaison avec un autre outil, la logique stochastique avec automates hybrides, dans le but d'en extraire par la suite des propriétés, d'en évaluer les performances ou la fiabilité, à l'aide d'outils de \textit{model checking}.
@@ -83,18 +83,36 @@ Mais la validation \textit{a~posteriori} d'un processus n'est pas le seul apport
 Dans cette optique, nous avons entrepris de modéliser les interactions entre un nœud compromis et les capteurs sains du réseau sous la forme de jeux quantitatifs.
 À la différence des travaux antérieurs, nous combinons des objectifs portant à la fois sur une valeur de gain (moyen) et sur une composante d'énergie.
 Ce modèle n'a pas encore permis d'apporter de nouveaux mécanismes de sécurité, mais il constitue une base intéressante d'étude, et permet de fournir de premiers résultats.
-Nous donnons ainsi les spécifications des graphes de jeu, notamment au travers d'exemples détaillés, avant de nous intéresser à leur résolution: si la résolution de ces jeux constitue un problème indécidable dans le cas général, nous démontrons qu'il est possible de résoudre les problèmes de victoire et de crédit initial lorsque l'objectif à atteindre est défini sous forme de conjonction de littéraux.
+Nous donnons ainsi les spécifications des graphes de jeu, notamment au travers d'exemples détaillés, avant de nous intéresser à leur résolution: si la résolution de ces jeux constitue un problème indécidable dans le cas général, nous démontrons qu'il est possible de résoudre les problèmes de victoire et de crédit initial lorsque l'objectif à atteindre est défini sous forme de conjonctions de littéraux.
 
 \section{Perspectives pour les travaux futurs}
 
-Ce modèle utilisant les jeux quantitatifs constitue une base de travail intéressante que nous aimerions affiner, dans le but d'améliorer le mécanisme de détection lui-même, par exemple en parvenant à exprimer des contraintes encore plus fortes qui forceraient les nœuds compromis à coopérer sous peine d'être immédiatement détectés.
-
 Nous avons déjà mené une étude poussée sur les processus de renouvellement des \cnst, mais il reste néanmoins beaucoup de pistes de réflexion à explorer.
-Concernant les mécanismes décris et implémentés sous forme de simulations, par exemple, il serait possible d'étendre les cas étudiés à d'autres topologies de réseaux, à d'autres architectures que des systèmes clusterisés où tous les capteurs sont voisins directs d'un cluster head.
-De même, la simulation d'applications spécifiques (et non plus d'un comportement général), voire encore mieux: leur implémentation sur un véritable réseau de capteurs, permettraient d'obtenir des valeurs numériques en meilleure adéquation avec une mise en place réelle du système.
 
-Il en va de même pour les modèles présentés, qui gagneraient d'une part à être mis en œuvre sur des configurations différentes, et d'une autre à être effectivement réutilisé avec les outils de \textit{model checking} que nous avons mentionné.
+Notre modèle de détection s'adapte bien à différents modèles d'attaques tant qu'il existe des règles permettant de traduire la signature des attaques en termes de trafic observé.
+Un angle d'approche concernerait l'étude et l'adoption, à la place, d'autres mécanismes (basés par exemple sur les anomalies de fonctionnement), dans le but de détecter de nouveaux schémas d'attaque.
+Et une fois la détection réalisée, il faudrait se pencher sur les réactions à adopter en réponse: y aurait-il, avec nos solutions, des éléments à mettre en œuvre à la place (ou bien en addition) de l'exclusion des capteurs compromis?
+La création d'un nouveau canal de communication, que l'attaquant exclu ne pourrait rejoindre, est un exemple à envisager.
+
+Toujours à propos des mécanismes décrits et implémentés sous forme de simulations, il serait possible d'étendre les cas étudiés à d'autres topologies de réseaux, à d'autres architectures que des systèmes clusterisés où tous les capteurs sont voisins directs d'un cluster head.
+Les différentes méthodes de renouvellement des \cnst proposées pourraient encore être complétées, soit par de nouveaux mécanismes qui rechercheraient des performances encore meilleures, soit dans un contexte radicalement différent.
+Par exemple, elles pourraient être transposées aux VANET, pour lesquels la mobilité est plus accentuée, qui possèdent une connectivité très différente entre les nœuds, mais dans lesquels le problème de l'énergie ne se pose (pratiquement) pas.
+
+Toutes ces méthodes méritent également d'être étudiées dans le cadre d'applications plus spécifiques (en s'extrayant du cadre d'un comportement général).
+En fonction des scénarios déployés, les mécanismes de sélection devront peut-être subir de nouvelles adaptations.
+Imaginons par exemple une application qui introduirait une différenciation de services, avec plusieurs flux de nature distincte dans le réseau, et qui imposerait à l'architecture des contraintes de qualité de service: non seulement les contraintes risquent de se répercuter sur la mise en place de la surveillance, mais elles pourraient même, de par les nouvelles exigences vis à vis du bon fonctionnement des services, rendre possible de nouvelles attaques qu'il faudrait alors prévenir.
+
+Quoi qu'il en soit, les résultats numériques obtenus par simulation profiteraient logiquement de l'usage d'applications plus proches d'une mise en production réelle.
+Mais nous pourrions faire encore mieux: implémenter de tels scénarios sur un véritable réseau de capteurs, en usant par exemple du système d'exploitation TinyOS~\cite{tinyos}, ce qui nous permettrait d'obtenir des valeurs en meilleure adéquation avec une mise en place opérationnelle du système.
+
+Il en va de même pour les modèles présentés, qui gagneraient d'une part à être mis en œuvre sur des configurations différentes, et d'une autre à être effectivement réutilisés avec les outils de \textit{model checking} que nous avons mentionnés.
 Il serait particulièrement intéressant de mettre en place le renouvellement des \cnst sur un véritable cas d'application, sur un véritable réseau, et de modéliser celui-ci sous forme de réseaux de \textsc{Petri} pour vérifier si les variables formelles obtenues correspondent bien à la situation réelle.
 
+En fonction des résultats, il serait alors possible de rechercher l'amélioration des modèles obtenus, ou bien l'utilisation d'outils plus adaptés pour obtenir des modèles plus fidèles et plus efficaces.
+Les automates temporels comme les réseaux d'automates stochastiques font partie des pistes envisageables à ce sujet.
+
+Le modèle utilisant les jeux quantitatifs constitue aussi une base de travail intéressante que nous aimerions affiner, dans le but d'améliorer le mécanisme de détection lui-même, par exemple en parvenant à exprimer des contraintes encore plus fortes qui forceraient les nœuds compromis à coopérer sous peine d'être immédiatement détectés.
+
 Enfin, de nombreuses autres approches peuvent être envisagées pour lutter contre les attaques par déni de service.
-Le travail sur les mécanismes de confiance, sur la résilience du routage, ou sur les propriétés des protocoles de la couche de liaison de données ne sont que quelques exemples de sujets brièvement étudiés au cours de cette thèse, mais qui mériteraient chacun d'être approfondis.
+La question du brouillage, par exemple, a été peu abordée: il pourrait être intéressant de s'appuyer en détail sur les spécifications d'un protocole choisi de couche de liaison de données, d'en trouver les faiblesses face aux tentatives de brouillage intelligent par exemple, et d'en dériver des mécanismes à inclure au niveau de la surveillance effectuée par les \cnst.
+Dans le même ordre d'idée, le travail sur la sécurité des algorithmes de clusterisation, les mécanismes de confiance, ou sur la résilience du routage face aux attaques, ne sont que quelques exemples de sujets brièvement étudiés au cours de cette thèse, mais qui mériteraient chacun d'être approfondis.
