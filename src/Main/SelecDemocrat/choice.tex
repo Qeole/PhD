@@ -9,7 +9,7 @@ Car il n'y a pas vraiment de «meilleure méthode» adaptable à toutes les appl
 \paragraph{Aucun \idx{renouvellement} des \cns}
 Ne pas renouveler les \cns permet de garder en vie très longtemps les nœuds qui ne sont pas sélectionnés, mais n'assure que très mal la \secu du réseau.
 Les \cns d'origine vont rapidement épuiser leur batterie et tomber hors service.
-De plus, si la sélection\index{selection@sélection} est réalisée de telle sorte que tous les capteurs du cluster ne soient pas couvert par un \cn\,\footnote{Ou même, en réalité, par le nombre minimal de \cns nécessaire pour reporter effectivement une attaque, puisque par principe le \ch attend de recevoir des alarmes de la part de plusieurs \cns distincts avant de déclarer un capteur comme compromis, ceci afin d'éviter les faux positifs (accidentels ou d'origine malveillante).}, alors certains nœuds ne seront jamais surveillés.
+De plus, si la sélection\index{selection@sélection} est réalisée de telle sorte que tous les capteurs du cluster ne soient pas couverts par un \cn\,\footnote{Ou même, en réalité, par le nombre minimal de \cns nécessaires pour reporter effectivement une attaque, puisque par principe le \ch attend de recevoir des alarmes de la part de plusieurs \cns distincts avant de déclarer un capteur comme compromis, ceci afin d'éviter les faux positifs (accidentels ou d'origine malveillante).}, alors certains nœuds ne seront jamais surveillés.
 La mise en place des \cns sans \idx{renouvellement} n'est donc pas conseillée, en dehors de cas particuliers où les \cns sont connus d'avance, disposent de composants matériels distincts des autres capteurs (une meilleure batterie, notamment), et sont expressément disposés de manière à assurer une couverture suffisante du cluster.
 
 \paragraph{Renouvellement périodique\index{renouvellement!renouvellement périodique}: sélection pseudo-aléatoire\index{selection@sélection!sélection aléatoire}}
@@ -84,7 +84,7 @@ La \tabref{sd:table:apps}, quant à elle, synthétise les cas d'utilisation de c
         \textsc{Méthode} & \textsc{Cas d'utilisation} \\
         \midrule
         Aucun renouvellement
-            & Fortement déconseillé de manière générale (la sécurité apportée ne vaut pas de mettre en place le dispositif, sauf en cas d'usage de capteurs dédiés du point de vue matériel)
+            & Fortement déconseillée de manière générale (la sécurité apportée ne vaut pas de mettre en place le dispositif, sauf en cas d'usage de capteurs dédiés du point de vue matériel)
             \\
         \midrule
         Sélection aléatoire
@@ -116,7 +116,7 @@ Pour rappel, nous avons travaillé jusqu'à maintenant dans un cluster dont tous
 Si les \cns sont appelés à être déployés sur une autre architecture, sans cluster par exemple, les problèmes de couverture seront différents.
 
         \subsubsection{Contraintes sur la couverture du cluster}
-Un exemple déjà abordé dans le chapitre précédent est celui d'un réseau en étoile, comme présenté en \figref{sd:fig:star}: dans une telle configuration, il est indispensable d'adapter (ou de supprimer) la règle selon laquelle chaque capteur doit être surveillé par au moins deux~\cns (pour les méthodes d'\elecdem et de sélection selon l'énergie résiduelle\index{selection@sélection!sélection selon l'énergie résiduelle}), sans quoi tous les nœuds ou presque devront être sélectionnés en tant que \cns.
+Un exemple déjà évoqué dans la \ssref{sd:ssec:selec} est celui d'un réseau en étoile, comme présenté en \figref{sd:fig:star}: dans une telle configuration, il est indispensable d'adapter (ou de supprimer) la règle selon laquelle chaque capteur doit être surveillé par au moins deux~\cns (pour les méthodes d'\elecdem et de sélection selon l'énergie résiduelle\index{selection@sélection!sélection selon l'énergie résiduelle}), sans quoi tous les nœuds ou presque devront être sélectionnés en tant que \cns.
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=7cm]{\chapterfig/WSN_star.pdf}

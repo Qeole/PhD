@@ -1,8 +1,8 @@
 % vim: set spelllang=fr foldmethod=marker:
 \vfill
-\lettrineh{A}{près avoir proposé} un processus de sélection aléatoire\index{selection@sélection!sélection aléatoire}, une première amélioration a été proposée pour mieux répartir la consommation en énergie dans le réseau.
-Cette méthode basée sur le niveau d'énergie restante des nœuds introduit de nouvelles considérations sur la \secu du système, qui est résolue par l'usage des \vns.
-Mais ces derniers demandent un protocole de mise en place un peu plus complexe, et consomment de l'énergie; dans ce chapitre, c'est une nouvelle méthode qui est proposée.
+\lettrineh{A}{près avoir proposé} un processus de sélection aléatoire\index{selection@sélection!sélection aléatoire}, une première amélioration a été suggérée pour mieux répartir la consommation en énergie dans le réseau.
+Cette méthode basée sur le niveau d'énergie résiduelle des nœuds introduit de nouvelles considérations sur la \secu du système, qui sont résolues par l'usage des \vns.
+Mais ces derniers demandent un protocole de mise en place un peu plus complexe, et consomment de l'énergie; dans ce chapitre, c'est une nouvelle méthode qui est proposée à la place.
 \vfill
 Le processus de sélection reste basé sur l'énergie résiduelle des nœuds\index{selection@sélection!sélection selon l'énergie résiduelle}, mais toutes les mesures de vérifications sont affectées aux \cns ---~puisqu'ils se chargent déjà de vérifier le trafic!
 Il en résulte une méthode «démocratique», dans le sens où ce sont désormais les capteurs eux-mêmes qui «votent» auprès du \ch pour déterminer les prochains \cns.
@@ -27,7 +27,7 @@ Pour exposer efficacement celui-ci, les notations suivantes sont adoptées:
 \end{itemize}
 
 Le processus d'\election débute, avant sa première itération, par une phase d'initialisation.
-Viennent ensuite les itérations elle-même qui marquent le \idx{renouvellement} de l'attribution du rôle de \cn, tant que le réseau est en fonctionnement.
+Viennent ensuite les itérations elles-mêmes qui marquent le \idx{renouvellement} de l'attribution du rôle de \cn, tant que le réseau est en fonctionnement.
 
     \subsection{Phase d'initialisation}
 
@@ -59,9 +59,9 @@ Chaque itération~$k$ se décompose en étapes, qui sont détaillées ici:
     \subsection{Modèle mathématique pour la consommation en énergie}
 
 Tout comme dans le chapitre précédent, la solution présentée ici implique des estimations sur la consommation en énergie des capteurs du cluster.
-Nous proposons à nouveau pour ces calculs d'utiliser le modèle de diffusion de \textsc{Rakhmatov} et \textsc{Vrudhula}, détaillé au \chapref{se}, \ssref{se:rakvru-formula}.
+Nous suggérons à nouveau pour ces calculs d'utiliser le modèle de diffusion proposé par \textsc{Rakhmatov} et \textsc{Vrudhula}, détaillé au \chapref{se}, \ssref{se:rakvru-formula}.
 
-    \subsection{Sélection\index{selection@sélection} des \cns parmi l'ensemble $\mathit{LNÉ}$}
+    \subsection{Sélection\index{selection@sélection} des \cns parmi l'ensemble $\mathit{LNÉ}$}\label{sd:ssec:selec}
 
 À l'étape~3 du processus d'\election, les \chs choisissent les \cns pour l'itération à venir parmi tous les nœuds placés dans la liste~$\mathit{LNÉ}$.
 Les critères retenus pour effectuer ce choix peuvent être très variés.
@@ -95,7 +95,7 @@ où:
 \end{itemize}
 Cette formule pourrait être utilisée pour classer les nœuds de la liste~$\mathit{LNÉ}$ de telle manière que le \ch puisse choisir les meilleurs \cns possibles par rapport aux critères pris en compte.
 
-La détermination des critères à retenir et des poids à appliquer revient à l'utilisateur du réseau; en pratique, il faudrait les adapter par rapport à l'application qui sera faite du \rc, tout en tenant compte des conditions particulières de l'environnement dans lequel celui-ci sera déployé.
+La détermination des critères à retenir et des poids à appliquer revient à l'exploitant du réseau; en pratique, il faudrait les adapter par rapport à l'application qui sera faite du \rc, tout en tenant compte des conditions particulières de l'environnement dans lequel celui-ci sera déployé.
 Dans un réseau constitué de nœuds statiques, par exemple, l'index de connectivité des capteurs, de même que la puissance de leur signal, ne sont pas censés subir de modifications sensibles entre deux itérations consécutives.
 En conséquence, les poids de ces deux critères devraient être modérés (par rapport aux autres poids utilisés dans la formule) afin d'éviter de désigner les mêmes capteurs à chaque itération.
 Dans un réseau clusterisé, où tous les nœuds peuvent atteindre leur \CH en un seul saut, l'index de connectivité ou la puissance du signal ne constituent peut-être pas des critères pertinents pour la formule de sélection\index{selection@sélection} (bien que, là encore, cela puisse dépendre de l'application déployée).
@@ -107,7 +107,7 @@ Toujours sur le même propos, la contrainte fixée consistant à faire en sorte 
 S'il s'agit en principe d'une bonne assurance pour détecter les nœuds compromis dans des clusters où tous les nœuds sont réunis à portée d'émission de leur \ch, cette contrainte pourrait s'avérer trop lourde pour certaines topologies.
 Ainsi dans un réseau en étoile, par exemple, où tous les capteurs se retrouveraient sur des branches et n'auraient que deux voisins (l'un plus près, l'autre plus loin de la \sdb), la mise en application de la contrainte pourrait avoir pour effet de désigner tous les nœuds du réseau comme \cns.
 
-Quelques remarques sur le processus dans son ensemble: par rapport au mécanisme proposée dans le chapitre précédent (sélection selon l'énergie résiduelle\index{selection@sélection!sélection selon l'énergie résiduelle}: chaque nœud annonce son énergie, et «vote pour lui-même» en quelque sorte), le processus présenté ici confie la vérification de la consommation en énergie aux \cns et non plus à des \vns expressément nommés dans ce but.
+Quelques remarques sur le processus dans son ensemble: par rapport au mécanisme proposé dans le chapitre précédent (sélection selon l'énergie résiduelle\index{selection@sélection!sélection selon l'énergie résiduelle}: chaque nœud annonce son énergie, et «vote pour lui-même» en quelque sorte), le processus présenté ici confie la vérification de la consommation en énergie aux \cns et non plus à des \vns expressément nommés dans ce but.
 Les \cns vont donc envoyer au \ch, au moment du \idx{renouvellement} de la sélection\index{selection@sélection}, un compte-rendu des observations réalisées pour chaque nœud: estimation de l'énergie consommée, mais aussi, suivant les détails du modèle implémenté: score de \reput (basé sur le respect ou non des règles), puissance du signal reçu, et autres critères comme évoqué plus haut.
 C'est ce vote «pour les autres» qui fait de la méthode un processus «démocratique»: en envoyant leur compte-rendu au \CH les \cns votent en quelque sorte pour déterminer leurs successeurs.
 Et par «successeurs», nous touchons d'ailleurs un aspect important: si la sélection\index{selection@sélection} est basée sur d'autres critères que l'énergie résiduelle\,\footnote{Dans le cas où seule l'énergie résiduelle est prise en compte, le surcroit de consommation induit par la surveillance devrait suffire à faire baisser le niveau d'énergie du nœud en dessous de celui des autres capteurs, et à assurer ainsi la rotation.}, il est recommandé de faire en sorte que les \cns ne puissent pas «voter» pour eux-mêmes.

@@ -46,8 +46,8 @@ La \tabref{sd:table:param} récapitule les principaux paramètres impliqués dan
 \newcommand\ideres{\textsf{\#ÉRes10}\xspace}
 \newcommand\iddemx{\textsf{\#Démc10}\xspace}
 \newcommand\iddems{\textsf{\#Démc07}\xspace}
-Dans les chapitres précédents, le but des simulations étaient de souligner les apports des nouvelles solutions proposées par rapport aux éléments antérieurs.
-Ici, l'objectif consiste plutôt à comparer tous les scénarios que nous avons défini au cours des trois chapitres sur les processus de sélection\index{selection@sélection}.
+Dans les chapitres précédents, le but des simulations était de souligner les apports des nouvelles solutions proposées par rapport aux éléments antérieurs.
+Ici, l'objectif consiste plutôt à comparer tous les scénarios que nous avons définis au cours des trois chapitres sur les processus de sélection\index{selection@sélection}.
 Un «scénario» se caractérise donc avant tout par le choix d'un processus de \idx{renouvellement} des \cns, mais aussi par le nombre de \cns sélectionnés à chaque tour, et par le montant d'énergie initialement attribué aux capteurs.
 Chaque graphe présente, pour un montant d'énergie initiale donné, les valeurs obtenues pour cinq scénarios distincts, auxquels nous attribuons des identifiants pour pouvoir nous y référer plus facilement par la suite:
 \begin{itemize}
@@ -167,7 +167,7 @@ C'est ce que montre la \figref{sd:fig:nbnodes-20J},
     \includegraphics{\chapterfig/plot_sd_nbnodesXtime_20J.pdf}
     \caption{Nombre de nœuds en activité au cours du temps pour un montant d'énergie initiale de 20~\joule}\label{sd:fig:nbnodes-20J}
 \end{figure}
-qui reprend les mêmes scénarios, mais développés sur la consommation des 20~\joule (au lieu de 10~\joule) initialement attribués au capteurs: \iddemx et \ideres sont quasiment a égalité dans ce cas.
+qui reprend les mêmes scénarios, mais développés sur la consommation des 20~\joule (au lieu de 10~\joule) initialement attribués au capteurs: \iddemx et \ideres sont quasiment à égalité dans ce cas.
 On retrouve un comportement à peu près identique pour \idstat et \idrand par rapport à la \figref{sd:fig:nbnodes-10J}, mais bien évidemment avec une durée d'épuisement des nœuds doublée.
 Tout comme \iddemx grignote du terrain sur \ideres, on observe que \iddems gagne en efficacité en comparaison de \idrand: avec 10~\joule d'énergie initiale, les nœuds s'épuisent d'un coup pour \iddems peu après 20~minutes, alors qu'il reste près de la moitié des nœuds pour la méthode \idrand au même instant.
 Tandis qu'avec 20~\joule d'énergie initiale, l'écart créé par la période initiale de \iddems a été en partie rattrapé, et lorsque le nombre de nœuds chute peu avant les 50~minutes de simulation, près de trois quarts des capteurs sont épuisés avec \idrand.
@@ -182,7 +182,7 @@ Le nombre de nœuds en mesure de détecter l'attaque du nœud compromis est dire
     \caption[Taux de détection au cours du temps (énergie initiale: 10~\joule; valeurs sur une seule instance)]{Taux de détection, pour chaque processus de sélection\index{selection@sélection}, au cours du temps (énergie initiale: 10~\joule; valeurs sur une seule instance)}\label{sd:fig:detec-one-10J}
 \end{figure}
 En dehors d'un intérêt artistique certain, ces courbes permettent d'observer les extremums atteints, mais sont très peu lisibles.
-La \figref{sd:fig:detec-min-10J} reprend donc ces valeurs, lissées une première fois en calculant la moyenne du nombre d'attaques détectées par les différentes instances (10~par scénario), puis une seconde fois sur une séquence d'une minutes (donc 6~phases de 10~secondes).
+La \figref{sd:fig:detec-min-10J} reprend donc ces valeurs, lissées une première fois en calculant la moyenne du nombre d'attaques détectées par les différentes instances (10~par scénario), puis une seconde fois sur une séquence d'une minute (donc 6~phases de 10~secondes).
 \begin{figure}[p]
     \centering
     \includegraphics{\chapterfig/plot_sd_detectionXtime-minute_10J.pdf}
