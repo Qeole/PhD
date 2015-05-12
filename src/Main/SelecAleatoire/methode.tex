@@ -182,7 +182,7 @@ Le \CH envoie alors un message à chacun de ces dix nœuds pour leur ordonner de
     \caption{Élection\index{selection@sélection!election@élection} des \cns réalisée par les \chs}\label{sa:fig:elecch}
 \end{figure}
 
-Cette méthode est plus efficace en terme de calculs puisque seuls les $2$-\CH ont à appliquer un algorithme de calcul de nombres pseudo-aléatoires.
+Cette méthode est plus efficace en ce qui concerne les calculs puisque seuls les $2$-\CH ont à appliquer un algorithme de calcul de nombres pseudo-aléatoires.
 Cependant, elle présente un autre désavantage: si l'un de ces \CH est compromis par un attaquant, il ne déclarera sans doute aucun \cn susceptible de le détecter, laissant ainsi tout son cluster à la merci d'autres attaques.
 Comme l'algorithme \leach désigne à tour de rôle chaque capteur, sur un cycle complet, pour accomplir le rôle de \CH, tout nœud compromis deviendra logiquement \CH à un moment ou l'autre.
 Le problème du \CH ne désignant aucun \cn peut donc légitimement se poser pour n'importe quel nœud compromis du réseau.

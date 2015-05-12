@@ -34,7 +34,7 @@ Viennent ensuite les itérations elle-même qui marquent le \idx{renouvellement}
 Les étapes suivantes sont réalisées une fois le cluster formé:
 \begin{itemize}
     \item Chaque nœud~$i$ du cluster envoie au \ch la valeur de son énergie résiduelle; le \CH l'enregistre dans un tableau spécifique, dénoté~$\mathit{ÉR}_0[i]$.
-    \item Chaque nœud agit temporairement comme un \cn, et commence à surveiller le trafic de ses voisins. Il conserve en parallèle le fonctionnement d'un nœud normal (en termes de mesure physiques et de collecte de données), sans quoi il n'y aurait aucun trafic à observer. Cette étape a pour but d'essayer de repérer, dès le départ, d'éventuels nœuds compromis, pour les écarter de la liste des candidats au rôle de \cn.
+    \item Chaque nœud agit temporairement comme un \cn, et commence à surveiller le trafic de ses voisins. Il conserve en parallèle le fonctionnement d'un nœud normal (pour ce qui concerne les mesure physiques et la collecte de données), sans quoi il n'y aurait aucun trafic à observer. Cette étape a pour but d'essayer de repérer, dès le départ, d'éventuels nœuds compromis, pour les écarter de la liste des candidats au rôle de \cn.
     \item Une fois la durée de cette première étape d'observation écoulée, le processus d'\elecdem peut commencer. La valeur du compteur d'itérations~$k$ est passée à $1$.
 \end{itemize}
 

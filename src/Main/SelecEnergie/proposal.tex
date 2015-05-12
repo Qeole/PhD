@@ -6,10 +6,10 @@ Pourtant, la surveillance que ces derniers mènent dans leur cluster entraine un
 
 Dans ce chapitre, une deuxième méthode de sélection\index{selection@sélection} des \cns est proposée.
 Le concept initial de l'algorithme est simple: à chaque \idx{renouvellement} du processus, l'énergie résiduelle des capteurs est évaluée, et ceux possédant le plus de réserves deviennent \cns.
-Le but de cette méthode est évidemment d'atteindre une meilleure répartition de la consommation d'énergie dans le cluster: les capteurs possédant le plus haut niveau de charge de leur batterie se verront attribuer le rôle qui consomme le plus d'énergie.
+Le but de cette méthode est évidemment d'atteindre une meilleure répartition de la consommation d'énergie dans le cluster: les capteurs possédant le plus haut niveau de charge batterie se verront attribuer le rôle qui consomme le plus d'énergie.
 
-Néanmoins, la perte de l'aspect aléatoire au profit d'une méthode purement déterministe va entrainer un certain nombre de contraintes en termes de \secu et de couverture spatiale.
-Il faut donc mettre en place des parades face aux nœuds compromis qui tenteraient de conserver \textit{ad~vitam~æternam} le rôle de \cn en falsifiant leur niveau d'énergie.
+Néanmoins, la perte de l'aspect aléatoire au profit d'une méthode purement déterministe va entrainer un certain nombre de contraintes concernant \secu et couverture spatiale.
+Il faut ainsi mettre en place des parades face aux nœuds compromis qui tenteraient de conserver \textit{ad~vitam~æternam} le rôle de \cn en falsifiant leur niveau d'énergie.
 Un nouveau type de nœuds, les \vns, viennent ici prévenir les tentatives de fraudes, tandis que le \ch veille à la couverture correcte du réseau par les \cns.
 Les performances obtenues à l'aide de ce second mécanisme de sélection\index{selection@sélection} sont elles aussi étudiées à travers un jeu de simulations.
 
@@ -20,10 +20,10 @@ Les performances obtenues à l'aide de ce second mécanisme de sélection\index{
 Les hypothèses présentées en début de \chapref{sa} (\ssref{sa:ssec:hypotheses}) demeurent valables ici.
 Le processus de sélection\index{selection@sélection} dans ce chapitre repose sur l'énergie restante pour chaque nœud au moment du \idx{renouvellement}.
 Cette énergie disponible dans la batterie est dite «énergie résiduelle».
-Afin de répartir au mieux la charge, les nœud possédant le plus d'énergie en réserve sont sélectionnés pour assurer la tâche qui consomme le plus.
+Afin de répartir au mieux la charge, les nœuds possédant le plus d'énergie en réserve sont sélectionnés pour assurer la tâche qui consomme le plus.
 Mais l'usage de la valeur d'énergie résiduelle comme critère de sélection\index{selection@sélection} présente un inconvénient notable: il n'y a aucun agent, dans le réseau, capable de mesurer de façon fiable le niveau d'énergie présent dans la batterie d'un nœud donné, si ce n'est ce nœud lui-même.
-Les nœuds voisins d'un nœud $N$ peuvent tout au plus enregistrer les messages envoyés par $N$, et en inférer une valeur approximative de l'énergie consommée.
-Mais ils ne connaissent ni le niveau d'énergie initial de $N$ (au moment du déploiement du réseau) ni l'énergie dépensée par $N$ lors de l'écoute du médium de transmission, la consommation approximative calculée ne permet pas de déduire le niveau d'énergie résiduelle avec une précision suffisante pour classer les nœuds de façon fiable sur ce critère.
+Les nœuds voisins d'un nœud $N$ peuvent tout au plus enregistrer les messages envoyés par $N$\kern-1pt, et en inférer une valeur approximative de l'énergie consommée.
+Mais comme ils ne connaissent ni le niveau d'énergie initial de $N$ (au moment du déploiement du réseau) ni l'énergie dépensée par $N$ lors de l'écoute du médium de transmission, la consommation approximative calculée ne permet pas de déduire le niveau d'énergie résiduelle avec une précision suffisante pour classer les nœuds de façon fiable sur ce critère.
 
 Aussi la seule façon d'obtenir le niveau de charge de la batterie d'un nœud est-elle de le lui demander.
 L'algorithme de sélection\index{selection@sélection} proposé s'écrit donc de la manière suivante:
@@ -63,7 +63,7 @@ Quatre cas sont alors susceptibles de se produire:
 \begin{enumerate}
     \item La consommation en énergie annoncée par le \cn ne correspond pas du tout au modèle théorique: il y a alors une forte probabilité pour que le nœud soit corrompu, et cherche à accaparer le rôle de \cn. Il est dénoncé au \ch;
     \item La consommation annoncée correspond très exactement au modèle théorique: le capteur est probablement un nœud compromis qui tente d'être sélectionné tout en échappant à la détection des \vns. Autrement dit: le nœud est compromis, mais il adapte son comportement par rapport au point précédent. Mais il est quasiment impossible en pratique que les valeurs théoriques et empiriques soient exactement identiques, sans la moindre marge d'erreur. Le capteur est donc dénoncé au \ch;
-    \item La consommation correspond à peu près aux valeurs du modèle théorique, mais elle n'évolue pas dans le sens de la consommation réelle observée localement par les \vns (l'évolution locale dans le temps du \cn devrait être grossièrement similaire à celle des \vns, puisqu'ils sont voisins, mais ce n'est pas le cas). Il s'agit probablement d'un nœud compromis qui adapte son comportement par rapport aux deux premiers points, par exemple en décrémentant son énergie des montants minimum imposés par la marge d'erreur définie vis à vis du modèle théorique. Le nœud est dénoncé au \ch;
+    \item La consommation correspond à peu près aux valeurs du modèle théorique, mais elle n'évolue pas dans le sens de la consommation réelle observée localement par les \vns (l'évolution locale dans le temps du \cn devrait être grossièrement similaire à celle des \vns, puisqu'ils sont voisins, mais ce n'est pas le cas). Il s'agit probablement d'un nœud compromis qui adapte son comportement par rapport aux deux premiers points, par exemple en décrémentant son énergie des montants minimums imposés par la marge d'erreur définie vis-à-vis du modèle théorique. Le nœud est dénoncé au \ch;
     \item La consommation annoncée correspond grossièrement au modèle théorique, et évolue dans le sens de la consommation locale observée par les \vns. Que le nœud soit compromis ou non, il adopte ici un comportement normal, et est autorisé à endosser le rôle de \cn.
 \end{enumerate}
 Si un \vn est compromis, il peut tenter de faire exclure\index{exclusion} le \cn légitime qu'il observe.
@@ -75,13 +75,14 @@ Comme ce dernier rôle consomme plus d'énergie que le relevé et la transmissio
 On remarquera que les points~2 et~3 énoncés ci-dessus correspondent à un nœud compromis qui décrémente volontairement son énergie annoncée au cours du temps; même si des irrégularités peuvent être détectées et le nœud compromis être ainsi démasqué, le seul fait qu'il applique ce comportement assure tout de même que le capteur compromis cessera d'être désigné \cn pour un cycle ou pour un autre dans le futur.
 
 Le modèle énergétique implémenté par les \vns pour vérifier les affirmations des \cns ne doit pas être trop lourd, mais il doit demeurer suffisamment précis pour pouvoir déterminer si un \cn s'en éloigne véritablement, tout en limitant les faux positifs.
-Nous proposons ici d'utiliser le modèle de diffusion de \textsc{Rakhmatov} et \textsc{Vrudhula}~\cite{RV01}.\label{se:rakvru-formula}
+Nous proposons ici d'utiliser le modèle de diffusion introduit par \textsc{Rakhmatov} et \textsc{Vrudhula}~\cite{RV01}.\label{se:rakvru-formula}
 Ce choix repose sur plusieurs observations:
 \begin{itemize}
     \item Ce modèle fournit une approximation assez précise de la consommation réelle d'une batterie, et tient compte des processus chimiques internes à la batterie tels que les effets de récupération (\textit{recovery effect} en anglais) ou de perte de capacité selon la tension de décharge (\textit{rate capacity effect});
     \item Il s'agit de l'un des modèles implémentés dans \nsiii, ce qui permet, pour les simulations basées sur ce logiciel, de bénéficier d'une implémentation déjà existante, et surtout d'un modèle théorique parfait. Il ne faut pas craindre cependant que ce modèle ne soit «trop parfait» pour être utilisé par les \vns, étant donné que ces derniers estimeront l'énergie consommée par les \cns à partir de messages émis par ces derniers, sans connaissance des mécanismes internes au nœud (calcul, écoute) comme le fait le cœur du simulateur. Les valeurs calculées par les \vns demeurent donc approximatives par rapport à la consommation des \cns réellement calculée par \nsiii.
 \end{itemize}
-Le modèle de diffusion de \textsc{Rakhmatov} et \textsc{Vrudhula} se réfère aux réactions chimiques qui se produisent à l'intérieur de l'électrolyte de la batterie, et elle est résumée par l'\equaref{se:eqn:rvdm}
+Le modèle de diffusion de \textsc{Rakhmatov} et \textsc{Vrudhula} se réfère aux réactions chimiques qui se produisent à l'intérieur de l'électrolyte de la batterie.
+Cette diffusion est résumée par l'\equaref{se:eqn:rvdm}
 \begin{equation}
     \label{se:eqn:rvdm}
     \sigma(t) = \underbrace{\int_{0}^{t} i(\tau) \, \mathrm d\tau}_{l(t)} \;+\; \overbrace{\int_{0}^{t} i(\tau) \left(2 \sum_{m=1}^{\infty} \exp^{-\beta^2 m^2 (t-r)} \right) \mathrm d\tau}^{u(t)}
@@ -133,13 +134,13 @@ Aussi l'algorithme de sélection\index{selection@sélection} présenté plus hau
     \item Au cours d'une première phase, chaque nœud évalue la valeur de son énergie résiduelle et la transmet au \ch;
     \item Le \ch écoute toutes les valeurs. Les autres nœuds enregistrent également les valeurs de leurs voisins;
     \item Tous les nœuds envoient au \CH la liste de leurs voisins directs (\textit{1-hop})\,\footnote{Nous supposons ici que les capteurs ne trichent pas durant cette étape. Ils pourraient en effet annoncer des voisins «virtuels» supplémentaires, pour faire croire qu'ils seront à portée d'un \cn, et ainsi éviter d'être détecté si ce n'est pas le cas. Le \chapref{ea} présente des mécanismes de protection permettant de détecter ce type d'attaques.};
-    \item Le \CH sélectionne les $n$ \cns parmi les nœuds ayant le plus d'énergie résiduelle, de telle façon que ces $n$ nœuds couvrent tous les autres nœuds en terme de portée;
+    \item Le \CH sélectionne les $n$ \cns parmi les nœuds ayant le plus d'énergie résiduelle, de telle façon que ces $n$ nœuds couvrent tous les autres capteurs par leur portée d'émission;
     \item Au besoin (si $n$ est trop bas), le \CH sélectionne des \cns supplémentaires de façon à ce qu'ils couvrent l'intégralité du cluster;
     \item Le \CH envoie un message aux nœuds sélectionnés pour leur notifier leur rôle de \cn.
 \end{enumerate}
 
-Il est intéressant de noter que certains algorithmes de clusterisation\index{clusterisation!protocole de clusterisation} (\heed~\cite{YF04} par exemple) utilisent d'autres mécanismes de sélection basés sur l'énergie résiduelle\index{selection@sélection!sélection selon l'énergie résiduelle} des nœuds ---~pour choisir des \chs, mais qui pourraient être transposer à la sélection\index{selection@sélection} des \cns.
-Nous ne souhaitons pas utiliser dans ce chapitre de telles solutions qui n'utilisent l'énergie que comme l'un des paramètres pris en compte, et reposent donc sur la \idx{confiance} vis à vis des nœuds qui calculent leur score propre.
+Il est intéressant de noter que certains algorithmes de clusterisation\index{clusterisation!protocole de clusterisation} (\heed~\cite{YF04} par exemple) utilisent d'autres mécanismes de sélection basés sur l'énergie résiduelle\index{selection@sélection!sélection selon l'énergie résiduelle} des nœuds ---~pour choisir des \chs, mais qui pourraient être transposés à la sélection\index{selection@sélection} des \cns.
+Nous ne souhaitons pas utiliser dans ce chapitre de telles solutions qui n'utilisent l'énergie que comme l'un des paramètres pris en compte, et reposent donc sur la \idx{confiance} vis-à-vis des nœuds qui calculent leur score propre.
 Au contraire, nous préférons obtenir l'énergie annoncée par les nœuds pour la comparer au modèle théorique, et permettre ainsi aux \vns de veiller à la \secu du processus.
 
     \subsection{Observations}

@@ -28,7 +28,7 @@ Les opérations menées à cette fin peuvent comprendre:
 \begin{itemize}
     \item la vérification de l'\integrite du système (par exemple en calculant périodiquement un \idx{condensat} des fichiers exécutables critiques, afin de les comparer avec le \idx{condensat} de leur version d'origine);
     \item la surveillance des journaux concernant les tentatives de connexion, afin de détecter des échecs répétitifs d'accès au système;
-    \item la détection d'une activité inhabituelle au niveau de l'activité du processeur, des allocations mémoires, ou des entrées sorties, qui risqueraient de pénaliser le système d'exploitation en termes de performance et de consommation énergétiques. Cette surveillance peut être menée en temps réel, ou via la journalisation des évènements système.
+    \item la détection d'une activité inhabituelle au niveau de l'activité du processeur, des allocations mémoires, ou des entrées sorties, qui risqueraient de pénaliser le système d'exploitation en matière de performances et de consommation énergétique. Cette surveillance peut être menée en temps réel, ou via la journalisation des évènements système.
 \end{itemize}
 On parle en anglais de NIDS\index{système de détection d'intrusion!NIDS} (\textit{Network Intrusion Detection System}) ou de HIDS\index{système de détection d'intrusion!HIDS} (\textit{Host based Intrusion Detection System}) pour les \IDS orientés réseau ou machine, respectivement.
 De nombreux \IDS cumulent à la fois des mécanismes de surveillance du réseau et du comportement de leurs voisins, et une surveillance des évènements système survenant sur leur hôte~\cite{BMS13}.
@@ -157,7 +157,7 @@ Le système dans son ensemble est finalement proche des mécanismes que nous uti
 Notre système en question repose sur les travaux de \textsc{Lai} et \textsc{Chen}, qui ont proposé en 2008 une solution proche mais dont seuls certains capteurs effectuent des opérations de surveillance~\cite{LC08}.
 Ces nœuds de contrôle, appelés \textit{gNodes}\index{gNodes@\textit{gNodes}} (pour \textit{guarding nodes}) par leurs auteurs, sont sélectionnés au sein du cluster pour effectuer les opérations de surveillance, permettant ainsi aux autres nœuds d'économiser d'autant en énergie.
 Lorsque le \ch reçoit plusieurs rapports de la part de \textit{gNodes}\index{gNodes@\textit{gNodes}} distincts (ceci afin de limiter les cas de faux positifs), le \CH en vient à considérer le capteur dénoncé comme étant corrompu et prend des mesures en conséquence.
-Bien que les simulations menées fournissent de bons résultats en termes de préservation des ressources, l'étude ne se penche pas sur le processus utilisé pour la désignation des nœuds de contrôle, et ne traite pas de leur \idx{renouvellement} dans le temps, ce qui fait que les même capteurs supportent la tâche de surveillance sur de longues durées.
+Bien que les simulations menées fournissent de bons résultats quant à la préservation des ressources, l'étude ne se penche pas sur le processus utilisé pour la désignation des nœuds de contrôle, et ne traite pas de leur \idx{renouvellement} dans le temps, ce qui fait que les même capteurs supportent la tâche de surveillance sur de longues durées.
 
 C'est sur ces points que se concentrent la majeure partie des travaux présentés dans cet ouvrage: les \cns que nous utilisons ne sont qu'une version renommée des \textit{gNodes}\index{gNodes@\textit{gNodes}}, pour lesquels a été proposé dans un premier temps un \idx{renouvellement} périodique~\cite{GMT12}.
 Nous nous attachons, dans le choix des nœuds de surveillance, à répartir au mieux la consommation énergétique dans le cluster; d'autres études cherchent à désigner ces nœuds de manière à obtenir la meilleure couverture possible, et à maximiser les chances de détection des nœuds compromis à l'aide d'heuristiques pour le placement de l'\IDS~\cite{INK09}.
@@ -189,7 +189,7 @@ Il existe ainsi une proposition concernant l'usage d'agents mobiles\index{mobili
 Si des capteurs corrompus sont détectés et que leur état ne peut être immédiatement restauré (soit que l'opération soit impossible, soit que l'agent mobile\index{mobilité} reçoive l'alarme d'un autre capteur et n'ait pas encore eu le temps d'accéder au nœud affecté), ces agents permettent également de propager l'alerte dans le réseau.
 
 \bigskip
-Plusieurs études se proposent de résumer les avancées des solutions proposées en termes de \idss~\cite{ME13,MS14}, et fournissent de nombreux autres exemples de ces systèmes.
+Plusieurs études se proposent de résumer les avancées des solutions proposées en matière de \idss~\cite{ME13,MS14}, et fournissent de nombreux autres exemples de ces systèmes.
 Les travaux de synthèse récents de \textsc{Butun, Morgera} et \textsc{Sankar}, qui classent et détaillent les \IDS pour \manet et \rcsfs~\cite{BMS13} sont notamment très complets.
 Et parce qu'aucun système \IDS n'est parfait, on trouve même des travaux réalisés sur les limites de certaines méthodes de détection et des mécanismes de \idx{confiance} (que nous verrons plus bas), assorties de mesures permettant d'améliorer l'efficacité de ces méthodes~\cite{CQW12}.
 %2}}}

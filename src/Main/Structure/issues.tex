@@ -11,8 +11,8 @@ Elles ont rendu possible, à force de miniaturisation et de réduction des couts
 
         \subsubsection{Des algorithmes à adapter}
 %{{{2
-Les algorithmes et protocoles déployés dans les \rcs doivent être peu exigeants en terme de calculs.
-Il est même possible de réduire les calculs en amont, en sélectionnant judicieusement les échantillons de donner à mesurer puis à analyser, pour éviter des calculs superflus; les algorithmes de traitement, d'\idx{agrégation} de données, doivent également être pensés pour les capteurs~\cite{ACFP09},
+Les algorithmes et protocoles déployés dans les \rcs doivent être peu exigeants en matière de calculs.
+Il est même possible de réduire les calculs en amont, en sélectionnant judicieusement les échantillons de donner à mesurer puis à analyser, pour éviter des calculs superflus; les algorithmes de traitement, d'\idx{agrégation} de données, doivent également être pensés pour les capteurs~\cite{ACFP09}.
 
 Les mécanismes cryptographiques\index{cryptographie} par exemple, souvent déployés pour des raisons de \secu (et qui seront abordés plus en détail en \chapref{ea}), produisent par nature un grand nombre de calculs: les versions les plus complexes ne peuvent pas toujours être implémentées sur les réseaux de capteurs.
 Le choix des algorithmes à utiliser~\cite{LDH06} en fonction de la mémoire ou de la vitesse du processeur disponibles et du niveau de \secu requis, leur optimisation (et la création de nouveaux algorithmes)~\cite{GNL12} aussi bien que leur impact sur la durée de vie des réseaux de capteurs~\cite{PLP06} ont donc fait l'objet de plusieurs études.
@@ -127,7 +127,7 @@ Chaque ronde $r$ est organisée de la façon suivante:
     \item Les \CHs auto-désignés informent leurs nœuds voisins de leur changement de statut à l'aide de messages en diffusion générale (\textit{broadcast}).
         Tous ces messages sont envoyés en utilisant la même puissance de transmission (valeur fixe et prédéterminée lors de l'implémentation).
         Pour limiter les collisions\index{collision}, il est fait usage sur la couche \mac de la méthode \textit{Carrier Sense Multiple Access} (\csma).
-    \item Les autres nœuds, qui ne se sont pas désignés en tant que \chs pour la ronde en cours, choisissent de se joindre au cluster du \CH dont ils perçoivent le signal avec l'intensité la plus élevée, \cad le \CH le plus proche en termes de puissance du signal électromagnétique.
+    \item Les autres nœuds, qui ne se sont pas désignés en tant que \chs pour la ronde en cours, choisissent de se joindre au cluster du \CH dont ils perçoivent le signal avec l'intensité la plus élevée, \cad le \CH le plus proche quant à la puissance du signal électromagnétique reçu.
         Chaque nœud prévient le \ch qu'il décide de rejoindre en lui envoyant un message.
         La méthode \csma est là encore appliquée.
     \item Au vu des réponses reçues, chaque \ch calcule un «ordre de transmission» pour les nœuds qui l'ont rejoint.
@@ -244,7 +244,7 @@ La \idx{sureté} et la \resilience des réseaux ne sont pas des problématiques 
         \subsubsection{Sécurité\index{securité@sécurité}}
 %{{{2
 En raison de leurs faibles capacités, conjuguées aux domaines critiques dans lesquels ils interviennent parfois, les capteurs peuvent présenter des cibles de choix pour un attaquant.
-Les algorithmes et mécanismes classiques utilisés en \idx{cryptographie} afin d'assurer la \idx{confidentialité} ou l'\idx{authentification} des données sont souvent très exigeants en ressources (en termes de calculs notamment, et donc de consommation énergétique).
+Les algorithmes et mécanismes classiques utilisés en \idx{cryptographie} afin d'assurer la \idx{confidentialité} ou l'\idx{authentification} des données sont souvent très exigeants en ressources (pour ce qui est des calculs notamment, et donc de la consommation énergétique).
 Il a fallu adapter ces mécanismes aux capteurs.
 
 D'autres attaques peuvent être menées, non plus pour intercepter des données, mais dans le but de perturber le bon fonctionnement du réseau.

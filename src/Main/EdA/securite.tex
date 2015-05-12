@@ -53,7 +53,7 @@ Idéalement, pour des \rcs, ces algorithmes doivent être implémentés de telle
 Les mécanismes généralement impliqués tiennent bien sûr du domaine de la \idx{cryptographie}, et doivent être intégrés aux protocoles de \secu utilisés~\cite{DSK10}.
 
 Les algorithmes de \idx{chiffrement} nécessitent en général de nombreux calculs, voire beaucoup de mémoire tampon, pour être mis en œuvre, surtout lorsque l'appareil ne dispose pas de matériel dédié~\cite{PLP06}, ce qui les rend parfois peu adaptés aux \rcs.
-Qui plus est, ils requièrent la plupart du temps la mise en place d'une architecture d'échange et de gestion du matériel cryptographique\index{cryptographie}, notamment en ce qui concerne les échanges de clés: cette architecture peut considérablement alourdir la structure du réseau ainsi que les échanges en termes de volume de données de contrôle.
+Qui plus est, ils requièrent la plupart du temps la mise en place d'une architecture d'échange et de gestion du matériel cryptographique\index{cryptographie}, notamment en ce qui concerne les échanges de clés: cette architecture peut considérablement alourdir la structure du réseau ainsi que les échanges en matière de volume de données de contrôle.
 Plusieurs solutions adaptées aux capacités limitées des capteurs ont donc été proposées~\cite{OX09}.
 Certaines d'entre elles demeurent basées sur des suites de protocoles dont les algorithmes de \idx{chiffrement} sont choisis au mieux pour répondre aux capacités des capteurs~\cite{SOBMCN11,KR12}; ces solutions couvrent le plus souvent d'autres problématiques que la seule \idx{confidentialité} des données, et certaines seront présentées dans la sous-section suivante.
 D'autres consistent à proposer de nouveaux algorithmes de \idx{chiffrement} spécialement adaptés, tels que les blocs KLEIN~\cite{GNL12}.
@@ -66,7 +66,7 @@ Un usage intéressant de la \idx{cryptographie} est le recours au chiffrement di
 Proposés pour les \rcs~\cite{BBTY14}, ces algorithmes permettent de procéder, dans une certaine mesure, à des opérations de \idx{compression} et d'\idx{agrégation} de données (par exemple) au cours du trajet d'un paquet, sans avoir à déchiffrer puis chiffrer à nouveau son contenu à chaque étape.
 
 À part les solutions de \idx{chiffrement}, d'autres méthodes consistent plus simplement à compliquer l'accès aux paquets plutôt qu'à chiffrer le contenu.
-Moins robustes, ces solutions sont aussi moins couteuses en termes de calculs et, \infine, de consommation énergétique.
+Moins robustes, ces solutions sont aussi moins couteuses pour ce qui concerne les calculs et, \infine, la consommation énergétique.
 Certaines méthodes proposent ainsi de découper les paquets à envoyer en fragments, qui seront injectés à travers le réseau par des routes\index{routage!route} distinctes.
 Ces fragments seront combinés de telle sorte que seule la détention d'un certain nombre d'entre eux permette de reconstituer le message original.
 Cette combinaison des fragments peut faire appel à des mécanismes très simples, par exemple un «ou exclusif» logique comme avec la méthode SDMP (\textit{Securing Data based on Multi-Path routing})~\cite{BM10}, ou bien à un mécanisme un peu plus élaboré de \idx{partage de secret} entre plusieurs entités, comme l'a proposé par exemple \textsc{Schamir}~\cite{Sha79}.
@@ -129,7 +129,7 @@ Le protocole MSQPS (\textit{Modified Secured Query Processing Scheme})~\cite{GD1
 De manière générale, les problèmes d'\idx{authentification}, et dans une moindre mesure les autres problématiques soulevées dans cette sous-section, ont mené à la proposition de nombreuses architectures dédiées.
 
     \subsubsection{Architectures de sécurité}\label{ea:sss:archi}
-Dans cet ouvrage, une «\idx{architecture de sécurité}» désigne un ensemble de protocoles et de mécanismes déployés dans le réseau en vue d'apporter certaines garanties en termes de \secu.
+Dans cet ouvrage, une «\idx{architecture de sécurité}» désigne un ensemble de protocoles et de mécanismes déployés dans le réseau en vue d'apporter certaines garanties en matière de \secu.
 L'équivalent anglais serait \textit{security framework}.
 Les solutions proposées sont multiples~\cite{HI12,GWZC13,SS14-rev}; nous allons présenter ici les plus connues.
 
@@ -231,7 +231,7 @@ Seconde remarque: dans la littérature, plusieurs des mécanismes introduits dan
 Par exemple, il existe une proposition concernant la combinaison de signatures\index{signature} numériques (cryptographie asymétrique)\index{cryptographie!cryptographie asymétrique}, du bloc \idx{$\mu$TESLA} (asymétrie temporelle) introduit avec \idx{SPINS} mais sans reprendre \idx{SNEP}, et d'un filtre de \textsc{Bloom} pour créer un mécanisme d'\textit{Information Asymmetry}, qui assure des diffusions générales (\textit{broadcast}) authentifiées~\cite{SLS10}.
 Le filtre de \textsc{Bloom} est utilisé pour condenser plusieurs codes d'authentification de messages (\macc), qui sont ajoutés aux paquets pour l'\idx{authentification} des transmissions par les nœuds.
 Plusieurs codes sont vérifiés par chaque nœud, qui possède son propre sous-ensemble de clés, de sorte que si certaines clés ont été compromises, il en reste d'autres à vérifier.
-Le bloc \idx{$\mu$TESLA} en particulier est par ailleurs repris dans de nombreuses propositions, notamment avec le protocole \idx{SecLEACH} qui l'introduit dans un réseau clusterisé de façon hiérarchique pour combler certains manques de l'algorithme \leach en termes de \secu~\cite{OFVWBDL07}.
+Le bloc \idx{$\mu$TESLA} en particulier est par ailleurs repris dans de nombreuses propositions, notamment avec le protocole \idx{SecLEACH} qui l'introduit dans un réseau clusterisé de façon hiérarchique pour combler certains manques de l'algorithme \leach en matière de \secu~\cite{OFVWBDL07}.
 \nomenclature{SecLEACH}{\textit{Secure LEACH}}
 
 À noter enfin que les architectures \idx{LEAP} et \idx{TinyKey} ont été analysées à l'aide d'un outil de \modelchecking appelé AVISPA, spécifiquement conçu pour vérifier les protocoles de \secu~\cite{TCCDC09}.
@@ -242,7 +242,7 @@ L'accès au réseau pour un attaquant peut passer par la compromission de l'un d
 Dans le pire des cas, tout le système peut être modifié et détourné de son but d'origine, pour mener d'autres attaques par la suite, tandis que la mémoire, et notamment le matériel cryptographique embarqué\index{cryptographie}, peuvent être entièrement analysés.
 
 Les systèmes d'exploitation utilisés par les capteurs sont généralement conçus pour être légers et s'adapter aux contraintes des capteurs.
-Mais ils ne rajoutent pas de problématiques particulières en termes de sécurité système\index{securité@sécurité!sécurité système} par rapport à d'autres machines, et le peu de fonctionnalités dont ils disposent joue plutôt en leur faveur pour ce qui est de la sécurité logicielle\index{securité@sécurité!sécurité logicielle}.
+Mais ils ne rajoutent pas de problématiques particulières en matière de sécurité système\index{securité@sécurité!sécurité système} par rapport à d'autres machines, et le peu de fonctionnalités dont ils disposent joue plutôt en leur faveur pour ce qui est de la sécurité logicielle\index{securité@sécurité!sécurité logicielle}.
 Leur faiblesse réside donc dans leur déploiement en milieu ouvert et potentiellement hostile, ce qui peut permettre aux attaquants d'y accéder physiquement et de manière prolongée.
 
 L'une des solutions proposées consiste donc à considérer un nœud comme ayant épuisé sa batterie s'il ne répond plus pendant une période prolongée; si en revanche le capteur redevient actif par la suite, on suppose que son absence était due à son extraction du réseau par un attaquant, et le capteur est alors considéré comme compromis~\cite{Ho10}.
