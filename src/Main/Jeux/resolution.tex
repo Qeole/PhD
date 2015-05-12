@@ -175,11 +175,11 @@ Ces jeux ont une solution simple, dans le sens où:
 \begin{itemize}
     \item l'un des joueurs\index{joueur} a une stratégie gagnante\index{stratégie!stratégie gagnante};
     \item si une stratégie gagnante\index{stratégie!stratégie gagnante} existe, alors il en existe une qui repose sur une mémoire finie;
-    \item déterminer quel sera le \idx{joueur} vainqueur peur être réalisé en $\NP\cap \coNP$~\cite{zwick96}.
+    \item déterminer quel sera le \idx{joueur} vainqueur peut être réalisé en $\NP\cap \coNP$~\cite{zwick96}.
 \end{itemize}
 De plus, il a été prouvé~\cite{velner12a} qu'une mémoire finie est suffisante pour gagner sur une \idx{conjonction} de contraintes sur l'énergie.
 Le cas des conjonctions\index{conjonction} de contraintes sur le \idx{gain} a lui aussi fait l'objet d'études dans~\cite{velner12a}, où les stratégies sans mémoire\index{stratégie!stratégie sans mémoire} pour chaque condition sur le \idx{gain} sont combinées en stratégies à mémoire infinie\index{stratégie!stratégie à mémoire infinie} pour l'objectif global.
-Par exemple, lorsque le gain moyen\index{gain!gain moyen} des défini par la limite supérieur du \idx{gain}, chaque stratégie\index{stratégie} peut être jouée au cours de phases de durée croissante jusqu'à atteindre (ou à s'approcher aussi près que nécessaire de) la valeur désirée.
+Par exemple, lorsque le gain moyen\index{gain!gain moyen} est défini par la limite supérieur du \idx{gain}, chaque stratégie\index{stratégie} peut être jouée au cours de phases de durée croissante jusqu'à atteindre (ou à s'approcher aussi près que nécessaire de) la valeur désirée.
 
 Par conséquent nous allons nous concentrer ici sur l'association d'objectifs portant à la fois sur l'énergie et sur le gain moyen\index{gain!gain moyen}.
 Il est bon de noter avant tout que si l'objectif du nœud compromis est une \idx{conjonction} de littéraux, et que l'un deux ne peut être réalisé, il est évident que le jeu ne peut être remporté.
@@ -228,7 +228,7 @@ Par définition d'un attracteur, on a alors $q \in \attractor{j}(\Q)$, et on en 
 
 \subsubsection{Conjonction d'un objectif de \idx{gain} et d'un objectif d'énergie}
 
-Dans ce premier exemple simple, nous étudions les objectifs, pour le \jo, de la forme $p_e \geq c_e \wedge p_v \geq c_v$, où $p_e$ et $p_v$ sont le niveau d'énergie et la valeur du gain moyen\index{gain!gain moyen} accumulé par le \jo, et avec $c_e, c_v \in \N$.
+Dans ce premier exemple simple, nous étudions les objectifs, pour le \jo, de la forme $p_e \geq c_e \wedge p_v \geq c_v$, où $p_e$ et $p_v$ sont le niveau d'énergie et la valeur du gain moyen\index{gain!gain moyen} accumulés par le \jo, et avec $c_e, c_v \in \N$.
 De tels objectifs se traduisent par le besoin d'atteindre une certaine valeur de \idx{gain} tandis que le niveau d'énergie demeure supérieur à une limite donnée.
 Un \idx{comportement cupide} est une illustration simple d'un objectif de ce type: le nœud compromis cherche à rester «en vie» (donc à vérifier à tout instant $p_e \geq 1$) tout en émettant au moins un message toutes les 6~étapes ($p_v \geq \frac1{6}$, mais comme nous l'avons remarqué plus haut, il est possible d'obtenir un seuil à valeur entière en multipliant tous les poids de la composante par~6).
 
@@ -343,7 +343,7 @@ En revanche, si seulement $m$ états de mémoire sont autorisés, la meilleure v
 Ainsi, avec une mémoire finie, non seulement le gain moyen\index{gain!gain moyen} optimal ne peut pas être atteint, mais on constate de plus que l'allocation de davantage de mémoire permet d'atteindre une meilleure valeur de gain moyen\index{gain!gain moyen}.
 \end{remark}
 
-Résoudre le jeu en supposant que le \jo a une mémoire finie limitée à un nombre $k$ d'unités fourni en entrée revient à deviner sa stratégie\index{stratégie} sous forme de machine de \textsc{Mealy}, ce qui constitue un objet de taille exponentielle si $k$ est fournie sous forme binaire.
+Résoudre le jeu en supposant que le \jo a une mémoire finie limitée à un nombre $k$ d'unités fourni en entrée revient à deviner sa stratégie\index{stratégie} sous forme de machine de \textsc{Mealy}, ce qui constitue un objet de taille exponentielle si $k$ est fourni sous forme binaire.
 La machine est alors synchronisée avec le jeu, et retourne un second jeu à un seul \idx{joueur}, à faire jouer par le \ji.
 Dans ce second jeu, seules les stratégies sans mémoire\index{stratégie!stratégie sans mémoire} doivent êtres prises en compte.
 
@@ -364,4 +364,4 @@ La résolution sur le segment positif est toutefois un cas intéressant, qui per
 Les travaux menés à ce jour sur cette modélisation du réseau sous forme de jeux quantitatifs\index{jeu!jeu quantitatif} s'arrête ici.
 Nous envisageons de poursuivre leur étude afin de pouvoir, à terme, obtenir des jeux\index{jeu}, des conditions de victoire et des résolutions suffisamment poussés pour nous permettre d'établir de nouvelles méthodes de détection ou de prévention des attaques par \dds dans le réseau, en forçant un nœud compromis à coopérer avec les capteurs alentour sous peine de perdre la partie.
 
-Avec ce chapitre se referme les aspects techniques présentés dans cet ouvrage; il ne nous reste plus à présent qu'à tirer les conclusions des travaux présentés, et à introduire les perspectives envisagées pour la suite des recherches.
+Avec ce chapitre se referment les aspects techniques présentés dans cet ouvrage; il ne nous reste plus à présent qu'à tirer les conclusions des travaux présentés, et à introduire les perspectives envisagées pour la suite des recherches.

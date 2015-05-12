@@ -1,8 +1,8 @@
 % vim: set spelllang=fr foldmethod=marker:
 \vfill
-\lettrineh{T}{rois processus différents} ont été présentés, dans les chapitres précédents, pour le renouvellement de \cns afin d'assurer la détection des attaques dans un \rcsfs.
+\lettrineh{T}{rois processus différents} ont été présentés, dans les chapitres précédents, pour le renouvellement de \cns afin d'assurer la détection des attaques dans un \rcsf.
 En quelque sorte, ils ont été conçus de façon «incrémentale»: simple sélection aléatoire\index{selection@sélection!sélection aléatoire} tout d'abord, qui pour améliorer l'équilibre de la consommation dans le réseau laisse place à la sélection selon l'énergie résiduelle\index{selection@sélection!sélection selon l'énergie résiduelle}; à son tour celle-ci présente des défauts, que nous avons voulu corriger avec le processus d'\elecdem.
-Lorsque nous en avons eu l'occasion, nous avons utilisé des outils de \idx{modélisation} pour mettre en forme ces systèmes sous un aspect plus formel, et pour pouvoir et extraire certaines propriétés.
+Lorsque nous en avons eu l'occasion, nous avons utilisé des outils de \idx{modélisation} pour mettre en forme ces systèmes sous un aspect plus formel, et pour pouvoir en extraire certaines propriétés.
 
 Dans ce chapitre, c'est la démarche inverse qui est mise en œuvre.
 Sans aller jusqu'à proposer un nouveau processus de sélection\index{selection@sélection}, nous avons souhaité modéliser le système en amont, afin de pouvoir, dans de futurs travaux, construire des protocoles efficaces à partir de l'architecture formelle obtenue.
@@ -17,7 +17,7 @@ Après une brève introduction à l'application de la \idx{théorie des jeux} da
 Nous avons évoqué la \idx{théorie des jeux} au \chapref{ea}, en nommant certains outils de \idx{modélisation} utilisés pour implémenter les méthodes de détection d'intrusion.
 Il semble utile à ce stade de fournir davantage d'éléments sur les liens qui rattachent cet outil à la \secu des \rcsfs.
 
-La \idx{théorie des jeux} est un ensemble d'outils permettant l'analyse de situations donnés, les «jeux»\index{jeu}, où les décisions prises par chaque entité (ou «joueur»)\index{joueur} se basent sur l'anticipation des décisions des autres joueurs\index{joueur}.
+La \idx{théorie des jeux} est un ensemble d'outils permettant l'analyse de situations données, les «jeux»\index{jeu}, où les décisions prises par chaque entité (ou «joueur»)\index{joueur} se basent sur l'anticipation des décisions des autres joueurs\index{joueur}.
 Ces outils servent dans un premier temps à modéliser le \idx{jeu} étudié, et consistent ensuite à résoudre des problèmes tels que la recherche d'équilibres ou de solutions optimales dans le \idx{jeu}.
 La \idx{théorie des jeux} est très fréquemment utilisée en économie.
 Elle intervient aussi régulièrement en politique, en biologie ou même en philosophie.
@@ -47,7 +47,7 @@ Ces jeux\index{jeu} sont donc employés pour créer des \idss génériques basé
 
 \subsection{Jeux quantitatifs\index{jeu!jeu quantitatif}, tours de jeux\index{jeu}}
 
-Notre approche est différente, dans le sens où l'arrêt potentiel (dû à l'épuisement de la batterie) est inclus dans les contraintes du \idx{jeu}, en parallèle aux valeurs de \idx{gain}.
+Notre approche se distingue des travaux existants, dans le sens où l'arrêt potentiel (dû à l'épuisement de la batterie) est inclus dans les contraintes du \idx{jeu}, en parallèle aux valeurs de \idx{gain}.
 Pour autant que nous sachions, les travaux portant sur des configurations\index{jeu!configuration} similaires considèrent toutes les dimensions comme étant soit liées à l'énergie, soit au \idx{gain}, et traitent uniquement des conjonctions\index{conjonction} d'atomes~\cite{chatterjee12,velner12a}.
 Dans de tels cas, les algorithmes sont établis sur une même structure: l'objectif du \idx{jeu} est décomposé selon les dimensions établies, et l'on cherche pour chacune de ces dimensions une stratégie gagnante\index{stratégie!stratégie gagnante} à mémoire finie\index{stratégie!stratégie à mémoire finie}.
 Ces stratégies\index{stratégie} sont ensuite combinées pour obtenir une stratégie\index{stratégie} globale pour le problème, qui elle peut éventuellement nécessiter une mémoire infinie\index{stratégie!stratégie à mémoire infinie}.
