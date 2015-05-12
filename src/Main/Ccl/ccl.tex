@@ -48,7 +48,7 @@ Mais il reste un second problème: un capteur compromis peut cette fois-ci jouer
 Pour parer cette faille potentielle, chaque \cnt est entouré d'un ou de plusieurs «\vnst», chargés de l'interroger régulièrement sur son énergie résiduelle et de comparer ses réponses avec un modèle théorique de consommation, le tout afin de détecter les tentatives de fraude.
 Ce second rôle vient charger la méthode en complexité d'implémentation, ainsi qu'en volume de données de contrôle nécessaire: la consommation en énergie est effectivement mieux répartie, cependant elle est aussi plus élevée.
 
-Aussi avons-nous été amenés à apporter une troisième contribution, toujours orientée à la fois vers l'équilibre de la consommation et vers la sécurité du processus.
+Aussi avons-nous été amenés à proposer une troisième contribution, toujours orientée à la fois vers l'équilibre de la consommation et vers la sécurité du processus.
 Ce troisième mécanisme de renouvellement est un processus d'élection démocratique, au cours duquel ce sont les nœuds du cluster qui votent auprès de leur cluster head afin de déterminer quels seront les \cnst.
 Tous les capteurs votent pour la première sélection, qui survient à la suite d'une période initiale où tous demeurent à l'écoute du trafic.
 Puis ce sont les \cnst d'une phase donnée qui votent pour leurs successeurs, au vu des conditions de trafic observées pendant leur «mandat».
@@ -133,8 +133,8 @@ Les automates temporels sont l'une des pistes envisageables à ce sujet.
 Les réseaux d'automates stochastiques en constituent une seconde: leur gestion efficace des évènements synchronisés pourrait leur donner un avantage conséquent, dans le contexte étudié, par rapport aux chaines de \textsc{Markov}, qui présentent des faiblesses sur ce point particulier.
 
         \vspace{-1em}
-        \subparagraph{Approfondissement des modèles actuels}
-Enfin le modèle utilisant les jeux quantitatifs constitue une base de travail intéressante que nous aimerions affiner, dans le but d'améliorer le mécanisme de détection lui-même, par exemple en parvenant à exprimer des contraintes encore plus fortes qui forceraient les nœuds compromis à coopérer sous peine d'être immédiatement détectés.
+        \subparagraph{Approfondissement des modèles développés}
+Enfin, le modèle utilisant les jeux quantitatifs constitue une base de travail intéressante que nous aimerions affiner, dans le but d'améliorer le mécanisme de détection lui-même, par exemple en parvenant à exprimer des contraintes encore plus fortes qui forceraient les nœuds compromis à coopérer sous peine d'être immédiatement détectés.
 
     \vspace{1em}
     \paragraph{}
