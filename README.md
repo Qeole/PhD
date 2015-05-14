@@ -18,20 +18,20 @@ XeLaTeX requis. Biber requis. De mémoire, il est possible qu'il y ait des souci
 
 _XeLaTeX required. Biber required. There may be issues for Biber versions lower than 1.9._
 
-Instructions:
+Instructions (UNIX):
 ```bash
-git clone https://github.com/Qeole/PhD.git QeolePhD
-cd QeolePhD/src
+$ git clone https://github.com/Qeole/PhD.git QeolePhD
+$ cd QeolePhD/src
 
-xelatex master.tex
+$ xelatex master.tex
 
-biber   master.bcf
-makeindex -s style.ist   master.idx
-makeindex -s nomencl.ist master.nlo -o master.nls
+$ biber   master.bcf
+$ makeindex -s style.ist   master.idx
+$ makeindex -s nomencl.ist master.nlo -o master.nls
 
-xelatex master.tex
-xelatex master.tex
-xelatex master.tex
+$ xelatex master.tex
+$ xelatex master.tex
+$ xelatex master.tex
 ```
 
 J'ai utilisé l'outil d'automatisation Waf pour la compilation (d'où les fichiers `wscript` et `waf-1.7.16/waflib/Tools/tex.py`), lui même appelé depuis le fichier `recomp` à chaque enregistrement d'un fichier source.
