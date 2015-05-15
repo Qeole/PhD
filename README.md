@@ -58,6 +58,8 @@ Figures 7.4 to 7.7: [Mathieu SASSOLAS][3] © 2014_
 
 _Those illustrations are subject to the copyright of their respective author._
 
+_File `laclthesis.cls` was derived from the standard LaTeX class `book.cls` and is released under the [LaTeX Project Public License (version 1.3c)][1]._
+
 _The remainder of this document and its sources is licenced under a [Creative Commons Zero 1.0 Universal License](https://creativecommons.org/publicdomain/zero/1.0) (Public Domain Dedication)._
 
 [1]: http://www.latex-project.org/lppl.txt
