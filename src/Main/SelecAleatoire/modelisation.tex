@@ -93,15 +93,15 @@ Nous allons ainsi nous orienter vers des processus non-markoviens, qui ne prése
     \subsection{Réseaux de \textsc{Petri}}
 
 Une autre représentation possible du système passe ainsi par l'utilisation de processus stochastiques à évènements discrets (PSED, en anglais \textit{Discrete-Event Stochastic Processes}, ou encore \textit{Generalized Semi-\textsc{Markov} Processes} pour «processus semi-markoviens généralisés»).
-Leur avantage principal sur les processus de \textsc{Markov} est leur capacité à représenter des événements dont la distribution n'est pas nécessairement exponentielle.
+Leur avantage principal sur les processus de \textsc{Markov} est leur capacité à représenter des évènements dont la distribution n'est pas nécessairement exponentielle.
 Plus particulièrement, nous allons utiliser des réseaux de \textsc{Petri} stochastiques généralisés étendus.
-\nomenclature{PSED}{Processus Stochastiques à Événements Discrets}
+\nomenclature{PSED}{Processus Stochastiques à Évènements Discrets}
 
         \subsubsection{Réseaux de \textsc{Petri} stochastiques généralisés étendus}
 \label{sa:subsubsec:presRPSGe}
 Les réseaux de \textsc{Petri} stochastiques généralisés (\rpsg) forment une classe de réseaux de \textsc{Petri} destinée à modéliser des processus stochastiques.
 Leur version étendue (\rpsge) permet de représenter des transitions dont les délais sont distribués de façon quelconque~\cite{ABCDF95}.
-Il s'agit d'un langage de haut niveau permettant de représenter des processus stochastiques à événements discrets, qui au contraire des processus markoviens «classiques» ne sont pas limités à la représentation d'événements à distribution exponentielle.
+Il s'agit d'un langage de haut niveau permettant de représenter des processus stochastiques à évènements discrets, qui au contraire des processus markoviens «classiques» ne sont pas limités à la représentation d'évènements à distribution exponentielle.
 \rpsge reprend, à quelques différences près, les définitions, la syntaxe et la représentation graphique des réseaux de \textsc{Petri} classiques, enrichis par des propriétés supplémentaires portant sur les transitions.
 Ces dernières sont dites soit \textit{immédiates}, soit \textit{minutées}.
 Elles sont de plus caractérisées par les éléments suivants:
@@ -142,7 +142,7 @@ Le comportement des capteurs basiques (qui poursuivent simplement leur mission d
 Ce comportement est modélisé par le \rpsg présenté en \figref{sa:fig:snodegspn}.
 Le nœud y est symbolisé par les pointillés bleus.
 Dans ce nœud $i$ se trouve une unique transition \textsf{TX}, sans place en entrée, autrement dit: toujours active.
-Elle est minutée, avec une distribution exponentielle de paramètre $\lambda_i$: chaque événement correspond à l'envoi de jetons sur tous ses arcs sortants.
+Elle est minutée, avec une distribution exponentielle de paramètre $\lambda_i$: chaque évènement correspond à l'envoi de jetons sur tous ses arcs sortants.
 Ces arcs sont rattachés à la place \textsf{InBuff$_{j}$}\,\footnote{Pour \textit{in buffer}.} de chacun des nœuds voisins du nœud $i$ (on trouve donc autant d'arcs sortants que de nœuds voisins).
 L'intégralité de la fonction de mesure et d'envoi des données utiles du \rc peut être modélisée par plusieurs éléments représentés par ce «modèle de nœud».
 Un nœud compromis $c$ sera également représenté selon le même modèle, avec un paramètre $\lambda_c$ plus élevé que les autres $\lambda_i$.
@@ -253,8 +253,8 @@ Ceux-ci sont envoyés dans les places \textsf{cNode} des nœuds sélectionnés p
     \subsection{Logique stochastique avec automates hybrides}
 
         \subsubsection{Présentation de la logique stochastique avec automates hybrides}
-La logique stochastique avec automates hybrides (\lsah; \textit{Hybrid Automata Stochastic Logic} en anglais) est un langage récent, qui introduit une architecture regroupant des études de \modelchecking et d'évaluation des performances ainsi que de fiabilité sur des processus stochastiques à événements discrets (PSED) exprimés sous forme de réseaux de \textsc{Petri} stochastiques généralisés (\rpsg)~\cite{BDDHP11hasl}.
-Plus concrètement, à partir d'un modèle \rpsg, les mesures de performances sont exprimées à l'aide de formules \lsah avant que leur soit appliquées des fonctions de \modelchecking statique permettant de vérifier automatiquement ces formules.
+La logique stochastique avec automates hybrides (\lsah; \textit{Hybrid Automata Stochastic Logic} en anglais) est un langage récent, qui introduit une architecture regroupant des études de \modelchecking et d'évaluation des performances ainsi que de fiabilité sur des processus stochastiques à évènements discrets (PSED) exprimés sous forme de réseaux de \textsc{Petri} stochastiques généralisés (\rpsg)~\cite{BDDHP11hasl}.
+Plus concrètement, à partir d'un modèle \rpsg, les mesures de performances sont exprimées à l'aide de formules \lsah avant que leur soient appliquées des fonctions de \modelchecking statique permettant de vérifier automatiquement ces formules.
 %en place de vérifications, en termes d'études statistiques, de modèles stochastiques~\cite{BDDHP11hasl}.
 \nomenclature{LSAH}{Logique Stochastique avec Automates Hybrides}
 
@@ -386,8 +386,8 @@ Voici quelques exemples de formules \lsah permettant d'obtenir plusieurs valeurs
     \subsection{Amélioration de la solution}
 
 Le renouvellement périodique\index{renouvellement!renouvellement périodique} des nœuds de surveillance permet d'améliorer tout à la fois la détection des attaques et la répartition de la charge en énergie dans le cluster, comme le démontrent les valeurs obtenues par simulation.
-Suite aux résultats numériques, le système a été modélisé de plusieurs façons différentes: après avoir étudié les limites des processus markoviens, orientés vers la \idx{modélisation} d'événements à distribution exponentielle, nous avons présenté une autre évaluation formelle possible.
-Elle fait intervenir une version étendue des réseaux de \textsc{Petri}, dédiée à la représentation de toutes sortes de distributions événementielles, et permet la visualisation du modèle sous l'aspect classique des réseaux de \textsc{Petri}.
+Suite aux résultats numériques, le système a été modélisé de plusieurs façons différentes: après avoir étudié les limites des processus markoviens, orientés vers la \idx{modélisation} d'évènements à distribution exponentielle, nous avons présenté une autre évaluation formelle possible.
+Elle fait intervenir une version étendue des réseaux de \textsc{Petri}, dédiée à la représentation de toutes sortes de distributions évènementielles, et permet la visualisation du modèle sous l'aspect classique des réseaux de \textsc{Petri}.
 Elle est accompagnée d'une troisième méthode basée sur un langage récent, la logique stochastique avec automates hybrides, qui réutilise le modèle précédent pour permettre l'évaluation formelle des performances du système par le biais d'outils de \modelchecking.
 Toutes ont pour objectifs, d'une part, de modéliser notre solution afin d'en souligner les avantages et inconvénients; mais aussi, d'autre part, de présenter différents moyens existants d'employer les méthodes formelles en vue de modéliser des \rcs, et ce de façon plus générale que dans le seul contexte de la solution proposée.
 
