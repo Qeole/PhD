@@ -144,7 +144,7 @@ Un mécanisme souvent mis en place dans les \rcs est l'envoi de paquets de type 
 Un attaquant, s'il dispose d'une machine plus puissante que la moyenne des capteurs, peut forger et envoyer des paquets «hello-reply» avec une portée supérieure à celle des capteurs, pour leur faire enregistrer des voisins qui sont en réalité bien au-delà de leur portée d'émission, et désorganiser complètement le \idx{routage} de paquets dans le réseau~\cite{AD14}.
 
         \paragraph{Altération\index{altération} des données}
-Lorsqu'aucune vérification de l'\integrite des données n'est réalisée, un nœud relais corrompu peut, s'il a accès au contenu (en clair ou parce qu'il possède la clé pour déchiffrer), modifier ou retrancher des données du paquet à retransmettre~\cite{SZFDXC14}.
+Lorsqu'aucune vérification de l'\integrite des données n'est réalisée, un nœud relai corrompu peut, s'il a accès au contenu (en clair ou parce qu'il possède la clé pour déchiffrer), modifier ou retrancher des données du paquet à retransmettre~\cite{SZFDXC14}.
 Les données qui parviennent à l'exploitant du réseau sont alors erronées ou incomplètes.
 
         \paragraph{Attaque \idx{attaque Sybil}}
@@ -364,7 +364,7 @@ Elles peuvent être utilisées pour neutraliser la remontée d'informations, mai
 Les attaques portant sur l'\integrite des données sur les différentes couches semblent efficaces pour altérer\index{altération} les résultats perçus par l'exploitant.
 Il y a toutefois une limite relative à l'application pour laquelle le réseau a été déployé: si les résultats finaux sont similaires à des moyennes calculées sur toute la zone couverte par les capteurs, influer significativement sur cette moyenne va demander d'altérer\index{altération} un grand nombre de paquets.
 L'envoi de messages en déluge\index{deluge@déluge de paquets} pour augmenter artificiellement le nombre de valeurs et fausser les résultats ne semble pas très intéressant, car le procédé est extrêmement facile à détecter dès lors qu'un mécanisme d'\idx{authentification} a été mis en place et que l'attaquant ne peut pas masquer son identité.
-La modification\index{altération} des paquets peut être menée sur un grand nombre d'entre eux pour peu que le nœud compromis soit bien situé, \cad s'il s'agir d'un relais proche de la \sdb.
+La modification\index{altération} des paquets peut être menée sur un grand nombre d'entre eux pour peu que le nœud compromis soit bien situé, \cad s'il s'agir d'un relai proche de la \sdb.
 
         \paragraph{}
 Les attaques qui nous semblent les plus plausibles sont donc au final les suivantes:

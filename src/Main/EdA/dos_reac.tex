@@ -47,7 +47,7 @@ Le sigle FHSS est utilisé pour cette technique et provient de l'anglais \textit
 Des antennes directionnelles\index{antenne directionnelle} peuvent aussi permettre une meilleure qualité de signal, et rendent parfois possibles les communications au travers d'une tentative de \idx{brouillage}~\cite{PI11}.
 Enfin, si les nœuds sont mobiles\index{mobilité}, ils peuvent tenter de sortir de la zone affectée par les émissions de l'attaquant~\cite{PI11}.
 
-Lorsque toute une zone du réseau est sous l'effet d'une attaque de \idx{brouillage} et se retrouve coupée de la \sdb, une possibilité intéressante est d'établir un «trou de ver»\index{trou!trou de ver}, légitime cette fois-ci, entre un relais de la zone atteinte et un nœud extérieur, qui sert alors de passerelle vers le reste du réseau~\cite{CCH07}.
+Lorsque toute une zone du réseau est sous l'effet d'une attaque de \idx{brouillage} et se retrouve coupée de la \sdb, une possibilité intéressante est d'établir un «trou de ver»\index{trou!trou de ver}, légitime cette fois-ci, entre un relai de la zone atteinte et un nœud extérieur, qui sert alors de passerelle vers le reste du réseau~\cite{CCH07}.
 Ce tunnel permet de n'équiper qu'un sous-ensemble réduit de capteurs en matériel nécessaire pour contrer les attaques de \idx{brouillage} radio, et de compter sur eux pour établir la passerelle salvatrice.
 
 En dehors de ce tunnel, les dispositions évoquées jusque là pour échapper au \idx{brouillage} sont très couteuses pour des \rcs, car elles demandent un équipement ou bien une capacité de calcul conséquents.
@@ -85,7 +85,7 @@ Ainsi, il est tout à fait possible d'introduire un mécanisme basé sur la \idx
 Si les nœuds procèdent à une \election du \CH, ils vont alors prendre en compte différents paramètres (distances, réserves énergétiques\dots) pour déterminer leur vote, parmi lesquels le score de \reput de leurs voisins jouera un rôle prépondérant: ils ne vont pas voter pour un nœud qui est susceptible d'être compromis, mais au contraire pour ceux en lesquels ils ont le plus \idx{confiance}.
 
 Les mêmes décisions peuvent être appliquées à la création de routes\index{routage!route} pour la retransmission des paquets.
-Si un capteur a une mauvaise \reput, \cad s'il est peu fiable, par exemple parce qu'il a déjà perdu de nombreux messages, mieux vaut éviter de le choisir comme relais.
+Si un capteur a une mauvaise \reput, \cad s'il est peu fiable, par exemple parce qu'il a déjà perdu de nombreux messages, mieux vaut éviter de le choisir comme relai.
 Certains protocoles de \idx{routage} intègrent, dès leur déploiement, des mécanismes de \idx{confiance}~\cite{ZTLMK13}.
 
 Pour prendre ces décisions de manière efficace, il est nécessaire d'adapter en temps réel le score de \reput de chaque voisin d'un nœud: les mécanismes de \idx{confiance} sont donc indissociables de la surveillance propre aux \IDS.
