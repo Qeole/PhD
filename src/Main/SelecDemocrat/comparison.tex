@@ -254,7 +254,7 @@ La probabilité que le nœud compromis ne soit surveillé par aucun \cn est donc
         %&\approx3,6\times10^{-5}\approx1/27228
 %\end{align*}
 $$P(k=0)\approx3,6\times10^{-5}\approx1/27228$$
-Elle est très faible; mais il ne faut pas oublier que «surveillance» n'est pas systématiquement égale à «détection» (si un \cn manque trop de paquets en raison de collisions\index{collision} dans le réseau, par exemple).
+Elle est très faible; mais il faut tenir compte encore une fois du fait que la surveillance peut échouer et ne pas mener à la détection de l'attaque, que ce soit en raison d'un nombre important de collisions\index{collision} dans le cluster qui viendrait perturber l'écoute du trafic, ou parce que sur une période donnée le capteur compromis a émis légèrement moins de paquets que d'habitude et que le seuil n'est pas atteint pour toutes les sentinelles.
 
 La \figref{sd:fig:detec-min-20J} présente les mêmes résultats, pour une énergie initiale de 20~\joule assignée aux capteurs.
 Les résultats, de manière prévisible, montrent que la durée de surveillance a à peu près doublé pour chaque méthode, avec une augmentation des performances pour \iddemx et \iddems (par rapport à la figure précédente), qui ont eu l'occasion de «rattraper» davantage l'écart creusé sur la consommation en énergie lors de leur période initiale.
