@@ -98,7 +98,7 @@ Si l'affirmation a été rejetée à raison, alors le \idx{gain} est nul.
 
 De même, l'affirmation $c>0$ est représentée par une arête qui décrémente à la fois $c$ et $c'$ (donc de poids $(-1,-1,0,0,0)$), et atteint l'état du \ji.
 Ce dernier peut soit poursuivre la simulation, soit se rendre sur un état \tjstopq.
-Cet état possède une unique arête qui boucle sur lui-même avec les poids $(0,0,0,0,1)$, ce qui signifie que la simulations est arrêtée mais que le \idx{gain} vaut $1$.
+Cet état possède une unique arête qui boucle sur lui-même avec les poids $(0,0,0,0,1)$, ce qui signifie que la simulation est arrêtée mais que le \idx{gain} vaut $1$.
 Si le \jo a triché, alors $c<0$ et la simulation n'a pas besoin d'être menée plus avant.
 S'il s'est comporté de façon loyale, alors $c>0$ et $c'>0$, et $p>1$.
 
