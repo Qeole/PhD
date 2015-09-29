@@ -36,7 +36,7 @@ Les paramètres utilisés lors des simulations sont présentés en \tabref{se:ta
 Ces simulations ont permis d'obtenir l'énergie résiduelle de chaque capteur à intervalles réguliers (une fois par minute).
 À partir de ces données, nous avons pu retracer les courbes d'évolution de la moyenne et de l'écart-type de la distribution de l'énergie résiduelle entre les nœuds.
 L'énergie résiduelle du \ch a été volontairement ignorée.
-\begin{figure}[!b]
+\begin{figure}[p]
     \centering
     \includegraphics[width=.96\linewidth]{\chapterfig/plot_se_mean.pdf}
     \caption[Valeur moyenne de l'énergie des nœuds en fonction du temps]{Valeur moyenne de l'énergie des nœuds (à l'exception du \ch) en fonction du temps}\label{se:fig:mean}
@@ -47,12 +47,12 @@ Ces résultats sont conformes aux attentes: le processus de sélection par l'én
 Étant donné que les \vns vont avoir à sortir périodiquement de leur état de veille pour envoyer une requête au \cn surveillé, écouter la réponse, et calculer une consommation théorique, le besoin en ressources énergétiques se retrouve logiquement affecté par rapport au processus de sélection pseudo-aléatoire\index{selection@sélection!sélection aléatoire}.
 
 Le volume de données de contrôle pour les deux méthodes proposées est donné par la \figref{se:fig:overhead}.
-Ici encore, l'usage des \vns entraine une augmentation des ressources consommées; il faut également tenir compte des messages (moins nombreux) envoyés par chaque capteur au moment du \idx{renouvellement} de la sélection\index{selection@sélection}.
-\begin{figure}[!ht]
+\begin{figure}[p]
     \centering
     \includegraphics[width=.96\linewidth]{\chapterfig/plot_se_overhead.pdf}
     \caption{Estimation du nombre total de paquets générés au cours de la simulation au cours du temps}\label{se:fig:overhead}
 \end{figure}
+Ici encore, l'usage des \vns entraine une augmentation des ressources consommées; il faut également tenir compte des messages (moins nombreux) envoyés par chaque capteur au moment du \idx{renouvellement} de la sélection\index{selection@sélection}.
 
 L'écart-type de la distribution en énergie résiduelle des nœuds est présenté sur la \figref{se:fig:stddev}.
 Durant les premières minutes de la simulation, la sélection par l'énergie\index{selection@sélection!sélection selon l'énergie résiduelle} crée une dispersion plus affirmée de la charge en énergie du réseau, à cause des \vns (il y a davantage de capteurs qui endossent des rôles consommant plus d'énergie).
@@ -63,11 +63,13 @@ Comme nous disposons d'un générateur de nombres pseudo-aléatoires efficace, �
 Et comme les capteurs ont également des activités de mesure identique, cette méthode (pseudo-aléatoire) fournit, dans notre cas, une excellente répartition de la charge dans le cluster.
 Dans une situation où les capteurs auraient des niveaux d'activité différents ---~si par exemple un évènement à détecter se produit beaucoup plus souvent dans une certaine région géographique du cluster~--- alors la consommation, avec cette méthode, ne serait plus nécessairement équilibrée entre tous les nœuds du cluster.
 Tandis que la sélection des \cns par l'énergie résiduelle\index{selection@sélection!sélection selon l'énergie résiduelle} permettrait de rétablir cet équilibre.
-\begin{figure}[!ht]
+
+\begin{figure}[!b]
     \centering
     \includegraphics[width=.96\linewidth]{\chapterfig/plot_se_stddev.pdf}
     \caption[Écart-type pour l'énergie résiduelle des nœuds au cours du temps]{Écart-type pour l'énergie résiduelle des nœuds (à l'exception du \ch) au cours du temps}\label{se:fig:stddev}
 \end{figure}
+\pagebreak %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
     \subsection{Pousser plus loin l'amélioration}
 

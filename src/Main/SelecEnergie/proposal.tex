@@ -52,6 +52,12 @@ Pour empêcher les capteurs de «mentir» lorsqu'ils annoncent leur valeur d'én
 Ces nœuds, que nous appelleront désormais \vns (comme pour \textit{nœuds de vérification}), seront responsables de vérifier la consommation en énergie des nœuds de surveillance.
 Une fois que la sélection\index{selection@sélection} des \cns est réalisée, chaque voisin d'un \cn nouvellement désigné choisit à partir d'un seuil de probabilité prédéfini s'il sera ou non \vn pour ce \cn.
 Un capteur peut assumer le rôle de \vn pour plusieurs \cn différents, du moment qu'il s'agit de nœuds voisins.
+Les \vns d'un cluster sont représentés sur la \figref{se:fig:vnodes}.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.6\linewidth]{\chapterfig/WSN_vNodes.pdf}
+    \caption{Schéma: cluster avec \cns et \vns}\label{se:fig:vnodes}
+\end{figure}
 
 Si le rôle de \vn s'avère trop gourmand en énergie, il devient inutile: autant déployer dès le départ, dans ce cas, un mécanisme de sélection pseudo-aléatoire\index{selection@sélection!sélection aléatoire} des \cns.
 Aussi les \vns ne doivent-ils pas demeurer en permanence à l'écoute du médium, comme le font les \cns.
@@ -117,16 +123,15 @@ La machine à états des capteurs est présentée en \figref{se:fig:states}.
     \subsection{Couverture du cluster en cas d'activité hétérogène}
 
 Le passage d'un algorithme pseudo-aléatoire à un processus de sélection\index{selection@sélection} déterministe n'a pas pour seul inconvénient d'introduire une faille que des capteurs compromis pourraient tenter d'exploiter.
-Il soulève un second problème, indépendant du comportement des nœuds, qui pourrait gêner la détection de capteurs compromis.
-S'il advient qu'une certaine zone géographique du cluster produit un trafic plus important que le reste des nœuds, alors l'énergie des capteurs de cette zone diminuera plus rapidement.
-Il s'ensuit mécaniquement que les \cns ne seront pas ou peu sélectionnés parmi les capteurs de cette zone.
-Il y a même de forte chances que les $n$ \cns désirés soient sélectionnés en dehors de la zone en question, et que certains capteurs ne soient pas surveillés du tout tant que le trafic de la zone d'activité ne diminue pas, donc potentiellement pour tous les cycles.
-La \figref{se:fig:cover} illustre ce problème.
+Il soulève un second problème, illustré en \figref{se:fig:cover}, indépendant du comportement des nœuds, et qui pourrait gêner la détection de capteurs compromis.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.8\linewidth]{\chapterfig/cover.pdf}
     \caption[Schéma d'explication: problème de couverture]{Schéma d'explication: les \cns sont sélectionnés au sein de la zone où l'activité est la plus faible (donc ou les nœuds ont conservé le plus d'énergie), et leur surveillance ne couvre pas les capteurs situés dans la partie opposée du cluster.}\label{se:fig:cover}
 \end{figure}
+S'il advient qu'une certaine zone géographique du cluster produit un trafic plus important que le reste des nœuds, alors l'énergie des capteurs de cette zone diminuera plus rapidement.
+Il s'ensuit mécaniquement que les \cns ne seront pas ou peu sélectionnés parmi les capteurs de cette zone.
+Il y a même de forte chances que les $n$ \cns désirés soient sélectionnés en dehors de la zone en question, et que certains capteurs ne soient pas surveillés du tout tant que le trafic de la zone d'activité ne diminue pas, donc potentiellement pour tous les cycles.
 
 Pour assurer une couverture complète du réseau, il est nécessaire de s'assurer que chaque capteur est surveillé par au moins un \cn.
 Aussi l'algorithme de sélection\index{selection@sélection} présenté plus haut doit-il être modifié, pour devenir:
@@ -147,7 +152,7 @@ Au contraire, nous préférons obtenir l'énergie annoncée par les nœuds pour 
 
 \paragraph{Mécanisme de détection}
 La détection des attaques par \dds est inchangée par rapport au chapitre précédent.
-Les \cns appliquent un ensemble de règles sur le trafic collecté dans le cluster: lorsqu'un capteur enfreint une règle un certain nombre de fois, par exemple lorsque le débit des paquets qu'il envoie excède un seuil prédéterminé, il est considéré comme malveillant (voir le paragraphe à ce sujet au \chapref{ea}, \ssref{ea:par:rules}).
+Les \cns appliquent un ensemble de règles sur le trafic collecté dans le cluster: lorsqu'un capteur enfreint une règle un certain nombre de fois, par exemple lorsque son débit excède un seuil prédéterminé, il est considéré comme malveillant (voir le paragraphe à ce sujet au \chapref{ea}, \ssref{ea:par:rules}).
 
 \paragraph{Alourdissement du modèle}
 La solution introduite de par le recours aux \vns consiste littéralement à choisir des nœuds chargés de surveiller les surveillants: le concept de surveillance devient récursif.
@@ -160,13 +165,13 @@ Lors du premier cycle où un nœud donné occupe le rôle de \cn, il n'y a donc 
 Le rôle de \vn pour un \cn donné peut donc attendre, pour être assigné, le deuxième cycle consécutif pendant lequel le \cn occupe son rôle.
 
 \paragraph{Sécurité\index{securité@sécurité} du réseau}
-Il est intéressant de se pencher sur un autre point: l'usage des \cns combinés aux \vns n'apporte pas de garantie totale sur la \secu du réseau.
-Le système repose sur plusieurs hypothèses, comme le fait que des nœuds compromis ne collaborent pas ensemble: un capteur compromis sélectionné comme \cn pourrait annoncer au \ch, par exemple, qu'il peut entendre et surveiller une portion plus large du cluster que ce qu'il en est réellement, dans le but de faire croire au \CH que tout le cluster est surveillé~--- alors qu'en réalité ce ne sera pas le cas.
+Autre point: l'usage des \cns combinés aux \vns n'apporte pas de garantie totale sur la \secu du réseau.
+Le système repose sur plusieurs hypothèses, comme le fait que des nœuds compromis ne collaborent pas ensemble: un capteur compromis sélectionné comme \cn pourrait annoncer au \ch, par exemple, qu'il peut entendre et surveiller une portion plus large du cluster que ce qu'il en est réellement, dans le but de faire croire au \CH ---~à tort~--- que tout le cluster est surveillé.
 Si le \CH ne désigne aucun autre \cn pour surveiller ces zones, d'autres nœuds compromis pourraient y porter des attaques sans risque d'être détectés.
 Une seconde hypothèse à prendre en compte établit que le \ch n'est pas et ne peut pas être compromis.
-Une troisième condition à l'application du modèle est d'être en mesure de contenir les tentatives d'\idx{usurpation d'identité} (voir le \chapref{ea}, \ssref{ea:ssec:auth}), sans quoi un nœud compromis n'a qu'à simuler une identité différente à chaque tour, possédant une batterie (soit disant) pleinement chargée, pour obtenir systématiquement le rôle convoité.
+Troisièmement, il est nécessaire d'être en mesure de contenir les tentatives d'\idx{usurpation d'identité} (voir le \chapref{ea}, \ssref{ea:ssec:auth}), sans quoi un nœud compromis n'a qu'à simuler une identité différente à chaque tour, possédant une batterie (soit disant) pleinement chargée, pour obtenir systématiquement le rôle convoité.
 Mais une nouvelle fois, la \secu d'un système est avant tout une affaire de compromis: plus on cherche à bloquer d'attaques, plus la complexité augmente.
 
 \paragraph{Outils de \idx{modélisation}}
-Si ce chapitre ne présente aucune \idx{modélisation} formelle du processus introduit, le système n'en a pas moins fait l'objet d'une \idx{modélisation}, dans une autre étude~\cite{HMMBA14}, sous forme d'automates temporels, dont des propriétés ont été exprimées à l'aide d'un sous-ensemble de CTL (\textit{Computation Tree Logic}, «logique d'arbre de calcul» en anglais) pour être vérifiées à l'aide de l'outil de \modelchecking \textsc{Uppaal}\,\footnote{Il ne s'agit cette fois pas d'un sigle, mais d'un nom composé à partir des deux principaux établissements qui ont contribué à l'élaboration de l'outil: le département d'informatique de l'université d'Uppsala (UPP) en Suède, et le département d'informatique de l'université d'Aalborg (AAL) au Danemark.}~\cite{BDL04, uppaal}.
+Si aucune représentation formelle du système n'est donnée dans ce chapitre, le système n'en a pas moins fait l'objet d'une \idx{modélisation}, dans une autre étude~\cite{HMMBA14}, sous forme d'automates temporels, dont des propriétés ont été exprimées à l'aide d'un sous-ensemble de CTL (\textit{Computation Tree Logic}, «logique d'arbre de calcul») pour être vérifiées à l'aide de l'outil de \modelchecking \textsc{Uppaal}\,\footnote{Il ne s'agit pas cette fois d'un sigle, mais d'un nom composé à partir des deux principaux établissements qui ont contribué à l'élaboration de l'outil: le département d'informatique de l'université d'Uppsala (UPP) en Suède, et le département d'informatique de l'université d'Aalborg (AAL) au Danemark.}~\cite{BDL04, uppaal}.
 \nomenclature{CTL}{\textit{Computation Tree Logic}}
