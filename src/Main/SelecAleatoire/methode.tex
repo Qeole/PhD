@@ -67,9 +67,9 @@ La partition hiérarchique\index{clusterisation!clusterisation hiérarchique} d'
 À côté des nœuds «normaux» et des \chs, un troisième rôle va être attribué à certains capteurs, afin d'assurer la détection des attaques par \dds.
 Certains capteurs se voient ainsi confier le rôle de «nœuds de contrôle», ici nommés \cns (introduits sous le nom de \textit{gNodes}\index{gNodes@\textit{gNodes}} dans~\cite{LC08}), et sont chargés de surveiller le trafic entrant et sortant des \chs.
 
-Si un \cn constate qu'un capteur envoie, au cours d'une unité de temps, plus de données à leur \CH qu'une valeur de seuil déterminée $S_{\textrm{débit}}$, il retient que le nœud a eu un comportement anormal (il y a eu un écart important à la moyenne de la quantité de données envoyées par unité de temps).
+Si un \cn constate qu'un capteur enfreint les règles fixées, par exemple en envoyant, au cours d'une unité de temps, plus de données à leur \CH qu'une valeur de seuil déterminée $S_{\textrm{débit}}$, il retient que le nœud a eu un comportement anormal (il y a eu un écart important à la moyenne de la quantité de données envoyées par unité de temps).
 Lorsque ce nœud réalise un certains nombres d'écarts, \cad lorsque le nombre de comportement anormaux détectés par un \cn dépasse une valeur de seuil $S_{\textrm{écarts}}$, le ou les nœuds de contrôle qui ont repéré ces écarts considèrent alors le capteur comme compromis.
-Chaque \cn ayant détecté un nœud compromis envoie un message d'avertissement à son \ch.
+Chaque \cn ayant détecté un nœud compromis envoie un message d'avertissement à son \ch, comme représenté sur la \figref{sa:fig:detection}.
 Ici encore, un seuil $S_{\textrm{alertes}}$ est fixé pour le nombre minimum d'alertes qu'un \CH doit recevoir avant de considérer un nœud comme malveillant, et ce afin d'éviter qu'un nœud compromis se faisant passer pour un \cn ne déclare tous ses voisins comme compromis.
 Plusieurs \cns distincts doivent donc détecter les écarts d'un nœud pour que celui-ci soit effectivement considéré comme compromis par le \ch.
 
@@ -79,6 +79,12 @@ En pratique, la solution utilisée ici est simple: tous les messages en provenan
 Les \cns comparent également la taille des trafics entrant et sortant du \ch.
 En cas d'écarts importants (en tenant compte des éventuels facteurs de \idx{compression} des données et des messages ignorés des nœuds considérés compromis), ils peuvent être amenés à penser que le \ch est lui-même malveillant.
 Dans ce cas, l'\election d'un nouveau \CH dans le cluster est déclenchée.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=.8\linewidth]{\chapterfig/WSN_detection}
+    \caption[Schéma: exemple de détection d'un comportement anormal et envoi d'une alerte au \CH]{Schéma: exemple de détection d'un comportement anormal et envoi d'une alerte au \CH (un seul cluster représenté)}\label{sa:fig:detection}
+\end{figure}
 
 %===============================================================================
     \subsection{Sélection dynamique\index{selection@sélection!sélection dynamique} des \cns}
@@ -174,13 +180,13 @@ Au cours de la seconde étape, les $2$-\CH nomment des \cns supplémentaires dan
         \subsubsection{Élection\index{selection@sélection!election@élection} centralisée au niveau des \chs}
 La seconde méthode proposée consiste à décharger les nœuds classiques du processus d'auto-désignation\index{selection@sélection!auto-élection}, pour le remplacer par une nomination autoritaire réalisée par les $2$-\chs (voir \figref{sa:fig:elecch}).
 Chaque \CH désigne alors un nombre de \cns correspondant au pourcentage indiqué par l'utilisateur.
-Par exemple, si l'on souhaite obtenir dix pour cent de \cns, et qu'un $2$-cluster comporte cent capteurs, le \CH de ce cluster va produire dix nombres pseudo-aléatoires distincts qui seront associés aux identifiants de dix nœuds du cluster.
-Le \CH envoie alors un message à chacun de ces dix nœuds pour leur ordonner de remplir le rôle de \cn sur la période en cours.
-\begin{figure}[ht]
+\begin{figure}[!b]
     \centering
     \includegraphics[width=.5\linewidth]{\chapterfig/elec_ch.pdf}
     \caption{Élection\index{selection@sélection!election@élection} des \cns réalisée par les \chs}\label{sa:fig:elecch}
 \end{figure}
+Par exemple, si l'on souhaite obtenir dix pour cent de \cns, et qu'un $2$-cluster comporte cent capteurs, le \CH de ce cluster va produire dix nombres pseudo-aléatoires distincts qui seront associés aux identifiants de dix nœuds du cluster.
+Le \CH envoie alors un message à chacun de ces dix nœuds pour leur ordonner de remplir le rôle de \cn sur la période en cours.
 
 Cette méthode est plus efficace en ce qui concerne les calculs puisque seuls les $2$-\CH ont à appliquer un algorithme de calcul de nombres pseudo-aléatoires.
 Cependant, elle présente un autre désavantage: si l'un de ces \CH est compromis par un attaquant, il ne déclarera sans doute aucun \cn susceptible de le détecter, laissant ainsi tout son cluster à la merci d'autres attaques.

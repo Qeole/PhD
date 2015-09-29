@@ -34,6 +34,11 @@ $x_{k_d}$ est une variable de type booléen, initialisée à $0$, et passée à 
 La fonction de seuil $f:s^s\rightarrow\{0;1\}$ est utilisée par les \cns pour déterminer la nature normale ou non du trafic (elle indique si un paquet a dépassé ou non le seuil des communications dites «normales»).
 Elle prend pour argument les valeurs des $s$ compteurs $x_{k_1},x_{k_2},\dots,x_{k_s}$ d'un macro-état $x_k$ associé à un \cn $k$, et la valeur retournée est stockée dans $x_{k_d}$.
 
+Nous donnons un exemple d'équation de transition pour un macro-état générique $x_k$, $1\leq k\leq m$.
+Le macro-état $x$, représentant l'intégralité du système, est directement obtenu en agrégeant les différents $x_k$.
+Le compteur $x_{k_c}$ représente dans la suite le nombre de messages émis par le nœud compromis et captés par le \cn $k$.
+L'équation est donnée en \figref{sa:fig:eqtrans}.
+
 \newlength\fboxlinelen
 \setlength\fboxlinelen\linewidth
 \addtolength\fboxlinelen{-2\fboxsep}
@@ -64,11 +69,6 @@ Elle prend pour argument les valeurs des $s$ compteurs $x_{k_1},x_{k_2},\dots,x_
     \caption{Exemple d'équation de transition du processus de \textsc{Markov} à temps continu modélisant le cluster}\label{sa:fig:eqtrans}
 \end{figure}
 
-Nous donnons un exemple d'équation de transition pour un macro-état générique $x_k$, $1\leq k\leq m$.
-Le macro-état $x$, représentant l'intégralité du système, est directement obtenu en agrégeant les différents $x_k$.
-Le compteur $x_{k_c}$ représente dans la suite le nombre de messages émis par le nœud compromis et captés par le \cn $k$.
-L'équation est donnée en \figref{sa:fig:eqtrans}.
-
 Formulé autrement: le \cn $k$, dans l'état $x_k$, reçoit périodiquement les messages de chaque capteur $i$ (pour tout $i$ tel que $1\leq i\leq s, i\!\neq\!k$): ce sont des transmissions dites «normales», qui surviennent avec une fréquence moyenne $\lambda_i$.
 Chaque message reçu laisse le \cn $k$ dans un état presque identique, à la seule différence que le compteur $x_{k_i}$ est incrémenté de $1$.
 La même chose se produit avec une fréquence $\lambda_c$ pour les messages envoyés par le nœud compromis, qui provoque à chaque fois l'incrémentation du compteur $x_{k_c}$.
@@ -77,7 +77,7 @@ La fonction $f$ est appliquée sur l'ensemble des $x_{k_i}$, $i$ allant de $1$ �
 Si l'un des capteurs a envoyé un nombre de paquets supérieur à la valeur de seuil (\cad si l'on a $f(x_k)\geq \mathit{seuil}$), le drapeau $x_{k_d}$ est levé.
 Un message d'alerte est alors envoyé du \cn $k$ au \ch.
 Si, en revanche, aucune anomalie n'est à rapporter, le drapeau $x_{k_i}$ est laissé à $0$, et rien n'est envoyé.
-Dans les deux cas, tous les compteurs $x_{k_i}$ sont réinitialisés à $0$, afin que la prochaine vérification soit effectuée sur des données «fraiches» (et pour ne pas déclencher par erreur une fausse détection par cumul des nombres de paquets envoyés d'une période sur l'autre).
+Dans les deux cas, tous les compteurs $x_{k_i}$ sont réinitialisés à $0$, afin de s'assurer que la vérification suivante soit effectuée sur des données «fraiches» (et pour ne pas déclencher par erreur une fausse détection par cumul des nombres de paquets envoyés d'une période sur l'autre).
 
 La probabilité de détection du nœud compromis par le \cn $k$, notée $\Delta_k$, est la suivante:
 \[\Delta_k=\sum_{x_{k_1},\dots,x_{k_s}}^\infty\pi(x_{k_1},\dots,x_{k_s},x_{k_d}=1)\]
@@ -136,6 +136,8 @@ Nous allons procéder par étapes en modélisant:
     \item les \cns désignés de manière statique;
     \item les \cns désignés de façon dynamique (dont la \idx{modélisation} diffère légèrement).
 \end{enumerate}
+Ces différentes «briques» pourront être assemblées par la suite pour représenter l'intégralité du système étudié.
+\pagebreak %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
             \paragraph{Modélisation\index{modélisation} des capteurs simples}
 Le comportement des capteurs basiques (qui poursuivent simplement leur mission de récolte de données) est simple: chaque capteur $i$ envoie des paquets selon un processus de \textsc{Poisson} de paramètre $\lambda_i$.
@@ -156,16 +158,18 @@ Un nœud compromis $c$ sera également représenté selon le même modèle, avec
 Nous travaillons de l'intérieur du cluster, et le \ch est vu comme un simple puits qui reçoit les paquets émis par les autres nœuds.
 Son activité de retransmission à destination de la \sdb n'est donc pas représentée.
 Illustré en \figref{sa:fig:chgspn}, le \CH ne contient donc qu'une place \textsf{InBuff$_\textsf{CH}$} qui représente le tampon contenant les messages reçus, et reliée aux transitions \textsf{TX$_i$} de tous les autres nœuds.
+En réalité, il devrait y avoir une place \textsf{InBuff$_i$} distincte pour les jetons provenant de chaque nœud voisin $i$ du \ch. Pour simplifier la représentation, tous les jetons arrivant au modèle du nœud sont rassemblés dans une place unique.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=.45\linewidth]{\chapterfig/RPSGe_CH.pdf}
     \caption{Modèle \rpsg du \ch}\label{sa:fig:chgspn}
 \end{figure}
-En réalité, il devrait y avoir une place \textsf{InBuff$_i$} distincte pour les jetons provenant de chaque nœud voisin $i$ du \ch. Pour simplifier la représentation, tous les jetons arrivant au modèle du nœud sont rassemblés dans une place unique.
+\pagebreak %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
             \paragraph{Modélisation\index{modélisation} des \cns désignés de façon statique}
 Un \cn élu de façon statique joue uniquement son rôle de \cn: il écoute le trafic, mais n'effectue pas de mesures sur son environnement.
 Le modèle \rpsge associé à ce type de nœud est présenté en \figref{sa:fig:cnodegspn1}.
+
 La place \textsf{InBuff} représente le tampon contenant les messages reçus par le nœud.
 Un jeton arrivant dans cette place (depuis un nœud «normal») représente un message capté par le \cn.
 La vérification du respect de la valeur seuil $K$ pour le trafic est réalisée à intervalles de temps constants.
@@ -177,13 +181,15 @@ Si, en revanche, il y a moins de $K$ jetons dans la place \textsf{InBuff}, aucun
 Dans un cas comme dans l'autre, la place \textsf{vider~tampon} reçoit un jeton (soit par \textsf{vérif\_OUI}, soit par \textsf{vérif\_NON}).
 Un jeton dans cette place permet de vider le tampon \textsf{InBuff}: la transition \textsf{e-déb} consomme le jeton de la place \textsf{vider~tampon}, et un jeton de \textsf{InBuff}.
 Un nouveau jeton est créé dans \textsf{vider~tampon}.
+
 Le processus est répété jusqu'à ce que la place \textsf{InBuff} soit vide; dans ce cas, la transition \textsf{e-fin} est franchie et ne produit rien, mais met fin à la consommation des jetons.
-Les étapes permettant de vider le tampon ne consomment pas de temps, et permettent de repartir avec un compteur neutre pour la période qui mènera à la vérifiation suivante.
-\begin{figure}[ht]
+Les étapes permettant de vider le tampon ne consomment pas de temps, et permettent de repartir avec un compteur neutre pour la période qui mènera à la vérification suivante (de façon à ne pas sommer le nombre de messages perçus d'une période sur l'autre).
+\begin{figure}[!b]
     \centering
     \includegraphics[width=.54\linewidth]{\chapterfig/RPSGe_cNode_static.pdf}
     \caption{Modèle \rpsge d'un \cn élu de manière \emph{statique}}\label{sa:fig:cnodegspn1}
 \end{figure}
+\pagebreak %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
             \paragraph{Modélisation\index{modélisation} des \cns désignés de façon dynamique}
 Le modèle \rpsge représentant le \cn élu de façon dynamique ressemble à son homologue élu de façon statique.
@@ -210,7 +216,7 @@ La représentation du cluster est donnée en \figref{sa:fig:petricluster}.
 Cette représentation peut être facilement étendue pour modéliser le réseau tout entier.
 On observera, par rapport au modèle précédent basé sur les chaines de \textsc{Markov}, que le graphe du cluster n'est plus connexe: les nœuds ne peuvent atteindre que leurs voisins directs (sur le côté ou en diagonale sur la représentation).
 Là encore, il s'agit d'un choix permettant de simplifier le graphique, et la connexité du réseau peut être complétée par le simple ajout des arêtes manquantes.
-\begin{figure}[!ht]
+\begin{figure}[p]
     \centering
     \includegraphics[width=\linewidth]{\chapterfig/RPSGe_network3x3_static.pdf}
     \caption{Modèle \rpsge d'un cluster (topologie: grille $3\times3$) comprenant un nœud compromis et deux \cns statiques}\label{sa:fig:petricluster}
@@ -230,6 +236,7 @@ Le \ch n'est toujours considéré que comme un simple puits, uniquement équipé
     \includegraphics[width=\linewidth]{\chapterfig/RPSGe_network3x3_dynamic.pdf}
     \caption{Modèle \rpsge pour le trafic d'un cluster (topologie: grille $3\times3$) comprenant un nœud compromis et deux \cns sélectionnés de façon dynamique}\label{sa:fig:petridyn}
 \end{figure}
+\pagebreak %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Un second réseau de \textsc{Petri} est utilisé pour modéliser le processus de sélection\index{selection@sélection} lui-même.
 En considérant $n$ comme le nombre de résultats possibles à l'\election, le module représentant l'\elecdyn des \cns comprend:
@@ -238,17 +245,18 @@ En considérant $n$ comme le nombre de résultats possibles à l'\election, le m
     \item $n$ transitions minutées, suivant une distribution déterministe, et mutuellement exclusives, menant à cette place (en bleu sur la \figref{sa:fig:petrielec});
     \item $n$ transitions immédiates et mutuellement exclusives, franchissables depuis la place centrale (en noir sur la \figref{sa:fig:petrielec}).
 \end{itemize}
+\begin{figure}[!b]
+    \centering
+    \includegraphics[width=.9\linewidth]{\chapterfig/RPSGe_network3x3_selection.pdf}
+    \caption{Modèle \rpsge pour l'\elecdyn de deux \cns parmi les nœuds du cluster}\label{sa:fig:petrielec}
+\end{figure}
+
 Dans notre cas, pour choisir deux \cns au sein du cluster, et en supposant que le nœud compromis ne peut être désigné, nous avons $n=\binom{7}{2}=21$~issues possibles pour l'\election.
 À la fin d'une période d'activité des \cns, une nouvelle \election est déclenchée.
 La transition minutée correspondant aux \cns sélectionnés pour la période qui s'achève est déclenchée; les jetons présents dans les places \textsf{cNode} de ces \cns sont consommés, et produisent ainsi un jeton dans l'unique place centrale du module.
 Chaque transition immédiate tente alors de produire un jeton.
 Comme elles sont mutuellement exclusives, mais ont la même priorité et le même poids (voir \sssref{sa:subsubsec:presRPSGe}), un tirage aléatoire a lieu pour déterminer l'unique transition qui est franchie et qui produit ses jetons.
 Ceux-ci sont envoyés dans les places \textsf{cNode} des nœuds sélectionnés pour la période qui débute, activant ainsi leurs fonctionnalités de \cns.
-\begin{figure}[!ht]
-    \centering
-    \includegraphics[width=.9\linewidth]{\chapterfig/RPSGe_network3x3_selection.pdf}
-    \caption{Modèle \rpsge pour l'\elecdyn de deux \cns parmi les nœuds du cluster}\label{sa:fig:petrielec}
-\end{figure}
 %===============================================================================
     \subsection{Logique stochastique avec automates hybrides}
 
@@ -313,7 +321,7 @@ L'automate linéaire hybride que nous utilisons fait appel aux variables suivant
     \item $x_{\mathit{bf}_i}$: nombre de paquets reçus et placés dans le tampon en entrée du nœud $i$.
 \end{itemize}
 L'automate linéaire hybride est présenté en \figref{sa:fig:lha}.
-\begin{figure}[!b]
+\begin{figure}[ht]
     \fbox{%
         \begin{minipage}{\fboxlinelen}
             \centering
@@ -353,6 +361,8 @@ L'état de gauche, que l'on nommera $e_1$, contient le taux de variation (autrem
     \item $x_{\mathit{bf}_i}$ est incrémentée avec un taux proportionnel au nombre de jetons présents dans le tampon d'entrée de $i$ (lorsque $i$ joue le rôle de \cn).
         On notera ce taux~$\dot{x}_{\mathit{bf}_i}$.
 \end{itemize}
+\pagebreak %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 $e_1$ comporte également trois transitions, qui sont exprimées sous la forme suivante:\ $<$\textit{condition temporelle (sur x\_t)}$>, <$\textit{ensemble des transitions franchies sur le réseau de \textsc{Petri} pour déclencher l'évènement}$>, <$\textit{action associée sur les variables de l'automate}$>$.
 Il s'agit des transitions suivantes:
 \begin{itemize}

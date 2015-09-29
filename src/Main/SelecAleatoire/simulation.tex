@@ -8,11 +8,6 @@ Afin d'étudier les avantages concrets qu'apporte l'\elecdyn des \cns, nous avon
 Les résultats obtenus sont présentés dans cette section.
 Ils sont issus de tests simulant le comportement d'un cluster qui se présente sous la forme d'une grille régulière de dix nœuds de côté par dix (voir \figref{sa:fig:grille}).
 Nous supposons, lorsque la question se pose, que c'est le protocole \leach qui a été mis en œuvre pour établir ce cluster.
-\begin{figure}[!b]
-    \centering
-    \includegraphics[width=6.5cm]{\chapterfig/WSN_topo.pdf}
-    \caption{Cluster sous forme de grille régulière $10 \times 10$, de côté de longueur $a$}\label{sa:fig:grille}
-\end{figure}
 
 Les caractéristiques du cluster étudié sont les suivantes:
 \begin{itemize}
@@ -23,12 +18,18 @@ Les caractéristiques du cluster étudié sont les suivantes:
     \item les \cns sont élus selon la méthode statique (unique sélection\index{selection@sélection} en début de simulation) ou bien dynamique (\election renouvelée périodiquement), selon le cas.
 \end{itemize}
 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=6.5cm]{\chapterfig/WSN_topo.pdf}
+    \caption{Cluster sous forme de grille régulière $10 \times 10$, de côté de longueur $a$}\label{sa:fig:grille}
+\end{figure}
+
 %===============================================================================
     \subsection{Taux de détection des nœuds compromis}\label{sa:ssec:detec}
 
 Pour mesurer l'efficacité des \cns, nous avons effectué plusieurs tests avec \nsii.
 La \tabref{sa:table:parametres1} indique les valeurs (ou les fourchettes de valeurs) utilisées comme paramètres au cours des différentes simulations.
-\begin{table}[ht]
+\begin{table}[!b]
     \centering
     \caption{Paramètres de simulation}\label{sa:table:parametres1}
     \medskip
@@ -45,6 +46,7 @@ La \tabref{sa:table:parametres1} indique les valeurs (ou les fourchettes de vale
         \bottomrule
     \end{tabular}
 \end{table}
+\pagebreak %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Pour la première simulation, les nœuds sont élus de façon dynamique sur dix périodes consécutives.
 Nous avons supposé que la génération de trafic suit une loi de \textsc{Poisson} (la génération est aléatoire, mais on connait sa valeur moyenne).
@@ -56,14 +58,14 @@ Lorsque ce nombre s'accroit encore, il n'y a plus d'évolution notable.
 Quinze \cns semblent donc être une mesure idéale pour notre réseau, si l'on considère une \elecstat.
 En revanche, on peut très bien descendre à dix \cns si l'on envisage un processus d'\elecdyn: le nœud compromis ne sera peut-être pas détecté sur une période donnée, mais le \idx{renouvellement} rapide des \cns permet de s'assurer qu'il sera détecté rapidement sur la période suivante.
 On note par ailleurs que jusqu'à quarante pour cent (soit quatre nœuds sur dix) ont pu détecter simultanément le nœud compromis sur les périodes~7,~8~et~9.
-\begin{figure}[t]
+\begin{figure}[ht]
     \centering
     \includegraphics{\chapterfig/plot_detection-nbCNodes.pdf}
     \caption{Taux de détection pour différents nombres de \cns}\label{sa:fig:detec-nbcn}
 \end{figure}
 
 La valeur de $\lambda_c$ a elle aussi un rôle à jouer dans la détection: plus le nœud compromis émet, plus il est probable que les \cns mesureront efficacement un dépassement par rapport au seuil théorique d'un nœud honnête.
-\begin{figure}[!b]
+\begin{figure}[ht]
     \centering
     \includegraphics{\chapterfig/plot_detection-txRate.pdf}
     \caption{Taux de détection en fonction de $\lambda_c$}\label{sa:fig:detection-txRate}
@@ -74,8 +76,9 @@ La courbe présentée en \figref{sa:fig:detection-txRate} illustre cet état de 
 %===============================================================================
     \subsection{Consommation énergétique}
 
-Les paramètres utilisés pour les simulations présentées dans cette sous-section sont synthétisés en \tabref{sa:table:parametres2}.
-\begin{table}[ht]
+L'étude de la consommation en énergie de la méthode proposée est indispensable pour apprécier l'effet produit sur la batterie des capteurs.
+Les résultats numériques présentées dans cette sous-section ont été obtenus en exécutant une nouvelle série d'instances, dont les paramètres de simulation sont synthétisés en \tabref{sa:table:parametres2}.
+\begin{table}[!b]
     \centering
     \caption{Paramètres de simulation}\label{sa:table:parametres2}
     \medskip
@@ -92,7 +95,7 @@ Les paramètres utilisés pour les simulations présentées dans cette sous-sect
 \end{table}
 
 L'histogramme donné en \figref{sa:fig:conso-moyenne} expose la consommation en énergie des nœuds, pour la méthode d'\elecstat et pour la méthode dynamique, en fonction du pourcentage de \cns.
-\begin{figure}[!b]
+\begin{figure}[ht]
     \centering
     \includegraphics{\chapterfig/plot_mean.pdf}
     \caption{Consommation moyenne en énergie}\label{sa:fig:conso-moyenne}
@@ -103,15 +106,15 @@ La consommation moyenne en fin de simulation est identique pour les deux méthod
 
 En revanche, si l'on compare les écarts-types à la moyenne, on relève des différences notables.
 Elles sont manifestes sur l'histogramme présenté en \figref{sa:fig:conso-ecart-type}, qui présente, pour différents pourcentages de \cns, les écarts-types à la moyenne précédente de la consommation en énergie des nœuds, à la fin de la simulation.
-Ici encore, \ch et nœud compromis ont été laissés de côté.
-Nous observons des écarts-types bien plus forts pour la méthode statique: seuls les \cns initiaux (non soumis à réélection par la suite) ont connu une consommation importante ---~ils sont restés sur écoute, ont analysé le trafic, éventuellement averti le \ch d'une attaque.
-Avec la méthode dynamique cependant, les écarts de consommations sont lissés sur le temps du fait des réélections périodiques.
-Nous observons ainsi une meilleure répartition de la charge.
-\begin{figure}[ht]
+\begin{figure}[!b]
     \centering
     \includegraphics{\chapterfig/plot_stddev.pdf}
     \caption{Écart-type à la moyenne de la consommation en énergie}\label{sa:fig:conso-ecart-type}
 \end{figure}
+Ici encore, \ch et nœud compromis ont été laissés de côté.
+Nous observons des écarts-types bien plus forts pour la méthode statique: seuls les \cns initiaux (non soumis à réélection par la suite) ont connu une consommation importante ---~ils sont restés sur écoute, ont analysé le trafic, éventuellement averti le \ch d'une attaque.
+Avec la méthode dynamique cependant, les écarts de consommations sont lissés sur le temps du fait des réélections périodiques.
+Nous observons ainsi une meilleure répartition de la charge.
 
 L'histogramme de la \figref{sa:fig:premier-deces} présente l'instant de décès du premier nœud à épuiser sa batterie au sein du cluster simulé.
 Pour obtenir ce résultat, nous avons alloué une énergie initiale de 4~\joule à chacun des nœuds (excepté le nœud compromis et le \ch, qui ont reçu davantage d'énergie, car nous ne voulions pas qu'ils cessent de fonctionner durant la simulation).
@@ -135,6 +138,7 @@ Nous avons démarré la simulation, et relevé l'instant de «décès» du premi
 En raison du changement périodique de \cns, la méthode dynamique permet de mieux répartir la consommation en énergie, là où la méthode statique sollicite toujours les mêmes \cns.
 Le premier nœud à épuiser sa batterie a donc une espérance de vie bien plus longue avec la méthode dynamique (jusqu'à cinq fois plus longue lorsque le pourcentage de \cns est faible), comme le reflète l'histogramme.
 
+\pagebreak %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %===============================================================================
     \subsection{Nœuds restants et détection au fil du temps}
 
@@ -161,6 +165,11 @@ Ces données, et les autres paramètres utilisés, sont présentés en \tabref{s
 \end{table}
 
 La courbe de la \figref{sa:fig:capteurs-en-vie} montre l'évolution dans le temps du nombre de capteurs en vie.
+\begin{figure}[p]
+    \centering
+    \includegraphics{\chapterfig/plot_lifetime.pdf}
+    \caption{Nombre de capteurs toujours en vie}\label{sa:fig:capteurs-en-vie}
+\end{figure}
 Comme précédemment, les capteurs normaux consomment très peu par rapport aux \cns, qui vident leur batterie bien plus rapidement.
 En conséquence, les dix \cns élus au départ avec la méthode statique consomment leur énergie, et meurent (vers $t=150$~secondes), tandis que les nœuds normaux vivent beaucoup plus longtemps (environ cinq heures selon nos estimations), mais ne sont plus surveillés.
 Avec la méthode dynamique, les \cns changent, et le premier nœud à mourir décède bien plus tard que dans le cas précédent.
@@ -168,16 +177,11 @@ Il s'agit d'un nœud qui a été élu \cn sur plusieurs périodes ---~mais pas (
 Deux nœuds seulement sont tombés à court d'énergie à $t=700$~secondes avec la méthode dynamique.
 En revanche, passé ce stade, les autres nœuds vont rapidement dépérir les uns après les autres; il ne reste plus qu'un nœud en vie à la fin de l'heure de simulation (ceci n'est pas visible sur la courbe).
 Ce décès «prématuré» des nœuds pour la méthode dynamique est tout à fait normal et prévisible, puisque la réélection de \cns élève continuellement la consommation de nouveaux nœuds; tandis que pour la méthode statique, une fois les \cns décédés, il n'y a plus que des nœuds normaux, qui consomment beaucoup moins d'énergie.
-\begin{figure}[ht]
-    \centering
-    \includegraphics{\chapterfig/plot_lifetime.pdf}
-    \caption{Nombre de capteurs toujours en vie}\label{sa:fig:capteurs-en-vie}
-\end{figure}
 
 Il est alors intéressant d'observer combien de nœuds sont toujours non seulement en vie, mais aussi capables de détecter l'attaque du nœud compromis au cours du temps.
 Les résultats sont exposés par la courbe donnée en \figref{sa:fig:detection-dos}.
 Le nombre de \cns ayant détecté l'attaque est indiqué sur chaque période de soixante secondes.
-\begin{figure}[ht]
+\begin{figure}[p]
     \centering
     \includegraphics{\chapterfig/plot_dos-over-time.pdf}
     \caption{Détection des attaques de \dds}\label{sa:fig:detection-dos}
