@@ -1,0 +1,42 @@
+% Copyright 2014 by Quentin Monnet
+%
+% Based on standard Beamer inner theme rounded,
+% Copyright 2007 by Till Tantau
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+%
+% ---
+%
+% Part of the unofficial LACL sidebar Beamer template v1.0
+
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/inner/beamerinnerthemeLACLsb.sty,v 1.0 2014/04/05 $
+
+
+\newif\ifbeamer@themeLACLsidebar@webtitle
+\beamer@themeLACLsidebar@webtitletrue
+\DeclareOptionBeamer{webtitle}[false]{\csname beamer@themeLACLsidebar@webtitle#1\endcsname}
+
+\DeclareOptionBeamer{shadow}[true]{\def\beamer@themerounded@shadow{#1}}
+\ExecuteOptionsBeamer{shadow=false,webtitle=false}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+\setbeamertemplate{blocks}[rounded][shadow=\beamer@themerounded@shadow]
+\setbeamertemplate{items}[ball]
+\setbeamertemplate{enumerate items}[circle]
+\setbeamertemplate{sections/subsections in toc}[circle]
+\setbeamertemplate{part page}[default][colsep=-4bp,rounded=true,shadow=\beamer@themerounded@shadow]
+% Title box: shadow?
+\ifbeamer@themeLACLsidebar@webtitle
+    \setbeamertemplate{title page}[default][colsep=-4bp,rounded=true,shadow=false]
+\else
+    \setbeamertemplate{title page}[default][colsep=-4bp,rounded=true,shadow=\beamer@themerounded@shadow]
+\fi
+
+\mode<all>

@@ -1,0 +1,300 @@
+% Copyright 2014 by Quentin Monnet
+%
+% Based on standard Beamer outer theme sidebar,
+% Copyright 2007 by Till Tantau
+% Main differences are:
+% - Reduced default headline size
+% - Forcing the use of LACL and UPEC logos
+% - Addition of footline
+% - Reformatting of title/authors in sidebar
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+%
+% ---
+%
+% Part of the unofficial LACL sidebar Beamer template v1.0
+%
+% Most code left in comments comes from the original files
+%
+% WARNING: \logo{} command is commented and will
+%          have no effect with this template.
+
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/outer/beamerouterthemeLACLsb.sty,v 1.0 2014/04/05 $
+
+
+\newdimen\beamer@sidebarwidth
+\newdimen\beamer@headheight
+\usebeamerfont{frametitle}
+\beamer@sidebarwidth=2.5\baselineskip
+%\beamer@headheight=2.5\baselineskip
+\beamer@headheight=1.5\baselineskip
+\reset@font
+
+%
+% For footline
+%
+\newdimen\beamer@footlinewidth
+\beamer@footlinewidth=\paperwidth
+\advance \beamer@footlinewidth by -\beamer@sidebarwidth
+\newdimen\beamer@footlinecenterwidth
+\beamer@footlinecenterwidth=\beamer@footlinewidth
+\advance \beamer@footlinecenterwidth by -\beamer@sidebarwidth
+\newif\ifbeamer@footlineLACLsb@footline
+\beamer@footlineLACLsb@footlinetrue
+\newif\ifbeamer@footlineLACLsb@framenb
+\beamer@footlineLACLsb@framenbtrue
+\DeclareOptionBeamer{footline}[true]{\csname beamer@footlineLACLsb@footline#1\endcsname}
+\DeclareOptionBeamer{framenb}[true]{\csname beamer@footlineLACLsb@framenb#1\endcsname}
+
+%
+% For sidebar
+%
+\def\beamer@lefttext{left}
+
+\DeclareOptionBeamer{hideothersubsections}[]{\beamer@nav@subsectionstyle{show/show/hide}}
+\DeclareOptionBeamer{hideallsubsections}[]{\beamer@nav@subsectionstyle{hide}}
+
+\DeclareOptionBeamer{width}{\beamer@sidebarwidth=#1}
+\DeclareOptionBeamer{height}{\beamer@headheight=#1}
+\DeclareOptionBeamer{left}{\def\beamer@sidebarside{left}}
+\DeclareOptionBeamer{right}{\def\beamer@sidebarside{right}}
+\ExecuteOptionsBeamer{left}
+\ProcessOptionsBeamer
+
+
+\mode<presentation>
+
+%
+% Footline definition
+%
+\ifbeamer@footlineLACLsb@footline
+\defbeamertemplate*{footline}{sidebar theme}
+{%
+  \leavevmode%
+  \hbox{%
+    \ifx\beamer@sidebarside\beamer@lefttext%
+      %\begin{beamercolorbox}[wd=\beamer@sidebarwidth,ht=2.5ex,dp=1.125ex,leftskip=.1cm plus1fill,rightskip=0.1cm plus1fill]{sidebar}%
+        %%\vspace{0em}\includegraphics[width=.7\beamer@sidebarwidth]{upec.png}%
+      %\end{beamercolorbox}%
+    \hspace{\beamer@sidebarwidth}%
+      \ifbeamer@footlineLACLsb@framenb%
+        \begin{beamercolorbox}[wd=\beamer@footlinecenterwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm plus1fill,rightskip=.3cm plus1fill]{date in head/foot}%
+          \usebeamerfont{author in head/foot}\insertshortauthor\ --- \insertshortdate%
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=\beamer@sidebarwidth,ht=2.5ex,dp=1.125ex,rightskip=.2cm,right]{date in head/foot}%
+            \insertframenumber{} / \inserttotalframenumber\hspace*{.2cm}%
+        \end{beamercolorbox}%
+        \else%
+          \begin{beamercolorbox}[wd=\beamer@footlinewidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm plus1fill,rightskip=.3cm plus1fill]{date in head/foot}%
+            \usebeamerfont{author in head/foot}\insertshortauthor\ --- \insertshortdate%
+          \end{beamercolorbox}%
+      \fi%
+    \else%
+      \ifbeamer@footlineLACLsb@framenb%
+        \begin{beamercolorbox}[wd=\beamer@sidebarwidth,ht=2.5ex,dp=1.125ex,leftskip=.2cm]{date in head/foot}%
+          \insertframenumber{} / \inserttotalframenumber%
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=\beamer@footlinecenterwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm plus1fill,rightskip=.3cm plus1fill]{date in head/foot}%
+          \usebeamerfont{author in head/foot}\insertshortauthor\ --- \insertshortdate%
+        \end{beamercolorbox}%
+        \else%
+          \begin{beamercolorbox}[wd=\beamer@sidebarwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm plus1fill,rightskip=.3cm plus1fill]{date in head/foot}%
+            \usebeamerfont{author in head/foot}\insertshortauthor\ --- \insertshortdate%
+          \end{beamercolorbox}%
+      \fi%
+    \fi%
+  }
+  \vskip0pt%
+}
+\fi
+
+
+%
+% Sidebar definition
+%
+\ifdim\beamer@headheight>0pt
+% if head height is 0pt, use default frame title
+
+  \setbeamercolor*{frametitle}{parent=sidebar}
+
+  \defbeamertemplate*{frametitle}{sidebar theme}
+  {%
+    \nointerlineskip%
+    \vskip-\beamer@headheight%
+    \vbox to \beamer@headheight{%
+      \vfil
+      %\leftskip=-\beamer@leftmargin%
+      %\advance\leftskip by0.3cm%
+      %\rightskip=-\beamer@rightmargin%
+      %\advance\rightskip by0.3cm plus1fil%
+      \leftskip=-\beamer@leftmargin%
+      %\advance\leftskip by0.3cm%
+      \rightskip=-\beamer@rightmargin%
+      \advance\rightskip by0.3cm plus1fil%
+      {\usebeamercolor[fg]{frametitle}\usebeamerfont{frametitle}\insertframetitle\par}%
+      {\usebeamercolor[fg]{framesubtitle}\usebeamerfont{framesubtitle}\insertframesubtitle\par}%
+      \vbox{}%
+      \vskip-1em%
+      \vfil
+    }%
+  }
+
+  \defbeamertemplate*{headline}{sidebar theme}
+  {%
+    \begin{beamercolorbox}[wd=\paperwidth]{frametitle}
+      \ifx\beamer@sidebarside\beamer@lefttext%
+      \else%
+        \hfill%
+      \fi%
+      \ifdim\beamer@sidebarwidth>0pt%
+        %\usebeamercolor[bg]{logo}% Color for top/left corner
+        \usebeamercolor[bg]{sidebar}% Color for top/left corner
+        \vrule width\beamer@sidebarwidth height \beamer@headheight%
+        \hskip-\beamer@sidebarwidth%
+        %\hbox to \beamer@sidebarwidth{\hss\vbox to
+          %\beamer@headheight{\vss\hbox{\color{fg}\insertlogo}\vss}\hss}%
+        %\hbox to \beamer@sidebarwidth{\hss\vbox to
+          %\beamer@headheight{\vss\hbox{\color{fg}\includegraphics[width=.7\beamer@sidebarwidth]{lacl.png}}\vss}\hss}%
+      \else%
+        \vrule width0pt height \beamer@headheight%
+      \fi%
+    \end{beamercolorbox}
+  }
+\fi
+
+
+\def\beamer@sidebarformat#1#2#3{%
+  \begin{beamercolorbox}[wd=\beamer@sidebarwidth,leftskip=#1,rightskip=1ex plus1fil,vmode]{#2}
+    \vbox{}%
+    #3\par%
+    \vbox{}%
+    \vskip-1.5ex%
+  \end{beamercolorbox}
+}
+
+\defbeamertemplate*{section in sidebar}{sidebar theme}
+{%
+  \vbox{%
+    \vskip1ex%
+    \beamer@sidebarformat{3pt}{section in sidebar}{\insertsectionhead}%
+  }%
+}
+
+\defbeamertemplate*{section in sidebar shaded}{sidebar theme}
+{%
+  \vbox{%
+    \vskip1ex%
+    \beamer@sidebarformat{3pt}{section in sidebar shaded}{\insertsectionhead}%
+  }%
+}
+
+\defbeamertemplate*{subsection in sidebar}{sidebar theme}
+{%
+  \beamer@sidebarformat{5pt}{subsection in sidebar}{\insertsubsectionhead}%
+}
+
+\defbeamertemplate*{subsection in sidebar shaded}{sidebar theme}
+{%
+  \beamer@sidebarformat{5pt}{subsection in sidebar shaded}{\insertsubsectionhead}%
+}
+
+\defbeamertemplate*{subsubsection in sidebar}{sidebar theme}
+{%
+  \beamer@sidebarformat{7pt}{subsubsection in sidebar}{\insertsubsubsectionhead}%
+}
+
+\defbeamertemplate*{subsubsection in sidebar shaded}{sidebar theme}
+{%
+  \beamer@sidebarformat{7pt}{subsubsection in sidebar shaded}{\insertsubsubsectionhead}%
+}
+
+
+\ifdim\beamer@sidebarwidth>0pt
+
+                                % Sidebar
+  \setbeamersize{sidebar width \beamer@sidebarside=\beamer@sidebarwidth}
+  \defbeamertemplate*{sidebar \beamer@sidebarside}{sidebar theme}
+  {
+    %\vfill
+    \beamer@tempdim=\beamer@sidebarwidth%
+    \advance\beamer@tempdim by -6pt%
+    \vspace{-4em}%
+    \vspace{-1\baselineskip}\vfill%
+    \insertverticalnavigation{\beamer@sidebarwidth}%
+    \vfill
+    \ifx\beamer@sidebarside\beamer@lefttext% sidebar left
+      %\hbox to \beamer@sidebarwidth{\hss\color{fg}\vspace{1em}\includegraphics[width=.9\beamer@sidebarwidth]{upe.png}\hss}%
+        \hfill
+    \else% sidebar right
+      \usebeamercolor{normal text}%
+      \hbox to \beamer@sidebarwidth{%
+        \llap{%
+          \vbox{%
+            \hbox{%
+              \usebeamertemplate***{navigation symbols}\hskip0.1cm%
+            }%
+            \ifbeamer@footlineLACLsb@footline%
+              \vspace{\footheight}%
+              \vspace{-4pt}%
+            \fi%
+            \vspace{-.5em}%
+          }%
+        }%
+        %\hss\color{fg}\vspace{1em}\includegraphics[width=.9\beamer@sidebarwidth]{upe.png}\hss%
+      }%
+    \fi%
+  }%
+
+  \ifx\beamer@sidebarside\beamer@lefttext%
+    \defbeamertemplate*{sidebar right}{sidebar theme}
+    {%
+      \vfill%
+      \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
+      \ifbeamer@footlineLACLsb@footline
+        \vskip\footheight
+        \vskip-4pt
+      \fi
+      \vskip2pt}
+  \fi
+                                % Margins
+  \setbeamersize{text margin left=0.5cm,text margin right=0.5cm}
+\fi
+
+
+%
+% Overwrite def in beamer/base/beamerbaseframecomponents.sty
+% Because sidebar stops at top of footline by default
+% That was a problem for displaying UPEC logo
+%
+\ifbeamer@footlineLACLsb@footline
+\def\beamer@calculateheadfoot{%
+  \setbox\beamer@tempbox=\hbox{{\beamer@typesetheadorfoot{footline}}}%
+  \footheight=\ht\beamer@tempbox%
+  \advance\footheight by \dp\beamer@tempbox%
+  \advance\footheight by 4pt%
+  \setbox\beamer@tempbox=\hbox{{\beamer@typesetheadorfoot{headline}}}%
+  \headheight=\ht\beamer@tempbox%
+  \headdp=\dp\beamer@tempbox%
+  \advance\headheight by\headdp%
+  \sidebarheight=\paperheight%
+  \advance\sidebarheight by-\headheight%
+  \advance\sidebarheight by\headdp%
+  %\advance\sidebarheight by-\footheight%
+  %\advance\sidebarheight by 4pt%
+  \footskip=\footheight%
+  \textheight=\paperheight%
+  \advance\textheight by-\footheight%
+  \advance\textheight by-\headheight%
+  \@colht\textheight%
+  \@colroom\textheight%
+  \vsize\textheight%
+}
+\fi
+
+\mode
+<all>

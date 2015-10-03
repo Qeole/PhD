@@ -1,0 +1,41 @@
+% vim: se ft=tex:
+\fontsize{4pt}{4pt}
+\begin{tikzpicture}[%
+    scale=.3, %
+    state/.style={draw=none,circle,fill,blueLACL,text=white,circular drop shadow,minimum width=.5cm,align=center}, %
+    edge/.style={->,>=stealth} %
+  ]
+  %\tikzset{state/.style={draw,circle,thick,minimum width=1cm,align=center}};
+
+  \node[state] (ni) at (-3,+3) {\idle};
+  \node[state] (nl) at (+3,+3) {\listen};
+  \node[state] (nt) at (+3,-3) {\treatnlmsg};
+  \node[state] (ns) at (-3,-3) {\send};
+
+  % IDLE <-> LISTEN
+  \draw[edge] (ni) to[bend left=20] node[above]{\startlisten: (-1,0)} (nl);
+  \draw[edge] (nl) to[bend left=20] node[below]{\stoplisten: (0,0)} (ni);
+
+  % IDLE <-> SEND
+  \draw[edge] (ni) to[bend left=20] node[midway,below=.5cm,right=.1cm,rotate=90]{\startsend: (-2,+1)} (ns);
+  \draw[edge] (ns) to[bend left=20] node[midway,above,rotate=90]{\stopsend: (0,0)} (ni);
+
+  % TREAT->SEND
+  \draw[edge] (nt) to[bend left=20] node[below]{\starttransmit: (-2,0)} (ns);
+
+  % LISTEN->TREAT
+  \draw[edge] (nl) to[bend left=20] node[midway,below,rotate=90]{\startreceive: (0,0)} (nt);
+
+  % Loop edges
+  \draw[edge] (ni) edge[loop,in=110,out=160,looseness=5] node[above=.15cm,right=-.5cm]{\remainidle: (+1,0)} (ni);
+  \draw[edge] (ns) edge[loop,in=200,out=250,looseness=5] node[below=.15cm,right=-.3cm]{\resend: (-2,0)} (ns);
+  \draw[edge] (nt) edge[loop,in=290,out=340,looseness=5] node[below=.15cm,left=-.15cm]{\hold: (0,0)} (nt);
+
+  % Init edge
+  \draw[edge] (-5.5,+3) to (ni);
+
+  %%% Bad node %%%
+  \draw[edge] (nt) to node[rotate=-45,below,near start]{\ignore: (0,0)} (ni);
+  %\draw[edge] (nl) to node[rotate=45,below,near start]{s\_send: (-2,+1)} (ns);
+\end{tikzpicture}
+\normalsize

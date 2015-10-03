@@ -1,0 +1,80 @@
+% Copyright 2014 by Quentin Monnet
+%
+% Based on standard Beamer template PaloAlto,
+% Copyright 2007 by Till Tantau
+% Main differences are:
+% - Reduced default headline size
+% - Forcing the use of LACL and UPEC logos
+% - Addition of footline
+% - Reformatting of title/authors in sidebar
+% - Additional options are provided (see below)
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+%
+% ---
+%
+% Unofficial LACL sidebar Beamer template v1.0
+% List of required files:
+% - beamerthemeLACLsb.sty (this file)
+% - beamercolorthemeLACLsb.sty
+% - beamerinnerthemeLACLsb.sty
+% - beamerouterthemeLACLsb.sty
+% - lacl.png
+% - upec.png
+%
+% How to use this template:
+% Insert following line in your LaTeX preamble:
+%    \usetheme[options]{LACLsb}
+% Provided options are below.
+%
+% WARNING: \logo{} command is commented and will
+%          have no effect with this template.
+%
+% ---
+%
+% Options available for this template are:
+% {option name}<default>(values)                 description
+%
+% {hideothersubsections}<false>(true, false)     hide subsections in sidebar, except for current section
+% {hideallsubsections}<false>(true, false)       hide all subsections titles in sidebar
+% {width}<2.5\baselineskip>(dimension)           width for sidebar
+% {height}<1.5\baselineskip>(dimension)          height for frametitle bar
+% {left/right}<left>(left, right)                sidebar on the left / right side of frames
+% {lightfl}<false>(true, false)                  set a lighter color for footline
+% {framenb}<true>(true, false)                   print framenumber in footline (on the opposite side of sidebar)
+% {footline}<true>(true, false)                  print any footline at all
+% {webtitle}<false>(true, false)                 main title looks like title of LACL website
+
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeLACLsb.sty,v 1.0 2014/04/05 $
+
+
+\DeclareOptionBeamer{hideothersubsections}{\PassOptionsToPackage{hideothersubsections=#1}{beamerouterthemeLACLsb}}
+\DeclareOptionBeamer{hideallsubsections}{\PassOptionsToPackage{hideallsubsections=#1}{beamerouterthemeLACLsb}}
+
+\DeclareOptionBeamer{width}{\PassOptionsToPackage{width=#1}{beamerouterthemeLACLsb}}
+\DeclareOptionBeamer{height}{\PassOptionsToPackage{height=#1}{beamerouterthemeLACLsb}}
+\DeclareOptionBeamer{left}{\PassOptionsToPackage{left}{beamerouterthemeLACLsb}}
+\DeclareOptionBeamer{right}{\PassOptionsToPackage{right}{beamerouterthemeLACLsb}}
+\DeclareOptionBeamer{lightfl}{\PassOptionsToPackage{lightfl}{beamercolorthemeLACLsb}}
+\DeclareOptionBeamer{framenb}{\def\beamer@outerthemeLACLsb@framenb{#1}}
+\DeclareOptionBeamer{footline}{\def\beamer@outerthemeLACLsb@footline{#1}}
+\DeclareOptionBeamer{webtitle}{\def\beamer@themeLACLsb@webtitle{#1}}
+\ExecuteOptionsBeamer{footline=true,framenb=true,webtitle=false}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+\useoutertheme[framenb=\beamer@outerthemeLACLsb@framenb,footline=\beamer@outerthemeLACLsb@footline]{LACLsb}
+\useinnertheme[shadow=true,webtitle=\beamer@themeLACLsb@webtitle]{LACLsb}
+\usecolortheme[webtitle=\beamer@themeLACLsb@webtitle]{LACLsb}
+
+%\setbeamercolor*{frametitle}{parent=palette primary}
+%\setbeamerfont{block title}{size={}}
+
+\mode
+<all>

@@ -1,0 +1,90 @@
+% Copyright 2014 by Quentin Monnet
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+%
+% ---
+%
+% Part of the unofficial LACL sidebar Beamer template v1.0
+
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/color/beamercolorthemeLACLsb.sty,v 1.0 2014/04/05 $
+
+
+\newif\ifbeamer@themeLACLsidebar@webtitle
+\beamer@themeLACLsidebar@webtitletrue
+
+\def\beamer@colorLACLsb@lightfltext{lightfl}
+\DeclareOptionBeamer{webtitle}[false]{\csname beamer@themeLACLsidebar@webtitle#1\endcsname}
+\DeclareOptionBeamer{lightfl}{\def\beamer@colorLACLsb@flcolor{lightfl}}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+\definecolor{blueLACL}{RGB}{0,101,189}
+\definecolor{lightblueLACL}{RGB}{132,199,255}
+\definecolor{redTitle}{RGB}{224, 0, 0}
+%\definecolor{lightblueLACL}{RGB}{193,227,255} % from visit cards; but too light for boxes
+%\colorlet{lightblueLACL}{blueLACL!50!white}
+
+\setbeamercolor{structure}{fg=blueLACL, bg=white} % fg used for items
+\setbeamercolor{normal text}{fg=black}
+
+\setbeamercolor*{palette primary}{use=structure, fg=structure.bg, bg=structure.fg}
+\setbeamercolor*{palette secondary}{use=structure, fg=structure.bg, bg=structure.fg!75!black} % Top left corner + sidebar
+\setbeamercolor*{palette tertiary}{use=structure, fg=structure.bg, bg=structure.fg!50!black} % Unused
+\setbeamercolor*{palette quaternary}{use=structure, fg=red, bg=white}
+
+\setbeamercolor*{sidebar}{use=structure, fg=structure.bg, bg=structure.fg}
+\setbeamercolor*{palette sidebar primary}{use=structure,fg=structure.bg!10} % subsections
+\setbeamercolor*{palette sidebar secondary}{fg=white} % sections
+\setbeamercolor*{palette sidebar tertiary}{fg=white} % authors
+\setbeamercolor*{palette sidebar quaternary}{fg=white} % title
+
+\setbeamercolor{section in head/foot}{parent=palette quaternary}
+\setbeamercolor{subsection in head/foot}{parent=palette primary}
+
+\setbeamercolor{author in head/foot}{parent=section in head/foot}
+\setbeamercolor{title in head/foot}{parent=subsection in head/foot}
+
+% ToC in sidebar
+%\setbeamercolor{section in sidebar shaded}{use=section in sidebar,fg=section in sidebar.fg!40!bg}
+\setbeamercolor{section in sidebar}{fg=white,bg=black!30!bg}
+\setbeamercolor{section in sidebar shaded}{fg=white}
+\setbeamercolor{subsection in sidebar}{fg=white,bg=black!15!bg}
+\setbeamercolor{subsection in sidebar shaded}{fg=white}
+
+% Footline
+\ifx\beamer@colorLACLsb@flcolor\beamer@colorLACLsb@lightfltext%
+    \setbeamercolor*{date in head/foot}{fg=black, bg=lightblueLACL}
+\else
+    \setbeamercolor*{date in head/foot}{parent=sidebar}
+\fi
+
+% Title box
+\ifbeamer@themeLACLsidebar@webtitle
+    \setbeamercolor*{titlelike}{parent=palette quaternary}
+    \setbeamerfont{title}{series=\bfseries}
+\else
+    \setbeamercolor*{titlelike}{parent=palette primary}
+\fi
+
+% Seems useless
+\setbeamercolor*{separation line}{}
+\setbeamercolor*{fine separation line}{}
+
+% Blocs
+\setbeamercolor{block title}{use=structure,fg=lightblueLACL!30!white,bg=structure.fg}
+\setbeamercolor{block body}{parent=normal text,bg=lightblueLACL!50!white}
+
+\setbeamercolor{block title alerted}{use=alerted text,fg=alerted text.fg!80!black,bg=alerted text.fg!30!bg}
+\setbeamercolor{block body alerted}{parent=normal text,use=block title alerted,bg=block title alerted.bg!30!bg}
+
+\setbeamercolor{block title example}{use=example text,fg=example text.fg!80!black,bg=example text.fg!30!bg}
+\setbeamercolor{block body example}{parent=normal text,use=block title example,bg=block title example.bg!30!bg}
+
+\mode
+<all>
